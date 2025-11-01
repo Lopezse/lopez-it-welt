@@ -17,4 +17,5 @@ coverage
 *.tsbuildinfo
 status.bat
 status.ps1
+logs/**
 
