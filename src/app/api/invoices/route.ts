@@ -243,8 +243,36 @@ export async function POST(request: NextRequest) {
     // Draft-Modus: Fallbacks für optionale Felder
     const finalIssueDate = issue_date || issued_at || new Date().toISOString().slice(0, 10);
     const finalServiceDate = service_date || finalIssueDate;
-    // customer_id ist NOT NULL in DB - Fallback auf "system" wenn nicht vorhanden
-    const finalCustomerId = customer_id || "system";
+
+    // customer_id ist NOT NULL in DB - prüfe ob Kunde existiert, sonst verwende ersten Kunden
+    let finalCustomerId = customer_id;
+    if (!finalCustomerId) {
+      try {
+        // Versuche ersten vorhandenen Kunden zu finden
+        const [customerRows] = await connection.execute(
+          "SELECT id FROM lopez_customers WHERE status = 'aktiv' OR status IS NULL LIMIT 1",
+        );
+        if (Array.isArray(customerRows) && customerRows.length > 0) {
+          finalCustomerId = String((customerRows[0] as any).id);
+        } else {
+          // Kein Kunde vorhanden - Fehler mit hilfreicher Meldung
+          throw new Error(
+            "Kein Kunde vorhanden. Bitte zuerst einen Kunden anlegen oder customer_id im Request mitgeben.",
+          );
+        }
+      } catch (customerError: any) {
+        console.error("❌ Fehler beim Prüfen des Kunden:", customerError);
+        // Wenn es bereits ein Error-Objekt ist, re-throw es
+        if (customerError instanceof Error && customerError.message.includes("Kein Kunde")) {
+          throw customerError;
+        }
+        // Andernfalls: Fehler mit hilfreicher Meldung
+        throw new Error(
+          "customer_id erforderlich. Bitte customer_id im Request mitgeben oder zuerst einen Kunden anlegen.",
+        );
+      }
+    }
+
     // created_by ist NOT NULL in DB - Fallback auf "system" wenn nicht vorhanden
     const finalCreatedBy = created_by || "system";
 
