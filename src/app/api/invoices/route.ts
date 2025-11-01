@@ -225,16 +225,15 @@ export async function POST(request: NextRequest) {
     if (!finalItems || !Array.isArray(finalItems) || finalItems.length === 0) {
       if (total_gross && typeof total_gross === "number") {
         // Demo-Item aus Brutto generieren
-        const netAmount = total_gross / (1 + tax_rate / 100);
-        const taxAmount = total_gross - netAmount;
+        const netFromGross = total_gross / (1 + tax_rate / 100);
 
         finalItems = [
           {
             item_text: debtor || "Demo-Position",
             qty: 1,
             unit: "Stk",
-            unit_price: netAmount.toFixed(2),
-            net_line: netAmount.toFixed(2),
+            unit_price: netFromGross.toFixed(2),
+            net_line: netFromGross.toFixed(2),
           },
         ];
       } else {
