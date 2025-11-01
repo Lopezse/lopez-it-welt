@@ -243,8 +243,10 @@ export async function POST(request: NextRequest) {
     // Draft-Modus: Fallbacks für optionale Felder
     const finalIssueDate = issue_date || issued_at || new Date().toISOString().slice(0, 10);
     const finalServiceDate = service_date || finalIssueDate;
-    const finalCustomerId = customer_id || null;
-    const finalCreatedBy = created_by || null;
+    // customer_id ist NOT NULL in DB - Fallback auf "system" wenn nicht vorhanden
+    const finalCustomerId = customer_id || "system";
+    // created_by ist NOT NULL in DB - Fallback auf "system" wenn nicht vorhanden
+    const finalCreatedBy = created_by || "system";
 
     // Draft-Modus: Items aus total_gross generieren, falls keine Items vorhanden
     let finalItems = items;
