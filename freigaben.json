@@ -1,15 +1,32 @@
 {
-  "docs/00-00-inhaltsverzeichnis.md": true,
-  "docs/04-ENTERPRISE/enterprise-master-architektur.md": true,
-  "test.md": false,
-  "docs/07-OFFICE-MANAGEMENT/validation/validation-report-final.md": true,
-  "docs/07-OFFICE-MANAGEMENT/validation/validation-summary.md": true,
-  "STATUS.md": true,
-  "docs/07-OFFICE-MANAGEMENT/README.md": true,
-  "freigaben.json": true,
-  "CHANGELOG.md": true,
-  "scripts/anti-rule-break-hook.js": true,
-  "scripts/freigabe-check.js": true,
-  "scripts/pre-commit-freigabe-check.js": true,
-  ".husky/pre-commit": true
+  "mode": "strict",
+  "allow": [
+    "docs/00-00-inhaltsverzeichnis.md",
+    "docs/04-ENTERPRISE/enterprise-master-architektur.md",
+    "test.md",
+    "docs/07-OFFICE-MANAGEMENT/validation/validation-report-final.md",
+    "docs/07-OFFICE-MANAGEMENT/validation/validation-summary.md",
+    "STATUS.md",
+    "docs/07-OFFICE-MANAGEMENT/README.md",
+    "freigaben.json",
+    "CHANGELOG.md",
+    "scripts/anti-rule-break-hook.js",
+    "scripts/freigabe-check.js",
+    "scripts/pre-commit-freigabe-check.js",
+    ".husky/pre-commit",
+    ".gitattributes",
+    ".editorconfig",
+    ".prettierrc",
+    ".prettierignore",
+    ".eslintrc.json",
+    "lint-staged.config.mjs",
+    "package.json",
+    ".husky/commit-msg",
+    "scripts/approve-files.mjs"
+  ],
+  "approver": {
+    "name": "Ramiro Lopez Rodriguez",
+    "role": "Owner, Lopez IT Welt",
+    "email": "ra-lopez@t-online.de"
+  }
 }

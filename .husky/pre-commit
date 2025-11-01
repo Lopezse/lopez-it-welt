@@ -24,3 +24,6 @@ fi
 
 # Lint (optional)
 npm run lint || echo "⚠️ Lint-Warnungen, aber Commit fortgesetzt."
+
+# --- Enterprise++ Pre-Commit: format + lint-staged ---
+npx lint-staged || exit 1

@@ -9,9 +9,9 @@
  * @date 2025-06-30
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 // Enterprise++ Anti-Regelbruch Konfiguration
 const ANTI_RULE_BREAK_CONFIG = {
@@ -35,18 +35,18 @@ const ANTI_RULE_BREAK_CONFIG = {
 
 // Geschützte Regeln
 const PROTECTED_RULES = [
-  'Datumsvalidierung',
-  'Zeiterfassung',
-  'Md-Struktur',
-  'Enterprise++ Standards',
-  'Freigabe-Erfordernis',
-  'System-Zeit-Verwendung',
+  "Datumsvalidierung",
+  "Zeiterfassung",
+  "Md-Struktur",
+  "Enterprise++ Standards",
+  "Freigabe-Erfordernis",
+  "System-Zeit-Verwendung",
 ];
 
 // Globale Variablen
 let isBlocked = false;
 let violationCount = 0;
-let lastViolation = '';
+let lastViolation = "";
 let approvalGiven = false;
 let blockedActions = [];
 
@@ -58,7 +58,7 @@ class AntiRuleBreakHook {
     this.config = ANTI_RULE_BREAK_CONFIG;
     this.isBlocked = false;
     this.violationCount = 0;
-    this.lastViolation = '';
+    this.lastViolation = "";
     this.approvalGiven = false;
     this.blockedActions = [];
   }
@@ -67,31 +67,31 @@ class AntiRuleBreakHook {
    * 🚨 Hauptvalidierung vor jeder Aktion
    */
   async validateBeforeAction(action, targetFile = null) {
-    console.log('🛡️ Anti-Regelbruch-System: Validierung läuft...');
+    console.log("🛡️ Anti-Regelbruch-System: Validierung läuft...");
 
     const timestamp = new Date().toISOString();
 
     // 1. System-Zeit validieren
     const timeValidation = await this.validateSystemTime();
     if (!timeValidation.valid) {
-      this.blockAction('System-Zeit nicht validiert', timeValidation.reason);
+      this.blockAction("System-Zeit nicht validiert", timeValidation.reason);
       return {
         valid: false,
         reason: timeValidation.reason,
         timestamp,
-        rule: 'System-Zeit',
+        rule: "System-Zeit",
       };
     }
 
     // 2. Datumskopieren blockieren
     const dateValidation = await this.validateNoDateCopying(action);
     if (!dateValidation.valid) {
-      this.blockAction('Datumskopieren blockiert', dateValidation.reason);
+      this.blockAction("Datumskopieren blockiert", dateValidation.reason);
       return {
         valid: false,
         reason: dateValidation.reason,
         timestamp,
-        rule: 'Datumsvalidierung',
+        rule: "Datumsvalidierung",
       };
     }
 
@@ -99,43 +99,40 @@ class AntiRuleBreakHook {
     if (targetFile && this.isMdFile(targetFile)) {
       const structureValidation = await this.validateMdStructure(targetFile);
       if (!structureValidation.valid) {
-        this.blockAction('Md-Struktur-Schutz', structureValidation.reason);
+        this.blockAction("Md-Struktur-Schutz", structureValidation.reason);
         return {
           valid: false,
           reason: structureValidation.reason,
           timestamp,
-          rule: 'Md-Struktur',
+          rule: "Md-Struktur",
         };
       }
     }
 
     // 4. Freigabe prüfen
     if (!this.approvalGiven && this.config.requireApproval) {
-      this.blockAction('Keine Freigabe vorhanden', action);
+      this.blockAction("Keine Freigabe vorhanden", action);
       return {
         valid: false,
-        reason: 'Keine Freigabe vorhanden',
+        reason: "Keine Freigabe vorhanden",
         timestamp,
-        rule: 'Freigabe-Erfordernis',
+        rule: "Freigabe-Erfordernis",
       };
     }
 
     // 5. Zeiterfassung prüfen
     const timeTrackingValidation = await this.validateTimeTracking(action);
     if (!timeTrackingValidation.valid) {
-      this.blockAction(
-        'Zeiterfassung nicht gewechselt',
-        timeTrackingValidation.reason
-      );
+      this.blockAction("Zeiterfassung nicht gewechselt", timeTrackingValidation.reason);
       return {
         valid: false,
         reason: timeTrackingValidation.reason,
         timestamp,
-        rule: 'Zeiterfassung',
+        rule: "Zeiterfassung",
       };
     }
 
-    console.log('✅ Anti-Regelbruch-Validierung erfolgreich');
+    console.log("✅ Anti-Regelbruch-Validierung erfolgreich");
     return { valid: true, timestamp };
   }
 
@@ -148,11 +145,11 @@ class AntiRuleBreakHook {
       const timestamp = currentTime.toISOString();
 
       // Prüfen ob Zeit plausibel ist (nicht in der Vergangenheit)
-      const minValidDate = new Date('2025-01-01');
+      const minValidDate = new Date("2025-01-01");
       if (currentTime < minValidDate) {
         return {
           valid: false,
-          reason: 'System-Zeit ist in der Vergangenheit',
+          reason: "System-Zeit ist in der Vergangenheit",
           timestamp,
         };
       }
@@ -161,7 +158,7 @@ class AntiRuleBreakHook {
     } catch (error) {
       return {
         valid: false,
-        reason: 'System-Zeit-Abfrage fehlgeschlagen',
+        reason: "System-Zeit-Abfrage fehlgeschlagen",
         timestamp: new Date().toISOString(),
       };
     }
@@ -172,12 +169,12 @@ class AntiRuleBreakHook {
    */
   async validateNoDateCopying(action) {
     const blockedDates = [
-      '2025-01-19',
-      '29.07.2025',
-      '27.06.2025',
-      '2025-06-27',
-      '2025-01-19T',
-      '29.07.2025T',
+      "2025-01-19",
+      "29.07.2025",
+      "27.06.2025",
+      "2025-06-27",
+      "2025-01-19T",
+      "29.07.2025T",
     ];
 
     const timestamp = new Date().toISOString();
@@ -236,7 +233,7 @@ class AntiRuleBreakHook {
       timestamp: new Date().toISOString(),
       rule: rule,
       reason: reason,
-      action: 'BLOCKIERT',
+      action: "BLOCKIERT",
     };
 
     this.blockedActions.push(violation);
@@ -267,18 +264,18 @@ class AntiRuleBreakHook {
 `;
 
     try {
-      let statusContent = '';
-      if (fs.existsSync('STATUS.md')) {
-        statusContent = fs.readFileSync('STATUS.md', 'utf8');
+      let statusContent = "";
+      if (fs.existsSync("STATUS.md")) {
+        statusContent = fs.readFileSync("STATUS.md", "utf8");
       }
 
       // Verstoß am Anfang einfügen
       const updatedContent = violationEntry + statusContent;
-      fs.writeFileSync('STATUS.md', updatedContent);
+      fs.writeFileSync("STATUS.md", updatedContent);
 
-      console.log('📝 Verstoß in STATUS.md dokumentiert');
+      console.log("📝 Verstoß in STATUS.md dokumentiert");
     } catch (error) {
-      console.error('❌ Fehler beim Dokumentieren des Verstoßes:', error);
+      console.error("❌ Fehler beim Dokumentieren des Verstoßes:", error);
     }
   }
 
@@ -288,7 +285,7 @@ class AntiRuleBreakHook {
   grantApproval() {
     this.approvalGiven = true;
     this.isBlocked = false;
-    console.log('✅ Anti-Regelbruch-Freigabe erteilt');
+    console.log("✅ Anti-Regelbruch-Freigabe erteilt");
   }
 
   /**
@@ -297,20 +294,18 @@ class AntiRuleBreakHook {
   revokeApproval() {
     this.approvalGiven = false;
     this.isBlocked = true;
-    console.log('🚫 Anti-Regelbruch-Freigabe zurückgezogen');
+    console.log("🚫 Anti-Regelbruch-Freigabe zurückgezogen");
   }
 
   /**
    * 📊 Status anzeigen
    */
   showStatus() {
-    console.log('\n🛡️ Anti-Regelbruch-System Status:');
-    console.log(`   Blockiert: ${this.isBlocked ? '❌ JA' : '✅ NEIN'}`);
-    console.log(
-      `   Freigabe: ${this.approvalGiven ? '✅ ERTEILT' : '❌ NICHT ERTEILT'}`
-    );
+    console.log("\n🛡️ Anti-Regelbruch-System Status:");
+    console.log(`   Blockiert: ${this.isBlocked ? "❌ JA" : "✅ NEIN"}`);
+    console.log(`   Freigabe: ${this.approvalGiven ? "✅ ERTEILT" : "❌ NICHT ERTEILT"}`);
     console.log(`   Verstöße: ${this.violationCount}`);
-    console.log(`   Letzter Verstoß: ${this.lastViolation || 'Keine'}`);
+    console.log(`   Letzter Verstoß: ${this.lastViolation || "Keine"}`);
     console.log(`   Blockierte Aktionen: ${this.blockedActions.length}`);
   }
 
@@ -319,14 +314,14 @@ class AntiRuleBreakHook {
    */
   updateConfig(newConfig) {
     this.config = { ...this.config, ...newConfig };
-    console.log('🔧 Anti-Regelbruch-Konfiguration aktualisiert');
+    console.log("🔧 Anti-Regelbruch-Konfiguration aktualisiert");
   }
 
   /**
    * 📋 Md-Datei prüfen
    */
   isMdFile(filename) {
-    return filename.endsWith('.md') || filename.endsWith('.MD');
+    return filename.endsWith(".md") || filename.endsWith(".MD");
   }
 
   /**
@@ -334,78 +329,103 @@ class AntiRuleBreakHook {
    */
   resetViolations() {
     this.violationCount = 0;
-    this.lastViolation = '';
+    this.lastViolation = "";
     this.blockedActions = [];
     this.isBlocked = false;
-    console.log('🧹 Anti-Regelbruch-Verstöße zurückgesetzt');
+    console.log("🧹 Anti-Regelbruch-Verstöße zurückgesetzt");
   }
 }
 
 // Pre-commit Hook Funktion
 async function preCommitHook() {
-  console.log('🛡️ Anti-Regelbruch Pre-Commit Hook läuft...');
+  console.log("🛡️ Anti-Regelbruch Pre-Commit Hook läuft...");
 
   const hook = new AntiRuleBreakHook();
 
   // Prüfe alle geänderten Dateien
   try {
     // Lade freigaben.json für Approval-Check
-    const FREIGABEN_PATH = path.resolve(__dirname, '../freigaben.json');
+    const FREIGABEN_PATH = path.resolve(__dirname, "../freigaben.json");
     let freigaben = {};
     if (fs.existsSync(FREIGABEN_PATH)) {
       try {
-        freigaben = JSON.parse(fs.readFileSync(FREIGABEN_PATH, 'utf8'));
+        freigaben = JSON.parse(fs.readFileSync(FREIGABEN_PATH, "utf8"));
       } catch (err) {
-        console.warn('⚠️ Fehler beim Laden von freigaben.json:', err.message);
+        console.warn("⚠️ Fehler beim Laden von freigaben.json:", err.message);
       }
     }
 
     // Ermittle geänderte Dateien (für beide Modi benötigt)
-    const changedFiles = execSync('git diff --cached --name-only', {
-      encoding: 'utf8',
+    const changedFiles = execSync("git diff --cached --name-only", {
+      encoding: "utf8",
     })
-      .split('\n')
-      .filter(file => file.trim());
+      .split("\n")
+      .filter((file) => file.trim());
 
     // Baseline-Modus: einmalige Freigabe für alle Dateien
-    if (freigaben.mode === 'baseline' && freigaben.allow && freigaben.allow.includes('**/*')) {
-      console.log('✅ Baseline-Modus aktiv: Alle Dateien freigegeben (einmalig).');
-      console.log(`📋 Attestation: ${freigaben.attestation?.id || 'N/A'}`);
+    if (freigaben.mode === "baseline" && freigaben.allow && freigaben.allow.includes("**/*")) {
+      console.log("✅ Baseline-Modus aktiv: Alle Dateien freigegeben (einmalig).");
+      console.log(`📋 Attestation: ${freigaben.attestation?.id || "N/A"}`);
       hook.grantApproval();
       // Nach diesem Commit wird Baseline-Modus ablaufen
-      if (freigaben.expires === 'once') {
-        console.log('⚠️ WARNUNG: Baseline-Modus läuft nach diesem Commit ab.');
+      if (freigaben.expires === "once") {
+        console.log("⚠️ WARNUNG: Baseline-Modus läuft nach diesem Commit ab.");
       }
     } else {
       // Normaler Modus: Filtere nur relevante Dateien (Markdown, Config, etc.) - ignoriere Build-Artefakte
-      const relevantFiles = changedFiles.filter(file => {
-        if (!file || file.trim() === '') return false;
+      const relevantFiles = changedFiles.filter((file) => {
+        if (!file || file.trim() === "") return false;
         // Ignoriere .next/, backups/, coverage/, node_modules/, etc.
-        if (file.startsWith('.next/') || file.startsWith('backups/') || 
-            file.startsWith('coverage/') || file.startsWith('node_modules/') ||
-            file.includes('.pack.gz') || file.includes('.hot-update.') ||
-            file.endsWith('.log') || file.endsWith('.json') && file.includes('/.next/')) {
+        if (
+          file.startsWith(".next/") ||
+          file.startsWith("backups/") ||
+          file.startsWith("coverage/") ||
+          file.startsWith("node_modules/") ||
+          file.includes(".pack.gz") ||
+          file.includes(".hot-update.") ||
+          file.endsWith(".log") ||
+          (file.endsWith(".json") && file.includes("/.next/"))
+        ) {
           return false;
         }
         return true;
       });
 
       // Prüfe ob alle relevanten Dateien in freigaben.json freigegeben sind
-      const allApproved = relevantFiles.every(file => {
-        return freigaben[file] === true;
-      });
+      // Unterstütze sowohl neue Struktur (allow Array) als auch alte Struktur (Dateiname als Key)
+      let allApproved = false;
+      if (freigaben.mode === "strict" && Array.isArray(freigaben.allow)) {
+        // Neue Struktur: allow Array
+        allApproved = relevantFiles.every((file) => {
+          return freigaben.allow.includes(file);
+        });
+      } else {
+        // Legacy-Struktur: Dateiname als Key
+        allApproved = relevantFiles.every((file) => {
+          return freigaben[file] === true;
+        });
+      }
 
       // Wenn alle relevanten Dateien freigegeben sind, setze approvalGiven Flag VOR Validierung
       if (allApproved && relevantFiles.length > 0) {
         hook.grantApproval();
-        console.log('✅ Alle relevanten Dateien haben Freigabe in freigaben.json');
+        console.log("✅ Alle relevanten Dateien haben Freigabe in freigaben.json");
       } else if (relevantFiles.length > 0) {
         // Finde fehlende Freigaben nur bei relevanten Dateien
-        const missingApprovals = relevantFiles.filter(file => {
-          return freigaben[file] !== true;
-        });
+        let missingApprovals = [];
+        if (freigaben.mode === "strict" && Array.isArray(freigaben.allow)) {
+          // Neue Struktur: allow Array
+          missingApprovals = relevantFiles.filter((file) => {
+            return !freigaben.allow.includes(file);
+          });
+        } else {
+          // Legacy-Struktur: Dateiname als Key
+          missingApprovals = relevantFiles.filter((file) => {
+            return freigaben[file] !== true;
+          });
+        }
         if (missingApprovals.length > 0) {
-          console.error(`❌ Fehlende Freigaben für: ${missingApprovals.join(', ')}`);
+          console.error(`❌ Fehlende Freigaben für: ${missingApprovals.join(", ")}`);
           process.exit(1);
         }
       } else {
@@ -416,37 +436,36 @@ async function preCommitHook() {
 
     for (const file of changedFiles) {
       if (hook.isMdFile(file)) {
-        const validation = await hook.validateBeforeAction(
-          `Änderung in ${file}`,
-          file
-        );
+        const validation = await hook.validateBeforeAction(`Änderung in ${file}`, file);
         if (!validation || !validation.valid) {
-          console.error(`❌ Pre-Commit Hook blockiert: ${validation?.reason || 'Unbekannter Fehler'}`);
+          console.error(
+            `❌ Pre-Commit Hook blockiert: ${validation?.reason || "Unbekannter Fehler"}`,
+          );
           process.exit(1);
         }
       }
     }
 
-    console.log('✅ Pre-Commit Hook erfolgreich');
+    console.log("✅ Pre-Commit Hook erfolgreich");
   } catch (error) {
-    console.error('❌ Pre-Commit Hook Fehler:', error.message);
+    console.error("❌ Pre-Commit Hook Fehler:", error.message);
     process.exit(1);
   }
 }
 
 // Post-commit Hook Funktion
 function postCommitHook() {
-  console.log('🛡️ Anti-Regelbruch Post-Commit Hook läuft...');
+  console.log("🛡️ Anti-Regelbruch Post-Commit Hook läuft...");
 
   const hook = new AntiRuleBreakHook();
 
   // Dokumentiere Commit in STATUS.md
   try {
-    const commitHash = execSync('git rev-parse HEAD', {
-      encoding: 'utf8',
+    const commitHash = execSync("git rev-parse HEAD", {
+      encoding: "utf8",
     }).trim();
-    const commitMessage = execSync('git log -1 --pretty=%B', {
-      encoding: 'utf8',
+    const commitMessage = execSync("git log -1 --pretty=%B", {
+      encoding: "utf8",
     }).trim();
 
     const commitEntry = `
@@ -458,15 +477,15 @@ function postCommitHook() {
 
 `;
 
-    if (fs.existsSync('STATUS.md')) {
-      const statusContent = fs.readFileSync('STATUS.md', 'utf8');
+    if (fs.existsSync("STATUS.md")) {
+      const statusContent = fs.readFileSync("STATUS.md", "utf8");
       const updatedContent = commitEntry + statusContent;
-      fs.writeFileSync('STATUS.md', updatedContent);
+      fs.writeFileSync("STATUS.md", updatedContent);
     }
 
-    console.log('✅ Post-Commit Hook erfolgreich');
+    console.log("✅ Post-Commit Hook erfolgreich");
   } catch (error) {
-    console.error('❌ Post-Commit Hook Fehler:', error.message);
+    console.error("❌ Post-Commit Hook Fehler:", error.message);
   }
 }
 
@@ -484,32 +503,26 @@ if (require.main === module) {
   const command = process.argv[2];
 
   switch (command) {
-    case 'pre-commit':
+    case "pre-commit":
       preCommitHook().catch((error) => {
-        console.error('❌ Pre-Commit Hook Fehler:', error);
+        console.error("❌ Pre-Commit Hook Fehler:", error);
         process.exit(1);
       });
       break;
-    case 'post-commit':
+    case "post-commit":
       postCommitHook();
       break;
-    case 'validate':
-      const action = process.argv[3] || 'test';
+    case "validate":
+      const action = process.argv[3] || "test";
       const targetFile = process.argv[4];
       const hook = new AntiRuleBreakHook();
       hook.validateBeforeAction(action, targetFile);
       break;
     default:
-      console.log('🛡️ Anti-Regelbruch Enterprise++ Modul - Node.js Hook');
-      console.log('Verwendung:');
-      console.log(
-        '  node anti-rule-break-hook.js pre-commit    - Pre-Commit Hook'
-      );
-      console.log(
-        '  node anti-rule-break-hook.js post-commit   - Post-Commit Hook'
-      );
-      console.log(
-        '  node anti-rule-break-hook.js validate <action> [file] - Validierung'
-      );
+      console.log("🛡️ Anti-Regelbruch Enterprise++ Modul - Node.js Hook");
+      console.log("Verwendung:");
+      console.log("  node anti-rule-break-hook.js pre-commit    - Pre-Commit Hook");
+      console.log("  node anti-rule-break-hook.js post-commit   - Post-Commit Hook");
+      console.log("  node anti-rule-break-hook.js validate <action> [file] - Validierung");
   }
 }

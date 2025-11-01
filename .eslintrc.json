@@ -1,11 +1,17 @@
 {
+  "root": true,
   "env": {
     "browser": true,
     "es2021": true,
     "node": true,
     "jest": true
   },
-  "extends": ["next/core-web-vitals"],
+  "extends": [
+    "eslint:recommended",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -28,7 +34,10 @@
       }
     ],
     "prettier/prettier": "error",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "linebreak-style": ["error", "unix"],
+    "no-trailing-spaces": "error",
+    "eol-last": ["error", "always"]
   },
   "settings": {
     "react": {
@@ -36,11 +45,12 @@
     }
   },
   "ignorePatterns": [
-    "node_modules/",
+    "dist",
+    "build",
+    "node_modules",
+    "**/*.min.*",
     ".next/",
     "out/",
-    "build/",
-    "dist/",
     "src/frontend/"
   ]
 }
