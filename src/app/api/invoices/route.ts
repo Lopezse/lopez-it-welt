@@ -158,6 +158,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  let connection: any = null;
+
   try {
     const body = await request.json();
     const {
@@ -172,66 +174,119 @@ export async function POST(request: NextRequest) {
       items,
       tax_rate = 19.0,
       created_by,
+      // Draft-Modus: Optionale Felder
+      debtor,
+      total_gross,
+      issued_at,
     } = body;
 
-    // Validierung (§14 UStG)
-    if (
-      !invoice_number ||
-      !customer_id ||
-      !issue_date ||
-      !service_date ||
-      !items ||
-      !Array.isArray(items) ||
-      items.length === 0
-    ) {
+    try {
+      connection = await createConnection();
+    } catch (dbError) {
+      console.error("❌ DB-Verbindungsfehler (invoices POST):", dbError);
       return NextResponse.json(
         {
           success: false,
-          error:
-            "Pflichtfelder: invoice_number, customer_id, issue_date, service_date, items (Array mit Positionen)",
+          error: "Datenbankverbindung fehlgeschlagen",
         },
-        { status: 400 },
+        { status: 500 },
       );
     }
 
-    const connection = await createConnection();
+    // Draft-Modus: Automatische Nummernkreis-Generierung (YYYY-####)
+    let finalInvoiceNumber = invoice_number;
+    if (!finalInvoiceNumber) {
+      // Nummernkreis: Jahresbasiert (YYYY-####)
+      const dateStr = issue_date || issued_at || new Date().toISOString().slice(0, 10);
+      const year = dateStr.slice(0, 4);
+
+      // Nächste Nummer im Jahr ermitteln
+      const [maxRows] = await connection.execute(
+        `SELECT MAX(CAST(SUBSTRING(invoice_number, 6) AS UNSIGNED)) as max_num 
+         FROM lopez_invoices 
+         WHERE invoice_number LIKE ?`,
+        [`${year}-%`],
+      );
+
+      const maxNum =
+        Array.isArray(maxRows) && maxRows.length > 0 ? (maxRows[0] as any).max_num || 0 : 0;
+      const nextNum = maxNum + 1;
+      finalInvoiceNumber = `${year}-${String(nextNum).padStart(4, "0")}`;
+    }
+
+    // Draft-Modus: Fallbacks für optionale Felder
+    const finalIssueDate = issue_date || issued_at || new Date().toISOString().slice(0, 10);
+    const finalServiceDate = service_date || finalIssueDate;
+    const finalCustomerId = customer_id || null;
+    const finalCreatedBy = created_by || null;
+
+    // Draft-Modus: Items aus total_gross generieren, falls keine Items vorhanden
+    let finalItems = items;
+    if (!finalItems || !Array.isArray(finalItems) || finalItems.length === 0) {
+      if (total_gross && typeof total_gross === "number") {
+        // Demo-Item aus Brutto generieren
+        const netAmount = total_gross / (1 + tax_rate / 100);
+        const taxAmount = total_gross - netAmount;
+
+        finalItems = [
+          {
+            item_text: debtor || "Demo-Position",
+            qty: 1,
+            unit: "Stk",
+            unit_price: netAmount.toFixed(2),
+            net_line: netAmount.toFixed(2),
+          },
+        ];
+      } else {
+        // Leeres Draft-Item
+        finalItems = [
+          {
+            item_text: debtor || "Position 1",
+            qty: 1,
+            unit: "Stk",
+            unit_price: 0,
+            net_line: 0,
+          },
+        ];
+      }
+    }
 
     // Summen berechnen
     let netAmount = 0;
-    for (const item of items) {
+    for (const item of finalItems) {
       const lineTotal = parseFloat(item.qty || 0) * parseFloat(item.unit_price || 0);
       netAmount += lineTotal;
     }
     const taxAmount = netAmount * (tax_rate / 100);
     const grossAmount = netAmount + taxAmount;
 
-    // Rechnung erstellen
+    // Rechnung erstellen (Status: draft)
     const [result] = await connection.execute(
       `INSERT INTO lopez_invoices 
-       (invoice_number, customer_id, project_id, order_id, issue_date, service_date, payment_terms, currency, net_amount, tax_rate, tax_amount, gross_amount, created_by)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       (invoice_number, customer_id, project_id, order_id, issue_date, service_date, payment_terms, currency, net_amount, tax_rate, tax_amount, gross_amount, status, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?)`,
       [
-        invoice_number,
-        customer_id,
+        finalInvoiceNumber,
+        finalCustomerId,
         project_id || null,
         order_id || null,
-        issue_date,
-        service_date,
+        finalIssueDate,
+        finalServiceDate,
         payment_terms || "Zahlbar innerhalb 14 Tage ohne Abzug",
         currency,
         netAmount,
         tax_rate,
         taxAmount,
         grossAmount,
-        created_by,
+        finalCreatedBy,
       ],
     );
 
     const invoiceId = (result as any).insertId;
 
     // Positionen einfügen
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
+    for (let i = 0; i < finalItems.length; i++) {
+      const item = finalItems[i];
       const lineTotal = parseFloat(item.qty || 0) * parseFloat(item.unit_price || 0);
 
       await connection.execute(
@@ -241,10 +296,10 @@ export async function POST(request: NextRequest) {
         [
           invoiceId,
           i + 1,
-          item.item_text,
-          item.qty,
+          item.item_text || item.name || "Position",
+          item.qty || 1,
           item.unit || "Stk",
-          item.unit_price,
+          item.unit_price || item.price || 0,
           lineTotal,
         ],
       );
@@ -255,32 +310,43 @@ export async function POST(request: NextRequest) {
       `INSERT INTO lopez_audit_logs (user_id, action, ref_table, ref_id, notes)
        VALUES (?, 'INVOICE_CREATE', 'lopez_invoices', ?, ?)`,
       [
-        created_by,
+        finalCreatedBy,
         invoiceId,
-        `Rechnung erstellt: ${invoice_number} (Netto: ${netAmount.toFixed(2)} EUR, Brutto: ${grossAmount.toFixed(2)} EUR)`,
+        `Rechnung erstellt (draft): ${finalInvoiceNumber} (Netto: ${netAmount.toFixed(2)} EUR, Brutto: ${grossAmount.toFixed(2)} EUR)`,
       ],
     );
 
-    await connection.end();
+    if (connection) {
+      try {
+        await connection.end();
+      } catch {}
+    }
 
     return NextResponse.json(
       {
         success: true,
         data: {
           id: invoiceId,
-          invoice_number,
+          invoice_number: finalInvoiceNumber,
+          status: "draft",
           net_amount: netAmount,
           tax_amount: taxAmount,
           gross_amount: grossAmount,
-          message: "Rechnung erfolgreich erstellt",
+          message: "Rechnung erfolgreich erstellt (draft)",
         },
       },
       {
+        status: 201,
         headers: { "Content-Type": "application/json; charset=utf-8" },
       },
     );
   } catch (error) {
     console.error("❌ Invoices API Fehler:", error);
+    if (connection) {
+      try {
+        await connection.end();
+      } catch {}
+    }
     return NextResponse.json(
       { success: false, error: "Fehler beim Erstellen der Rechnung" },
       { status: 500 },

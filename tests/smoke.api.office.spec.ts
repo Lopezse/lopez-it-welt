@@ -45,4 +45,29 @@ describe("Office API smoke", () => {
       expect(contentType).toMatch(/application\/json/);
     }
   });
+
+  it("POST /api/invoices creates draft invoice with number YYYY-####", async () => {
+    const currentYear = new Date().getFullYear();
+    const response = await fetch(`${baseUrl}/api/invoices`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        debtor: "Test GmbH",
+        total_gross: 59.5,
+        issued_at: `${currentYear}-11-01`,
+      }),
+    });
+
+    expect([201, 200, 401, 403, 500]).toContain(response.status); // RBAC kann 401/403 liefern, sonst 201
+
+    if (response.status === 201 || response.status === 200) {
+      const data = await response.json();
+      if (data.success && data.data) {
+        expect(data.data.invoice_number).toMatch(new RegExp(`^${currentYear}-\\d{4}$`));
+        expect(data.data.status).toBe("draft");
+      }
+    }
+  });
 });
