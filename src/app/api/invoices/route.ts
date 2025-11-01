@@ -288,60 +288,95 @@ export async function POST(request: NextRequest) {
     const grossAmount = netAmount + taxAmount;
 
     // Rechnung erstellen (Status: draft)
-    const [result] = await connection.execute(
-      `INSERT INTO lopez_invoices 
-       (invoice_number, customer_id, project_id, order_id, issue_date, service_date, payment_terms, currency, net_amount, tax_rate, tax_amount, gross_amount, status, created_by)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?)`,
-      [
-        finalInvoiceNumber,
-        finalCustomerId,
-        project_id || null,
-        order_id || null,
-        finalIssueDate,
-        finalServiceDate,
-        payment_terms || "Zahlbar innerhalb 14 Tage ohne Abzug",
-        currency,
-        netAmount,
-        tax_rate,
-        taxAmount,
-        grossAmount,
-        finalCreatedBy,
-      ],
-    );
-
-    const invoiceId = (result as any).insertId;
-
-    // Positionen einfügen
-    for (let i = 0; i < finalItems.length; i++) {
-      const item = finalItems[i];
-      const lineTotal = parseFloat(item.qty || 0) * parseFloat(item.unit_price || 0);
-
-      await connection.execute(
-        `INSERT INTO lopez_invoice_items 
-         (invoice_id, pos, item_text, qty, unit, unit_price, net_line)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    let invoiceId: number | null = null;
+    try {
+      const [result] = await connection.execute(
+        `INSERT INTO lopez_invoices 
+         (invoice_number, customer_id, project_id, order_id, issue_date, service_date, payment_terms, currency, net_amount, tax_rate, tax_amount, gross_amount, status, created_by)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?)`,
         [
-          invoiceId,
-          i + 1,
-          item.item_text || item.name || "Position",
-          item.qty || 1,
-          item.unit || "Stk",
-          item.unit_price || item.price || 0,
-          lineTotal,
+          finalInvoiceNumber,
+          finalCustomerId,
+          project_id || null,
+          order_id || null,
+          finalIssueDate,
+          finalServiceDate,
+          payment_terms || "Zahlbar innerhalb 14 Tage ohne Abzug",
+          currency,
+          netAmount,
+          tax_rate,
+          taxAmount,
+          grossAmount,
+          finalCreatedBy,
         ],
       );
-    }
 
-    // Audit-Log
-    await connection.execute(
-      `INSERT INTO lopez_audit_logs (user_id, action, ref_table, ref_id, notes)
-       VALUES (?, 'INVOICE_CREATE', 'lopez_invoices', ?, ?)`,
-      [
-        finalCreatedBy,
-        invoiceId,
-        `Rechnung erstellt (draft): ${finalInvoiceNumber} (Netto: ${netAmount.toFixed(2)} EUR, Brutto: ${grossAmount.toFixed(2)} EUR)`,
-      ],
-    );
+      invoiceId = (result as any).insertId;
+
+      // Positionen einfügen
+      if (invoiceId && finalItems.length > 0) {
+        for (let i = 0; i < finalItems.length; i++) {
+          const item = finalItems[i];
+          const lineTotal = parseFloat(item.qty || 0) * parseFloat(item.unit_price || 0);
+
+          try {
+            await connection.execute(
+              `INSERT INTO lopez_invoice_items 
+               (invoice_id, pos, item_text, qty, unit, unit_price, net_line)
+               VALUES (?, ?, ?, ?, ?, ?, ?)`,
+              [
+                invoiceId,
+                i + 1,
+                item.item_text || item.name || "Position",
+                item.qty || 1,
+                item.unit || "Stk",
+                item.unit_price || item.price || 0,
+                lineTotal,
+              ],
+            );
+          } catch (itemError: any) {
+            console.error(`❌ Fehler beim Einfügen der Position ${i + 1}:`, itemError);
+            // Weiter mit nächster Position (nicht blockierend)
+          }
+        }
+      }
+
+      // Audit-Log (optional, nicht blockierend)
+      if (invoiceId) {
+        try {
+          await connection.execute(
+            `INSERT INTO lopez_audit_logs (user_id, action, ref_table, ref_id, notes)
+             VALUES (?, 'INVOICE_CREATE', 'lopez_invoices', ?, ?)`,
+            [
+              finalCreatedBy,
+              invoiceId,
+              `Rechnung erstellt (draft): ${finalInvoiceNumber} (Netto: ${netAmount.toFixed(2)} EUR, Brutto: ${grossAmount.toFixed(2)} EUR)`,
+            ],
+          );
+        } catch (auditError: any) {
+          console.error("❌ Fehler beim Audit-Log:", auditError);
+          // Nicht blockierend - Rechnung wurde bereits erstellt
+        }
+      }
+    } catch (insertError: any) {
+      console.error("❌ Fehler beim Erstellen der Rechnung:", insertError);
+      console.error("❌ SQL Error Details:", insertError?.message, insertError?.code);
+
+      // Spezifische Fehlermeldungen für häufige Probleme
+      if (insertError?.code === "ER_NO_SUCH_TABLE") {
+        throw new Error("Tabelle lopez_invoices existiert nicht. Bitte Datenbankschema ausführen.");
+      }
+      if (insertError?.code === "ER_BAD_FIELD_ERROR") {
+        throw new Error(`Ungültiges Datenbankfeld: ${insertError?.message}`);
+      }
+      if (insertError?.code === "ER_FOREIGN_KEY_CONSTRAINT_FAILS") {
+        throw new Error(
+          `Foreign Key Constraint Fehler: ${finalCustomerId} existiert nicht in lopez_customers`,
+        );
+      }
+
+      throw insertError; // Re-throw für allgemeine Fehlerbehandlung
+    }
 
     if (connection) {
       try {
