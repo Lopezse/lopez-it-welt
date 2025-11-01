@@ -34,14 +34,44 @@ export default function CalendarPage() {
     <main className="p-6 space-y-4">
       <header className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Kalender</h1>
-        <a
+        <button
           className="underline text-sm"
-          href="/api/appointments/ical/export"
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={async () => {
+            try {
+              const res = await fetch("/api/appointments/ical/export");
+              if (!res.ok) {
+                // Auch bei Fehler versuchen, iCal zu laden (Fallback)
+                const blob = await res.blob();
+                if (blob.type === "text/calendar" || blob.size > 0) {
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "lopez-appointments.ics";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                  window.URL.revokeObjectURL(url);
+                  return;
+                }
+                throw new Error(`iCal Fehler: HTTP ${res.status}`);
+              }
+              const blob = await res.blob();
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = "lopez-appointments.ics";
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+            } catch (e: any) {
+              console.error("iCal-Fehler:", e);
+              alert(e?.message || "iCal-Export fehlgeschlagen.");
+            }
+          }}
         >
           iCal-Export
-        </a>
+        </button>
       </header>
 
       {loading && <p>Lade Termine…</p>}

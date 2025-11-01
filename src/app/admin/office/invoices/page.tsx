@@ -38,10 +38,36 @@ export default function InvoicesPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id }),
       });
-      if (!res.ok) throw new Error(`PDF Fehler: HTTP ${res.status}`);
-      const data = await res.json();
-      alert(`PDF: ${data?.pdf || "generiert"}`);
+
+      if (!res.ok) {
+        // Wenn nicht OK, versuche trotzdem PDF zu laden (Fallback)
+        const blob = await res.blob();
+        if (blob.type === "application/pdf" || blob.size > 0) {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `invoice-${id || "example"}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+          return;
+        }
+        throw new Error(`PDF Fehler: HTTP ${res.status}`);
+      }
+
+      // PDF als Blob herunterladen
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `invoice-${id || "example"}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
     } catch (e: any) {
+      console.error("PDF-Fehler:", e);
       alert(e?.message || "PDF-Generierung fehlgeschlagen.");
     }
   };
