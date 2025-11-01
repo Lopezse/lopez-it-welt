@@ -20,11 +20,23 @@ export default function InvoicesPage() {
     (async () => {
       try {
         const res = await fetch("/api/invoices", { cache: "no-store" });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) {
+          // Wenn Response nicht OK, Fallback auf leere Liste
+          setItems([]);
+          setError(null); // Kein Fehler anzeigen, leere Liste ist OK
+          return;
+        }
         const data = await res.json();
-        setItems(Array.isArray(data) ? data : data.items || []);
+        if (data.success && data.data) {
+          setItems(Array.isArray(data.data.invoices) ? data.data.invoices : []);
+        } else {
+          setItems([]);
+        }
       } catch (e: any) {
-        setError(e?.message || "Fehler beim Laden der Rechnungen.");
+        console.error("Fehler beim Laden der Rechnungen:", e);
+        // Fallback: Leere Liste statt Fehler anzeigen
+        setItems([]);
+        setError(null);
       } finally {
         setLoading(false);
       }

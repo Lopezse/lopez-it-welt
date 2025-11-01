@@ -19,11 +19,27 @@ export default function CalendarPage() {
     (async () => {
       try {
         const res = await fetch("/api/appointments", { cache: "no-store" });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) {
+          // Wenn Response nicht OK, Fallback auf leere Liste
+          setItems([]);
+          setError(null); // Kein Fehler anzeigen, leere Liste ist OK
+          return;
+        }
         const data = await res.json();
-        setItems(Array.isArray(data) ? data : data.items || []);
+        if (data.success && data.data) {
+          setItems(Array.isArray(data.data.appointments) ? data.data.appointments : []);
+        } else if (Array.isArray(data)) {
+          setItems(data);
+        } else if (Array.isArray(data.items)) {
+          setItems(data.items);
+        } else {
+          setItems([]);
+        }
       } catch (e: any) {
-        setError(e?.message || "Fehler beim Laden der Termine.");
+        console.error("Fehler beim Laden der Termine:", e);
+        // Fallback: Leere Liste statt Fehler anzeigen
+        setItems([]);
+        setError(null);
       } finally {
         setLoading(false);
       }

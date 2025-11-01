@@ -19,6 +19,7 @@ const PUBLIC_ROUTES = [
   "/api/monitoring/status",
   "/api/appointments/ical/export", // iCal-Export ist öffentlich (keine Auth nötig)
   "/api/invoices/pdf", // PDF-Export ist öffentlich (keine Auth nötig)
+  "/api/admin/contact-messages/stats", // Contact Stats ist öffentlich (für Badge-Updates)
 ];
 
 // Office & Finance API-Routen (Admin-Only)
