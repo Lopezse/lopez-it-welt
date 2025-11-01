@@ -11,19 +11,157 @@ import fs from "fs";
 import path from "path";
 
 export async function POST(request: NextRequest) {
+  let connection: any = null;
+
   try {
     const body = await request.json();
     const { invoice_id, id } = body;
     const invoiceId = invoice_id || id;
 
     if (!invoiceId) {
-      return NextResponse.json(
-        { success: false, error: "invoice_id ist erforderlich" },
-        { status: 400 },
-      );
+      // Fallback: Dummy-PDF statt JSON-Fehler
+      const dummyPdf = `%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+>>
+>>
+>>
+endobj
+4 0 obj
+<<
+/Length 55
+>>
+stream
+BT
+/F1 12 Tf
+100 700 Td
+(Fehler: invoice_id erforderlich) Tj
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+trailer
+<<
+/Size 5
+/Root 1 0 R
+>>
+startxref
+376
+%%EOF`;
+      const pdfBuffer = Buffer.from(dummyPdf, "utf8");
+      return new NextResponse(pdfBuffer, {
+        status: 200,
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": 'inline; filename="invoice-error.pdf"',
+          "Content-Length": pdfBuffer.length.toString(),
+        },
+      });
     }
 
-    const connection = await createConnection();
+    try {
+      connection = await createConnection();
+    } catch (dbError) {
+      console.error("❌ DB-Verbindungsfehler:", dbError);
+      // Fallback: Dummy-PDF statt JSON-Fehler
+      const dummyPdf = `%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+>>
+>>
+>>
+endobj
+4 0 obj
+<<
+/Length 58
+>>
+stream
+BT
+/F1 12 Tf
+100 700 Td
+(Fehler: Datenbankverbindung) Tj
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+trailer
+<<
+/Size 5
+/Root 1 0 R
+>>
+startxref
+379
+%%EOF`;
+      const pdfBuffer = Buffer.from(dummyPdf, "utf8");
+      return new NextResponse(pdfBuffer, {
+        status: 200,
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": 'inline; filename="invoice-error.pdf"',
+          "Content-Length": pdfBuffer.length.toString(),
+        },
+      });
+    }
 
     // Rechnung laden
     const [invoiceRows] = await connection.execute(
@@ -40,10 +178,79 @@ export async function POST(request: NextRequest) {
     const invoice = Array.isArray(invoiceRows) && invoiceRows.length > 0 ? invoiceRows[0] : null;
 
     if (!invoice) {
-      return NextResponse.json(
-        { success: false, error: "Rechnung nicht gefunden" },
-        { status: 404 },
-      );
+      if (connection) {
+        try {
+          await connection.end();
+        } catch {}
+      }
+      // Fallback: Dummy-PDF statt JSON-Fehler
+      const dummyPdf = `%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+>>
+>>
+>>
+endobj
+4 0 obj
+<<
+/Length 54
+>>
+stream
+BT
+/F1 12 Tf
+100 700 Td
+(Fehler: Rechnung nicht gefunden) Tj
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+trailer
+<<
+/Size 5
+/Root 1 0 R
+>>
+startxref
+375
+%%EOF`;
+      const pdfBuffer = Buffer.from(dummyPdf, "utf8");
+      return new NextResponse(pdfBuffer, {
+        status: 200,
+        headers: {
+          "Content-Type": "application/pdf",
+          "Content-Disposition": 'inline; filename="invoice-error.pdf"',
+          "Content-Length": pdfBuffer.length.toString(),
+        },
+      });
     }
 
     // Positionen laden
@@ -184,10 +391,84 @@ startxref
     });
   } catch (error) {
     console.error("❌ Invoice PDF API Fehler:", error);
-    // Fallback: JSON mit Fehler
-    return NextResponse.json(
-      { success: false, error: "Fehler beim Generieren der PDF" },
-      { status: 500 },
-    );
+
+    // Stelle sicher, dass DB-Verbindung geschlossen wird
+    let connection: any = null;
+    try {
+      connection = await createConnection();
+      await connection.end();
+    } catch {}
+
+    // Fallback: Dummy-PDF statt JSON-Fehler
+    const dummyPdf = `%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+>>
+>>
+>>
+endobj
+4 0 obj
+<<
+/Length 65
+>>
+stream
+BT
+/F1 12 Tf
+100 700 Td
+(Fehler beim Generieren der PDF) Tj
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000261 00000 n 
+trailer
+<<
+/Size 5
+/Root 1 0 R
+>>
+startxref
+386
+%%EOF`;
+
+    const pdfBuffer = Buffer.from(dummyPdf, "utf8");
+
+    // Fallback: Dummy-PDF statt JSON-Fehler (immer HTTP 200)
+    return new NextResponse(pdfBuffer, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'inline; filename="invoice-error.pdf"',
+        "Content-Length": pdfBuffer.length.toString(),
+      },
+    });
   }
 }

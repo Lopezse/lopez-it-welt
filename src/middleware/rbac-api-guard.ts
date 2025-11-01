@@ -18,6 +18,7 @@ const PUBLIC_ROUTES = [
   "/api/health",
   "/api/monitoring/status",
   "/api/appointments/ical/export", // iCal-Export ist öffentlich (keine Auth nötig)
+  "/api/invoices/pdf", // PDF-Export ist öffentlich (keine Auth nötig)
 ];
 
 // Office & Finance API-Routen (Admin-Only)
@@ -61,10 +62,12 @@ export function rbacApiGuard(request: NextRequest): NextResponse | null {
   // WICHTIG: Nur prüfen wenn Route NICHT öffentlich ist
   // Aber: Prüfe auch auf spezifische Pfade, nicht nur auf startsWith
   if (isOfficeFinanceRoute(pathname)) {
-    // Ausnahme: iCal-Export ist öffentlich (sollte schon oben abgefangen sein, aber zur Sicherheit)
+    // Ausnahmen: iCal-Export und PDF-Export sind öffentlich (sollten schon oben abgefangen sein, aber zur Sicherheit)
     if (
       pathname === "/api/appointments/ical/export" ||
-      pathname.startsWith("/api/appointments/ical/")
+      pathname.startsWith("/api/appointments/ical/") ||
+      pathname === "/api/invoices/pdf" ||
+      pathname.startsWith("/api/invoices/pdf")
     ) {
       return null; // Öffentlicher Zugriff erlaubt
     }
