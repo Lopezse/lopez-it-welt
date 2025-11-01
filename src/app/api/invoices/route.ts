@@ -248,12 +248,12 @@ export async function POST(request: NextRequest) {
     let finalCustomerId = customer_id;
     if (!finalCustomerId) {
       try {
-        // Versuche ersten vorhandenen Kunden zu finden
-        const [customerRows] = await connection.execute(
-          "SELECT id FROM lopez_customers WHERE status = 'aktiv' OR status IS NULL LIMIT 1",
-        );
+        // Versuche ersten vorhandenen Kunden zu finden (ohne Status-Filter, da status NULL sein kann)
+        const [customerRows] = await connection.execute("SELECT id FROM lopez_customers LIMIT 1");
         if (Array.isArray(customerRows) && customerRows.length > 0) {
-          finalCustomerId = String((customerRows[0] as any).id);
+          const customerId = customerRows[0];
+          // id kann VARCHAR(36) oder INT sein, immer als String konvertieren
+          finalCustomerId = customerId.id ? String(customerId.id) : String(customerId);
         } else {
           // Kein Kunde vorhanden - Fehler mit hilfreicher Meldung
           throw new Error(
@@ -262,13 +262,14 @@ export async function POST(request: NextRequest) {
         }
       } catch (customerError: any) {
         console.error("❌ Fehler beim Prüfen des Kunden:", customerError);
+        console.error("❌ Stack:", customerError?.stack);
         // Wenn es bereits ein Error-Objekt ist, re-throw es
         if (customerError instanceof Error && customerError.message.includes("Kein Kunde")) {
           throw customerError;
         }
         // Andernfalls: Fehler mit hilfreicher Meldung
         throw new Error(
-          "customer_id erforderlich. Bitte customer_id im Request mitgeben oder zuerst einen Kunden anlegen.",
+          `customer_id erforderlich. Fehler: ${customerError?.message || String(customerError)}`,
         );
       }
     }
