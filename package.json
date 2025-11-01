@@ -33,7 +33,8 @@
     "backup:scheduler": "node scripts/backup-scheduler.js start",
     "backup:scheduler:stop": "node scripts/backup-scheduler.js stop",
     "backup:scheduler:status": "node scripts/backup-scheduler.js status",
-    "verify:office": "node -e \"console.log('verify:office PASS – GoBD/DSGVO/ISO27001 checks OK')\"",
+    "test": "jest -c jest.config.js",
+    "verify:office": "jest -c jest.config.js -t 'Office API smoke' && node -e \"console.log('verify:office PASS – GoBD/DSGVO/ISO27001 checks OK')\"",
     "release:sbom": "node scripts/gen-sbom.mjs",
     "release:tag": "node scripts/release-tag.mjs"
   },
