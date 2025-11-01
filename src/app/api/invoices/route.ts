@@ -161,7 +161,20 @@ export async function POST(request: NextRequest) {
   let connection: any = null;
 
   try {
-    const body = await request.json();
+    // Request-Body parsen mit Fehlerbehandlung
+    let body: any = {};
+    try {
+      body = await request.json();
+    } catch (parseError) {
+      console.error("❌ JSON-Parse-Fehler:", parseError);
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Ungültiges JSON im Request-Body",
+        },
+        { status: 400 },
+      );
+    }
     const {
       invoice_number,
       customer_id,
@@ -196,22 +209,35 @@ export async function POST(request: NextRequest) {
     // Draft-Modus: Automatische Nummernkreis-Generierung (YYYY-####)
     let finalInvoiceNumber = invoice_number;
     if (!finalInvoiceNumber) {
-      // Nummernkreis: Jahresbasiert (YYYY-####)
-      const dateStr = issue_date || issued_at || new Date().toISOString().slice(0, 10);
-      const year = dateStr.slice(0, 4);
+      try {
+        // Nummernkreis: Jahresbasiert (YYYY-####)
+        const dateStr = issue_date || issued_at || new Date().toISOString().slice(0, 10);
+        const year = dateStr.slice(0, 4);
 
-      // Nächste Nummer im Jahr ermitteln
-      const [maxRows] = await connection.execute(
-        `SELECT MAX(CAST(SUBSTRING(invoice_number, 6) AS UNSIGNED)) as max_num 
-         FROM lopez_invoices 
-         WHERE invoice_number LIKE ?`,
-        [`${year}-%`],
-      );
+        // Nächste Nummer im Jahr ermitteln (mit Fehlerbehandlung für nicht existierende Tabelle)
+        try {
+          const [maxRows] = await connection.execute(
+            `SELECT MAX(CAST(SUBSTRING(invoice_number, 6) AS UNSIGNED)) as max_num 
+             FROM lopez_invoices 
+             WHERE invoice_number LIKE ?`,
+            [`${year}-%`],
+          );
 
-      const maxNum =
-        Array.isArray(maxRows) && maxRows.length > 0 ? (maxRows[0] as any).max_num || 0 : 0;
-      const nextNum = maxNum + 1;
-      finalInvoiceNumber = `${year}-${String(nextNum).padStart(4, "0")}`;
+          const maxNum =
+            Array.isArray(maxRows) && maxRows.length > 0 ? (maxRows[0] as any).max_num || 0 : 0;
+          const nextNum = maxNum + 1;
+          finalInvoiceNumber = `${year}-${String(nextNum).padStart(4, "0")}`;
+        } catch (sqlError: any) {
+          console.error("❌ SQL-Fehler bei Nummernkreis-Generierung:", sqlError);
+          // Fallback: Timestamp-basierte Nummer
+          finalInvoiceNumber = `${year}-${String(Date.now()).slice(-4)}`;
+        }
+      } catch (error) {
+        console.error("❌ Fehler bei Nummernkreis-Generierung:", error);
+        // Fallback: Timestamp-basierte Nummer
+        const year = new Date().getFullYear();
+        finalInvoiceNumber = `${year}-${String(Date.now()).slice(-4)}`;
+      }
     }
 
     // Draft-Modus: Fallbacks für optionale Felder
@@ -339,15 +365,32 @@ export async function POST(request: NextRequest) {
         headers: { "Content-Type": "application/json; charset=utf-8" },
       },
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("❌ Invoices API Fehler:", error);
+    console.error("❌ Stack:", error?.stack);
     if (connection) {
       try {
         await connection.end();
       } catch {}
     }
+
+    // Detailliertere Fehlermeldung für Development
+    const errorMessage =
+      process.env.NODE_ENV === "development"
+        ? error?.message || String(error) || "Fehler beim Erstellen der Rechnung"
+        : "Fehler beim Erstellen der Rechnung";
+
     return NextResponse.json(
-      { success: false, error: "Fehler beim Erstellen der Rechnung" },
+      {
+        success: false,
+        error: errorMessage,
+        ...(process.env.NODE_ENV === "development" && {
+          details: {
+            stack: error?.stack,
+            name: error?.name,
+          },
+        }),
+      },
       { status: 500 },
     );
   }
