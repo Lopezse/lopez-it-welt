@@ -21,14 +21,16 @@ export async function GET(request: NextRequest) {
       connection = await createConnection();
     } catch (dbError) {
       console.error("❌ DB-Verbindungsfehler:", dbError);
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Datenbankverbindung fehlgeschlagen",
-          details: dbError instanceof Error ? dbError.message : "Unbekannter Fehler",
+      // Fallback: Leeres iCal-Objekt zurückgeben statt JSON-Fehler
+      const emptyIcal =
+        "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Lopez IT Welt//Office & Finance//DE\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nEND:VCALENDAR\r\n";
+      return new NextResponse(emptyIcal, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/calendar; charset=utf-8",
+          "Content-Disposition": 'attachment; filename="lopez-appointments.ics"',
         },
-        { status: 500 },
-      );
+      });
     }
 
     let query = `
@@ -66,23 +68,81 @@ export async function GET(request: NextRequest) {
 
     let appointments: any[] = [];
     try {
+      // Prüfe ob Tabelle existiert
+      try {
+        const [tableCheck] = await connection.execute(
+          "SELECT 1 FROM information_schema.tables WHERE table_schema = 'lopez_it_welt' AND table_name = 'lopez_appointments' LIMIT 1",
+        );
+        if (Array.isArray(tableCheck) && tableCheck.length === 0) {
+          console.warn(
+            "⚠️ Tabelle lopez_appointments existiert nicht - Fallback auf leeres Kalender-Objekt",
+          );
+          if (connection) {
+            try {
+              await connection.end();
+            } catch {}
+          }
+          // Fallback: Leeres iCal-Objekt
+          const emptyIcal =
+            "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Lopez IT Welt//Office & Finance//DE\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nEND:VCALENDAR\r\n";
+          return new NextResponse(emptyIcal, {
+            status: 200,
+            headers: {
+              "Content-Type": "text/calendar; charset=utf-8",
+              "Content-Disposition": 'attachment; filename="lopez-appointments.ics"',
+            },
+          });
+        }
+      } catch (checkError) {
+        console.warn("⚠️ Fehler beim Prüfen der Tabelle:", checkError);
+        // Weiter mit Query versuchen
+      }
+
       const [rows] = await connection.execute(query, params);
       appointments = Array.isArray(rows) ? rows : [];
-    } catch (queryError) {
+    } catch (queryError: any) {
       console.error("❌ SQL-Query-Fehler:", queryError);
+
+      // Spezifische Fehlerbehandlung
+      const errorMessage = queryError instanceof Error ? queryError.message : String(queryError);
+
+      // Wenn Tabelle nicht existiert, gebe leeres Kalender-Objekt zurück
+      if (errorMessage.includes("doesn't exist") || errorMessage.includes("Unknown table")) {
+        console.warn(
+          "⚠️ Tabelle lopez_appointments existiert nicht - Fallback auf leeres Kalender-Objekt",
+        );
+        if (connection) {
+          try {
+            await connection.end();
+          } catch {}
+        }
+        const emptyIcal =
+          "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Lopez IT Welt//Office & Finance//DE\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nEND:VCALENDAR\r\n";
+        return new NextResponse(emptyIcal, {
+          status: 200,
+          headers: {
+            "Content-Type": "text/calendar; charset=utf-8",
+            "Content-Disposition": 'attachment; filename="lopez-appointments.ics"',
+          },
+        });
+      }
+
+      // Andere Fehler: ebenfalls Fallback
       if (connection) {
         try {
           await connection.end();
         } catch {}
       }
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Fehler beim Abrufen der Termine",
-          details: queryError instanceof Error ? queryError.message : "Unbekannter Fehler",
+      // Fallback: Leeres iCal-Objekt statt JSON-Fehler
+      const emptyIcal =
+        "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Lopez IT Welt//Office & Finance//DE\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nEND:VCALENDAR\r\n";
+      return new NextResponse(emptyIcal, {
+        status: 200,
+        headers: {
+          "Content-Type": "text/calendar; charset=utf-8",
+          "Content-Disposition": 'attachment; filename="lopez-appointments.ics"',
         },
-        { status: 500 },
-      );
+      });
     }
 
     if (connection) {
@@ -177,14 +237,16 @@ export async function GET(request: NextRequest) {
       } catch {}
     }
 
-    return NextResponse.json(
-      {
-        success: false,
-        error: "Fehler beim Exportieren der Termine",
-        details: error instanceof Error ? error.message : "Unbekannter Fehler",
+    // Auch im äußeren catch: Leeres iCal-Objekt statt JSON-Fehler
+    const emptyIcal =
+      "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Lopez IT Welt//Office & Finance//DE\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nEND:VCALENDAR\r\n";
+    return new NextResponse(emptyIcal, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/calendar; charset=utf-8",
+        "Content-Disposition": 'attachment; filename="lopez-appointments.ics"',
       },
-      { status: 500 },
-    );
+    });
   }
 }
 
