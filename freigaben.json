@@ -1,32 +1,43 @@
 {
   "mode": "strict",
   "allow": [
-    "docs/00-00-inhaltsverzeichnis.md",
-    "docs/04-ENTERPRISE/enterprise-master-architektur.md",
-    "test.md",
-    "docs/07-OFFICE-MANAGEMENT/validation/validation-report-final.md",
-    "docs/07-OFFICE-MANAGEMENT/validation/validation-summary.md",
-    "STATUS.md",
-    "docs/07-OFFICE-MANAGEMENT/README.md",
+    "policies/change-control.yml",
     "freigaben.json",
-    "CHANGELOG.md",
-    "scripts/anti-rule-break-hook.js",
-    "scripts/freigabe-check.js",
-    "scripts/pre-commit-freigabe-check.js",
-    ".husky/pre-commit",
-    ".gitattributes",
-    ".editorconfig",
-    ".prettierrc",
-    ".prettierignore",
-    ".eslintrc.json",
-    "lint-staged.config.mjs",
+    "scripts/log-compliance-status.js",
+    ".husky/pre-push",
     "package.json",
-    ".husky/commit-msg",
-    "scripts/approve-files.mjs"
+    "scripts/enterprise-gate.mjs",
+    "scripts/gen-sbom.mjs",
+    "scripts/release-tag.mjs"
+  ],
+  "temporary_allow": [
+    {
+      "pattern": "docs/**",
+      "reason": "Dokumentation, changelogs, validierungsberichte",
+      "expires_at": "2025-11-08T23:59:59Z",
+      "max_files_per_commit": 50,
+      "branch": ["docs/*", "feature/docs"]
+    },
+    {
+      "pattern": "frontend/**",
+      "reason": "UI & CSS Updates (Low-Risk)",
+      "expires_at": "2025-11-08T23:59:59Z",
+      "max_files_per_commit": 25,
+      "branch": ["feature/ui", "feature/frontend"]
+    }
+  ],
+  "deny_patterns": [
+    "**/*.env",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/*.pem",
+    "**/*.key",
+    "**/secrets/**"
   ],
   "approver": {
     "name": "Ramiro Lopez Rodriguez",
-    "role": "Owner, Lopez IT Welt",
+    "role": "Inhaber / Compliance Officer",
     "email": "ra-lopez@t-online.de"
   }
 }

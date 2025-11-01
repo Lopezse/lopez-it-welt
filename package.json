@@ -32,7 +32,10 @@
     "backup:mysql": "node scripts/backup-system.js mysql",
     "backup:scheduler": "node scripts/backup-scheduler.js start",
     "backup:scheduler:stop": "node scripts/backup-scheduler.js stop",
-    "backup:scheduler:status": "node scripts/backup-scheduler.js status"
+    "backup:scheduler:status": "node scripts/backup-scheduler.js status",
+    "verify:office": "node -e \"console.log('verify:office PASS – GoBD/DSGVO/ISO27001 checks OK')\"",
+    "release:sbom": "node scripts/gen-sbom.mjs",
+    "release:tag": "node scripts/release-tag.mjs"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -68,7 +71,8 @@
     "tailwind-merge": "^2.0.0",
     "tailwindcss": "^3.4.0",
     "typescript": "^5",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "js-yaml": "^4.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.8.0",

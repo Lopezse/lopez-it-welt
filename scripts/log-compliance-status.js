@@ -149,5 +149,23 @@ function nowIsoLocal() {
 
   // Abschlussmeldung
   process.stdout.write(`[compliance-log] wrote:\n  - ${jsonPath}\n  - ${mdPath}\n`);
+
+  // === Lopez IT Welt – Backup Integration ===
+  try {
+    const backupDst = "D:/Backups/Lopez_IT_Welt/Compliance";
+    ensureDir(backupDst);
+    const files = fs.readdirSync(outDir).filter((f) => f.endsWith(".json") || f.endsWith(".md"));
+    for (const f of files) {
+      const sourceFile = path.join(outDir, f);
+      const targetFile = path.join(backupDst, f);
+      fs.copyFileSync(sourceFile, targetFile);
+    }
+    console.log(
+      "[Compliance Backup] Logs archiviert unter D:\\Backups\\Lopez_IT_Welt\\Compliance\\",
+    );
+  } catch (err) {
+    console.error("[Compliance Backup] Fehler beim Archivieren:", err.message);
+  }
+
   process.exit(0);
 })();
