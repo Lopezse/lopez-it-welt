@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "erstellt": "2025-07-06T09:53:11.519Z",
+  "autoStart": true,
+  "ueberwachungsIntervall": 300000,
+  "maxGedaechtnisGroesse": 100,
+  "aktivierteModule": [
+    "system-analyse",
+    "aufgaben-identifikation",
+    "status-generierung",
+    "bericht-generierung"
+  ],
+  "benachrichtigungen": {
+    "email": false,
+    "console": true,
+    "log": true
+  }
+}

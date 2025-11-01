@@ -1,0 +1,15 @@
+{
+  "mode": "baseline",
+  "allow": ["**/*"],
+  "reason": "Initial repository import (one-time baseline, GoBD/DSGVO/ISO27001 compliant).",
+  "expires": "once",
+  "approver": {
+    "name": "Ramiro Lopez Rodriguez",
+    "role": "Owner, Lopez IT Welt",
+    "email": "ra-lopez@t-online.de"
+  },
+  "attestation": {
+    "id": "BASELINE-2025-11-01",
+    "created": "2025-11-01"
+  }
+}

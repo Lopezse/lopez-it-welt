@@ -1,0 +1,87 @@
+{
+  "version": "6.0.0",
+  "last_updated": "2024-03-21",
+  "quality_policy": "zero-tolerance",
+  "cursor_mode": "strict",
+  "cursor_focus": "sequenziell",
+  "cursor_interaction": "suspend until done",
+  "ai_rules": {
+    "cursor": {
+      "mode": "strict",
+      "focus": "sequenziell",
+      "interaction": "suspend until done",
+      "quality_policy": "zero-tolerance"
+    },
+    "initialization": {
+      "require_cursor_start": true,
+      "auto_check": true,
+      "status_report": true
+    },
+    "validation": {
+      "project_structure": true,
+      "ci_compliance": true,
+      "documentation_sync": true
+    },
+    "correction": {
+      "identify_issues": true,
+      "scope_changes": true,
+      "update_documentation": true
+    },
+    "confirmation": {
+      "generate_report": true,
+      "update_changelog": true,
+      "document_status": true
+    }
+  },
+  "rules": {
+    "code": {
+      "testCoverage": 100,
+      "typeCoverage": 100,
+      "lintErrors": 0,
+      "complexity": 1,
+      "duplication": 0,
+      "documentation": 100
+    },
+    "performance": {
+      "lighthouse": 100,
+      "firstPaint": 0,
+      "timeToInteractive": 0,
+      "bundleSize": 0,
+      "memoryUsage": 0,
+      "cpuUsage": 0
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "compliance": 100,
+      "encryption": 100,
+      "authentication": 100,
+      "authorization": 100
+    },
+    "accessibility": {
+      "wcag": "AAA",
+      "screenReader": 100,
+      "keyboard": 100,
+      "colorContrast": 100,
+      "focusManagement": 100
+    },
+    "documentation": {
+      "requireComments": true,
+      "requireReadme": true,
+      "requireChangelog": true,
+      "checkIntervals": {
+        "README.md": "daily",
+        "CHANGELOG.md": "on-commit",
+        "START.md": "on-change",
+        "FEEDBACK.md": "continuous",
+        "CORRECTION.md": "daily",
+        "PROJECT.md": "weekly"
+      }
+    },
+    "workflow": {
+      "requirePR": true,
+      "requireReview": true,
+      "requireApproval": true,
+      "steps": ["initialization", "check", "correction", "confirmation"]
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+    "version": "2.0.0",
+    "erstellt": "2025-07-06T09:52:52.152Z",
+    "letzteAktualisierung": "2025-07-06T12:00:00.000Z",
+    "optimierung": {
+        "grund": "Performance-Verbesserung",
+        "alteGroesse": "1.64 MB",
+        "neueGroesse": "Ziel: < 100 KB",
+        "behalteneEintraege": 50,
+        "archiviert": true
+    },
+    "wichtigeDateien": [
+        {
+            "pfad": "AUFTRAG_FUER_MORGEN.md",
+            "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+            "prioritaet": "hoch",
+            "status": "aktiv",
+            "letzteAenderung": "2025-06-30T05:09:50.257Z",
+            "kategorien": [
+                "enterprise",
+                "projekt-management",
+                "technisch",
+                "admin",
+                "ki-agenten"
+            ],
+            "schluesselwoerter": [
+                "shop",
+                "admin",
+                "status",
+                "ticket",
+                "priorit"
+            ]
+        },
+        {
+            "pfad": "CHANGELOG.md",
+            "titel": "📝 Changelog - Lopez IT Welt",
+            "prioritaet": "normal",
+            "status": "aktiv",
+            "letzteAenderung": "2025-06-27T18:13:55.839Z",
+            "kategorien": [
+                "enterprise",
+                "projekt-management",
+                "technisch",
+                "admin",
+                "ki-agenten"
+            ],
+            "schluesselwoerter": [
+                "deutsche",
+                "compliance",
+                "navigation",
+                "dsgvo"
+            ]
+        },
+        {
+            "pfad": "CursorGuide.md",
+            "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+            "prioritaet": "normal",
+            "status": "aktiv",
+            "letzteAenderung": "2025-06-27T18:14:01.108Z",
+            "kategorien": [
+                "enterprise",
+                "projekt-management",
+                "ki-agenten"
+            ],
+            "schluesselwoerter": [
+                "status",
+                "freigabe",
+                "qualit",
+                "commit"
+            ]
+        }
+    ],
+    "systemStatus": {
+        "performance": "optimiert",
+        "groesse": "reduziert",
+        "archivierung": "aktiv",
+        "monitoring": "aktiviert"
+    },
+    "archivierung": {
+        "alteDatei": "agenten-gedaechtnis-backup-2025-07-06-12-00.json",
+        "archivierteEintraege": 67729,
+        "behalteneEintraege": 50,
+        "komprimierung": "aktiviert"
+    }
+}

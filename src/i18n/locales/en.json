@@ -1,0 +1,401 @@
+{
+  "kopfbereich": {
+    "logo": "Lopez IT Welt",
+    "navigation": {
+      "startseite": "Home",
+      "leistungen": "Services",
+      "webshop": "Webshop",
+      "preise": "Prices",
+      "ueber_uns": "About us",
+      "kontakt": "Contact"
+    },
+    "cta": "Get advice now",
+    "sprache": {
+      "de": "DE",
+      "en": "EN",
+      "es": "ES"
+    },
+    "anmeldung": {
+      "anmelden": "Login",
+      "registrieren": "Register",
+      "abmelden": "Logout",
+      "profil": "Profile"
+    },
+    "auth": {
+      "anmelden": "Login",
+      "abmelden": "Logout",
+      "willkommen": "Welcome"
+    }
+  },
+  "hero": {
+    "titel": "Digital Solutions for Everyone",
+    "untertitel": "Accessible and Multilingual IT Solutions",
+    "beschreibung": "IT Service, Web Development & Consulting – reliable, personal, modern."
+  },
+  "hauptbereiche": {
+    "titel": "Our Main Areas",
+    "elemente": {
+      "it_support": {
+        "titel": "IT Support",
+        "beschreibung": "Remote & on-site – help with PC, network, software",
+        "details": "• Remote support via TeamViewer\n• On-site service in Wunstorf\n• Hardware repairs\n• Software installation\n• Network setup",
+        "symbol": "💼"
+      },
+      "pc_bau": {
+        "titel": "PC Build & Setup",
+        "beschreibung": "Individually assembled, accessibly explained",
+        "details": "• Individual PC configuration\n• Accessible setup\n• Software installation\n• Data transfer\n• Training & support",
+        "symbol": "🖥️"
+      },
+      "webdesign": {
+        "titel": "Web Design & Automation",
+        "beschreibung": "Accessible, multilingual, AI-based",
+        "details": "• Accessible website design\n• Multilingual content\n• AI integration\n• Process automation\n• SEO optimization",
+        "symbol": "🌐"
+      },
+      "ki_assistenz": {
+        "titel": "AI Assistance",
+        "beschreibung": "Applications, texts, automations",
+        "details": "• ChatGPT integration\n• Text generation\n• Process automation\n• AI training\n• Custom AI solutions",
+        "symbol": "🤖"
+      },
+      "formularservice": {
+        "titel": "Form Service",
+        "beschreibung": "Help with authorities, health insurance, applications",
+        "details": "• Authority applications\n• Health insurance forms\n• Job center documents\n• Legal documents\n• Translation support",
+        "symbol": "📝"
+      },
+      "webshop": {
+        "titel": "Shop / Digital Products",
+        "beschreibung": "Templates, tools, application sets, security solutions for download",
+        "details": "• Application templates\n• Security tools\n• AI templates\n• Multilingual documents\n• Instant download",
+        "symbol": "🛒"
+      }
+    }
+  },
+  "webshop": {
+    "titel": "Our Shop – Digital. Simple. Instant.",
+    "produkte": {
+      "vorlagen": {
+        "titel": "Application Templates",
+        "beschreibung": "PDF/Word, accessible",
+        "symbol": "📂"
+      },
+      "sicherheit": {
+        "titel": "Security Tools",
+        "beschreibung": "Password manager, privacy checklists",
+        "symbol": "🔐"
+      },
+      "ki_vorlagen": {
+        "titel": "AI Templates",
+        "beschreibung": "ChatGPT prompts, Cursor templates",
+        "symbol": "🧠"
+      },
+      "mehrsprachig": {
+        "titel": "Multilingual Documents",
+        "beschreibung": "DE/ES",
+        "symbol": "🌍"
+      }
+    },
+    "features": "One-time payment, instant download, GDPR compliant",
+    "cta": "Go to Shop"
+  },
+  "vertrauen": {
+    "titel": "Why Lopez IT Welt?",
+    "punkte": {
+      "barrierefreiheit": "Accessibility as a principle, not an add-on",
+      "zweisprachig": "Bilingual: German & Spanish",
+      "empathie": "Empathy & experience with job center, illness, authorities",
+      "menschenzentriert": "IT made for people",
+      "enterprise": "Enterprise++ standards in code, data protection & automation"
+    }
+  },
+  "kundenstimmen": {
+    "titel": "Customer Reviews",
+    "elemente": {
+      "kunde1": {
+        "text": "Finally someone who understands my problems and offers real solutions.",
+        "autor": "Mr. R.",
+        "ort": "Hanover"
+      },
+      "kunde2": {
+        "text": "The shop is great – I could use the template directly for the employment office.",
+        "autor": "Ms. M.",
+        "ort": "Laatzen"
+      }
+    }
+  },
+  "sicherheit": {
+    "titel": "Security & Quality",
+    "punkte": {
+      "dsgvo": "GDPR compliant",
+      "zero_trust": "Zero-Trust architecture",
+      "updates": "Automatic updates & backups",
+      "prozesse": "Documented processes & protocols",
+      "barrierefreiheit": "Accessible UX concept (also for visually impaired)"
+    }
+  },
+  "kontakt": {
+    "titel": "Contact & Consultation",
+    "methoden": {
+      "formular": "Contact form (accessible, multilingual)",
+      "telefon": "Phone (by appointment)",
+      "vor_ort": "On-site appointment possible (Wunstorf / Hanover region)"
+    },
+    "cta": "Get in Touch"
+  },
+  "fussbereich": {
+    "rechtlich": {
+      "impressum": "Imprint",
+      "datenschutz": "Privacy",
+      "agb": "Terms",
+      "barrierefreiheit": "Accessibility"
+    },
+    "sprache": "Language: German / English",
+    "copyright": "© 2025 Lopez IT Welt"
+  },
+  "ki": {
+    "titel": "AI & Automation for Companies",
+    "beschreibung": "We make your processes smarter – with ChatGPT, RPA & customized tools."
+  },
+  "testimonials": {
+    "titel": "Customer Reviews",
+    "elemente": {
+      "kunde1": {
+        "text": "Finally someone who explains IT in an understandable way! Mr. Lopez helped me set up my PC perfectly.",
+        "autor": "Maria S.",
+        "rolle": "Retiree"
+      },
+      "kunde2": {
+        "text": "Excellent form service. Quick, friendly and competent!",
+        "autor": "Thomas M.",
+        "rolle": "Self-employed"
+      },
+      "kunde3": {
+        "text": "The accessible website they created for us is exactly what we were looking for.",
+        "autor": "Sarah K.",
+        "rolle": "Association Chair"
+      }
+    }
+  },
+  "faq": {
+    "titel": "Frequently Asked Questions",
+    "elemente": {
+      "frage1": {
+        "frage": "How does the IT support work?",
+        "antwort": "We offer both remote support and on-site service. You can contact us by phone or email, and we'll find the quickest solution to your problem."
+      },
+      "frage2": {
+        "frage": "What payment methods are available?",
+        "antwort": "We accept cash, debit cards, bank transfer, and PayPal. For regular services, monthly billing is also possible."
+      },
+      "frage3": {
+        "frage": "How accessible are your services?",
+        "antwort": "Very! We use plain language, offer support in German, English, and Spanish, and can adapt our services to your needs."
+      },
+      "frage4": {
+        "frage": "How quickly can you help?",
+        "antwort": "For urgent cases, we're usually there for you on the same day. For standard requests, we schedule appointments within 2-3 business days."
+      }
+    }
+  },
+  "why_choose_us": {
+    "titel": "Why Choose Lopez IT Welt?",
+    "untertitel": "We make the difference through personal service, expertise and a heart for people.",
+    "elemente": {
+      "service": {
+        "titel": "Personal Service",
+        "beschreibung": "We take time for you and explain everything clearly - without technical jargon."
+      },
+      "mehrsprachig": {
+        "titel": "Multilingual",
+        "beschreibung": "Consultation in German, English and Spanish - for barrier-free communication."
+      },
+      "schnell": {
+        "titel": "Quick Help",
+        "beschreibung": "For urgent problems, we're there for you on the same day."
+      },
+      "innovativ": {
+        "titel": "Innovative Solutions",
+        "beschreibung": "We combine modern technology with easy operation."
+      }
+    }
+  },
+  "cta": {
+    "titel": "Ready for the next step?",
+    "beschreibung": "Let's realize your project together. Contact us for a non-binding consultation.",
+    "button": "Contact Now"
+  },
+  "cookie": {
+    "titel": "Cookie Settings",
+    "stand": "Status",
+    "letzte_aktualisierung": "Last Updated",
+    "uebersicht": "Overview",
+    "beschreibung": "This website uses cookies to provide you with the best possible experience. You can adjust your cookie settings here.",
+    "einstellungen": "Cookie Settings",
+    "notwendig": {
+      "titel": "Necessary Cookies",
+      "beschreibung": "These cookies are required for the basic functions of the website and cannot be disabled."
+    },
+    "funktional": {
+      "titel": "Functional Cookies",
+      "beschreibung": "These cookies enable advanced functions and personalization."
+    },
+    "analytik": {
+      "titel": "Analytics Cookies",
+      "beschreibung": "These cookies help us understand and improve website usage."
+    },
+    "marketing": {
+      "titel": "Marketing Cookies",
+      "beschreibung": "These cookies are used to show you relevant advertising."
+    },
+    "immer_aktiv": "Always active",
+    "buttons": "Save Settings",
+    "alle_akzeptieren": "Accept All",
+    "nur_notwendige": "Necessary Only",
+    "kontakt": "Contact",
+    "kontakt_text": "If you have questions about our cookie settings, please feel free to contact us:"
+  },
+  "datenschutz": {
+    "titel": "Privacy Policy",
+    "stand": "Status",
+    "letzte_aktualisierung": "Last Updated",
+    "datum": "January 18, 2025",
+    "uebersicht": {
+      "titel": "1. Privacy at a Glance",
+      "allgemein": "General Information",
+      "allgemein_text": "The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data with which you can be personally identified.",
+      "datenerfassung": "Data Collection on this Website",
+      "datenerfassung_text": "Data processing on this website is carried out by the website operator. You can find the contact details in the \"Information on the responsible party\" section of this privacy policy."
+    },
+    "hosting": {
+      "titel": "2. Hosting",
+      "text": "We host our website with a professional hosting provider. Data processing takes place exclusively on servers in the European Union."
+    },
+    "allgemein": {
+      "titel": "3. General Information and Mandatory Information",
+      "datenschutz": "Privacy",
+      "datenschutz_text": "The operators of these pages take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with the statutory data protection regulations and this privacy policy.",
+      "verantwortlich": "Information on the Responsible Party",
+      "verantwortlich_text": "The party responsible for data processing on this website is:",
+      "speicherdauer": "Storage Period",
+      "speicherdauer_text": "Unless a more specific storage period is mentioned within this privacy policy, your personal data will remain with us until the purpose for data processing ceases. If you assert a legitimate deletion request or revoke consent for data processing, your data will be deleted, unless we have other legally permissible reasons for storing your personal data.",
+      "rechte": "Your Rights",
+      "rechte_text": "You have the following rights:",
+      "rechte": {
+        "auskunft": "Right to information about your stored personal data",
+        "berichtigung": "Right to correction of incorrect or incomplete data",
+        "loeschung": "Right to deletion of your data stored with us",
+        "einschraenkung": "Right to restriction of data processing",
+        "uebertragbarkeit": "Right to data portability",
+        "widerspruch": "Right to object to the processing of your data with us",
+        "beschwerde": "Right to lodge a complaint with a supervisory authority"
+      }
+    },
+    "datenerfassung": {
+      "titel": "4. Data Collection on this Website",
+      "cookies": "Cookies",
+      "cookies_text": "This website uses cookies. Cookies are small text files that are stored on your device and sent back to us by your browser when you visit the website again. They serve to make the website more user-friendly, effective and secure.",
+      "cookies_einstellungen": "You can adjust the use of cookies in your browser settings. Please note that disabling cookies may limit the functionality of this website.",
+      "server_logs": "Server Log Files",
+      "server_logs_text": "The provider of the pages automatically collects and stores information in so-called server log files, which your browser automatically transmits to us. These are:",
+      "server_logs_liste": {
+        "browser": "Browser type and browser version",
+        "betriebssystem": "Operating system used",
+        "referrer": "Referrer URL",
+        "hostname": "Hostname of the accessing computer",
+        "uhrzeit": "Time of server request",
+        "ip": "IP address"
+      },
+      "server_logs_zusammenfuehrung": "A merger of this data with other data sources is not carried out."
+    },
+    "zahlungen": {
+      "titel": "5. Payment Data",
+      "einleitung": "When making payments through our shop, the following data is processed:",
+      "rechtsgrundlage": "Legal Basis",
+      "paypal": {
+        "titel": "PayPal Checkout",
+        "text": "When paying via PayPal, payment data is transmitted directly to PayPal. We only receive confirmation of successful payment. Processing is carried out according to PayPal's privacy guidelines.",
+        "rechtsgrundlage": "Art. 6 para. 1 lit. b GDPR (Contract fulfillment)"
+      },
+      "sofortueberweisung": {
+        "titel": "Sofortüberweisung",
+        "text": "With Sofortüberweisung, payment data is processed through the payment service provider. We only receive confirmation of successful payment. Bank data is not stored with us.",
+        "rechtsgrundlage": "Art. 6 para. 1 lit. b GDPR (Contract fulfillment)"
+      },
+      "sepa": {
+        "titel": "SEPA Transfer",
+        "text": "With SEPA transfer, account data is only used for the transfer. The data is not stored with us and is only needed for the transaction.",
+        "rechtsgrundlage": "Art. 6 para. 1 lit. b GDPR (Contract fulfillment)"
+      },
+      "sicherheit": {
+        "titel": "Security",
+        "text": "All payment transactions are SSL encrypted. We work exclusively with proven and secure payment service providers who meet the highest security standards."
+      }
+    },
+    "kontaktformular": {
+      "titel": "6. Contact Form",
+      "text": "If you send us inquiries via the contact form, your details from the inquiry form, including the contact details you provided there, will be stored by us for the purpose of processing the inquiry and in the event of follow-up questions. We will not pass on this data without your consent.",
+      "rechtsgrundlage": "Art. 6 para. 1 lit. b GDPR (Contract fulfillment)"
+    },
+    "newsletter": {
+      "titel": "7. Newsletter",
+      "text": "If you would like to receive the newsletter offered on the website, we need an email address from you as well as information that allows us to verify that you are the owner of the specified email address and agree to receive the newsletter (so-called double opt-in).",
+      "rechtsgrundlage": "Art. 6 para. 1 lit. a GDPR (Consent)"
+    },
+    "plugins": {
+      "titel": "8. Plugins and Tools",
+      "google_fonts": {
+        "titel": "Google Fonts (Local Hosting)",
+        "text": "This page uses so-called Google Fonts for the uniform display of fonts, which are provided by Google. The Google Fonts are installed locally. No connection to Google servers takes place."
+      }
+    },
+    "sicherheit": {
+      "titel": "9. Data Security",
+      "text": "This page uses SSL or TLS encryption for security reasons and to protect the transmission of confidential content. You can recognize an encrypted connection by the fact that the address line of the browser changes from \"http://\" to \"https://\" and by the lock symbol in your browser line."
+    },
+    "kontakt": {
+      "titel": "10. Contact",
+      "text": "For questions about the collection, processing or use of your personal data, for information, correction, blocking or deletion of data, please contact:"
+    },
+    "aenderungen": {
+      "titel": "11. Changes to this Privacy Policy",
+      "text": "We reserve the right to adapt this privacy policy so that it always complies with current legal requirements or to implement changes to our services in the privacy policy, e.g. when introducing new services."
+    }
+  },
+  "impressum": {
+    "titel": "Legal Notice",
+    "angaben_tmg": "Information according to § 5 TMG",
+    "rechtsform": "Legal Form",
+    "rechtsform_text": "Sole Proprietorship",
+    "kontakt": "Contact",
+    "umsatzsteuer": "VAT ID",
+    "umsatzsteuer_text": "VAT identification number according to §27 a VAT Act:",
+    "umsatzsteuer_nummer": "DE264851464",
+    "berufshaftpflicht": "Professional Liability Insurance",
+    "berufshaftpflicht_text": "Professional liability insurance through VGH Insurance",
+    "verantwortlich": "Responsible for content according to § 55 Abs. 2 RStV",
+    "berufsbezeichnung": "Professional title and professional regulations",
+    "berufsbezeichnung_text": "Professional title: IT Service Provider / Computer Consultant",
+    "berufsbezeichnung_land": "Responsible chamber: Chamber of Industry and Commerce Hannover",
+    "berufsbezeichnung_verleihung": "Awarded by: Germany",
+    "berufsbezeichnung_gesetz": "The following professional regulations apply: Trade Regulation Act",
+    "berufsbezeichnung_gesetz_link": "https://www.gesetze-im-internet.de/gewo/",
+    "berufsbezeichnung_aufsicht": "Responsible supervisory authority: Trade Supervisory Office Hannover",
+    "berufsbezeichnung_aufsicht_adresse": "Hildesheimer Straße 20, 30169 Hannover",
+    "berufsbezeichnung_aufsicht_web": "https://www.gewerbeaufsicht.niedersachsen.de/",
+    "streitschlichtung": "Dispute Resolution",
+    "streitschlichtung_text": "The European Commission provides a platform for online dispute resolution (OS):",
+    "streitschlichtung_link": "https://ec.europa.eu/consumers/odr/",
+    "streitschlichtung_email": "You can find our email address above in the legal notice.",
+    "verbraucherstreit": "We are neither willing nor obligated to participate in dispute resolution proceedings before a consumer arbitration board.",
+    "haftung": "Liability for Content",
+    "haftung_text": "As a service provider, we are responsible for our own content on these pages in accordance with § 7 Abs.1 TMG and general laws. According to §§ 8 to 10 TMG, however, we as a service provider are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.",
+    "haftung_links": "Liability for Links",
+    "haftung_links_text": "Our offer contains links to external third-party websites over whose content we have no influence. Therefore, we cannot assume any liability for this external content. The respective provider or operator of the pages is always responsible for the content of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking.",
+    "haftung_links_entfernung": "However, a permanent content control of the linked pages is not reasonable without concrete evidence of a legal violation. Upon becoming aware of legal violations, we will remove such links immediately.",
+    "urheberrecht": "Copyright",
+    "urheberrecht_text": "The content and works created by the site operators on these pages are subject to German copyright law. The reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator. Downloads and copies of this page are only permitted for private, non-commercial use.",
+    "urheberrecht_fremd": "Insofar as the content on this page was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is marked as such. Should you nevertheless become aware of a copyright infringement, we ask for a corresponding notice. Upon becoming aware of legal violations, we will remove such content immediately."
+  }
+}

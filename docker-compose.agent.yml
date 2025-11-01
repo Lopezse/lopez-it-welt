@@ -1,0 +1,115 @@
+# =====================================================
+# Docker Compose für KI-Agenten Service
+# =====================================================
+# Erstellt: 2025-07-02
+# Zweck: Einfaches Deployment des Agent-Services
+# =====================================================
+
+version: '3.8'
+
+services:
+  # =====================================================
+  # KI-Agenten Service
+  # =====================================================
+  compliance-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    container_name: lopez-it-welt-compliance-agent
+    ports:
+      - "4001:4001"
+    environment:
+      - NODE_ENV=production
+      - AGENT_PORT=4001
+      - AGENT_API_KEY=${AGENT_API_KEY:-default-key-change-in-production}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:3000}
+      - DB_HOST=${DB_HOST:-localhost}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD:-}
+      - DB_NAME=${DB_NAME:-lopez_it_welt_db}
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "node", "-e", "require('http').get('http://localhost:4001/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - agent-network
+
+  # =====================================================
+  # MySQL Database (optional, falls nicht extern verfügbar)
+  # =====================================================
+  mysql:
+    image: mysql:8.0
+    container_name: lopez-it-welt-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-rootpassword}
+      - MYSQL_DATABASE=${DB_NAME:-lopez_it_welt_db}
+      - MYSQL_USER=${DB_USER:-lopez_user}
+      - MYSQL_PASSWORD=${DB_PASSWORD:-userpassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    networks:
+      - agent-network
+    profiles:
+      - with-database
+
+  # =====================================================
+  # Redis Cache (optional, für Performance)
+  # =====================================================
+  redis:
+    image: redis:7-alpine
+    container_name: lopez-it-welt-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - agent-network
+    profiles:
+      - with-cache
+
+  # =====================================================
+  # Nginx Reverse Proxy (optional, für Production)
+  # =====================================================
+  nginx:
+    image: nginx:alpine
+    container_name: lopez-it-welt-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - compliance-agent
+    restart: unless-stopped
+    networks:
+      - agent-network
+    profiles:
+      - with-proxy
+
+# =====================================================
+# Networks
+# =====================================================
+networks:
+  agent-network:
+    driver: bridge
+
+# =====================================================
+# Volumes
+# =====================================================
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local

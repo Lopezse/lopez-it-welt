@@ -1,0 +1,30 @@
+site_name: Lopez IT Welt
+site_description: Enterprise++ Dokumentation
+theme: material
+
+nav:
+  - Home: index.md
+  - Enterprise:
+      - Standards: enterprise/standards.md
+      - Guidelines: enterprise/guidelines.md
+      - Best Practices: enterprise/best-practices.md
+  - Development:
+      - Setup: development/setup.md
+      - Architecture: development/architecture.md
+      - Testing: development/testing.md
+  - API:
+      - Overview: api/overview.md
+      - Endpoints: api/endpoints.md
+      - Authentication: api/authentication.md
+
+plugins:
+  - search
+  - mkdocstrings
+  - mkdocs-material
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - admonition
+  - footnotes

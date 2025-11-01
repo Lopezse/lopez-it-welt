@@ -1,0 +1,505 @@
+{
+  "kopfbereich": {
+    "logo": "Lopez IT Welt",
+    "navigation": {
+      "startseite": "Startseite",
+      "leistungen": "Leistungen",
+      "webshop": "Webshop",
+      "preise": "Preise",
+      "ueber_uns": "Über uns",
+      "kontakt": "Kontakt"
+    },
+    "cta": "Jetzt beraten lassen",
+    "sprache": {
+      "de": "DE",
+      "en": "EN",
+      "es": "ES"
+    },
+    "anmeldung": {
+      "anmelden": "Anmelden",
+      "registrieren": "Registrieren",
+      "abmelden": "Abmelden",
+      "profil": "Profil"
+    },
+    "auth": {
+      "anmelden": "Anmelden",
+      "abmelden": "Abmelden",
+      "willkommen": "Willkommen"
+    }
+  },
+  "hero": {
+    "titel": "Digitale Lösungen für alle",
+    "untertitel": "Barrierefreie und mehrsprachige IT-Lösungen",
+    "beschreibung": "IT-Service, Webentwicklung & Beratung – verlässlich, persönlich, modern."
+  },
+  "hauptbereiche": {
+    "titel": "Unsere Hauptbereiche",
+    "elemente": {
+      "it_support": {
+        "titel": "IT-Support",
+        "beschreibung": "Remote & vor Ort – Hilfe bei PC, Netzwerk, Software",
+        "details": "• Remote-Support per TeamViewer\n• Vor-Ort-Service in Wunstorf\n• Hardware-Reparaturen\n• Software-Installation\n• Netzwerk-Einrichtung",
+        "symbol": "💼"
+      },
+      "pc_bau": {
+        "titel": "PC-Bau & Einrichtung",
+        "beschreibung": "Individuell zusammengestellt, zugänglich erklärt",
+        "details": "• Individuelle PC-Konfiguration\n• Barrierefreie Einrichtung\n• Software-Installation\n• Datenübertragung\n• Schulung & Support",
+        "symbol": "🖥️"
+      },
+      "webdesign": {
+        "titel": "Webdesign & Automatisierung",
+        "beschreibung": "Zugänglich, mehrsprachig, KI-basiert",
+        "details": "• Barrierefreie Websites\n• Mehrsprachige Inhalte\n• KI-Integration\n• Automatisierung\n• SEO-Optimierung",
+        "symbol": "🌐"
+      },
+      "ki_assistenz": {
+        "titel": "KI-Assistenz",
+        "beschreibung": "Anträge, Texte, Automatisierungen",
+        "details": "• KI-gestützte Texterstellung\n• Automatisierte Prozesse\n• Chatbot-Entwicklung\n• Datenanalyse\n• Intelligente Formulare",
+        "symbol": "🤖"
+      },
+      "formularservice": {
+        "titel": "Formular- & Büroservice",
+        "beschreibung": "Organisatorische Hilfe bei Anträgen, Dokumenten und Versand",
+        "details": "• Unterstützung bei Behördenanträgen\n• Hilfe mit Krankenkassen-Formularen\n• Organisation von Versicherungsanträgen\n• Digitalisierung & Kopierservice\n• Postversand auf Wunsch",
+        "symbol": "📝"
+      },
+      "webshop": {
+        "titel": "Shop / Digitale Produkte",
+        "beschreibung": "Vorlagen, Tools, Antragssets, Sicherheitslösungen zum Download",
+        "details": "• Antragsvorlagen (PDF/Word)\n• Sicherheits-Tools\n• KI-Vorlagen\n• Mehrsprachige Dokumente\n• Sofort-Download",
+        "symbol": "🛒"
+      }
+    }
+  },
+  "webshop": {
+    "titel": "Unser Shop – Digital. Einfach. Sofort.",
+    "produkte": {
+      "vorlagen": {
+        "titel": "Antragsvorlagen",
+        "beschreibung": "PDF/Word, zugänglich",
+        "symbol": "📂"
+      },
+      "sicherheit": {
+        "titel": "Sicherheits-Tools",
+        "beschreibung": "Passwortmanager, Datenschutz-Checklisten",
+        "symbol": "🔐"
+      },
+      "ki_vorlagen": {
+        "titel": "KI-Vorlagen",
+        "beschreibung": "ChatGPT-Prompts, Cursor-Vorlagen",
+        "symbol": "🧠"
+      },
+      "mehrsprachig": {
+        "titel": "Mehrsprachige Dokumente",
+        "beschreibung": "DE/ES",
+        "symbol": "🌍"
+      }
+    },
+    "features": "Einmalzahlung, Sofort-Download, DSGVO-konform",
+    "cta": "Zum Shop"
+  },
+  "why_choose_us": {
+    "titel": "Warum Lopez IT Welt wählen?",
+    "untertitel": "Wir machen den Unterschied durch persönlichen Service, Expertise und ein Herz für Menschen.",
+    "elemente": {
+      "service": {
+        "titel": "Persönlicher Service",
+        "beschreibung": "Wir nehmen uns Zeit für Sie und Ihre individuellen Bedürfnisse."
+      },
+      "mehrsprachig": {
+        "titel": "Mehrsprachig",
+        "beschreibung": "Deutsch, Spanisch und Englisch - für internationale Kunden und Familien."
+      },
+      "schnell": {
+        "titel": "Schnell & Zuverlässig",
+        "beschreibung": "Schnelle Hilfe bei IT-Problemen und zuverlässige Lösungen."
+      },
+      "innovativ": {
+        "titel": "Innovativ",
+        "beschreibung": "Moderne Technologien und KI-Lösungen für Ihren Erfolg."
+      }
+    }
+  },
+  "testimonials": {
+    "titel": "Kundenbewertungen",
+    "elemente": {
+      "kunde1": {
+        "text": "Endlich jemand, der IT verständlich erklärt! Herr Lopez hat mir perfekt beim Einrichten meines PCs geholfen.",
+        "autor": "Maria S.",
+        "rolle": "Rentnerin"
+      },
+      "kunde2": {
+        "text": "Ausgezeichneter Formularservice. Schnell, freundlich und kompetent!",
+        "autor": "Thomas M.",
+        "rolle": "Selbstständig"
+      },
+      "kunde3": {
+        "text": "Die zugängliche Website, die sie für uns erstellt haben, ist genau das, was wir gesucht haben.",
+        "autor": "Sarah K.",
+        "rolle": "Vereinsvorsitzende"
+      }
+    }
+  },
+  "faq": {
+    "titel": "Häufig gestellte Fragen",
+    "elemente": {
+      "frage1": {
+        "frage": "Wie funktioniert der IT-Support?",
+        "antwort": "Wir bieten sowohl Remote-Support als auch Vor-Ort-Service. Sie können uns telefonisch oder per E-Mail kontaktieren, und wir finden die schnellste Lösung für Ihr Problem."
+      },
+      "frage2": {
+        "frage": "Welche Zahlungsmethoden sind verfügbar?",
+        "antwort": "Wir akzeptieren Bargeld, Debitkarten, Banküberweisung und PayPal. Für regelmäßige Dienstleistungen ist auch monatliche Abrechnung möglich."
+      },
+      "frage3": {
+        "frage": "Wie zugänglich sind Ihre Dienstleistungen?",
+        "antwort": "Sehr! Wir verwenden einfache Sprache, bieten Support auf Deutsch, Englisch und Spanisch und können unsere Dienstleistungen an Ihre Bedürfnisse anpassen."
+      },
+      "frage4": {
+        "frage": "Wie schnell können Sie helfen?",
+        "antwort": "Für dringende Fälle sind wir normalerweise noch am selben Tag für Sie da. Für Standardanfragen planen wir Termine innerhalb von 2-3 Werktagen."
+      }
+    }
+  },
+  "kontakt": {
+    "titel": "Kontakt & Beratung",
+    "methoden": {
+      "formular": "Kontaktformular (zugänglich, mehrsprachig)",
+      "telefon": "Telefon (nach Vereinbarung)",
+      "vor_ort": "Vor-Ort-Termin möglich (Wunstorf / Region Hannover)"
+    },
+    "cta": "Kontakt aufnehmen"
+  },
+  "fussbereich": {
+    "rechtlich": {
+      "impressum": "Impressum",
+      "datenschutz": "Datenschutz",
+      "agb": "AGB",
+      "barrierefreiheit": "Zugänglichkeit"
+    },
+    "sprache": "Sprache: Deutsch / English / Español",
+    "copyright": "Alle Rechte vorbehalten."
+  },
+  "cta": {
+    "titel": "Bereit für den nächsten Schritt?",
+    "beschreibung": "Lassen Sie uns gemeinsam Ihre IT-Herausforderungen lösen.",
+    "button": "Kontakt aufnehmen"
+  },
+  "datenschutz": {
+    "titel": "Datenschutzerklärung",
+    "stand": "Stand",
+    "datum": "01. Januar 2025",
+    "letzte_aktualisierung": "Letzte Aktualisierung",
+    "uebersicht": {
+      "titel": "Übersicht",
+      "allgemein": "Allgemeine Informationen",
+      "allgemein_text": "Diese Datenschutzerklärung informiert Sie über die Erhebung, Verarbeitung und Nutzung Ihrer personenbezogenen Daten bei der Nutzung unserer Website.",
+      "datenerfassung": "Datenerfassung",
+      "datenerfassung_text": "Wir erheben nur die Daten, die für den Betrieb unserer Website und die Bereitstellung unserer Dienstleistungen erforderlich sind."
+    },
+    "hosting": {
+      "titel": "Hosting",
+      "text": "Unsere Website wird auf Servern in Deutschland gehostet, um die Einhaltung deutscher Datenschutzgesetze zu gewährleisten."
+    },
+    "allgemein": {
+      "titel": "Allgemeine Informationen",
+      "datenschutz": "Datenschutz",
+      "datenschutz_text": "Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Datenschutzerklärung informiert Sie über Art, Umfang und Zweck der Verarbeitung personenbezogener Daten auf unserer Website.",
+      "verantwortlich": "Verantwortlicher",
+      "verantwortlich_text": "Verantwortlich für die Datenverarbeitung auf dieser Website ist:",
+      "speicherdauer": "Speicherdauer",
+      "speicherdauer_text": "Ihre Daten werden nur so lange gespeichert, wie es für die genannten Zwecke erforderlich ist oder gesetzliche Aufbewahrungsfristen dies vorschreiben.",
+      "rechte": "Ihre Rechte",
+      "rechte_text": "Sie haben folgende Rechte bezüglich Ihrer personenbezogenen Daten:",
+      "rechte": {
+        "auskunft": "Recht auf Auskunft",
+        "berichtigung": "Recht auf Berichtigung",
+        "loeschung": "Recht auf Löschung",
+        "einschraenkung": "Recht auf Einschränkung der Verarbeitung",
+        "uebertragbarkeit": "Recht auf Datenübertragbarkeit",
+        "widerspruch": "Widerspruchsrecht",
+        "beschwerde": "Recht auf Beschwerde bei einer Aufsichtsbehörde"
+      }
+    },
+    "datenerfassung": {
+      "titel": "Datenerfassung auf unserer Website",
+      "cookies": "Cookies",
+      "cookies_text": "Unsere Website verwendet Cookies, um die Nutzung zu verbessern. Sie können Cookies in Ihren Browsereinstellungen deaktivieren.",
+      "cookies_einstellungen": "Sie können Ihre Cookie-Einstellungen jederzeit anpassen.",
+      "server_logs": "Server-Logs",
+      "server_logs_text": "Bei jedem Zugriff auf unsere Website werden automatisch folgende Informationen gespeichert:",
+      "server_logs_liste": {
+        "browser": "Browsertyp und -version",
+        "betriebssystem": "Verwendetes Betriebssystem",
+        "referrer": "Website, von der aus Sie zu uns gelangt sind",
+        "hostname": "Hostname des zugreifenden Rechners",
+        "uhrzeit": "Uhrzeit der Serveranfrage",
+        "ip": "IP-Adresse"
+      },
+      "server_logs_zusammenfuehrung": "Diese Daten werden nicht mit anderen Datenquellen zusammengeführt."
+    },
+    "zahlungen": {
+      "titel": "Zahlungsabwicklung",
+      "einleitung": "Für die Zahlungsabwicklung verwenden wir verschiedene Zahlungsdienstleister:",
+      "paypal": {
+        "titel": "PayPal",
+        "text": "Bei der Zahlung über PayPal werden Ihre Zahlungsdaten an PayPal übermittelt.",
+        "rechtsgrundlage": "Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)"
+      },
+      "sofortueberweisung": {
+        "titel": "Sofortüberweisung",
+        "text": "Bei der Zahlung über Sofortüberweisung werden Ihre Daten an die SOFORT GmbH übermittelt.",
+        "rechtsgrundlage": "Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)"
+      },
+      "sepa": {
+        "titel": "SEPA-Lastschrift",
+        "text": "Bei der Zahlung per SEPA-Lastschrift werden Ihre Bankdaten für die Zahlungsabwicklung verwendet.",
+        "rechtsgrundlage": "Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)"
+      },
+      "sicherheit": {
+        "titel": "Sicherheit",
+        "text": "Alle Zahlungsdaten werden verschlüsselt übertragen und nach den höchsten Sicherheitsstandards verarbeitet."
+      },
+      "rechtsgrundlage": "Rechtsgrundlage"
+    },
+    "kontaktformular": {
+      "titel": "Kontaktformular",
+      "text": "Wenn Sie uns über das Kontaktformular erreichen, werden Ihre Daten zur Bearbeitung Ihrer Anfrage verwendet."
+    }
+  },
+  "ueber_uns": {
+    "titel": "Über uns",
+    "intro": "Lopez IT Welt steht für moderne, barrierefreie und verständliche IT-Lösungen – entwickelt mit Verstand, Herz und eigener Erfahrung.",
+    "gruender_titel": "Die Geschichte des Gründers",
+    "gruender_text_1": "Mein Name ist Ramiro Lopez Rodriguez, Gründer von Lopez IT Welt. Ursprünglich war ich als CNC-Dreher und Fräser in der Metallverarbeitung tätig. Doch im Jahr 2018 musste ich meinen Beruf aufgrund einer zunehmenden Sehbeeinträchtigung aufgeben – feine Maschinenarbeit war damit nicht mehr möglich.",
+    "gruender_text_2": "Ein Neuanfang war geplant – doch die Umschulung zum Fachinformatiker verzögerte sich: Bürokratische Hürden und die Corona-Pandemie machten den Einstieg lange schwierig. Erst 2021 konnte ich die Umschulung endlich beginnen und meine Leidenschaft für IT zum Beruf machen.",
+    "gruender_text_3": "Heute verbinde ich technisches Denken, eigene Erfahrung mit Barrierefreiheit und modernes IT-Know-how zu einem einzigartigen Angebot.",
+    "besonders_titel": "Was uns besonders macht",
+    "besonders_erfahrung_titel": "Aus Erfahrung barrierefrei",
+    "besonders_erfahrung_text": "Barrierefreiheit ist für uns kein Zusatz – sondern Standard. Als jemand mit Sehbeeinträchtigung weiß ich, wie wichtig gut nutzbare Technik ist. Deshalb entwickeln wir barrierearme und barrierefreie Lösungen:",
+    "besonders_erfahrung_liste": [
+      "Hohe Kontraste & klare Schrift",
+      "Skalierbare Inhalte",
+      "Screenreader-Kompatibilität",
+      "Verständliche Sprache",
+      "Fokus auf Nutzerfreundlichkeit"
+    ],
+    "besonders_massgeschneidert_titel": "Maßgeschneiderte IT-Lösungen",
+    "besonders_massgeschneidert_text": "Ob private Website, Shop-System, Formularservice oder Netzwerksupport: Wir planen, entwickeln und betreuen digitale Lösungen nach Maß – individuell, sicher und verständlich.",
+    "besonders_ehrlich_titel": "Persönlich & ehrlich",
+    "besonders_ehrlich_text": "Sie erreichen bei uns keine Hotline, sondern echte Beratung mit Fachkenntnis und Herz. Wir arbeiten transparent, zuverlässig und mit klaren Worten – so, wie wir selbst beraten werden wollen.",
+    "ziel_titel": "Unser Ziel",
+    "ziel_text": "Wir möchten Technik für alle zugänglich machen. Ob mit oder ohne Einschränkungen, ob jung oder alt – digitale Teilhabe ist ein Menschenrecht. Mit Lopez IT Welt schaffen wir die Brücke zwischen komplexer Technik und echter Verständlichkeit – für Privatpersonen, Selbstständige und kleine Unternehmen."
+  },
+  "datenschutz": {
+    "titel": "Datenschutzerklärung",
+    "stand": "Stand",
+    "letzte_aktualisierung": "Letzte Aktualisierung",
+    "datum": "21. März 2024",
+    "uebersicht": {
+      "titel": "1. Datenschutz auf einen Blick",
+      "allgemein": "Allgemeine Hinweise",
+      "allgemein_text": "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.",
+      "datenerfassung": "Datenerfassung auf dieser Website",
+      "datenerfassung_text": "Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Abschnitt \"Hinweis zur Verantwortlichen Stelle\" in dieser Datenschutzerklärung entnehmen."
+    },
+    "hosting": {
+      "titel": "2. Hosting",
+      "text": "Wir hosten unsere Website bei einem professionellen Hosting-Anbieter. Die Datenverarbeitung erfolgt ausschließlich auf Servern in der Europäischen Union."
+    },
+    "allgemein": {
+      "titel": "3. Allgemeine Hinweise und Pflichtinformationen",
+      "datenschutz": "Datenschutz",
+      "datenschutz_text": "Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.",
+      "verantwortlich": "Hinweis zur verantwortlichen Stelle",
+      "verantwortlich_text": "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
+      "speicherdauer": "Speicherdauer",
+      "speicherdauer_text": "Sofern innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben.",
+      "rechte_text": "Sie haben folgende Rechte:",
+      "rechte": {
+        "auskunft": "Recht auf Auskunft über Ihre bei uns gespeicherten personenbezogenen Daten",
+        "berichtigung": "Recht auf Berichtigung falscher oder unvollständiger Daten",
+        "loeschung": "Recht auf Löschung Ihrer bei uns gespeicherten Daten",
+        "einschraenkung": "Recht auf Einschränkung der Datenverarbeitung",
+        "uebertragbarkeit": "Recht auf Datenübertragbarkeit",
+        "widerspruch": "Recht auf Widerspruch gegen die Verarbeitung Ihrer Daten bei uns",
+        "beschwerde": "Recht auf Beschwerde bei einer Aufsichtsbehörde"
+      }
+    },
+    "datenerfassung": {
+      "titel": "4. Datenerfassung auf dieser Website",
+      "cookies": "Cookies",
+      "cookies_text": "Diese Website verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem Gerät gespeichert und von Ihrem Browser an uns zurückgesendet werden, wenn Sie die Website erneut besuchen. Sie dienen dazu, die Website benutzerfreundlicher, effektiver und sicherer zu machen.",
+      "cookies_einstellungen": "Sie können die Verwendung von Cookies in Ihren Browsereinstellungen anpassen. Bitte beachten Sie, dass das Deaktivieren von Cookies die Funktionalität dieser Website einschränken kann.",
+      "server_logs_text": "Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:",
+      "server_logs_liste": {
+        "browser": "Browsertyp und Browserversion",
+        "betriebssystem": "verwendetes Betriebssystem",
+        "referrer": "Referrer URL",
+        "hostname": "Hostname des zugreifenden Rechners",
+        "uhrzeit": "Uhrzeit der Serveranfrage",
+        "ip": "IP-Adresse"
+      },
+      "server_logs_zusammenfuehrung": "Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen."
+    },
+    "zahlungen": {
+      "titel": "5. Zahlungsdaten",
+      "einleitung": "Bei Zahlungen über unseren Shop werden folgende Daten verarbeitet:",
+      "rechtsgrundlage": "Rechtsgrundlage",
+      "paypal": {
+        "titel": "PayPal Checkout",
+        "text": "Bei der Zahlung über PayPal werden die Zahlungsdaten direkt an PayPal übermittelt. Wir erhalten nur eine Bestätigung über die erfolgreiche Zahlung. Die Verarbeitung erfolgt nach den Datenschutzrichtlinien von PayPal.",
+        "rechtsgrundlage": "Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)"
+      },
+      "sofortueberweisung": {
+        "titel": "Sofortüberweisung",
+        "text": "Bei der Sofortüberweisung werden die Zahlungsdaten über den Zahlungsdienstleister verarbeitet. Wir erhalten nur eine Bestätigung über die erfolgreiche Zahlung. Bankdaten werden bei uns nicht gespeichert.",
+        "rechtsgrundlage": "Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)"
+      },
+      "sepa": {
+        "titel": "SEPA-Überweisung",
+        "text": "Bei der SEPA-Überweisung werden Kontodaten nur für die Überweisung verwendet. Die Daten werden bei uns nicht gespeichert und sind nur für die Transaktion erforderlich.",
+        "rechtsgrundlage": "Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)"
+      },
+      "sicherheit": {
+        "titel": "Sicherheit",
+        "text": "Alle Zahlungstransaktionen sind SSL-verschlüsselt. Wir arbeiten ausschließlich mit bewährten und sicheren Zahlungsdienstleistern, die höchste Sicherheitsstandards erfüllen."
+      }
+    },
+    "kontaktformular": {
+      "titel": "6. Kontaktformular",
+      "text": "Wenn Sie uns Anfragen über das Kontaktformular zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.",
+      "rechtsgrundlage": "Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)"
+    },
+    "newsletter": {
+      "titel": "7. Newsletter",
+      "text": "Wenn Sie den auf der Website angebotenen Newsletter beziehen möchten, benötigen wir von Ihnen eine E-Mail-Adresse sowie Informationen, welche uns die Überprüfung gestatten, dass Sie der Inhaber der angegebenen E-Mail-Adresse sind und mit dem Empfang des Newsletters einverstanden sind (sog. Double-Opt-In).",
+      "rechtsgrundlage": "Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)"
+    },
+    "plugins": {
+      "titel": "8. Plugins und Tools",
+      "google_fonts": {
+        "titel": "Google Fonts (lokales Hosting)",
+        "text": "Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten so genannte Google Fonts, die von Google bereitgestellt werden. Die Google Fonts sind lokal installiert. Eine Verbindung zu Google-Servern findet nicht statt."
+      }
+    },
+    "sicherheit": {
+      "titel": "9. Datensicherheit",
+      "text": "Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL-bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von \"http://\" auf \"https://\" wechselt und an dem Schloss-Symbol in Ihrer Browserzeile."
+    },
+    "kontakt": {
+      "titel": "10. Kontakt",
+      "text": "Bei Fragen zur Erhebung, Verarbeitung oder Nutzung Ihrer personenbezogenen Daten, bei Auskünften, Berichtigung, Sperrung oder Löschung von Daten wenden Sie sich bitte an:"
+    },
+    "aenderungen": {
+      "titel": "11. Änderungen dieser Datenschutzerklärung",
+      "text": "Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer Services."
+    }
+  },
+  "impressum": {
+    "titel": "Impressum",
+    "angaben_tmg": "Angaben gemäß § 5 TMG",
+    "rechtsform": "Rechtsform",
+    "rechtsform_text": "Einzelunternehmen",
+    "kontakt": "Kontakt",
+    "umsatzsteuer": "Umsatzsteuer-ID",
+    "umsatzsteuer_text": "Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:",
+    "umsatzsteuer_nummer": "DE264851464",
+    "berufshaftpflicht": "Berufshaftpflichtversicherung",
+    "berufshaftpflicht_text": "Berufshaftpflichtversicherung über die VGH Versicherung",
+    "verantwortlich": "Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV",
+    "berufsbezeichnung": "Berufsbezeichnung und berufsrechtliche Regelungen",
+    "berufsbezeichnung_text": "Berufsbezeichnung: IT-Service-Provider / Computerberater",
+    "berufsbezeichnung_land": "Zuständige Kammer: Industrie- und Handelskammer Hannover",
+    "berufsbezeichnung_verleihung": "Verliehen durch: Deutschland",
+    "berufsbezeichnung_gesetz": "Es gelten folgende berufsrechtliche Regelungen: Gewerbeordnung",
+    "berufsbezeichnung_gesetz_link": "https://www.gesetze-im-internet.de/gewo/",
+    "berufsbezeichnung_aufsicht": "Zuständige Aufsichtsbehörde: Gewerbeaufsichtsamt Hannover",
+    "berufsbezeichnung_aufsicht_adresse": "Hildesheimer Straße 20, 30169 Hannover",
+    "berufsbezeichnung_aufsicht_web": "https://www.gewerbeaufsicht.niedersachsen.de/",
+    "streitschlichtung": "Streitschlichtung",
+    "streitschlichtung_text": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:",
+    "streitschlichtung_link": "https://ec.europa.eu/consumers/odr/",
+    "streitschlichtung_email": "Unsere E-Mail-Adresse finden Sie oben im Impressum.",
+    "verbraucherstreit": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+    "haftung": "Haftung für Inhalte",
+    "haftung_text": "Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht unter der Verpflichtung, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.",
+    "haftung_links": "Haftung für Links",
+    "haftung_links_text": "Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.",
+    "haftung_links_entfernung": "Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.",
+    "urheberrecht": "Urheberrecht",
+    "urheberrecht_text": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.",
+    "urheberrecht_fremd": "Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen."
+  },
+  "vertrauen": {
+    "titel": "Warum Lopez IT Welt?",
+    "punkte": {
+      "barrierefreiheit": "Barrierefreiheit als Prinzip, nicht als Zusatz",
+      "zweisprachig": "Zweisprachig: Deutsch & Spanisch",
+      "empathie": "Empathie & Erfahrung mit Jobcenter, Krankheit, Behörden",
+      "menschenzentriert": "IT für Menschen gemacht",
+      "enterprise": "Enterprise++ Standards in Code, Datenschutz & Automatisierung"
+    }
+  },
+  "kundenstimmen": {
+    "titel": "Kundenbewertungen",
+    "elemente": {
+      "kunde1": {
+        "text": "Endlich jemand, der meine Probleme versteht und echte Lösungen anbietet.",
+        "autor": "Herr R.",
+        "ort": "Hannover"
+      },
+      "kunde2": {
+        "text": "Der Shop ist super – ich konnte die Vorlage direkt für das Arbeitsamt nutzen.",
+        "autor": "Frau M.",
+        "ort": "Laatzen"
+      }
+    }
+  },
+  "sicherheit": {
+    "titel": "Sicherheit & Qualität",
+    "punkte": {
+      "dsgvo": "DSGVO-konform",
+      "zero_trust": "Zero-Trust Architektur",
+      "updates": "Automatische Updates & Backups",
+      "prozesse": "Dokumentierte Prozesse & Protokolle",
+      "barrierefreiheit": "Barrierefreies UX-Konzept (auch für Sehbehinderte)"
+    }
+  },
+  "ki": {
+    "titel": "KI & Automatisierung für Unternehmen",
+    "beschreibung": "Wir machen Ihre Prozesse intelligenter – mit ChatGPT, RPA & maßgeschneiderten Tools."
+  },
+  "cookie": {
+    "titel": "Cookie-Einstellungen",
+    "stand": "Stand",
+    "letzte_aktualisierung": "Letzte Aktualisierung",
+    "uebersicht": "Übersicht",
+    "beschreibung": "Diese Website verwendet Cookies, um Ihnen das bestmögliche Erlebnis zu bieten. Sie können Ihre Cookie-Einstellungen hier anpassen.",
+    "einstellungen": "Cookie-Einstellungen",
+    "notwendig": {
+      "titel": "Notwendige Cookies",
+      "beschreibung": "Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden."
+    },
+    "funktional": {
+      "titel": "Funktionale Cookies",
+      "beschreibung": "Diese Cookies ermöglichen erweiterte Funktionen und Personalisierung."
+    },
+    "analytik": {
+      "titel": "Analyse-Cookies",
+      "beschreibung": "Diese Cookies helfen uns, die Website-Nutzung zu verstehen und zu verbessern."
+    },
+    "marketing": {
+      "titel": "Marketing-Cookies",
+      "beschreibung": "Diese Cookies werden verwendet, um Ihnen relevante Werbung anzuzeigen."
+    },
+    "immer_aktiv": "Immer aktiv",
+    "buttons": "Einstellungen speichern",
+    "alle_akzeptieren": "Alle akzeptieren",
+    "nur_notwendige": "Nur notwendige",
+    "kontakt": "Kontakt",
+    "kontakt_text": "Bei Fragen zu unseren Cookie-Einstellungen kontaktieren Sie uns gerne:"
+  }
+}
