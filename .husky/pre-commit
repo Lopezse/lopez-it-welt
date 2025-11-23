@@ -29,3 +29,4 @@ npm run lint || echo "⚠️ Lint-Warnungen, aber Commit fortgesetzt."
 npx lint-staged || exit 1
 # format:check is non-blocking (warnings only)
 npm run format:check || echo "⚠️ Format-Check-Warnungen (nicht-blockierend)"
+

@@ -1,0 +1,4 @@
+{"timestamp":"2025-07-15T13:45:47.419Z","level":"INFO","agent":"Snapshot-Archivierung","message":"Starte Snapshot-Archivierung...","performance":{"duration":0,"memory":187896392}}
+{"timestamp":"2025-07-15T13:45:47.435Z","level":"INFO","agent":"Snapshot-Archivierung","message":"Erstelle Deployment-Snapshot...","performance":{"duration":0,"memory":177860336}}
+{"timestamp":"2025-07-15T13:45:47.541Z","level":"INFO","agent":"Snapshot-Archivierung","message":"✅ Deployment-Snapshot erstellt: snapshot-2025-07-15T13-45-47-436Z-693zlr (2560 bytes)","performance":{"duration":0,"memory":177923768}}
+{"timestamp":"2025-07-15T13:45:47.541Z","level":"INFO","agent":"Snapshot-Archivierung","message":"Erstelle Backup-Snapshot...","performance":{"duration":0,"memory":177930104}}

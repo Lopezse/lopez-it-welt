@@ -1,0 +1,567 @@
+globalThis.__RSC_MANIFEST = globalThis.__RSC_MANIFEST || {};
+globalThis.__RSC_MANIFEST['/(main)/page'] = {
+  moduleLoading: { prefix: '/_next/' },
+  ssrModuleMapping: {
+    '(app-pages-browser)/./src/app/global-error.tsx': {
+      '*': {
+        id: '(ssr)/./src/app/global-error.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/I18nProvider.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Features/I18nProvider.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/app/error.tsx': {
+      '*': {
+        id: '(ssr)/./src/app/error.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/ClientLayout.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Core/ClientLayout.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Footer.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Core/Footer.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Header.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Core/Header.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Hauptbereiche.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Core/Hauptbereiche.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Hero.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Core/Hero.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/FAQ.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Features/FAQ.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/KISicherheit.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Features/KISicherheit.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/Testimonials.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Features/Testimonials.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/WhyChooseUs.tsx': {
+      '*': {
+        id: '(ssr)/./src/components/Features/WhyChooseUs.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/client-page.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/client-segment.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/client-segment.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/error-boundary.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/layout-router.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/async-metadata.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/metadata/async-metadata.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/metadata-boundary.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/metadata/metadata-boundary.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js':
+      {
+        '*': {
+          id: '(ssr)/./node_modules/next/dist/client/components/render-from-template-context.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+  },
+  edgeSSRModuleMapping: {},
+  clientModules: {
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\global-error.tsx': {
+      id: '(app-pages-browser)/./src/app/global-error.tsx',
+      name: '*',
+      chunks: ['app/global-error', 'static/chunks/app/global-error.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\font\\google\\target.css?{"path":"src\\\\app\\\\layout.tsx","import":"Inter","arguments":[{"subsets":["latin"]}],"variableName":"inter"}':
+      {
+        id: '(app-pages-browser)/./node_modules/next/font/google/target.css?{"path":"src\\\\app\\\\layout.tsx","import":"Inter","arguments":[{"subsets":["latin"]}],"variableName":"inter"}',
+        name: '*',
+        chunks: ['app/layout', 'static/chunks/app/layout.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\globals.css': {
+      id: '(app-pages-browser)/./src/app/globals.css',
+      name: '*',
+      chunks: ['app/layout', 'static/chunks/app/layout.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Features\\I18nProvider.tsx':
+      {
+        id: '(app-pages-browser)/./src/components/Features/I18nProvider.tsx',
+        name: '*',
+        chunks: ['app/layout', 'static/chunks/app/layout.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\error.tsx': {
+      id: '(app-pages-browser)/./src/app/error.tsx',
+      name: '*',
+      chunks: ['app/error', 'static/chunks/app/error.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Core\\ClientLayout.tsx': {
+      id: '(app-pages-browser)/./src/components/Core/ClientLayout.tsx',
+      name: '*',
+      chunks: ['app/(main)/layout', 'static/chunks/app/(main)/layout.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Core\\Footer.tsx': {
+      id: '(app-pages-browser)/./src/components/Core/Footer.tsx',
+      name: '*',
+      chunks: ['app/(main)/layout', 'static/chunks/app/(main)/layout.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Core\\Header.tsx': {
+      id: '(app-pages-browser)/./src/components/Core/Header.tsx',
+      name: '*',
+      chunks: ['app/(main)/layout', 'static/chunks/app/(main)/layout.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Core\\Hauptbereiche.tsx': {
+      id: '(app-pages-browser)/./src/components/Core/Hauptbereiche.tsx',
+      name: '*',
+      chunks: ['app/(main)/page', 'static/chunks/app/(main)/page.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Core\\Hero.tsx': {
+      id: '(app-pages-browser)/./src/components/Core/Hero.tsx',
+      name: '*',
+      chunks: ['app/(main)/page', 'static/chunks/app/(main)/page.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Features\\FAQ.tsx': {
+      id: '(app-pages-browser)/./src/components/Features/FAQ.tsx',
+      name: '*',
+      chunks: ['app/(main)/page', 'static/chunks/app/(main)/page.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Features\\KISicherheit.tsx':
+      {
+        id: '(app-pages-browser)/./src/components/Features/KISicherheit.tsx',
+        name: '*',
+        chunks: ['app/(main)/page', 'static/chunks/app/(main)/page.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Features\\Testimonials.tsx':
+      {
+        id: '(app-pages-browser)/./src/components/Features/Testimonials.tsx',
+        name: '*',
+        chunks: ['app/(main)/page', 'static/chunks/app/(main)/page.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\src\\components\\Features\\WhyChooseUs.tsx': {
+      id: '(app-pages-browser)/./src/components/Features/WhyChooseUs.tsx',
+      name: '*',
+      chunks: ['app/(main)/page', 'static/chunks/app/(main)/page.js'],
+      async: false,
+    },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\client-page.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\client-page.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\client-segment.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/client-segment.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\client-segment.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/client-segment.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\error-boundary.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\error-boundary.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\http-access-fallback\\error-boundary.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\http-access-fallback\\error-boundary.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\layout-router.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\layout-router.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\metadata\\async-metadata.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/async-metadata.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\metadata\\async-metadata.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/async-metadata.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\metadata\\metadata-boundary.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/metadata-boundary.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\metadata\\metadata-boundary.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/metadata-boundary.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\client\\components\\render-from-template-context.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+    'D:\\Projekte\\lopez-it-welt\\node_modules\\next\\dist\\esm\\client\\components\\render-from-template-context.js':
+      {
+        id: '(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js',
+        name: '*',
+        chunks: ['app-pages-internals', 'static/chunks/app-pages-internals.js'],
+        async: false,
+      },
+  },
+  entryCSSFiles: {
+    'D:\\Projekte\\lopez-it-welt\\src\\': [],
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\global-error': [],
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\layout': [
+      { inlined: false, path: 'static/css/app/layout.css' },
+    ],
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\error': [],
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\not-found': [],
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\(main)\\layout': [],
+    'D:\\Projekte\\lopez-it-welt\\src\\app\\(main)\\page': [],
+  },
+  rscModuleMapping: {
+    '(app-pages-browser)/./src/app/global-error.tsx': {
+      '*': {
+        id: '(rsc)/./src/app/global-error.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/app/globals.css': {
+      '*': {
+        id: '(rsc)/./src/app/globals.css',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/I18nProvider.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Features/I18nProvider.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/app/error.tsx': {
+      '*': {
+        id: '(rsc)/./src/app/error.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/ClientLayout.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Core/ClientLayout.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Footer.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Core/Footer.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Header.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Core/Header.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Hauptbereiche.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Core/Hauptbereiche.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Core/Hero.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Core/Hero.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/FAQ.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Features/FAQ.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/KISicherheit.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Features/KISicherheit.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/Testimonials.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Features/Testimonials.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./src/components/Features/WhyChooseUs.tsx': {
+      '*': {
+        id: '(rsc)/./src/components/Features/WhyChooseUs.tsx',
+        name: '*',
+        chunks: [],
+        async: false,
+      },
+    },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/client-page.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/client-page.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/client-segment.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/client-segment.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/error-boundary.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/http-access-fallback/error-boundary.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/layout-router.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/async-metadata.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/metadata/async-metadata.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/metadata/metadata-boundary.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/metadata/metadata-boundary.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+    '(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js':
+      {
+        '*': {
+          id: '(rsc)/./node_modules/next/dist/client/components/render-from-template-context.js',
+          name: '*',
+          chunks: [],
+          async: false,
+        },
+      },
+  },
+  edgeRscModuleMapping: {},
+};

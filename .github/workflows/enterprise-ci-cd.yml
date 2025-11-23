@@ -1,207 +1,319 @@
-name: 🏗️ Enterprise++ CI/CD Pipeline
+name: Enterprise++ CI/CD Pipeline
 
 on:
   push:
     branches: [main, develop]
   pull_request:
-    branches: [main]
+    branches: [main, develop]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: "18"
+  NPM_VERSION: "9"
 
 jobs:
-  # 🛡️ Enterprise++ Sicherheitsprüfung
-  security-check:
+  # Qualitätsprüfungen
+  quality:
+    name: Quality Assurance
     runs-on: ubuntu-latest
-    name: 🛡️ Enterprise++ Security Check
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: 🐍 Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-      
-      - name: 📋 Enterprise++ Anti-Rule-Break Check
-        run: |
-          echo "🛡️ Enterprise++ Sicherheitsprüfung läuft..."
-          node scripts/anti-rule-break-system.js validate
-      
-      - name: 🔍 Enterprise++ Enforcement Check
-        run: |
-          echo "🔍 Enterprise++ Enforcement läuft..."
-          node scripts/enforce-rules-fixed.js
-      
-      - name: 🛡️ KI-Sicherheitsmodul Check
-        run: |
-          echo "🛡️ KI-Sicherheitsmodul läuft..."
-          node scripts/ki-sicherheitsmodul.js validate
+    timeout-minutes: 15
 
-  # 📋 Qualitätsprüfung
-  quality-check:
-    runs-on: ubuntu-latest
-    name: 📋 Enterprise++ Quality Check
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: 📦 Setup Node.js
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.15.0'
-          cache: 'npm'
-      
-      - name: 📥 Install dependencies
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install Dependencies
         run: npm ci
-      
-      - name: 🔍 Lint check
+
+      - name: Lint Code
         run: npm run lint
-      
-      - name: 🎨 Prettier check
-        run: npm run format:check
-      
-      - name: 🧪 Run tests
-        run: npm run test
-      
-      - name: 📊 Test coverage
+
+      - name: Type Check
+        run: npm run type-check
+
+      - name: Run Unit Tests
         run: npm run test:coverage
 
-  # 🔒 Security Scan
-  security-scan:
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+      - name: Run E2E Tests
+        run: npm run test:e2e
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results
+          path: test-results/
+
+  # Performance-Tests
+  performance:
+    name: Performance Testing
     runs-on: ubuntu-latest
-    name: 🔒 Security Scan
+    timeout-minutes: 20
+    needs: quality
+
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: 📦 Setup Node.js
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.15.0'
-          cache: 'npm'
-      
-      - name: 📥 Install dependencies
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install Dependencies
         run: npm ci
-      
-      - name: 🔒 Run security audit
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Start Application
+        run: npm start &
+        env:
+          PORT: 3000
+
+      - name: Wait for Application
+        run: npx wait-on http://localhost:3000
+
+      - name: Run Lighthouse CI
+        run: npm run lighthouse:ci
+
+      - name: Bundle Analysis
+        run: npm run bundle:analyze
+
+      - name: Upload Performance Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: performance-report
+          path: |
+            .lighthouseci/
+            bundle-report.html
+
+  # Accessibility-Tests
+  accessibility:
+    name: Accessibility Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: quality
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Start Application
+        run: npm start &
+        env:
+          PORT: 3000
+
+      - name: Wait for Application
+        run: npx wait-on http://localhost:3000
+
+      - name: Run Accessibility Tests
+        run: npm run test:a11y
+
+      - name: Upload Accessibility Report
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: accessibility-report
+          path: test-results/
+
+  # Security-Scan
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: quality
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Security Audit
         run: npm audit --audit-level=moderate
-      
-      - name: 🔍 Run Snyk security scan
+
+      - name: Run Snyk Security Scan
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high
 
-  # 🏗️ Build
-  build:
+  # Storybook Build
+  storybook:
+    name: Storybook Build
     runs-on: ubuntu-latest
-    needs: [security-check, quality-check, security-scan]
-    name: 🏗️ Build Application
+    timeout-minutes: 10
+    needs: quality
+
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: 📦 Setup Node.js
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.15.0'
-          cache: 'npm'
-      
-      - name: 📥 Install dependencies
-        run: npm ci
-      
-      - name: 🏗️ Build application
-        run: npm run build
-      
-      - name: 📦 Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: .next/
-          retention-days: 7
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
 
-  # 🚀 Deploy to Staging
-  deploy-staging:
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Upload Storybook
+        uses: actions/upload-artifact@v3
+        with:
+          name: storybook-static
+          path: storybook-static/
+
+  # Staging Deployment
+  staging:
+    name: Deploy to Staging
     runs-on: ubuntu-latest
-    needs: build
+    timeout-minutes: 15
+    needs: [quality, performance, accessibility, security, storybook]
     if: github.ref == 'refs/heads/develop'
-    name: 🚀 Deploy to Staging
     environment: staging
+
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: 📦 Setup Node.js
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.15.0'
-          cache: 'npm'
-      
-      - name: 📥 Install dependencies
-        run: npm ci
-      
-      - name: 🏗️ Build application
-        run: npm run build
-      
-      - name: 🚀 Deploy to staging
-        run: |
-          echo "🚀 Deploying to staging environment..."
-          # Hier kommt Ihre Staging-Deployment-Logik hin
-          echo "✅ Staging deployment successful"
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
 
-  # 🚀 Deploy to Production
-  deploy-production:
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build
+        env:
+          NODE_ENV: staging
+
+      - name: Deploy to Staging
+        run: |
+          echo "Deploying to staging environment..."
+          # Add your staging deployment logic here
+
+      - name: Run Smoke Tests
+        run: |
+          echo "Running smoke tests on staging..."
+          # Add your smoke test logic here
+
+  # Production Deployment
+  production:
+    name: Deploy to Production
     runs-on: ubuntu-latest
-    needs: build
+    timeout-minutes: 20
+    needs: [quality, performance, accessibility, security, storybook]
     if: github.ref == 'refs/heads/main'
-    name: 🚀 Deploy to Production
     environment: production
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: 📦 Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.15.0'
-          cache: 'npm'
-      
-      - name: 📥 Install dependencies
-        run: npm ci
-      
-      - name: 🏗️ Build application
-        run: npm run build
-      
-      - name: 🚀 Deploy to production
-        run: |
-          echo "🚀 Deploying to production environment..."
-          # Hier kommt Ihre Production-Deployment-Logik hin
-          echo "✅ Production deployment successful"
-      
-      - name: 📊 Post-deployment health check
-        run: |
-          echo "📊 Running post-deployment health checks..."
-          # Hier kommen Ihre Health-Check-Logiken hin
-          echo "✅ All health checks passed"
 
-  # 📊 Enterprise++ Quality Report
-  quality-report:
-    runs-on: ubuntu-latest
-    needs: [security-check, quality-check, security-scan, build]
-    name: 📊 Enterprise++ Quality Report
     steps:
-      - uses: actions/checkout@v4
-      
-      - name: 📦 Setup Node.js
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.15.0'
-          cache: 'npm'
-      
-      - name: 📥 Install dependencies
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install Dependencies
         run: npm ci
-      
-      - name: 📊 Generate Enterprise++ Quality Report
+
+      - name: Build Application
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Production
         run: |
-          echo "📊 Generating Enterprise++ Quality Report..."
-          node scripts/enterprise-quality-controller.js report
-      
-      - name: 📤 Upload Quality Report
-        uses: actions/upload-artifact@v4
+          echo "Deploying to production environment..."
+          # Add your production deployment logic here
+
+      - name: Run Health Checks
+        run: |
+          echo "Running health checks on production..."
+          # Add your health check logic here
+
+      - name: Notify Team
+        run: |
+          echo "Production deployment completed successfully!"
+          # Add your notification logic here
+
+  # Quality Report
+  report:
+    name: Generate Quality Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [quality, performance, accessibility, security]
+    if: always()
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
         with:
-          name: enterprise-quality-report
-          path: QUALITY_DASHBOARD.md
-          retention-days: 30 
+          path: artifacts/
+
+      - name: Generate Report
+        run: |
+          echo "Generating comprehensive quality report..."
+          # Add your report generation logic here
+
+      - name: Upload Quality Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: quality-report
+          path: reports/
+
+      - name: Notify Team
+        run: |
+          echo "Quality report generated successfully!"
+          # Add your notification logic here

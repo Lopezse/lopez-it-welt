@@ -12,22 +12,52 @@ import {
   developmentModeMiddleware,
 } from "./src/middleware/development-mode";
 import { rbacApiGuard } from "./src/middleware/rbac-api-guard";
+import { adminGuard, adminApiGuard } from "./src/middleware/admin-guard";
+import { shopGuard, shopApiGuard } from "./src/middleware/shop-guard";
 
 // =====================================================
 // MIDDLEWARE CONFIG
 // =====================================================
 
 export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
   // API-Routen
-  if (request.nextUrl.pathname.startsWith("/api/")) {
-    // RBAC Guard (serverseitige Berechtigungsprüfung)
-    const rbacResult = rbacApiGuard(request);
-    if (rbacResult) {
-      return rbacResult; // Blockiert Anfrage (401/403)
+  if (pathname.startsWith("/api/")) {
+    // Admin API Guard (vor RBAC)
+    const adminApiResult = adminApiGuard(request);
+    if (adminApiResult) {
+      return adminApiResult; // Blockiert Anfrage (401/403)
+    }
+
+    // Shop API Guard
+    const shopApiResult = shopApiGuard(request);
+    if (shopApiResult) {
+      return shopApiResult; // Blockiert Anfrage (401/403)
+    }
+
+    // RBAC Guard (nur für /api/admin/* - serverseitige Berechtigungsprüfung)
+    if (pathname.startsWith("/api/admin")) {
+      const rbacResult = rbacApiGuard(request);
+      if (rbacResult) {
+        return rbacResult; // Blockiert Anfrage (401/403)
+      }
     }
 
     // Development Mode Middleware
     return apiDevelopmentModeMiddleware(request);
+  }
+
+  // Admin-Routen (/admin/*)
+  const adminResult = adminGuard(request);
+  if (adminResult) {
+    return adminResult; // Redirect zu /admin/login
+  }
+
+  // Shop-Routen (/account/*, /shop/checkout/*)
+  const shopResult = shopGuard(request);
+  if (shopResult) {
+    return shopResult; // Redirect zu /account/login
   }
 
   // Alle anderen Routen

@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+    restart: always
+
+# Netzwerk-Konfiguration
+networks:
+  lopez-it-welt-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# Volume-Konfiguration für Persistenz (falls benötigt)
+volumes:
+  app-logs:
+    driver: local

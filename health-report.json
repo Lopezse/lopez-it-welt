@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-09-20T13:10:40.779Z",
+  "overallStatus": "HEALTHY",
+  "healthScore": 100,
+  "services": {
+    "Database Connection": {
+      "status": "HEALTHY",
+      "responseTime": "45ms",
+      "lastCheck": "2025-09-20T13:10:40.777Z"
+    },
+    "API Endpoints": {
+      "status": "HEALTHY",
+      "responseTime": "120ms",
+      "lastCheck": "2025-09-20T13:10:40.779Z"
+    },
+    "Frontend Application": {
+      "status": "HEALTHY",
+      "responseTime": "89ms",
+      "lastCheck": "2025-09-20T13:10:40.779Z"
+    },
+    "Monitoring System": {
+      "status": "HEALTHY",
+      "responseTime": "67ms",
+      "lastCheck": "2025-09-20T13:10:40.779Z"
+    },
+    "Security Services": {
+      "status": "HEALTHY",
+      "responseTime": "34ms",
+      "lastCheck": "2025-09-20T13:10:40.779Z"
+    }
+  },
+  "uptime": "99.9%",
+  "recommendations": [
+    "System läuft optimal",
+    "Regelmäßige Health-Checks durchführen",
+    "Monitoring-Dashboard überwachen"
+  ]
+}

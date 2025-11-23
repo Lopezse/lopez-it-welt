@@ -12,6 +12,7 @@ Der **Admin-Troubleshooting-Guide** bietet systematische Lösungsansätze für h
 ## 🎯 **TROUBLESHOOTING-METHODIK**
 
 ### **Systematischer Ansatz**
+
 ```typescript
 // Troubleshooting-Prozess
 interface TroubleshootingProcess {
@@ -19,10 +20,10 @@ interface TroubleshootingProcess {
   identification: {
     symptoms: string[];
     affectedComponents: string[];
-    impact: 'low' | 'medium' | 'high' | 'critical';
+    impact: "low" | "medium" | "high" | "critical";
     userReports: string[];
   };
-  
+
   // 2. Daten sammeln
   dataCollection: {
     logs: LogEntry[];
@@ -30,7 +31,7 @@ interface TroubleshootingProcess {
     errorMessages: string[];
     systemStatus: SystemStatus;
   };
-  
+
   // 3. Ursache analysieren
   analysis: {
     rootCause: string;
@@ -38,14 +39,14 @@ interface TroubleshootingProcess {
     timeline: EventTimeline[];
     patterns: Pattern[];
   };
-  
+
   // 4. Lösung implementieren
   solution: {
     steps: TroubleshootingStep[];
     rollbackPlan: RollbackPlan;
     verification: VerificationStep[];
   };
-  
+
   // 5. Dokumentation
   documentation: {
     issueDescription: string;
@@ -63,6 +64,7 @@ interface TroubleshootingProcess {
 ### **"Connection failed" - Fehler beheben**
 
 #### **Symptome:**
+
 - Verbindungsfehler beim Login
 - Timeout-Fehler bei API-Anfragen
 - Netzwerk-Unerreichbarkeit
@@ -70,6 +72,7 @@ interface TroubleshootingProcess {
 #### **Diagnose-Schritte:**
 
 **1. Internet-Verbindung prüfen**
+
 ```bash
 # Internet-Verbindung testen
 ping 8.8.8.8
@@ -82,6 +85,7 @@ traceroute lopez-it-welt.de
 ```
 
 **2. VPN-Verbindung prüfen**
+
 ```bash
 # VPN-Status anzeigen
 systemctl status openvpn
@@ -94,6 +98,7 @@ tail -f /var/log/openvpn.log
 ```
 
 **3. Firewall-Einstellungen prüfen**
+
 ```bash
 # Firewall-Status anzeigen
 sudo ufw status
@@ -108,6 +113,7 @@ telnet lopez-it-welt.de 443
 #### **Lösungsansätze:**
 
 **1. Internet-Verbindung wiederherstellen**
+
 ```bash
 # Netzwerk-Interface neu starten
 sudo systemctl restart networking
@@ -121,6 +127,7 @@ sudo systemctl restart systemd-resolved
 ```
 
 **2. VPN-Verbindung wiederherstellen**
+
 ```bash
 # VPN-Service neu starten
 sudo systemctl restart openvpn
@@ -133,6 +140,7 @@ sudo openvpn --config /etc/openvpn/client.conf
 ```
 
 **3. Proxy-Einstellungen prüfen**
+
 ```bash
 # Proxy-Umgebungsvariablen prüfen
 echo $http_proxy
@@ -148,6 +156,7 @@ unset https_proxy
 ### **Login-Probleme beheben**
 
 #### **Symptome:**
+
 - "Invalid credentials" Fehler
 - Session-Timeout
 - Zwei-Faktor-Authentifizierung fehlgeschlagen
@@ -155,17 +164,19 @@ unset https_proxy
 #### **Diagnose-Schritte:**
 
 **1. Benutzer-Credentials prüfen**
+
 ```bash
 # Datenbank-Verbindung testen
 mysql -u admin -p -h db.lopez-it-welt.de
 
 # Benutzer-Status prüfen
-SELECT id, email, is_active, last_login_at 
-FROM users 
+SELECT id, email, is_active, last_login_at
+FROM users
 WHERE email = 'admin@lopez-it-welt.de';
 ```
 
 **2. Session-Management prüfen**
+
 ```bash
 # Redis-Verbindung testen
 redis-cli -h redis.lopez-it-welt.de ping
@@ -175,6 +186,7 @@ redis-cli -h redis.lopez-it-welt.de KEYS "session:*"
 ```
 
 **3. JWT-Token validieren**
+
 ```bash
 # Token-Dekodierung
 echo "YOUR_JWT_TOKEN" | base64 -d
@@ -186,14 +198,16 @@ jwt decode YOUR_JWT_TOKEN
 #### **Lösungsansätze:**
 
 **1. Passwort zurücksetzen**
+
 ```sql
 -- Admin-Passwort zurücksetzen
-UPDATE users 
-SET password_hash = 'new_hashed_password' 
+UPDATE users
+SET password_hash = 'new_hashed_password'
 WHERE email = 'admin@lopez-it-welt.de';
 ```
 
 **2. Session-Cache leeren**
+
 ```bash
 # Redis-Cache leeren
 redis-cli -h redis.lopez-it-welt.de FLUSHALL
@@ -203,10 +217,11 @@ rm -rf ~/.lopez-it-welt/sessions/*
 ```
 
 **3. Zwei-Faktor-Authentifizierung umgehen**
+
 ```sql
 -- 2FA temporär deaktivieren
-UPDATE users 
-SET two_factor_enabled = false 
+UPDATE users
+SET two_factor_enabled = false
 WHERE email = 'admin@lopez-it-welt.de';
 ```
 
@@ -215,6 +230,7 @@ WHERE email = 'admin@lopez-it-welt.de';
 ### **MySQL-Verbindungsprobleme**
 
 #### **Symptome:**
+
 - "Database connection failed"
 - Langsame Datenbankabfragen
 - Connection pool exhausted
@@ -222,6 +238,7 @@ WHERE email = 'admin@lopez-it-welt.de';
 #### **Diagnose-Schritte:**
 
 **1. Datenbank-Verbindung testen**
+
 ```bash
 # MySQL-Status prüfen
 sudo systemctl status mysql
@@ -234,19 +251,21 @@ mysql -u root -p -e "SHOW PROCESSLIST;"
 ```
 
 **2. Datenbank-Performance prüfen**
+
 ```bash
 # Langsame Queries identifizieren
 mysql -u root -p -e "
 SELECT query, COUNT(*) as count, AVG(duration) as avg_duration
-FROM mysql.slow_log 
+FROM mysql.slow_log
 WHERE start_time > DATE_SUB(NOW(), INTERVAL 1 HOUR)
-GROUP BY query 
-ORDER BY avg_duration DESC 
+GROUP BY query
+ORDER BY avg_duration DESC
 LIMIT 10;
 "
 ```
 
 **3. Datenbank-Logs prüfen**
+
 ```bash
 # MySQL-Error-Log
 sudo tail -f /var/log/mysql/error.log
@@ -258,6 +277,7 @@ sudo tail -f /var/log/mysql/slow.log
 #### **Lösungsansätze:**
 
 **1. MySQL-Service neu starten**
+
 ```bash
 # MySQL sicher stoppen
 sudo mysqladmin shutdown
@@ -270,6 +290,7 @@ sudo systemctl status mysql
 ```
 
 **2. Connection pool optimieren**
+
 ```sql
 -- Connection pool Einstellungen
 SET GLOBAL max_connections = 200;
@@ -278,6 +299,7 @@ SET GLOBAL interactive_timeout = 600;
 ```
 
 **3. Datenbank-Performance optimieren**
+
 ```sql
 -- Query-Cache aktivieren
 SET GLOBAL query_cache_type = 1;
@@ -290,6 +312,7 @@ SET GLOBAL innodb_buffer_pool_size = 4G;
 ### **Redis-Verbindungsprobleme**
 
 #### **Symptome:**
+
 - "Redis connection failed"
 - Cache-Misses
 - Session-Verlust
@@ -297,6 +320,7 @@ SET GLOBAL innodb_buffer_pool_size = 4G;
 #### **Diagnose-Schritte:**
 
 **1. Redis-Verbindung testen**
+
 ```bash
 # Redis-Status prüfen
 sudo systemctl status redis-server
@@ -309,6 +333,7 @@ redis-cli info memory
 ```
 
 **2. Redis-Performance prüfen**
+
 ```bash
 # Redis-Statistiken
 redis-cli info stats
@@ -323,6 +348,7 @@ redis-cli info memory
 #### **Lösungsansätze:**
 
 **1. Redis-Service neu starten**
+
 ```bash
 # Redis stoppen
 sudo systemctl stop redis-server
@@ -335,6 +361,7 @@ sudo systemctl status redis-server
 ```
 
 **2. Redis-Memory optimieren**
+
 ```bash
 # Redis-Memory-Limit setzen
 redis-cli CONFIG SET maxmemory 512mb
@@ -348,6 +375,7 @@ redis-cli CONFIG SET maxmemory-policy allkeys-lru
 ### **API-Verbindungsprobleme**
 
 #### **Symptome:**
+
 - "API endpoint not found"
 - "Internal server error"
 - "Gateway timeout"
@@ -355,6 +383,7 @@ redis-cli CONFIG SET maxmemory-policy allkeys-lru
 #### **Diagnose-Schritte:**
 
 **1. API-Endpunkt testen**
+
 ```bash
 # API-Health-Check
 curl -X GET https://api.lopez-it-welt.de/v1/health
@@ -367,6 +396,7 @@ curl -X GET https://api.lopez-it-welt.de/v1/version
 ```
 
 **2. API-Logs prüfen**
+
 ```bash
 # Application-Logs
 sudo tail -f /var/log/lopez-it-welt/application.log
@@ -379,6 +409,7 @@ sudo tail -f /var/log/nginx/access.log
 ```
 
 **3. API-Performance testen**
+
 ```bash
 # API-Response-Time testen
 curl -w "@curl-format.txt" -o /dev/null -s https://api.lopez-it-welt.de/v1/health
@@ -390,6 +421,7 @@ ab -n 1000 -c 10 https://api.lopez-it-welt.de/v1/health
 #### **Lösungsansätze:**
 
 **1. API-Service neu starten**
+
 ```bash
 # Application-Service neu starten
 sudo systemctl restart lopez-it-welt
@@ -402,6 +434,7 @@ pm2 restart all
 ```
 
 **2. API-Cache leeren**
+
 ```bash
 # Application-Cache leeren
 sudo rm -rf /var/cache/lopez-it-welt/*
@@ -418,6 +451,7 @@ redis-cli FLUSHALL
 ### **SSL/TLS-Probleme**
 
 #### **Symptome:**
+
 - "SSL certificate error"
 - "Connection not secure"
 - "Certificate expired"
@@ -425,6 +459,7 @@ redis-cli FLUSHALL
 #### **Diagnose-Schritte:**
 
 **1. SSL-Zertifikat prüfen**
+
 ```bash
 # Zertifikat-Validität prüfen
 openssl s_client -connect lopez-it-welt.de:443 -servername lopez-it-welt.de
@@ -437,6 +472,7 @@ openssl x509 -in /etc/ssl/certs/lopez-it-welt.crt -noout -dates
 ```
 
 **2. SSL-Konfiguration prüfen**
+
 ```bash
 # Nginx-SSL-Konfiguration prüfen
 sudo nginx -t
@@ -448,6 +484,7 @@ sslscan lopez-it-welt.de
 #### **Lösungsansätze:**
 
 **1. SSL-Zertifikat erneuern**
+
 ```bash
 # Let's Encrypt-Zertifikat erneuern
 sudo certbot renew
@@ -457,6 +494,7 @@ sudo certbot certificates
 ```
 
 **2. SSL-Konfiguration optimieren**
+
 ```nginx
 # Nginx-SSL-Konfiguration
 ssl_protocols TLSv1.2 TLSv1.3;
@@ -467,6 +505,7 @@ ssl_prefer_server_ciphers off;
 ### **Firewall-Probleme**
 
 #### **Symptome:**
+
 - "Connection refused"
 - "Port blocked"
 - "Access denied"
@@ -474,6 +513,7 @@ ssl_prefer_server_ciphers off;
 #### **Diagnose-Schritte:**
 
 **1. Firewall-Status prüfen**
+
 ```bash
 # UFW-Status
 sudo ufw status
@@ -487,6 +527,7 @@ netstat -tulpn | grep :443
 ```
 
 **2. Port-Verfügbarkeit testen**
+
 ```bash
 # Port 80 testen
 telnet lopez-it-welt.de 80
@@ -501,6 +542,7 @@ telnet lopez-it-welt.de 3000
 #### **Lösungsansätze:**
 
 **1. Firewall-Regeln anpassen**
+
 ```bash
 # HTTP-Port freigeben
 sudo ufw allow 80/tcp
@@ -513,6 +555,7 @@ sudo ufw allow 3000/tcp
 ```
 
 **2. Firewall zurücksetzen**
+
 ```bash
 # UFW zurücksetzen
 sudo ufw --force reset
@@ -533,6 +576,7 @@ sudo ufw allow 443/tcp
 ### **Langsame Antwortzeiten**
 
 #### **Symptome:**
+
 - "Request timeout"
 - "Slow response"
 - "High latency"
@@ -540,6 +584,7 @@ sudo ufw allow 443/tcp
 #### **Diagnose-Schritte:**
 
 **1. System-Ressourcen prüfen**
+
 ```bash
 # CPU-Auslastung
 top -bn1 | grep "Cpu(s)"
@@ -555,6 +600,7 @@ netstat -i
 ```
 
 **2. Application-Performance prüfen**
+
 ```bash
 # Node.js-Prozesse
 ps aux | grep node
@@ -569,6 +615,7 @@ tail -f /var/log/lopez-it-welt/application.log
 #### **Lösungsansätze:**
 
 **1. System-Ressourcen optimieren**
+
 ```bash
 # Memory-Swap aktivieren
 sudo swapon -a
@@ -579,6 +626,7 @@ sudo sysctl -p
 ```
 
 **2. Application-Optimierung**
+
 ```bash
 # PM2-Cluster-Modus
 pm2 start ecosystem.config.js --env production
@@ -595,6 +643,7 @@ pm2 restart all
 ### **Log-Dateien nicht verfügbar**
 
 #### **Symptome:**
+
 - "Log file not found"
 - "Permission denied"
 - "Disk space full"
@@ -602,6 +651,7 @@ pm2 restart all
 #### **Diagnose-Schritte:**
 
 **1. Log-Verzeichnis prüfen**
+
 ```bash
 # Log-Verzeichnis-Existenz
 ls -la /var/log/lopez-it-welt/
@@ -614,6 +664,7 @@ df -h /var/log
 ```
 
 **2. Log-Rotation prüfen**
+
 ```bash
 # Logrotate-Konfiguration
 cat /etc/logrotate.d/lopez-it-welt
@@ -625,6 +676,7 @@ sudo logrotate -d /etc/logrotate.d/lopez-it-welt
 #### **Lösungsansätze:**
 
 **1. Log-Berechtigungen korrigieren**
+
 ```bash
 # Log-Verzeichnis erstellen
 sudo mkdir -p /var/log/lopez-it-welt
@@ -635,6 +687,7 @@ sudo chmod -R 755 /var/log/lopez-it-welt
 ```
 
 **2. Log-Rotation konfigurieren**
+
 ```bash
 # Logrotate-Konfiguration erstellen
 sudo tee /etc/logrotate.d/lopez-it-welt << EOF
@@ -660,6 +713,7 @@ EOF
 #### **Kritische System-Probleme:**
 
 **1. System komplett neu starten**
+
 ```bash
 # Graceful Shutdown
 sudo systemctl stop lopez-it-welt
@@ -678,6 +732,7 @@ sudo systemctl start nginx
 ```
 
 **2. Datenbank-Wiederherstellung**
+
 ```bash
 # Datenbank-Backup wiederherstellen
 mysql -u root -p lopez_it_welt < backup_2025-07-05.sql
@@ -690,6 +745,7 @@ mysql -u root -p -e "OPTIMIZE TABLE users, ai_agents, chat_sessions;"
 ```
 
 **3. Application-Wiederherstellung**
+
 ```bash
 # Application-Reset
 sudo rm -rf /var/cache/lopez-it-welt/*
@@ -706,12 +762,14 @@ pm2 start ecosystem.config.js --env production
 ### **Kontakt-Informationen**
 
 **Notfall-Kontakte:**
+
 - **System-Admin:** +49 123 456789
 - **DevOps-Team:** devops@lopez-it-welt.de
 - **Security-Team:** security@lopez-it-welt.de
 - **24/7 Support:** support@lopez-it-welt.de
 
 **Escalation-Prozess:**
+
 1. **Level 1:** System-Admin (30 Min.)
 2. **Level 2:** DevOps-Team (1 Stunde)
 3. **Level 3:** Security-Team (2 Stunden)
@@ -720,4 +778,4 @@ pm2 start ecosystem.config.js --env production
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

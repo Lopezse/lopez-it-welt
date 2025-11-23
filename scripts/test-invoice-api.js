@@ -1,69 +1,97 @@
 /**
  * Test-Script für Invoice POST API
- * Simuliert den exakten Request vom Frontend
+ * Simuliert den Request und zeigt die genaue Fehlermeldung
  */
 
-const fetch = require("node-fetch");
+const http = require("http");
 
-const baseUrl = "http://localhost:3000";
+const testPayload = {
+  debtor: "Test GmbH",
+  issued_at: new Date().toISOString().slice(0, 10),
+  total_gross: 119.0,
+  items: [],
+};
 
 async function testInvoiceAPI() {
-  console.log("🧪 Teste POST /api/invoices...\n");
+  return new Promise((resolve, reject) => {
+    const postData = JSON.stringify(testPayload);
 
-  const testPayload = {
-    issued_at: new Date().toISOString().slice(0, 10),
-    total_gross: 119.0,
-    items: [],
-    debtor: "Test GmbH",
-  };
-
-  console.log("📤 Request-Payload:");
-  console.log(JSON.stringify(testPayload, null, 2));
-  console.log();
-
-  try {
-    const response = await fetch(`${baseUrl}/api/invoices`, {
+    const options = {
+      hostname: "localhost",
+      port: 3000,
+      path: "/api/invoices",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(postData),
       },
-      body: JSON.stringify(testPayload),
-    });
+    };
 
-    console.log(`📥 Response Status: ${response.status} ${response.statusText}`);
-    console.log(`📥 Response Headers:`, Object.fromEntries(response.headers.entries()));
+    console.log("🔍 Teste POST /api/invoices...");
+    console.log("📤 Payload:", JSON.stringify(testPayload, null, 2));
     console.log();
 
-    const responseText = await response.text();
-    console.log("📥 Response Body:");
+    const req = http.request(options, (res) => {
+      let data = "";
 
-    try {
-      const jsonResponse = JSON.parse(responseText);
-      console.log(JSON.stringify(jsonResponse, null, 2));
+      res.on("data", (chunk) => {
+        data += chunk;
+      });
 
-      if (!response.ok) {
-        console.log("\n❌ FEHLER-DETAILS:");
-        if (jsonResponse.error) {
-          console.log(`  Error: ${jsonResponse.error}`);
+      res.on("end", () => {
+        console.log(`📥 Status: ${res.statusCode} ${res.statusMessage}`);
+        console.log(`📋 Headers:`, res.headers);
+        console.log();
+
+        let json = null;
+        try {
+          json = JSON.parse(data);
+          console.log("📄 Response:", JSON.stringify(json, null, 2));
+        } catch (e) {
+          console.log("📄 Response (nicht JSON):", data);
         }
-        if (jsonResponse.details) {
-          console.log(`  Details:`, jsonResponse.details);
+
+        if (res.statusCode >= 400) {
+          reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+        } else {
+          resolve(json || data);
         }
-        if (jsonResponse.stack) {
-          console.log(`  Stack:`, jsonResponse.stack);
-        }
-      } else {
-        console.log("\n✅ ERFOLGREICH!");
+      });
+    });
+
+    req.on("error", (error) => {
+      console.error("❌ Request Error:", error.message);
+      if (error.code === "ECONNREFUSED") {
+        console.error("⚠️ Server läuft nicht auf localhost:3000");
+        console.error("   Bitte starten Sie den Server mit: npm run dev");
       }
-    } catch (parseError) {
-      console.log(responseText);
-      console.log("\n⚠️ Response ist kein JSON");
-    }
-  } catch (error) {
-    console.error("❌ Request-Fehler:", error.message);
-    console.error("   Stack:", error.stack);
-    console.log("\n💡 Hinweis: Stelle sicher, dass der Server auf localhost:3000 läuft");
-  }
+      reject(error);
+    });
+
+    req.write(postData);
+    req.end();
+  });
 }
 
-testInvoiceAPI();
+testInvoiceAPI()
+  .then(() => {
+    console.log("\n✅ Test erfolgreich!");
+  })
+  .catch((error) => {
+    console.error("\n❌ Test fehlgeschlagen:", error.message);
+    process.exit(1);
+  });
+
+    req.write(postData);
+    req.end();
+  });
+}
+
+testInvoiceAPI()
+  .then(() => {
+    console.log("\n✅ Test erfolgreich!");
+  })
+  .catch((error) => {
+    console.error("\n❌ Test fehlgeschlagen:", error.message);
+    process.exit(1);
+  });

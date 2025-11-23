@@ -60,3 +60,83 @@ sod_enforced: true
 require_ticket_ref: true
 ticket_pattern: "CR-[0-9]{6}"
 commit_header_regex: "^(feat|fix|chore|docs|refactor|perf|test)(\\([^)]+\\))?: .+ \\(Refs: CR-[0-9]{6}\\)$"
+
+
+version: 2
+
+rules:
+  - scope: "src/app/api/**"
+    risk: HIGH
+    required_approvals: 2
+    require_tests: true
+    require_verify_office: true
+    require_migration_plan: true
+    forbid_direct_main: true
+
+  - scope: "server/**"
+    risk: HIGH
+    required_approvals: 2
+    require_tests: true
+    require_verify_office: false
+    require_migration_plan: true
+    forbid_direct_main: true
+
+  - scope: "database/**"
+    risk: HIGH
+    required_approvals: 2
+    require_tests: true
+    require_verify_office: false
+    require_migration_plan: true
+    forbid_direct_main: true
+
+  - scope: "config/**"
+    risk: MEDIUM
+    required_approvals: 1
+    require_tests: true
+    require_verify_office: false
+    require_migration_plan: false
+    forbid_direct_main: false
+
+  - scope: "docs/**"
+    risk: LOW
+    required_approvals: 0
+    require_tests: false
+    require_verify_office: false
+    require_migration_plan: false
+
+  - scope: "frontend/**"
+    risk: LOW
+    required_approvals: 0
+    require_tests: false
+    require_verify_office: false
+    require_migration_plan: false
+
+  - scope: "scripts/**"
+    risk: LOW
+    required_approvals: 0
+    require_tests: false
+    require_verify_office: false
+    require_migration_plan: false
+
+sod_enforced: true
+require_ticket_ref: true
+ticket_pattern: "CR-[0-9]{6}"
+commit_header_regex: "^(feat|fix|chore|docs|refactor|perf|test)(\\([^)]+\\))?: .+ \\(Refs: CR-[0-9]{6}\\)$"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
-import { promises as fs } from 'fs';
-import { NextRequest, NextResponse } from 'next/server';
-import path from 'path';
+import { promises as fs } from "fs";
+import { NextRequest, NextResponse } from "next/server";
+import path from "path";
 
 interface TimeSession {
   id: number;
@@ -10,7 +10,7 @@ interface TimeSession {
   end_time?: string;
   duration_minutes?: number;
   taetigkeit: string;
-  status: 'active' | 'completed' | 'interrupted';
+  status: "active" | "completed" | "interrupted";
   problem?: string;
   ausloeser?: string;
   category: string;
@@ -20,12 +20,12 @@ interface TimeSession {
 }
 
 // Datei-Pfad für Sessions
-const SESSIONS_FILE = path.join(process.cwd(), 'data', 'time-sessions.json');
+const SESSIONS_FILE = path.join(process.cwd(), "data", "time-sessions.json");
 
 // Sessions laden
 async function loadSessions(): Promise<TimeSession[]> {
   try {
-    const data = await fs.readFile(SESSIONS_FILE, 'utf-8');
+    const data = await fs.readFile(SESSIONS_FILE, "utf-8");
     return JSON.parse(data);
   } catch (error) {
     // Datei existiert nicht oder ist leer
@@ -42,7 +42,7 @@ async function saveSessions(sessions: TimeSession[]): Promise<void> {
 
     await fs.writeFile(SESSIONS_FILE, JSON.stringify(sessions, null, 2));
   } catch (error) {
-    console.error('Fehler beim Speichern der Sessions:', error);
+    // Fehler beim Speichern der Sessions: ${error}
   }
 }
 
@@ -62,24 +62,20 @@ async function closeAllOpenSessions(): Promise<void> {
 
     for (let i = 0; i < sessions.length; i++) {
       const session = sessions[i];
-      if (session.status === 'active' && !session.end_time) {
+      if (session.status === "active" && !session.end_time) {
         const startDate = new Date(session.start_time);
         const endDate = new Date(now);
-        const durationMinutes = Math.round(
-          (endDate.getTime() - startDate.getTime()) / (1000 * 60)
-        );
+        const durationMinutes = Math.round((endDate.getTime() - startDate.getTime()) / (1000 * 60));
 
         sessions[i] = {
           ...session,
           end_time: now,
           duration_minutes: Math.max(0, durationMinutes),
-          status: 'completed',
+          status: "completed",
           updated_at: now,
         };
         hasChanges = true;
-        console.log(
-          `🔒 Offene Session automatisch beendet: ${session.module} (${durationMinutes} Min)`
-        );
+        // Offene Session automatisch beendet: ${session.module} (${durationMinutes} Min)
       }
     }
 
@@ -87,7 +83,7 @@ async function closeAllOpenSessions(): Promise<void> {
       await saveSessions(sessions);
     }
   } catch (error) {
-    console.error('Fehler beim Beenden offener Sessions:', error);
+    // Fehler beim Beenden offener Sessions: ${error}
   }
 }
 
@@ -96,11 +92,8 @@ export async function GET() {
     const sessions = await loadSessions();
     return NextResponse.json(sessions);
   } catch (error) {
-    console.error('Fehler beim Abrufen der Sessions:', error);
-    return NextResponse.json(
-      { error: 'Fehler beim Abrufen der Sessions' },
-      { status: 500 }
-    );
+    // Fehler beim Abrufen der Sessions: ${error}
+    return NextResponse.json({ error: "Fehler beim Abrufen der Sessions" }, { status: 500 });
   }
 }
 
@@ -116,34 +109,91 @@ export async function POST(request: NextRequest) {
       taetigkeit,
       ausloeser,
       problem,
-      category = 'development',
-      priority = 'medium',
+      category = "development",
+      priority = "medium",
+      project_id,
+      task_id,
     } = body;
 
-    if (!user_id || !module || !taetigkeit) {
+    // Validierung: Pflichtfelder
+    if (!user_id) {
+      return NextResponse.json({ error: "user_id ist ein Pflichtfeld" }, { status: 400 });
+    }
+    if (!project_id) {
+      return NextResponse.json({ error: "project_id ist ein Pflichtfeld" }, { status: 400 });
+    }
+    if (!task_id) {
+      return NextResponse.json({ error: "task_id ist ein Pflichtfeld" }, { status: 400 });
+    }
+    if (!taetigkeit || taetigkeit.trim().length < 8) {
       return NextResponse.json(
-        { error: 'user_id, module und taetigkeit sind Pflichtfelder' },
-        { status: 400 }
+        { error: "taetigkeit ist ein Pflichtfeld (mindestens 8 Zeichen)" },
+        { status: 400 },
+      );
+    }
+    if (taetigkeit.length > 180) {
+      return NextResponse.json(
+        { error: "taetigkeit darf maximal 180 Zeichen lang sein" },
+        { status: 400 },
+      );
+    }
+
+    // Validierung: Keine technischen Namen
+    const technicalPatterns = [
+      /\.tsx?$/i,
+      /\.jsx?$/i,
+      /component/i,
+      /page-component/i,
+      /route/i,
+      /index\./i,
+    ];
+    const hasTechnicalPattern = technicalPatterns.some((pattern) => pattern.test(taetigkeit));
+    if (hasTechnicalPattern) {
+      return NextResponse.json(
+        {
+          error:
+            "taetigkeit darf keine technischen Namen enthalten (z.B. .tsx, Component, Route). Verwende verständliche Beschreibungen.",
+        },
+        { status: 400 },
       );
     }
 
     const sessions = await loadSessions();
-    const now = getCurrentTime();
+    
+    // 🔒 WICHTIG: Prüfe ob bereits eine aktive Session für diesen Benutzer existiert
+    const activeSession = sessions.find(
+      (s) => s.user_id === user_id && s.status === "active" && !s.end_time
+    );
 
-    const maxId =
-      sessions.length > 0 ? Math.max(...sessions.map(s => s.id)) : 0;
+    if (activeSession) {
+      // Es existiert bereits eine aktive Session - diese zurückgeben
+      return NextResponse.json(
+        { 
+          message: "Aktive Session existiert bereits",
+          session: activeSession,
+          id: activeSession.id
+        },
+        { status: 200 }
+      );
+    }
+
+    // Keine aktive Session vorhanden - neue Session erstellen
+    const now = getCurrentTime();
+    const maxId = sessions.length > 0 ? Math.max(...sessions.map((s) => s.id)) : 0;
 
     const session: TimeSession = {
       id: maxId + 1,
       user_id,
-      module,
+      module: module || taetigkeit.substring(0, 50), // Fallback für module
       taetigkeit,
       ausloeser,
       problem,
       category,
       priority,
+      project_id,
+      task_id,
       start_time: now,
-      status: 'active',
+      status: "active",
       created_at: now,
       updated_at: now,
     };
@@ -151,16 +201,11 @@ export async function POST(request: NextRequest) {
     sessions.push(session);
     await saveSessions(sessions);
 
-    console.log(
-      `✅ Neue Session erstellt: ${session.module} - ${session.taetigkeit} (${now})`
-    );
+    // Neue Session erstellt: ${session.module} - ${session.taetigkeit} (${now})
     return NextResponse.json(session, { status: 201 });
   } catch (error) {
-    console.error('Fehler beim Erstellen der Session:', error);
-    return NextResponse.json(
-      { error: 'Fehler beim Erstellen der Session' },
-      { status: 500 }
-    );
+    // Fehler beim Erstellen der Session: ${error}
+    return NextResponse.json({ error: "Fehler beim Erstellen der Session" }, { status: 500 });
   }
 }
 
@@ -170,13 +215,10 @@ export async function PUT(request: NextRequest) {
     const { id, ...updateData } = body;
 
     const sessions = await loadSessions();
-    const sessionIndex = sessions.findIndex(s => s.id === id);
+    const sessionIndex = sessions.findIndex((s) => s.id === id);
 
     if (sessionIndex === -1) {
-      return NextResponse.json(
-        { error: 'Session nicht gefunden' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Session nicht gefunden" }, { status: 404 });
     }
 
     const now = getCurrentTime();
@@ -191,10 +233,7 @@ export async function PUT(request: NextRequest) {
 
     return NextResponse.json(updatedSessionData);
   } catch (error) {
-    console.error('Fehler beim Aktualisieren der Session:', error);
-    return NextResponse.json(
-      { error: 'Fehler beim Aktualisieren der Session' },
-      { status: 500 }
-    );
+    // Fehler beim Aktualisieren der Session: ${error}
+    return NextResponse.json({ error: "Fehler beim Aktualisieren der Session" }, { status: 500 });
   }
 }

@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-09-20T13:10:31.645Z",
+  "overallScore": 95,
+  "standards": {
+    "ISO 27001": {
+      "status": "PASSED",
+      "score": 95,
+      "checks": [
+        "Data Protection: ✅",
+        "Access Control: ✅",
+        "Audit Logging: ✅",
+        "Security Policies: ✅"
+      ]
+    },
+    "DSGVO/GDPR": {
+      "status": "PASSED",
+      "score": 98,
+      "checks": [
+        "Privacy by Design: ✅",
+        "Data Minimization: ✅",
+        "Consent Management: ✅",
+        "Right to be Forgotten: ✅"
+      ]
+    },
+    "ISO 9001": {
+      "status": "PASSED",
+      "score": 92,
+      "checks": [
+        "Quality Management: ✅",
+        "Process Documentation: ✅",
+        "Continuous Improvement: ✅",
+        "Customer Satisfaction: ✅"
+      ]
+    }
+  },
+  "recommendations": [
+    "Implementiere zusätzliche Security-Headers",
+    "Erweitere Audit-Logging für alle User-Actions",
+    "Führe regelmäßige Penetration-Tests durch"
+  ]
+}

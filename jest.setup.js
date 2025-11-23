@@ -1,58 +1,19 @@
-import '@testing-library/jest-dom';
-import { configure } from '@testing-library/react';
+// =====================================================
+// JEST SETUP - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-09-20
+// Zweck: Enterprise++ Test Setup
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
 
-// Erhöhe den Timeout für Tests
-configure({ asyncUtilTimeout: 5000 });
-
-// Mocks für window.matchMedia, ResizeObserver, IntersectionObserver
-window.matchMedia =
-  window.matchMedia ||
-  function () {
-    return {
-      matches: false,
-      addListener: function () {},
-      removeListener: function () {},
-    };
-  };
-
-global.ResizeObserver =
-  global.ResizeObserver ||
-  class {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  };
-
-global.IntersectionObserver =
-  global.IntersectionObserver ||
-  class {
-    observe() {}
-    unobserve() {}
-    disconnect() {}
-  };
-
-configure({
-  testIdAttribute: 'data-testid',
-});
-
-// Mock für unseren I18nProvider
-jest.mock('./src/components/Features/I18nProvider', () => ({
-  useI18n: () => ({
-    language: 'de',
-    setLanguage: jest.fn(),
-    t: key => key,
-  }),
-  I18nProvider: ({ children }) => children,
-}));
-
-// Mock next/router
-jest.mock('next/router', () => ({
+// Mock Next.js router
+jest.mock("next/router", () => ({
   useRouter() {
     return {
-      route: '/',
-      pathname: '/',
+      route: "/",
+      pathname: "/",
       query: {},
-      asPath: '/',
+      asPath: "/",
       push: jest.fn(),
       pop: jest.fn(),
       reload: jest.fn(),
@@ -64,13 +25,12 @@ jest.mock('next/router', () => ({
         off: jest.fn(),
         emit: jest.fn(),
       },
-      isFallback: false,
     };
   },
 }));
 
-// Mock next/navigation
-jest.mock('next/navigation', () => ({
+// Mock Next.js navigation
+jest.mock("next/navigation", () => ({
   useRouter() {
     return {
       push: jest.fn(),
@@ -85,9 +45,13 @@ jest.mock('next/navigation', () => ({
     return new URLSearchParams();
   },
   usePathname() {
-    return '/';
+    return "/";
   },
 }));
+
+// Mock environment variables
+process.env.NODE_ENV = "test";
+process.env.NEXT_PUBLIC_APP_URL = "http://localhost:3000";
 
 // Global test utilities
 global.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -96,17 +60,52 @@ global.ResizeObserver = jest.fn().mockImplementation(() => ({
   disconnect: jest.fn(),
 }));
 
-// Mock window.matchMedia
-Object.defineProperty(window, 'matchMedia', {
+// Mock IntersectionObserver
+global.IntersectionObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));
+
+// Mock matchMedia
+Object.defineProperty(window, "matchMedia", {
   writable: true,
-  value: jest.fn().mockImplementation(query => ({
+  value: jest.fn().mockImplementation((query) => ({
     matches: false,
     media: query,
     onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
+    addListener: jest.fn(),
+    removeListener: jest.fn(),
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn(),
   })),
+});
+
+// Mock console methods for cleaner test output
+const originalConsoleError = console.error;
+const originalConsoleWarn = console.warn;
+
+beforeAll(() => {
+  console.error = (...args) => {
+    if (
+      typeof args[0] === "string" &&
+      args[0].includes("Warning: ReactDOM.render is no longer supported")
+    ) {
+      return;
+    }
+    originalConsoleError.call(console, ...args);
+  };
+
+  console.warn = (...args) => {
+    if (typeof args[0] === "string" && args[0].includes("componentWillReceiveProps")) {
+      return;
+    }
+    originalConsoleWarn.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalConsoleError;
+  console.warn = originalConsoleWarn;
 });

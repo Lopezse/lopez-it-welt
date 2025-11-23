@@ -1,16 +1,16 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class AutoFixer {
   constructor() {
     this.validationReport = JSON.parse(
-      fs.readFileSync('implementation-validation-report.json', 'utf8')
+      fs.readFileSync("implementation-validation-report.json", "utf8"),
     );
   }
 
   async fixAll() {
-    console.log('🔧 Starte automatische Korrekturen...');
+    console.log("🔧 Starte automatische Korrekturen...");
 
     const missingImplementations = this.getMissingImplementations();
 
@@ -19,66 +19,64 @@ class AutoFixer {
       await this.fixImplementation(missing);
     }
 
-    console.log('\n✅ Automatische Korrekturen abgeschlossen');
+    console.log("\n✅ Automatische Korrekturen abgeschlossen");
   }
 
   getMissingImplementations() {
     const missing = [];
-    Object.entries(this.validationReport.status).forEach(
-      ([category, checks]) => {
-        Object.entries(checks).forEach(([check, status]) => {
-          if (!status) {
-            missing.push(`${category}.${check}`);
-          }
-        });
-      }
-    );
+    Object.entries(this.validationReport.status).forEach(([category, checks]) => {
+      Object.entries(checks).forEach(([check, status]) => {
+        if (!status) {
+          missing.push(`${category}.${check}`);
+        }
+      });
+    });
     return missing;
   }
 
   async fixImplementation(missing) {
-    const [category, check] = missing.split('.');
+    const [category, check] = missing.split(".");
 
     switch (missing) {
-      case 'code.testCoverage':
+      case "code.testCoverage":
         await this.fixTestCoverage();
         break;
-      case 'code.typeCoverage':
+      case "code.typeCoverage":
         await this.fixTypeCoverage();
         break;
-      case 'code.linting':
+      case "code.linting":
         await this.fixLinting();
         break;
-      case 'performance.lighthouse':
+      case "performance.lighthouse":
         await this.fixLighthouse();
         break;
-      case 'performance.bundleSize':
+      case "performance.bundleSize":
         await this.fixBundleSize();
         break;
-      case 'security.vulnerabilities':
+      case "security.vulnerabilities":
         await this.fixVulnerabilities();
         break;
-      case 'security.encryption':
+      case "security.encryption":
         await this.fixEncryption();
         break;
-      case 'accessibility.wcag':
+      case "accessibility.wcag":
         await this.fixWCAG();
         break;
-      case 'accessibility.screenReader':
+      case "accessibility.screenReader":
         await this.fixScreenReader();
         break;
-      case 'documentation.README.md':
-      case 'documentation.CHANGELOG.md':
-      case 'documentation.START.md':
-      case 'documentation.FEEDBACK.md':
-      case 'documentation.CORRECTION.md':
-      case 'documentation.PROJECT.md':
+      case "documentation.README.md":
+      case "documentation.CHANGELOG.md":
+      case "documentation.START.md":
+      case "documentation.FEEDBACK.md":
+      case "documentation.CORRECTION.md":
+      case "documentation.PROJECT.md":
         await this.fixDocumentation(check);
         break;
-      case 'workflow.hooks':
+      case "workflow.hooks":
         await this.fixGitHooks();
         break;
-      case 'workflow.ci':
+      case "workflow.ci":
         await this.fixCI();
         break;
       default:
@@ -87,47 +85,47 @@ class AutoFixer {
   }
 
   async fixTestCoverage() {
-    console.log('📝 Füge fehlende Tests hinzu...');
+    console.log("📝 Füge fehlende Tests hinzu...");
     // Implementierung der Test-Generierung
   }
 
   async fixTypeCoverage() {
-    console.log('📊 Füge fehlende Typen hinzu...');
+    console.log("📊 Füge fehlende Typen hinzu...");
     // Implementierung der Typ-Korrektur
   }
 
   async fixLinting() {
-    console.log('🔍 Korrigiere Linting-Fehler...');
-    execSync('npm run lint -- --fix');
+    console.log("🔍 Korrigiere Linting-Fehler...");
+    execSync("npm run lint -- --fix");
   }
 
   async fixLighthouse() {
-    console.log('⚡ Optimiere Performance...');
+    console.log("⚡ Optimiere Performance...");
     // Implementierung der Performance-Optimierung
   }
 
   async fixBundleSize() {
-    console.log('📦 Optimiere Bundle-Größe...');
+    console.log("📦 Optimiere Bundle-Größe...");
     // Implementierung der Bundle-Optimierung
   }
 
   async fixVulnerabilities() {
-    console.log('🔒 Behebe Sicherheitslücken...');
-    execSync('npm audit fix --force');
+    console.log("🔒 Behebe Sicherheitslücken...");
+    execSync("npm audit fix --force");
   }
 
   async fixEncryption() {
-    console.log('🔐 Konfiguriere SSL/TLS...');
+    console.log("🔐 Konfiguriere SSL/TLS...");
     // Implementierung der SSL/TLS-Konfiguration
   }
 
   async fixWCAG() {
-    console.log('♿ Verbessere Barrierefreiheit...');
+    console.log("♿ Verbessere Barrierefreiheit...");
     // Implementierung der WCAG-Korrekturen
   }
 
   async fixScreenReader() {
-    console.log('👁️ Verbessere Screen Reader Unterstützung...');
+    console.log("👁️ Verbessere Screen Reader Unterstützung...");
     // Implementierung der Screen Reader Optimierungen
   }
 
@@ -139,7 +137,7 @@ class AutoFixer {
 
   getDocumentationTemplate(docName) {
     const templates = {
-      'README.md': `# Projekt-Name
+      "README.md": `# Projekt-Name
 
 ## Beschreibung
 [Projektbeschreibung hier einfügen]
@@ -155,17 +153,17 @@ npm install
 ## Lizenz
 MIT
 `,
-      'CHANGELOG.md': `# Changelog
+      "CHANGELOG.md": `# Changelog
 
 ## [Unreleased]
 ### Added
 - Initiale Version
 
-## [0.1.0] - ${new Date().toISOString().split('T')[0]}
+## [0.1.0] - ${new Date().toISOString().split("T")[0]}
 ### Added
 - Erste Release
 `,
-      'START.md': `# Projekt-Start
+      "START.md": `# Projekt-Start
 
 ## Voraussetzungen
 - Node.js >= 14
@@ -179,7 +177,7 @@ MIT
 ## Entwicklung
 [Entwicklungsanleitung hier einfügen]
 `,
-      'FEEDBACK.md': `# Feedback
+      "FEEDBACK.md": `# Feedback
 
 ## Feedback-Prozess
 1. Issue erstellen
@@ -190,7 +188,7 @@ MIT
 ## Feedback-Formular
 [Feedback-Formular hier einfügen]
 `,
-      'CORRECTION.md': `# Korrekturen
+      "CORRECTION.md": `# Korrekturen
 
 ## Korrektur-Prozess
 1. Problem identifizieren
@@ -201,7 +199,7 @@ MIT
 ## Bekannte Probleme
 - Keine bekannten Probleme
 `,
-      'PROJECT.md': `# Projekt-Dokumentation
+      "PROJECT.md": `# Projekt-Dokumentation
 
 ## Projekt-Struktur
 [Projektstruktur hier einfügen]
@@ -215,19 +213,19 @@ MIT
 - Tailwind CSS
 `,
     };
-    return templates[docName] || '# Dokumentation\n\n[Inhalt hier einfügen]';
+    return templates[docName] || "# Dokumentation\n\n[Inhalt hier einfügen]";
   }
 
   async fixGitHooks() {
-    console.log('🔧 Konfiguriere Git Hooks...');
-    execSync('npx husky install');
+    console.log("🔧 Konfiguriere Git Hooks...");
+    execSync("npx husky install");
     execSync('npx husky add .husky/pre-commit "npm run precommit"');
     execSync('npx husky add .husky/pre-push "npm run test"');
   }
 
   async fixCI() {
-    console.log('🔄 Konfiguriere CI/CD...');
-    const ciDir = '.github/workflows';
+    console.log("🔄 Konfiguriere CI/CD...");
+    const ciDir = ".github/workflows";
     if (!fs.existsSync(ciDir)) {
       fs.mkdirSync(ciDir, { recursive: true });
     }
@@ -256,7 +254,7 @@ jobs:
     - run: npm run validate-implementation
 `;
 
-    fs.writeFileSync(path.join(ciDir, 'ci.yml'), ciConfig);
+    fs.writeFileSync(path.join(ciDir, "ci.yml"), ciConfig);
   }
 }
 

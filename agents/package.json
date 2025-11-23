@@ -1,0 +1,28 @@
+{
+  "name": "lopez-it-welt-agents",
+  "version": "1.0.0",
+  "description": "KI-Agenten-System für Lopez IT Welt",
+  "main": "index.js",
+  "scripts": {
+    "styleguard": "ts-node styleguard/index.ts",
+    "security-audit": "python security-audit/run.py",
+    "deploy-buddy": "ts-node deploy-buddy/checker.ts",
+    "monitoring": "ts-node monitoring-waecher/watcher.ts",
+    "compliance": "ts-node compliance-checker/checker.ts",
+    "ai-test": "ts-node ai-test-agent/generator.ts",
+    "snapshot": "ts-node snapshot-archivierung/archiver.ts",
+    "test": "jest",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0"
+  }
+}

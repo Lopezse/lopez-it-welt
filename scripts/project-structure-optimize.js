@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class ProjectStructureOptimizer {
   constructor() {
@@ -33,7 +33,7 @@ class ProjectStructureOptimizer {
   }
 
   async optimize() {
-    console.log('📁 Starte Project Structure Optimierung...');
+    console.log("📁 Starte Project Structure Optimierung...");
 
     await Promise.all([
       this.optimizeFolderStructure(),
@@ -46,7 +46,7 @@ class ProjectStructureOptimizer {
   }
 
   async optimizeFolderStructure() {
-    console.log('\n📂 Optimiere Ordnerstruktur...');
+    console.log("\n📂 Optimiere Ordnerstruktur...");
 
     // Entferne doppelte Ordner
     const rootDir = process.cwd();
@@ -54,14 +54,13 @@ class ProjectStructureOptimizer {
 
     // Finde und entferne doppelte Ordner
     const duplicateFolders = folders.filter(
-      folder =>
-        folder.includes('lopez-it-welt') &&
-        fs.statSync(path.join(rootDir, folder)).isDirectory()
+      (folder) =>
+        folder.includes("lopez-it-welt") && fs.statSync(path.join(rootDir, folder)).isDirectory(),
     );
 
     if (duplicateFolders.length > 1) {
-      console.log('🔄 Entferne doppelte Ordner...');
-      duplicateFolders.slice(1).forEach(folder => {
+      console.log("🔄 Entferne doppelte Ordner...");
+      duplicateFolders.slice(1).forEach((folder) => {
         fs.rmSync(path.join(rootDir, folder), { recursive: true, force: true });
       });
     }
@@ -86,11 +85,11 @@ build/
 .DS_Store
 Thumbs.db
 `;
-    fs.writeFileSync('.gitignore', gitignoreContent);
+    fs.writeFileSync(".gitignore", gitignoreContent);
   }
 
   async optimizeDocumentation() {
-    console.log('\n📚 Optimiere Dokumentation...');
+    console.log("\n📚 Optimiere Dokumentation...");
 
     // Erstelle mkdocs.yml
     const mkdocsConfig = `
@@ -125,15 +124,15 @@ markdown_extensions:
   - admonition
   - footnotes
 `;
-    fs.writeFileSync('mkdocs.yml', mkdocsConfig);
+    fs.writeFileSync("mkdocs.yml", mkdocsConfig);
 
     // Konsolidiere Markdown-Dateien
-    const docsDir = path.join(process.cwd(), 'docs');
+    const docsDir = path.join(process.cwd(), "docs");
     if (fs.existsSync(docsDir)) {
-      const enterpriseDir = path.join(docsDir, 'enterprise');
+      const enterpriseDir = path.join(docsDir, "enterprise");
       if (fs.existsSync(enterpriseDir)) {
         // Entferne redundante Dateien
-        ['CORRECTION.md', 'PROJECT.md'].forEach(file => {
+        ["CORRECTION.md", "PROJECT.md"].forEach((file) => {
           const filePath = path.join(enterpriseDir, file);
           if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
@@ -144,7 +143,7 @@ markdown_extensions:
   }
 
   async enhanceTesting() {
-    console.log('\n🧪 Verbessere Tests...');
+    console.log("\n🧪 Verbessere Tests...");
 
     // Erweitere Cypress Tests
     const cypressTestContent = `
@@ -181,15 +180,15 @@ describe('Home Page', () => {
   });
 });
 `;
-    fs.writeFileSync('cypress/e2e/home.cy.ts', cypressTestContent);
+    fs.writeFileSync("cypress/e2e/home.cy.ts", cypressTestContent);
   }
 
   async organizeAssets() {
-    console.log('\n🎨 Organisiere Assets...');
+    console.log("\n🎨 Organisiere Assets...");
 
     // Erstelle Asset-Struktur
-    const assetsDir = path.join(process.cwd(), 'assets');
-    const logoDir = path.join(assetsDir, 'logo');
+    const assetsDir = path.join(process.cwd(), "assets");
+    const logoDir = path.join(assetsDir, "logo");
 
     if (!fs.existsSync(logoDir)) {
       fs.mkdirSync(logoDir, { recursive: true });
@@ -202,7 +201,7 @@ describe('Home Page', () => {
   <text x="100" y="120" font-family="Arial" font-size="40" fill="white" text-anchor="middle">LIT</text>
 </svg>
 `;
-    fs.writeFileSync(path.join(logoDir, 'logo.svg'), logoSvg);
+    fs.writeFileSync(path.join(logoDir, "logo.svg"), logoSvg);
 
     // Erstelle Dark Mode Variante
     const darkLogoSvg = `
@@ -211,7 +210,7 @@ describe('Home Page', () => {
   <text x="100" y="120" font-family="Arial" font-size="40" fill="#ECF0F1" text-anchor="middle">LIT</text>
 </svg>
 `;
-    fs.writeFileSync(path.join(logoDir, 'logo-dark.svg'), darkLogoSvg);
+    fs.writeFileSync(path.join(logoDir, "logo-dark.svg"), darkLogoSvg);
 
     // Erstelle Favicon
     const faviconSvg = `
@@ -220,49 +219,46 @@ describe('Home Page', () => {
   <text x="16" y="22" font-family="Arial" font-size="16" fill="white" text-anchor="middle">L</text>
 </svg>
 `;
-    fs.writeFileSync(path.join(logoDir, 'favicon.svg'), faviconSvg);
+    fs.writeFileSync(path.join(logoDir, "favicon.svg"), faviconSvg);
   }
 
   generateReport() {
-    console.log('\n📊 PROJEKT-STRUKTUR OPTIMIERUNGSBERICHT');
-    console.log('=====================================');
-    console.log('\n📂 ORDNERSTRUKTUR:');
-    console.log('- Doppelte Ordner entfernt');
-    console.log('- .gitignore für node_modules erstellt');
-    console.log('- Asset-Struktur optimiert');
+    console.log("\n📊 PROJEKT-STRUKTUR OPTIMIERUNGSBERICHT");
+    console.log("=====================================");
+    console.log("\n📂 ORDNERSTRUKTUR:");
+    console.log("- Doppelte Ordner entfernt");
+    console.log("- .gitignore für node_modules erstellt");
+    console.log("- Asset-Struktur optimiert");
 
-    console.log('\n📚 DOKUMENTATION:');
-    console.log('- MkDocs Konfiguration erstellt');
-    console.log('- Redundante Markdown-Dateien entfernt');
-    console.log('- Dokumentation konsolidiert');
+    console.log("\n📚 DOKUMENTATION:");
+    console.log("- MkDocs Konfiguration erstellt");
+    console.log("- Redundante Markdown-Dateien entfernt");
+    console.log("- Dokumentation konsolidiert");
 
-    console.log('\n🧪 TESTS:');
-    console.log('- Cypress Tests erweitert');
-    console.log('- Responsive Design Tests hinzugefügt');
-    console.log('- Dark Mode Tests implementiert');
+    console.log("\n🧪 TESTS:");
+    console.log("- Cypress Tests erweitert");
+    console.log("- Responsive Design Tests hinzugefügt");
+    console.log("- Dark Mode Tests implementiert");
 
-    console.log('\n🎨 ASSETS:');
-    console.log('- Logo SVGs erstellt');
-    console.log('- Dark Mode Varianten hinzugefügt');
-    console.log('- Favicon generiert');
+    console.log("\n🎨 ASSETS:");
+    console.log("- Logo SVGs erstellt");
+    console.log("- Dark Mode Varianten hinzugefügt");
+    console.log("- Favicon generiert");
 
-    console.log('\n✅ ABSCHLUSS:');
-    console.log('Projektstruktur erfolgreich optimiert');
-    console.log('Dokumentation verbessert');
-    console.log('Tests erweitert');
-    console.log('Assets organisiert');
+    console.log("\n✅ ABSCHLUSS:");
+    console.log("Projektstruktur erfolgreich optimiert");
+    console.log("Dokumentation verbessert");
+    console.log("Tests erweitert");
+    console.log("Assets organisiert");
 
     // Speichere Optimierungs-Report
     const report = {
       timestamp: new Date().toISOString(),
       config: this.config,
-      status: 'success',
+      status: "success",
     };
 
-    fs.writeFileSync(
-      'project-structure-optimization-report.json',
-      JSON.stringify(report, null, 2)
-    );
+    fs.writeFileSync("project-structure-optimization-report.json", JSON.stringify(report, null, 2));
   }
 }
 

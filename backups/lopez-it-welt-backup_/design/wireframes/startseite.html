@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wireframe – Startseite | Lopez IT Welt</title>
+    <style>
+      body {
+        font-family: Inter, Arial, sans-serif;
+        background: #f0f0f0;
+        color: #222;
+        margin: 0;
+      }
+      header,
+      main,
+      footer {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .hero {
+        background: #0055a4;
+        color: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        text-align: center;
+      }
+      .usp,
+      .leistungen,
+      .news,
+      .cta {
+        margin: 2rem 0;
+      }
+      .leistungen ul,
+      .news ul {
+        display: flex;
+        gap: 1rem;
+        list-style: none;
+        padding: 0;
+      }
+      .leistungen li,
+      .news li {
+        background: #fff;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        flex: 1;
+      }
+      .cta button {
+        background: #f5a623;
+        color: #222;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 2rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+      .cta button:focus {
+        outline: 2px solid #0055a4;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero" role="banner">
+      <h1>Lopez IT Welt</h1>
+      <p>
+        Ihr digitales Schaufenster für IT-Services, Cloud & digitale Produkte
+      </p>
+    </header>
+    <main>
+      <section class="usp" aria-labelledby="usp-title">
+        <h2 id="usp-title">Unsere Stärken</h2>
+        <ul>
+          <li>Managed IT-Services</li>
+          <li>Cloud-Beratung</li>
+          <li>SaaS-Dashboard</li>
+          <li>Shop für digitale Produkte</li>
+        </ul>
+      </section>
+      <section class="leistungen" aria-labelledby="leistungen-title">
+        <h2 id="leistungen-title">Leistungen</h2>
+        <ul>
+          <li>IT-Support</li>
+          <li>Cloud-Migration</li>
+          <li>Security</li>
+          <li>Webinare</li>
+        </ul>
+      </section>
+      <section class="news" aria-labelledby="news-title">
+        <h2 id="news-title">Aktuelles</h2>
+        <ul>
+          <li>Neues Whitepaper verfügbar</li>
+          <li>Webinar: IT-Security 2024</li>
+          <li>Cloud-Consulting jetzt buchen</li>
+        </ul>
+      </section>
+      <section class="cta" aria-label="Call to Action">
+        <button>Jetzt Kontakt aufnehmen</button>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2024 Lopez IT Welt</p>
+    </footer>
+  </body>
+</html>

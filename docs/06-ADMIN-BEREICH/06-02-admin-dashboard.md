@@ -12,6 +12,7 @@ Das **Admin-Dashboard** ist das zentrale Kontrollzentrum für alle Administrator
 ## 🎯 **DASHBOARD-FEATURES**
 
 ### **Haupt-Dashboard**
+
 ```typescript
 // Dashboard-Komponenten
 interface DashboardMetrics {
@@ -20,24 +21,24 @@ interface DashboardMetrics {
   activeUsers: number;
   newUsersToday: number;
   userGrowthRate: number;
-  
+
   // Chat-Metriken
   totalSessions: number;
   activeSessions: number;
   messagesToday: number;
   averageSessionDuration: number;
-  
+
   // KI-Agenten-Metriken
   totalAgents: number;
   activeAgents: number;
   agentUsage: AgentUsage[];
-  
+
   // System-Metriken
-  systemHealth: 'healthy' | 'warning' | 'critical';
+  systemHealth: "healthy" | "warning" | "critical";
   cpuUsage: number;
   memoryUsage: number;
   diskUsage: number;
-  
+
   // Performance-Metriken
   averageResponseTime: number;
   errorRate: number;
@@ -46,22 +47,23 @@ interface DashboardMetrics {
 ```
 
 ### **Real-Time Monitoring**
+
 ```typescript
 // Live-Monitoring-Komponente
 interface LiveMetrics {
   // Aktive Benutzer
   currentActiveUsers: number;
   userSessions: UserSession[];
-  
+
   // Chat-Aktivität
   recentMessages: ChatMessage[];
   activeChats: ChatSession[];
-  
+
   // System-Performance
   serverMetrics: ServerMetrics;
   databaseMetrics: DatabaseMetrics;
   redisMetrics: RedisMetrics;
-  
+
   // Fehler-Monitoring
   recentErrors: SystemError[];
   errorTrends: ErrorTrend[];
@@ -71,6 +73,7 @@ interface LiveMetrics {
 ## 📊 **METRIKEN & ANALYTICS**
 
 ### **Benutzer-Analytics**
+
 ```typescript
 // Benutzer-Statistiken
 interface UserAnalytics {
@@ -81,7 +84,7 @@ interface UserAnalytics {
     devices: Device[];
     browsers: Browser[];
   };
-  
+
   // Verhaltens-Analyse
   userBehavior: {
     sessionDuration: number;
@@ -89,7 +92,7 @@ interface UserAnalytics {
     bounceRate: number;
     retentionRate: number;
   };
-  
+
   // Engagement-Metriken
   engagement: {
     dailyActiveUsers: number;
@@ -101,6 +104,7 @@ interface UserAnalytics {
 ```
 
 ### **Chat-Analytics**
+
 ```typescript
 // Chat-Performance-Analyse
 interface ChatAnalytics {
@@ -111,7 +115,7 @@ interface ChatAnalytics {
     completionRate: number;
     satisfactionScore: number;
   };
-  
+
   // Nachrichten-Analyse
   messageMetrics: {
     totalMessages: number;
@@ -119,7 +123,7 @@ interface ChatAnalytics {
     responseTime: number;
     messageTypes: MessageType[];
   };
-  
+
   // Agent-Performance
   agentPerformance: {
     agentId: string;
@@ -132,6 +136,7 @@ interface ChatAnalytics {
 ```
 
 ### **System-Performance**
+
 ```typescript
 // System-Monitoring
 interface SystemPerformance {
@@ -142,7 +147,7 @@ interface SystemPerformance {
     diskUsage: number;
     networkTraffic: NetworkTraffic;
   };
-  
+
   // Datenbank-Performance
   database: {
     connectionCount: number;
@@ -150,7 +155,7 @@ interface SystemPerformance {
     slowQueries: SlowQuery[];
     indexUsage: IndexUsage[];
   };
-  
+
   // Cache-Performance
   cache: {
     hitRate: number;
@@ -164,6 +169,7 @@ interface SystemPerformance {
 ## 🎛️ **ADMIN-FUNKTIONEN**
 
 ### **Benutzer-Management**
+
 ```typescript
 // Benutzer-Verwaltung
 interface UserManagement {
@@ -175,7 +181,7 @@ interface UserManagement {
     dateRange: DateRange;
     search: string;
   };
-  
+
   // Benutzer-Aktionen
   actions: {
     createUser: (userData: CreateUserData) => Promise<User>;
@@ -184,7 +190,7 @@ interface UserManagement {
     suspendUser: (userId: string, reason: string) => Promise<void>;
     activateUser: (userId: string) => Promise<void>;
   };
-  
+
   // Bulk-Operationen
   bulkActions: {
     exportUsers: (filters: UserFilters) => Promise<Blob>;
@@ -196,20 +202,21 @@ interface UserManagement {
 ```
 
 ### **KI-Agenten-Management**
+
 ```typescript
 // KI-Agenten-Verwaltung
 interface AgentManagement {
   // Agent-Liste
   agents: AIAgent[];
   agentTypes: AgentType[];
-  
+
   // Agent-Konfiguration
   agentConfig: {
     models: AIModel[];
     capabilities: AgentCapability[];
     settings: AgentSettings;
   };
-  
+
   // Agent-Aktionen
   actions: {
     createAgent: (agentData: CreateAgentData) => Promise<AIAgent>;
@@ -219,7 +226,7 @@ interface AgentManagement {
     deactivateAgent: (agentId: string) => Promise<void>;
     testAgent: (agentId: string, testData: TestData) => Promise<TestResult>;
   };
-  
+
   // Agent-Monitoring
   monitoring: {
     agentUsage: AgentUsage[];
@@ -230,6 +237,7 @@ interface AgentManagement {
 ```
 
 ### **System-Konfiguration**
+
 ```typescript
 // System-Einstellungen
 interface SystemConfiguration {
@@ -241,14 +249,14 @@ interface SystemConfiguration {
     registrationEnabled: boolean;
     emailVerificationRequired: boolean;
   };
-  
+
   // KI-Service-Konfiguration
   aiServices: {
     openai: OpenAIConfig;
     anthropic: AnthropicConfig;
     customModels: CustomModel[];
   };
-  
+
   // Sicherheits-Einstellungen
   security: {
     passwordPolicy: PasswordPolicy;
@@ -257,17 +265,17 @@ interface SystemConfiguration {
     twoFactorRequired: boolean;
     ipWhitelist: string[];
   };
-  
+
   // Email-Konfiguration
   email: {
     smtp: SMTPConfig;
     templates: EmailTemplate[];
     notifications: NotificationSettings;
   };
-  
+
   // Storage-Konfiguration
   storage: {
-    provider: 'local' | 's3' | 'gcs';
+    provider: "local" | "s3" | "gcs";
     config: StorageConfig;
     quotas: StorageQuota[];
   };
@@ -277,6 +285,7 @@ interface SystemConfiguration {
 ## 📈 **REPORTING & EXPORT**
 
 ### **Berichte generieren**
+
 ```typescript
 // Reporting-System
 interface ReportingSystem {
@@ -287,20 +296,21 @@ interface ReportingSystem {
     agentPerformance: (dateRange: DateRange) => Promise<AgentPerformanceReport>;
     systemHealth: (dateRange: DateRange) => Promise<SystemHealthReport>;
   };
-  
+
   // Custom-Berichte
   customReports: {
     createReport: (config: ReportConfig) => Promise<CustomReport>;
     scheduleReport: (config: ScheduledReport) => Promise<ScheduledReport>;
     exportReport: (reportId: string, format: ExportFormat) => Promise<Blob>;
   };
-  
+
   // Export-Formate
-  exportFormats: ['pdf', 'excel', 'csv', 'json'];
+  exportFormats: ["pdf", "excel", "csv", "json"];
 }
 ```
 
 ### **Data-Export**
+
 ```typescript
 // Daten-Export
 interface DataExport {
@@ -311,7 +321,7 @@ interface DataExport {
     messages: ExportConfig;
     analytics: ExportConfig;
   };
-  
+
   // Export-Aktionen
   actions: {
     exportData: (type: string, filters: ExportFilters) => Promise<Blob>;
@@ -324,6 +334,7 @@ interface DataExport {
 ## 🔧 **SYSTEM-TOOLS**
 
 ### **Database-Tools**
+
 ```typescript
 // Datenbank-Verwaltung
 interface DatabaseTools {
@@ -334,14 +345,14 @@ interface DatabaseTools {
     listBackups: () => Promise<Backup[]>;
     deleteBackup: (backupId: string) => Promise<void>;
   };
-  
+
   // Migration
   migration: {
     runMigrations: () => Promise<MigrationResult>;
     rollbackMigration: (version: string) => Promise<RollbackResult>;
     listMigrations: () => Promise<Migration[]>;
   };
-  
+
   // Query-Tools
   query: {
     executeQuery: (query: string) => Promise<QueryResult>;
@@ -352,6 +363,7 @@ interface DatabaseTools {
 ```
 
 ### **Cache-Management**
+
 ```typescript
 // Cache-Verwaltung
 interface CacheManagement {
@@ -363,7 +375,7 @@ interface CacheManagement {
     getCacheValue: (key: string) => Promise<any>;
     deleteCacheValue: (key: string) => Promise<void>;
   };
-  
+
   // Cache-Monitoring
   monitoring: {
     cacheHitRate: number;
@@ -375,6 +387,7 @@ interface CacheManagement {
 ```
 
 ### **Log-Management**
+
 ```typescript
 // Log-Verwaltung
 interface LogManagement {
@@ -384,7 +397,7 @@ interface LogManagement {
     downloadLogs: (filters: LogFilters) => Promise<Blob>;
     clearLogs: (olderThan: Date) => Promise<void>;
   };
-  
+
   // Log-Monitoring
   monitoring: {
     errorRate: number;
@@ -397,12 +410,13 @@ interface LogManagement {
 ## 🚨 **ALERTING & NOTIFICATIONS**
 
 ### **Alert-System**
+
 ```typescript
 // Alert-Konfiguration
 interface AlertSystem {
   // Alert-Regeln
   rules: AlertRule[];
-  
+
   // Alert-Aktionen
   actions: {
     createAlert: (rule: AlertRule) => Promise<Alert>;
@@ -410,13 +424,14 @@ interface AlertSystem {
     deleteAlert: (alertId: string) => Promise<void>;
     testAlert: (alertId: string) => Promise<TestResult>;
   };
-  
+
   // Alert-Historie
   history: AlertHistory[];
 }
 ```
 
 ### **Notification-System**
+
 ```typescript
 // Benachrichtigungen
 interface NotificationSystem {
@@ -427,7 +442,7 @@ interface NotificationSystem {
     webhook: WebhookNotification;
     sms: SMSNotification;
   };
-  
+
   // Notification-Aktionen
   actions: {
     sendNotification: (config: NotificationConfig) => Promise<void>;
@@ -440,19 +455,20 @@ interface NotificationSystem {
 ## 🔐 **SECURITY & AUDIT**
 
 ### **Security-Monitoring**
+
 ```typescript
 // Sicherheits-Überwachung
 interface SecurityMonitoring {
   // Security-Events
   events: SecurityEvent[];
-  
+
   // Threat-Detection
   threats: {
     suspiciousLogins: LoginAttempt[];
     failedAttempts: FailedAttempt[];
     unusualActivity: UnusualActivity[];
   };
-  
+
   // Security-Actions
   actions: {
     blockIP: (ip: string, reason: string) => Promise<void>;
@@ -463,12 +479,13 @@ interface SecurityMonitoring {
 ```
 
 ### **Audit-Trail**
+
 ```typescript
 // Audit-System
 interface AuditSystem {
   // Audit-Logs
   logs: AuditLog[];
-  
+
   // Audit-Filter
   filters: {
     user: string;
@@ -476,7 +493,7 @@ interface AuditSystem {
     resource: string;
     dateRange: DateRange;
   };
-  
+
   // Audit-Export
   export: {
     exportAuditLogs: (filters: AuditFilters) => Promise<Blob>;
@@ -488,6 +505,7 @@ interface AuditSystem {
 ## 📱 **RESPONSIVE DESIGN**
 
 ### **Mobile-Admin**
+
 ```typescript
 // Mobile-Admin-Features
 interface MobileAdmin {
@@ -497,7 +515,7 @@ interface MobileAdmin {
     mobileMetrics: MobileMetrics;
     touchGestures: TouchGesture[];
   };
-  
+
   // Mobile-Navigation
   navigation: {
     bottomTabs: Tab[];
@@ -510,6 +528,7 @@ interface MobileAdmin {
 ## 🎨 **UI/UX-FEATURES**
 
 ### **Dashboard-Layout**
+
 ```typescript
 // Dashboard-Komponenten
 interface DashboardLayout {
@@ -520,14 +539,14 @@ interface DashboardLayout {
     tables: TableWidget[];
     alerts: AlertWidget[];
   };
-  
+
   // Layout-Konfiguration
   layout: {
     grid: GridLayout;
     responsive: ResponsiveConfig;
     themes: Theme[];
   };
-  
+
   // Personalisierung
   customization: {
     userPreferences: UserPreferences;
@@ -538,6 +557,7 @@ interface DashboardLayout {
 ```
 
 ### **Theme-System**
+
 ```typescript
 // Theme-Konfiguration
 interface ThemeSystem {
@@ -547,7 +567,7 @@ interface ThemeSystem {
     dark: DarkTheme;
     highContrast: HighContrastTheme;
   };
-  
+
   // Theme-Konfiguration
   config: {
     primaryColor: string;
@@ -562,4 +582,4 @@ interface ThemeSystem {
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

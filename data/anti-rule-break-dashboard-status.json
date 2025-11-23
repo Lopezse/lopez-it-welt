@@ -1,0 +1,17 @@
+{
+  "antiRuleBreakActive": true,
+  "agentsActive": true,
+  "enterpriseRulesLoaded": true,
+  "monitoringActive": true,
+  "cursorIntegrationActive": true,
+  "startupTime": "2025-07-17T06:19:18.537Z",
+  "errorCount": 0,
+  "violationCount": 0,
+  "startupComplete": true,
+  "strictConsentMode": true,
+  "explicitConsentRequired": true,
+  "userConfirmationRequired": true,
+  "blockUnauthorizedActions": true,
+  "logAllActions": true,
+  "lastSaved": "2025-07-17T06:19:18.537Z"
+}

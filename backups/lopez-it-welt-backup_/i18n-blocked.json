@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-06-20T17:29:34.266Z",
+  "reason": "I18N_CRITICAL_VIOLATIONS",
+  "violations": [
+    {
+      "language": "de",
+      "type": "READ_ERROR",
+      "severity": "CRITICAL",
+      "message": "Fehler beim Lesen der Datei: Expected ',' or '}' after property value in JSON at position 14211 (line 287 column 235)"
+    },
+    {
+      "type": "MISSING_REFERENCE",
+      "severity": "CRITICAL",
+      "message": "Referenzsprache (Deutsch) nicht verfügbar"
+    }
+  ],
+  "action": "BLOCK_ALL_I18N_CHANGES"
+}

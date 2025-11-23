@@ -1,0 +1,162 @@
+{
+  "timestamp": "2025-07-14T04:49:50.624Z",
+  "summary": {
+    "security": 25,
+    "compliance": 100,
+    "vulnerabilities": 0,
+    "secrets": 0
+  },
+  "details": {
+    "security": {
+      "dependencies": {
+        "critical": 0,
+        "high": 0,
+        "moderate": 0,
+        "low": 0,
+        "total": 0,
+        "score": 100
+      },
+      "sast": {
+        "error": "spawnSync C:\\WINDOWS\\system32\\cmd.exe ENOBUFS"
+      },
+      "containers": {
+        "error": "Command failed: docker scan --json .\nDer Befehl \"docker\" ist entweder falsch geschrieben oder\r\nkonnte nicht gefunden werden.\r\n"
+      },
+      "network": {
+        "ports": {},
+        "ssl": {
+          "valid": true
+        },
+        "firewall": {
+          "active": true
+        }
+      }
+    },
+    "compliance": {
+      "dsgvo": {
+        "score": 100,
+        "checks": {
+          "dataMinimization": true,
+          "consentManagement": true,
+          "rightToErasure": true,
+          "dataPortability": true,
+          "privacyByDesign": true
+        },
+        "compliant": true
+      },
+      "iso27001": {
+        "score": 100,
+        "checks": {
+          "informationSecurityPolicy": true,
+          "riskAssessment": true,
+          "securityControls": true,
+          "incidentManagement": true,
+          "businessContinuity": true
+        },
+        "compliant": true
+      },
+      "gdpr": {
+        "score": 100,
+        "checks": {
+          "lawfulBasis": true,
+          "dataSubjectRights": true,
+          "dataProtection": true,
+          "breachNotification": true,
+          "dataTransfer": true
+        },
+        "compliant": true
+      },
+      "wcag21": {
+        "score": 100,
+        "checks": {
+          "perceivable": true,
+          "operable": true,
+          "understandable": true,
+          "robust": true
+        },
+        "compliant": true
+      }
+    },
+    "vulnerabilities": {
+      "npm": {
+        "vulnerabilities": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "total": 0
+      },
+      "snyk": {
+        "error": "Command failed: npx snyk test --json"
+      },
+      "zap": {
+        "error": "Command failed: zap-baseline.py -t http://localhost:3000\nDer Befehl \"zap-baseline.py\" ist entweder falsch geschrieben oder\r\nkonnte nicht gefunden werden.\r\n"
+      }
+    },
+    "secrets": {
+      "git": {
+        "error": "Command failed: git secrets --scan\ngit: 'secrets' is not a git command. See 'git --help'.\n"
+      },
+      "code": {
+        "found": 0,
+        "secrets": []
+      },
+      "environment": {
+        "found": 0,
+        "secrets": []
+      }
+    },
+    "performance": {
+      "security": {
+        "scanTime": 1752468590621,
+        "vulnerabilities": {
+          "npm": {
+            "vulnerabilities": {
+              "info": 0,
+              "low": 0,
+              "moderate": 0,
+              "high": 0,
+              "critical": 0,
+              "total": 0
+            },
+            "total": 0
+          },
+          "snyk": {
+            "error": "Command failed: npx snyk test --json"
+          },
+          "zap": {
+            "error": "Command failed: zap-baseline.py -t http://localhost:3000\nDer Befehl \"zap-baseline.py\" ist entweder falsch geschrieben oder\r\nkonnte nicht gefunden werden.\r\n"
+          }
+        },
+        "securityScore": 25,
+        "lastUpdate": "2025-07-14T04:49:50.621Z"
+      },
+      "compliance": {
+        "dsgvo": 100,
+        "iso27001": 100,
+        "gdpr": 100,
+        "wcag21": 100,
+        "overall": 100
+      },
+      "system": {
+        "uptime": 76.9660091,
+        "memory": {
+          "rss": 40755200,
+          "heapTotal": 7393280,
+          "heapUsed": 4894720,
+          "external": 1636882,
+          "arrayBuffers": 10515
+        },
+        "cpu": {
+          "user": 468000,
+          "system": 328000
+        },
+        "timestamp": "2025-07-14T04:49:50.623Z"
+      }
+    }
+  },
+  "recommendations": []
+}

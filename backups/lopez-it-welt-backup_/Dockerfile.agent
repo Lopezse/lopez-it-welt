@@ -1,0 +1,53 @@
+# =====================================================
+# Dockerfile für KI-Agenten Service
+# =====================================================
+# Erstellt: 2025-07-02
+# Zweck: Containerisierte Version des Agent-Services
+# =====================================================
+
+# ========== STAGE 1: Build ==========
+FROM node:18-alpine as builder
+
+# Arbeitsverzeichnis setzen
+WORKDIR /app
+
+# Package-Dateien kopieren
+COPY package*.json ./
+COPY tsconfig.json ./
+
+# Dependencies installieren
+RUN npm ci --only=production
+
+# Source-Code kopieren
+COPY src/ ./src/
+
+# TypeScript kompilieren
+RUN npm run build
+
+# ========== STAGE 2: Production ==========
+FROM node:18-alpine
+
+# Arbeitsverzeichnis setzen
+WORKDIR /app
+
+# Production Dependencies installieren
+COPY package*.json ./
+RUN npm ci --only=production && npm cache clean --force
+
+# Kompilierten Code kopieren
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/src/lib ./src/lib
+
+# Umgebungsvariablen setzen
+ENV NODE_ENV=production
+ENV AGENT_PORT=4001
+
+# Port exponieren
+EXPOSE 4001
+
+# Health Check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:4001/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
+
+# Service starten
+CMD ["node", "dist/agents/complianceAgentService.js"] 

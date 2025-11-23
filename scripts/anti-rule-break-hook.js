@@ -526,3 +526,22 @@ if (require.main === module) {
       console.log("  node anti-rule-break-hook.js validate <action> [file] - Validierung");
   }
 }
+
+      break;
+    case "post-commit":
+      postCommitHook();
+      break;
+    case "validate":
+      const action = process.argv[3] || "test";
+      const targetFile = process.argv[4];
+      const hook = new AntiRuleBreakHook();
+      hook.validateBeforeAction(action, targetFile);
+      break;
+    default:
+      console.log("🛡️ Anti-Regelbruch Enterprise++ Modul - Node.js Hook");
+      console.log("Verwendung:");
+      console.log("  node anti-rule-break-hook.js pre-commit    - Pre-Commit Hook");
+      console.log("  node anti-rule-break-hook.js post-commit   - Post-Commit Hook");
+      console.log("  node anti-rule-break-hook.js validate <action> [file] - Validierung");
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "timestamp": "2025-06-22T18:38:14.477Z",
+  "metrics": {
+    "code": {
+      "testCoverage": 0,
+      "typeCoverage": 85,
+      "lintErrors": 1,
+      "complexity": 87,
+      "duplication": 0,
+      "documentation": 100,
+      "codeQuality": 59,
+      "maintainability": 11
+    },
+    "performance": {
+      "responseTime": 264,
+      "memoryUsage": 37,
+      "cpuUsage": 6.281687543602697,
+      "bundleSize": 35403,
+      "loadTime": 960,
+      "firstPaint": 773,
+      "timeToInteractive": 935,
+      "lighthouseScore": 85
+    },
+    "security": {
+      "securityScore": 100,
+      "vulnerabilities": 1,
+      "compliance": 100,
+      "encryption": 100,
+      "authentication": 100,
+      "authorization": 100,
+      "auditScore": 90
+    },
+    "accessibility": {
+      "wcagLevel": "AAA",
+      "accessibilityScore": 100,
+      "screenReader": 100,
+      "keyboard": 100,
+      "colorContrast": 100,
+      "focusManagement": 100,
+      "ariaSupport": 100
+    },
+    "business": {
+      "userSatisfaction": 4.8,
+      "conversionRate": 0.08,
+      "uptime": 99.99,
+      "pageViews": 2398,
+      "uniqueVisitors": 238,
+      "bounceRate": 0.25,
+      "sessionDuration": 286,
+      "revenue": 28279
+    },
+    "system": {
+      "diskUsage": 71,
+      "networkLatency": 41,
+      "databaseConnections": 32,
+      "cacheHitRate": 86,
+      "apiResponseTime": 145,
+      "errorRate": 0.0021594799968736047,
+      "activeUsers": 97,
+      "systemHealth": 100
+    }
+  },
+  "alerts": [
+    {
+      "level": "warning",
+      "message": "Test Coverage: 0% (Empfohlen: 80%+)",
+      "timestamp": "2025-06-22T18:38:14.475Z",
+      "category": "code"
+    },
+    {
+      "level": "warning",
+      "message": "Code Quality: 63% (Ziel: 85%+)",
+      "timestamp": "2025-06-22T18:38:14.475Z",
+      "category": "code"
+    }
+  ],
+  "trends": [
+    {
+      "category": "code",
+      "metric": "testCoverage",
+      "trend": "increasing",
+      "value": 95,
+      "change": "+5%"
+    },
+    {
+      "category": "performance",
+      "metric": "responseTime",
+      "trend": "decreasing",
+      "value": 500,
+      "change": "-20%"
+    },
+    {
+      "category": "security",
+      "metric": "securityScore",
+      "trend": "stable",
+      "value": 96,
+      "change": "0%"
+    }
+  ],
+  "summary": {
+    "overallScore": 1259,
+    "codeQuality": {
+      "average": 43,
+      "status": "poor"
+    },
+    "performance": {
+      "average": 4808,
+      "status": "excellent"
+    },
+    "security": {
+      "average": 84,
+      "status": "good"
+    },
+    "accessibility": {
+      "average": 100,
+      "status": "excellent"
+    }
+  }
+}

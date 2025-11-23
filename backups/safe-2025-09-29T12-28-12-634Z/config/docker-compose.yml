@@ -1,0 +1,197 @@
+# 🐳 Lopez IT Welt - Docker Compose
+# Lokale Entwicklungsumgebung
+
+version: '3.8'
+
+services:
+  # 🚀 Hauptanwendung
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: lopez-it-welt-app
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=mysql://root:password@db:3306/lopez_it_welt
+      - REDIS_URL=redis://redis:6379
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - db
+      - redis
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/api/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 🗄️ Datenbank
+  db:
+    image: mysql:8.0
+    container_name: lopez-it-welt-db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: lopez_it_welt
+      MYSQL_USER: lopez
+      MYSQL_PASSWORD: lopez123
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 🔄 Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: lopez-it-welt-redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 📊 Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: lopez-it-welt-prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+
+  # 📈 Grafana Dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: lopez-it-welt-grafana
+    ports:
+      - '3001:3000'
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # 📝 Logging
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
+    container_name: lopez-it-welt-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+    ports:
+      - '9200:9200'
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - lopez-network
+    restart: unless-stopped
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.8.0
+    container_name: lopez-it-welt-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - '5601:5601'
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    depends_on:
+      - elasticsearch
+
+  # 🔍 Security Scanner
+  trivy:
+    image: aquasec/trivy:latest
+    container_name: lopez-it-welt-trivy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - lopez-network
+    profiles:
+      - security
+
+  # 🧪 Testing
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: lopez-it-welt-test
+    environment:
+      - NODE_ENV=test
+      - DATABASE_URL=mysql://root:password@db:3306/lopez_it_welt_test
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - lopez-network
+    depends_on:
+      - db
+    profiles:
+      - test
+    command: ['npm', 'run', 'test']
+
+# 📦 Volumes
+volumes:
+  db_data:
+    driver: local
+  redis_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+
+# 🌐 Networks
+networks:
+  lopez-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

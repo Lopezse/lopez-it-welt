@@ -20,7 +20,7 @@
 ### **1. Lizenz-Server (Zentral)**
 
 ```
-lopez-team.de/license-server/
+lopez-it-welt.de/license-server/
 ├── API-Endpoints
 ├── Lizenz-Datenbank
 ├── Validierungs-Logik
@@ -126,9 +126,8 @@ const validateLicense = async (domain: string, key: string) => {
     domain: domain,
   });
 
-  if (!license) return { valid: false, reason: 'INVALID_KEY' };
-  if (license.valid_until < new Date())
-    return { valid: false, reason: 'EXPIRED' };
+  if (!license) return { valid: false, reason: "INVALID_KEY" };
+  if (license.valid_until < new Date()) return { valid: false, reason: "EXPIRED" };
 
   return {
     valid: true,
@@ -155,9 +154,9 @@ export function useLicense() {
 
   const checkLicense = async () => {
     try {
-      const response = await fetch('/api/license/check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/license/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           domain: window.location.hostname,
           timestamp: Date.now(),
@@ -206,8 +205,8 @@ const ShopModule = () => {
 ```typescript
 // Unsichtbares Watermark bei Lizenz-Problemen
 const addWatermark = () => {
-  const watermark = document.createElement('div');
-  watermark.innerHTML = 'Lopez IT Welt - Lizenz erforderlich';
+  const watermark = document.createElement("div");
+  watermark.innerHTML = "Lopez IT Welt - Lizenz erforderlich";
   watermark.style.cssText = `
     position: fixed;
     top: 50%;
@@ -235,7 +234,7 @@ const logLicenseCheck = async (domain: string, result: any) => {
     check_result: result,
     timestamp: new Date(),
     ip_address: req.ip,
-    user_agent: req.headers['user-agent'],
+    user_agent: req.headers["user-agent"],
   });
 };
 ```
@@ -247,7 +246,7 @@ const logLicenseCheck = async (domain: string, result: any) => {
 const rateLimit = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 Minuten
   max: 100, // Max 100 Anfragen pro IP
-  message: 'Zu viele Anfragen',
+  message: "Zu viele Anfragen",
 });
 ```
 

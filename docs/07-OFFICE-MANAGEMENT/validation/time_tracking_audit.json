@@ -1,0 +1,40 @@
+{
+  "files": {
+    "TIME_LOG.md": "FOUND",
+    "data_mapping.md": "FOUND",
+    "office_management_core.md": "FOUND",
+    "work_sessions_schema.sql": "FOUND",
+    "src/app/api/admin/time-tracking/sessions/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/sessions/[id]/pause/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/sessions/[id]/resume/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/sessions/[id]/stop/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/sessions/close-all/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/stats/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/analytics/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts": "FOUND",
+    "src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts": "FOUND",
+    "src/app/api/time/entries/route.ts": "FOUND",
+    "src/app/admin/time-tracking/page.tsx": "FOUND",
+    "src/lib/time-tracking-types.ts": "FOUND"
+  },
+  "api": {
+    "heartbeat": true,
+    "activity": true,
+    "entries": true
+  },
+  "schema": {
+    "flags": {
+      "approved": true,
+      "invoiced": true
+    }
+  },
+  "ui": {
+    "hasProject": true,
+    "hasOrder": true,
+    "hasTask": true,
+    "hasCategory": true,
+    "hasProblem": true,
+    "heartbeat": true
+  },
+  "verdict": []
+}

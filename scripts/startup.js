@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync, spawn } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync, spawn } = require("child_process");
 
 class StartupSystem {
   constructor() {
@@ -12,11 +12,11 @@ class StartupSystem {
   // Startup-Prozess starten
   async start() {
     if (this.isRunning) {
-      console.log('⚠️ Startup-System läuft bereits');
+      console.log("⚠️ Startup-System läuft bereits");
       return;
     }
 
-    console.log('🚀 Starte Startup-System...');
+    console.log("🚀 Starte Startup-System...");
     this.isRunning = true;
 
     try {
@@ -38,9 +38,9 @@ class StartupSystem {
       // 6. Health-Check durchführen
       await this.performHealthCheck();
 
-      console.log('✅ Startup-System erfolgreich gestartet');
+      console.log("✅ Startup-System erfolgreich gestartet");
     } catch (error) {
-      console.error('❌ Startup-System fehlgeschlagen:', error.message);
+      console.error("❌ Startup-System fehlgeschlagen:", error.message);
       this.isRunning = false;
       throw error;
     }
@@ -48,9 +48,9 @@ class StartupSystem {
 
   // Umgebung prüfen
   async checkEnvironment() {
-    console.log('🔍 Prüfe Umgebung...');
+    console.log("🔍 Prüfe Umgebung...");
 
-    const requiredEnvVars = ['NODE_ENV', 'PORT'];
+    const requiredEnvVars = ["NODE_ENV", "PORT"];
 
     const missingVars = [];
 
@@ -61,16 +61,16 @@ class StartupSystem {
     }
 
     if (missingVars.length > 0) {
-      throw new Error(`Fehlende Umgebungsvariablen: ${missingVars.join(', ')}`);
+      throw new Error(`Fehlende Umgebungsvariablen: ${missingVars.join(", ")}`);
     }
 
     // Node.js-Version prüfen
     const nodeVersion = process.version;
-    const minVersion = '16.0.0';
+    const minVersion = "16.0.0";
 
     if (this.compareVersions(nodeVersion, minVersion) < 0) {
       throw new Error(
-        `Node.js-Version ${nodeVersion} ist zu alt. Mindestens ${minVersion} erforderlich.`
+        `Node.js-Version ${nodeVersion} ist zu alt. Mindestens ${minVersion} erforderlich.`,
       );
     }
 
@@ -81,57 +81,46 @@ class StartupSystem {
 
   // Abhängigkeiten prüfen
   async checkDependencies() {
-    console.log('📦 Prüfe Abhängigkeiten...');
+    console.log("📦 Prüfe Abhängigkeiten...");
 
-    const packageJsonPath = path.join(this.projectRoot, 'package.json');
+    const packageJsonPath = path.join(this.projectRoot, "package.json");
 
     if (!fs.existsSync(packageJsonPath)) {
-      throw new Error('package.json nicht gefunden');
+      throw new Error("package.json nicht gefunden");
     }
 
     try {
-      const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+      const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
       // Erforderliche Abhängigkeiten prüfen
-      const requiredDeps = ['react', 'next', 'typescript'];
+      const requiredDeps = ["react", "next", "typescript"];
 
       const missingDeps = [];
 
       for (const dep of requiredDeps) {
-        if (
-          !packageJson.dependencies?.[dep] &&
-          !packageJson.devDependencies?.[dep]
-        ) {
+        if (!packageJson.dependencies?.[dep] && !packageJson.devDependencies?.[dep]) {
           missingDeps.push(dep);
         }
       }
 
       if (missingDeps.length > 0) {
-        throw new Error(`Fehlende Abhängigkeiten: ${missingDeps.join(', ')}`);
+        throw new Error(`Fehlende Abhängigkeiten: ${missingDeps.join(", ")}`);
       }
 
+      console.log(`  ✅ ${Object.keys(packageJson.dependencies || {}).length} Abhängigkeiten`);
       console.log(
-        `  ✅ ${Object.keys(packageJson.dependencies || {}).length} Abhängigkeiten`
-      );
-      console.log(
-        `  ✅ ${Object.keys(packageJson.devDependencies || {}).length} Dev-Abhängigkeiten`
+        `  ✅ ${Object.keys(packageJson.devDependencies || {}).length} Dev-Abhängigkeiten`,
       );
     } catch (error) {
-      throw new Error(
-        `Fehler beim Prüfen der Abhängigkeiten: ${error.message}`
-      );
+      throw new Error(`Fehler beim Prüfen der Abhängigkeiten: ${error.message}`);
     }
   }
 
   // Konfiguration validieren
   async validateConfiguration() {
-    console.log('⚙️ Validiere Konfiguration...');
+    console.log("⚙️ Validiere Konfiguration...");
 
-    const configFiles = [
-      'next.config.js',
-      'tsconfig.json',
-      'tailwind.config.ts',
-    ];
+    const configFiles = ["next.config.js", "tsconfig.json", "tailwind.config.ts"];
 
     const missingConfigs = [];
 
@@ -143,86 +132,82 @@ class StartupSystem {
     }
 
     if (missingConfigs.length > 0) {
-      console.warn(
-        `  ⚠️ Fehlende Konfigurationsdateien: ${missingConfigs.join(', ')}`
-      );
+      console.warn(`  ⚠️ Fehlende Konfigurationsdateien: ${missingConfigs.join(", ")}`);
     } else {
-      console.log('  ✅ Alle Konfigurationsdateien vorhanden');
+      console.log("  ✅ Alle Konfigurationsdateien vorhanden");
     }
 
     // i18n-Konfiguration prüfen
-    const i18nConfigPath = path.join(this.projectRoot, 'src/i18n/config.ts');
+    const i18nConfigPath = path.join(this.projectRoot, "src/i18n/config.ts");
     if (fs.existsSync(i18nConfigPath)) {
-      console.log('  ✅ i18n-Konfiguration vorhanden');
+      console.log("  ✅ i18n-Konfiguration vorhanden");
     } else {
-      console.warn('  ⚠️ i18n-Konfiguration fehlt');
+      console.warn("  ⚠️ i18n-Konfiguration fehlt");
     }
   }
 
   // Datenbankverbindung testen (falls vorhanden)
   async testDatabaseConnection() {
-    console.log('🗄️ Prüfe Datenbankverbindung...');
+    console.log("🗄️ Prüfe Datenbankverbindung...");
 
     // Hier könnte die Datenbankverbindung getestet werden
     // Für dieses Projekt ist keine Datenbank erforderlich
 
-    console.log('  ✅ Keine Datenbankverbindung erforderlich');
+    console.log("  ✅ Keine Datenbankverbindung erforderlich");
   }
 
   // Services starten
   async startServices() {
-    console.log('🔧 Starte Services...');
+    console.log("🔧 Starte Services...");
 
     // Development-Server starten (falls im Development-Modus)
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       await this.startDevServer();
     }
 
     // Weitere Services hier starten...
-    console.log('  ✅ Services gestartet');
+    console.log("  ✅ Services gestartet");
   }
 
   // Development-Server starten
   async startDevServer() {
-    console.log('  🚀 Starte Development-Server...');
+    console.log("  🚀 Starte Development-Server...");
 
     try {
       // Prüfen ob Port verfügbar ist
       const port = process.env.PORT || 3000;
 
       // Server im Hintergrund starten
-      const server = spawn('npm', ['run', 'dev'], {
+      const server = spawn("npm", ["run", "dev"], {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
         detached: true,
       });
 
       // Server-Output loggen
-      server.stdout.on('data', data => {
+      server.stdout.on("data", (data) => {
         const output = data.toString();
         console.log(`  📝 Server: ${output.trim()}`);
 
-        if (output.includes('Ready') || output.includes('started')) {
+        if (output.includes("Ready") || output.includes("started")) {
           console.log(`  ✅ Development-Server gestartet auf Port ${port}`);
         }
       });
 
-      server.stderr.on('data', data => {
+      server.stderr.on("data", (data) => {
         console.error(`  ❌ Server-Fehler: ${data.toString().trim()}`);
       });
 
       // Server-Prozess-ID speichern
       this.serverProcess = server;
     } catch (error) {
-      console.error(
-        `  ❌ Fehler beim Starten des Development-Servers: ${error.message}`
-      );
+      console.error(`  ❌ Fehler beim Starten des Development-Servers: ${error.message}`);
     }
   }
 
   // Health-Check durchführen
   async performHealthCheck() {
-    console.log('🏥 Führe Health-Check durch...');
+    console.log("🏥 Führe Health-Check durch...");
 
     const healthChecks = [
       this.checkFileSystem(),
@@ -235,10 +220,8 @@ class StartupSystem {
     let failedChecks = 0;
 
     results.forEach((result, index) => {
-      if (result.status === 'rejected') {
-        console.error(
-          `  ❌ Health-Check ${index + 1} fehlgeschlagen: ${result.reason}`
-        );
+      if (result.status === "rejected") {
+        console.error(`  ❌ Health-Check ${index + 1} fehlgeschlagen: ${result.reason}`);
         failedChecks++;
       } else {
         console.log(`  ✅ Health-Check ${index + 1} erfolgreich`);
@@ -249,12 +232,12 @@ class StartupSystem {
       throw new Error(`${failedChecks} Health-Checks fehlgeschlagen`);
     }
 
-    console.log('  ✅ Alle Health-Checks erfolgreich');
+    console.log("  ✅ Alle Health-Checks erfolgreich");
   }
 
   // Dateisystem prüfen
   async checkFileSystem() {
-    const criticalPaths = ['src', 'public', 'src/app', 'src/components'];
+    const criticalPaths = ["src", "public", "src/app", "src/components"];
 
     for (const criticalPath of criticalPaths) {
       const fullPath = path.join(this.projectRoot, criticalPath);
@@ -281,28 +264,24 @@ class StartupSystem {
 
   // i18n-Integrität prüfen
   async checkI18nIntegrity() {
-    const i18nDir = path.join(this.projectRoot, 'src/i18n/locales');
+    const i18nDir = path.join(this.projectRoot, "src/i18n/locales");
 
     if (!fs.existsSync(i18nDir)) {
-      throw new Error('i18n-Verzeichnis fehlt');
+      throw new Error("i18n-Verzeichnis fehlt");
     }
 
-    const languageFiles = fs
-      .readdirSync(i18nDir)
-      .filter(file => file.endsWith('.json'));
+    const languageFiles = fs.readdirSync(i18nDir).filter((file) => file.endsWith(".json"));
 
     if (languageFiles.length === 0) {
-      throw new Error('Keine Sprachdateien gefunden');
+      throw new Error("Keine Sprachdateien gefunden");
     }
 
     // Mindestens deutsche und englische Übersetzungen
-    const requiredLanguages = ['de.json', 'en.json'];
-    const missingLanguages = requiredLanguages.filter(
-      lang => !languageFiles.includes(lang)
-    );
+    const requiredLanguages = ["de.json", "en.json"];
+    const missingLanguages = requiredLanguages.filter((lang) => !languageFiles.includes(lang));
 
     if (missingLanguages.length > 0) {
-      throw new Error(`Fehlende Sprachdateien: ${missingLanguages.join(', ')}`);
+      throw new Error(`Fehlende Sprachdateien: ${missingLanguages.join(", ")}`);
     }
   }
 
@@ -310,35 +289,30 @@ class StartupSystem {
   async checkBuildProcess() {
     try {
       // TypeScript-Kompilierung testen
-      execSync('npx tsc --noEmit', {
+      execSync("npx tsc --noEmit", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
     } catch (error) {
-      throw new Error(
-        `TypeScript-Kompilierung fehlgeschlagen: ${error.message}`
-      );
+      throw new Error(`TypeScript-Kompilierung fehlgeschlagen: ${error.message}`);
     }
   }
 
   // Startup-System stoppen
   async stop() {
-    console.log('🛑 Stoppe Startup-System...');
+    console.log("🛑 Stoppe Startup-System...");
 
     if (this.serverProcess) {
       try {
         this.serverProcess.kill();
-        console.log('  ✅ Development-Server gestoppt');
+        console.log("  ✅ Development-Server gestoppt");
       } catch (error) {
-        console.warn(
-          '  ⚠️ Fehler beim Stoppen des Development-Servers:',
-          error.message
-        );
+        console.warn("  ⚠️ Fehler beim Stoppen des Development-Servers:", error.message);
       }
     }
 
     this.isRunning = false;
-    console.log('✅ Startup-System gestoppt');
+    console.log("✅ Startup-System gestoppt");
   }
 
   // Status abrufen
@@ -353,7 +327,7 @@ class StartupSystem {
 
   // Versionen vergleichen
   compareVersions(v1, v2) {
-    const normalize = v => v.replace(/^v/, '').split('.').map(Number);
+    const normalize = (v) => v.replace(/^v/, "").split(".").map(Number);
     const n1 = normalize(v1);
     const n2 = normalize(v2);
 
@@ -369,7 +343,7 @@ class StartupSystem {
   }
 
   // Log-Eintrag hinzufügen
-  log(message, level = 'info') {
+  log(message, level = "info") {
     const logEntry = {
       timestamp: new Date().toISOString(),
       level: level,
@@ -379,8 +353,8 @@ class StartupSystem {
     this.startupLog.push(logEntry);
 
     // Log in Datei speichern
-    const logFile = path.join(this.projectRoot, 'startup.log');
-    fs.appendFileSync(logFile, JSON.stringify(logEntry) + '\n');
+    const logFile = path.join(this.projectRoot, "startup.log");
+    fs.appendFileSync(logFile, JSON.stringify(logEntry) + "\n");
   }
 }
 
@@ -391,29 +365,29 @@ if (require.main === module) {
   const command = process.argv[2];
 
   switch (command) {
-    case 'start':
+    case "start":
       startup
         .start()
         .then(() => {
-          console.log('Startup abgeschlossen');
+          console.log("Startup abgeschlossen");
         })
-        .catch(error => {
-          console.error('Startup fehlgeschlagen:', error.message);
+        .catch((error) => {
+          console.error("Startup fehlgeschlagen:", error.message);
           process.exit(1);
         });
       break;
 
-    case 'stop':
+    case "stop":
       startup.stop();
       break;
 
-    case 'status':
+    case "status":
       const status = startup.getStatus();
       console.log(JSON.stringify(status, null, 2));
       break;
 
     default:
-      console.log('Verwendung: node startup.js [start|stop|status]');
+      console.log("Verwendung: node startup.js [start|stop|status]");
   }
 }
 

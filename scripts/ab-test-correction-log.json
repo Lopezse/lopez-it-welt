@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-10-31T13:49:14.973Z",
+  "steps": ["Standard-Texte bei ID=1 gesetzt", "Platzhalter ID 2, 3 gelöscht"],
+  "errors": [],
+  "results": {
+    "update1": {
+      "affectedRows": 1,
+      "changedRows": 1
+    },
+    "delete": {
+      "affectedRows": 2
+    },
+    "finalState": [
+      {
+        "id": 1,
+        "title": "Lopez IT Welt",
+        "subtitle": "Professionelle IT-Lösungen",
+        "description": "Wir entwickeln maßgeschneiderte Software-Lösungen mit Fokus auf Barrierefreiheit und persönliche Betreuung.",
+        "button_text": "Jetzt beraten lassen",
+        "button_link": "/kontakt",
+        "is_active": 1,
+        "updated_at": "2025-10-31T13:49:15.000Z"
+      }
+    ]
+  }
+}

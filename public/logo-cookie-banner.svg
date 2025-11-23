@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="220" viewBox="0 0 800 220"
+     shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" 
+     image-rendering="optimizeQuality">
+  <defs>
+    <!-- Farbverlauf für LW-Quadrat (vorgegeben: Hauptblau zu Akzentblau) -->
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0055A4"/>
+      <stop offset="100%" stop-color="#00BFFF"/>
+    </linearGradient>
+    <!-- Glow für LW-Quadrat -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- LW Quadrat -->
+  <rect x="30" y="35" width="100" height="100" rx="25" ry="25"
+        fill="url(#blueGradient)" filter="url(#neonGlow)"/>
+  <text x="80" y="100" font-family="Montserrat, Arial, sans-serif"
+        font-size="48" font-weight="bold" text-anchor="middle" fill="white"
+        text-rendering="optimizeLegibility" shape-rendering="geometricPrecision">LW</text>
+
+  <!-- Textblock - präzise mittig mit LW-Quadrat ausgerichtet -->
+  <g transform="translate(160, 85)">
+    <!-- "Lopez" in Gelb (wie im Header/Footer) -->
+    <text x="0" y="0" font-family="Montserrat, Arial, sans-serif"
+          font-size="56" font-weight="600" fill="#FFD700"
+          text-rendering="optimizeLegibility" shape-rendering="geometricPrecision">Lopez</text>
+    
+    <!-- "IT Welt" in Blau-Gradient (wie im Header/Footer) -->
+    <text x="180" y="0" font-family="Montserrat, Arial, sans-serif"
+          font-size="56" font-weight="700" fill="url(#blueGradient)"
+          text-rendering="optimizeLegibility" shape-rendering="geometricPrecision">IT Welt</text>
+  </g>
+
+  <!-- Tagline -->
+  <g transform="translate(160, 140)">
+    <text x="0" y="0" font-family="Montserrat, Arial, sans-serif"
+          font-size="28" font-weight="300" fill="#444444"
+          text-rendering="optimizeLegibility" shape-rendering="geometricPrecision"
+          letter-spacing="1px">
+      Digitale Lösungen. Global. Sicher.
+    </text>
+  </g>
+</svg>

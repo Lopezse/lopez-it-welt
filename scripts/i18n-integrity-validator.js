@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 class I18nIntegrityValidator {
   constructor() {
     this.projectRoot = process.cwd();
-    this.i18nDir = path.join(this.projectRoot, 'src/i18n/locales');
+    this.i18nDir = path.join(this.projectRoot, "src/i18n/locales");
     this.errors = [];
     this.warnings = [];
     this.info = [];
@@ -12,7 +12,7 @@ class I18nIntegrityValidator {
 
   // Hauptfunktion für i18n-Integritätsprüfung
   async validateIntegrity() {
-    console.log('🌍 Starte i18n-Integritätsprüfung...');
+    console.log("🌍 Starte i18n-Integritätsprüfung...");
 
     this.errors = [];
     this.warnings = [];
@@ -38,26 +38,26 @@ class I18nIntegrityValidator {
 
   // Grundlegende Struktur prüfen
   validateStructure() {
-    console.log('📁 Überprüfe i18n-Struktur...');
+    console.log("📁 Überprüfe i18n-Struktur...");
 
     if (!fs.existsSync(this.i18nDir)) {
-      this.errors.push('i18n-Verzeichnis fehlt: src/i18n/locales');
+      this.errors.push("i18n-Verzeichnis fehlt: src/i18n/locales");
       return;
     }
 
-    const configFile = path.join(this.projectRoot, 'src/i18n/config.ts');
+    const configFile = path.join(this.projectRoot, "src/i18n/config.ts");
     if (!fs.existsSync(configFile)) {
-      this.warnings.push('i18n-Konfigurationsdatei fehlt: src/i18n/config.ts');
+      this.warnings.push("i18n-Konfigurationsdatei fehlt: src/i18n/config.ts");
     } else {
-      this.info.push('i18n-Konfigurationsdatei vorhanden');
+      this.info.push("i18n-Konfigurationsdatei vorhanden");
     }
   }
 
   // Sprachdateien prüfen
   async validateLanguageFiles() {
-    console.log('📄 Überprüfe Sprachdateien...');
+    console.log("📄 Überprüfe Sprachdateien...");
 
-    const requiredLanguages = ['de', 'en', 'es'];
+    const requiredLanguages = ["de", "en", "es"];
     const languageFiles = {};
 
     for (const lang of requiredLanguages) {
@@ -69,20 +69,16 @@ class I18nIntegrityValidator {
       }
 
       try {
-        const content = fs.readFileSync(langFile, 'utf8');
+        const content = fs.readFileSync(langFile, "utf8");
         const parsed = JSON.parse(content);
 
         languageFiles[lang] = parsed;
-        this.info.push(
-          `Sprachdatei ${lang}.json geladen (${this.countKeys(parsed)} Schlüssel)`
-        );
+        this.info.push(`Sprachdatei ${lang}.json geladen (${this.countKeys(parsed)} Schlüssel)`);
 
         // JSON-Syntax prüfen
         this.validateJsonSyntax(lang, content);
       } catch (error) {
-        this.errors.push(
-          `Fehler beim Parsen von ${lang}.json: ${error.message}`
-        );
+        this.errors.push(`Fehler beim Parsen von ${lang}.json: ${error.message}`);
       }
     }
 
@@ -94,47 +90,41 @@ class I18nIntegrityValidator {
     try {
       JSON.parse(content);
     } catch (error) {
-      this.errors.push(
-        `JSON-Syntax-Fehler in ${language}.json: ${error.message}`
-      );
+      this.errors.push(`JSON-Syntax-Fehler in ${language}.json: ${error.message}`);
     }
   }
 
   // Schlüssel-Konsistenz prüfen
   async validateKeyConsistency() {
-    console.log('🔑 Überprüfe Schlüssel-Konsistenz...');
+    console.log("🔑 Überprüfe Schlüssel-Konsistenz...");
 
     if (!this.languageFiles || Object.keys(this.languageFiles).length === 0) {
       return;
     }
 
     const languages = Object.keys(this.languageFiles);
-    const baseLanguage = 'de';
+    const baseLanguage = "de";
 
     if (!this.languageFiles[baseLanguage]) {
-      this.errors.push('Basis-Sprache (de) fehlt für Konsistenzprüfung');
+      this.errors.push("Basis-Sprache (de) fehlt für Konsistenzprüfung");
       return;
     }
 
     const baseKeys = this.extractKeys(this.languageFiles[baseLanguage]);
-    this.info.push(
-      `Basis-Sprache (${baseLanguage}): ${baseKeys.length} Schlüssel`
-    );
+    this.info.push(`Basis-Sprache (${baseLanguage}): ${baseKeys.length} Schlüssel`);
 
     // Schlüssel in anderen Sprachen prüfen
     for (const lang of languages) {
       if (lang === baseLanguage) continue;
 
       const langKeys = this.extractKeys(this.languageFiles[lang]);
-      const missingKeys = baseKeys.filter(key => !langKeys.includes(key));
-      const extraKeys = langKeys.filter(key => !baseKeys.includes(key));
+      const missingKeys = baseKeys.filter((key) => !langKeys.includes(key));
+      const extraKeys = langKeys.filter((key) => !baseKeys.includes(key));
 
       if (missingKeys.length > 0) {
         this.warnings.push(`${lang}: ${missingKeys.length} fehlende Schlüssel`);
         if (missingKeys.length <= 5) {
-          this.info.push(
-            `  Fehlende Schlüssel in ${lang}: ${missingKeys.join(', ')}`
-          );
+          this.info.push(`  Fehlende Schlüssel in ${lang}: ${missingKeys.join(", ")}`);
         }
       }
 
@@ -146,7 +136,7 @@ class I18nIntegrityValidator {
 
   // Übersetzungsqualität prüfen
   async validateTranslationQuality() {
-    console.log('✨ Überprüfe Übersetzungsqualität...');
+    console.log("✨ Überprüfe Übersetzungsqualität...");
 
     if (!this.languageFiles) return;
 
@@ -157,10 +147,8 @@ class I18nIntegrityValidator {
       const qualityIssues = this.analyzeTranslationQuality(lang, translations);
 
       if (qualityIssues.length > 0) {
-        this.warnings.push(
-          `${lang}: ${qualityIssues.length} Qualitätsprobleme`
-        );
-        qualityIssues.slice(0, 3).forEach(issue => {
+        this.warnings.push(`${lang}: ${qualityIssues.length} Qualitätsprobleme`);
+        qualityIssues.slice(0, 3).forEach((issue) => {
           this.info.push(`  ${lang}: ${issue}`);
         });
       }
@@ -175,16 +163,16 @@ class I18nIntegrityValidator {
     for (const key of keys) {
       const value = this.getNestedValue(translations, key);
 
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         // Leere Übersetzungen
-        if (value.trim() === '') {
+        if (value.trim() === "") {
           issues.push(`Leere Übersetzung für "${key}"`);
         }
 
         // Platzhalter-Konsistenz prüfen
         const placeholders = this.extractPlaceholders(value);
         if (placeholders.length > 0) {
-          issues.push(`Platzhalter in "${key}": ${placeholders.join(', ')}`);
+          issues.push(`Platzhalter in "${key}": ${placeholders.join(", ")}`);
         }
 
         // Sehr kurze Übersetzungen
@@ -221,11 +209,11 @@ class I18nIntegrityValidator {
 
   // Nested-Wert aus Objekt extrahieren
   getNestedValue(obj, key) {
-    const keys = key.split('.');
+    const keys = key.split(".");
     let value = obj;
 
     for (const k of keys) {
-      if (value && typeof value === 'object' && k in value) {
+      if (value && typeof value === "object" && k in value) {
         value = value[k];
       } else {
         return undefined;
@@ -236,17 +224,13 @@ class I18nIntegrityValidator {
   }
 
   // Schlüssel aus Objekt extrahieren
-  extractKeys(obj, prefix = '') {
+  extractKeys(obj, prefix = "") {
     const keys = [];
 
     for (const key in obj) {
       const fullKey = prefix ? `${prefix}.${key}` : key;
 
-      if (
-        typeof obj[key] === 'object' &&
-        obj[key] !== null &&
-        !Array.isArray(obj[key])
-      ) {
+      if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
         keys.push(...this.extractKeys(obj[key], fullKey));
       } else {
         keys.push(fullKey);
@@ -263,48 +247,48 @@ class I18nIntegrityValidator {
 
   // Ergebnisse ausgeben
   printResults() {
-    console.log('\n📊 i18n-Integritätsprüfung Ergebnisse:');
+    console.log("\n📊 i18n-Integritätsprüfung Ergebnisse:");
 
     if (this.errors.length > 0) {
-      console.log('\n❌ Fehler:');
-      this.errors.forEach(error => {
+      console.log("\n❌ Fehler:");
+      this.errors.forEach((error) => {
         console.log(`  - ${error}`);
       });
     }
 
     if (this.warnings.length > 0) {
-      console.log('\n⚠️ Warnungen:');
-      this.warnings.forEach(warning => {
+      console.log("\n⚠️ Warnungen:");
+      this.warnings.forEach((warning) => {
         console.log(`  - ${warning}`);
       });
     }
 
     if (this.info.length > 0) {
-      console.log('\nℹ️ Informationen:');
-      this.info.forEach(info => {
+      console.log("\nℹ️ Informationen:");
+      this.info.forEach((info) => {
         console.log(`  - ${info}`);
       });
     }
 
     if (this.errors.length === 0 && this.warnings.length === 0) {
-      console.log('\n✅ i18n-Integrität ist in Ordnung!');
+      console.log("\n✅ i18n-Integrität ist in Ordnung!");
     }
   }
 
   // Automatische Korrekturen
   async autoFix() {
-    console.log('🔧 Versuche automatische i18n-Korrekturen...');
+    console.log("🔧 Versuche automatische i18n-Korrekturen...");
 
     if (!this.languageFiles) {
-      console.log('Keine Sprachdateien zum Korrigieren gefunden');
+      console.log("Keine Sprachdateien zum Korrigieren gefunden");
       return;
     }
 
     const languages = Object.keys(this.languageFiles);
-    const baseLanguage = 'de';
+    const baseLanguage = "de";
 
     if (!this.languageFiles[baseLanguage]) {
-      console.log('Basis-Sprache fehlt für Auto-Fix');
+      console.log("Basis-Sprache fehlt für Auto-Fix");
       return;
     }
 
@@ -329,16 +313,10 @@ class I18nIntegrityValidator {
       // Geänderte Datei speichern
       if (modified) {
         try {
-          fs.writeFileSync(
-            langFile,
-            JSON.stringify(currentTranslations, null, 2)
-          );
+          fs.writeFileSync(langFile, JSON.stringify(currentTranslations, null, 2));
           console.log(`  ${lang}.json aktualisiert`);
         } catch (error) {
-          console.error(
-            `  Fehler beim Speichern von ${lang}.json:`,
-            error.message
-          );
+          console.error(`  Fehler beim Speichern von ${lang}.json:`, error.message);
         }
       }
     }
@@ -351,12 +329,12 @@ class I18nIntegrityValidator {
 
   // Nested-Wert setzen
   setNestedValue(obj, key, value) {
-    const keys = key.split('.');
+    const keys = key.split(".");
     let current = obj;
 
     for (let i = 0; i < keys.length - 1; i++) {
       const k = keys[i];
-      if (!(k in current) || typeof current[k] !== 'object') {
+      if (!(k in current) || typeof current[k] !== "object") {
         current[k] = {};
       }
       current = current[k];
@@ -394,13 +372,13 @@ if (require.main === module) {
   const command = process.argv[2];
 
   switch (command) {
-    case 'validate':
+    case "validate":
       validator.validateIntegrity();
       break;
-    case 'fix':
+    case "fix":
       validator.autoFix();
       break;
-    case 'stats':
+    case "stats":
       const stats = validator.generateStats();
       console.log(JSON.stringify(stats, null, 2));
       break;

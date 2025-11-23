@@ -1,0 +1,26 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "📝 Post-Commit: Compliance-Dokumentation..."
+
+# Commit-Informationen sammeln
+COMMIT_HASH=$(git rev-parse HEAD)
+COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+COMMIT_AUTHOR=$(git log -1 --pretty=%an)
+COMMIT_DATE=$(git log -1 --pretty=%cd)
+
+# Compliance-Log erstellen
+echo "🔍 Compliance-Log für Commit $COMMIT_HASH..."
+
+# Enterprise++ Compliance-Status dokumentieren
+node scripts/log-compliance-status.js "$COMMIT_HASH" "$COMMIT_MESSAGE" "$COMMIT_AUTHOR" "$COMMIT_DATE"
+
+# Audit-Trail aktualisieren
+echo "📋 Audit-Trail aktualisieren..."
+node scripts/update-audit-trail.js "$COMMIT_HASH" "$COMMIT_MESSAGE"
+
+# Status.md aktualisieren
+echo "📊 STATUS.md aktualisieren..."
+node scripts/update-status-md.js "$COMMIT_HASH" "$COMMIT_MESSAGE"
+
+echo "✅ Post-Commit Compliance-Dokumentation abgeschlossen!" 

@@ -1,227 +1,217 @@
-'use client';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { Button } from '../../components/Features/Button';
-import { useI18n } from '../../components/Features/I18nProvider';
+"use client";
 
-export default function Login() {
-  const { t } = useI18n();
-  const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    name: '',
-  });
+import Logo from "@/components/Logo";
+import { useState } from "react";
+import { FaEye, FaEyeSlash, FaKey, FaLock, FaShieldAlt, FaUser } from "react-icons/fa";
+
+export default function LoginPage() {
+  const [identifier, setIdentifier] = useState(""); // Username ODER Email
+  const [password, setPassword] = useState("");
+  const [totpCode, setTotpCode] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [step, setStep] = useState<"credentials" | "2fa">("credentials");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
 
-    // Simulierte Authentifizierung
-    setTimeout(() => {
-      if (isLogin) {
-        // Login-Logik
-        localStorage.setItem('authToken', 'dummy-token');
-        window.location.href = '/';
+    try {
+      if (step === "credentials") {
+        // Erste Stufe: Username ODER Email und Passwort
+        const response = await fetch("/api/auth/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ identifier, password }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          // Login erfolgreich, weiterleiten
+          window.location.href = "/admin";
+        } else if (data.requires2FA) {
+          // 2FA erforderlich
+          setStep("2fa");
+        } else {
+          setError(data.message || "Anmeldung fehlgeschlagen");
+        }
       } else {
-        // Registrierungs-Logik
-        localStorage.setItem('authToken', 'dummy-token');
-        window.location.href = '/';
-      }
-      setIsLoading(false);
-    }, 1000);
-  };
+        // Zweite Stufe: 2FA-Code (Pflicht für Admin)
+        const response = await fetch("/api/auth/admin/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            identifier,
+            password,
+            twoFactorToken: totpCode,
+          }),
+        });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+        const data = await response.json();
+
+        if (data.success) {
+          window.location.href = "/admin";
+        } else {
+          setError(data.message || "2FA-Code ungültig");
+        }
+      }
+    } catch (error) {
+      setError("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-hellgrau dark:bg-dunkelgrau py-12 px-4 sm:px-6 lg:px-8'>
-      <div className='max-w-md w-full space-y-8'>
-        <div>
-          <Link href='/' className='flex justify-center'>
-            <h2 className='text-3xl font-bold text-hauptblau dark:text-akzentblau'>
-              Lopez IT Welt
-            </h2>
-          </Link>
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-dunkelgrau dark:text-weiss'>
-            {isLogin ? t('auth.login.titel') : t('auth.register.titel')}
-          </h2>
-          <p className='mt-2 text-center text-sm text-dunkelgrau dark:text-hellgrau'>
-            {isLogin ? (
-              <>
-                {t('auth.no_account')}{' '}
-                <button
-                  onClick={() => setIsLogin(false)}
-                  className='font-medium text-hauptblau hover:text-akzentblau dark:text-akzentblau dark:hover:text-gelb'
-                >
-                  {t('auth.login.registrieren_link')}
-                </button>
-              </>
-            ) : (
-              <>
-                {t('auth.has_account')}{' '}
-                <button
-                  onClick={() => setIsLogin(true)}
-                  className='font-medium text-hauptblau hover:text-akzentblau dark:text-akzentblau dark:hover:text-gelb'
-                >
-                  {t('auth.register.anmelden_link')}
-                </button>
-              </>
-            )}
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 flex items-center justify-center p-4">
+      {/* Hintergrund-Effekte */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Login-Container */}
+      <div className="relative z-10 w-full max-w-md">
+        {/* Logo und Header */}
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-6">
+            <Logo size="large" showTagline={true} />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-2">Willkommen zurück</h1>
+          <p className="text-slate-300">Melden Sie sich sicher in Ihrem Konto an</p>
         </div>
 
-        <form className='mt-8 space-y-6' onSubmit={handleSubmit}>
-          <div className='rounded-md shadow-sm -space-y-px'>
-            {!isLogin && (
-              <div>
-                <label htmlFor='name' className='sr-only'>
-                  {t('auth.register.name')}
-                </label>
-                <input
-                  id='name'
-                  name='name'
-                  type='text'
-                  required={!isLogin}
-                  className='appearance-none rounded-none relative block w-full px-3 py-2 border border-hellgrau dark:border-dunkelgrau placeholder-dunkelgrau dark:placeholder-hellgrau text-dunkelgrau dark:text-weiss rounded-t-md focus:outline-none focus:ring-hauptblau focus:border-hauptblau focus:z-10 sm:text-sm bg-weiss dark:bg-dunkelgrau'
-                  placeholder={t('auth.register.name')}
-                  value={formData.name}
-                  onChange={handleInputChange}
-                />
-              </div>
-            )}
+        {/* Login-Formular */}
+        <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 shadow-2xl">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Username ODER E-Mail */}
             <div>
-              <label htmlFor='email' className='sr-only'>
-                {t('auth.login.email')}
+              <label className="block text-sm font-medium text-white mb-2">
+                Benutzername oder E-Mail
               </label>
-              <input
-                id='email'
-                name='email'
-                type='email'
-                autoComplete='email'
-                required
-                className={`appearance-none rounded-none relative block w-full px-3 py-2 border border-hellgrau dark:border-dunkelgrau placeholder-dunkelgrau dark:placeholder-hellgrau text-dunkelgrau dark:text-weiss focus:outline-none focus:ring-hauptblau focus:border-hauptblau focus:z-10 sm:text-sm bg-weiss dark:bg-dunkelgrau ${
-                  isLogin ? 'rounded-t-md' : ''
-                }`}
-                placeholder={t('auth.login.email')}
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label htmlFor='password' className='sr-only'>
-                {t('auth.login.password')}
-              </label>
-              <input
-                id='password'
-                name='password'
-                type='password'
-                autoComplete={isLogin ? 'current-password' : 'new-password'}
-                required
-                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-hellgrau dark:border-dunkelgrau placeholder-dunkelgrau dark:placeholder-hellgrau text-dunkelgrau dark:text-weiss focus:outline-none focus:ring-hauptblau focus:border-hauptblau focus:z-10 sm:text-sm bg-weiss dark:bg-dunkelgrau'
-                placeholder={t('auth.login.password')}
-                value={formData.password}
-                onChange={handleInputChange}
-              />
-            </div>
-            {!isLogin && (
-              <div>
-                <label htmlFor='confirmPassword' className='sr-only'>
-                  {t('auth.register.confirm_password')}
-                </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaUser className="h-5 w-5 text-slate-400" />
+                </div>
                 <input
-                  id='confirmPassword'
-                  name='confirmPassword'
-                  type='password'
-                  autoComplete='new-password'
-                  required={!isLogin}
-                  className='appearance-none rounded-none relative block w-full px-3 py-2 border border-hellgrau dark:border-dunkelgrau placeholder-dunkelgrau dark:placeholder-hellgrau text-dunkelgrau dark:text-weiss rounded-b-md focus:outline-none focus:ring-hauptblau focus:border-hauptblau focus:z-10 sm:text-sm bg-weiss dark:bg-dunkelgrau'
-                  placeholder={t('auth.register.confirm_password')}
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                />
-              </div>
-            )}
-            {isLogin && (
-              <div>
-                <label htmlFor='password' className='sr-only'>
-                  {t('auth.login.password')}
-                </label>
-                <input
-                  id='password'
-                  name='password'
-                  type='password'
-                  autoComplete='current-password'
+                  type="text"
+                  value={identifier}
+                  onChange={(e) => setIdentifier(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  placeholder="r.lopezsr oder ramiro-lopez-rodriguez@lopez-it-welt.de"
                   required
-                  className='appearance-none rounded-none relative block w-full px-3 py-2 border border-hellgrau dark:border-dunkelgrau placeholder-dunkelgrau dark:placeholder-hellgrau text-dunkelgrau dark:text-weiss rounded-b-md focus:outline-none focus:ring-hauptblau focus:border-hauptblau focus:z-10 sm:text-sm bg-weiss dark:bg-dunkelgrau'
-                  placeholder={t('auth.login.password')}
-                  value={formData.password}
-                  onChange={handleInputChange}
                 />
               </div>
-            )}
-          </div>
+              <p className="text-xs text-slate-400 mt-1">
+                Sie können sich mit Ihrem Benutzernamen (z.B. r.lopezsr) oder Ihrer E-Mail-Adresse
+                anmelden
+              </p>
+            </div>
 
-          {isLogin && (
-            <div className='flex items-center justify-between'>
-              <div className='flex items-center'>
+            {/* Passwort */}
+            <div>
+              <label className="block text-sm font-medium text-white mb-2">Passwort</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaLock className="h-5 w-5 text-slate-400" />
+                </div>
                 <input
-                  id='remember-me'
-                  name='remember-me'
-                  type='checkbox'
-                  className='h-4 w-4 text-hauptblau focus:ring-hauptblau border-hellgrau dark:border-dunkelgrau rounded'
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                  placeholder="Ihr Passwort"
+                  required
                 />
-                <label
-                  htmlFor='remember-me'
-                  className='ml-2 block text-sm text-dunkelgrau dark:text-hellgrau'
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-white transition-colors"
                 >
-                  {t('auth.login.remember_me')}
-                </label>
-              </div>
-
-              <div className='text-sm'>
-                <a
-                  href='#'
-                  className='font-medium text-hauptblau hover:text-akzentblau dark:text-akzentblau dark:hover:text-gelb'
-                >
-                  {t('auth.login.forgot_password')}
-                </a>
+                  {showPassword ? (
+                    <FaEyeSlash className="h-5 w-5" />
+                  ) : (
+                    <FaEye className="h-5 w-5" />
+                  )}
+                </button>
               </div>
             </div>
-          )}
 
-          <div>
-            <Button
-              type='submit'
-              variante='haupt'
-              groesse='gross'
-              ladezustand={isLoading}
-              className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-weiss bg-hauptblau hover:bg-akzentblau focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-hauptblau'
-            >
-              {isLoading
-                ? t('auth.loading')
-                : isLogin
-                  ? t('auth.login.submit')
-                  : t('auth.register.submit')}
-            </Button>
-          </div>
+            {/* 2FA-Code (nur wenn nötig) */}
+            {step === "2fa" && (
+              <div>
+                <label className="block text-sm font-medium text-white mb-2">
+                  <FaShieldAlt className="inline h-4 w-4 mr-2" />
+                  2FA-Code (Aegis)
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaKey className="h-5 w-5 text-slate-400" />
+                  </div>
+                  <input
+                    type="text"
+                    value={totpCode}
+                    onChange={(e) => setTotpCode(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    placeholder="6-stelliger Code"
+                    maxLength={6}
+                    required
+                  />
+                </div>
+                <p className="text-xs text-slate-400 mt-2">
+                  Geben Sie den 6-stelligen Code aus Ihrer Aegis-App ein
+                </p>
+              </div>
+            )}
 
-          <div className='text-center'>
-            <Link
-              href='/'
-              className='font-medium text-hauptblau hover:text-akzentblau dark:text-akzentblau dark:hover:text-gelb'
+            {/* Fehler-Anzeige */}
+            {error && (
+              <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-3">
+                <p className="text-red-200 text-sm">{error}</p>
+              </div>
+            )}
+
+            {/* Submit-Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
             >
-              {t('auth.login.back_to_home')}
-            </Link>
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  {step === "credentials" ? "Anmelden..." : "Verifiziere..."}
+                </div>
+              ) : step === "credentials" ? (
+                "Anmelden"
+              ) : (
+                "2FA bestätigen"
+              )}
+            </button>
+
+            {/* Passwort vergessen */}
+            <div className="text-center">
+              <button
+                type="button"
+                className="text-slate-400 hover:text-white text-sm transition-colors"
+              >
+                Passwort vergessen?
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-8">
+          <p className="text-slate-400 text-sm">© 2024 Lopez IT Welt. Alle Rechte vorbehalten.</p>
+          <div className="flex items-center justify-center mt-2 text-xs text-slate-500">
+            <FaShieldAlt className="h-3 w-3 mr-1" />
+            Sichere Verbindung
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

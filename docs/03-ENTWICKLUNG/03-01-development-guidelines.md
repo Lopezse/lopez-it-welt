@@ -12,18 +12,21 @@ Die **Development-Guidelines** definieren die vollständigen Entwicklungs-Richtl
 ## 🎯 **ENTWICKLUNGS-PRINZIPIEN**
 
 ### **✅ Code-Qualität**
+
 - **Clean Code:** Lesbarer, wartbarer Code
 - **SOLID-Prinzipien:** Einheitliche Architektur
 - **DRY-Prinzip:** Keine Duplikate
 - **KISS-Prinzip:** Einfachheit bevorzugen
 
 ### **✅ Sicherheit**
+
 - **Security-First:** Sicherheit von Anfang an
 - **Input-Validierung:** Alle Eingaben validieren
 - **SQL-Injection-Schutz:** Prepared Statements verwenden
 - **XSS-Schutz:** Content sanitization
 
 ### **✅ Performance**
+
 - **Optimierung:** Performance von Anfang an
 - **Caching:** Intelligentes Caching
 - **Lazy Loading:** Ressourcen sparsam laden
@@ -32,6 +35,7 @@ Die **Development-Guidelines** definieren die vollständigen Entwicklungs-Richtl
 ## 🛠️ **TECHNOLOGIE-STACK**
 
 ### **Frontend**
+
 ```typescript
 // Technologie-Stack
 {
@@ -47,6 +51,7 @@ Die **Development-Guidelines** definieren die vollständigen Entwicklungs-Richtl
 ```
 
 ### **Backend**
+
 ```typescript
 // Backend-Stack
 {
@@ -61,6 +66,7 @@ Die **Development-Guidelines** definieren die vollständigen Entwicklungs-Richtl
 ```
 
 ### **DevOps**
+
 ```typescript
 // DevOps-Stack
 {
@@ -83,12 +89,12 @@ interface User {
   id: string;
   email: string;
   name: string;
-  role: 'admin' | 'user';
+  role: "admin" | "user";
   createdAt: Date;
 }
 
 // ✅ GUT: Funktionen mit Typen
-function createUser(userData: Omit<User, 'id' | 'createdAt'>): Promise<User> {
+function createUser(userData: Omit<User, "id" | "createdAt">): Promise<User> {
   // Implementation
 }
 
@@ -110,12 +116,12 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-export function Button({ 
-  variant, 
-  size, 
-  children, 
-  onClick, 
-  disabled = false 
+export function Button({
+  variant,
+  size,
+  children,
+  onClick,
+  disabled = false
 }: ButtonProps) {
   return (
     <button
@@ -167,13 +173,13 @@ function addUser(user: User): Promise<void> {
 
 ```typescript
 // ✅ GUT: Zod-Schema für Validierung
-import { z } from 'zod';
+import { z } from "zod";
 
 const userSchema = z.object({
-  email: z.string().email('Ungültige E-Mail-Adresse'),
-  password: z.string().min(8, 'Passwort muss mindestens 8 Zeichen lang sein'),
-  name: z.string().min(2, 'Name muss mindestens 2 Zeichen lang sein'),
-  role: z.enum(['admin', 'user'])
+  email: z.string().email("Ungültige E-Mail-Adresse"),
+  password: z.string().min(8, "Passwort muss mindestens 8 Zeichen lang sein"),
+  name: z.string().min(2, "Name muss mindestens 2 Zeichen lang sein"),
+  role: z.enum(["admin", "user"]),
 });
 
 // ✅ GUT: Validierung in API-Route
@@ -181,23 +187,20 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     const validatedData = userSchema.parse(data);
-    
+
     // Verarbeitung mit validierten Daten
     const user = await createUser(validatedData);
-    
+
     return NextResponse.json(user);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Validierungsfehler', details: error.errors },
-        { status: 400 }
+        { error: "Validierungsfehler", details: error.errors },
+        { status: 400 },
       );
     }
-    
-    return NextResponse.json(
-      { error: 'Server-Fehler' },
-      { status: 500 }
-    );
+
+    return NextResponse.json({ error: "Server-Fehler" }, { status: 500 });
   }
 }
 ```
@@ -207,13 +210,13 @@ export async function POST(request: NextRequest) {
 ```typescript
 // ✅ GUT: Prepared Statements
 export async function getUserById(id: string): Promise<User | null> {
-  const query = 'SELECT * FROM users WHERE id = ?';
+  const query = "SELECT * FROM users WHERE id = ?";
   const [rows] = await pool.execute(query, [id]);
-  
+
   if (Array.isArray(rows) && rows.length > 0) {
     return rows[0] as User;
   }
-  
+
   return null;
 }
 
@@ -221,7 +224,7 @@ export async function getUserById(id: string): Promise<User | null> {
 export async function getUserById(id: string): Promise<User | null> {
   const query = `SELECT * FROM users WHERE id = '${id}'`;
   const [rows] = await pool.execute(query);
-  
+
   return rows[0] as User;
 }
 ```
@@ -243,10 +246,10 @@ function UserProfile({ user }: { user: User }) {
       <h1>{user.name}</h1>
       <p>{user.email}</p>
       {/* Verwende dangerouslySetInnerHTML nur wenn nötig */}
-      <div 
-        dangerouslySetInnerHTML={{ 
-          __html: sanitizeInput(user.bio || '') 
-        }} 
+      <div
+        dangerouslySetInnerHTML={{
+          __html: sanitizeInput(user.bio || '')
+        }}
       />
     </div>
   );
@@ -276,9 +279,9 @@ interface ExpensiveComponentProps {
   onItemClick: (id: string) => void;
 }
 
-export const ExpensiveComponent = memo(function ExpensiveComponent({ 
-  data, 
-  onItemClick 
+export const ExpensiveComponent = memo(function ExpensiveComponent({
+  data,
+  onItemClick
 }: ExpensiveComponentProps) {
   return (
     <div>
@@ -340,10 +343,10 @@ function OptimizedImage({ src, alt }: { src: string; alt: string }) {
 // ✅ GUT: API-Route-Caching
 export async function GET(request: NextRequest) {
   const response = NextResponse.json({ data: 'cached data' });
-  
+
   // Cache für 1 Stunde
   response.headers.set('Cache-Control', 's-maxage=3600, stale-while-revalidate');
-  
+
   return response;
 }
 ```
@@ -352,7 +355,7 @@ export async function GET(request: NextRequest) {
 
 ```typescript
 // ✅ GUT: Connection Pooling
-import mysql from 'mysql2/promise';
+import mysql from "mysql2/promise";
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -364,26 +367,29 @@ const pool = mysql.createPool({
   queueLimit: 0,
   acquireTimeout: 60000,
   timeout: 60000,
-  reconnect: true
+  reconnect: true,
 });
 
 // ✅ GUT: Prepared Statements mit Pool
 export async function getUsers(limit: number = 10): Promise<User[]> {
-  const query = 'SELECT * FROM users ORDER BY created_at DESC LIMIT ?';
+  const query = "SELECT * FROM users ORDER BY created_at DESC LIMIT ?";
   const [rows] = await pool.execute(query, [limit]);
   return rows as User[];
 }
 
 // ✅ GUT: Transaktionen
-export async function createUserWithProfile(userData: UserData, profileData: ProfileData): Promise<User> {
+export async function createUserWithProfile(
+  userData: UserData,
+  profileData: ProfileData,
+): Promise<User> {
   const connection = await pool.getConnection();
-  
+
   try {
     await connection.beginTransaction();
-    
+
     const user = await createUser(connection, userData);
     await createProfile(connection, user.id, profileData);
-    
+
     await connection.commit();
     return user;
   } catch (error) {
@@ -407,17 +413,17 @@ import { Button } from './Button';
 describe('Button', () => {
   it('rendert korrekt mit allen Props', () => {
     const handleClick = jest.fn();
-    
+
     render(
-      <Button 
-        variant="primary" 
-        size="md" 
+      <Button
+        variant="primary"
+        size="md"
         onClick={handleClick}
       >
         Klick mich
       </Button>
     );
-    
+
     const button = screen.getByRole('button', { name: /klick mich/i });
     expect(button).toBeInTheDocument();
     expect(button).toHaveClass('btn-primary', 'btn-md');
@@ -425,16 +431,16 @@ describe('Button', () => {
 
   it('ruft onClick-Handler auf', () => {
     const handleClick = jest.fn();
-    
+
     render(
       <Button variant="primary" onClick={handleClick}>
         Klick mich
       </Button>
     );
-    
+
     const button = screen.getByRole('button');
     fireEvent.click(button);
-    
+
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
@@ -444,7 +450,7 @@ describe('Button', () => {
         Klick mich
       </Button>
     );
-    
+
     const button = screen.getByRole('button');
     expect(button).toBeDisabled();
   });
@@ -455,45 +461,45 @@ describe('Button', () => {
 
 ```typescript
 // ✅ GUT: API-Route-Tests
-import { createMocks } from 'node-mocks-http';
-import { POST } from '@/app/api/users/route';
+import { createMocks } from "node-mocks-http";
+import { POST } from "@/app/api/users/route";
 
-describe('/api/users', () => {
-  it('erstellt einen neuen Benutzer', async () => {
+describe("/api/users", () => {
+  it("erstellt einen neuen Benutzer", async () => {
     const { req, res } = createMocks({
-      method: 'POST',
+      method: "POST",
       body: {
-        name: 'Test User',
-        email: 'test@example.com',
-        password: 'password123'
-      }
+        name: "Test User",
+        email: "test@example.org",
+        password: "password123",
+      },
     });
 
     await POST(req);
 
     expect(res._getStatusCode()).toBe(201);
-    
+
     const data = JSON.parse(res._getData());
-    expect(data.name).toBe('Test User');
-    expect(data.email).toBe('test@example.com');
+    expect(data.name).toBe("Test User");
+    expect(data.email).toBe("test@example.org");
   });
 
-  it('gibt Fehler bei ungültigen Daten zurück', async () => {
+  it("gibt Fehler bei ungültigen Daten zurück", async () => {
     const { req, res } = createMocks({
-      method: 'POST',
+      method: "POST",
       body: {
-        name: '',
-        email: 'invalid-email',
-        password: '123'
-      }
+        name: "",
+        email: "invalid-email",
+        password: "123",
+      },
     });
 
     await POST(req);
 
     expect(res._getStatusCode()).toBe(400);
-    
+
     const data = JSON.parse(res._getData());
-    expect(data.error).toBe('Validierungsfehler');
+    expect(data.error).toBe("Validierungsfehler");
   });
 });
 ```
@@ -502,40 +508,40 @@ describe('/api/users', () => {
 
 ```typescript
 // ✅ GUT: Cypress-Tests
-describe('Benutzer-Verwaltung', () => {
+describe("Benutzer-Verwaltung", () => {
   beforeEach(() => {
-    cy.visit('/admin/users');
-    cy.login('admin@example.com', 'password');
+    cy.visit("/admin/users");
+    cy.login("admin@lopez-it-welt.de", "password");
   });
 
-  it('erstellt einen neuen Benutzer', () => {
+  it("erstellt einen neuen Benutzer", () => {
     cy.get('[data-testid="create-user-button"]').click();
-    
-    cy.get('[data-testid="user-name-input"]').type('Neuer Benutzer');
-    cy.get('[data-testid="user-email-input"]').type('neu@example.com');
-    cy.get('[data-testid="user-password-input"]').type('password123');
-    cy.get('[data-testid="user-role-select"]').select('user');
-    
+
+    cy.get('[data-testid="user-name-input"]').type("Neuer Benutzer");
+    cy.get('[data-testid="user-email-input"]').type("test@example.org");
+    cy.get('[data-testid="user-password-input"]').type("password123");
+    cy.get('[data-testid="user-role-select"]').select("user");
+
     cy.get('[data-testid="save-user-button"]').click();
-    
-    cy.get('[data-testid="success-message"]').should('contain', 'Benutzer erstellt');
-    cy.get('[data-testid="users-table"]').should('contain', 'Neuer Benutzer');
+
+    cy.get('[data-testid="success-message"]').should("contain", "Benutzer erstellt");
+    cy.get('[data-testid="users-table"]').should("contain", "Neuer Benutzer");
   });
 
-  it('bearbeitet einen bestehenden Benutzer', () => {
+  it("bearbeitet einen bestehenden Benutzer", () => {
     cy.get('[data-testid="edit-user-button"]').first().click();
-    
-    cy.get('[data-testid="user-name-input"]').clear().type('Bearbeiteter Name');
+
+    cy.get('[data-testid="user-name-input"]').clear().type("Bearbeiteter Name");
     cy.get('[data-testid="save-user-button"]').click();
-    
-    cy.get('[data-testid="success-message"]').should('contain', 'Benutzer aktualisiert');
+
+    cy.get('[data-testid="success-message"]').should("contain", "Benutzer aktualisiert");
   });
 
-  it('löscht einen Benutzer', () => {
+  it("löscht einen Benutzer", () => {
     cy.get('[data-testid="delete-user-button"]').first().click();
     cy.get('[data-testid="confirm-delete-button"]').click();
-    
-    cy.get('[data-testid="success-message"]').should('contain', 'Benutzer gelöscht');
+
+    cy.get('[data-testid="success-message"]').should("contain", "Benutzer gelöscht");
   });
 });
 ```
@@ -544,7 +550,7 @@ describe('Benutzer-Verwaltung', () => {
 
 ### **Code-Dokumentation**
 
-```typescript
+````typescript
 // ✅ GUT: JSDoc-Kommentare
 /**
  * Erstellt einen neuen Benutzer im System
@@ -557,14 +563,14 @@ describe('Benutzer-Verwaltung', () => {
  * ```typescript
  * const user = await createUser({
  *   name: 'Max Mustermann',
- *   email: 'max@example.com',
+ *   email: 'test@example.org',
  *   password: 'secure123'
  * });
  * ```
  */
 export async function createUser(
   userData: CreateUserData,
-  options: CreateUserOptions = {}
+  options: CreateUserOptions = {},
 ): Promise<User> {
   // Implementation
 }
@@ -576,37 +582,39 @@ export async function createUser(
 interface User {
   /** Eindeutige ID des Benutzers */
   id: string;
-  
+
   /** E-Mail-Adresse des Benutzers (muss eindeutig sein) */
   email: string;
-  
+
   /** Vollständiger Name des Benutzers */
   name: string;
-  
+
   /** Rolle des Benutzers im System */
-  role: 'admin' | 'user';
-  
+  role: "admin" | "user";
+
   /** Zeitpunkt der Erstellung */
   createdAt: Date;
-  
+
   /** Zeitpunkt der letzten Aktualisierung */
   updatedAt: Date;
 }
-```
+````
 
 ### **README-Dokumentation**
 
-```markdown
+````markdown
 # Lopez IT Welt - Development Guidelines
 
 ## 🚀 Schnellstart
 
 ### Voraussetzungen
+
 - Node.js 18.x oder höher
 - MySQL 8.0 oder höher
 - Redis 7.x oder höher
 
 ### Installation
+
 ```bash
 # Repository klonen
 git clone https://github.com/lopez-it-welt/lopez-it-welt.git
@@ -625,8 +633,10 @@ npm run db:migrate
 # Entwicklungsserver starten
 npm run dev
 ```
+````
 
 ### Entwicklung
+
 ```bash
 # Tests ausführen
 npm run test
@@ -665,18 +675,21 @@ src/
 ## 🎯 Coding-Standards
 
 ### TypeScript
+
 - Strikte TypeScript-Konfiguration verwenden
 - Alle Funktionen und Variablen typisieren
 - `any` vermeiden, `unknown` bevorzugen
 - Interface über Type für Objekt-Typen
 
 ### React
+
 - Funktionale Komponenten verwenden
 - Hooks für State-Management
 - Props mit TypeScript-Interfaces definieren
 - Memoization für Performance-kritische Komponenten
 
 ### Styling
+
 - TailwindCSS für Styling
 - CSS-Module für komplexe Komponenten
 - Responsive Design von Anfang an
@@ -685,18 +698,21 @@ src/
 ## 🧪 Testing
 
 ### Unit-Tests
+
 - Jest + React Testing Library
 - Mindestens 80% Code-Coverage
 - Alle öffentlichen Funktionen testen
 - Mocking für externe Dependencies
 
 ### Integration-Tests
+
 - API-Route-Tests
 - Datenbank-Integration-Tests
 - Authentication-Tests
 - Error-Handling-Tests
 
 ### E2E-Tests
+
 - Cypress für Browser-Tests
 - Kritische User-Journeys testen
 - Cross-Browser-Testing
@@ -705,18 +721,21 @@ src/
 ## 🔒 Sicherheit
 
 ### Input-Validierung
+
 - Zod für Schema-Validierung
 - Server-seitige Validierung immer
 - Client-seitige Validierung für UX
 - Sanitization für HTML-Content
 
 ### Authentication
+
 - NextAuth.js für Session-Management
 - JWT für API-Authentifizierung
 - Role-based Access Control (RBAC)
 - Rate Limiting für API-Routen
 
 ### Database
+
 - Prepared Statements verwenden
 - SQL-Injection-Schutz
 - Input-Sanitization
@@ -725,12 +744,14 @@ src/
 ## ⚡ Performance
 
 ### Frontend
+
 - Code-Splitting mit Next.js
 - Lazy Loading für Komponenten
 - Image-Optimization
 - Bundle-Analyse regelmäßig
 
 ### Backend
+
 - Connection Pooling
 - Query-Optimierung
 - Caching-Strategien
@@ -739,12 +760,14 @@ src/
 ## 📊 Monitoring
 
 ### Logging
+
 - Winston für strukturiertes Logging
 - Verschiedene Log-Level
 - Error-Tracking
 - Performance-Monitoring
 
 ### Metrics
+
 - Application Performance Monitoring (APM)
 - Database-Performance
 - User-Experience-Metrics
@@ -753,12 +776,14 @@ src/
 ## 🚀 Deployment
 
 ### CI/CD
+
 - GitHub Actions für Automatisierung
 - Automatische Tests bei jedem Push
 - Staging-Umgebung für Tests
 - Blue-Green-Deployment
 
 ### Environment
+
 - Development
 - Staging
 - Production
@@ -767,17 +792,20 @@ src/
 ## 📞 Support
 
 ### Dokumentation
+
 - API-Dokumentation mit OpenAPI
 - Code-Dokumentation mit JSDoc
 - README-Dateien für alle Module
 - Troubleshooting-Guide
 
 ### Kommunikation
+
 - GitHub Issues für Bugs
 - Pull Requests für Features
 - Code-Reviews obligatorisch
 - Pair-Programming für komplexe Features
-```
+
+````
 
 ## 🔧 **TOOLS & WORKFLOW**
 
@@ -800,32 +828,29 @@ src/
     "cypress": "^13.0.0"
   }
 }
-```
+````
 
 ### **ESLint-Konfiguration**
 
 ```javascript
 // .eslintrc.js
 module.exports = {
-  extends: [
-    'next/core-web-vitals',
-    '@typescript-eslint/recommended'
-  ],
+  extends: ["next/core-web-vitals", "@typescript-eslint/recommended"],
   rules: {
     // TypeScript-Regeln
-    '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
-    
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+
     // React-Regeln
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+
     // Allgemeine Regeln
-    'no-console': 'warn',
-    'prefer-const': 'error',
-    'no-var': 'error'
-  }
+    "no-console": "warn",
+    "prefer-const": "error",
+    "no-var": "error",
+  },
 };
 ```
 
@@ -845,4 +870,4 @@ module.exports = {
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

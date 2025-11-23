@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projekte/lopez-it-welt/src/app/not-found.tsx"],"sourcesContent":["export default function NotFound() {\n  return (\n    <div>\n      <h1>404 - Seite nicht gefunden</h1>\n      <p>Die angeforderte Seite existiert nicht.</p>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;;0BACC,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;0BAAE;;;;;;;;;;;;AAGT","debugId":null}}]
+}

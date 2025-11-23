@@ -1,3 +1,6 @@
 {
-  "/(main)/page": "app/(main)/page.js"
+  "/(main)/page": "app/(main)/page.js",
+  "/api/ab/variant/route": "app/api/ab/variant/route.js",
+  "/api/content/header/route": "app/api/content/header/route.js",
+  "/api/content/hero/route": "app/api/content/hero/route.js"
 }

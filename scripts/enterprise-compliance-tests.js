@@ -3,316 +3,327 @@
 /**
  * 🏢 Enterprise++ Compliance Test Suite
  * Verifikation nach Siemens, IBM, SAP Standards
- * 
+ *
  * @author: Lopez IT Welt
  * @version: 2.0.0
  * @date: 2025-07-06
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 class EnterpriseComplianceTester {
-    constructor() {
-        this.results = {
-            total: 0,
-            passed: 0,
-            failed: 0,
-            warnings: 0,
-            details: []
-        };
-        this.startTime = Date.now();
+  constructor() {
+    this.results = {
+      total: 0,
+      passed: 0,
+      failed: 0,
+      warnings: 0,
+      details: [],
+    };
+    this.startTime = Date.now();
+  }
+
+  // 🧪 Test 1: Verzeichnisstruktur-Validierung
+  testDirectoryStructure() {
+    console.log("🔍 Test 1: Verzeichnisstruktur-Validierung...");
+
+    const requiredDirs = [
+      "01-PROJEKT-MANAGEMENT",
+      "02-ARCHITEKTUR",
+      "03-ENTWICKLUNG",
+      "04-ENTERPRISE",
+      "05-KI-AGENTEN",
+      "06-ADMIN-BEREICH",
+      "07-QUALITAET-SICHERUNG",
+      "08-BUSINESS",
+      "09-REFERENZEN",
+      "10-APPENDIX",
+    ];
+
+    let passed = 0;
+    const details = [];
+
+    for (const dir of requiredDirs) {
+      const dirPath = path.join("docs", dir);
+      if (fs.existsSync(dirPath)) {
+        passed++;
+        details.push(`✅ ${dir}: Vorhanden`);
+      } else {
+        details.push(`❌ ${dir}: Fehlt`);
+      }
     }
 
-    // 🧪 Test 1: Verzeichnisstruktur-Validierung
-    testDirectoryStructure() {
-        console.log('🔍 Test 1: Verzeichnisstruktur-Validierung...');
+    this.addResult("Verzeichnisstruktur", passed, requiredDirs.length, details);
+  }
 
-        const requiredDirs = [
-            '01-PROJEKT-MANAGEMENT',
-            '02-ARCHITEKTUR',
-            '03-ENTWICKLUNG',
-            '04-ENTERPRISE',
-            '05-KI-AGENTEN',
-            '06-ADMIN-BEREICH',
-            '07-QUALITAET-SICHERUNG',
-            '08-BUSINESS',
-            '09-REFERENZEN',
-            '10-APPENDIX'
-        ];
+  // 🧪 Test 2: README.md Validierung
+  testReadmeFiles() {
+    console.log("📝 Test 2: README.md Validierung...");
 
-        let passed = 0;
-        const details = [];
+    const docsPath = "docs";
+    const dirs = fs
+      .readdirSync(docsPath, { withFileTypes: true })
+      .filter((dirent) => dirent.isDirectory())
+      .map((dirent) => dirent.name);
 
-        for (const dir of requiredDirs) {
-            const dirPath = path.join('docs', dir);
-            if (fs.existsSync(dirPath)) {
-                passed++;
-                details.push(`✅ ${dir}: Vorhanden`);
-            } else {
-                details.push(`❌ ${dir}: Fehlt`);
-            }
-        }
+    let passed = 0;
+    const details = [];
 
-        this.addResult('Verzeichnisstruktur', passed, requiredDirs.length, details);
+    for (const dir of dirs) {
+      const readmePath = path.join(docsPath, dir, "README.md");
+      if (fs.existsSync(readmePath)) {
+        passed++;
+        details.push(`✅ ${dir}/README.md: Vorhanden`);
+      } else {
+        details.push(`❌ ${dir}/README.md: Fehlt`);
+      }
     }
 
-    // 🧪 Test 2: README.md Validierung
-    testReadmeFiles() {
-        console.log('📝 Test 2: README.md Validierung...');
+    this.addResult("README.md Dateien", passed, dirs.length, details);
+  }
 
-        const docsPath = 'docs';
-        const dirs = fs.readdirSync(docsPath, { withFileTypes: true })
-            .filter(dirent => dirent.isDirectory())
-            .map(dirent => dirent.name);
+  // 🧪 Test 3: Performance-Optimierung
+  testPerformanceOptimization() {
+    console.log("⚡ Test 3: Performance-Optimierung...");
 
-        let passed = 0;
-        const details = [];
+    const agentMemoryPath = "data/agenten-gedaechtnis.json";
+    let passed = 0;
+    const details = [];
 
-        for (const dir of dirs) {
-            const readmePath = path.join(docsPath, dir, 'README.md');
-            if (fs.existsSync(readmePath)) {
-                passed++;
-                details.push(`✅ ${dir}/README.md: Vorhanden`);
-            } else {
-                details.push(`❌ ${dir}/README.md: Fehlt`);
-            }
-        }
+    if (fs.existsSync(agentMemoryPath)) {
+      const stats = fs.statSync(agentMemoryPath);
+      const sizeKB = stats.size / 1024;
 
-        this.addResult('README.md Dateien', passed, dirs.length, details);
+      if (sizeKB < 100) {
+        // Ziel: < 100 KB
+        passed++;
+        details.push(`✅ Agenten-Gedächtnis: ${sizeKB.toFixed(2)} KB (Ziel: < 100 KB)`);
+      } else {
+        details.push(`❌ Agenten-Gedächtnis: ${sizeKB.toFixed(2)} KB (Ziel: < 100 KB)`);
+      }
+    } else {
+      details.push(`❌ Agenten-Gedächtnis: Datei nicht gefunden`);
     }
 
-    // 🧪 Test 3: Performance-Optimierung
-    testPerformanceOptimization() {
-        console.log('⚡ Test 3: Performance-Optimierung...');
+    this.addResult("Performance-Optimierung", passed, 1, details);
+  }
 
-        const agentMemoryPath = 'data/agenten-gedaechtnis.json';
-        let passed = 0;
-        const details = [];
+  // 🧪 Test 4: Markdown-Dateien Validierung
+  testMarkdownFiles() {
+    console.log("📄 Test 4: Markdown-Dateien Validierung...");
 
-        if (fs.existsSync(agentMemoryPath)) {
-            const stats = fs.statSync(agentMemoryPath);
-            const sizeKB = stats.size / 1024;
+    const docsPath = "docs";
+    const markdownFiles = this.findMarkdownFiles(docsPath);
 
-            if (sizeKB < 100) { // Ziel: < 100 KB
-                passed++;
-                details.push(`✅ Agenten-Gedächtnis: ${sizeKB.toFixed(2)} KB (Ziel: < 100 KB)`);
-            } else {
-                details.push(`❌ Agenten-Gedächtnis: ${sizeKB.toFixed(2)} KB (Ziel: < 100 KB)`);
-            }
+    let passed = 0;
+    const details = [];
+
+    for (const file of markdownFiles) {
+      try {
+        const content = fs.readFileSync(file, "utf8");
+        if (content.length > 0) {
+          passed++;
+          details.push(`✅ ${file}: Gültig`);
         } else {
-            details.push(`❌ Agenten-Gedächtnis: Datei nicht gefunden`);
+          details.push(`⚠️ ${file}: Leer`);
         }
-
-        this.addResult('Performance-Optimierung', passed, 1, details);
+      } catch (error) {
+        details.push(`❌ ${file}: Fehler beim Lesen`);
+      }
     }
 
-    // 🧪 Test 4: Markdown-Dateien Validierung
-    testMarkdownFiles() {
-        console.log('📄 Test 4: Markdown-Dateien Validierung...');
+    this.addResult("Markdown-Dateien", passed, markdownFiles.length, details);
+  }
 
-        const docsPath = 'docs';
-        const markdownFiles = this.findMarkdownFiles(docsPath);
+  // 🧪 Test 5: Enterprise++ Standards
+  testEnterpriseStandards() {
+    console.log("🏢 Test 5: Enterprise++ Standards...");
 
-        let passed = 0;
-        const details = [];
+    const standards = [
+      { name: "Inhaltsverzeichnis", file: "docs/00-00-inhaltsverzeichnis.md" },
+      { name: "Projektstatus", file: "docs/00-01-projekt-status.md" },
+      {
+        name: "Compliance-Report",
+        file: "docs/ENTERPRISE-COMPLIANCE-REPORT.md",
+      },
+    ];
 
-        for (const file of markdownFiles) {
-            try {
-                const content = fs.readFileSync(file, 'utf8');
-                if (content.length > 0) {
-                    passed++;
-                    details.push(`✅ ${file}: Gültig`);
-                } else {
-                    details.push(`⚠️ ${file}: Leer`);
-                }
-            } catch (error) {
-                details.push(`❌ ${file}: Fehler beim Lesen`);
-            }
-        }
+    let passed = 0;
+    const details = [];
 
-        this.addResult('Markdown-Dateien', passed, markdownFiles.length, details);
+    for (const standard of standards) {
+      if (fs.existsSync(standard.file)) {
+        passed++;
+        details.push(`✅ ${standard.name}: Vorhanden`);
+      } else {
+        details.push(`❌ ${standard.name}: Fehlt`);
+      }
     }
 
-    // 🧪 Test 5: Enterprise++ Standards
-    testEnterpriseStandards() {
-        console.log('🏢 Test 5: Enterprise++ Standards...');
+    this.addResult("Enterprise++ Standards", passed, standards.length, details);
+  }
 
-        const standards = [
-            { name: 'Inhaltsverzeichnis', file: 'docs/00-00-inhaltsverzeichnis.md' },
-            { name: 'Projektstatus', file: 'docs/00-01-projekt-status.md' },
-            { name: 'Compliance-Report', file: 'docs/ENTERPRISE-COMPLIANCE-REPORT.md' }
-        ];
+  // 🧪 Test 6: Backup-System
+  testBackupSystem() {
+    console.log("💾 Test 6: Backup-System...");
 
-        let passed = 0;
-        const details = [];
+    const backupFiles = fs
+      .readdirSync("data")
+      .filter((file) => file.includes("backup") || file.includes("agenten-gedaechtnis-backup"));
 
-        for (const standard of standards) {
-            if (fs.existsSync(standard.file)) {
-                passed++;
-                details.push(`✅ ${standard.name}: Vorhanden`);
-            } else {
-                details.push(`❌ ${standard.name}: Fehlt`);
-            }
-        }
+    let passed = 0;
+    const details = [];
 
-        this.addResult('Enterprise++ Standards', passed, standards.length, details);
+    if (backupFiles.length > 0) {
+      passed++;
+      details.push(`✅ Backup-Dateien gefunden: ${backupFiles.length}`);
+    } else {
+      details.push(`❌ Keine Backup-Dateien gefunden`);
     }
 
-    // 🧪 Test 6: Backup-System
-    testBackupSystem() {
-        console.log('💾 Test 6: Backup-System...');
+    this.addResult("Backup-System", passed, 1, details);
+  }
 
-        const backupFiles = fs.readdirSync('data')
-            .filter(file => file.includes('backup') || file.includes('agenten-gedaechtnis-backup'));
+  // 🧪 Test 7: Compliance-Validierung
+  testComplianceValidation() {
+    console.log("🛡️ Test 7: Compliance-Validierung...");
 
-        let passed = 0;
-        const details = [];
+    const complianceFiles = [
+      "docs/datenschutz/page.tsx",
+      "docs/cookie-einstellungen/page.tsx",
+      "docs/impressum/page.tsx",
+    ];
 
-        if (backupFiles.length > 0) {
-            passed++;
-            details.push(`✅ Backup-Dateien gefunden: ${backupFiles.length}`);
-        } else {
-            details.push(`❌ Keine Backup-Dateien gefunden`);
-        }
+    let passed = 0;
+    const details = [];
 
-        this.addResult('Backup-System', passed, 1, details);
+    for (const file of complianceFiles) {
+      if (fs.existsSync(file)) {
+        passed++;
+        details.push(`✅ ${file}: DSGVO-Compliant`);
+      } else {
+        details.push(`❌ ${file}: Fehlt`);
+      }
     }
 
-    // 🧪 Test 7: Compliance-Validierung
-    testComplianceValidation() {
-        console.log('🛡️ Test 7: Compliance-Validierung...');
+    this.addResult("Compliance-Validierung", passed, complianceFiles.length, details);
+  }
 
-        const complianceFiles = [
-            'docs/datenschutz/page.tsx',
-            'docs/cookie-einstellungen/page.tsx',
-            'docs/impressum/page.tsx'
-        ];
+  // Hilfsmethoden
+  findMarkdownFiles(dir) {
+    const files = [];
+    const items = fs.readdirSync(dir);
 
-        let passed = 0;
-        const details = [];
+    for (const item of items) {
+      const fullPath = path.join(dir, item);
+      const stat = fs.statSync(fullPath);
 
-        for (const file of complianceFiles) {
-            if (fs.existsSync(file)) {
-                passed++;
-                details.push(`✅ ${file}: DSGVO-Compliant`);
-            } else {
-                details.push(`❌ ${file}: Fehlt`);
-            }
-        }
-
-        this.addResult('Compliance-Validierung', passed, complianceFiles.length, details);
+      if (stat.isDirectory()) {
+        files.push(...this.findMarkdownFiles(fullPath));
+      } else if (item.endsWith(".md")) {
+        files.push(fullPath);
+      }
     }
 
-    // Hilfsmethoden
-    findMarkdownFiles(dir) {
-        const files = [];
-        const items = fs.readdirSync(dir);
+    return files;
+  }
 
-        for (const item of items) {
-            const fullPath = path.join(dir, item);
-            const stat = fs.statSync(fullPath);
+  addResult(testName, passed, total, details) {
+    this.results.total += total;
+    this.results.passed += passed;
+    this.results.failed += total - passed;
 
-            if (stat.isDirectory()) {
-                files.push(...this.findMarkdownFiles(fullPath));
-            } else if (item.endsWith('.md')) {
-                files.push(fullPath);
-            }
-        }
+    this.results.details.push({
+      test: testName,
+      passed,
+      total,
+      percentage: ((passed / total) * 100).toFixed(1),
+      details,
+    });
+  }
 
-        return files;
+  // 🎯 Haupttest-Methode
+  runAllTests() {
+    console.log("🏢 Enterprise++ Compliance Test Suite");
+    console.log("=====================================\n");
+
+    this.testDirectoryStructure();
+    this.testReadmeFiles();
+    this.testPerformanceOptimization();
+    this.testMarkdownFiles();
+    this.testEnterpriseStandards();
+    this.testBackupSystem();
+    this.testComplianceValidation();
+
+    this.generateReport();
+  }
+
+  // 📊 Report-Generierung
+  generateReport() {
+    const endTime = Date.now();
+    const duration = ((endTime - this.startTime) / 1000).toFixed(2);
+
+    console.log("\n📊 ENTERPRISE++ COMPLIANCE REPORT");
+    console.log("==================================");
+    console.log(`⏱️  Testdauer: ${duration} Sekunden`);
+    console.log(`📈 Gesamt: ${this.results.total} Tests`);
+    console.log(`✅ Bestanden: ${this.results.passed}`);
+    console.log(`❌ Fehlgeschlagen: ${this.results.failed}`);
+    console.log(
+      `📊 Erfolgsrate: ${((this.results.passed / this.results.total) * 100).toFixed(1)}%`,
+    );
+
+    console.log("\n📋 DETAILIERTE ERGEBNISSE:");
+    console.log("===========================");
+
+    for (const result of this.results.details) {
+      console.log(`\n🧪 ${result.test}:`);
+      console.log(`   Erfolgsrate: ${result.percentage}% (${result.passed}/${result.total})`);
+
+      for (const detail of result.details) {
+        console.log(`   ${detail}`);
+      }
     }
 
-    addResult(testName, passed, total, details) {
-        this.results.total += total;
-        this.results.passed += passed;
-        this.results.failed += (total - passed);
+    // 🎯 Finale Bewertung
+    const successRate = (this.results.passed / this.results.total) * 100;
 
-        this.results.details.push({
-            test: testName,
-            passed,
-            total,
-            percentage: ((passed / total) * 100).toFixed(1),
-            details
-        });
+    console.log("\n🎯 FINALE BEWERTUNG:");
+    console.log("====================");
+
+    if (successRate >= 95) {
+      console.log("🏆 EXCELLENT: 100% Enterprise++ Compliant!");
+      console.log("✅ Erfüllt alle Siemens, IBM, SAP Standards");
+    } else if (successRate >= 90) {
+      console.log("✅ GOOD: Enterprise++ Compliant");
+      console.log("⚠️  Einige Verbesserungen empfohlen");
+    } else {
+      console.log("❌ NEEDS IMPROVEMENT: Nicht Enterprise++ Compliant");
+      console.log("🔧 Erhebliche Verbesserungen erforderlich");
     }
 
-    // 🎯 Haupttest-Methode
-    runAllTests() {
-        console.log('🏢 Enterprise++ Compliance Test Suite');
-        console.log('=====================================\n');
+    // 📄 Report in Datei speichern
+    const report = {
+      timestamp: new Date().toISOString(),
+      duration: `${duration}s`,
+      results: this.results,
+      successRate: successRate.toFixed(1),
+      compliant: successRate >= 95,
+    };
 
-        this.testDirectoryStructure();
-        this.testReadmeFiles();
-        this.testPerformanceOptimization();
-        this.testMarkdownFiles();
-        this.testEnterpriseStandards();
-        this.testBackupSystem();
-        this.testComplianceValidation();
-
-        this.generateReport();
-    }
-
-    // 📊 Report-Generierung
-    generateReport() {
-        const endTime = Date.now();
-        const duration = ((endTime - this.startTime) / 1000).toFixed(2);
-
-        console.log('\n📊 ENTERPRISE++ COMPLIANCE REPORT');
-        console.log('==================================');
-        console.log(`⏱️  Testdauer: ${duration} Sekunden`);
-        console.log(`📈 Gesamt: ${this.results.total} Tests`);
-        console.log(`✅ Bestanden: ${this.results.passed}`);
-        console.log(`❌ Fehlgeschlagen: ${this.results.failed}`);
-        console.log(`📊 Erfolgsrate: ${((this.results.passed / this.results.total) * 100).toFixed(1)}%`);
-
-        console.log('\n📋 DETAILIERTE ERGEBNISSE:');
-        console.log('===========================');
-
-        for (const result of this.results.details) {
-            console.log(`\n🧪 ${result.test}:`);
-            console.log(`   Erfolgsrate: ${result.percentage}% (${result.passed}/${result.total})`);
-
-            for (const detail of result.details) {
-                console.log(`   ${detail}`);
-            }
-        }
-
-        // 🎯 Finale Bewertung
-        const successRate = (this.results.passed / this.results.total) * 100;
-
-        console.log('\n🎯 FINALE BEWERTUNG:');
-        console.log('====================');
-
-        if (successRate >= 95) {
-            console.log('🏆 EXCELLENT: 100% Enterprise++ Compliant!');
-            console.log('✅ Erfüllt alle Siemens, IBM, SAP Standards');
-        } else if (successRate >= 90) {
-            console.log('✅ GOOD: Enterprise++ Compliant');
-            console.log('⚠️  Einige Verbesserungen empfohlen');
-        } else {
-            console.log('❌ NEEDS IMPROVEMENT: Nicht Enterprise++ Compliant');
-            console.log('🔧 Erhebliche Verbesserungen erforderlich');
-        }
-
-        // 📄 Report in Datei speichern
-        const report = {
-            timestamp: new Date().toISOString(),
-            duration: `${duration}s`,
-            results: this.results,
-            successRate: successRate.toFixed(1),
-            compliant: successRate >= 95
-        };
-
-        fs.writeFileSync('data/enterprise-compliance-test-report.json', JSON.stringify(report, null, 2));
-        console.log('\n📄 Report gespeichert: data/enterprise-compliance-test-report.json');
-    }
+    fs.writeFileSync(
+      "data/enterprise-compliance-test-report.json",
+      JSON.stringify(report, null, 2),
+    );
+    console.log("\n📄 Report gespeichert: data/enterprise-compliance-test-report.json");
+  }
 }
 
 // 🚀 Test ausführen
 if (require.main === module) {
-    const tester = new EnterpriseComplianceTester();
-    tester.runAllTests();
+  const tester = new EnterpriseComplianceTester();
+  tester.runAllTests();
 }
 
-module.exports = EnterpriseComplianceTester; 
+module.exports = EnterpriseComplianceTester;

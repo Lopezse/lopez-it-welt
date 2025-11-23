@@ -19,6 +19,7 @@ const PUBLIC_ROUTES = [
   "/api/monitoring/status",
   "/api/appointments/ical/export", // iCal-Export ist öffentlich (keine Auth nötig)
   "/api/invoices/pdf", // PDF-Export ist öffentlich (keine Auth nötig)
+  "/api/invoices", // TEMPORÄR: Für Debugging öffentlich
   "/api/admin/contact-messages/stats", // Contact Stats ist öffentlich (für Badge-Updates)
 ];
 
@@ -93,3 +94,11 @@ export function rbacApiGuard(request: NextRequest): NextResponse | null {
 
   return null; // Weiterleitung zur eigentlichen Route
 }
+
+
+
+
+
+
+
+

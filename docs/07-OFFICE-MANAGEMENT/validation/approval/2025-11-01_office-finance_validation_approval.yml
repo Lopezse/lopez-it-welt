@@ -5,7 +5,7 @@ status: APPROVED
 approved_by:
   name: Ramiro Lopez Rodriguez
   role: Owner, Lopez IT Welt
-  email: ra-lopez@t-online.de
+  email: ramiro-lopez-rodriguez@lopez-it-welt.de
 artifacts:
   - docs/07-OFFICE-MANAGEMENT/validation/validation-report-final.md
   - docs/07-OFFICE-MANAGEMENT/validation/validation-summary.md
@@ -24,4 +24,3 @@ attestation:
     STATUS.md: 34912157D3B94CAFE5C76B59A9145FE5569C79053C4D75E975B1AC1955F347D2
     README.md: 06624CB0E8B656F6376204BF73E34153CE3AA663289436D3F6BBD5D9AEE291A3
 notes: "Freigabe gemäß Enterprise++: Docs = Source of Truth. Husky-Gate darf passieren."
-

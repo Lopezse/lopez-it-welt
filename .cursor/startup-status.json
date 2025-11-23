@@ -1,0 +1,13 @@
+{
+  "antiRuleBreakActive": true,
+  "agentsActive": true,
+  "enterpriseRulesLoaded": true,
+  "monitoringActive": true,
+  "cursorIntegrationActive": true,
+  "startupTime": "2025-07-15T17:11:25.090Z",
+  "errorCount": 0,
+  "lastCheck": "2025-07-15T17:12:25.108Z",
+  "violationCount": 0,
+  "violations": [],
+  "lastSaved": "2025-07-15T17:12:25.109Z"
+}

@@ -1,0 +1,235 @@
+# 🛡️ Cursor-Regeln für Lopez IT Welt Enterprise++
+# Automatische Anti-Regelbruch-System-Aktivierung
+
+# =====================================================
+# ENTERPRISE++ CURSOR-INTEGRATION
+# =====================================================
+
+# 🚀 AUTOMATISCHE AKTIVIERUNG
+# Bei jedem Cursor-Start automatisch laden:
+# import { initializeCursorIntegration } from './src/lib/cursor-integration';
+
+# 🛡️ ANTI-REGELBRUCH-SYSTEM
+# Automatische Aktivierung bei Cursor-Start
+strictMode: true
+zeroTolerance: true
+autoBlock: true
+requireApproval: true
+validateBeforeAction: true
+validateAfterAction: true
+blockOnViolation: true
+
+# 🤖 AGENTEN-AKTIVIERUNG
+# Alle Agenten automatisch starten
+autoActivateAgents: true
+agentMonitoring: true
+agentValidation: true
+
+# 📋 ENTERPRISE-REGELN
+# Alle Enterprise++ Regeln automatisch laden
+autoLoadEnterpriseRules: true
+ruleValidation: true
+ruleEnforcement: true
+
+# 🔍 VOR JEDER AKTION PRÜFEN
+# Automatische Validierung vor jeder Cursor-Aktion
+preActionValidation: true
+postActionValidation: true
+violationBlocking: true
+
+# 📊 STATUS-ÜBERWACHUNG
+# Automatische Status-Anzeige
+statusMonitoring: true
+statusReporting: true
+statusLogging: true
+
+# =====================================================
+# ENTERPRISE++ STANDARDS
+# =====================================================
+
+# 🏢 ENTERPRISE-ARCHITEKTUR
+enterpriseMode: true
+scalableArchitecture: true
+maintainableCode: true
+professionalStandards: true
+
+# 🔒 SICHERHEIT
+securityFirst: true
+privacyProtection: true
+dataProtection: true
+accessControl: true
+
+# 📋 COMPLIANCE
+dsgvoCompliance: true
+licenseCompliance: true
+auditTrail: true
+documentationRequired: true
+
+# 🎯 QUALITÄT
+qualityStandards: true
+codeReview: true
+testingRequired: true
+performanceOptimization: true
+
+# =====================================================
+# ANTI-REGELBRUCH-KONFIGURATION
+# =====================================================
+
+# 🚨 BLOCKIERUNG BEI VERSTÖSSEN
+blockOnRuleViolation: true
+blockOnSecurityViolation: true
+blockOnComplianceViolation: true
+blockOnQualityViolation: true
+
+# ⏱️ ZEITERFASSUNG
+requireSystemTime: true
+blockDateCopying: true
+validateTimestamps: true
+enforceTimeTracking: true
+
+# 📄 DOKUMENTATION
+protectMdStructure: true
+requireAppendOnly: true
+preventOverwriting: true
+documentationRequired: true
+
+# 🔄 SESSION-MANAGEMENT
+requireSessionSwitch: true
+blockOverlappingSessions: true
+sessionValidation: true
+sessionTracking: true
+
+# =====================================================
+# AGENTEN-KONFIGURATION
+# =====================================================
+
+# 🤖 AGENTEN-AKTIVIERUNG
+styleguardEnabled: true
+securityAuditEnabled: true
+deployBuddyEnabled: true
+monitoringWaecherEnabled: true
+complianceCheckerEnabled: true
+aiTestAgentEnabled: true
+snapshotArchivierungEnabled: true
+
+# 🔍 AGENTEN-ÜBERWACHUNG
+agentMonitoring: true
+agentValidation: true
+agentReporting: true
+agentLogging: true
+
+# 🚨 AGENTEN-BLOCKIERUNG
+agentBlockOnViolation: true
+agentBlockOnSecurityIssue: true
+agentBlockOnComplianceIssue: true
+agentBlockOnQualityIssue: true
+
+# =====================================================
+# CURSOR-INTEGRATION
+# =====================================================
+
+# 🚀 AUTOMATISCHE INITIALISIERUNG
+autoInitialize: true
+autoLoadRules: true
+autoActivateAgents: true
+autoStartMonitoring: true
+
+# 🔍 AUTOMATISCHE VALIDIERUNG
+autoValidateBeforeAction: true
+autoValidateAfterAction: true
+autoCheckCompliance: true
+autoCheckSecurity: true
+
+# 📊 AUTOMATISCHE ÜBERWACHUNG
+autoMonitorStatus: true
+autoReportViolations: true
+autoLogActivities: true
+autoTrackChanges: true
+
+# =====================================================
+# ENTERPRISE++ WORKFLOW
+# =====================================================
+
+# 📋 WORKFLOW-REGELN
+requireApproval: true
+requireDocumentation: true
+requireTesting: true
+requireReview: true
+
+# 🔄 WORKFLOW-VALIDIERUNG
+validateWorkflow: true
+enforceWorkflow: true
+trackWorkflow: true
+reportWorkflow: true
+
+# 🎯 WORKFLOW-ZIELE
+enterpriseQuality: true
+enterpriseSecurity: true
+enterpriseCompliance: true
+enterpriseScalability: true
+
+# =====================================================
+# AKTIVIERUNG
+# =====================================================
+
+# 🚀 SYSTEM AKTIVIEREN
+# Diese Zeile aktiviert das komplette System
+activateEnterpriseSystem: true
+
+# 🛡️ ANTI-REGELBRUCH AKTIVIEREN
+# Diese Zeile aktiviert das Anti-Regelbruch-System
+activateAntiRuleBreakSystem: true
+
+# 🤖 AGENTEN AKTIVIEREN
+# Diese Zeile aktiviert alle Agenten
+activateAllAgents: true
+
+# 📋 REGELN AKTIVIEREN
+# Diese Zeile aktiviert alle Enterprise-Regeln
+activateEnterpriseRules: true
+
+# =====================================================
+# ÜBERWACHUNGS-REGELN
+# =====================================================
+
+# 🚨 VOR JEDER AKTION PRÜFEN
+# Diese Regeln werden vor jeder Aktion ausgeführt
+beforeAction:
+  - validateSystemTime
+  - checkApproval
+  - validateMdStructure
+  - checkDateCopying
+  - validateTimeTracking
+
+# 🛡️ BLOCKIERUNGS-REGELN
+# Diese Aktionen werden automatisch blockiert
+blockedActions:
+  - "Datumskopieren ohne Freigabe"
+  - "Md-Struktur-Änderungen ohne Freigabe"
+  - "System-Zeit-Verwendung ohne Freigabe"
+  - "Zeiterfassung ohne Wechsel"
+  - "Überschreiben von Dokumentation"
+
+# 📊 ÜBERWACHUNGS-AUSGABEN
+# Diese Meldungen werden bei Aktivierung angezeigt
+monitoringMessages:
+  - "🛡️ Anti-Regelbruch-System: AKTIV"
+  - "🤖 Agenten: AKTIV"
+  - "📋 Enterprise-Regeln: GELADEN"
+  - "🚨 Überwachung: AKTIV"
+  - "⏰ System-Zeit: VALIDIERT"
+  - "📄 Md-Struktur: GESCHÜTZT"
+  - "🔒 Freigabe: ERFORDERLICH"
+
+# 🔍 VALIDIERUNGS-REGELN
+# Diese Validierungen werden ausgeführt
+validations:
+  systemTime: true
+  approval: true
+  mdStructure: true
+  dateCopying: true
+  timeTracking: true
+  sessionSwitch: true
+  compliance: true
+  security: true
+  quality: true 

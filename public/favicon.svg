@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+     shape-rendering="geometricPrecision" text-rendering="optimizeLegibility" 
+     image-rendering="optimizeQuality">
+  <defs>
+    <!-- Farbverlauf für LW-Quadrat (wie im echten Logo) -->
+    <linearGradient id="faviconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0055A4"/>
+      <stop offset="100%" stop-color="#00BFFF"/>
+    </linearGradient>
+    <!-- Glow für LW-Quadrat -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- LW Quadrat mit Glow (wie im echten Logo) -->
+  <rect x="4" y="4" width="24" height="24" rx="6" ry="6"
+        fill="url(#faviconGradient)" filter="url(#neonGlow)"/>
+  <text x="16" y="20" font-family="Montserrat, Arial, sans-serif"
+        font-size="14" font-weight="bold" text-anchor="middle" fill="white"
+        text-rendering="optimizeLegibility" shape-rendering="geometricPrecision">LW</text>
+</svg>

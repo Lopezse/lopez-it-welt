@@ -17,7 +17,8 @@ Write-Host "`n📦 Installiere Dependencies..." -ForegroundColor Yellow
 try {
     npm install mysql2
     Write-Host "✅ Dependencies installiert" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "❌ Fehler beim Installieren der Dependencies: $($_.Exception.Message)" -ForegroundColor Red
     exit 1
 }
@@ -45,16 +46,19 @@ try {
         # MySQL Command ausführen (XAMPP Standard)
         $mysqlCmd = "C:\xampp\mysql\bin\mysql.exe"
         if (Test-Path $mysqlCmd) {
-            & $mysqlCmd -u root -p"" < $schemaPath
+            Get-Content $schemaPath | & $mysqlCmd -u root -p""
             Write-Host "✅ Datenbank-Schema erstellt" -ForegroundColor Green
-        } else {
+        }
+        else {
             Write-Host "⚠️ MySQL nicht in XAMPP gefunden. Bitte führe das Schema manuell aus:" -ForegroundColor Yellow
             Write-Host "   mysql -u root -p < database/compliance_schema_mysql.sql" -ForegroundColor Cyan
         }
-    } else {
+    }
+    else {
         Write-Host "❌ Schema-Datei nicht gefunden: $schemaPath" -ForegroundColor Red
     }
-} catch {
+}
+catch {
     Write-Host "❌ Fehler beim Datenbank-Setup: $($_.Exception.Message)" -ForegroundColor Red
 }
 
@@ -67,7 +71,8 @@ Write-Host "`n📁 Führe MD-zu-DB Migration aus..." -ForegroundColor Yellow
 try {
     node scripts/md-to-db-migration.js
     Write-Host "✅ Migration abgeschlossen" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "❌ Fehler bei der Migration: $($_.Exception.Message)" -ForegroundColor Red
 }
 
@@ -80,7 +85,8 @@ Write-Host "`n🔍 Teste Compliance-System..." -ForegroundColor Yellow
 try {
     node scripts/db-compliance-system.js
     Write-Host "✅ Compliance-System funktioniert" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "❌ Fehler beim Testen: $($_.Exception.Message)" -ForegroundColor Red
 }
 
@@ -98,7 +104,8 @@ try {
     }
     
     Write-Host "✅ Agenten-System bereit für DB-Integration" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "❌ Fehler beim Aktualisieren: $($_.Exception.Message)" -ForegroundColor Red
 }
 
@@ -118,7 +125,8 @@ try {
     
     $packageJson | ConvertTo-Json -Depth 10 | Set-Content "package.json"
     Write-Host "✅ NPM Scripts hinzugefügt" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "❌ Fehler beim Hinzufügen der Scripts: $($_.Exception.Message)" -ForegroundColor Red
 }
 

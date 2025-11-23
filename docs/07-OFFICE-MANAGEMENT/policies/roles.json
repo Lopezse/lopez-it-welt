@@ -1,0 +1,135 @@
+{
+  "$schema": "https://lopez-it-welt/schemas/rbac-policy.schema.json",
+  "version": "1.0.0",
+  "principle": "docs-are-source-of-truth",
+  "roles": {
+    "admin": {
+      "inherits": [
+        "finance_manager",
+        "project_lead",
+        "support",
+        "user",
+        "report_viewer",
+        "buchhaltung_readonly"
+      ],
+      "ui": ["*"],
+      "api": ["*"]
+    },
+    "finance_manager": {
+      "ui": [
+        "office_finance",
+        "office_finance.crm_projects",
+        "office_finance.orders_tasks",
+        "office_finance.calendar",
+        "office_finance.invoices",
+        "office_finance.einvoice",
+        "office_finance.reporting",
+        "office_finance.audit"
+      ],
+      "api": [
+        "GET:/api/projects",
+        "POST:/api/projects",
+        "PUT:/api/projects/*",
+        "DELETE:/api/projects/*",
+        "GET:/api/orders",
+        "POST:/api/orders",
+        "GET:/api/orders/*",
+        "PUT:/api/orders/*",
+        "DELETE:/api/orders/*",
+        "GET:/api/tasks",
+        "POST:/api/tasks",
+        "GET:/api/tasks/*",
+        "PUT:/api/tasks/*",
+        "DELETE:/api/tasks/*",
+        "GET:/api/appointments",
+        "POST:/api/appointments",
+        "GET:/api/appointments/*",
+        "PUT:/api/appointments/*",
+        "DELETE:/api/appointments/*",
+        "GET:/api/appointments/ical/export",
+        "GET:/api/invoices",
+        "POST:/api/invoices",
+        "GET:/api/invoices/*",
+        "PUT:/api/invoices/*",
+        "DELETE:/api/invoices/*",
+        "POST:/api/invoices/pdf",
+        "PUT:/api/invoices/status",
+        "POST:/api/einvoice/inbox/upload",
+        "POST:/api/einvoice/outbox/create",
+        "POST:/api/einvoice/send",
+        "GET:/api/audit",
+        "GET:/api/time/entries"
+      ]
+    },
+    "project_lead": {
+      "ui": [
+        "projects",
+        "office_finance.crm_projects",
+        "office_finance.orders_tasks",
+        "office_finance.calendar"
+      ],
+      "api": [
+        "GET:/api/projects",
+        "POST:/api/projects",
+        "PUT:/api/projects/*",
+        "GET:/api/orders",
+        "POST:/api/orders",
+        "GET:/api/orders/*",
+        "PUT:/api/orders/*",
+        "GET:/api/tasks",
+        "POST:/api/tasks",
+        "GET:/api/tasks/*",
+        "PUT:/api/tasks/*",
+        "GET:/api/appointments",
+        "POST:/api/appointments",
+        "GET:/api/appointments/*",
+        "PUT:/api/appointments/*",
+        "PUT:/api/admin/time-tracking/approve/*"
+      ]
+    },
+    "support": {
+      "ui": ["support", "documentation"],
+      "api": ["GET:/api/projects", "GET:/api/orders", "GET:/api/tasks", "GET:/api/appointments"]
+    },
+    "user": {
+      "ui": ["dashboard"],
+      "api": [
+        "GET:/api/projects",
+        "GET:/api/tasks",
+        "POST:/api/admin/time-tracking/sessions",
+        "POST:/api/admin/time-tracking/sessions/*/heartbeat",
+        "POST:/api/admin/time-tracking/sessions/*/activity",
+        "POST:/api/admin/time-tracking/sessions/*/pause",
+        "PUT:/api/admin/time-tracking/sessions/*/resume",
+        "PUT:/api/admin/time-tracking/sessions/*/stop",
+        "GET:/api/admin/time-tracking/sessions"
+      ]
+    },
+    "report_viewer": {
+      "ui": ["office_finance.reporting", "office_finance.audit"],
+      "api": ["GET:/api/invoices", "GET:/api/audit"]
+    },
+    "buchhaltung_readonly": {
+      "ui": ["office_finance.invoices", "office_finance.einvoice", "office_finance.reporting"],
+      "api": ["GET:/api/invoices", "GET:/api/invoices/*", "GET:/api/audit"]
+    }
+  },
+  "default": {
+    "ui": [],
+    "api": []
+  },
+  "deny_overrides_allow": true,
+  "audit_required_for": ["POST", "PUT", "DELETE", "PATCH"]
+}
+
+      "ui": ["office_finance.invoices", "office_finance.einvoice", "office_finance.reporting"],
+      "api": ["GET:/api/invoices", "GET:/api/invoices/*", "GET:/api/audit"]
+    }
+  },
+  "default": {
+    "ui": [],
+    "api": []
+  },
+  "deny_overrides_allow": true,
+  "audit_required_for": ["POST", "PUT", "DELETE", "PATCH"]
+}

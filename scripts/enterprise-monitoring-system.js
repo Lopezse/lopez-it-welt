@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class EnterpriseMonitoringSystem {
   constructor() {
@@ -39,7 +39,7 @@ class EnterpriseMonitoringSystem {
 
   // Monitoring starten
   async startMonitoring() {
-    console.log('🚀 Enterprise++ Monitoring System startet...');
+    console.log("🚀 Enterprise++ Monitoring System startet...");
     this.isMonitoring = true;
 
     // Initiale Metriken sammeln
@@ -54,22 +54,22 @@ class EnterpriseMonitoringSystem {
       }
     }, this.monitoringInterval);
 
-    console.log('✅ Enterprise++ Monitoring aktiv');
+    console.log("✅ Enterprise++ Monitoring aktiv");
   }
 
   // Monitoring stoppen
   stopMonitoring() {
-    console.log('🛑 Enterprise++ Monitoring wird gestoppt...');
+    console.log("🛑 Enterprise++ Monitoring wird gestoppt...");
     this.isMonitoring = false;
     if (this.monitoringInterval) {
       clearInterval(this.monitoringInterval);
     }
-    console.log('✅ Enterprise++ Monitoring gestoppt');
+    console.log("✅ Enterprise++ Monitoring gestoppt");
   }
 
   // Metriken sammeln
   async collectMetrics() {
-    console.log('📊 Sammle Enterprise++ Metriken...');
+    console.log("📊 Sammle Enterprise++ Metriken...");
 
     const timestamp = new Date().toISOString();
 
@@ -87,8 +87,8 @@ class EnterpriseMonitoringSystem {
       // Alte Metriken bereinigen (älter als 24 Stunden)
       this.cleanupOldMetrics();
     } catch (error) {
-      console.error('❌ Fehler beim Sammeln der Metriken:', error.message);
-      await this.createAlert('metric_collection_error', error.message, 'high');
+      console.error("❌ Fehler beim Sammeln der Metriken:", error.message);
+      await this.createAlert("metric_collection_error", error.message, "high");
     }
   }
 
@@ -201,7 +201,7 @@ class EnterpriseMonitoringSystem {
 
   async measureBundleSize() {
     try {
-      const nextDir = path.join(this.projectRoot, '.next');
+      const nextDir = path.join(this.projectRoot, ".next");
       if (fs.existsSync(nextDir)) {
         const size = this.calculateDirectorySize(nextDir);
         return Math.round(size / 1024); // KB
@@ -241,17 +241,13 @@ class EnterpriseMonitoringSystem {
 
   async calculateTestCoverage() {
     try {
-      execSync('npm test -- --coverage', {
+      execSync("npm test -- --coverage", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      const coverageFile = path.join(
-        this.projectRoot,
-        'coverage',
-        'coverage-summary.json'
-      );
+      const coverageFile = path.join(this.projectRoot, "coverage", "coverage-summary.json");
       if (fs.existsSync(coverageFile)) {
-        const coverage = JSON.parse(fs.readFileSync(coverageFile, 'utf8'));
+        const coverage = JSON.parse(fs.readFileSync(coverageFile, "utf8"));
         return coverage.total.lines.pct;
       }
       return 0;
@@ -289,7 +285,7 @@ class EnterpriseMonitoringSystem {
 
   async calculateTypeCoverage() {
     try {
-      execSync('npx tsc --noEmit', { cwd: this.projectRoot, stdio: 'pipe' });
+      execSync("npx tsc --noEmit", { cwd: this.projectRoot, stdio: "pipe" });
       return 100; // 100% wenn TypeScript kompiliert
     } catch (error) {
       return 0;
@@ -298,7 +294,7 @@ class EnterpriseMonitoringSystem {
 
   async countLintErrors() {
     try {
-      execSync('npm run lint', { cwd: this.projectRoot, stdio: 'pipe' });
+      execSync("npm run lint", { cwd: this.projectRoot, stdio: "pipe" });
       return 0; // Keine Fehler
     } catch (error) {
       return 1; // Mindestens ein Fehler
@@ -311,8 +307,8 @@ class EnterpriseMonitoringSystem {
       let totalComplexity = 0;
 
       for (const file of sourceFiles) {
-        const content = fs.readFileSync(file, 'utf8');
-        const lines = content.split('\n');
+        const content = fs.readFileSync(file, "utf8");
+        const lines = content.split("\n");
         totalComplexity += lines.length;
       }
 
@@ -333,7 +329,7 @@ class EnterpriseMonitoringSystem {
 
   async calculateDocumentation() {
     try {
-      const docs = ['README.md', 'CHANGELOG.md', 'PROJECT.md', 'docs/'];
+      const docs = ["README.md", "CHANGELOG.md", "PROJECT.md", "docs/"];
       let docScore = 0;
 
       for (const doc of docs) {
@@ -499,41 +495,41 @@ class EnterpriseMonitoringSystem {
 
     if (performance.responseTime > thresholds.responseTime) {
       await this.createAlert(
-        'high_response_time',
+        "high_response_time",
         `Response Time: ${performance.responseTime}ms (Threshold: ${thresholds.responseTime}ms)`,
-        'high'
+        "high",
       );
     }
 
     if (performance.memoryUsage > thresholds.memoryUsage) {
       await this.createAlert(
-        'high_memory_usage',
+        "high_memory_usage",
         `Memory Usage: ${performance.memoryUsage}MB (Threshold: ${thresholds.memoryUsage}MB)`,
-        'medium'
+        "medium",
       );
     }
 
     if (performance.cpuUsage > thresholds.cpuUsage) {
       await this.createAlert(
-        'high_cpu_usage',
+        "high_cpu_usage",
         `CPU Usage: ${performance.cpuUsage}% (Threshold: ${thresholds.cpuUsage}%)`,
-        'medium'
+        "medium",
       );
     }
 
     if (performance.errorRate > thresholds.errorRate) {
       await this.createAlert(
-        'high_error_rate',
+        "high_error_rate",
         `Error Rate: ${performance.errorRate}% (Threshold: ${thresholds.errorRate}%)`,
-        'critical'
+        "critical",
       );
     }
 
     if (performance.availability < thresholds.availability) {
       await this.createAlert(
-        'low_availability',
+        "low_availability",
         `Availability: ${performance.availability}% (Threshold: ${thresholds.availability}%)`,
-        'critical'
+        "critical",
       );
     }
   }
@@ -543,33 +539,33 @@ class EnterpriseMonitoringSystem {
 
     if (quality.testCoverage < thresholds.testCoverage) {
       await this.createAlert(
-        'low_test_coverage',
+        "low_test_coverage",
         `Test Coverage: ${quality.testCoverage}% (Threshold: ${thresholds.testCoverage}%)`,
-        'medium'
+        "medium",
       );
     }
 
     if (quality.codeQuality < thresholds.codeQuality) {
       await this.createAlert(
-        'low_code_quality',
+        "low_code_quality",
         `Code Quality: ${quality.codeQuality}% (Threshold: ${thresholds.codeQuality}%)`,
-        'medium'
+        "medium",
       );
     }
 
     if (quality.securityScore < thresholds.securityScore) {
       await this.createAlert(
-        'low_security_score',
+        "low_security_score",
         `Security Score: ${quality.securityScore}% (Threshold: ${thresholds.securityScore}%)`,
-        'high'
+        "high",
       );
     }
 
     if (quality.accessibilityScore < thresholds.accessibilityScore) {
       await this.createAlert(
-        'low_accessibility_score',
+        "low_accessibility_score",
         `Accessibility Score: ${quality.accessibilityScore}% (Threshold: ${thresholds.accessibilityScore}%)`,
-        'medium'
+        "medium",
       );
     }
   }
@@ -579,59 +575,51 @@ class EnterpriseMonitoringSystem {
 
     if (business.userSatisfaction < thresholds.userSatisfaction) {
       await this.createAlert(
-        'low_user_satisfaction',
+        "low_user_satisfaction",
         `User Satisfaction: ${business.userSatisfaction}/5 (Threshold: ${thresholds.userSatisfaction}/5)`,
-        'high'
+        "high",
       );
     }
 
     if (business.conversionRate < thresholds.conversionRate) {
       await this.createAlert(
-        'low_conversion_rate',
+        "low_conversion_rate",
         `Conversion Rate: ${business.conversionRate}% (Threshold: ${thresholds.conversionRate}%)`,
-        'high'
+        "high",
       );
     }
 
     if (business.loadTime > thresholds.loadTime) {
       await this.createAlert(
-        'high_load_time',
+        "high_load_time",
         `Load Time: ${business.loadTime}ms (Threshold: ${thresholds.loadTime}ms)`,
-        'medium'
+        "medium",
       );
     }
 
     if (business.uptime < thresholds.uptime) {
       await this.createAlert(
-        'low_uptime',
+        "low_uptime",
         `Uptime: ${business.uptime}% (Threshold: ${thresholds.uptime}%)`,
-        'critical'
+        "critical",
       );
     }
   }
 
   async checkSystemAlerts(system) {
     if (system.diskUsage > 90) {
-      await this.createAlert(
-        'high_disk_usage',
-        `Disk Usage: ${system.diskUsage}%`,
-        'high'
-      );
+      await this.createAlert("high_disk_usage", `Disk Usage: ${system.diskUsage}%`, "high");
     }
 
     if (system.errorLogs > 10) {
-      await this.createAlert(
-        'high_error_logs',
-        `Error Logs: ${system.errorLogs}`,
-        'medium'
-      );
+      await this.createAlert("high_error_logs", `Error Logs: ${system.errorLogs}`, "medium");
     }
 
     if (system.cacheHitRate < 70) {
       await this.createAlert(
-        'low_cache_hit_rate',
+        "low_cache_hit_rate",
         `Cache Hit Rate: ${system.cacheHitRate}%`,
-        'medium'
+        "medium",
       );
     }
   }
@@ -652,7 +640,7 @@ class EnterpriseMonitoringSystem {
     console.log(`🚨 Alert [${severity.toUpperCase()}]: ${message}`);
 
     // Kritische Alerts sofort benachrichtigen
-    if (severity === 'critical') {
+    if (severity === "critical") {
       await this.sendCriticalAlert(alert);
     }
   }
@@ -686,8 +674,8 @@ class EnterpriseMonitoringSystem {
   }
 
   getSourceFiles() {
-    const sourceDirs = ['src', 'components'];
-    const extensions = ['.ts', '.tsx', '.js', '.jsx'];
+    const sourceDirs = ["src", "components"];
+    const extensions = [".ts", ".tsx", ".js", ".jsx"];
     const files = [];
 
     for (const dir of sourceDirs) {
@@ -738,7 +726,7 @@ class EnterpriseMonitoringSystem {
 
   async simulateRequest() {
     // Simulierte Anfrage für Response-Time-Messung
-    return new Promise(resolve => setTimeout(resolve, Math.random() * 100));
+    return new Promise((resolve) => setTimeout(resolve, Math.random() * 100));
   }
 
   // Bericht-Generierung
@@ -749,14 +737,11 @@ class EnterpriseMonitoringSystem {
     const report = {
       timestamp: new Date().toISOString(),
       metrics: latestMetrics,
-      alerts: this.alerts.filter(alert => !alert.resolved),
+      alerts: this.alerts.filter((alert) => !alert.resolved),
       summary: this.generateMetricsSummary(),
     };
 
-    const reportFile = path.join(
-      this.projectRoot,
-      'enterprise-metrics-report.json'
-    );
+    const reportFile = path.join(this.projectRoot, "enterprise-metrics-report.json");
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
   }
 
@@ -782,16 +767,16 @@ class EnterpriseMonitoringSystem {
       },
       alerts: {
         total: this.alerts.length,
-        critical: this.alerts.filter(a => a.severity === 'critical').length,
-        high: this.alerts.filter(a => a.severity === 'high').length,
-        medium: this.alerts.filter(a => a.severity === 'medium').length,
+        critical: this.alerts.filter((a) => a.severity === "critical").length,
+        high: this.alerts.filter((a) => a.severity === "high").length,
+        medium: this.alerts.filter((a) => a.severity === "medium").length,
       },
     };
   }
 
   // Alert-Management
   acknowledgeAlert(alertId) {
-    const alert = this.alerts.find(a => a.id === alertId);
+    const alert = this.alerts.find((a) => a.id === alertId);
     if (alert) {
       alert.acknowledged = true;
       console.log(`✅ Alert bestätigt: ${alert.message}`);
@@ -799,7 +784,7 @@ class EnterpriseMonitoringSystem {
   }
 
   resolveAlert(alertId) {
-    const alert = this.alerts.find(a => a.id === alertId);
+    const alert = this.alerts.find((a) => a.id === alertId);
     if (alert) {
       alert.resolved = true;
       console.log(`✅ Alert behoben: ${alert.message}`);
@@ -807,13 +792,11 @@ class EnterpriseMonitoringSystem {
   }
 
   getActiveAlerts() {
-    return this.alerts.filter(alert => !alert.resolved);
+    return this.alerts.filter((alert) => !alert.resolved);
   }
 
   getCriticalAlerts() {
-    return this.alerts.filter(
-      alert => alert.severity === 'critical' && !alert.resolved
-    );
+    return this.alerts.filter((alert) => alert.severity === "critical" && !alert.resolved);
   }
 }
 
@@ -822,14 +805,14 @@ if (require.main === module) {
   const monitoring = new EnterpriseMonitoringSystem();
 
   // Graceful Shutdown
-  process.on('SIGINT', () => {
-    console.log('\n🛑 Beende Enterprise++ Monitoring...');
+  process.on("SIGINT", () => {
+    console.log("\n🛑 Beende Enterprise++ Monitoring...");
     monitoring.stopMonitoring();
     process.exit(0);
   });
 
-  process.on('SIGTERM', () => {
-    console.log('\n🛑 Beende Enterprise++ Monitoring...');
+  process.on("SIGTERM", () => {
+    console.log("\n🛑 Beende Enterprise++ Monitoring...");
     monitoring.stopMonitoring();
     process.exit(0);
   });
@@ -838,14 +821,11 @@ if (require.main === module) {
   monitoring
     .startMonitoring()
     .then(() => {
-      console.log('✅ Enterprise++ Monitoring System läuft...');
-      console.log('Drücke Ctrl+C zum Beenden');
+      console.log("✅ Enterprise++ Monitoring System läuft...");
+      console.log("Drücke Ctrl+C zum Beenden");
     })
-    .catch(error => {
-      console.error(
-        '❌ Enterprise++ Monitoring fehlgeschlagen:',
-        error.message
-      );
+    .catch((error) => {
+      console.error("❌ Enterprise++ Monitoring fehlgeschlagen:", error.message);
       process.exit(1);
     });
 }

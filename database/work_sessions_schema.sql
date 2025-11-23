@@ -34,16 +34,35 @@ CREATE TABLE IF NOT EXISTS work_sessions (
     lektion TEXT NULL COMMENT 'Was habe ich gelernt? - Erkenntnisse für die Zukunft',
     naechster_schritt TEXT NULL COMMENT 'Was mache ich beim nächsten Mal anders? - Konkrete Maßnahmen',
     
+    -- Abrechnungs-Flags
+    approved TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Freigegeben für Abrechnung (0=nein, 1=ja)',
+    invoiced TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Bereits abgerechnet (0=nein, 1=ja)',
+    
+    -- Office & Finance Integration
+    project_id INT NULL COMMENT 'FK zu lopez_projects.id',
+    order_id INT NULL COMMENT 'FK zu lopez_orders.id',
+    task_id INT NULL COMMENT 'FK zu lopez_tasks.id',
+    
     -- Technische Felder
     erstellt_am DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Wann wurde der Eintrag erstellt',
     aktualisiert_am DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Wann wurde zuletzt aktualisiert',
+    
+    -- Foreign Keys
+    FOREIGN KEY (project_id) REFERENCES lopez_projects(id) ON DELETE SET NULL,
+    FOREIGN KEY (order_id) REFERENCES lopez_orders(id) ON DELETE SET NULL,
+    FOREIGN KEY (task_id) REFERENCES lopez_tasks(id) ON DELETE SET NULL,
     
     -- Indizes für bessere Performance
     INDEX idx_status (status),
     INDEX idx_kategorie (kategorie),
     INDEX idx_start_time (start_time),
     INDEX idx_prioritaet (prioritaet),
-    INDEX idx_erstellt_am (erstellt_am)
+    INDEX idx_erstellt_am (erstellt_am),
+    INDEX idx_approved (approved),
+    INDEX idx_invoiced (invoiced),
+    INDEX idx_project_id (project_id),
+    INDEX idx_order_id (order_id),
+    INDEX idx_task_id (task_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Haupttabelle für Zeiterfassung und Lernsystem';
 
 -- =====================================================
@@ -200,6 +219,25 @@ WHERE end_time IS NOT NULL
 GROUP BY kategorie
 ORDER BY gesamt_minuten DESC;
 
+-- View: Abrechenbare Zeiten (approved & !invoiced)
+CREATE OR REPLACE VIEW v_billable_time AS
+SELECT 
+    ws.*,
+    p.project_name,
+    o.order_number,
+    t.task_title,
+    u.name as user_name
+FROM work_sessions ws
+LEFT JOIN lopez_projects p ON ws.project_id = p.id
+LEFT JOIN lopez_orders o ON ws.order_id = o.id
+LEFT JOIN lopez_tasks t ON ws.task_id = t.id
+LEFT JOIN lopez_users u ON ws.user_id = u.id
+WHERE ws.approved = 1 
+  AND ws.invoiced = 0
+  AND ws.status = 'completed'
+  AND ws.end_time IS NOT NULL
+ORDER BY ws.start_time DESC;
+
 -- =====================================================
 -- Beispiel-Daten für Tests
 -- =====================================================
@@ -209,6 +247,44 @@ INSERT INTO work_sessions (beschreibung, start_time, end_time, status, kategorie
 (
     'Next.js 15 Kompatibilitätsprobleme analysieren',
     '2025-01-19 09:00:00',
+    '2025-01-19 10:30:00',
+    'schlecht',
+    'debug',
+    'hoch',
+    'Webpack-Cache-Fehler und Module-Import-Probleme identifiziert',
+    'Next.js 15 hat breaking changes bei params.id - muss awaited werden',
+    'Immer erst Tests mit neuer Version machen, bevor Migration',
+    'Next.js 14 beibehalten bis alle Kompatibilitätsprobleme gelöst sind'
+),
+(
+    'Zeiterfassung-System konzipieren',
+    '2025-01-19 11:00:00',
+    '2025-01-19 11:45:00',
+    'gut',
+    'planung',
+    'mittel',
+    'Klare Struktur für Lernsystem definiert - MySQL-Schema erstellt',
+    NULL,
+    'Strukturierte Planung spart später viel Zeit',
+    'Schema implementieren und API-Endpoints erstellen'
+),
+(
+    'MySQL-Datenbank-Schema erstellen',
+    '2025-01-19 12:00:00',
+    '2025-01-19 13:15:00',
+    'gut',
+    'umsetzung',
+    'hoch',
+    'Vollständiges Schema mit Triggers, Views und Beispiel-Daten erstellt',
+    NULL,
+    'Automatische Berechnungen mit Triggers sind sehr nützlich',
+    'API-Integration implementieren'
+);
+
+-- =====================================================
+-- Erfolgreich erstellt!
+-- =====================================================
+SELECT 'Datenbank-Schema erfolgreich erstellt!' as status; 
     '2025-01-19 10:30:00',
     'schlecht',
     'debug',

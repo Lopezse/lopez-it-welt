@@ -4784,13 +4784,7 @@
       "letzteAenderung": "2025-07-06T08:47:44.055Z",
       "hash": "7fc39140ec9873706884a8c5ab4ed0dc",
       "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
-      "kategorien": [
-        "enterprise",
-        "projekt-management",
-        "technisch",
-        "admin",
-        "ki-agenten"
-      ],
+      "kategorien": ["enterprise", "projekt-management", "technisch", "admin", "ki-agenten"],
       "schluesselwoerter": [
         {
           "wort": "enterprise",
@@ -4843,12 +4837,7 @@
       "letzteAenderung": "2025-07-06T10:10:28.957Z",
       "hash": "b4fe8adc644363daeff374c1b8d1c8e2",
       "titel": "Content-Management-System (CMS)",
-      "kategorien": [
-        "projekt-management",
-        "technisch",
-        "admin",
-        "content-management"
-      ],
+      "kategorien": ["projekt-management", "technisch", "admin", "content-management"],
       "schluesselwoerter": [
         {
           "wort": "content",

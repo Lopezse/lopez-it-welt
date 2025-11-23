@@ -42,21 +42,21 @@ src/app/admin/
 
 ```typescript
 // src/lib/admin-auth.ts
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export async function requireAdmin() {
   const session = await getServerSession(authOptions);
-  
+
   if (!session) {
-    redirect('/login');
+    redirect("/login");
   }
-  
-  if (session.user.role !== 'admin') {
-    redirect('/');
+
+  if (session.user.role !== "admin") {
+    redirect("/");
   }
-  
+
   return session;
 }
 
@@ -64,7 +64,7 @@ export async function requireAdminOrRedirect() {
   try {
     return await requireAdmin();
   } catch (error) {
-    redirect('/login');
+    redirect("/login");
   }
 }
 ```
@@ -86,9 +86,9 @@ export default async function AdminPage() {
   return (
     <div className="admin-dashboard">
       <h1>Admin-Dashboard</h1>
-      
+
       <SystemStatus />
-      
+
       <div className="dashboard-grid">
         <AdminDashboard />
         <QuickActions />
@@ -121,7 +121,7 @@ export function SystemStatus() {
   useEffect(() => {
     fetchSystemMetrics();
     const interval = setInterval(fetchSystemMetrics, 30000); // 30 Sekunden
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -148,28 +148,28 @@ export function SystemStatus() {
   return (
     <div className="system-status">
       <h2>System-Status</h2>
-      
+
       <div className="metrics-grid">
         <div className="metric">
           <span className="label">Uptime:</span>
           <span className="value">{metrics.uptime}</span>
         </div>
-        
+
         <div className="metric">
           <span className="label">Memory Usage:</span>
           <span className="value">{metrics.memoryUsage}%</span>
         </div>
-        
+
         <div className="metric">
           <span className="label">CPU Usage:</span>
           <span className="value">{metrics.cpuUsage}%</span>
         </div>
-        
+
         <div className="metric">
           <span className="label">Active Users:</span>
           <span className="value">{metrics.activeUsers}</span>
         </div>
-        
+
         <div className="metric">
           <span className="label">Total Requests:</span>
           <span className="value">{metrics.totalRequests}</span>
@@ -225,7 +225,7 @@ export function QuickActions() {
   return (
     <div className="quick-actions">
       <h2>Schnell-Aktionen</h2>
-      
+
       <div className="actions-grid">
         {actions.map((action) => (
           <Link
@@ -261,7 +261,7 @@ export default async function UsersPage() {
   return (
     <div className="users-page">
       <h1>Benutzer-Verwaltung</h1>
-      
+
       <UserManagement />
     </div>
   );
@@ -348,7 +348,7 @@ export function UserManagement() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        
+
         <Link href="/admin/users/create" className="btn-primary">
           Neuen Benutzer erstellen
         </Link>
@@ -423,7 +423,7 @@ export default async function CreateUserPage() {
   return (
     <div className="create-user-page">
       <h1>Neuen Benutzer erstellen</h1>
-      
+
       <CreateUserForm />
     </div>
   );
@@ -542,7 +542,7 @@ export function CreateUserForm() {
         >
           {loading ? 'Erstelle...' : 'Benutzer erstellen'}
         </button>
-        
+
         <button
           type="button"
           onClick={() => router.back()}
@@ -571,7 +571,7 @@ export default async function TextsPage() {
   return (
     <div className="texts-page">
       <h1>Text-Management</h1>
-      
+
       <TextManagement />
     </div>
   );
@@ -643,7 +643,7 @@ export function TextManagement() {
     const matchesSearch = text.key.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          text.value.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesLanguage = languageFilter === 'all' || text.language === languageFilter;
-    
+
     return matchesSearch && matchesLanguage;
   });
 
@@ -663,7 +663,7 @@ export function TextManagement() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          
+
           <div className="language-filter">
             <select
               value={languageFilter}
@@ -676,7 +676,7 @@ export function TextManagement() {
             </select>
           </div>
         </div>
-        
+
         <Link href="/admin/texts/create" className="btn-primary">
           Neuen Text erstellen
         </Link>
@@ -754,7 +754,7 @@ export default async function SettingsPage() {
   return (
     <div className="settings-page">
       <h1>Einstellungen</h1>
-      
+
       <SettingsOverview />
     </div>
   );
@@ -834,7 +834,7 @@ export default async function AnalyticsPage() {
   return (
     <div className="analytics-page">
       <h1>Analytics-Dashboard</h1>
-      
+
       <AnalyticsDashboard />
     </div>
   );
@@ -899,17 +899,17 @@ export function AnalyticsDashboard() {
           <h3>Seitenaufrufe</h3>
           <div className="metric-value">{analyticsData.pageViews.toLocaleString()}</div>
         </div>
-        
+
         <div className="metric-card">
           <h3>Eindeutige Besucher</h3>
           <div className="metric-value">{analyticsData.uniqueVisitors.toLocaleString()}</div>
         </div>
-        
+
         <div className="metric-card">
           <h3>Absprungrate</h3>
           <div className="metric-value">{analyticsData.bounceRate}%</div>
         </div>
-        
+
         <div className="metric-card">
           <h3>Durchschnittliche Session-Dauer</h3>
           <div className="metric-value">{Math.round(analyticsData.avgSessionDuration / 60)} Min</div>
@@ -959,7 +959,7 @@ export default async function LogsPage() {
   return (
     <div className="logs-page">
       <h1>Log-Übersicht</h1>
-      
+
       <LogOverview />
     </div>
   );
@@ -1032,4 +1032,4 @@ export function LogOverview() {
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

@@ -46,11 +46,16 @@ export async function GET(request: NextRequest) {
       SELECT a.*,
              p.project_name, p.project_code,
              o.title as order_title, o.order_no,
-             t.title as task_title
+             t.title as task_title,
+             u.username as employee_username,
+             u.first_name as employee_first_name,
+             u.last_name as employee_last_name,
+             u.email as employee_email
       FROM lopez_appointments a
       LEFT JOIN lopez_projects p ON a.project_id = p.id
       LEFT JOIN lopez_orders o ON a.order_id = o.id
       LEFT JOIN lopez_tasks t ON a.task_id = t.id
+      LEFT JOIN lopez_core_users u ON a.employee_id = u.id
       WHERE 1=1
     `;
     const params: any[] = [];
@@ -170,10 +175,16 @@ export async function POST(request: NextRequest) {
     // iCal UID generieren
     const icalUid = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}@lopez-it-welt.de`;
 
+    const {
+      is_billable = false,
+      status = "planned",
+      time_session_id = null,
+    } = body;
+
     const [result] = await connection.execute(
       `INSERT INTO lopez_appointments 
-       (project_id, order_id, task_id, employee_id, title, date_start, date_end, location, notes, is_all_day, ical_uid, created_by)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       (project_id, order_id, task_id, employee_id, title, date_start, date_end, location, notes, is_all_day, ical_uid, is_billable, status, time_session_id, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         project_id || null,
         order_id || null,
@@ -186,6 +197,75 @@ export async function POST(request: NextRequest) {
         notes || null,
         is_all_day ? 1 : 0,
         icalUid,
+        is_billable ? 1 : 0,
+        status,
+        time_session_id || null,
+        created_by,
+      ],
+    );
+
+    const insertId = (result as any).insertId;
+
+    // Audit-Log
+    await connection.execute(
+      `INSERT INTO lopez_audit_logs (user_id, action, ref_table, ref_id, notes)
+       VALUES (?, 'APPOINTMENT_CREATE', 'lopez_appointments', ?, ?)`,
+      [created_by, insertId, `Termin erstellt: ${title}`],
+    );
+
+    await connection.end();
+
+    return NextResponse.json(
+      {
+        success: true,
+        data: { id: insertId, ical_uid: icalUid, message: "Termin erfolgreich erstellt" },
+      },
+      {
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+      },
+    );
+  } catch (error) {
+    console.error("❌ Appointments API Fehler:", error);
+    return NextResponse.json(
+      { success: false, error: "Fehler beim Erstellen des Termins" },
+      { status: 500 },
+    );
+  }
+}
+
+      );
+    }
+
+    const connection = await createConnection();
+
+    // iCal UID generieren
+    const icalUid = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}@lopez-it-welt.de`;
+
+    const {
+      is_billable = false,
+      status = "planned",
+      time_session_id = null,
+    } = body;
+
+    const [result] = await connection.execute(
+      `INSERT INTO lopez_appointments 
+       (project_id, order_id, task_id, employee_id, title, date_start, date_end, location, notes, is_all_day, ical_uid, is_billable, status, time_session_id, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        project_id || null,
+        order_id || null,
+        task_id || null,
+        employee_id || null,
+        title,
+        date_start,
+        date_end,
+        location || null,
+        notes || null,
+        is_all_day ? 1 : 0,
+        icalUid,
+        is_billable ? 1 : 0,
+        status,
+        time_session_id || null,
         created_by,
       ],
     );

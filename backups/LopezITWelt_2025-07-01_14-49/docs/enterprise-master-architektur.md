@@ -12,17 +12,20 @@ Dieses Dokument definiert die **zentrale Master-Architektur** für das gesamte L
 ## 🎯 **ARCHITEKTUR-PRINZIPIEN**
 
 ### **1. Enterprise++ Standards**
+
 - **Zero Tolerance:** Keine Regelverstöße toleriert
 - **Strict Mode:** Alle Systeme im strengsten Modus
 - **Documentation First:** Jede Änderung wird dokumentiert
 - **German Naming:** Alle Komponenten verwenden deutsche Namen
 
 ### **2. Modularität**
+
 - **Plug & Play:** Module können einfach hinzugefügt/entfernt werden
 - **Loose Coupling:** Module sind unabhängig voneinander
 - **High Cohesion:** Module haben eine klare, einzige Verantwortlichkeit
 
 ### **3. Sicherheit**
+
 - **Defense in Depth:** Mehrere Sicherheitsebenen
 - **Principle of Least Privilege:** Minimal notwendige Berechtigungen
 - **Audit Trail:** Alle Aktionen werden protokolliert
@@ -70,41 +73,41 @@ Dieses Dokument definiert die **zentrale Master-Architektur** für das gesamte L
 
 ### **🛡️ Enterprise++ Sicherheitsmodule**
 
-| Modul | Datei | Status | Verantwortlichkeit |
-|-------|-------|--------|-------------------|
-| KI-Sicherheitsmodul | `scripts/ki-sicherheitsmodul.js` | 🚧 Entwicklung | Zentrale KI-Verhaltenskontrolle |
-| Anti-Regelbruch-System | `scripts/anti-rule-break-system.js` | ✅ Aktiv | Regel-Durchsetzung |
-| Enterprise++ Enforcement | `scripts/enforce-rules-fixed.js` | ✅ Aktiv | Qualitätsstandards |
-| Git-Hooks | `scripts/anti-rule-break-hook.js` | ✅ Aktiv | Pre/Post-Commit Validierung |
-| Notifications | `scripts/anti-rule-break-notifications.js` | ✅ Aktiv | Benachrichtigungen |
+| Modul                    | Datei                                      | Status         | Verantwortlichkeit              |
+| ------------------------ | ------------------------------------------ | -------------- | ------------------------------- |
+| KI-Sicherheitsmodul      | `scripts/ki-sicherheitsmodul.js`           | 🚧 Entwicklung | Zentrale KI-Verhaltenskontrolle |
+| Anti-Regelbruch-System   | `scripts/anti-rule-break-system.js`        | ✅ Aktiv       | Regel-Durchsetzung              |
+| Enterprise++ Enforcement | `scripts/enforce-rules-fixed.js`           | ✅ Aktiv       | Qualitätsstandards              |
+| Git-Hooks                | `scripts/anti-rule-break-hook.js`          | ✅ Aktiv       | Pre/Post-Commit Validierung     |
+| Notifications            | `scripts/anti-rule-break-notifications.js` | ✅ Aktiv       | Benachrichtigungen              |
 
 ### **🏠 Core-Anwendungsmodule**
 
-| Modul | Datei | Status | Verantwortlichkeit |
-|-------|-------|--------|-------------------|
-| Hauptanwendung | `src/app/` | ✅ Aktiv | Next.js Frontend |
-| Admin-Bereich | `src/app/admin/` | ✅ Aktiv | Administrations-Interface |
-| Authentifizierung | `src/app/login/` | ✅ Aktiv | Benutzer-Login |
-| Layout-System | `src/components/Core/` | ✅ Aktiv | Basis-Layouts |
+| Modul             | Datei                  | Status   | Verantwortlichkeit        |
+| ----------------- | ---------------------- | -------- | ------------------------- |
+| Hauptanwendung    | `src/app/`             | ✅ Aktiv | Next.js Frontend          |
+| Admin-Bereich     | `src/app/admin/`       | ✅ Aktiv | Administrations-Interface |
+| Authentifizierung | `src/app/login/`       | ✅ Aktiv | Benutzer-Login            |
+| Layout-System     | `src/components/Core/` | ✅ Aktiv | Basis-Layouts             |
 
 ### **🔧 Feature-Module**
 
-| Modul | Datei | Status | Verantwortlichkeit |
-|-------|-------|--------|-------------------|
-| Zeiterfassung | `src/app/admin/time-tracking/` | ✅ Aktiv | Arbeitszeit-Tracking |
-| Ticket-System | `src/app/admin/tickets/` | ✅ Aktiv | Support-Tickets |
-| Monitoring | `src/app/admin/monitoring/` | ✅ Aktiv | System-Überwachung |
-| Benutzerverwaltung | `src/app/admin/users/` | ✅ Aktiv | User-Management |
-| Analytics | `src/app/admin/time-tracking/analytics/` | ✅ Aktiv | Datenanalyse |
+| Modul              | Datei                                    | Status   | Verantwortlichkeit   |
+| ------------------ | ---------------------------------------- | -------- | -------------------- |
+| Zeiterfassung      | `src/app/admin/time-tracking/`           | ✅ Aktiv | Arbeitszeit-Tracking |
+| Ticket-System      | `src/app/admin/tickets/`                 | ✅ Aktiv | Support-Tickets      |
+| Monitoring         | `src/app/admin/monitoring/`              | ✅ Aktiv | System-Überwachung   |
+| Benutzerverwaltung | `src/app/admin/users/`                   | ✅ Aktiv | User-Management      |
+| Analytics          | `src/app/admin/time-tracking/analytics/` | ✅ Aktiv | Datenanalyse         |
 
 ### **🎨 UI-Komponenten**
 
-| Modul | Datei | Status | Verantwortlichkeit |
-|-------|-------|--------|-------------------|
+| Modul         | Datei                                       | Status   | Verantwortlichkeit         |
+| ------------- | ------------------------------------------- | -------- | -------------------------- |
 | Schaltflaeche | `src/components/Features/Schaltflaeche.tsx` | ✅ Aktiv | Deutsche Button-Komponente |
-| Karte | `src/components/Features/Karte.tsx` | ✅ Aktiv | Deutsche Card-Komponente |
-| Navigation | `src/components/navigation/` | ✅ Aktiv | Navigations-System |
-| Admin-UI | `src/components/admin/` | ✅ Aktiv | Admin-Interface |
+| Karte         | `src/components/Features/Karte.tsx`         | ✅ Aktiv | Deutsche Card-Komponente   |
+| Navigation    | `src/components/navigation/`                | ✅ Aktiv | Navigations-System         |
+| Admin-UI      | `src/components/admin/`                     | ✅ Aktiv | Admin-Interface            |
 
 ## 🔗 **ABHÄNGIGKEITEN**
 
@@ -175,12 +178,12 @@ Admin-Bereich
 
 ### **Überwachungssysteme**
 
-| System | Zweck | Status |
-|--------|-------|--------|
-| Enterprise++ Dashboard | Qualitätsmetriken | ✅ Aktiv |
-| Anti-Regelbruch-Monitoring | Regelverstöße | ✅ Aktiv |
-| System-Monitoring | Performance & Fehler | ✅ Aktiv |
-| Security-Monitoring | Sicherheitsvorfälle | ✅ Aktiv |
+| System                     | Zweck                | Status   |
+| -------------------------- | -------------------- | -------- |
+| Enterprise++ Dashboard     | Qualitätsmetriken    | ✅ Aktiv |
+| Anti-Regelbruch-Monitoring | Regelverstöße        | ✅ Aktiv |
+| System-Monitoring          | Performance & Fehler | ✅ Aktiv |
+| Security-Monitoring        | Sicherheitsvorfälle  | ✅ Aktiv |
 
 ### **Logging-Strategie**
 
@@ -325,24 +328,28 @@ Admin-Bereich
 ## 🎯 **ROADMAP**
 
 ### **Phase 1: Architektur-Konsolidierung (Woche 1-2)**
+
 - [ ] Master-Architektur-Dokument finalisieren
 - [ ] Alle Module in Architektur integrieren
 - [ ] Abhängigkeiten dokumentieren
 - [ ] CI/CD-Pipeline aufsetzen
 
 ### **Phase 2: Enterprise++ Starter-Paket (Woche 3-4)**
+
 - [ ] Standardisiertes Template erstellen
 - [ ] Alle Sicherheitsmodule integrieren
 - [ ] Deployment-Automatisierung
 - [ ] Monitoring-System
 
 ### **Phase 3: Migration & Optimierung (Woche 5-8)**
+
 - [ ] Alle bestehenden Module migrieren
 - [ ] Performance-Optimierung
 - [ ] Security-Hardening
 - [ ] Dokumentation vervollständigen
 
 ### **Phase 4: Wartung & Updates (Monatlich)**
+
 - [ ] Regelmäßige Architektur-Reviews
 - [ ] Security-Updates
 - [ ] Performance-Monitoring
@@ -352,21 +359,21 @@ Admin-Bereich
 
 ### **Architektur-Team**
 
-| Rolle | Verantwortlichkeit | Kontakt |
-|-------|-------------------|---------|
-| System-Architekt | Gesamtarchitektur | TBD |
-| Security-Engineer | Sicherheitsarchitektur | TBD |
-| DevOps-Engineer | Deployment & CI/CD | TBD |
-| QA-Engineer | Qualitätssicherung | TBD |
+| Rolle             | Verantwortlichkeit     | Kontakt |
+| ----------------- | ---------------------- | ------- |
+| System-Architekt  | Gesamtarchitektur      | TBD     |
+| Security-Engineer | Sicherheitsarchitektur | TBD     |
+| DevOps-Engineer   | Deployment & CI/CD     | TBD     |
+| QA-Engineer       | Qualitätssicherung     | TBD     |
 
 ### **Entwicklungsteam**
 
-| Modul | Verantwortlicher | Status |
-|-------|-----------------|--------|
-| Frontend | TBD | ✅ Aktiv |
-| Backend | TBD | ✅ Aktiv |
-| Database | TBD | ✅ Aktiv |
-| Security | TBD | ✅ Aktiv |
+| Modul    | Verantwortlicher | Status   |
+| -------- | ---------------- | -------- |
+| Frontend | TBD              | ✅ Aktiv |
+| Backend  | TBD              | ✅ Aktiv |
+| Database | TBD              | ✅ Aktiv |
+| Security | TBD              | ✅ Aktiv |
 
 ## 📚 **DOKUMENTATION**
 
@@ -390,18 +397,21 @@ Admin-Bereich
 ## 🔮 **ZUKUNFTSVISION**
 
 ### **Kurzfristig (3 Monate)**
+
 - Vollständige Enterprise++ Compliance
 - Automatisierte Qualitätssicherung
 - Robuste CI/CD-Pipeline
 - Umfassende Dokumentation
 
 ### **Mittelfristig (6 Monate)**
+
 - Microservices-Architektur
 - Cloud-Native Deployment
 - Advanced Monitoring
 - Machine Learning Integration
 
 ### **Langfristig (12 Monate)**
+
 - Enterprise-Grade Skalierbarkeit
 - Advanced Security Features
 - AI-Powered Analytics
@@ -412,4 +422,4 @@ Admin-Bereich
 **Letzte Aktualisierung:** 01.07.2025  
 **Nächste Review:** 08.07.2025  
 **Version:** 1.0  
-**Status:** 🚧 IN ENTWICKLUNG 
+**Status:** 🚧 IN ENTWICKLUNG

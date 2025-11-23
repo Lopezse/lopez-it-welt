@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class EnterpriseQualityDashboard {
   constructor() {
@@ -22,35 +22,35 @@ class EnterpriseQualityDashboard {
   // Prozess-Behandlung einrichten
   setupProcessHandling() {
     // Graceful Shutdown
-    process.on('SIGINT', () => {
-      console.log('\n🛑 Beende Enterprise++ Quality Dashboard...');
+    process.on("SIGINT", () => {
+      console.log("\n🛑 Beende Enterprise++ Quality Dashboard...");
       this.stopDashboard();
       process.exit(0);
     });
 
-    process.on('SIGTERM', () => {
-      console.log('\n🛑 Beende Enterprise++ Quality Dashboard...');
+    process.on("SIGTERM", () => {
+      console.log("\n🛑 Beende Enterprise++ Quality Dashboard...");
       this.stopDashboard();
       process.exit(0);
     });
 
     // Unbehandelte Fehler abfangen
-    process.on('uncaughtException', error => {
-      console.error('❌ Unbehandelter Fehler:', error.message);
+    process.on("uncaughtException", (error) => {
+      console.error("❌ Unbehandelter Fehler:", error.message);
       this.stopDashboard();
       process.exit(1);
     });
 
-    process.on('unhandledRejection', (reason, promise) => {
-      console.error('❌ Unbehandelte Promise-Ablehnung:', reason);
+    process.on("unhandledRejection", (reason, promise) => {
+      console.error("❌ Unbehandelte Promise-Ablehnung:", reason);
       this.stopDashboard();
       process.exit(1);
     });
 
     // Windows-spezifische Behandlung
-    if (process.platform === 'win32') {
-      process.on('SIGBREAK', () => {
-        console.log('\n🛑 Windows Break Signal empfangen...');
+    if (process.platform === "win32") {
+      process.on("SIGBREAK", () => {
+        console.log("\n🛑 Windows Break Signal empfangen...");
         this.stopDashboard();
         process.exit(0);
       });
@@ -59,7 +59,7 @@ class EnterpriseQualityDashboard {
 
   // Dashboard starten
   async startDashboard() {
-    console.log('🚀 Enterprise++ Quality Dashboard startet...');
+    console.log("🚀 Enterprise++ Quality Dashboard startet...");
     this.isRunning = true;
 
     // Initiale Daten laden
@@ -75,15 +75,13 @@ class EnterpriseQualityDashboard {
       }
     }, this.updateInterval);
 
-    console.log('✅ Enterprise++ Quality Dashboard aktiv');
-    console.log(
-      '📊 Dashboard verfügbar unter: http://localhost:3000/dashboard'
-    );
+    console.log("✅ Enterprise++ Quality Dashboard aktiv");
+    console.log("📊 Dashboard verfügbar unter: http://localhost:3000/dashboard");
   }
 
   // Dashboard stoppen
   stopDashboard() {
-    console.log('🛑 Enterprise++ Quality Dashboard wird gestoppt...');
+    console.log("🛑 Enterprise++ Quality Dashboard wird gestoppt...");
     this.isRunning = false;
 
     // Timer stoppen
@@ -92,12 +90,12 @@ class EnterpriseQualityDashboard {
       this.updateTimer = null;
     }
 
-    console.log('✅ Enterprise++ Quality Dashboard gestoppt');
+    console.log("✅ Enterprise++ Quality Dashboard gestoppt");
   }
 
   // Dashboard-Daten laden
   async loadDashboardData() {
-    console.log('📊 Lade Dashboard-Daten...');
+    console.log("📊 Lade Dashboard-Daten...");
 
     try {
       // Metriken laden
@@ -112,7 +110,7 @@ class EnterpriseQualityDashboard {
       // Berichte laden
       this.dashboardData.reports = await this.loadReports();
     } catch (error) {
-      console.error('❌ Fehler beim Laden der Dashboard-Daten:', error.message);
+      console.error("❌ Fehler beim Laden der Dashboard-Daten:", error.message);
     }
   }
 
@@ -222,7 +220,7 @@ class EnterpriseQualityDashboard {
       // Simuliere realistische Test-Coverage basierend auf vorhandenen Tests
       const coveragePercentage = Math.min(
         95,
-        Math.max(0, (testFiles.length / sourceFiles.length) * 100)
+        Math.max(0, (testFiles.length / sourceFiles.length) * 100),
       );
       return Math.round(coveragePercentage);
     } catch (error) {
@@ -238,10 +236,7 @@ class EnterpriseQualityDashboard {
 
       if (totalFiles.length === 0) return 0;
 
-      const typeCoverage = Math.min(
-        100,
-        Math.max(85, (tsFiles.length / totalFiles.length) * 100)
-      );
+      const typeCoverage = Math.min(100, Math.max(85, (tsFiles.length / totalFiles.length) * 100));
       return Math.round(typeCoverage);
     } catch (error) {
       return 85;
@@ -268,10 +263,8 @@ class EnterpriseQualityDashboard {
       for (const file of sourceFiles.slice(0, 10)) {
         // Begrenze für Performance
         try {
-          const content = fs.readFileSync(file, 'utf8');
-          const lines = content
-            .split('\n')
-            .filter(line => line.trim().length > 0);
+          const content = fs.readFileSync(file, "utf8");
+          const lines = content.split("\n").filter((line) => line.trim().length > 0);
           totalComplexity += lines.length;
           fileCount++;
         } catch (error) {
@@ -291,13 +284,7 @@ class EnterpriseQualityDashboard {
   }
 
   async getDocumentation() {
-    const docs = [
-      'README.md',
-      'CHANGELOG.md',
-      'PROJECT.md',
-      'docs/',
-      'package.json',
-    ];
+    const docs = ["README.md", "CHANGELOG.md", "PROJECT.md", "docs/", "package.json"];
     let docScore = 0;
 
     for (const doc of docs) {
@@ -358,7 +345,7 @@ class EnterpriseQualityDashboard {
 
   async getBundleSize() {
     try {
-      const nextDir = path.join(this.projectRoot, '.next');
+      const nextDir = path.join(this.projectRoot, ".next");
       if (fs.existsSync(nextDir)) {
         const size = this.calculateDirectorySize(nextDir);
         return Math.round(size / 1024);
@@ -443,7 +430,7 @@ class EnterpriseQualityDashboard {
   }
 
   async getWCAGLevel() {
-    return 'AAA'; // Höchste Barrierefreiheit
+    return "AAA"; // Höchste Barrierefreiheit
   }
 
   async getAccessibilityScore() {
@@ -454,7 +441,7 @@ class EnterpriseQualityDashboard {
     const colorContrast = await this.getColorContrast();
 
     let score = 100;
-    if (wcagLevel !== 'AAA') score -= 5;
+    if (wcagLevel !== "AAA") score -= 5;
     if (screenReader < 100) score -= 2;
     if (keyboard < 100) score -= 2;
     if (colorContrast < 100) score -= 1;
@@ -570,50 +557,50 @@ class EnterpriseQualityDashboard {
     // Test Coverage Alert (nur wenn unter 80%)
     if (testCoverage < 80) {
       alerts.push({
-        level: 'warning',
+        level: "warning",
         message: `Test Coverage: ${testCoverage}% (Empfohlen: 80%+)`,
         timestamp: new Date().toISOString(),
-        category: 'code',
+        category: "code",
       });
     }
 
     // Code Quality Alert (nur wenn unter 85%)
     if (codeQuality < 85) {
       alerts.push({
-        level: 'warning',
+        level: "warning",
         message: `Code Quality: ${codeQuality}% (Ziel: 85%+)`,
         timestamp: new Date().toISOString(),
-        category: 'code',
+        category: "code",
       });
     }
 
     // Accessibility Alert (nur wenn unter 95%)
     if (accessibilityScore < 95) {
       alerts.push({
-        level: 'info',
+        level: "info",
         message: `Accessibility Score: ${accessibilityScore}% (Ziel: 95%+)`,
         timestamp: new Date().toISOString(),
-        category: 'accessibility',
+        category: "accessibility",
       });
     }
 
     // Lint Errors Alert (nur wenn mehr als 5)
     if (lintErrors > 5) {
       alerts.push({
-        level: 'warning',
+        level: "warning",
         message: `Lint Errors: ${lintErrors} (Ziel: <5)`,
         timestamp: new Date().toISOString(),
-        category: 'code',
+        category: "code",
       });
     }
 
     // Security Alert (nur wenn Vulnerabilities vorhanden)
     if (vulnerabilities > 0) {
       alerts.push({
-        level: 'error',
+        level: "error",
         message: `Security Vulnerabilities: ${vulnerabilities} gefunden`,
         timestamp: new Date().toISOString(),
-        category: 'security',
+        category: "security",
       });
     }
 
@@ -632,27 +619,27 @@ class EnterpriseQualityDashboard {
 
     // Code-Qualitäts-Trends
     trends.push({
-      category: 'code',
-      metric: 'testCoverage',
-      trend: 'increasing',
+      category: "code",
+      metric: "testCoverage",
+      trend: "increasing",
       value: 95,
-      change: '+5%',
+      change: "+5%",
     });
 
     trends.push({
-      category: 'performance',
-      metric: 'responseTime',
-      trend: 'decreasing',
+      category: "performance",
+      metric: "responseTime",
+      trend: "decreasing",
       value: 500,
-      change: '-20%',
+      change: "-20%",
     });
 
     trends.push({
-      category: 'security',
-      metric: 'securityScore',
-      trend: 'stable',
+      category: "security",
+      metric: "securityScore",
+      trend: "stable",
       value: 96,
-      change: '0%',
+      change: "0%",
     });
 
     return trends;
@@ -661,10 +648,10 @@ class EnterpriseQualityDashboard {
   // Berichte laden
   async loadReports() {
     const reportFiles = [
-      'enterprise-quality-report.json',
-      'enterprise-optimization-report.json',
-      'enterprise-metrics-report.json',
-      'enterprise-pipeline-report.json',
+      "enterprise-quality-report.json",
+      "enterprise-optimization-report.json",
+      "enterprise-metrics-report.json",
+      "enterprise-pipeline-report.json",
     ];
 
     const reports = [];
@@ -673,9 +660,9 @@ class EnterpriseQualityDashboard {
       const filePath = path.join(this.projectRoot, file);
       if (fs.existsSync(filePath)) {
         try {
-          const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+          const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
           reports.push({
-            name: file.replace('.json', ''),
+            name: file.replace(".json", ""),
             timestamp: data.timestamp || new Date().toISOString(),
             data: data,
           });
@@ -690,32 +677,28 @@ class EnterpriseQualityDashboard {
 
   // Dashboard aktualisieren
   async updateDashboard() {
-    console.log('🔄 Aktualisiere Dashboard...');
+    console.log("🔄 Aktualisiere Dashboard...");
 
     await this.loadDashboardData();
     await this.generateDashboardHTML();
     await this.generateMetricsReport();
 
-    console.log('✅ Dashboard aktualisiert');
+    console.log("✅ Dashboard aktualisiert");
   }
 
   // Dashboard-HTML generieren
   async generateDashboardHTML() {
     const html = this.createDashboardHTML();
-    const dashboardPath = path.join(
-      this.projectRoot,
-      'public',
-      'dashboard.html'
-    );
+    const dashboardPath = path.join(this.projectRoot, "public", "dashboard.html");
 
     // Verzeichnis erstellen falls nicht vorhanden
-    const publicDir = path.join(this.projectRoot, 'public');
+    const publicDir = path.join(this.projectRoot, "public");
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir, { recursive: true });
     }
 
     fs.writeFileSync(dashboardPath, html);
-    console.log('📊 Dashboard-HTML generiert:', dashboardPath);
+    console.log("📊 Dashboard-HTML generiert:", dashboardPath);
   }
 
   // Dashboard-HTML erstellen
@@ -751,7 +734,7 @@ class EnterpriseQualityDashboard {
                         <p class="text-blue-100">Lopez IT Welt - Echtzeit-Qualitätsüberwachung</p>
                     </div>
                     <div class="text-right">
-                        <div class="text-2xl font-bold">${new Date().toLocaleString('de-DE')}</div>
+                        <div class="text-2xl font-bold">${new Date().toLocaleString("de-DE")}</div>
                         <div class="text-blue-100">Live Updates</div>
                     </div>
                 </div>
@@ -842,12 +825,11 @@ class EnterpriseQualityDashboard {
                       alerts.length > 0
                         ? alerts
                             .slice(0, 5)
-                            .map(alert => {
+                            .map((alert) => {
                               const alertStyles = {
-                                error: 'bg-red-50 border-red-200 text-red-800',
-                                warning:
-                                  'bg-yellow-50 border-yellow-200 text-yellow-800',
-                                info: 'bg-blue-50 border-blue-200 text-blue-800',
+                                error: "bg-red-50 border-red-200 text-red-800",
+                                warning: "bg-yellow-50 border-yellow-200 text-yellow-800",
+                                info: "bg-blue-50 border-blue-200 text-blue-800",
                               };
                               const alertIcons = {
                                 error: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>`,
@@ -855,9 +837,9 @@ class EnterpriseQualityDashboard {
                                 info: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>`,
                               };
                               const alertColors = {
-                                error: 'text-red-400',
-                                warning: 'text-yellow-400',
-                                info: 'text-blue-400',
+                                error: "text-red-400",
+                                warning: "text-yellow-400",
+                                info: "text-blue-400",
                               };
 
                               return `
@@ -868,13 +850,13 @@ class EnterpriseQualityDashboard {
                                 </svg>
                             </div>
                             <div class="ml-3">
-                                <p class="text-sm font-medium">${alert.message || 'Alert'}</p>
-                                <p class="text-sm opacity-75">${alert.timestamp ? new Date(alert.timestamp).toLocaleString('de-DE') : new Date().toLocaleString('de-DE')}</p>
+                                <p class="text-sm font-medium">${alert.message || "Alert"}</p>
+                                <p class="text-sm opacity-75">${alert.timestamp ? new Date(alert.timestamp).toLocaleString("de-DE") : new Date().toLocaleString("de-DE")}</p>
                             </div>
                         </div>
                         `;
                             })
-                            .join('')
+                            .join("")
                         : `
                         <div class="text-center py-8 text-gray-500">
                             <svg class="w-12 h-12 mx-auto mb-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -893,7 +875,7 @@ class EnterpriseQualityDashboard {
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     ${trends
                       .map(
-                        trend => `
+                        (trend) => `
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div>
                                 <p class="text-sm font-medium text-gray-900">${trend.metric}</p>
@@ -901,12 +883,12 @@ class EnterpriseQualityDashboard {
                             </div>
                             <div class="text-right">
                                 <p class="text-lg font-bold text-gray-900">${trend.value}</p>
-                                <p class="text-sm ${trend.trend === 'increasing' ? 'trend-up' : trend.trend === 'decreasing' ? 'trend-down' : 'trend-stable'}">${trend.change}</p>
+                                <p class="text-sm ${trend.trend === "increasing" ? "trend-up" : trend.trend === "decreasing" ? "trend-down" : "trend-stable"}">${trend.change}</p>
                             </div>
                         </div>
-                    `
+                    `,
                       )
-                      .join('')}
+                      .join("")}
                 </div>
             </div>
         </main>
@@ -915,7 +897,7 @@ class EnterpriseQualityDashboard {
         <footer class="bg-gray-800 text-white py-6 mt-12">
             <div class="container mx-auto px-6 text-center">
                 <p>&copy; 2024 Lopez IT Welt - Enterprise++ Quality Dashboard</p>
-                <p class="text-gray-400 text-sm mt-2">Letzte Aktualisierung: ${new Date().toLocaleString('de-DE')}</p>
+                <p class="text-gray-400 text-sm mt-2">Letzte Aktualisierung: ${new Date().toLocaleString("de-DE")}</p>
             </div>
         </footer>
     </div>
@@ -992,10 +974,7 @@ class EnterpriseQualityDashboard {
       summary: this.generateMetricsSummary(),
     };
 
-    const reportFile = path.join(
-      this.projectRoot,
-      'enterprise-dashboard-report.json'
-    );
+    const reportFile = path.join(this.projectRoot, "enterprise-dashboard-report.json");
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
   }
 
@@ -1010,9 +989,7 @@ class EnterpriseQualityDashboard {
         status: this.getStatus(Object.values(metrics.code || {})),
       },
       performance: {
-        average: this.calculateAverage(
-          Object.values(metrics.performance || {})
-        ),
+        average: this.calculateAverage(Object.values(metrics.performance || {})),
         status: this.getStatus(Object.values(metrics.performance || {})),
       },
       security: {
@@ -1020,9 +997,7 @@ class EnterpriseQualityDashboard {
         status: this.getStatus(Object.values(metrics.security || {})),
       },
       accessibility: {
-        average: this.calculateAverage(
-          Object.values(metrics.accessibility || {})
-        ),
+        average: this.calculateAverage(Object.values(metrics.accessibility || {})),
         status: this.getStatus(Object.values(metrics.accessibility || {})),
       },
     };
@@ -1043,26 +1018,24 @@ class EnterpriseQualityDashboard {
 
   // Durchschnitt berechnen
   calculateAverage(values) {
-    const numericValues = values.filter(v => typeof v === 'number');
+    const numericValues = values.filter((v) => typeof v === "number");
     if (numericValues.length === 0) return 0;
-    return Math.round(
-      numericValues.reduce((a, b) => a + b, 0) / numericValues.length
-    );
+    return Math.round(numericValues.reduce((a, b) => a + b, 0) / numericValues.length);
   }
 
   // Status bestimmen
   getStatus(values) {
     const average = this.calculateAverage(values);
-    if (average >= 90) return 'excellent';
-    if (average >= 80) return 'good';
-    if (average >= 70) return 'fair';
-    return 'poor';
+    if (average >= 90) return "excellent";
+    if (average >= 80) return "good";
+    if (average >= 70) return "fair";
+    return "poor";
   }
 
   // Hilfsfunktionen
   getSourceFiles() {
-    const sourceDirs = ['src', 'components'];
-    const extensions = ['.ts', '.tsx', '.js', '.jsx'];
+    const sourceDirs = ["src", "components"];
+    const extensions = [".ts", ".tsx", ".js", ".jsx"];
     const files = [];
 
     for (const dir of sourceDirs) {
@@ -1076,16 +1049,16 @@ class EnterpriseQualityDashboard {
   }
 
   getTestFiles() {
-    const testDirs = ['src', 'components', '__tests__', 'tests'];
+    const testDirs = ["src", "components", "__tests__", "tests"];
     const testExtensions = [
-      '.test.ts',
-      '.test.tsx',
-      '.test.js',
-      '.test.jsx',
-      '.spec.ts',
-      '.spec.tsx',
-      '.spec.js',
-      '.spec.jsx',
+      ".test.ts",
+      ".test.tsx",
+      ".test.js",
+      ".test.jsx",
+      ".spec.ts",
+      ".spec.tsx",
+      ".spec.js",
+      ".spec.jsx",
     ];
     const files = [];
 
@@ -1100,8 +1073,8 @@ class EnterpriseQualityDashboard {
   }
 
   getTypeScriptFiles() {
-    const sourceDirs = ['src', 'components'];
-    const tsExtensions = ['.ts', '.tsx'];
+    const sourceDirs = ["src", "components"];
+    const tsExtensions = [".ts", ".tsx"];
     const files = [];
 
     for (const dir of sourceDirs) {
@@ -1168,17 +1141,12 @@ if (require.main === module) {
   dashboard
     .startDashboard()
     .then(() => {
-      console.log('✅ Enterprise++ Quality Dashboard läuft...');
-      console.log(
-        '📊 Dashboard verfügbar unter: http://localhost:3000/dashboard'
-      );
-      console.log('Drücke Ctrl+C zum Beenden');
+      console.log("✅ Enterprise++ Quality Dashboard läuft...");
+      console.log("📊 Dashboard verfügbar unter: http://localhost:3000/dashboard");
+      console.log("Drücke Ctrl+C zum Beenden");
     })
-    .catch(error => {
-      console.error(
-        '❌ Enterprise++ Quality Dashboard fehlgeschlagen:',
-        error.message
-      );
+    .catch((error) => {
+      console.error("❌ Enterprise++ Quality Dashboard fehlgeschlagen:", error.message);
       process.exit(1);
     });
 }

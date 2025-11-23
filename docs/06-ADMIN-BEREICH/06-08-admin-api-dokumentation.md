@@ -13,11 +13,13 @@ Die **Admin-API-Dokumentation** beschreibt alle verfügbaren Admin-Endpunkte des
 ## 🔐 **AUTHENTIFIZIERUNG**
 
 ### **Admin-Token**
+
 ```http
 Authorization: Bearer <admin_token>
 ```
 
 ### **API-Key (für externe Admin-Tools)**
+
 ```http
 X-Admin-API-Key: <admin_api_key>
 ```
@@ -25,6 +27,7 @@ X-Admin-API-Key: <admin_api_key>
 ## 📊 **ALLGEMEINE ANTWORTEN**
 
 ### **Erfolgreiche Admin-Antwort**
+
 ```json
 {
   "success": true,
@@ -38,6 +41,7 @@ X-Admin-API-Key: <admin_api_key>
 ```
 
 ### **Admin-Fehler-Antwort**
+
 ```json
 {
   "success": false,
@@ -58,6 +62,7 @@ X-Admin-API-Key: <admin_api_key>
 ## 👥 **ADMIN-BENUTZER-MANAGEMENT**
 
 ### **Admin-Benutzer erstellen**
+
 ```http
 POST /api/admin/users
 Authorization: Bearer <admin_token>
@@ -78,6 +83,7 @@ Content-Type: application/json
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -86,11 +92,7 @@ Content-Type: application/json
     "name": "Admin Mustermann",
     "email": "admin@lopez-it-welt.de",
     "role": "admin",
-    "permissions": [
-      "user_management",
-      "system_configuration",
-      "security_management"
-    ],
+    "permissions": ["user_management", "system_configuration", "security_management"],
     "organizationId": "org_123456789",
     "isActive": true,
     "createdAt": "2025-07-05T10:30:00Z",
@@ -101,12 +103,14 @@ Content-Type: application/json
 ```
 
 ### **Admin-Benutzer abrufen**
+
 ```http
 GET /api/admin/users/{admin_id}
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -115,11 +119,7 @@ Authorization: Bearer <admin_token>
     "name": "Admin Mustermann",
     "email": "admin@lopez-it-welt.de",
     "role": "admin",
-    "permissions": [
-      "user_management",
-      "system_configuration",
-      "security_management"
-    ],
+    "permissions": ["user_management", "system_configuration", "security_management"],
     "organizationId": "org_123456789",
     "lastLoginAt": "2025-07-05T09:15:00Z",
     "isActive": true,
@@ -130,6 +130,7 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **Admin-Benutzer aktualisieren**
+
 ```http
 PUT /api/admin/users/{admin_id}
 Authorization: Bearer <admin_token>
@@ -148,18 +149,21 @@ Content-Type: application/json
 ```
 
 ### **Admin-Benutzer löschen**
+
 ```http
 DELETE /api/admin/users/{admin_id}
 Authorization: Bearer <admin_token>
 ```
 
 ### **Admin-Benutzer-Liste abrufen**
+
 ```http
 GET /api/admin/users?page=1&limit=10&role=admin&isActive=true
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -189,12 +193,14 @@ Authorization: Bearer <admin_token>
 ## 🎛️ **SYSTEM-KONFIGURATION**
 
 ### **System-Status abrufen**
+
 ```http
 GET /api/admin/system/status
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -243,12 +249,14 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **System-Konfiguration abrufen**
+
 ```http
 GET /api/admin/system/config
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -302,6 +310,7 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **System-Konfiguration aktualisieren**
+
 ```http
 PUT /api/admin/system/config
 Authorization: Bearer <admin_token>
@@ -324,6 +333,7 @@ Content-Type: application/json
 ```
 
 ### **System-Backup erstellen**
+
 ```http
 POST /api/admin/system/backup
 Authorization: Bearer <admin_token>
@@ -339,6 +349,7 @@ Content-Type: application/json
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -357,6 +368,7 @@ Content-Type: application/json
 ```
 
 ### **System-Backup wiederherstellen**
+
 ```http
 POST /api/admin/system/backup/{backup_id}/restore
 Authorization: Bearer <admin_token>
@@ -371,12 +383,14 @@ Content-Type: application/json
 ## 📊 **MONITORING & ANALYTICS**
 
 ### **System-Metriken abrufen**
+
 ```http
 GET /api/admin/monitoring/metrics?startDate=2025-07-01&endDate=2025-07-05&interval=hourly
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -436,12 +450,14 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **Performance-Alerts abrufen**
+
 ```http
 GET /api/admin/monitoring/alerts?severity=critical&status=active
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -471,6 +487,7 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **Alert bestätigen**
+
 ```http
 PATCH /api/admin/monitoring/alerts/{alert_id}/acknowledge
 Authorization: Bearer <admin_token>
@@ -485,12 +502,14 @@ Content-Type: application/json
 ## 🔍 **LOGGING & AUDIT**
 
 ### **System-Logs abrufen**
+
 ```http
 GET /api/admin/logs?level=error&startDate=2025-07-01&endDate=2025-07-05&limit=100
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -526,12 +545,14 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **Audit-Logs abrufen**
+
 ```http
 GET /api/admin/audit?action=user_created&startDate=2025-07-01&endDate=2025-07-05
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -547,7 +568,7 @@ Authorization: Bearer <admin_token>
         "oldValue": null,
         "newValue": {
           "name": "Max Mustermann",
-          "email": "max@example.com",
+          "email": "test@example.org",
           "role": "user"
         },
         "ipAddress": "192.168.1.100",
@@ -575,6 +596,7 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **Logs exportieren**
+
 ```http
 POST /api/admin/logs/export
 Authorization: Bearer <admin_token>
@@ -591,6 +613,7 @@ Content-Type: application/json
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -609,12 +632,14 @@ Content-Type: application/json
 ## 🔒 **SECURITY-MANAGEMENT**
 
 ### **Security-Events abrufen**
+
 ```http
 GET /api/admin/security/events?startDate=2025-07-01&endDate=2025-07-05&type=suspicious_activity
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -655,6 +680,7 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **IP-Adresse blockieren**
+
 ```http
 POST /api/admin/security/block-ip
 Authorization: Bearer <admin_token>
@@ -669,6 +695,7 @@ Content-Type: application/json
 ```
 
 ### **IP-Adresse entsperren**
+
 ```http
 POST /api/admin/security/unblock-ip
 Authorization: Bearer <admin_token>
@@ -682,6 +709,7 @@ Content-Type: application/json
 ```
 
 ### **Security-Report generieren**
+
 ```http
 POST /api/admin/security/report
 Authorization: Bearer <admin_token>
@@ -699,6 +727,7 @@ Content-Type: application/json
 ## 📈 **REPORTING**
 
 ### **Report generieren**
+
 ```http
 POST /api/admin/reports/generate
 Authorization: Bearer <admin_token>
@@ -715,6 +744,7 @@ Content-Type: application/json
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -732,12 +762,14 @@ Content-Type: application/json
 ```
 
 ### **Geplante Reports abrufen**
+
 ```http
 GET /api/admin/reports/scheduled
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -759,6 +791,7 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **Report-Schedule erstellen**
+
 ```http
 POST /api/admin/reports/schedule
 Authorization: Bearer <admin_token>
@@ -777,12 +810,14 @@ Content-Type: application/json
 ## 🚨 **ALERTING**
 
 ### **Alerts abrufen**
+
 ```http
 GET /api/admin/alerts?status=active&severity=critical
 Authorization: Bearer <admin_token>
 ```
 
 ### **Alert-Regel erstellen**
+
 ```http
 POST /api/admin/alerts/rules
 Authorization: Bearer <admin_token>
@@ -802,6 +837,7 @@ Content-Type: application/json
 ```
 
 ### **Alert-Regel aktualisieren**
+
 ```http
 PUT /api/admin/alerts/rules/{rule_id}
 Authorization: Bearer <admin_token>
@@ -817,12 +853,14 @@ Content-Type: application/json
 ## 📊 **ANALYTICS**
 
 ### **Analytics-Daten abrufen**
+
 ```http
 GET /api/admin/analytics?type=user_activity&startDate=2025-07-01&endDate=2025-07-05&groupBy=day
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -860,6 +898,7 @@ Authorization: Bearer <admin_token>
 ## 🔧 **SYSTEM-TOOLS**
 
 ### **Datenbank-Migration ausführen**
+
 ```http
 POST /api/admin/system/migrate
 Authorization: Bearer <admin_token>
@@ -873,6 +912,7 @@ Content-Type: application/json
 ```
 
 ### **Cache leeren**
+
 ```http
 POST /api/admin/system/cache/clear
 Authorization: Bearer <admin_token>
@@ -885,6 +925,7 @@ Content-Type: application/json
 ```
 
 ### **System-Neustart**
+
 ```http
 POST /api/admin/system/restart
 Authorization: Bearer <admin_token>
@@ -900,6 +941,7 @@ Content-Type: application/json
 ## 📝 **FEHLER-CODES**
 
 ### **Admin-spezifische Fehler-Codes**
+
 ```json
 {
   "error_codes": {
@@ -920,12 +962,14 @@ Content-Type: application/json
 ## 📞 **SUPPORT**
 
 ### **Admin-Support**
+
 - **E-Mail:** admin-support@lopez-it-welt.de
 - **Dokumentation:** https://admin-docs.lopez-it-welt.de
 - **Status-Seite:** https://status.lopez-it-welt.de
 - **Emergency:** +49 123 456789
 
 ### **Rate Limits**
+
 - **Standard:** 1000 Anfragen/Stunde
 - **Admin:** 5000 Anfragen/Stunde
 - **Super-Admin:** Unbegrenzt
@@ -933,4 +977,4 @@ Content-Type: application/json
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

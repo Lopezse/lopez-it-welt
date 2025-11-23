@@ -1,0 +1,219 @@
+{
+  "timestamp": "2025-10-31T13:41:41.744Z",
+  "database": "lopez_it_welt",
+  "connection": null,
+  "characterSets": {
+    "character_set_client": "utf8mb4",
+    "character_set_connection": "utf8mb4",
+    "character_set_database": "utf8mb4",
+    "character_set_filesystem": "binary",
+    "character_set_results": "utf8mb4",
+    "character_set_server": "utf8mb4",
+    "character_set_system": "utf8",
+    "character_sets_dir": "C:\\xampp\\mysql\\share\\charsets\\"
+  },
+  "collations": {
+    "collation_connection": "utf8mb4_general_ci",
+    "collation_database": "utf8mb4_unicode_ci",
+    "collation_server": "utf8mb4_general_ci"
+  },
+  "schemas": [
+    {
+      "SCHEMA_NAME": "lopez_erp",
+      "DEFAULT_CHARACTER_SET_NAME": "utf8mb4",
+      "DEFAULT_COLLATION_NAME": "utf8mb4_unicode_ci"
+    },
+    {
+      "SCHEMA_NAME": "lopez_it_welt",
+      "DEFAULT_CHARACTER_SET_NAME": "utf8mb4",
+      "DEFAULT_COLLATION_NAME": "utf8mb4_unicode_ci"
+    }
+  ],
+  "tables": [
+    {
+      "TABLE_NAME": "content_header",
+      "TABLE_COLLATION": "utf8mb4_unicode_ci",
+      "TABLE_TYPE": "BASE TABLE"
+    },
+    {
+      "TABLE_NAME": "content_hero",
+      "TABLE_COLLATION": "utf8mb4_unicode_ci",
+      "TABLE_TYPE": "BASE TABLE"
+    },
+    {
+      "TABLE_NAME": "lopez_footer",
+      "TABLE_COLLATION": "utf8mb4_unicode_ci",
+      "TABLE_TYPE": "BASE TABLE"
+    },
+    {
+      "TABLE_NAME": "test_utf8",
+      "TABLE_COLLATION": "utf8mb4_unicode_ci",
+      "TABLE_TYPE": "BASE TABLE"
+    }
+  ],
+  "contentHeroColumns": [
+    {
+      "COLUMN_NAME": "id",
+      "CHARACTER_SET_NAME": null,
+      "COLLATION_NAME": null,
+      "DATA_TYPE": "int",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "title",
+      "CHARACTER_SET_NAME": "utf8mb4",
+      "COLLATION_NAME": "utf8mb4_unicode_ci",
+      "DATA_TYPE": "varchar",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "subtitle",
+      "CHARACTER_SET_NAME": "utf8mb4",
+      "COLLATION_NAME": "utf8mb4_unicode_ci",
+      "DATA_TYPE": "varchar",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "description",
+      "CHARACTER_SET_NAME": "utf8mb4",
+      "COLLATION_NAME": "utf8mb4_unicode_ci",
+      "DATA_TYPE": "text",
+      "CHARACTER_MAXIMUM_LENGTH": 65535
+    },
+    {
+      "COLUMN_NAME": "button_text",
+      "CHARACTER_SET_NAME": "utf8mb4",
+      "COLLATION_NAME": "utf8mb4_unicode_ci",
+      "DATA_TYPE": "varchar",
+      "CHARACTER_MAXIMUM_LENGTH": 100
+    },
+    {
+      "COLUMN_NAME": "button_link",
+      "CHARACTER_SET_NAME": "utf8mb4",
+      "COLLATION_NAME": "utf8mb4_unicode_ci",
+      "DATA_TYPE": "varchar",
+      "CHARACTER_MAXIMUM_LENGTH": 255
+    },
+    {
+      "COLUMN_NAME": "background_style",
+      "CHARACTER_SET_NAME": "utf8mb4",
+      "COLLATION_NAME": "utf8mb4_unicode_ci",
+      "DATA_TYPE": "varchar",
+      "CHARACTER_MAXIMUM_LENGTH": 50
+    },
+    {
+      "COLUMN_NAME": "background_value",
+      "CHARACTER_SET_NAME": "utf8mb4",
+      "COLLATION_NAME": "utf8mb4_unicode_ci",
+      "DATA_TYPE": "text",
+      "CHARACTER_MAXIMUM_LENGTH": 65535
+    },
+    {
+      "COLUMN_NAME": "is_active",
+      "CHARACTER_SET_NAME": null,
+      "COLLATION_NAME": null,
+      "DATA_TYPE": "tinyint",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "created_at",
+      "CHARACTER_SET_NAME": null,
+      "COLLATION_NAME": null,
+      "DATA_TYPE": "timestamp",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    },
+    {
+      "COLUMN_NAME": "updated_at",
+      "CHARACTER_SET_NAME": null,
+      "COLLATION_NAME": null,
+      "DATA_TYPE": "timestamp",
+      "CHARACTER_MAXIMUM_LENGTH": null
+    }
+  ],
+  "contentHeroData": [
+    {
+      "id": 1,
+      "title": "Lopez IT Welt",
+      "subtitle": "Professionelle IT-L?sungen",
+      "description": "Wir entwickeln ma?geschneiderte Software-L?sungen mit Fokus auf Barrierefreiheit und pers?nliche Betreuung. Von der Konzeption bis zur Umsetzung - Ihr Partner f?r digitale Innovation.",
+      "button_text": "Jetzt beraten lassen",
+      "button_link": "/kontakt",
+      "is_active": 1,
+      "created_at": "2025-09-28T18:20:09.000Z",
+      "updated_at": "2025-09-29T11:41:05.000Z"
+    },
+    {
+      "id": 2,
+      "title": "L?sungen Test",
+      "subtitle": "Professionelle IT-L?sungen",
+      "description": "Wir entwickeln ma?geschneiderte Software-L?sungen mit Fokus auf Barrierefreiheit und pers?nliche Betreuung.",
+      "button_text": "Jetzt beraten lassen",
+      "button_link": "/kontakt",
+      "is_active": 1,
+      "created_at": "2025-09-29T12:37:03.000Z",
+      "updated_at": "2025-09-29T12:37:03.000Z"
+    },
+    {
+      "id": 3,
+      "title": "L?sungen Test 2",
+      "subtitle": "Professionelle IT-L?sungen",
+      "description": "Wir entwickeln ma?geschneiderte Software-L?sungen mit Fokus auf Barrierefreiheit und pers?nliche Betreuung.",
+      "button_text": "Jetzt beraten lassen",
+      "button_link": "/kontakt",
+      "is_active": 1,
+      "created_at": "2025-09-29T12:37:44.000Z",
+      "updated_at": "2025-09-29T12:37:44.000Z"
+    }
+  ],
+  "placeholderEntries": [
+    {
+      "id": 1,
+      "title": "Lopez IT Welt",
+      "subtitle": "Professionelle IT-L?sungen",
+      "description": "Wir entwickeln ma?geschneiderte Software-L?sungen mit Fokus auf Barrierefreiheit und pers?nliche Betreuung. Von der Konzeption bis zur Umsetzung - Ihr Partner f?r digitale Innovation.",
+      "button_text": "Jetzt beraten lassen",
+      "button_link": "/kontakt",
+      "is_active": 1,
+      "created_at": "2025-09-28T18:20:09.000Z",
+      "updated_at": "2025-09-29T11:41:05.000Z"
+    },
+    {
+      "id": 2,
+      "title": "L?sungen Test",
+      "subtitle": "Professionelle IT-L?sungen",
+      "description": "Wir entwickeln ma?geschneiderte Software-L?sungen mit Fokus auf Barrierefreiheit und pers?nliche Betreuung.",
+      "button_text": "Jetzt beraten lassen",
+      "button_link": "/kontakt",
+      "is_active": 1,
+      "created_at": "2025-09-29T12:37:03.000Z",
+      "updated_at": "2025-09-29T12:37:03.000Z"
+    },
+    {
+      "id": 3,
+      "title": "L?sungen Test 2",
+      "subtitle": "Professionelle IT-L?sungen",
+      "description": "Wir entwickeln ma?geschneiderte Software-L?sungen mit Fokus auf Barrierefreiheit und pers?nliche Betreuung.",
+      "button_text": "Jetzt beraten lassen",
+      "button_link": "/kontakt",
+      "is_active": 1,
+      "created_at": "2025-09-29T12:37:44.000Z",
+      "updated_at": "2025-09-29T12:37:44.000Z"
+    }
+  ],
+  "abTestConfig": [],
+  "heroAbTests": [],
+  "heroTestStats": [],
+  "alternativeTables": [
+    {
+      "TABLE_NAME": "content_header"
+    },
+    {
+      "TABLE_NAME": "content_hero"
+    }
+  ],
+  "errors": [
+    "Tabelle ab_test_config nicht gefunden",
+    "Tabelle hero_ab_tests nicht gefunden",
+    "Tabelle hero_test_stats nicht gefunden"
+  ]
+}

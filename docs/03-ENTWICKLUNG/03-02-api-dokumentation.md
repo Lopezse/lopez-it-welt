@@ -13,11 +13,13 @@ Die **API-Dokumentation** beschreibt alle verfügbaren Endpunkte des Lopez IT We
 ## 🔐 **AUTHENTIFIZIERUNG**
 
 ### **Bearer Token**
+
 ```http
 Authorization: Bearer <access_token>
 ```
 
 ### **API-Key (für externe Services)**
+
 ```http
 X-API-Key: <api_key>
 ```
@@ -25,6 +27,7 @@ X-API-Key: <api_key>
 ## 📊 **ALLGEMEINE ANTWORTEN**
 
 ### **Erfolgreiche Antwort**
+
 ```json
 {
   "success": true,
@@ -37,6 +40,7 @@ X-API-Key: <api_key>
 ```
 
 ### **Fehler-Antwort**
+
 ```json
 {
   "success": false,
@@ -57,26 +61,28 @@ X-API-Key: <api_key>
 ## 👥 **BENUTZER-MANAGEMENT**
 
 ### **Benutzer erstellen**
+
 ```http
 POST /api/users
 Content-Type: application/json
 
 {
   "name": "Max Mustermann",
-  "email": "max@example.com",
+  "email": "test@example.org",
   "password": "secure123",
   "role": "user"
 }
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
   "data": {
     "id": "usr_123456789",
     "name": "Max Mustermann",
-    "email": "max@example.com",
+    "email": "test@example.org",
     "role": "user",
     "createdAt": "2025-07-05T10:30:00Z",
     "updatedAt": "2025-07-05T10:30:00Z"
@@ -86,19 +92,21 @@ Content-Type: application/json
 ```
 
 ### **Benutzer abrufen**
+
 ```http
 GET /api/users/{user_id}
 Authorization: Bearer <access_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
   "data": {
     "id": "usr_123456789",
     "name": "Max Mustermann",
-    "email": "max@example.com",
+    "email": "test@example.org",
     "role": "user",
     "profile": {
       "avatar": "https://example.com/avatar.jpg",
@@ -112,6 +120,7 @@ Authorization: Bearer <access_token>
 ```
 
 ### **Benutzer aktualisieren**
+
 ```http
 PUT /api/users/{user_id}
 Authorization: Bearer <access_token>
@@ -126,18 +135,21 @@ Content-Type: application/json
 ```
 
 ### **Benutzer löschen**
+
 ```http
 DELETE /api/users/{user_id}
 Authorization: Bearer <access_token>
 ```
 
 ### **Benutzer-Liste abrufen**
+
 ```http
 GET /api/users?page=1&limit=10&search=max&role=user
 Authorization: Bearer <access_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -146,7 +158,7 @@ Authorization: Bearer <access_token>
       {
         "id": "usr_123456789",
         "name": "Max Mustermann",
-        "email": "max@example.com",
+        "email": "test@example.org",
         "role": "user",
         "createdAt": "2025-07-05T10:30:00Z"
       }
@@ -164,17 +176,19 @@ Authorization: Bearer <access_token>
 ## 🔐 **AUTHENTIFIZIERUNG**
 
 ### **Anmeldung**
+
 ```http
 POST /api/auth/login
 Content-Type: application/json
 
 {
-  "email": "max@example.com",
+  "email": "test@example.org",
   "password": "secure123"
 }
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -182,7 +196,7 @@ Content-Type: application/json
     "user": {
       "id": "usr_123456789",
       "name": "Max Mustermann",
-      "email": "max@example.com",
+      "email": "test@example.org",
       "role": "user"
     },
     "tokens": {
@@ -196,12 +210,14 @@ Content-Type: application/json
 ```
 
 ### **Abmeldung**
+
 ```http
 POST /api/auth/logout
 Authorization: Bearer <access_token>
 ```
 
 ### **Token erneuern**
+
 ```http
 POST /api/auth/refresh
 Content-Type: application/json
@@ -212,16 +228,18 @@ Content-Type: application/json
 ```
 
 ### **Passwort zurücksetzen**
+
 ```http
 POST /api/auth/forgot-password
 Content-Type: application/json
 
 {
-  "email": "max@example.com"
+  "email": "test@example.org"
 }
 ```
 
 ### **Passwort ändern**
+
 ```http
 POST /api/auth/reset-password
 Content-Type: application/json
@@ -235,6 +253,7 @@ Content-Type: application/json
 ## 🤖 **KI-AGENTEN**
 
 ### **KI-Agent erstellen**
+
 ```http
 POST /api/ai-agents
 Authorization: Bearer <access_token>
@@ -256,6 +275,7 @@ Content-Type: application/json
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -280,12 +300,14 @@ Content-Type: application/json
 ```
 
 ### **KI-Agent abrufen**
+
 ```http
 GET /api/ai-agents/{agent_id}
 Authorization: Bearer <access_token>
 ```
 
 ### **KI-Agent aktualisieren**
+
 ```http
 PUT /api/ai-agents/{agent_id}
 Authorization: Bearer <access_token>
@@ -300,18 +322,21 @@ Content-Type: application/json
 ```
 
 ### **KI-Agent löschen**
+
 ```http
 DELETE /api/ai-agents/{agent_id}
 Authorization: Bearer <access_token>
 ```
 
 ### **KI-Agent-Liste abrufen**
+
 ```http
 GET /api/ai-agents?page=1&limit=10&type=chatbot&isActive=true
 Authorization: Bearer <access_token>
 ```
 
 ### **KI-Agent aktivieren/deaktivieren**
+
 ```http
 PATCH /api/ai-agents/{agent_id}/toggle
 Authorization: Bearer <access_token>
@@ -320,6 +345,7 @@ Authorization: Bearer <access_token>
 ## 💬 **CHAT-SYSTEM**
 
 ### **Chat-Session erstellen**
+
 ```http
 POST /api/chat/sessions
 Authorization: Bearer <access_token>
@@ -336,6 +362,7 @@ Content-Type: application/json
 ```
 
 ### **Nachricht senden**
+
 ```http
 POST /api/chat/sessions/{session_id}/messages
 Authorization: Bearer <access_token>
@@ -351,6 +378,7 @@ Content-Type: application/json
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -368,12 +396,14 @@ Content-Type: application/json
 ```
 
 ### **Chat-Historie abrufen**
+
 ```http
 GET /api/chat/sessions/{session_id}/messages?page=1&limit=50
 Authorization: Bearer <access_token>
 ```
 
 ### **Chat-Session beenden**
+
 ```http
 PATCH /api/chat/sessions/{session_id}/end
 Authorization: Bearer <access_token>
@@ -382,12 +412,14 @@ Authorization: Bearer <access_token>
 ## 📊 **ANALYTICS**
 
 ### **Chat-Statistiken**
+
 ```http
 GET /api/analytics/chat?startDate=2025-07-01&endDate=2025-07-05&agentId=agent_123456789
 Authorization: Bearer <access_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -421,12 +453,14 @@ Authorization: Bearer <access_token>
 ```
 
 ### **Benutzer-Statistiken**
+
 ```http
 GET /api/analytics/users?startDate=2025-07-01&endDate=2025-07-05
 Authorization: Bearer <access_token>
 ```
 
 ### **KI-Agent-Performance**
+
 ```http
 GET /api/analytics/agents/{agent_id}/performance?startDate=2025-07-01&endDate=2025-07-05
 Authorization: Bearer <access_token>
@@ -435,12 +469,14 @@ Authorization: Bearer <access_token>
 ## 🔧 **SYSTEM-ADMINISTRATION**
 
 ### **System-Status abrufen**
+
 ```http
 GET /api/admin/system/status
 Authorization: Bearer <admin_token>
 ```
 
 **Antwort:**
+
 ```json
 {
   "success": true,
@@ -464,12 +500,14 @@ Authorization: Bearer <admin_token>
 ```
 
 ### **Logs abrufen**
+
 ```http
 GET /api/admin/logs?level=error&startDate=2025-07-01&endDate=2025-07-05&limit=100
 Authorization: Bearer <admin_token>
 ```
 
 ### **Backup erstellen**
+
 ```http
 POST /api/admin/backup
 Authorization: Bearer <admin_token>
@@ -483,12 +521,14 @@ Content-Type: application/json
 ```
 
 ### **System-Konfiguration abrufen**
+
 ```http
 GET /api/admin/config
 Authorization: Bearer <admin_token>
 ```
 
 ### **System-Konfiguration aktualisieren**
+
 ```http
 PUT /api/admin/config
 Authorization: Bearer <admin_token>
@@ -514,6 +554,7 @@ Content-Type: application/json
 ## 📝 **FEHLER-CODES**
 
 ### **HTTP-Status-Codes**
+
 - `200` - Erfolgreich
 - `201` - Erstellt
 - `400` - Ungültige Anfrage
@@ -525,6 +566,7 @@ Content-Type: application/json
 - `500` - Server-Fehler
 
 ### **Anwendungs-spezifische Fehler-Codes**
+
 ```json
 {
   "error_codes": {
@@ -547,6 +589,7 @@ Content-Type: application/json
 ## 🔄 **WEBHOOKS**
 
 ### **Webhook registrieren**
+
 ```http
 POST /api/webhooks
 Authorization: Bearer <access_token>
@@ -560,6 +603,7 @@ Content-Type: application/json
 ```
 
 ### **Webhook-Events**
+
 ```json
 {
   "events": {
@@ -580,12 +624,13 @@ Content-Type: application/json
 ## 📚 **BEISPIELE**
 
 ### **Vollständiger Chat-Flow**
+
 ```bash
 # 1. Benutzer anmelden
 curl -X POST https://api.lopez-it-welt.de/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "max@example.com",
+    "email": "test@example.org",
     "password": "secure123"
   }'
 
@@ -613,6 +658,7 @@ curl -X GET https://api.lopez-it-welt.de/v1/chat/sessions/session_123/messages \
 ```
 
 ### **KI-Agent-Management**
+
 ```bash
 # 1. KI-Agent erstellen
 curl -X POST https://api.lopez-it-welt.de/v1/ai-agents \
@@ -646,39 +692,41 @@ curl -X GET "https://api.lopez-it-welt.de/v1/ai-agents?page=1&limit=10" \
 ## 🔧 **SDK & BIBLIOTHEKEN**
 
 ### **JavaScript/TypeScript SDK**
+
 ```bash
 npm install @lopez-it-welt/sdk
 ```
 
 ```typescript
-import { LopezITWeltClient } from '@lopez-it-welt/sdk';
+import { LopezITWeltClient } from "@lopez-it-welt/sdk";
 
 const client = new LopezITWeltClient({
-  apiKey: 'your_api_key',
-  baseUrl: 'https://api.lopez-it-welt.de/v1'
+  apiKey: "your_api_key",
+  baseUrl: "https://api.lopez-it-welt.de/v1",
 });
 
 // Benutzer erstellen
 const user = await client.users.create({
-  name: 'Max Mustermann',
-  email: 'max@example.com',
-  password: 'secure123'
+  name: "Max Mustermann",
+  email: "test@example.org",
+  password: "secure123",
 });
 
 // Chat-Session erstellen
 const session = await client.chat.createSession({
-  agentId: 'agent_123',
-  title: 'Kunden-Support'
+  agentId: "agent_123",
+  title: "Kunden-Support",
 });
 
 // Nachricht senden
 const message = await client.chat.sendMessage(session.id, {
-  content: 'Hallo, ich brauche Hilfe',
-  type: 'user'
+  content: "Hallo, ich brauche Hilfe",
+  type: "user",
 });
 ```
 
 ### **Python SDK**
+
 ```bash
 pip install lopez-it-welt-sdk
 ```
@@ -694,7 +742,7 @@ client = LopezITWeltClient(
 # Benutzer erstellen
 user = client.users.create({
     'name': 'Max Mustermann',
-    'email': 'max@example.com',
+    'email': 'test@example.org',
     'password': 'secure123'
 })
 
@@ -708,17 +756,20 @@ session = client.chat.create_session({
 ## 📞 **SUPPORT**
 
 ### **API-Support**
+
 - **E-Mail:** api-support@lopez-it-welt.de
 - **Dokumentation:** https://docs.lopez-it-welt.de/api
 - **Status-Seite:** https://status.lopez-it-welt.de
 - **GitHub Issues:** https://github.com/lopez-it-welt/api/issues
 
 ### **Rate Limits**
+
 - **Standard:** 1000 Anfragen/Stunde
 - **Premium:** 10000 Anfragen/Stunde
 - **Enterprise:** Unbegrenzt
 
 ### **Versionierung**
+
 - **Aktuelle Version:** v1
 - **Deprecation Policy:** 12 Monate Vorankündigung
 - **Breaking Changes:** Nur in Major-Versionen
@@ -726,4 +777,4 @@ session = client.chat.create_session({
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

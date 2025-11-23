@@ -1,8 +1,8 @@
 ---
-title: 'Willkommen bei Lopez IT Welt'
-date: '2024-03-20'
-author: 'Ramiro Lopez Rodriguez'
-description: 'Eine Einführung in unsere IT-Dienstleistungen'
+title: "Willkommen bei Lopez IT Welt"
+date: "2024-03-20"
+author: "Ramiro Lopez Rodriguez"
+description: "Eine Einführung in unsere IT-Dienstleistungen"
 ---
 
 # Willkommen bei Lopez IT Welt

@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class MorgenRoutine {
   constructor() {
@@ -11,10 +11,10 @@ class MorgenRoutine {
 
   // Hauptfunktion für Morgen-Routine
   async execute() {
-    console.log('🌅 Starte Morgen-Routine...');
-    console.log(`📅 Datum: ${this.startTime.toLocaleDateString('de-DE')}`);
-    console.log(`⏰ Zeit: ${this.startTime.toLocaleTimeString('de-DE')}`);
-    console.log('');
+    console.log("🌅 Starte Morgen-Routine...");
+    console.log(`📅 Datum: ${this.startTime.toLocaleDateString("de-DE")}`);
+    console.log(`⏰ Zeit: ${this.startTime.toLocaleTimeString("de-DE")}`);
+    console.log("");
 
     try {
       // 1. System-Status prüfen
@@ -41,31 +41,31 @@ class MorgenRoutine {
       // 8. Bericht generieren
       await this.generateReport();
 
-      console.log('✅ Morgen-Routine erfolgreich abgeschlossen');
+      console.log("✅ Morgen-Routine erfolgreich abgeschlossen");
     } catch (error) {
-      console.error('❌ Fehler in der Morgen-Routine:', error.message);
-      this.logError('Morgen-Routine fehlgeschlagen', error);
+      console.error("❌ Fehler in der Morgen-Routine:", error.message);
+      this.logError("Morgen-Routine fehlgeschlagen", error);
     }
   }
 
   // System-Status prüfen
   async checkSystemStatus() {
-    console.log('🔍 Prüfe System-Status...');
+    console.log("🔍 Prüfe System-Status...");
 
     // Node.js-Version
     try {
       const nodeVersion = process.version;
       console.log(`  ✅ Node.js: ${nodeVersion}`);
     } catch (error) {
-      this.logError('Node.js-Version konnte nicht ermittelt werden', error);
+      this.logError("Node.js-Version konnte nicht ermittelt werden", error);
     }
 
     // npm-Version
     try {
-      const npmVersion = execSync('npm --version', { encoding: 'utf8' }).trim();
+      const npmVersion = execSync("npm --version", { encoding: "utf8" }).trim();
       console.log(`  ✅ npm: ${npmVersion}`);
     } catch (error) {
-      this.logError('npm-Version konnte nicht ermittelt werden', error);
+      this.logError("npm-Version konnte nicht ermittelt werden", error);
     }
 
     // Speicherplatz prüfen
@@ -74,7 +74,7 @@ class MorgenRoutine {
       const freeSpace = this.getFreeDiskSpace();
       console.log(`  ✅ Freier Speicherplatz: ${freeSpace} GB`);
     } catch (error) {
-      this.logError('Speicherplatz konnte nicht geprüft werden', error);
+      this.logError("Speicherplatz konnte nicht geprüft werden", error);
     }
 
     // Projektgröße
@@ -82,26 +82,26 @@ class MorgenRoutine {
       const projectSize = this.getProjectSize();
       console.log(`  ✅ Projektgröße: ${projectSize} MB`);
     } catch (error) {
-      this.logError('Projektgröße konnte nicht ermittelt werden', error);
+      this.logError("Projektgröße konnte nicht ermittelt werden", error);
     }
   }
 
   // Backup-Status prüfen
   async checkBackupStatus() {
-    console.log('💾 Prüfe Backup-Status...');
+    console.log("💾 Prüfe Backup-Status...");
 
-    const backupDir = path.join(this.projectRoot, 'backups');
+    const backupDir = path.join(this.projectRoot, "backups");
 
     if (!fs.existsSync(backupDir)) {
-      console.log('  ⚠️ Backup-Verzeichnis nicht gefunden');
+      console.log("  ⚠️ Backup-Verzeichnis nicht gefunden");
       return;
     }
 
     try {
       const backupFiles = fs
         .readdirSync(backupDir)
-        .filter(file => file.endsWith('.json') || file.endsWith('.zip'))
-        .map(file => {
+        .filter((file) => file.endsWith(".json") || file.endsWith(".zip"))
+        .map((file) => {
           const filePath = path.join(backupDir, file);
           const stats = fs.statSync(filePath);
           return {
@@ -115,81 +115,73 @@ class MorgenRoutine {
       if (backupFiles.length > 0) {
         const latestBackup = backupFiles[0];
         const daysSinceBackup = Math.floor(
-          (Date.now() - latestBackup.date.getTime()) / (1000 * 60 * 60 * 24)
+          (Date.now() - latestBackup.date.getTime()) / (1000 * 60 * 60 * 24),
         );
 
-        console.log(
-          `  ✅ Letztes Backup: ${latestBackup.name} (vor ${daysSinceBackup} Tagen)`
-        );
-        console.log(
-          `  📊 Backup-Größe: ${(latestBackup.size / 1024 / 1024).toFixed(2)} MB`
-        );
+        console.log(`  ✅ Letztes Backup: ${latestBackup.name} (vor ${daysSinceBackup} Tagen)`);
+        console.log(`  📊 Backup-Größe: ${(latestBackup.size / 1024 / 1024).toFixed(2)} MB`);
 
         if (daysSinceBackup > 7) {
-          console.log('  ⚠️ Backup ist älter als 7 Tage');
+          console.log("  ⚠️ Backup ist älter als 7 Tage");
         }
       } else {
-        console.log('  ⚠️ Keine Backups gefunden');
+        console.log("  ⚠️ Keine Backups gefunden");
       }
     } catch (error) {
-      this.logError('Backup-Status konnte nicht geprüft werden', error);
+      this.logError("Backup-Status konnte nicht geprüft werden", error);
     }
   }
 
   // Code-Qualität prüfen
   async checkCodeQuality() {
-    console.log('🔧 Prüfe Code-Qualität...');
+    console.log("🔧 Prüfe Code-Qualität...");
 
     try {
       // ESLint ausführen
-      execSync('npm run lint', {
+      execSync("npm run lint", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ ESLint-Prüfung bestanden');
+      console.log("  ✅ ESLint-Prüfung bestanden");
     } catch (error) {
-      console.log('  ⚠️ ESLint-Prüfung fehlgeschlagen');
-      this.logError('ESLint-Prüfung fehlgeschlagen', error);
+      console.log("  ⚠️ ESLint-Prüfung fehlgeschlagen");
+      this.logError("ESLint-Prüfung fehlgeschlagen", error);
     }
 
     try {
       // TypeScript-Kompilierung prüfen
-      execSync('npx tsc --noEmit', {
+      execSync("npx tsc --noEmit", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ TypeScript-Kompilierung erfolgreich');
+      console.log("  ✅ TypeScript-Kompilierung erfolgreich");
     } catch (error) {
-      console.log('  ❌ TypeScript-Kompilierung fehlgeschlagen');
-      this.logError('TypeScript-Kompilierung fehlgeschlagen', error);
+      console.log("  ❌ TypeScript-Kompilierung fehlgeschlagen");
+      this.logError("TypeScript-Kompilierung fehlgeschlagen", error);
     }
 
     // Code-Metriken sammeln
     try {
       const metrics = this.collectCodeMetrics();
-      console.log(
-        `  📊 Code-Metriken: ${metrics.files} Dateien, ${metrics.lines} Zeilen`
-      );
+      console.log(`  📊 Code-Metriken: ${metrics.files} Dateien, ${metrics.lines} Zeilen`);
     } catch (error) {
-      this.logError('Code-Metriken konnten nicht gesammelt werden', error);
+      this.logError("Code-Metriken konnten nicht gesammelt werden", error);
     }
   }
 
   // i18n-Status prüfen
   async checkI18nStatus() {
-    console.log('🌍 Prüfe i18n-Status...');
+    console.log("🌍 Prüfe i18n-Status...");
 
-    const i18nDir = path.join(this.projectRoot, 'src/i18n/locales');
+    const i18nDir = path.join(this.projectRoot, "src/i18n/locales");
 
     if (!fs.existsSync(i18nDir)) {
-      console.log('  ❌ i18n-Verzeichnis nicht gefunden');
+      console.log("  ❌ i18n-Verzeichnis nicht gefunden");
       return;
     }
 
     try {
-      const languageFiles = fs
-        .readdirSync(i18nDir)
-        .filter(file => file.endsWith('.json'));
+      const languageFiles = fs.readdirSync(i18nDir).filter((file) => file.endsWith(".json"));
 
       console.log(`  ✅ ${languageFiles.length} Sprachdateien gefunden`);
 
@@ -197,20 +189,20 @@ class MorgenRoutine {
       const translations = {};
       for (const file of languageFiles) {
         const filePath = path.join(i18nDir, file);
-        const content = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        const content = JSON.parse(fs.readFileSync(filePath, "utf8"));
         const keys = this.extractKeys(content);
         translations[file] = keys;
         console.log(`    ${file}: ${keys.length} Schlüssel`);
       }
 
       // Konsistenz prüfen
-      const baseKeys = translations['de.json'] || [];
+      const baseKeys = translations["de.json"] || [];
       let inconsistencies = 0;
 
       for (const [lang, keys] of Object.entries(translations)) {
-        if (lang === 'de.json') continue;
+        if (lang === "de.json") continue;
 
-        const missingKeys = baseKeys.filter(key => !keys.includes(key));
+        const missingKeys = baseKeys.filter((key) => !keys.includes(key));
         if (missingKeys.length > 0) {
           inconsistencies += missingKeys.length;
         }
@@ -219,80 +211,80 @@ class MorgenRoutine {
       if (inconsistencies > 0) {
         console.log(`  ⚠️ ${inconsistencies} fehlende Übersetzungen`);
       } else {
-        console.log('  ✅ Alle Übersetzungen konsistent');
+        console.log("  ✅ Alle Übersetzungen konsistent");
       }
     } catch (error) {
-      this.logError('i18n-Status konnte nicht geprüft werden', error);
+      this.logError("i18n-Status konnte nicht geprüft werden", error);
     }
   }
 
   // Tests ausführen
   async runTests() {
-    console.log('🧪 Führe Tests aus...');
+    console.log("🧪 Führe Tests aus...");
 
     try {
       // Unit-Tests
-      execSync('npm test', {
+      execSync("npm test", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Unit-Tests bestanden');
+      console.log("  ✅ Unit-Tests bestanden");
     } catch (error) {
-      console.log('  ❌ Unit-Tests fehlgeschlagen');
-      this.logError('Unit-Tests fehlgeschlagen', error);
+      console.log("  ❌ Unit-Tests fehlgeschlagen");
+      this.logError("Unit-Tests fehlgeschlagen", error);
     }
 
     try {
       // E2E-Tests (falls vorhanden)
-      if (fs.existsSync(path.join(this.projectRoot, 'cypress'))) {
-        execSync('npm run test:e2e', {
+      if (fs.existsSync(path.join(this.projectRoot, "cypress"))) {
+        execSync("npm run test:e2e", {
           cwd: this.projectRoot,
-          stdio: 'pipe',
+          stdio: "pipe",
         });
-        console.log('  ✅ E2E-Tests bestanden');
+        console.log("  ✅ E2E-Tests bestanden");
       }
     } catch (error) {
-      console.log('  ⚠️ E2E-Tests fehlgeschlagen oder nicht verfügbar');
+      console.log("  ⚠️ E2E-Tests fehlgeschlagen oder nicht verfügbar");
     }
   }
 
   // Build-Status prüfen
   async checkBuildStatus() {
-    console.log('🔨 Prüfe Build-Status...');
+    console.log("🔨 Prüfe Build-Status...");
 
     try {
       // Build-Prozess testen
-      execSync('npm run build', {
+      execSync("npm run build", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Build erfolgreich');
+      console.log("  ✅ Build erfolgreich");
     } catch (error) {
-      console.log('  ❌ Build fehlgeschlagen');
-      this.logError('Build fehlgeschlagen', error);
+      console.log("  ❌ Build fehlgeschlagen");
+      this.logError("Build fehlgeschlagen", error);
     }
   }
 
   // Performance-Optimierungen
   async performOptimizations() {
-    console.log('⚡ Führe Optimierungen durch...');
+    console.log("⚡ Führe Optimierungen durch...");
 
     try {
       // Bundle-Analyse (falls verfügbar)
-      if (fs.existsSync(path.join(this.projectRoot, 'next.config.js'))) {
-        execSync('npm run analyze', {
+      if (fs.existsSync(path.join(this.projectRoot, "next.config.js"))) {
+        execSync("npm run analyze", {
           cwd: this.projectRoot,
-          stdio: 'pipe',
+          stdio: "pipe",
         });
-        console.log('  ✅ Bundle-Analyse durchgeführt');
+        console.log("  ✅ Bundle-Analyse durchgeführt");
       }
     } catch (error) {
-      console.log('  ⚠️ Bundle-Analyse nicht verfügbar');
+      console.log("  ⚠️ Bundle-Analyse nicht verfügbar");
     }
 
     try {
       // Cache bereinigen
-      const cacheDirs = ['.next', 'node_modules/.cache', 'dist'];
+      const cacheDirs = [".next", "node_modules/.cache", "dist"];
       for (const cacheDir of cacheDirs) {
         const cachePath = path.join(this.projectRoot, cacheDir);
         if (fs.existsSync(cachePath)) {
@@ -301,13 +293,13 @@ class MorgenRoutine {
         }
       }
     } catch (error) {
-      this.logError('Cache-Bereinigung fehlgeschlagen', error);
+      this.logError("Cache-Bereinigung fehlgeschlagen", error);
     }
   }
 
   // Bericht generieren
   async generateReport() {
-    console.log('📊 Generiere Bericht...');
+    console.log("📊 Generiere Bericht...");
 
     const endTime = new Date();
     const duration = endTime - this.startTime;
@@ -315,23 +307,18 @@ class MorgenRoutine {
     const report = {
       timestamp: this.startTime.toISOString(),
       duration: `${duration.getMinutes()}m ${duration.getSeconds()}s`,
-      status: 'completed',
-      errors: this.routineLog.filter(log => log.type === 'error').length,
-      warnings: this.routineLog.filter(log => log.type === 'warning').length,
+      status: "completed",
+      errors: this.routineLog.filter((log) => log.type === "error").length,
+      warnings: this.routineLog.filter((log) => log.type === "warning").length,
       logs: this.routineLog,
     };
 
     // Bericht speichern
-    const reportFile = path.join(
-      this.projectRoot,
-      'morgen-routine-report.json'
-    );
+    const reportFile = path.join(this.projectRoot, "morgen-routine-report.json");
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
 
     console.log(`  ✅ Bericht gespeichert: ${reportFile}`);
-    console.log(
-      `  📈 Dauer: ${duration.getMinutes()}m ${duration.getSeconds()}s`
-    );
+    console.log(`  📈 Dauer: ${duration.getMinutes()}m ${duration.getSeconds()}s`);
     console.log(`  ❌ Fehler: ${report.errors}`);
     console.log(`  ⚠️ Warnungen: ${report.warnings}`);
   }
@@ -339,7 +326,7 @@ class MorgenRoutine {
   // Hilfsfunktionen
   getFreeDiskSpace() {
     // Vereinfachte Implementierung
-    return 'N/A';
+    return "N/A";
   }
 
   getProjectSize() {
@@ -347,7 +334,7 @@ class MorgenRoutine {
       const size = this.calculateDirectorySize(this.projectRoot);
       return (size / 1024 / 1024).toFixed(2);
     } catch (error) {
-      return 'N/A';
+      return "N/A";
     }
   }
 
@@ -370,8 +357,8 @@ class MorgenRoutine {
   }
 
   collectCodeMetrics() {
-    const sourceDirs = ['src', 'components', 'app'];
-    const extensions = ['.ts', '.tsx', '.js', '.jsx'];
+    const sourceDirs = ["src", "components", "app"];
+    const extensions = [".ts", ".tsx", ".js", ".jsx"];
     let files = 0;
     let lines = 0;
 
@@ -404,8 +391,8 @@ class MorgenRoutine {
         const ext = path.extname(item);
         if (extensions.includes(ext)) {
           files++;
-          const content = fs.readFileSync(itemPath, 'utf8');
-          lines += content.split('\n').length;
+          const content = fs.readFileSync(itemPath, "utf8");
+          lines += content.split("\n").length;
         }
       }
     }
@@ -413,17 +400,13 @@ class MorgenRoutine {
     return { files, lines };
   }
 
-  extractKeys(obj, prefix = '') {
+  extractKeys(obj, prefix = "") {
     const keys = [];
 
     for (const key in obj) {
       const fullKey = prefix ? `${prefix}.${key}` : key;
 
-      if (
-        typeof obj[key] === 'object' &&
-        obj[key] !== null &&
-        !Array.isArray(obj[key])
-      ) {
+      if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
         keys.push(...this.extractKeys(obj[key], fullKey));
       } else {
         keys.push(fullKey);
@@ -442,7 +425,7 @@ class MorgenRoutine {
   logError(message, error) {
     this.routineLog.push({
       timestamp: new Date().toISOString(),
-      type: 'error',
+      type: "error",
       message: message,
       error: error.message,
     });
@@ -456,11 +439,11 @@ if (require.main === module) {
   routine
     .execute()
     .then(() => {
-      console.log('Morgen-Routine abgeschlossen');
+      console.log("Morgen-Routine abgeschlossen");
       process.exit(0);
     })
-    .catch(error => {
-      console.error('Morgen-Routine fehlgeschlagen:', error);
+    .catch((error) => {
+      console.error("Morgen-Routine fehlgeschlagen:", error);
       process.exit(1);
     });
 }

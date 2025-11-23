@@ -1,0 +1,120 @@
+/* Logo Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-icon svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.logo-main {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+}
+
+.logo-lopez {
+  color: #ffd700;
+}
+
+.logo-itwelt {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  color: #007bff;
+  /* Fallback */
+  display: inline-block;
+}
+
+.logo-tagline {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 300;
+  color: #666666;
+  margin: 0;
+  padding: 0;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+/* Size Variants */
+.logo-container.size-small {
+  gap: 8px !important;
+}
+
+.logo-container.size-small .logo-icon {
+  height: 32px !important;
+  width: 32px !important;
+}
+
+.logo-container.size-small .logo-main {
+  font-size: 16px !important;
+}
+
+.logo-container.size-small .logo-tagline {
+  font-size: 10px !important;
+}
+
+.logo-container.size-medium {
+  gap: 12px !important;
+}
+
+.logo-container.size-medium .logo-icon {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.logo-container.size-medium .logo-main {
+  font-size: 24px !important;
+}
+
+.logo-container.size-medium .logo-tagline {
+  font-size: 12px !important;
+}
+
+.logo-container.size-large {
+  gap: 16px !important;
+}
+
+.logo-container.size-large .logo-icon {
+  height: 100px !important;
+  width: 100px !important;
+}
+
+.logo-container.size-large .logo-main {
+  font-size: 48px !important;
+}
+
+.logo-container.size-large .logo-tagline {
+  font-size: 20px !important;
+}
+
+/* Dark theme adjustments */
+.dark .logo-tagline {
+  color: #cccccc;
+}
+
+/* Footer specific */
+footer .logo-tagline {
+  color: #cccccc;
+}

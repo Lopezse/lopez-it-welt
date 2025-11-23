@@ -1,0 +1,4899 @@
+{
+  "version": "1.0.0",
+  "generiert": "2025-07-06T10:10:58.009Z",
+  "systemStatus": {
+    "gesamtDateien": 237,
+    "kategorien": [
+      "enterprise",
+      "projekt-management",
+      "technisch",
+      "admin",
+      "ki-agenten",
+      "content-management"
+    ],
+    "offeneAufgaben": 37,
+    "systemStatus": "aktiv",
+    "letzteAktualisierung": "2025-07-06T10:10:30.556Z",
+    "naechsteSchritte": [
+      {
+        "prioritaet": "hoch",
+        "beschreibung": "1 hoch-prioritäre Aufgaben bearbeiten",
+        "aufgaben": [
+          {
+            "typ": "enterprise_optimierung",
+            "beschreibung": "Enterprise++ Standards überprüfen und optimieren",
+            "prioritaet": "hoch"
+          }
+        ]
+      },
+      {
+        "prioritaet": "normal",
+        "beschreibung": "Agenten-System weiterentwickeln",
+        "aufgaben": [
+          {
+            "typ": "system_entwicklung",
+            "beschreibung": "Automatisierte Agenten-Logik implementieren"
+          }
+        ]
+      }
+    ]
+  },
+  "offeneAufgaben": [
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💻 PC-Verkauf & Hardware - Dokumentation (backups\\LopezITWelt_2025-07-01_14-49\\docs\\appendix\\pc-verkauf.md) - Status: fehler",
+      "prioritaet": "normal",
+      "datei": "backups\\LopezITWelt_2025-07-01_14-49\\docs\\appendix\\pc-verkauf.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔌 API-Dokumentation - Lopez IT Welt (docs\\03-ENTWICKLUNG\\03-02-api-dokumentation.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\03-ENTWICKLUNG\\03-02-api-dokumentation.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🗄️ Datenbank-Schema - Lopez IT Welt (docs\\03-ENTWICKLUNG\\03-03-datenbank-schema.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\03-ENTWICKLUNG\\03-03-datenbank-schema.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🚀 Deployment-Guide - Lopez IT Welt (docs\\03-ENTWICKLUNG\\03-04-deployment-guide.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\03-ENTWICKLUNG\\03-04-deployment-guide.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-03-enterprise-architektur-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-03-enterprise-architektur-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-06-enterprise-skalierbarkeit-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-06-enterprise-skalierbarkeit-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-07-enterprise-monitoring-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-07-enterprise-monitoring-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💾 Enterprise-Backup & Disaster Recovery Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-09-enterprise-backup-disaster-recovery-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-09-enterprise-backup-disaster-recovery-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "⚙️ Admin-Dokumentation - Vollständige Admin-Bereich Dokumentation (docs\\06-ADMIN-BEREICH\\06-01-admin-dokumentation.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-01-admin-dokumentation.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🎛️ Admin-Dashboard - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-02-admin-dashboard.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-02-admin-dashboard.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔐 Admin-Berechtigungen - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-03-admin-berechtigungen.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-03-admin-berechtigungen.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📊 Admin-Monitoring - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-04-admin-monitoring.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-04-admin-monitoring.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💾 Admin-Backup-System - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-05-admin-backup-system.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-05-admin-backup-system.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📝 Admin-Logging-System - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-06-admin-logging-system.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-06-admin-logging-system.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📊 Admin-Reporting-System - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-07-admin-reporting-system.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-07-admin-reporting-system.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔌 Admin-API-Dokumentation - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-08-admin-api-dokumentation.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-08-admin-api-dokumentation.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-09-admin-troubleshooting.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-09-admin-troubleshooting.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💻 PC-Verkauf & Hardware - Dokumentation (docs\\appendix\\pc-verkauf.md) - Status: fehler",
+      "prioritaet": "normal",
+      "datei": "docs\\appendix\\pc-verkauf.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💻 PC-Verkauf & Hardware - Dokumentation (backups\\LopezITWelt_2025-07-01_14-49\\docs\\appendix\\pc-verkauf.md) - Status: fehler",
+      "prioritaet": "normal",
+      "datei": "backups\\LopezITWelt_2025-07-01_14-49\\docs\\appendix\\pc-verkauf.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔌 API-Dokumentation - Lopez IT Welt (docs\\03-ENTWICKLUNG\\03-02-api-dokumentation.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\03-ENTWICKLUNG\\03-02-api-dokumentation.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🗄️ Datenbank-Schema - Lopez IT Welt (docs\\03-ENTWICKLUNG\\03-03-datenbank-schema.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\03-ENTWICKLUNG\\03-03-datenbank-schema.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🚀 Deployment-Guide - Lopez IT Welt (docs\\03-ENTWICKLUNG\\03-04-deployment-guide.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\03-ENTWICKLUNG\\03-04-deployment-guide.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-03-enterprise-architektur-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-03-enterprise-architektur-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-06-enterprise-skalierbarkeit-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-06-enterprise-skalierbarkeit-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-07-enterprise-monitoring-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-07-enterprise-monitoring-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💾 Enterprise-Backup & Disaster Recovery Erweitert - Lopez IT Welt (docs\\04-ENTERPRISE\\04-09-enterprise-backup-disaster-recovery-erweitert.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\04-ENTERPRISE\\04-09-enterprise-backup-disaster-recovery-erweitert.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "⚙️ Admin-Dokumentation - Vollständige Admin-Bereich Dokumentation (docs\\06-ADMIN-BEREICH\\06-01-admin-dokumentation.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-01-admin-dokumentation.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🎛️ Admin-Dashboard - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-02-admin-dashboard.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-02-admin-dashboard.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔐 Admin-Berechtigungen - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-03-admin-berechtigungen.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-03-admin-berechtigungen.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📊 Admin-Monitoring - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-04-admin-monitoring.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-04-admin-monitoring.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💾 Admin-Backup-System - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-05-admin-backup-system.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-05-admin-backup-system.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📝 Admin-Logging-System - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-06-admin-logging-system.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-06-admin-logging-system.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "📊 Admin-Reporting-System - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-07-admin-reporting-system.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-07-admin-reporting-system.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔌 Admin-API-Dokumentation - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-08-admin-api-dokumentation.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-08-admin-api-dokumentation.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt (docs\\06-ADMIN-BEREICH\\06-09-admin-troubleshooting.md) - Status: in_entwicklung",
+      "prioritaet": "normal",
+      "datei": "docs\\06-ADMIN-BEREICH\\06-09-admin-troubleshooting.md"
+    },
+    {
+      "typ": "datei_verbesserung",
+      "beschreibung": "💻 PC-Verkauf & Hardware - Dokumentation (docs\\appendix\\pc-verkauf.md) - Status: fehler",
+      "prioritaet": "normal",
+      "datei": "docs\\appendix\\pc-verkauf.md"
+    },
+    {
+      "typ": "enterprise_optimierung",
+      "beschreibung": "Enterprise++ Standards überprüfen und optimieren",
+      "prioritaet": "hoch"
+    }
+  ],
+  "kategorienUebersicht": {
+    "enterprise": {
+      "anzahl": 128,
+      "dateien": [
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📦 Neues Modul - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📦 Neues Modul - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        }
+      ],
+      "statusVerteilung": {
+        "abgeschlossen": 100,
+        "unbekannt": 20,
+        "in_entwicklung": 8
+      },
+      "prioritaetsVerteilung": {
+        "hoch": 30,
+        "normal": 98
+      }
+    },
+    "projekt-management": {
+      "anzahl": 209,
+      "dateien": [
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Kontakt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "💾 Enterprise-Backup & Disaster Recovery Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "⚙️ Admin-Dokumentation - Vollständige Admin-Bereich Dokumentation",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💾 Admin-Backup-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Kontakt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Kontakt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Content-Management-System (CMS)",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "💾 Enterprise-Backup & Disaster Recovery Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "⚙️ Admin-Dokumentation - Vollständige Admin-Bereich Dokumentation",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💾 Admin-Backup-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Kontakt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        }
+      ],
+      "statusVerteilung": {
+        "abgeschlossen": 127,
+        "unbekannt": 46,
+        "fehler": 4,
+        "in_entwicklung": 32
+      },
+      "prioritaetsVerteilung": {
+        "hoch": 38,
+        "normal": 169,
+        "niedrig": 2
+      }
+    },
+    "technisch": {
+      "anzahl": 181,
+      "dateien": [
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Entwicklungsrichtlinien",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "or",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💾 Admin-Backup-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Entwicklungsrichtlinien",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📦 Neues Modul - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "or",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Entwicklungsrichtlinien",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "or",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Content-Management-System (CMS)",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💾 Admin-Backup-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "API-Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Entwicklungsrichtlinien",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📋 Enterprise++ Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📦 Neues Modul - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Anforderungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "or",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        }
+      ],
+      "statusVerteilung": {
+        "abgeschlossen": 105,
+        "unbekannt": 44,
+        "fehler": 4,
+        "in_entwicklung": 28
+      },
+      "prioritaetsVerteilung": {
+        "hoch": 38,
+        "normal": 141,
+        "niedrig": 2
+      }
+    },
+    "admin": {
+      "anzahl": 167,
+      "dateien": [
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Willkommen bei Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Admin-Dokumentation - Vollständige Admin-Bereich Dokumentation",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💾 Admin-Backup-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Willkommen bei Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Willkommen bei Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Content-Management-System (CMS)",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📈 Enterprise-Skalierbarkeit Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Admin-Dokumentation - Vollständige Admin-Bereich Dokumentation",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💾 Admin-Backup-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔧 Admin-Troubleshooting-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "User Stories – Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🇩🇪 Deutsche Namenskonventionen - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "⚙️ Setup Guide - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise++ Qualitäts-Dashboard - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Morgen-Routine - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Willkommen bei Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        }
+      ],
+      "statusVerteilung": {
+        "abgeschlossen": 107,
+        "unbekannt": 30,
+        "fehler": 4,
+        "in_entwicklung": 26
+      },
+      "prioritaetsVerteilung": {
+        "hoch": 34,
+        "normal": 131,
+        "niedrig": 2
+      }
+    },
+    "ki-agenten": {
+      "anzahl": 142,
+      "dateien": [
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Warum unsere KI-Hilfe sicher und zuverlässig ist",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Über uns",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Warum unsere KI-Hilfe sicher und zuverlässig ist",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Über uns",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Warum unsere KI-Hilfe sicher und zuverlässig ist",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Über uns",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 CursorGuide.md – KI-Nutzungsregel",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🗄️ Datenbank-Schema - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Deployment-Guide - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Übersicht - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏢 Enterprise-Architektur Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Enterprise-Compliance Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Enterprise-Monitoring Erweitert - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🏢 Enterprise++ Struktur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🤖 KI-Agenten-Implementierung - Vollständige Implementierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎛️ Admin-Dashboard - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔐 Admin-Berechtigungen - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Monitoring - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Admin-Logging-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📊 Admin-Reporting-System - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔌 Admin-API-Dokumentation - Lopez IT Welt",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Adminbereich – MySQL Datenbankstruktur (Enterprise++ konform)",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten Service Deployment Guide",
+          "status": "abgeschlossen",
+          "prioritaet": "niedrig"
+        },
+        {
+          "titel": "🤖 Agenten-System Dokumentation - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Lopez IT Welt - Compliance System Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📅 Enterprise++ Roadmap - Strategischer Transformationsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧩 Enterprise++ Starter-Paket - Standardisiertes Projekt-Template",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Enterprise++ Time Tracking System",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 KI-Agenten + Gedächtnis - Konkreter Implementierungsplan",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Project Structure Optimizer Dokumentation",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Security Guidelines - Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧹 Enterprise++ Aufräumungsbericht",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Enterprise++ Quality Controller",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Warum unsere KI-Hilfe sicher und zuverlässig ist",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Über uns",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🚀 START.md - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "STATUS.md - Lopez IT Welt Projekt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        }
+      ],
+      "statusVerteilung": {
+        "abgeschlossen": 102,
+        "unbekannt": 18,
+        "in_entwicklung": 22
+      },
+      "prioritaetsVerteilung": {
+        "hoch": 26,
+        "normal": 114,
+        "niedrig": 2
+      }
+    },
+    "content-management": {
+      "anzahl": 51,
+      "dateien": [
+        {
+          "titel": "Auftrag für den nächsten Chat / Entwickler / KI",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Projektplan - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Warum unsere KI-Hilfe sicher und zuverlässig ist",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Kontakt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Über uns",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📝 Changelog - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📚 Inhaltsverzeichnis - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "📊 Projekt-Status - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🎯 AUFTRAG FÜR MORGEN - LOPEZ IT WELT",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "Pflichtenheft – Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Businessplan – Lopez IT Welt GmbH",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "💻 Development-Guidelines - Entwicklungs-Richtlinien",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Content-Management-System (CMS)",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Vollständige System-Architektur",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Enterprise-Security Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "⚙️ Admin-Dokumentation - Vollständige Admin-Bereich Dokumentation",
+          "status": "in_entwicklung",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 LOPEZ IT WELT - ENTERPRISE++ DASHBOARD",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "💻 PC-Verkauf & Hardware - Dokumentation",
+          "status": "fehler",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🔒 Code-Schutz & Obfuscation - Geistiges Eigentum schützen",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🔒 Sicheres Lizenzsystem - Server-seitige Validierung",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Website-Builder mit Shop-Integration - Geschäftskonzept",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎨 Lopez IT Welt - Design System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "📋 Entwicklungsrichtlinien - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "hoch"
+        },
+        {
+          "titel": "🚀 Enterprise++ Initialisierung - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🏗️ Enterprise++ Master-Architektur - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Ausführungsplan Lopez IT Welt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🧠 KI-Agenten + Gedächtnis Integration - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "🎯 Quality Standards - Lopez IT Welt",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Lopez IT Welt - Task Plan",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Feedback-System",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Warum unsere KI-Hilfe sicher und zuverlässig ist",
+          "status": "abgeschlossen",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Kontakt",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Unsere Leistungen",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        },
+        {
+          "titel": "Über uns",
+          "status": "unbekannt",
+          "prioritaet": "normal"
+        }
+      ],
+      "statusVerteilung": {
+        "abgeschlossen": 35,
+        "fehler": 2,
+        "unbekannt": 13,
+        "in_entwicklung": 1
+      },
+      "prioritaetsVerteilung": {
+        "hoch": 15,
+        "normal": 36
+      }
+    }
+  },
+  "aktivitaetenLog": [
+    "[2025-07-06T09:52:52.179Z] System-Analyse gestartet",
+    "[2025-07-06T09:52:52.734Z] System-Analyse abgeschlossen",
+    "[2025-07-06T10:10:29.975Z] System-Analyse gestartet",
+    "[2025-07-06T10:10:30.570Z] System-Analyse abgeschlossen"
+  ],
+  "naechsteSchritte": [
+    {
+      "prioritaet": "hoch",
+      "beschreibung": "1 hoch-prioritäre Aufgaben bearbeiten",
+      "aufgaben": [
+        {
+          "typ": "enterprise_optimierung",
+          "beschreibung": "Enterprise++ Standards überprüfen und optimieren",
+          "prioritaet": "hoch"
+        }
+      ]
+    },
+    {
+      "prioritaet": "normal",
+      "beschreibung": "Agenten-System weiterentwickeln",
+      "aufgaben": [
+        {
+          "typ": "system_entwicklung",
+          "beschreibung": "Automatisierte Agenten-Logik implementieren"
+        }
+      ]
+    }
+  ],
+  "performance": {
+    "gesamtGroesse": 3277423,
+    "durchschnittlicheGroesse": 13829,
+    "groessteDatei": {
+      "pfad": "docs\\04-ENTERPRISE\\04-08-enterprise-integration-erweitert.md",
+      "groesse": 262825,
+      "zeilen": 8469,
+      "letzteAenderung": "2025-07-06T08:47:44.055Z",
+      "hash": "7fc39140ec9873706884a8c5ab4ed0dc",
+      "titel": "🔗 Enterprise-Integration Erweitert - Lopez IT Welt",
+      "kategorien": [
+        "enterprise",
+        "projekt-management",
+        "technisch",
+        "admin",
+        "ki-agenten"
+      ],
+      "schluesselwoerter": [
+        {
+          "wort": "enterprise",
+          "anzahl": 403
+        },
+        {
+          "wort": "2025",
+          "anzahl": 256
+        },
+        {
+          "wort": "status",
+          "anzahl": 219
+        },
+        {
+          "wort": "system",
+          "anzahl": 185
+        },
+        {
+          "wort": "fehler",
+          "anzahl": 167
+        },
+        {
+          "wort": "const",
+          "anzahl": 154
+        },
+        {
+          "wort": "error",
+          "anzahl": 114
+        },
+        {
+          "wort": "test",
+          "anzahl": 111
+        },
+        {
+          "wort": "qualit",
+          "anzahl": 98
+        },
+        {
+          "wort": "alle",
+          "anzahl": 96
+        }
+      ],
+      "status": "abgeschlossen",
+      "prioritaet": "hoch"
+    },
+    "neuesteDatei": {
+      "pfad": "docs\\03-ENTWICKLUNG\\03-05-content-management-system.md",
+      "groesse": 6737,
+      "zeilen": 252,
+      "letzteAenderung": "2025-07-06T10:10:28.957Z",
+      "hash": "b4fe8adc644363daeff374c1b8d1c8e2",
+      "titel": "Content-Management-System (CMS)",
+      "kategorien": [
+        "projekt-management",
+        "technisch",
+        "admin",
+        "content-management"
+      ],
+      "schluesselwoerter": [
+        {
+          "wort": "content",
+          "anzahl": 37
+        },
+        {
+          "wort": "language",
+          "anzahl": 13
+        },
+        {
+          "wort": "const",
+          "anzahl": 13
+        },
+        {
+          "wort": "null",
+          "anzahl": 9
+        },
+        {
+          "wort": "pagekey",
+          "anzahl": 9
+        },
+        {
+          "wort": "datenbank",
+          "anzahl": 8
+        },
+        {
+          "wort": "default",
+          "anzahl": 8
+        },
+        {
+          "wort": "error",
+          "anzahl": 8
+        },
+        {
+          "wort": "current_timestamp",
+          "anzahl": 7
+        },
+        {
+          "wort": "isloading",
+          "anzahl": 7
+        }
+      ],
+      "status": "abgeschlossen",
+      "prioritaet": "normal"
+    },
+    "kategorienAnzahl": 6
+  }
+}

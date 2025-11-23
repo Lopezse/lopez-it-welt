@@ -12,6 +12,7 @@ Das **Admin-Logging-System** implementiert ein umfassendes Logging- und Audit-Sy
 ## 🎯 **LOGGING-STRUKTUR**
 
 ### **Log-Level**
+
 ```typescript
 // Log-Level-Definitionen
 enum LogLevel {
@@ -20,40 +21,41 @@ enum LogLevel {
   INFO = 2,
   WARN = 3,
   ERROR = 4,
-  FATAL = 5
+  FATAL = 5,
 }
 
 // Log-Kategorien
 enum LogCategory {
   // System-Logs
-  SYSTEM = 'system',
-  APPLICATION = 'application',
-  DATABASE = 'database',
-  NETWORK = 'network',
-  
+  SYSTEM = "system",
+  APPLICATION = "application",
+  DATABASE = "database",
+  NETWORK = "network",
+
   // Benutzer-Logs
-  USER_ACTIVITY = 'user_activity',
-  AUTHENTICATION = 'authentication',
-  AUTHORIZATION = 'authorization',
-  
+  USER_ACTIVITY = "user_activity",
+  AUTHENTICATION = "authentication",
+  AUTHORIZATION = "authorization",
+
   // Business-Logs
-  BUSINESS = 'business',
-  TRANSACTIONS = 'transactions',
-  ANALYTICS = 'analytics',
-  
+  BUSINESS = "business",
+  TRANSACTIONS = "transactions",
+  ANALYTICS = "analytics",
+
   // Sicherheits-Logs
-  SECURITY = 'security',
-  AUDIT = 'audit',
-  COMPLIANCE = 'compliance',
-  
+  SECURITY = "security",
+  AUDIT = "audit",
+  COMPLIANCE = "compliance",
+
   // Performance-Logs
-  PERFORMANCE = 'performance',
-  MONITORING = 'monitoring',
-  METRICS = 'metrics'
+  PERFORMANCE = "performance",
+  MONITORING = "monitoring",
+  METRICS = "metrics",
 }
 ```
 
 ### **Log-Format**
+
 ```typescript
 // Log-Entry-Struktur
 interface LogEntry {
@@ -63,7 +65,7 @@ interface LogEntry {
   level: LogLevel;
   category: LogCategory;
   message: string;
-  
+
   // Kontext-Informationen
   context: {
     userId?: string;
@@ -74,21 +76,21 @@ interface LogEntry {
     url?: string;
     method?: string;
   };
-  
+
   // Zusätzliche Daten
   data: any;
   tags: string[];
-  
+
   // Performance-Metriken
   performance?: {
     duration: number;
     memoryUsage: number;
     cpuUsage: number;
   };
-  
+
   // Stack-Trace (für Fehler)
   stackTrace?: string;
-  
+
   // Korrelations-ID
   correlationId?: string;
 }
@@ -97,16 +99,17 @@ interface LogEntry {
 ## 🛠️ **LOGGING-IMPLEMENTATION**
 
 ### **Winston-Logger**
+
 ```typescript
 // Winston-Logger-Konfiguration
-import winston from 'winston';
-import DailyRotateFile from 'winston-daily-rotate-file';
+import winston from "winston";
+import DailyRotateFile from "winston-daily-rotate-file";
 
 // Logger-Konfiguration
 const loggerConfig = {
   // Log-Level
-  level: process.env.LOG_LEVEL || 'info',
-  
+  level: process.env.LOG_LEVEL || "info",
+
   // Log-Format
   format: winston.format.combine(
     winston.format.timestamp(),
@@ -117,48 +120,45 @@ const loggerConfig = {
         timestamp,
         level,
         message,
-        ...meta
+        ...meta,
       });
-    })
+    }),
   ),
-  
+
   // Transport-Konfiguration
   transports: [
     // Console-Transport
     new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-      )
+      format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
     }),
-    
+
     // Datei-Transport für alle Logs
     new DailyRotateFile({
-      filename: 'logs/application-%DATE%.log',
-      datePattern: 'YYYY-MM-DD',
-      maxSize: '20m',
-      maxFiles: '14d',
-      level: 'info'
+      filename: "logs/application-%DATE%.log",
+      datePattern: "YYYY-MM-DD",
+      maxSize: "20m",
+      maxFiles: "14d",
+      level: "info",
     }),
-    
+
     // Datei-Transport für Fehler
     new DailyRotateFile({
-      filename: 'logs/error-%DATE%.log',
-      datePattern: 'YYYY-MM-DD',
-      maxSize: '20m',
-      maxFiles: '30d',
-      level: 'error'
+      filename: "logs/error-%DATE%.log",
+      datePattern: "YYYY-MM-DD",
+      maxSize: "20m",
+      maxFiles: "30d",
+      level: "error",
     }),
-    
+
     // Datei-Transport für Audit-Logs
     new DailyRotateFile({
-      filename: 'logs/audit-%DATE%.log',
-      datePattern: 'YYYY-MM-DD',
-      maxSize: '20m',
-      maxFiles: '90d',
-      level: 'info'
-    })
-  ]
+      filename: "logs/audit-%DATE%.log",
+      datePattern: "YYYY-MM-DD",
+      maxSize: "20m",
+      maxFiles: "90d",
+      level: "info",
+    }),
+  ],
 };
 
 // Logger-Instanz erstellen
@@ -169,6 +169,7 @@ export default logger;
 ```
 
 ### **Strukturierte Logging-Funktionen**
+
 ```typescript
 // Logging-Service
 class LoggingService {
@@ -178,30 +179,30 @@ class LoggingService {
       category: LogCategory.APPLICATION,
       context,
       data,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
-  
+
   // Debug-Log
   static debug(message: string, context?: LogContext, data?: any): void {
     logger.debug(message, {
       category: LogCategory.APPLICATION,
       context,
       data,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
-  
+
   // Warn-Log
   static warn(message: string, context?: LogContext, data?: any): void {
     logger.warn(message, {
       category: LogCategory.APPLICATION,
       context,
       data,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
-  
+
   // Error-Log
   static error(message: string, error?: Error, context?: LogContext, data?: any): void {
     logger.error(message, {
@@ -209,10 +210,10 @@ class LoggingService {
       context,
       data,
       stackTrace: error?.stack,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
-  
+
   // Fatal-Log
   static fatal(message: string, error?: Error, context?: LogContext, data?: any): void {
     logger.error(message, {
@@ -220,10 +221,10 @@ class LoggingService {
       context,
       data,
       stackTrace: error?.stack,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
-  
+
   // Audit-Log
   static audit(action: string, userId: string, resource: string, details?: any): void {
     logger.info(`AUDIT: ${action}`, {
@@ -231,13 +232,13 @@ class LoggingService {
       context: {
         userId,
         action,
-        resource
+        resource,
       },
       data: details,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
-  
+
   // Security-Log
   static security(event: string, userId?: string, ipAddress?: string, details?: any): void {
     logger.warn(`SECURITY: ${event}`, {
@@ -245,13 +246,13 @@ class LoggingService {
       context: {
         userId,
         ipAddress,
-        event
+        event,
       },
       data: details,
-      timestamp: new Date()
+      timestamp: new Date(),
     });
   }
-  
+
   // Performance-Log
   static performance(operation: string, duration: number, context?: LogContext): void {
     logger.info(`PERFORMANCE: ${operation}`, {
@@ -260,8 +261,8 @@ class LoggingService {
       data: {
         operation,
         duration,
-        timestamp: new Date()
-      }
+        timestamp: new Date(),
+      },
     });
   }
 }
@@ -282,6 +283,7 @@ interface LogContext {
 ## 🔍 **AUDIT-LOGGING**
 
 ### **Audit-Trail-System**
+
 ```typescript
 // Audit-Trail-Interface
 interface AuditTrail {
@@ -309,7 +311,7 @@ class AuditService {
     resourceId?: string,
     oldValue?: any,
     newValue?: any,
-    metadata?: any
+    metadata?: any,
   ): Promise<void> {
     const auditEvent: AuditTrail = {
       id: generateId(),
@@ -323,77 +325,58 @@ class AuditService {
       ipAddress: getClientIP(),
       userAgent: getClientUserAgent(),
       sessionId: getSessionId(),
-      metadata: metadata || {}
+      metadata: metadata || {},
     };
-    
+
     // Audit-Event in Datenbank speichern
     await this.saveAuditEvent(auditEvent);
-    
+
     // Audit-Event loggen
     LoggingService.audit(action, userId, resource, {
       resourceId,
       oldValue,
       newValue,
-      metadata
+      metadata,
     });
   }
-  
+
   // Benutzer-Aktivitäten auditieren
-  static async logUserActivity(
-    userId: string,
-    activity: string,
-    details?: any
-  ): Promise<void> {
-    await this.logAuditEvent(
-      userId,
-      'USER_ACTIVITY',
-      'user',
-      userId,
-      undefined,
-      undefined,
-      { activity, details }
-    );
+  static async logUserActivity(userId: string, activity: string, details?: any): Promise<void> {
+    await this.logAuditEvent(userId, "USER_ACTIVITY", "user", userId, undefined, undefined, {
+      activity,
+      details,
+    });
   }
-  
+
   // Datenbank-Änderungen auditieren
   static async logDataChange(
     userId: string,
     table: string,
     recordId: string,
-    action: 'CREATE' | 'UPDATE' | 'DELETE',
+    action: "CREATE" | "UPDATE" | "DELETE",
     oldValue?: any,
-    newValue?: any
+    newValue?: any,
   ): Promise<void> {
-    await this.logAuditEvent(
-      userId,
-      action,
-      table,
-      recordId,
-      oldValue,
-      newValue
-    );
+    await this.logAuditEvent(userId, action, table, recordId, oldValue, newValue);
   }
-  
+
   // Sicherheits-Events auditieren
-  static async logSecurityEvent(
-    userId: string,
-    event: string,
-    details?: any
-  ): Promise<void> {
+  static async logSecurityEvent(userId: string, event: string, details?: any): Promise<void> {
     await this.logAuditEvent(
       userId,
-      'SECURITY_EVENT',
-      'security',
+      "SECURITY_EVENT",
+      "security",
       undefined,
       undefined,
       undefined,
-      { event, details }
+      { event, details },
     );
   }
 }
 ```
 
 ### **Audit-Query-System**
+
 ```typescript
 // Audit-Query-Interface
 interface AuditQuery {
@@ -411,85 +394,85 @@ class AuditQueryService {
   // Audit-Events abfragen
   static async queryAuditEvents(query: AuditQuery): Promise<AuditTrail[]> {
     const whereConditions: any = {};
-    
+
     if (query.userId) {
       whereConditions.userId = query.userId;
     }
-    
+
     if (query.action) {
       whereConditions.action = query.action;
     }
-    
+
     if (query.resource) {
       whereConditions.resource = query.resource;
     }
-    
+
     if (query.startDate || query.endDate) {
       whereConditions.timestamp = {};
-      
+
       if (query.startDate) {
         whereConditions.timestamp.$gte = query.startDate;
       }
-      
+
       if (query.endDate) {
         whereConditions.timestamp.$lte = query.endDate;
       }
     }
-    
+
     const auditEvents = await AuditTrail.find(whereConditions)
       .sort({ timestamp: -1 })
       .limit(query.limit || 100)
       .skip(query.offset || 0);
-    
+
     return auditEvents;
   }
-  
+
   // Audit-Report generieren
   static async generateAuditReport(
     startDate: Date,
     endDate: Date,
-    userId?: string
+    userId?: string,
   ): Promise<AuditReport> {
     const query: AuditQuery = {
       startDate,
       endDate,
-      userId
+      userId,
     };
-    
+
     const auditEvents = await this.queryAuditEvents(query);
-    
+
     // Statistiken berechnen
     const statistics = this.calculateAuditStatistics(auditEvents);
-    
+
     // Häufige Aktionen
     const frequentActions = this.getFrequentActions(auditEvents);
-    
+
     // Benutzer-Aktivitäten
     const userActivities = this.getUserActivities(auditEvents);
-    
+
     return {
       period: { startDate, endDate },
       totalEvents: auditEvents.length,
       statistics,
       frequentActions,
       userActivities,
-      events: auditEvents
+      events: auditEvents,
     };
   }
-  
+
   // Audit-Export
   static async exportAuditEvents(
     query: AuditQuery,
-    format: 'csv' | 'json' | 'pdf'
+    format: "csv" | "json" | "pdf",
   ): Promise<Buffer> {
     const auditEvents = await this.queryAuditEvents(query);
-    
+
     switch (format) {
-      case 'csv':
+      case "csv":
         return this.exportToCSV(auditEvents);
-      case 'json':
+      case "json":
         return this.exportToJSON(auditEvents);
-      case 'pdf':
+      case "pdf":
         return this.exportToPDF(auditEvents);
       default:
         throw new Error(`Unbekanntes Export-Format: ${format}`);
@@ -501,36 +484,37 @@ class AuditQueryService {
 ## 🔒 **SECURITY-LOGGING**
 
 ### **Security-Event-Logging**
+
 ```typescript
 // Security-Event-Typen
 enum SecurityEventType {
   // Authentifizierung
-  LOGIN_SUCCESS = 'login_success',
-  LOGIN_FAILED = 'login_failed',
-  LOGOUT = 'logout',
-  PASSWORD_CHANGE = 'password_change',
-  PASSWORD_RESET = 'password_reset',
-  
+  LOGIN_SUCCESS = "login_success",
+  LOGIN_FAILED = "login_failed",
+  LOGOUT = "logout",
+  PASSWORD_CHANGE = "password_change",
+  PASSWORD_RESET = "password_reset",
+
   // Autorisierung
-  ACCESS_GRANTED = 'access_granted',
-  ACCESS_DENIED = 'access_denied',
-  PERMISSION_CHANGE = 'permission_change',
-  
+  ACCESS_GRANTED = "access_granted",
+  ACCESS_DENIED = "access_denied",
+  PERMISSION_CHANGE = "permission_change",
+
   // Bedrohungen
-  SUSPICIOUS_ACTIVITY = 'suspicious_activity',
-  BRUTE_FORCE_ATTEMPT = 'brute_force_attempt',
-  SQL_INJECTION_ATTEMPT = 'sql_injection_attempt',
-  XSS_ATTEMPT = 'xss_attempt',
-  
+  SUSPICIOUS_ACTIVITY = "suspicious_activity",
+  BRUTE_FORCE_ATTEMPT = "brute_force_attempt",
+  SQL_INJECTION_ATTEMPT = "sql_injection_attempt",
+  XSS_ATTEMPT = "xss_attempt",
+
   // Daten-Sicherheit
-  DATA_ACCESS = 'data_access',
-  DATA_EXPORT = 'data_export',
-  DATA_DELETION = 'data_deletion',
-  
+  DATA_ACCESS = "data_access",
+  DATA_EXPORT = "data_export",
+  DATA_DELETION = "data_deletion",
+
   // System-Sicherheit
-  CONFIGURATION_CHANGE = 'configuration_change',
-  BACKUP_CREATED = 'backup_created',
-  BACKUP_RESTORED = 'backup_restored'
+  CONFIGURATION_CHANGE = "configuration_change",
+  BACKUP_CREATED = "backup_created",
+  BACKUP_RESTORED = "backup_restored",
 }
 
 // Security-Logging-Service
@@ -539,7 +523,7 @@ class SecurityLoggingService {
   static async logSecurityEvent(
     eventType: SecurityEventType,
     userId?: string,
-    details?: any
+    details?: any,
   ): Promise<void> {
     const securityEvent = {
       id: generateId(),
@@ -549,80 +533,76 @@ class SecurityLoggingService {
       ipAddress: getClientIP(),
       userAgent: getClientUserAgent(),
       sessionId: getSessionId(),
-      details: details || {}
+      details: details || {},
     };
-    
+
     // Security-Event in Datenbank speichern
     await this.saveSecurityEvent(securityEvent);
-    
+
     // Security-Event loggen
     LoggingService.security(eventType, userId, getClientIP(), details);
-    
+
     // Bei kritischen Events Alert auslösen
     if (this.isCriticalEvent(eventType)) {
       await this.triggerSecurityAlert(securityEvent);
     }
   }
-  
+
   // Login-Versuch loggen
-  static async logLoginAttempt(
-    email: string,
-    success: boolean,
-    reason?: string
-  ): Promise<void> {
+  static async logLoginAttempt(email: string, success: boolean, reason?: string): Promise<void> {
     const eventType = success ? SecurityEventType.LOGIN_SUCCESS : SecurityEventType.LOGIN_FAILED;
-    
+
     await this.logSecurityEvent(eventType, undefined, {
       email,
       success,
-      reason
+      reason,
     });
-    
+
     // Bei fehlgeschlagenen Versuchen Rate-Limiting prüfen
     if (!success) {
       await this.checkRateLimiting(email);
     }
   }
-  
+
   // Zugriffs-Versuch loggen
   static async logAccessAttempt(
     userId: string,
     resource: string,
     granted: boolean,
-    reason?: string
+    reason?: string,
   ): Promise<void> {
     const eventType = granted ? SecurityEventType.ACCESS_GRANTED : SecurityEventType.ACCESS_DENIED;
-    
+
     await this.logSecurityEvent(eventType, userId, {
       resource,
       granted,
-      reason
+      reason,
     });
   }
-  
+
   // Verdächtige Aktivität loggen
   static async logSuspiciousActivity(
     userId: string,
     activity: string,
-    riskLevel: 'low' | 'medium' | 'high',
-    details?: any
+    riskLevel: "low" | "medium" | "high",
+    details?: any,
   ): Promise<void> {
     await this.logSecurityEvent(SecurityEventType.SUSPICIOUS_ACTIVITY, userId, {
       activity,
       riskLevel,
-      details
+      details,
     });
   }
-  
+
   // Kritische Events prüfen
   private static isCriticalEvent(eventType: SecurityEventType): boolean {
     const criticalEvents = [
       SecurityEventType.BRUTE_FORCE_ATTEMPT,
       SecurityEventType.SQL_INJECTION_ATTEMPT,
       SecurityEventType.XSS_ATTEMPT,
-      SecurityEventType.SUSPICIOUS_ACTIVITY
+      SecurityEventType.SUSPICIOUS_ACTIVITY,
     ];
-    
+
     return criticalEvents.includes(eventType);
   }
 }
@@ -631,6 +611,7 @@ class SecurityLoggingService {
 ## 📊 **PERFORMANCE-LOGGING**
 
 ### **Performance-Monitoring**
+
 ```typescript
 // Performance-Metriken
 interface PerformanceMetrics {
@@ -642,28 +623,28 @@ interface PerformanceMetrics {
     statusCode: number;
     responseSize: number;
   };
-  
+
   // Datenbank-Metriken
   database: {
     queryCount: number;
     totalQueryTime: number;
     slowQueries: SlowQuery[];
   };
-  
+
   // Cache-Metriken
   cache: {
     hitCount: number;
     missCount: number;
     hitRate: number;
   };
-  
+
   // Memory-Metriken
   memory: {
     heapUsed: number;
     heapTotal: number;
     external: number;
   };
-  
+
   // CPU-Metriken
   cpu: {
     usage: number;
@@ -679,67 +660,64 @@ class PerformanceLoggingService {
     url: string,
     duration: number,
     statusCode: number,
-    responseSize: number
+    responseSize: number,
   ): void {
-    LoggingService.performance('HTTP_REQUEST', duration, {
+    LoggingService.performance("HTTP_REQUEST", duration, {
       method,
       url,
       statusCode,
-      responseSize
+      responseSize,
     });
   }
-  
+
   // Datenbank-Performance loggen
-  static logDatabasePerformance(
-    query: string,
-    duration: number,
-    rowsAffected: number
-  ): void {
-    LoggingService.performance('DATABASE_QUERY', duration, {
+  static logDatabasePerformance(query: string, duration: number, rowsAffected: number): void {
+    LoggingService.performance("DATABASE_QUERY", duration, {
       query: this.sanitizeQuery(query),
-      rowsAffected
+      rowsAffected,
     });
-    
+
     // Langsame Queries separat loggen
-    if (duration > 1000) { // > 1 Sekunde
-      LoggingService.warn('SLOW_QUERY_DETECTED', undefined, {
+    if (duration > 1000) {
+      // > 1 Sekunde
+      LoggingService.warn("SLOW_QUERY_DETECTED", undefined, {
         query: this.sanitizeQuery(query),
         duration,
-        rowsAffected
+        rowsAffected,
       });
     }
   }
-  
+
   // Cache-Performance loggen
   static logCachePerformance(
-    operation: 'get' | 'set' | 'delete',
+    operation: "get" | "set" | "delete",
     key: string,
     hit: boolean,
-    duration: number
+    duration: number,
   ): void {
-    LoggingService.performance('CACHE_OPERATION', duration, {
+    LoggingService.performance("CACHE_OPERATION", duration, {
       operation,
       key,
-      hit
+      hit,
     });
   }
-  
+
   // Memory-Performance loggen
   static logMemoryPerformance(): void {
     const memoryUsage = process.memoryUsage();
-    
-    LoggingService.info('MEMORY_USAGE', undefined, {
+
+    LoggingService.info("MEMORY_USAGE", undefined, {
       heapUsed: memoryUsage.heapUsed,
       heapTotal: memoryUsage.heapTotal,
       external: memoryUsage.external,
-      rss: memoryUsage.rss
+      rss: memoryUsage.rss,
     });
   }
-  
+
   // Query sanitieren
   private static sanitizeQuery(query: string): string {
     // Sensible Daten aus Query entfernen
-    return query.replace(/password\s*=\s*['"][^'"]*['"]/gi, 'password=***');
+    return query.replace(/password\s*=\s*['"][^'"]*['"]/gi, "password=***");
   }
 }
 ```
@@ -747,6 +725,7 @@ class PerformanceLoggingService {
 ## 🔍 **LOG-ANALYSIS**
 
 ### **Log-Analyse-Tools**
+
 ```typescript
 // Log-Analyse-Service
 class LogAnalysisService {
@@ -754,63 +733,49 @@ class LogAnalysisService {
   static async detectLogPatterns(
     startDate: Date,
     endDate: Date,
-    category?: LogCategory
+    category?: LogCategory,
   ): Promise<LogPattern[]> {
     const logs = await this.getLogs(startDate, endDate, category);
-    
+
     // Häufige Fehler-Patterns
     const errorPatterns = this.findErrorPatterns(logs);
-    
+
     // Performance-Patterns
     const performancePatterns = this.findPerformancePatterns(logs);
-    
+
     // Sicherheits-Patterns
     const securityPatterns = this.findSecurityPatterns(logs);
-    
-    return [
-      ...errorPatterns,
-      ...performancePatterns,
-      ...securityPatterns
-    ];
+
+    return [...errorPatterns, ...performancePatterns, ...securityPatterns];
   }
-  
+
   // Anomalien erkennen
-  static async detectAnomalies(
-    startDate: Date,
-    endDate: Date
-  ): Promise<LogAnomaly[]> {
+  static async detectAnomalies(startDate: Date, endDate: Date): Promise<LogAnomaly[]> {
     const logs = await this.getLogs(startDate, endDate);
-    
+
     // Statistische Anomalien
     const statisticalAnomalies = this.findStatisticalAnomalies(logs);
-    
+
     // Verhaltens-Anomalien
     const behavioralAnomalies = this.findBehavioralAnomalies(logs);
-    
+
     // Zeitbasierte Anomalien
     const temporalAnomalies = this.findTemporalAnomalies(logs);
-    
-    return [
-      ...statisticalAnomalies,
-      ...behavioralAnomalies,
-      ...temporalAnomalies
-    ];
+
+    return [...statisticalAnomalies, ...behavioralAnomalies, ...temporalAnomalies];
   }
-  
+
   // Log-Statistiken generieren
-  static async generateLogStatistics(
-    startDate: Date,
-    endDate: Date
-  ): Promise<LogStatistics> {
+  static async generateLogStatistics(startDate: Date, endDate: Date): Promise<LogStatistics> {
     const logs = await this.getLogs(startDate, endDate);
-    
+
     return {
       totalLogs: logs.length,
       logsByLevel: this.groupByLevel(logs),
       logsByCategory: this.groupByCategory(logs),
       logsByHour: this.groupByHour(logs),
       errorRate: this.calculateErrorRate(logs),
-      averageResponseTime: this.calculateAverageResponseTime(logs)
+      averageResponseTime: this.calculateAverageResponseTime(logs),
     };
   }
 }
@@ -819,12 +784,13 @@ class LogAnalysisService {
 ## 📈 **LOG-VISUALIZATION**
 
 ### **Log-Dashboard**
+
 ```typescript
 // Log-Dashboard-Interface
 interface LogDashboard {
   // Real-Time-Logs
   realTimeLogs: LogEntry[];
-  
+
   // Log-Statistiken
   statistics: {
     totalLogs: number;
@@ -832,20 +798,20 @@ interface LogDashboard {
     warningCount: number;
     infoCount: number;
   };
-  
+
   // Log-Trends
   trends: {
     logsByHour: DataPoint[];
     errorsByHour: DataPoint[];
     performanceByHour: DataPoint[];
   };
-  
+
   // Aktive Alerts
   alerts: LogAlert[];
-  
+
   // Top-Fehler
   topErrors: ErrorSummary[];
-  
+
   // Performance-Metriken
   performanceMetrics: PerformanceMetrics;
 }
@@ -856,47 +822,45 @@ class LogDashboardService {
   static async getDashboardData(): Promise<LogDashboard> {
     const now = new Date();
     const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
-    
+
     return {
       realTimeLogs: await this.getRecentLogs(100),
       statistics: await this.getLogStatistics(oneHourAgo, now),
       trends: await this.getLogTrends(oneHourAgo, now),
       alerts: await this.getActiveAlerts(),
       topErrors: await this.getTopErrors(oneHourAgo, now),
-      performanceMetrics: await this.getPerformanceMetrics()
+      performanceMetrics: await this.getPerformanceMetrics(),
     };
   }
-  
+
   // Log-Filter
-  static async filterLogs(
-    filters: LogFilter
-  ): Promise<LogEntry[]> {
+  static async filterLogs(filters: LogFilter): Promise<LogEntry[]> {
     const query: any = {};
-    
+
     if (filters.level) {
       query.level = filters.level;
     }
-    
+
     if (filters.category) {
       query.category = filters.category;
     }
-    
+
     if (filters.userId) {
-      query['context.userId'] = filters.userId;
+      query["context.userId"] = filters.userId;
     }
-    
+
     if (filters.startDate || filters.endDate) {
       query.timestamp = {};
-      
+
       if (filters.startDate) {
         query.timestamp.$gte = filters.startDate;
       }
-      
+
       if (filters.endDate) {
         query.timestamp.$lte = filters.endDate;
       }
     }
-    
+
     return await LogEntry.find(query)
       .sort({ timestamp: -1 })
       .limit(filters.limit || 100);
@@ -907,4 +871,4 @@ class LogDashboardService {
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

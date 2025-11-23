@@ -28,12 +28,14 @@ Deutschland
 ### ✅ Office & Finance Management: Final Validation PASS (2025-11-01)
 
 #### ✅ Hinzugefügt
+
 - **Validierungsberichte** - Vollständige Validierung der Office & Finance Management Implementierung
 - **RBAC-Policy** - Vollständige Rollendefinition (`docs/07-OFFICE-MANAGEMENT/policies/roles.json`)
 - **API-Detailrouten** - 10 neue API-Routen für Detail-Operationen und spezielle Funktionen
 - **Approval-Artefakte** - Enterprise++ Approval-System mit SHA-256 Attestation
 
 #### ✅ Validierung
+
 - **Navigation:** PASS 8/8 - Sidebar entspricht exakt der Dokumentation
 - **API-Routen (Basis):** PASS 17/17 - Alle Basis-Routen implementiert
 - **API-Routen (Detail):** PASS 10/10 - Alle Detail- und Spezialrouten implementiert
@@ -41,6 +43,7 @@ Deutschland
 - **Compliance:** PASS 5/5 - GoBD/DSGVO/ISO27001-Hinweise vorhanden
 
 #### 📋 Validierungsberichte
+
 - [Zusammenfassung](docs/07-OFFICE-MANAGEMENT/validation/validation-summary.md)
 - [Vollständiger Report](docs/07-OFFICE-MANAGEMENT/validation/validation-report-final.md)
 - [Approval](docs/07-OFFICE-MANAGEMENT/validation/approval/2025-11-01_office-finance_validation_approval.yml)
@@ -48,6 +51,7 @@ Deutschland
 ### 🔧 MySQL2-Konfiguration repariert - Datenbankverbindung funktioniert (2025-09-28)
 
 #### ✅ Behoben
+
 - **MySQL2-Warnungen** - Ungültige Optionen entfernt (collation, acquireTimeout, timeout, reconnect)
 - **Datenbankverbindung** - API-Endpoints funktionieren wieder
 - **Pool-Konfiguration** - connectionLimit = 10, waitForConnections = true
@@ -55,12 +59,14 @@ Deutschland
 - **Server-Restart** - Neue Konfiguration aktiv
 
 #### 📋 Nächste Schritte
+
 - **UTF-8 Umlaute** - Noch Probleme mit deutschen Zeichen in der Datenbank
 - **Datenbank-Encoding** - Prüfung der Tabellen-Collation erforderlich
 
 ### 🛡️ R1.C Sicherheitsnetz - Vollständiges Backup & Rollback System (2025-09-28)
 
 #### ✅ Hinzugefügt
+
 - **Backup-Strategie** - Vollständiger Dump aller Datenbanken vor Wiederherstellung
 - **Dry-Run/No-Op Modus** - SQL-Syntax-Validierung ohne Ausführung
 - **Validierungs-Strategie** - Hash, Row Count und Log-Validierung
@@ -70,11 +76,13 @@ Deutschland
 - **RPO/RTO Planung** - Recovery Point/Time Objectives definiert
 
 #### 📋 Geplant
+
 - **R1.D** - Wiederherstellung ausführen (wartend auf Freigabe)
 
 ### ⏱️ Time Log System - Automatische Zeiterfassung implementiert (2025-09-28)
 
 #### ✅ Hinzugefügt
+
 - **`src/lib/time-log.ts`** - Vollständiges Zeiterfassungssystem erstellt
 - **`logTask()`** - Hauptfunktion für automatische Zeiterfassung
 - **Europe/Berlin Timezone** - Lokale Zeit mit 24h Format
@@ -84,17 +92,20 @@ Deutschland
 - **Fehlerbehandlung** - ❌ Status bei Fehlern
 
 #### 🔄 Geändert
+
 - **TIME_LOG.md** - UTC-Zeiten zu allen Einträgen hinzugefügt
 - **Tagesübersicht** - Automatische Berechnung (130 min Gesamt)
 - **Zeitformat** - Europe/Berlin + UTC parallel
 
 #### 📋 Geplant
+
 - **Automatische Integration** - Alle Aktionen durch logTask() Wrapper
 - **Kein ✅ ohne Eintrag** - Strikte Zeiterfassung-Pflicht
 
 ### 🛡️ Enterprise++ Regeln - Verbindliche Arbeitsweise implementiert (2025-09-26)
 
 #### ✅ Hinzugefügt
+
 - **Enterprise++ Regeln** in STATUS.md dokumentiert
 - **Phase R1: Database Recovery** Struktur implementiert
 - **MIGRATION_PLAN.md** für systematische Wiederherstellung erstellt
@@ -103,11 +114,13 @@ Deutschland
 - **Read-only Analyse** vor jeder Änderung
 
 #### 🔄 Geändert
+
 - **STATUS.md** erweitert um Enterprise++ Regeln
 - **CHANGELOG.md** aktualisiert um neue Struktur
 - **Dokumentations-Standard** auf Enterprise++ Level angehoben
 
 #### 📋 Geplant
+
 - **R1.A:** Bestandsaufnahme (read-only) - Wartend auf Freigabe
 - **R1.B:** Wiederherstellungsplan - Wartend auf R1.A
 - **R1.C:** Sicherheitsnetz - Wartend auf R1.B

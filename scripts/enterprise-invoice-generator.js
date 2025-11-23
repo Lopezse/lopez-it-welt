@@ -5,14 +5,14 @@
  * Automatische PDF-Rechnungserstellung aus Time Tracking Daten
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 class EnterpriseInvoiceGenerator {
   constructor() {
     this.timestamp = new Date().toISOString();
-    this.invoicesPath = 'enterprise-invoices/';
-    this.templatesPath = 'enterprise-templates/';
+    this.invoicesPath = "enterprise-invoices/";
+    this.templatesPath = "enterprise-templates/";
 
     // Erstelle Ordner falls nicht vorhanden
     if (!fs.existsSync(this.invoicesPath)) {
@@ -24,8 +24,8 @@ class EnterpriseInvoiceGenerator {
   }
 
   async generateInvoice(billingEntry) {
-    console.log('🧾 ENTERPRISE++ RECHNUNG GENERIEREN');
-    console.log('====================================');
+    console.log("🧾 ENTERPRISE++ RECHNUNG GENERIEREN");
+    console.log("====================================");
 
     const invoice = this.createInvoiceData(billingEntry);
     const htmlContent = this.generateHTMLInvoice(invoice);
@@ -40,7 +40,7 @@ class EnterpriseInvoiceGenerator {
 
   createInvoiceData(billingEntry) {
     const invoiceNumber = billingEntry.invoiceNumber;
-    const invoiceDate = new Date().toLocaleDateString('de-DE');
+    const invoiceDate = new Date().toLocaleDateString("de-DE");
     const dueDate = this.calculateDueDate(invoiceDate);
 
     return {
@@ -48,15 +48,15 @@ class EnterpriseInvoiceGenerator {
       invoiceDate: invoiceDate,
       dueDate: dueDate,
       client: {
-        name: 'Lopez IT Welt',
-        address: 'IT-Dienstleistungen',
-        email: 'info@lopez-it-welt.de',
-        phone: '+49 123 456789',
-        website: 'www.lopez-it-welt.de',
+        name: "Lopez IT Welt",
+        address: "IT-Dienstleistungen",
+        email: "info@lopez-it-welt.de",
+        phone: "+49 123 456789",
+        website: "www.lopez-it-welt.de",
       },
       items: [
         {
-          description: 'IT-Dienstleistungen - Entwicklung & Beratung',
+          description: "IT-Dienstleistungen - Entwicklung & Beratung",
           hours: billingEntry.totalHours,
           rate: billingEntry.hourlyRate,
           amount: billingEntry.totalAmount,
@@ -65,12 +65,12 @@ class EnterpriseInvoiceGenerator {
       subtotal: billingEntry.totalAmount,
       tax: billingEntry.totalAmount * 0.19, // 19% MwSt
       total: billingEntry.totalAmount * 1.19,
-      paymentTerms: 'Zahlung innerhalb von 14 Tagen nach Rechnungsstellung',
+      paymentTerms: "Zahlung innerhalb von 14 Tagen nach Rechnungsstellung",
       bankDetails: {
-        accountHolder: 'Lopez IT Welt',
-        iban: 'DE89 3704 0044 0532 0130 00',
-        bic: 'COBADEFFXXX',
-        bank: 'Commerzbank AG',
+        accountHolder: "Lopez IT Welt",
+        iban: "DE89 3704 0044 0532 0130 00",
+        bic: "COBADEFFXXX",
+        bank: "Commerzbank AG",
       },
     };
   }
@@ -182,16 +182,16 @@ class EnterpriseInvoiceGenerator {
         <tbody>
             ${invoice.items
               .map(
-                item => `
+                (item) => `
                 <tr>
                     <td>${item.description}</td>
                     <td>${item.hours}h</td>
                     <td>€${item.rate.toFixed(2)}</td>
                     <td>€${item.amount.toFixed(2)}</td>
                 </tr>
-            `
+            `,
               )
-              .join('')}
+              .join("")}
         </tbody>
         <tfoot>
             <tr class="total-row">
@@ -243,9 +243,9 @@ class EnterpriseInvoiceGenerator {
   }
 
   calculateDueDate(invoiceDate) {
-    const date = new Date(invoiceDate.split('.').reverse().join('-'));
+    const date = new Date(invoiceDate.split(".").reverse().join("-"));
     date.setDate(date.getDate() + 14); // 14 Tage Zahlungsziel
-    return date.toLocaleDateString('de-DE');
+    return date.toLocaleDateString("de-DE");
   }
 
   async generateMonthlyInvoice(month, year) {
@@ -255,7 +255,7 @@ class EnterpriseInvoiceGenerator {
     // Sammelt alle Sessions eines Monats und erstellt eine Gesamtrechnung
 
     const monthlyInvoice = {
-      invoiceNumber: `LIW-${year}${String(month).padStart(2, '0')}-MONTH`,
+      invoiceNumber: `LIW-${year}${String(month).padStart(2, "0")}-MONTH`,
       month: month,
       year: year,
       totalHours: 0,
@@ -292,8 +292,8 @@ async function main() {
 
     // Beispiel-Billing-Entry
     const billingEntry = {
-      invoiceNumber: 'LIW-20250119-001',
-      date: '19.01.2025',
+      invoiceNumber: "LIW-20250119-001",
+      date: "19.01.2025",
       totalHours: 8.5,
       hourlyRate: 85,
       totalAmount: 722.5,
@@ -308,7 +308,7 @@ async function main() {
     // Wochenbericht generieren
     await generator.generateWeeklyReport(3, 2025);
   } catch (error) {
-    console.error('❌ Fehler beim Generieren der Rechnung:', error);
+    console.error("❌ Fehler beim Generieren der Rechnung:", error);
     process.exit(1);
   }
 }

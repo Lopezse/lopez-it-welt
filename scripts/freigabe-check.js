@@ -153,3 +153,54 @@ function main() {
 }
 
 main();
+
+      process.exit(1);
+    } else if (geprüfteDateien === 0) {
+      console.log("⚠️ Keine relevanten Dateien geändert - prüfe ob Strict-Modus aktiv.");
+      process.exit(0);
+    } else {
+      console.log(`✅ Alle ${geprüfteDateien} relevanten Dateien haben Freigabe.`);
+      process.exit(0);
+    }
+    return;
+  }
+
+  // Legacy-Modus: Datei-spezifische Prüfung (alte Struktur: Dateiname als Key)
+  let blockiert = false;
+  let geprüfteDateien = 0;
+
+  relevantFiles.forEach((file) => {
+    if (!file || file.trim() === "") return;
+
+    // Wenn Datei in freigaben.json vorhanden ist, prüfe den Wert
+    if (freigaben.hasOwnProperty(file)) {
+      geprüfteDateien++;
+      if (!freigaben[file]) {
+        console.error(`🚨 Änderung BLOCKIERT: Für ${file} liegt KEINE Freigabe vor!`);
+        blockiert = true;
+      } else {
+        console.log(`✅ Freigabe für ${file} vorhanden.`);
+      }
+    }
+  });
+
+  if (blockiert) {
+    process.exit(1);
+  } else {
+    if (geprüfteDateien === 0) {
+      console.log(
+        "⚠️ Keine relevanten Dateien in freigaben.json gefunden - prüfe ob Baseline-Modus aktiv.",
+      );
+    }
+    process.exit(0);
+  }
+}
+
+// 6. Hauptlogik
+function main() {
+  const changedFiles = getChangedFiles();
+  const freigaben = loadFreigaben();
+  checkFreigaben(changedFiles, freigaben);
+}
+
+main();

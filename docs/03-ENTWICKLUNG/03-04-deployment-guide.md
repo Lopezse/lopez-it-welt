@@ -12,6 +12,7 @@ Der **Deployment-Guide** beschreibt die vollständige Deployment-Strategie für 
 ## 🎯 **DEPLOYMENT-STRATEGIE**
 
 ### **Umgebungen**
+
 ```yaml
 # Umgebungs-Konfiguration
 environments:
@@ -19,12 +20,12 @@ environments:
     url: http://localhost:3000
     database: lopez_it_welt_dev
     redis: redis://localhost:6379/0
-    
+
   staging:
     url: https://staging.lopez-it-welt.de
     database: lopez_it_welt_staging
     redis: redis://staging-redis:6379/0
-    
+
   production:
     url: https://lopez-it-welt.de
     database: lopez_it_welt_prod
@@ -32,6 +33,7 @@ environments:
 ```
 
 ### **Deployment-Pipeline**
+
 ```mermaid
 graph LR
     A[Code Commit] --> B[Tests]
@@ -48,6 +50,7 @@ graph LR
 ## 🛠️ **VORBEREITUNG**
 
 ### **System-Anforderungen**
+
 ```bash
 # Minimale System-Anforderungen
 CPU: 2 Cores
@@ -57,6 +60,7 @@ OS: Ubuntu 20.04 LTS oder höher
 ```
 
 ### **Abhängigkeiten installieren**
+
 ```bash
 # Ubuntu/Debian
 sudo apt update
@@ -89,6 +93,7 @@ sudo systemctl start redis-server
 ```
 
 ### **Umgebungsvariablen**
+
 ```bash
 # .env.production
 NODE_ENV=production
@@ -126,6 +131,7 @@ AWS_S3_BUCKET=lopez-it-welt-storage
 ## 🐳 **DOCKER-DEPLOYMENT**
 
 ### **Dockerfile**
+
 ```dockerfile
 # Multi-stage build für optimierte Images
 FROM node:18-alpine AS base
@@ -169,9 +175,10 @@ CMD ["node", "server.js"]
 ```
 
 ### **Docker Compose**
+
 ```yaml
 # docker-compose.yml
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -239,6 +246,7 @@ networks:
 ```
 
 ### **Nginx-Konfiguration**
+
 ```nginx
 # nginx.conf
 events {
@@ -325,6 +333,7 @@ http {
 ## ☁️ **CLOUD-DEPLOYMENT**
 
 ### **AWS ECS Deployment**
+
 ```yaml
 # task-definition.json
 {
@@ -335,46 +344,44 @@ http {
   "memory": "1024",
   "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
   "taskRoleArn": "arn:aws:iam::123456789012:role/ecsTaskRole",
-  "containerDefinitions": [
-    {
-      "name": "app",
-      "image": "123456789012.dkr.ecr.eu-central-1.amazonaws.com/lopez-it-welt:latest",
-      "portMappings": [
-        {
-          "containerPort": 3000,
-          "protocol": "tcp"
-        }
-      ],
-      "environment": [
-        {
-          "name": "NODE_ENV",
-          "value": "production"
-        },
-        {
-          "name": "DATABASE_URL",
-          "value": "mysql://user:password@db-cluster.cluster-xyz.eu-central-1.rds.amazonaws.com:3306/lopez_it_welt"
-        }
-      ],
-      "secrets": [
-        {
-          "name": "NEXTAUTH_SECRET",
-          "valueFrom": "arn:aws:secretsmanager:eu-central-1:123456789012:secret:lopez-it-welt/nextauth-secret"
-        }
-      ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "/ecs/lopez-it-welt",
-          "awslogs-region": "eu-central-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      }
-    }
-  ]
+  "containerDefinitions":
+    [
+      {
+        "name": "app",
+        "image": "123456789012.dkr.ecr.eu-central-1.amazonaws.com/lopez-it-welt:latest",
+        "portMappings": [{ "containerPort": 3000, "protocol": "tcp" }],
+        "environment":
+          [
+            { "name": "NODE_ENV", "value": "production" },
+            {
+              "name": "DATABASE_URL",
+              "value": "mysql://user:password@db-cluster.cluster-xyz.eu-central-1.rds.amazonaws.com:3306/lopez_it_welt",
+            },
+          ],
+        "secrets":
+          [
+            {
+              "name": "NEXTAUTH_SECRET",
+              "valueFrom": "arn:aws:secretsmanager:eu-central-1:123456789012:secret:lopez-it-welt/nextauth-secret",
+            },
+          ],
+        "logConfiguration":
+          {
+            "logDriver": "awslogs",
+            "options":
+              {
+                "awslogs-group": "/ecs/lopez-it-welt",
+                "awslogs-region": "eu-central-1",
+                "awslogs-stream-prefix": "ecs",
+              },
+          },
+      },
+    ],
 }
 ```
 
 ### **Kubernetes Deployment**
+
 ```yaml
 # k8s-deployment.yaml
 apiVersion: apps/v1
@@ -393,42 +400,42 @@ spec:
         app: lopez-it-welt
     spec:
       containers:
-      - name: app
-        image: lopez-it-welt:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: NODE_ENV
-          value: "production"
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: lopez-it-welt-secrets
-              key: database-url
-        - name: NEXTAUTH_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: lopez-it-welt-secrets
-              key: nextauth-secret
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "250m"
-          limits:
-            memory: "1Gi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /api/health
-            port: 3000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /api/health
-            port: 3000
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: app
+          image: lopez-it-welt:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: lopez-it-welt-secrets
+                  key: database-url
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: lopez-it-welt-secrets
+                  key: nextauth-secret
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
 ---
 apiVersion: v1
 kind: Service
@@ -439,9 +446,9 @@ spec:
   selector:
     app: lopez-it-welt
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3000
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
   type: LoadBalancer
 ---
 apiVersion: networking.k8s.io/v1
@@ -454,25 +461,26 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
-  - hosts:
-    - lopez-it-welt.de
-    secretName: lopez-it-welt-tls
+    - hosts:
+        - lopez-it-welt.de
+      secretName: lopez-it-welt-tls
   rules:
-  - host: lopez-it-welt.de
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: lopez-it-welt-service
-            port:
-              number: 80
+    - host: lopez-it-welt.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: lopez-it-welt-service
+                port:
+                  number: 80
 ```
 
 ## 🔄 **CI/CD-PIPELINE**
 
 ### **GitHub Actions**
+
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy to Production
@@ -487,92 +495,93 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run tests
-      run: npm test
-    
-    - name: Run linting
-      run: npm run lint
-    
-    - name: Type check
-      run: npm run type-check
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Type check
+        run: npm run type-check
 
   security-scan:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Run security scan
-      uses: snyk/actions/node@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      with:
-        args: --severity-threshold=high
+      - uses: actions/checkout@v3
+
+      - name: Run security scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
 
   build:
     needs: [test, security-scan]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    
-    - name: Login to ECR
-      uses: aws-actions/amazon-ecr-login@v1
-    
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
+      - uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy-staging:
     needs: build
     runs-on: ubuntu-latest
     environment: staging
     steps:
-    - name: Deploy to staging
-      run: |
-        aws ecs update-service \
-          --cluster staging-cluster \
-          --service lopez-it-welt-staging \
-          --force-new-deployment
+      - name: Deploy to staging
+        run: |
+          aws ecs update-service \
+            --cluster staging-cluster \
+            --service lopez-it-welt-staging \
+            --force-new-deployment
 
   deploy-production:
     needs: deploy-staging
     runs-on: ubuntu-latest
     environment: production
     steps:
-    - name: Deploy to production
-      run: |
-        aws ecs update-service \
-          --cluster production-cluster \
-          --service lopez-it-welt-production \
-          --force-new-deployment
-    
-    - name: Run smoke tests
-      run: |
-        curl -f https://lopez-it-welt.de/api/health
-        curl -f https://lopez-it-welt.de/api/version
+      - name: Deploy to production
+        run: |
+          aws ecs update-service \
+            --cluster production-cluster \
+            --service lopez-it-welt-production \
+            --force-new-deployment
+
+      - name: Run smoke tests
+        run: |
+          curl -f https://lopez-it-welt.de/api/health
+          curl -f https://lopez-it-welt.de/api/version
 ```
 
 ### **Database Migration**
+
 ```bash
 # Migration-Script
 #!/bin/bash
@@ -598,97 +607,93 @@ echo "Migration completed successfully"
 ## 📊 **MONITORING & ALERTING**
 
 ### **Health Checks**
+
 ```typescript
 // pages/api/health.ts
-import { NextApiRequest, NextApiResponse } from 'next';
-import { checkDatabaseConnection } from '@/lib/database';
-import { checkRedisConnection } from '@/lib/redis';
+import { NextApiRequest, NextApiResponse } from "next";
+import { checkDatabaseConnection } from "@/lib/database";
+import { checkRedisConnection } from "@/lib/redis";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     // Datenbank-Check
     const dbStatus = await checkDatabaseConnection();
-    
+
     // Redis-Check
     const redisStatus = await checkRedisConnection();
-    
+
     // Externe Services
     const openaiStatus = await checkOpenAIConnection();
-    
+
     const isHealthy = dbStatus && redisStatus && openaiStatus;
-    
+
     res.status(isHealthy ? 200 : 503).json({
-      status: isHealthy ? 'healthy' : 'unhealthy',
+      status: isHealthy ? "healthy" : "unhealthy",
       timestamp: new Date().toISOString(),
       checks: {
         database: dbStatus,
         redis: redisStatus,
-        openai: openaiStatus
-      }
+        openai: openaiStatus,
+      },
     });
   } catch (error) {
     res.status(503).json({
-      status: 'unhealthy',
+      status: "unhealthy",
       error: error.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 }
 ```
 
 ### **Prometheus Metrics**
+
 ```typescript
 // lib/metrics.ts
-import { register, Counter, Histogram, Gauge } from 'prom-client';
+import { register, Counter, Histogram, Gauge } from "prom-client";
 
 // Metriken definieren
 export const httpRequestDuration = new Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'Duration of HTTP requests in seconds',
-  labelNames: ['method', 'route', 'status_code']
+  name: "http_request_duration_seconds",
+  help: "Duration of HTTP requests in seconds",
+  labelNames: ["method", "route", "status_code"],
 });
 
 export const httpRequestsTotal = new Counter({
-  name: 'http_requests_total',
-  help: 'Total number of HTTP requests',
-  labelNames: ['method', 'route', 'status_code']
+  name: "http_requests_total",
+  help: "Total number of HTTP requests",
+  labelNames: ["method", "route", "status_code"],
 });
 
 export const activeUsers = new Gauge({
-  name: 'active_users',
-  help: 'Number of currently active users'
+  name: "active_users",
+  help: "Number of currently active users",
 });
 
 export const chatMessagesTotal = new Counter({
-  name: 'chat_messages_total',
-  help: 'Total number of chat messages',
-  labelNames: ['agent_id', 'type']
+  name: "chat_messages_total",
+  help: "Total number of chat messages",
+  labelNames: ["agent_id", "type"],
 });
 
 // Middleware für Request-Metriken
 export function metricsMiddleware(req: NextApiRequest, res: NextApiResponse, next: () => void) {
   const start = Date.now();
-  
-  res.on('finish', () => {
+
+  res.on("finish", () => {
     const duration = (Date.now() - start) / 1000;
-    
-    httpRequestDuration
-      .labels(req.method!, req.url!, res.statusCode.toString())
-      .observe(duration);
-    
-    httpRequestsTotal
-      .labels(req.method!, req.url!, res.statusCode.toString())
-      .inc();
+
+    httpRequestDuration.labels(req.method!, req.url!, res.statusCode.toString()).observe(duration);
+
+    httpRequestsTotal.labels(req.method!, req.url!, res.statusCode.toString()).inc();
   });
-  
+
   next();
 }
 ```
 
 ### **Grafana Dashboard**
+
 ```json
 {
   "dashboard": {
@@ -741,6 +746,7 @@ export function metricsMiddleware(req: NextApiRequest, res: NextApiResponse, nex
 ## 🔒 **SICHERHEIT**
 
 ### **SSL/TLS-Konfiguration**
+
 ```bash
 # Let's Encrypt Zertifikat
 sudo certbot --nginx -d lopez-it-welt.de -d www.lopez-it-welt.de
@@ -751,6 +757,7 @@ sudo crontab -e
 ```
 
 ### **Firewall-Konfiguration**
+
 ```bash
 # UFW Firewall
 sudo ufw default deny incoming
@@ -762,6 +769,7 @@ sudo ufw enable
 ```
 
 ### **Backup-Strategie**
+
 ```bash
 #!/bin/bash
 # backup.sh
@@ -788,6 +796,7 @@ aws s3 sync $BACKUP_DIR s3://lopez-it-welt-backups/
 ### **Häufige Probleme**
 
 #### **Datenbank-Verbindung fehlgeschlagen**
+
 ```bash
 # MySQL-Status prüfen
 sudo systemctl status mysql
@@ -800,6 +809,7 @@ sudo tail -f /var/log/mysql/error.log
 ```
 
 #### **Redis-Verbindung fehlgeschlagen**
+
 ```bash
 # Redis-Status prüfen
 sudo systemctl status redis-server
@@ -812,6 +822,7 @@ sudo tail -f /var/log/redis/redis-server.log
 ```
 
 #### **Application-Fehler**
+
 ```bash
 # Application-Logs prüfen
 docker logs lopez-it-welt-app
@@ -824,6 +835,7 @@ docker stats
 ```
 
 ### **Performance-Optimierung**
+
 ```bash
 # MySQL-Performance
 mysql -u root -p -e "SHOW VARIABLES LIKE 'innodb_buffer_pool_size';"
@@ -837,4 +849,4 @@ redis-cli config set maxmemory 512mb
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

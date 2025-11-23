@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 🚦 Freigabe-Check vor allen anderen Prüfungen
+node scripts/freigabe-check.js
+if [ $? -ne 0 ]; then
+  echo "🚨 Commit abgebrochen: Es fehlt eine Freigabe!"
+  exit 1
+fi
+
+# 🛡️ Anti-Regelbruch-System vor Commit prüfen
+echo "🛡️ Anti-Regelbruch-System: Pre-Commit Validierung..."
+node scripts/anti-rule-break-hook.js pre-commit
+
+# Standard Tests
+npm test
+node scripts/pre-commit-freigabe-check.js

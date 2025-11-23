@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: Lopez IT Welt API
+  version: 1.0.0
+  description: |
+    Dies ist die zentrale OpenAPI-Spezifikation für das Projekt "Lopez IT Welt".
+    Sie beschreibt alle REST-Endpunkte, Datenmodelle und Sicherheitsanforderungen.
+servers:
+  - url: https://api.lopez-it-welt.de/v1
+    description: Produktion
+  - url: http://localhost:4000/v1
+    description: Lokale Entwicklung
+paths:
+  /services:
+    get:
+      summary: Liste aller Services
+      responses:
+        '200':
+          description: Erfolgreiche Antwort
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+    post:
+      summary: Neuen Service anlegen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceInput'
+      responses:
+        '201':
+          description: Service erstellt
+  /users:
+    get:
+      summary: Liste aller Nutzer
+      responses:
+        '200':
+          description: Erfolgreiche Antwort
+    post:
+      summary: Nutzer registrieren
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: Nutzer erstellt
+  /orders:
+    get:
+      summary: Alle Bestellungen abrufen
+      responses:
+        '200':
+          description: Erfolgreiche Antwort
+  /tickets:
+    get:
+      summary: Alle Tickets abrufen
+      responses:
+        '200':
+          description: Erfolgreiche Antwort
+    post:
+      summary: Ticket erstellen
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketInput'
+      responses:
+        '201':
+          description: Ticket erstellt
+components:
+  schemas:
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        category:
+          type: string
+        price:
+          type: number
+    ServiceInput:
+      type: object
+      properties:
+        name:
+          type: string
+        category:
+          type: string
+        price:
+          type: number
+    UserInput:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    TicketInput:
+      type: object
+      properties:
+        subject:
+          type: string
+        description:
+          type: string
+        priority:
+          type: string
+          enum: [low, medium, high]

@@ -1,12 +1,15 @@
 # Content-Management-System (CMS)
+
 ## Dynamische Webseiten-Texte aus der Datenbank
 
 ### 🎯 **ÜBERSICHT**
+
 Das Content-Management-System ermöglicht es, alle Texte der Webseite dynamisch aus der Datenbank zu laden und über ein Admin-Interface zu bearbeiten.
 
 ### 📋 **ANFORDERUNGEN**
 
 #### **Kern-Funktionalitäten:**
+
 - ✅ Alle Webseiten-Texte aus Datenbank laden
 - ✅ Admin-Interface für Text-Bearbeitung
 - ✅ Mehrsprachigkeit (DE/EN/ES)
@@ -15,6 +18,7 @@ Das Content-Management-System ermöglicht es, alle Texte der Webseite dynamisch 
 - ✅ Backup und Wiederherstellung von Content
 
 #### **Technische Anforderungen:**
+
 - ✅ API-Endpunkte für Content-CRUD
 - ✅ Datenbank-Schema für Texte und Übersetzungen
 - ✅ Frontend-Integration mit React
@@ -64,6 +68,7 @@ CREATE TABLE content_versions (
 ### 🔌 **API-ENDPUNKTE**
 
 #### **Content laden:**
+
 ```javascript
 // GET /api/content/{page_key}/{language}
 GET /api/content/homepage/de
@@ -86,6 +91,7 @@ GET /api/content/services/es
 ```
 
 #### **Content bearbeiten:**
+
 ```javascript
 // PUT /api/content/{page_key}/{language}
 PUT /api/content/homepage/de
@@ -100,6 +106,7 @@ PUT /api/content/homepage/de
 ### 🎛️ **ADMIN-INTERFACE**
 
 #### **Content-Editor Komponente:**
+
 ```typescript
 // src/components/admin/ContentEditor.tsx
 interface ContentEditorProps {
@@ -137,7 +144,7 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
   return (
     <div className="content-editor">
       <h2>Content Editor: {pageKey} ({language})</h2>
-      
+
       {Object.entries(content).map(([key, value]) => (
         <div key={key} className="content-section">
           <label>{key}:</label>
@@ -151,7 +158,7 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
           />
         </div>
       ))}
-      
+
       <button onClick={handleSave} disabled={isLoading}>
         {isLoading ? 'Speichere...' : 'Speichern'}
       </button>
@@ -163,9 +170,10 @@ const ContentEditor: React.FC<ContentEditorProps> = ({
 ### 🔄 **FRONTEND-INTEGRATION**
 
 #### **Content-Loader Hook:**
+
 ```typescript
 // src/hooks/useContent.ts
-export const useContent = (pageKey: string, language: string = 'de') => {
+export const useContent = (pageKey: string, language: string = "de") => {
   const [content, setContent] = useState<ContentData>({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -178,7 +186,7 @@ export const useContent = (pageKey: string, language: string = 'de') => {
         const data = await response.json();
         setContent(data.page.sections);
       } catch (err) {
-        setError('Fehler beim Laden des Contents');
+        setError("Fehler beim Laden des Contents");
       } finally {
         setIsLoading(false);
       }
@@ -192,6 +200,7 @@ export const useContent = (pageKey: string, language: string = 'de') => {
 ```
 
 #### **Verwendung in Komponenten:**
+
 ```typescript
 // src/components/Core/HeroSection.tsx
 import { useContent } from '@/hooks/useContent';
@@ -215,18 +224,21 @@ const HeroSection: React.FC = () => {
 ### 📊 **IMPLEMENTIERUNGS-PLAN**
 
 #### **Phase 1: Grundlagen (HOCH-PRIORITÄT)**
+
 - [ ] Datenbank-Schema erstellen
 - [ ] API-Endpunkte implementieren
 - [ ] Content-Loader Hook entwickeln
 - [ ] Basis-Admin-Interface
 
 #### **Phase 2: Erweiterungen**
+
 - [ ] Mehrsprachigkeit
 - [ ] Versionierung
 - [ ] Live-Preview
 - [ ] Caching-System
 
 #### **Phase 3: Optimierung**
+
 - [ ] Performance-Optimierung
 - [ ] SEO-Integration
 - [ ] Backup-System
@@ -240,6 +252,7 @@ const HeroSection: React.FC = () => {
 4. **Admin-Interface aufbauen**
 
 ### 📝 **STATUS**
+
 - **Priorität:** HOCH
 - **Status:** FEHLER (nicht implementiert)
 - **Kategorie:** Content-Management
@@ -247,6 +260,6 @@ const HeroSection: React.FC = () => {
 
 ---
 
-*Erstellt: 2025-07-06*  
-*Aktualisiert: 2025-07-06*  
-*Version: 1.0* 
+_Erstellt: 2025-07-06_  
+_Aktualisiert: 2025-07-06_  
+_Version: 1.0_

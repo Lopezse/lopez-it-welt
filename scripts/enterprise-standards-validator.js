@@ -6,8 +6,8 @@
  * Verhindert unterschiedliche Standards in verschiedenen Dateien
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Enterprise++ Standards (einheitlich für alle Dateien)
 const ENTERPRISE_STANDARDS = {
@@ -35,7 +35,7 @@ const ENTERPRISE_STANDARDS = {
     authorization: 100, // 100% Autorisierung
   },
   accessibility: {
-    wcag: 'AAA', // Höchste WCAG-Stufe
+    wcag: "AAA", // Höchste WCAG-Stufe
     screenReader: 100, // 100% Screen Reader Support
     keyboard: 100, // 100% Tastaturunterstützung
     colorContrast: 100, // 100% Farbkontrast
@@ -45,23 +45,15 @@ const ENTERPRISE_STANDARDS = {
 
 class EnterpriseStandardsValidator {
   constructor() {
-    this.mdFiles = [
-      'START.md',
-      'QualityController.md',
-      'PROJECT.md',
-      'STATUS.md',
-      'README.md',
-    ];
+    this.mdFiles = ["START.md", "QualityController.md", "PROJECT.md", "STATUS.md", "README.md"];
     this.violations = [];
     this.fixes = [];
   }
 
   async validateAllFiles() {
-    console.log('🔍 ENTERPRISE++ STANDARDS VALIDATOR');
-    console.log('=====================================');
-    console.log(
-      'Prüfe alle .md-Dateien auf einheitliche Enterprise++ Standards...\n'
-    );
+    console.log("🔍 ENTERPRISE++ STANDARDS VALIDATOR");
+    console.log("=====================================");
+    console.log("Prüfe alle .md-Dateien auf einheitliche Enterprise++ Standards...\n");
 
     for (const file of this.mdFiles) {
       if (fs.existsSync(file)) {
@@ -78,7 +70,7 @@ class EnterpriseStandardsValidator {
   async validateFile(filePath) {
     console.log(`📄 Prüfe: ${filePath}`);
 
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, "utf8");
     const violations = [];
 
     // Prüfe auf Enterprise++ Standards
@@ -130,7 +122,7 @@ class EnterpriseStandardsValidator {
           const value = parseInt(match.match(/\d+/)[0]);
           if (value !== standards.code.testCoverage) {
             violations.push({
-              type: 'testCoverage',
+              type: "testCoverage",
               found: value,
               expected: standards.code.testCoverage,
               line: this.findLineNumber(content, match),
@@ -155,7 +147,7 @@ class EnterpriseStandardsValidator {
           const value = parseInt(match.match(/\d+/)[0]);
           if (value !== standards.code.lintErrors) {
             violations.push({
-              type: 'lintErrors',
+              type: "lintErrors",
               found: value,
               expected: standards.code.lintErrors,
               line: this.findLineNumber(content, match),
@@ -180,7 +172,7 @@ class EnterpriseStandardsValidator {
           const value = parseInt(match.match(/\d+/)[0]);
           if (value !== standards.performance.bundleSize) {
             violations.push({
-              type: 'bundleSize',
+              type: "bundleSize",
               found: value,
               expected: standards.performance.bundleSize,
               line: this.findLineNumber(content, match),
@@ -213,11 +205,7 @@ class EnterpriseStandardsValidator {
     }
 
     // Prüfe auf inkonsistente Qualitätsstandards-Bezeichnungen
-    const qualityPatterns = [
-      /Qualitätsstandards/g,
-      /Quality Standards/g,
-      /QualityController/g,
-    ];
+    const qualityPatterns = [/Qualitätsstandards/g, /Quality Standards/g, /QualityController/g];
 
     let qualityCount = 0;
     for (const pattern of qualityPatterns) {
@@ -230,12 +218,11 @@ class EnterpriseStandardsValidator {
     // Wenn Enterprise++ verwendet wird, sollte es konsistent sein
     if (enterpriseCount > 0 && qualityCount > enterpriseCount) {
       violations.push({
-        type: 'consistency',
-        found: 'Mixed terminology',
-        expected: 'Consistent Enterprise++ terminology',
+        type: "consistency",
+        found: "Mixed terminology",
+        expected: "Consistent Enterprise++ terminology",
         line: 1,
-        message:
-          'Inkonsistente Terminologie: Enterprise++ und normale Qualitätsstandards gemischt',
+        message: "Inkonsistente Terminologie: Enterprise++ und normale Qualitätsstandards gemischt",
       });
     }
 
@@ -243,7 +230,7 @@ class EnterpriseStandardsValidator {
   }
 
   findLineNumber(content, match) {
-    const lines = content.split('\n');
+    const lines = content.split("\n");
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].includes(match)) {
         return i + 1;
@@ -257,39 +244,39 @@ class EnterpriseStandardsValidator {
 
     for (const violation of violations) {
       switch (violation.type) {
-        case 'testCoverage':
+        case "testCoverage":
           fixes.push({
-            type: 'replace',
-            search: new RegExp(`testCoverage:\\s*${violation.found}`, 'g'),
+            type: "replace",
+            search: new RegExp(`testCoverage:\\s*${violation.found}`, "g"),
             replace: `testCoverage: ${violation.expected}`,
             message: `Test Coverage von ${violation.found}% auf ${violation.expected}% korrigiert`,
           });
           break;
 
-        case 'lintErrors':
+        case "lintErrors":
           fixes.push({
-            type: 'replace',
-            search: new RegExp(`lintErrors:\\s*${violation.found}`, 'g'),
+            type: "replace",
+            search: new RegExp(`lintErrors:\\s*${violation.found}`, "g"),
             replace: `lintErrors: ${violation.expected}`,
             message: `Lint Errors von ${violation.found} auf ${violation.expected} korrigiert`,
           });
           break;
 
-        case 'bundleSize':
+        case "bundleSize":
           fixes.push({
-            type: 'replace',
-            search: new RegExp(`bundleSize:\\s*${violation.found}`, 'g'),
+            type: "replace",
+            search: new RegExp(`bundleSize:\\s*${violation.found}`, "g"),
             replace: `bundleSize: ${violation.expected}`,
             message: `Bundle Size von ${violation.found} kB auf ${violation.expected} kB korrigiert`,
           });
           break;
 
-        case 'consistency':
+        case "consistency":
           fixes.push({
-            type: 'replace',
+            type: "replace",
             search: /Qualitätsstandards/g,
-            replace: 'Enterprise++ Standards',
-            message: 'Terminologie auf Enterprise++ Standards vereinheitlicht',
+            replace: "Enterprise++ Standards",
+            message: "Terminologie auf Enterprise++ Standards vereinheitlicht",
           });
           break;
       }
@@ -299,27 +286,23 @@ class EnterpriseStandardsValidator {
   }
 
   generateReport() {
-    console.log('\n📊 ENTERPRISE++ STANDARDS VALIDATOR REPORT');
-    console.log('==========================================');
+    console.log("\n📊 ENTERPRISE++ STANDARDS VALIDATOR REPORT");
+    console.log("==========================================");
 
     if (this.violations.length === 0) {
-      console.log('✅ ALLE ENTERPRISE++ STANDARDS EINGEHALTEN!');
-      console.log(
-        '🎉 Alle .md-Dateien verwenden einheitliche Enterprise++ Standards'
-      );
+      console.log("✅ ALLE ENTERPRISE++ STANDARDS EINGEHALTEN!");
+      console.log("🎉 Alle .md-Dateien verwenden einheitliche Enterprise++ Standards");
       return;
     }
 
-    console.log(
-      `❌ ${this.violations.length} Dateien mit Verstößen gefunden:\n`
-    );
+    console.log(`❌ ${this.violations.length} Dateien mit Verstößen gefunden:\n`);
 
     for (const violation of this.violations) {
       console.log(`📄 ${violation.file}:`);
       for (const v of violation.violations) {
         console.log(`   ❌ Zeile ${v.line}: ${v.message}`);
       }
-      console.log('');
+      console.log("");
     }
 
     console.log(`🔧 ${this.fixes.length} automatische Korrekturen verfügbar`);
@@ -330,16 +313,16 @@ class EnterpriseStandardsValidator {
       return;
     }
 
-    console.log('\n🔧 AUTOMATISCHE KORREKTUREN ANWENDEN?');
-    console.log('=====================================');
-    console.log('Die folgenden Korrekturen werden automatisch angewendet:\n');
+    console.log("\n🔧 AUTOMATISCHE KORREKTUREN ANWENDEN?");
+    console.log("=====================================");
+    console.log("Die folgenden Korrekturen werden automatisch angewendet:\n");
 
     for (const fix of this.fixes) {
       console.log(`📄 ${fix.file}:`);
       for (const f of fix.fixes) {
         console.log(`   ✅ ${f.message}`);
       }
-      console.log('');
+      console.log("");
     }
 
     // Automatisch anwenden (da es ein Validator ist)
@@ -360,7 +343,7 @@ class EnterpriseStandardsValidator {
       console.log(`✅ ${fix.file} korrigiert (Backup: ${backupPath})`);
     }
 
-    console.log('\n🎉 ALLE ENTERPRISE++ STANDARDS KORRIGIERT!');
+    console.log("\n🎉 ALLE ENTERPRISE++ STANDARDS KORRIGIERT!");
   }
 }
 
@@ -370,10 +353,7 @@ async function main() {
     const validator = new EnterpriseStandardsValidator();
     await validator.validateAllFiles();
   } catch (error) {
-    console.error(
-      '❌ Fehler beim Validieren der Enterprise++ Standards:',
-      error
-    );
+    console.error("❌ Fehler beim Validieren der Enterprise++ Standards:", error);
     process.exit(1);
   }
 }

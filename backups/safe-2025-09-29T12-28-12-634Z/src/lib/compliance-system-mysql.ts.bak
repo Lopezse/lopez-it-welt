@@ -1,0 +1,825 @@
+import * as fs from 'fs';
+import { glob } from 'glob';
+import mysql from 'mysql2/promise';
+import * as path from 'path';
+
+// =====================================================
+// Interfaces und Types
+// =====================================================
+
+export interface ComplianceRule {
+  id: number;
+  rule_name: string;
+  rule_description: string;
+  rule_category: string;
+  rule_type: 'REQUIRED' | 'RECOMMENDED' | 'OPTIONAL';
+  rule_source: string;
+  enforcement_level: 'BLOCK' | 'WARN' | 'INFO';
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface ComplianceViolation {
+  id: number;
+  rule_id: number;
+  violation_type: string;
+  severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW';
+  description: string;
+  detected_at: Date;
+  resolved_at?: Date;
+  status: 'OPEN' | 'RESOLVED' | 'IGNORED';
+}
+
+export interface ComplianceScan {
+  id: number;
+  scan_type: 'AUTOMATED' | 'MANUAL' | 'SCHEDULED';
+  scan_date: Date;
+  total_rules_checked: number;
+  violations_found: number;
+  compliance_score: number;
+  scan_status: 'RUNNING' | 'COMPLETED' | 'FAILED';
+  scan_details: ScanDetails;
+}
+
+export interface ScanDetails {
+  files_scanned: number;
+  lines_checked: number;
+  rules_applied: string[];
+  execution_time_ms: number;
+  memory_usage_mb: number;
+}
+
+export interface ComplianceReport {
+  scan_id: number;
+  scan_date: Date;
+  compliance_score: number;
+  total_violations: number;
+  critical_violations: number;
+  high_violations: number;
+  medium_violations: number;
+  low_violations: number;
+  recommendations: string[];
+  next_scan_recommendation: Date;
+}
+
+// =====================================================
+// MySQL Compliance System
+// =====================================================
+
+export class ComplianceSystemMySQL {
+  private connection: mysql.Connection | null = null;
+  private readonly dbConfig: mysql.ConnectionOptions;
+
+  constructor() {
+    this.dbConfig = {
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '3306'),
+      user: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || '',
+      database: process.env.DB_NAME || 'lopez_it_welt_db',
+      charset: 'utf8mb4',
+    };
+  }
+
+  // =====================================================
+  // System initialisieren
+  // =====================================================
+
+  async initialize(): Promise<void> {
+    try {
+      this.connection = await mysql.createConnection(this.dbConfig);
+      await this.createTables();
+    } catch (error) {
+      throw new Error(
+        `Compliance-System Initialisierung fehlgeschlagen: ${error}`
+      );
+    }
+  }
+
+  // =====================================================
+  // Tabellen erstellen
+  // =====================================================
+
+  private async createTables(): Promise<void> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    const tables = [
+      `CREATE TABLE IF NOT EXISTS compliance_rules (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        rule_name VARCHAR(255) NOT NULL,
+        rule_description TEXT,
+        rule_category VARCHAR(100) NOT NULL,
+        rule_type ENUM('REQUIRED', 'RECOMMENDED', 'OPTIONAL') DEFAULT 'REQUIRED',
+        rule_source VARCHAR(255),
+        enforcement_level ENUM('BLOCK', 'WARN', 'INFO') DEFAULT 'WARN',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_category (rule_category),
+        INDEX idx_type (rule_type),
+        INDEX idx_enforcement (enforcement_level)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,
+
+      `CREATE TABLE IF NOT EXISTS compliance_violations (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        rule_id INT NOT NULL,
+        violation_type VARCHAR(100) NOT NULL,
+        severity ENUM('CRITICAL', 'HIGH', 'MEDIUM', 'LOW') DEFAULT 'MEDIUM',
+        description TEXT NOT NULL,
+        detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        resolved_at TIMESTAMP NULL,
+        status ENUM('OPEN', 'RESOLVED', 'IGNORED') DEFAULT 'OPEN',
+        FOREIGN KEY (rule_id) REFERENCES compliance_rules(id) ON DELETE CASCADE,
+        INDEX idx_rule (rule_id),
+        INDEX idx_severity (severity),
+        INDEX idx_status (status),
+        INDEX idx_detected (detected_at)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,
+
+      `CREATE TABLE IF NOT EXISTS compliance_scans (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        scan_type ENUM('AUTOMATED', 'MANUAL', 'SCHEDULED') DEFAULT 'AUTOMATED',
+        scan_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        total_rules_checked INT DEFAULT 0,
+        violations_found INT DEFAULT 0,
+        compliance_score DECIMAL(5,2) DEFAULT 0.00,
+        scan_status ENUM('RUNNING', 'COMPLETED', 'FAILED') DEFAULT 'RUNNING',
+        scan_details JSON,
+        INDEX idx_scan_type (scan_type),
+        INDEX idx_scan_date (scan_date),
+        INDEX idx_status (scan_status)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`,
+    ];
+
+    for (const table of tables) {
+      await this.connection.execute(table);
+    }
+  }
+
+  // =====================================================
+  // DSGVO-Regeln abrufen
+  // =====================================================
+
+  async getDSGVORules(): Promise<ComplianceRule[]> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    try {
+      const [rows] = await this.connection.execute(
+        'SELECT * FROM compliance_rules WHERE rule_category = "DSGVO" ORDER BY enforcement_level DESC, rule_name ASC'
+      );
+
+      return rows as ComplianceRule[];
+    } catch (error) {
+      throw new Error(`Fehler beim Abrufen der DSGVO-Regeln: ${error}`);
+    }
+  }
+
+  // =====================================================
+  // Regel hinzufügen
+  // =====================================================
+
+  async addRule(
+    rule: Omit<ComplianceRule, 'id' | 'created_at' | 'updated_at'>
+  ): Promise<number> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    try {
+      const [result] = await this.connection.execute(
+        `INSERT INTO compliance_rules 
+         (rule_name, rule_description, rule_category, rule_type, rule_source, enforcement_level) 
+         VALUES (?, ?, ?, ?, ?, ?)`,
+        [
+          rule.rule_name,
+          rule.rule_description,
+          rule.rule_category,
+          rule.rule_type,
+          rule.rule_source,
+          rule.enforcement_level,
+        ]
+      );
+
+      return (result as mysql.ResultSetHeader).insertId;
+    } catch (error) {
+      throw new Error(`Fehler beim Hinzufügen der Regel: ${error}`);
+    }
+  }
+
+  // =====================================================
+  // Verstoß registrieren
+  // =====================================================
+
+  async recordViolation(
+    ruleId: number,
+    violationType: string,
+    severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW',
+    description: string
+  ): Promise<number> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    try {
+      const [result] = await this.connection.execute(
+        `INSERT INTO compliance_violations 
+         (rule_id, violation_type, severity, description) 
+         VALUES (?, ?, ?, ?)`,
+        [ruleId, violationType, severity, description]
+      );
+
+      return (result as mysql.ResultSetHeader).insertId;
+    } catch (error) {
+      throw new Error(`Fehler beim Registrieren des Verstoßes: ${error}`);
+    }
+  }
+
+  // =====================================================
+  // Compliance-Scan starten
+  // =====================================================
+
+  async startComplianceScan(
+    scanType: 'AUTOMATED' | 'MANUAL' | 'SCHEDULED' = 'AUTOMATED'
+  ): Promise<{ scanId: number; results: ComplianceScan }> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    try {
+      // Scan starten
+      const [scanResult] = await this.connection.execute(
+        `INSERT INTO compliance_scans 
+         (scan_type, scan_status, scan_details) 
+         VALUES (?, 'RUNNING', ?)`,
+        [
+          scanType,
+          JSON.stringify({
+            files_scanned: 0,
+            lines_checked: 0,
+            rules_applied: [],
+            execution_time_ms: 0,
+            memory_usage_mb: 0,
+          }),
+        ]
+      );
+
+      const scanId = (scanResult as mysql.ResultSetHeader).insertId;
+
+      // Scan ausführen
+      const scanResults = await this.executeComplianceScan(scanId);
+
+      return { scanId, results: scanResults };
+    } catch (error) {
+      throw new Error(`Fehler beim Starten des Compliance-Scans: ${error}`);
+    }
+  }
+
+  // =====================================================
+  // Compliance-Scan ausführen
+  // =====================================================
+
+  private async executeComplianceScan(scanId: number): Promise<ComplianceScan> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    const startTime = Date.now();
+    let totalRulesChecked = 0;
+    let violationsFound = 0;
+
+    try {
+      // Alle DSGVO-Regeln abrufen
+      const rules = await this.getDSGVORules();
+      totalRulesChecked = rules.length;
+
+      // Regeln anwenden (vereinfachte Simulation)
+      for (const rule of rules) {
+        // Hier würde die tatsächliche Regelprüfung stattfinden
+        // Für Demo-Zwecke simulieren wir einige Verstöße
+        if (Math.random() < 0.1) {
+          // 10% Wahrscheinlichkeit für einen Verstoß
+          await this.recordViolation(
+            rule.id,
+            'AUTOMATED_CHECK',
+            'MEDIUM',
+            `Automatische Prüfung für Regel: ${rule.rule_name}`
+          );
+          violationsFound++;
+        }
+      }
+
+      // Compliance-Score berechnen
+      const complianceScore =
+        totalRulesChecked > 0
+          ? ((totalRulesChecked - violationsFound) / totalRulesChecked) * 100
+          : 100;
+
+      // Scan aktualisieren
+      const executionTime = Date.now() - startTime;
+      const scanDetails: ScanDetails = {
+        files_scanned: 0, // Würde in echter Implementierung gezählt
+        lines_checked: 0, // Würde in echter Implementierung gezählt
+        rules_applied: rules.map(r => r.rule_name),
+        execution_time_ms: executionTime,
+        memory_usage_mb: process.memoryUsage().heapUsed / 1024 / 1024,
+      };
+
+      await this.connection.execute(
+        `UPDATE compliance_scans 
+         SET total_rules_checked = ?, violations_found = ?, compliance_score = ?, 
+             scan_status = 'COMPLETED', scan_details = ? 
+         WHERE id = ?`,
+        [
+          totalRulesChecked,
+          violationsFound,
+          complianceScore.toFixed(2),
+          JSON.stringify(scanDetails),
+          scanId,
+        ]
+      );
+
+      // Scan-Ergebnisse abrufen
+      const [scanRows] = await this.connection.execute(
+        'SELECT * FROM compliance_scans WHERE id = ?',
+        [scanId]
+      );
+
+      return (scanRows as any[])[0] as ComplianceScan;
+    } catch (error) {
+      // Scan als fehlgeschlagen markieren
+      await this.connection.execute(
+        "UPDATE compliance_scans SET scan_status = 'FAILED' WHERE id = ?",
+        [scanId]
+      );
+
+      throw new Error(`Compliance-Scan fehlgeschlagen: ${error}`);
+    }
+  }
+
+  // =====================================================
+  // Compliance-Report generieren
+  // =====================================================
+
+  async generateComplianceReport(scanId: number): Promise<ComplianceReport> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    try {
+      // Scan-Details abrufen
+      const [scanRows] = await this.connection.execute(
+        'SELECT * FROM compliance_scans WHERE id = ?',
+        [scanId]
+      );
+
+      if (!(scanRows as any[]).length) {
+        throw new Error(`Scan mit ID ${scanId} nicht gefunden`);
+      }
+
+      const scan = (scanRows as any[])[0] as ComplianceScan;
+
+      // Verstöße nach Schweregrad gruppieren
+      const [violationRows] = await this.connection.execute(
+        `SELECT severity, COUNT(*) as count 
+         FROM compliance_violations 
+         WHERE detected_at >= ? 
+         GROUP BY severity`,
+        [scan.scan_date]
+      );
+
+      const violations = violationRows as Array<{
+        severity: string;
+        count: number;
+      }>;
+      const violationCounts = {
+        critical: violations.find(v => v.severity === 'CRITICAL')?.count || 0,
+        high: violations.find(v => v.severity === 'HIGH')?.count || 0,
+        medium: violations.find(v => v.severity === 'MEDIUM')?.count || 0,
+        low: violations.find(v => v.severity === 'LOW')?.count || 0,
+      };
+
+      const totalViolations = Object.values(violationCounts).reduce(
+        (a, b) => a + b,
+        0
+      );
+
+      // Empfehlungen generieren
+      const recommendations: string[] = [];
+      if (violationCounts.critical > 0) {
+        recommendations.push('🚨 Kritische Verstöße sofort beheben');
+      }
+      if (violationCounts.high > 0) {
+        recommendations.push('⚠️ Hohe Verstöße priorisiert behandeln');
+      }
+      if (scan.compliance_score < 80) {
+        recommendations.push('📈 Compliance-Score verbessern');
+      }
+
+      // Nächsten Scan empfehlen
+      const nextScanDate = new Date();
+      nextScanDate.setDate(nextScanDate.getDate() + 7); // In einer Woche
+
+      return {
+        scan_id: scan.id,
+        scan_date: scan.scan_date,
+        compliance_score: scan.compliance_score,
+        total_violations: totalViolations,
+        critical_violations: violationCounts.critical,
+        high_violations: violationCounts.high,
+        medium_violations: violationCounts.medium,
+        low_violations: violationCounts.low,
+        recommendations,
+        next_scan_recommendation: nextScanDate,
+      };
+    } catch (error) {
+      throw new Error(
+        `Fehler beim Generieren des Compliance-Reports: ${error}`
+      );
+    }
+  }
+
+  // =====================================================
+  // Verstoß als behoben markieren
+  // =====================================================
+
+  async resolveViolation(violationId: number): Promise<void> {
+    if (!this.connection) {
+      throw new Error('Keine Datenbankverbindung verfügbar');
+    }
+
+    try {
+      await this.connection.execute(
+        `UPDATE compliance_violations 
+         SET status = 'RESOLVED', resolved_at = CURRENT_TIMESTAMP 
+         WHERE id = ?`,
+        [violationId]
+      );
+    } catch (error) {
+      throw new Error(`Fehler beim Beheben des Verstoßes: ${error}`);
+    }
+  }
+
+  // =====================================================
+  // System schließen
+  // =====================================================
+
+  async close(): Promise<void> {
+    if (this.connection) {
+      await this.connection.end();
+      this.connection = null;
+    }
+  }
+}
+
+// =====================================================
+// Factory-Funktion
+// =====================================================
+
+export function createComplianceSystemMySQL(): ComplianceSystemMySQL {
+  return new ComplianceSystemMySQL();
+}
+
+// Compliance Scanner Class für MySQL
+export class ComplianceScannerMySQL {
+  private complianceSystem: ComplianceSystemMySQL;
+  private projectRoot: string;
+
+  constructor(
+    projectRoot: string = process.cwd(),
+    dbConfig?: mysql.ConnectionOptions
+  ) {
+    this.complianceSystem = new ComplianceSystemMySQL();
+    this.projectRoot = projectRoot;
+  }
+
+  // Hauptscan-Funktion
+  async scanForCompliance(
+    scanName: string,
+    scanType: 'DSGVO' | 'FULL_COMPLIANCE' | 'CUSTOM' = 'DSGVO'
+  ): Promise<{ scanId: number; results: any }> {
+    console.log('🚀 Starte Compliance-Scan:', scanName);
+
+    // System initialisieren
+    await this.complianceSystem.initialize();
+
+    // Neuen Scan erstellen
+    const scanId = await this.complianceSystem.createScan(scanName, scanType);
+    await this.complianceSystem.updateScanStatus(scanId, 'RUNNING');
+
+    try {
+      // DSGVO-Regeln laden
+      const rules = await this.complianceSystem.getDSGVORules();
+      console.log(`📋 Lade ${rules.length} DSGVO-Regeln`);
+
+      // Dateien scannen
+      const files = await this.scanProjectFiles();
+      console.log(`📁 Gefundene Dateien: ${files.length}`);
+
+      // Jede Regel gegen jede Datei prüfen
+      for (const rule of rules) {
+        console.log(`🔍 Prüfe Regel: ${rule.rule_name}`);
+
+        for (const file of files) {
+          const result = await this.checkRuleAgainstFile(rule, file);
+          if (result) {
+            await this.complianceSystem.saveScanResult(
+              scanId,
+              rule.id,
+              result.status,
+              result.details,
+              file.path,
+              result.lineNumber
+            );
+          }
+        }
+      }
+
+      // Scan als abgeschlossen markieren
+      await this.complianceSystem.updateScanStatus(scanId, 'COMPLETED');
+
+      // Ergebnisse abrufen
+      const scanDetails = await this.complianceSystem.getScanDetails(scanId);
+
+      console.log('✅ Compliance-Scan abgeschlossen');
+      return { scanId, results: scanDetails };
+    } catch (error) {
+      console.error('❌ Fehler beim Compliance-Scan:', error);
+      await this.complianceSystem.updateScanStatus(scanId, 'FAILED');
+      throw error;
+    } finally {
+      await this.complianceSystem.close();
+    }
+  }
+
+  // Projektdateien scannen
+  private async scanProjectFiles(): Promise<
+    Array<{ path: string; content: string; type: string }>
+  > {
+    const patterns = [
+      '**/*.md',
+      '**/*.html',
+      '**/*.tsx',
+      '**/*.jsx',
+      '**/*.ts',
+      '**/*.js',
+    ];
+
+    const files: Array<{ path: string; content: string; type: string }> = [];
+
+    for (const pattern of patterns) {
+      const matches = await glob(pattern, {
+        cwd: this.projectRoot,
+        ignore: [
+          '**/node_modules/**',
+          '**/.git/**',
+          '**/coverage/**',
+          '**/.next/**',
+        ],
+      });
+
+      for (const match of matches) {
+        const fullPath = path.join(this.projectRoot, match);
+        try {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          const ext = path.extname(match);
+          files.push({
+            path: match,
+            content,
+            type: ext,
+          });
+        } catch (error) {
+          console.warn(`⚠️ Konnte Datei nicht lesen: ${match}`);
+        }
+      }
+    }
+
+    return files;
+  }
+
+  // Regel gegen Datei prüfen
+  private async checkRuleAgainstFile(
+    rule: ComplianceRule,
+    file: { path: string; content: string; type: string }
+  ): Promise<{
+    status: ScanResult['status'];
+    details: any;
+    lineNumber?: number;
+  } | null> {
+    const ruleName = rule.rule_name.toLowerCase();
+    const content = file.content.toLowerCase();
+    const filePath = file.path.toLowerCase();
+
+    // Cookie-Consent Regel
+    if (ruleName.includes('cookie-consent')) {
+      const hasCookieBanner =
+        content.includes('cookie') &&
+        (content.includes('consent') ||
+          content.includes('banner') ||
+          content.includes('accept'));
+      return {
+        status: hasCookieBanner ? 'PASS' : 'FAIL',
+        details: {
+          message: hasCookieBanner
+            ? 'Cookie-Consent gefunden'
+            : 'Cookie-Consent nicht gefunden',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Datenschutzerklärung Regel
+    if (ruleName.includes('datenschutzerklärung')) {
+      const hasPrivacyPolicy =
+        filePath.includes('datenschutz') ||
+        content.includes('datenschutz') ||
+        content.includes('privacy');
+      return {
+        status: hasPrivacyPolicy ? 'PASS' : 'FAIL',
+        details: {
+          message: hasPrivacyPolicy
+            ? 'Datenschutzerklärung gefunden'
+            : 'Datenschutzerklärung nicht gefunden',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Impressum Regel
+    if (ruleName.includes('impressum')) {
+      const hasImprint =
+        filePath.includes('impressum') ||
+        content.includes('impressum') ||
+        content.includes('imprint');
+      return {
+        status: hasImprint ? 'PASS' : 'FAIL',
+        details: {
+          message: hasImprint
+            ? 'Impressum gefunden'
+            : 'Impressum nicht gefunden',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // SSL-Verschlüsselung Regel
+    if (ruleName.includes('ssl')) {
+      const hasHttps =
+        content.includes('https://') ||
+        content.includes('ssl') ||
+        content.includes('secure');
+      return {
+        status: hasHttps ? 'PASS' : 'WARNING',
+        details: {
+          message: hasHttps
+            ? 'HTTPS/SSL Referenzen gefunden'
+            : 'Keine HTTPS/SSL Referenzen gefunden',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Kontaktformular-Datenschutz Regel
+    if (ruleName.includes('kontaktformular')) {
+      const hasContactForm =
+        content.includes('form') &&
+        (content.includes('kontakt') || content.includes('contact'));
+      const hasPrivacyNotice =
+        hasContactForm &&
+        (content.includes('datenschutz') || content.includes('privacy'));
+      return {
+        status: hasContactForm
+          ? hasPrivacyNotice
+            ? 'PASS'
+            : 'WARNING'
+          : 'INFO',
+        details: {
+          message: hasContactForm
+            ? hasPrivacyNotice
+              ? 'Kontaktformular mit Datenschutzhinweisen gefunden'
+              : 'Kontaktformular ohne Datenschutzhinweise gefunden'
+            : 'Kein Kontaktformular gefunden',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Tracking-Code-Dokumentation Regel
+    if (ruleName.includes('tracking')) {
+      const hasTracking =
+        content.includes('analytics') ||
+        content.includes('tracking') ||
+        content.includes('gtag') ||
+        content.includes('facebook') ||
+        content.includes('google');
+      const hasDocumentation =
+        hasTracking &&
+        (content.includes('datenschutz') ||
+          content.includes('privacy') ||
+          content.includes('cookie'));
+      return {
+        status: hasTracking ? (hasDocumentation ? 'PASS' : 'WARNING') : 'INFO',
+        details: {
+          message: hasTracking
+            ? hasDocumentation
+              ? 'Tracking-Code mit Dokumentation gefunden'
+              : 'Tracking-Code ohne Dokumentation gefunden'
+            : 'Kein Tracking-Code gefunden',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Opt-Out-Mechanismus Regel
+    if (ruleName.includes('opt-out')) {
+      const hasOptOut =
+        content.includes('opt-out') ||
+        content.includes('optout') ||
+        content.includes('ablehnen') ||
+        content.includes('decline');
+      return {
+        status: hasOptOut ? 'PASS' : 'WARNING',
+        details: {
+          message: hasOptOut
+            ? 'Opt-Out-Mechanismus gefunden'
+            : 'Opt-Out-Mechanismus nicht gefunden',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Datenspeicherung-Dokumentation Regel
+    if (ruleName.includes('datenspeicherung')) {
+      const hasStorageInfo =
+        content.includes('speicherung') ||
+        content.includes('storage') ||
+        content.includes('dauer') ||
+        content.includes('retention');
+      return {
+        status: hasStorageInfo ? 'PASS' : 'WARNING',
+        details: {
+          message: hasStorageInfo
+            ? 'Datenspeicherung dokumentiert'
+            : 'Datenspeicherung nicht dokumentiert',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Betroffenenrechte Regel
+    if (ruleName.includes('betroffenenrechte')) {
+      const hasRights =
+        content.includes('auskunft') ||
+        content.includes('löschung') ||
+        content.includes('berichtigung') ||
+        content.includes('widerspruch');
+      return {
+        status: hasRights ? 'PASS' : 'WARNING',
+        details: {
+          message: hasRights
+            ? 'Betroffenenrechte dokumentiert'
+            : 'Betroffenenrechte nicht dokumentiert',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    // Datenverarbeitungsgrundlage Regel
+    if (ruleName.includes('datenverarbeitungsgrundlage')) {
+      const hasLegalBasis =
+        content.includes('einwilligung') ||
+        content.includes('vertrag') ||
+        content.includes('berechtigtes interesse') ||
+        content.includes('legal basis');
+      return {
+        status: hasLegalBasis ? 'PASS' : 'WARNING',
+        details: {
+          message: hasLegalBasis
+            ? 'Datenverarbeitungsgrundlage angegeben'
+            : 'Datenverarbeitungsgrundlage nicht angegeben',
+          rule: rule.rule_name,
+          file: file.path,
+        },
+      };
+    }
+
+    return null;
+  }
+}
+
+// Export der Hauptfunktionen
+export const createComplianceScannerMySQL = (
+  projectRoot?: string,
+  dbConfig?: mysql.ConnectionOptions
+) => new ComplianceScannerMySQL(projectRoot, dbConfig);

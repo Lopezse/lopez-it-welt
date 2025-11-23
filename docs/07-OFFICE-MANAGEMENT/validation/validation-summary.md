@@ -53,4 +53,3 @@
 Vollständiger Validierungsbericht: [validation-report-final.md](./validation-report-final.md)
 
 Das System ist vollständig implementiert und entspricht der Dokumentation.
-

@@ -34,7 +34,7 @@ npm run build:protected
 
 ```javascript
 // next.config.js
-const JavaScriptObfuscator = require('webpack-obfuscator');
+const JavaScriptObfuscator = require("webpack-obfuscator");
 
 module.exports = {
   webpack: (config, { dev, isServer }) => {
@@ -49,9 +49,9 @@ module.exports = {
           debugProtection: true,
           debugProtectionInterval: true,
           disableConsoleOutput: true,
-          identifierNamesGenerator: 'hexadecimal',
+          identifierNamesGenerator: "hexadecimal",
           stringArray: true,
-          stringArrayEncoding: ['base64'],
+          stringArrayEncoding: ["base64"],
           stringArrayThreshold: 0.75,
           splitStrings: true,
           splitStringsChunkLength: 10,
@@ -61,7 +61,7 @@ module.exports = {
           selfDefending: true,
           log: false,
           unicodeEscapeSequence: false,
-        })
+        }),
       );
     }
     return config;
@@ -125,8 +125,8 @@ export function useLicense() {
   // Client macht nur API-Calls
   // Keine kritische Logik im Browser
   const checkLicense = async () => {
-    const response = await fetch('/api/license/validate', {
-      method: 'POST',
+    const response = await fetch("/api/license/validate", {
+      method: "POST",
       body: JSON.stringify({ domain: window.location.hostname }),
     });
     return response.json();
@@ -157,7 +157,7 @@ const AdminPanel = dynamic(() => import('../components/Admin/AdminPanel'), {
 
 ```typescript
 // utils/license.ts
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment = process.env.NODE_ENV === "development";
 
 export const licenseConfig = {
   // Entwicklung: Debug-Informationen

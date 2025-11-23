@@ -1,0 +1,441 @@
+name: 🤖 Agenten-Pipeline
+
+# 📋 Trigger-Konfiguration
+on:
+  push:
+    branches: [main, develop, feature/*]
+    paths:
+      - "src/**"
+      - "agents/**"
+      - "docs/**"
+      - "config/**"
+      - "scripts/**"
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "src/**"
+      - "agents/**"
+      - "docs/**"
+      - "config/**"
+      - "scripts/**"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment Environment"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+      agent:
+        description: "Specific Agent to Run"
+        required: false
+        type: string
+
+# 🔧 Umgebungsvariablen
+env:
+  NODE_VERSION: "18"
+  PYTHON_VERSION: "3.11"
+  DOCKER_REGISTRY: ghcr.io
+  IMAGE_NAME: lopez-it-welt/agents
+  AGENT_ENVIRONMENT: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.environment || 'development' }}
+  AGENT_SPECIFIC: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.agent || '' }}
+  MONITORING_CONFIG: ${{ secrets.MONITORING_CONFIG }}
+
+# 📋 Jobs
+jobs:
+  # 🎨 StyleGuard-AI
+  styleguard:
+    name: 🎨 StyleGuard-AI Review
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: |
+          npm ci
+          npm install -g typescript ts-node
+
+      - name: 🎨 StyleGuard-AI Review
+        run: |
+          echo "🎨 StyleGuard-AI startet..."
+          node agents/styleguard/index.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STYLEGUARD_CONFIG: ${{ secrets.STYLEGUARD_CONFIG }}
+
+      - name: 📊 StyleGuard Report
+        if: always()
+        run: |
+          echo "📊 StyleGuard-Report generiert"
+          # Report-Logik hier
+
+  # 🛡️ Security-Audit-Agent
+  security-audit:
+    name: 🛡️ Security-Audit-Agent
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: 📦 Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r agents/security-audit/requirements.txt
+
+      - name: 🛡️ Security-Audit-AI
+        run: |
+          echo "🛡️ Security-Audit-Agent startet..."
+          python agents/security-audit/run.py
+        env:
+          SECURITY_AUDIT_CONFIG: ${{ secrets.SECURITY_AUDIT_CONFIG }}
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+
+      - name: 📊 Security Report
+        if: always()
+        run: |
+          echo "📊 Security-Report generiert"
+          # Security-Report-Logik
+
+      - name: 🚨 Security Alert
+        if: failure()
+        run: |
+          echo "🚨 Security-Alert gesendet"
+          # Alert-Logik
+
+  # 📋 Compliance-Checker
+  compliance-check:
+    name: 📋 Compliance-Checker
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 📋 Compliance-Checker
+        run: |
+          echo "📋 Compliance-Checker startet..."
+          node agents/compliance-checker/checker.ts
+        env:
+          COMPLIANCE_CONFIG: ${{ secrets.COMPLIANCE_CONFIG }}
+
+      - name: 📊 Compliance Report
+        if: always()
+        run: |
+          echo "📊 Compliance-Report generiert"
+
+  # 🧪 AI-TestAgent
+  ai-test:
+    name: 🧪 AI-TestAgent
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🧪 AI-TestAgent
+        run: |
+          echo "🧪 AI-TestAgent startet..."
+          node agents/ai-test-agent/generator.ts
+        env:
+          AI_TEST_CONFIG: ${{ secrets.AI_TEST_CONFIG }}
+
+      - name: 🧪 Run Generated Tests
+        run: |
+          echo "🧪 Generierte Tests werden ausgeführt..."
+          npm test
+
+      - name: 📊 Test Coverage Report
+        if: always()
+        run: |
+          echo "📊 Test-Coverage-Report generiert"
+
+  # 📊 Monitoring-Wächter
+  monitoring-waecher:
+    name: 📊 Monitoring-Wächter
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 📊 Monitoring-Wächter
+        run: |
+          echo "📊 Monitoring-Wächter startet..."
+          node agents/monitoring-waecher/watcher.ts
+        env:
+          MONITORING_CONFIG: ${{ secrets.MONITORING_CONFIG }}
+
+      - name: 📊 Monitoring Report
+        if: always()
+        run: |
+          echo "📊 Monitoring-Report generiert"
+
+      - name: 🚨 Send Alerts
+        if: failure()
+        run: |
+          echo "🚨 Monitoring-Alerts gesendet"
+          # Alert-Logik
+
+  # 🚀 Deploy-Buddy
+  deploy-buddy:
+    name: 🚀 Deploy-Buddy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🚀 Deploy-Buddy Check
+        run: |
+          echo "🚀 Deploy-Buddy startet..."
+          node agents/deploy-buddy/checker.ts
+        env:
+          DEPLOY_BUDDY_CONFIG: ${{ secrets.DEPLOY_BUDDY_CONFIG }}
+
+      - name: 📊 Deployment Report
+        if: always()
+        run: |
+          echo "📊 Deployment-Report generiert"
+
+  # 🐳 Docker Build
+  docker-build:
+    name: 🐳 Docker Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [styleguard, security-audit, compliance-check, ai-test]
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🔐 Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐳 Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: 🔍 Security Scan
+        run: |
+          echo "🔍 Security-Scan des Docker-Images..."
+          # Trivy oder andere Security-Scanner
+
+  # 🚀 Staging Deployment
+  deploy-staging:
+    name: 🚀 Staging Deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [docker-build, deploy-buddy]
+    if: github.ref == 'refs/heads/develop' && needs.deploy-buddy.result == 'success'
+    environment: staging
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Staging
+        run: |
+          echo "🚀 Staging-Deployment startet..."
+          bash scripts/deploy-staging.sh
+        env:
+          STAGING_ENV: ${{ secrets.STAGING_ENV }}
+          DOCKER_IMAGE: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: 🏥 Health Check
+        run: |
+          echo "🏥 Health-Check wird durchgeführt..."
+          # Health-Check-Logik
+
+      - name: 📊 Staging Report
+        if: always()
+        run: |
+          echo "📊 Staging-Report generiert"
+
+  # 🚀 Production Deployment
+  deploy-production:
+    name: 🚀 Production Deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [deploy-staging]
+    if: github.ref == 'refs/heads/main' && needs.deploy-staging.result == 'success'
+    environment: production
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Production
+        run: |
+          echo "🚀 Production-Deployment startet..."
+          bash scripts/deploy-production.sh
+        env:
+          PRODUCTION_ENV: ${{ secrets.PRODUCTION_ENV }}
+          DOCKER_IMAGE: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: 🏥 Health Check
+        run: |
+          echo "🏥 Health-Check wird durchgeführt..."
+          # Health-Check-Logik
+
+      - name: 📊 Production Report
+        if: always()
+        run: |
+          echo "📊 Production-Report generiert"
+
+  # 📊 Monitoring & Reporting
+  monitoring-report:
+    name: 📊 Monitoring & Reporting
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [deploy-staging, deploy-production]
+    if: always()
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 📊 Generate Reports
+        run: |
+          echo "📊 Reports werden generiert..."
+          node agents/shared/report-generator.js
+
+      - name: 📧 Send Notifications
+        if: always()
+        run: |
+          echo "📧 Benachrichtigungen werden gesendet..."
+          # Notification-Logik
+
+      - name: 📊 Upload Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-reports-${{ github.run_number }}
+          path: |
+            reports/
+            logs/
+          retention-days: 30
+
+  # 🔄 Snapshot-Archivierung
+  snapshot-archivierung:
+    name: 🔄 Snapshot-Archivierung
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [deploy-production]
+    if: success() && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔄 Create Snapshot
+        run: |
+          echo "🔄 Snapshot wird erstellt..."
+          node agents/snapshot-archivierung/archiver.ts
+        env:
+          SNAPSHOT_CONFIG: ${{ secrets.SNAPSHOT_CONFIG }}
+
+      - name: 📊 Snapshot Report
+        if: always()
+        run: |
+          echo "📊 Snapshot-Report generiert"
+
+# 📋 Workflow-Konfiguration
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true

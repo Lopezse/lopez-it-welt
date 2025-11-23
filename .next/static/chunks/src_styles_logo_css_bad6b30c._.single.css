@@ -1,0 +1,113 @@
+/* [project]/src/styles/logo.css [app-client] (css) */
+.logo-container {
+  align-items: center;
+  gap: 12px;
+  display: flex;
+}
+
+.logo-icon {
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.logo-icon svg {
+  vertical-align: middle;
+  display: block;
+}
+
+.logo-text {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.logo-main {
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat, Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.logo-lopez {
+  color: gold;
+}
+
+.logo-itwelt {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  -webkit-text-fill-color: transparent;
+  color: #007bff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.logo-tagline {
+  color: #666;
+  margin: 2px 0 0;
+  padding: 0;
+  font-family: Montserrat, Arial, sans-serif;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.logo-container.size-small {
+  gap: 8px !important;
+}
+
+.logo-container.size-small .logo-icon {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.logo-container.size-small .logo-main {
+  font-size: 16px !important;
+}
+
+.logo-container.size-small .logo-tagline {
+  font-size: 10px !important;
+}
+
+.logo-container.size-medium {
+  gap: 12px !important;
+}
+
+.logo-container.size-medium .logo-icon {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.logo-container.size-medium .logo-main {
+  font-size: 24px !important;
+}
+
+.logo-container.size-medium .logo-tagline {
+  font-size: 12px !important;
+}
+
+.logo-container.size-large {
+  gap: 16px !important;
+}
+
+.logo-container.size-large .logo-icon {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.logo-container.size-large .logo-main {
+  font-size: 48px !important;
+}
+
+.logo-container.size-large .logo-tagline {
+  font-size: 20px !important;
+}
+
+.dark .logo-tagline, footer .logo-tagline {
+  color: #ccc;
+}
+
+/*# sourceMappingURL=src_styles_logo_css_bad6b30c._.single.css.map*/

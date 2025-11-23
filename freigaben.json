@@ -8,7 +8,25 @@
     "package.json",
     "scripts/enterprise-gate.mjs",
     "scripts/gen-sbom.mjs",
-    "scripts/release-tag.mjs"
+    "scripts/release-tag.mjs",
+    "src/app/admin/office/calendar/page.tsx",
+    "src/app/admin/office/invoices/page.tsx",
+    "src/lib/rbac-ui.ts",
+    "tests/smoke.admin.office.spec.ts",
+    "src/middleware/rbac-api-guard.ts",
+    "middleware.ts",
+    "src/app/api/invoices/pdf/route.ts",
+    "tests/smoke.api.office.spec.ts",
+    "src/app/api/appointments/ical/export/route.ts",
+    "src/components/admin/AdminNavigation.tsx",
+    "src/app/api/admin/contact-messages/stats/route.ts",
+    "src/app/api/invoices/route.ts",
+    "src/app/api/appointments/route.ts",
+    "src/components/ui/Dialog.tsx",
+    "scripts/setup-office-finance.js",
+    "scripts/debug-invoice-error.js",
+    "scripts/test-invoice-api.js",
+    "scripts/test-invoice-creation-direct.js"
   ],
   "temporary_allow": [
     {
@@ -16,14 +34,52 @@
       "reason": "Dokumentation, changelogs, validierungsberichte",
       "expires_at": "2025-11-08T23:59:59Z",
       "max_files_per_commit": 50,
-      "branch": ["docs/*", "feature/docs"]
+      "branch": [
+        "docs/*",
+        "feature/docs"
+      ]
     },
     {
       "pattern": "frontend/**",
       "reason": "UI & CSS Updates (Low-Risk)",
       "expires_at": "2025-11-08T23:59:59Z",
       "max_files_per_commit": 25,
-      "branch": ["feature/ui", "feature/frontend"]
+      "branch": [
+        "feature/ui",
+        "feature/frontend"
+      ]
+    }
+  ],
+  "deny_patterns": [
+    "**/*.env",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/*.pem",
+    "**/*.key",
+    "**/secrets/**"
+  ],
+  "approver": {
+    "name": "Ramiro Lopez Rodriguez",
+    "role": "Inhaber / Compliance Officer",
+    "email": "ra-lopez@t-online.de"
+  }
+}
+
+      "branch": [
+        "docs/*",
+        "feature/docs"
+      ]
+    },
+    {
+      "pattern": "frontend/**",
+      "reason": "UI & CSS Updates (Low-Risk)",
+      "expires_at": "2025-11-08T23:59:59Z",
+      "max_files_per_commit": 25,
+      "branch": [
+        "feature/ui",
+        "feature/frontend"
+      ]
     }
   ],
   "deny_patterns": [

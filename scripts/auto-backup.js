@@ -1,25 +1,25 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class AutoBackup {
   constructor() {
     this.backupConfig = {
-      frequency: 'daily',
+      frequency: "daily",
       retention: 30, // Tage
-      locations: ['local', 'cloud'],
-      types: ['code', 'database', 'config', 'docs'],
+      locations: ["local", "cloud"],
+      types: ["code", "database", "config", "docs"],
     };
   }
 
   async createBackup() {
-    console.log('💾 Starte automatisches Backup...');
+    console.log("💾 Starte automatisches Backup...");
 
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const backupDir = path.join('backups', timestamp);
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const backupDir = path.join("backups", timestamp);
 
-    if (!fs.existsSync('backups')) {
-      fs.mkdirSync('backups', { recursive: true });
+    if (!fs.existsSync("backups")) {
+      fs.mkdirSync("backups", { recursive: true });
     }
     fs.mkdirSync(backupDir, { recursive: true });
 
@@ -33,12 +33,12 @@ class AutoBackup {
     await this.cleanupOldBackups();
     await this.syncToCloud(backupDir);
 
-    console.log('✅ Backup abgeschlossen');
+    console.log("✅ Backup abgeschlossen");
   }
 
   async backupCode(backupDir) {
-    console.log('📦 Backup Code...');
-    const codeDir = path.join(backupDir, 'code');
+    console.log("📦 Backup Code...");
+    const codeDir = path.join(backupDir, "code");
     fs.mkdirSync(codeDir, { recursive: true });
 
     // Backup Source Code
@@ -52,8 +52,8 @@ class AutoBackup {
   }
 
   async backupDatabase(backupDir) {
-    console.log('🗄️ Backup Database...');
-    const dbDir = path.join(backupDir, 'database');
+    console.log("🗄️ Backup Database...");
+    const dbDir = path.join(backupDir, "database");
     fs.mkdirSync(dbDir, { recursive: true });
 
     // Backup Database Schema
@@ -64,8 +64,8 @@ class AutoBackup {
   }
 
   async backupConfig(backupDir) {
-    console.log('⚙️ Backup Konfiguration...');
-    const configDir = path.join(backupDir, 'config');
+    console.log("⚙️ Backup Konfiguration...");
+    const configDir = path.join(backupDir, "config");
     fs.mkdirSync(configDir, { recursive: true });
 
     // Backup Environment Variables
@@ -80,8 +80,8 @@ class AutoBackup {
   }
 
   async backupDocs(backupDir) {
-    console.log('📚 Backup Dokumentation...');
-    const docsDir = path.join(backupDir, 'docs');
+    console.log("📚 Backup Dokumentation...");
+    const docsDir = path.join(backupDir, "docs");
     fs.mkdirSync(docsDir, { recursive: true });
 
     // Backup Markdown Files
@@ -95,22 +95,22 @@ class AutoBackup {
   }
 
   async cleanupOldBackups() {
-    console.log('🧹 Bereinige alte Backups...');
-    const backups = fs.readdirSync('backups');
+    console.log("🧹 Bereinige alte Backups...");
+    const backups = fs.readdirSync("backups");
     const now = new Date();
 
-    backups.forEach(backup => {
-      const backupDate = new Date(backup.replace(/-/g, ':'));
+    backups.forEach((backup) => {
+      const backupDate = new Date(backup.replace(/-/g, ":"));
       const daysOld = (now - backupDate) / (1000 * 60 * 60 * 24);
 
       if (daysOld > this.backupConfig.retention) {
-        fs.rmSync(path.join('backups', backup), { recursive: true });
+        fs.rmSync(path.join("backups", backup), { recursive: true });
       }
     });
   }
 
   async syncToCloud(backupDir) {
-    console.log('☁️ Synchronisiere mit Cloud...');
+    console.log("☁️ Synchronisiere mit Cloud...");
     // Implementierung der Cloud-Synchronisation
     // z.B. mit AWS S3, Google Cloud Storage, etc.
   }

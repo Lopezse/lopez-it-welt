@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class PreCommitValidator {
   constructor() {
@@ -11,7 +11,7 @@ class PreCommitValidator {
 
   // Hauptfunktion für Pre-Commit-Validierung
   async validate() {
-    console.log('🔍 Starte Pre-Commit-Validierung...');
+    console.log("🔍 Starte Pre-Commit-Validierung...");
 
     this.errors = [];
     this.warnings = [];
@@ -28,101 +28,101 @@ class PreCommitValidator {
 
     // Bei Fehlern abbrechen
     if (this.errors.length > 0) {
-      console.log('\n❌ Pre-Commit-Validierung fehlgeschlagen!');
+      console.log("\n❌ Pre-Commit-Validierung fehlgeschlagen!");
       process.exit(1);
     }
 
-    console.log('\n✅ Pre-Commit-Validierung erfolgreich!');
+    console.log("\n✅ Pre-Commit-Validierung erfolgreich!");
   }
 
   // Code-Style-Validierung
   async validateCodeStyle() {
-    console.log('📝 Überprüfe Code-Style...');
+    console.log("📝 Überprüfe Code-Style...");
 
     try {
       // ESLint ausführen
-      execSync('npm run lint', {
+      execSync("npm run lint", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ ESLint-Prüfung bestanden');
+      console.log("  ✅ ESLint-Prüfung bestanden");
     } catch (error) {
-      this.errors.push('ESLint-Prüfung fehlgeschlagen');
-      console.log('  ❌ ESLint-Prüfung fehlgeschlagen');
+      this.errors.push("ESLint-Prüfung fehlgeschlagen");
+      console.log("  ❌ ESLint-Prüfung fehlgeschlagen");
     }
 
     try {
       // Prettier ausführen
-      execSync('npm run format:check', {
+      execSync("npm run format:check", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Prettier-Prüfung bestanden');
+      console.log("  ✅ Prettier-Prüfung bestanden");
     } catch (error) {
-      this.warnings.push('Code-Formatierung nicht korrekt');
-      console.log('  ⚠️ Prettier-Prüfung fehlgeschlagen');
+      this.warnings.push("Code-Formatierung nicht korrekt");
+      console.log("  ⚠️ Prettier-Prüfung fehlgeschlagen");
     }
   }
 
   // Test-Validierung
   async validateTests() {
-    console.log('🧪 Überprüfe Tests...');
+    console.log("🧪 Überprüfe Tests...");
 
     try {
       // Unit-Tests ausführen
-      execSync('npm test', {
+      execSync("npm test", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Unit-Tests bestanden');
+      console.log("  ✅ Unit-Tests bestanden");
     } catch (error) {
-      this.errors.push('Unit-Tests fehlgeschlagen');
-      console.log('  ❌ Unit-Tests fehlgeschlagen');
+      this.errors.push("Unit-Tests fehlgeschlagen");
+      console.log("  ❌ Unit-Tests fehlgeschlagen");
     }
 
     try {
       // TypeScript-Kompilierung prüfen
-      execSync('npx tsc --noEmit', {
+      execSync("npx tsc --noEmit", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ TypeScript-Kompilierung erfolgreich');
+      console.log("  ✅ TypeScript-Kompilierung erfolgreich");
     } catch (error) {
-      this.errors.push('TypeScript-Kompilierung fehlgeschlagen');
-      console.log('  ❌ TypeScript-Kompilierung fehlgeschlagen');
+      this.errors.push("TypeScript-Kompilierung fehlgeschlagen");
+      console.log("  ❌ TypeScript-Kompilierung fehlgeschlagen");
     }
   }
 
   // Build-Validierung
   async validateBuild() {
-    console.log('🔨 Überprüfe Build...');
+    console.log("🔨 Überprüfe Build...");
 
     try {
       // Build-Prozess testen
-      execSync('npm run build', {
+      execSync("npm run build", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Build erfolgreich');
+      console.log("  ✅ Build erfolgreich");
     } catch (error) {
-      this.errors.push('Build-Prozess fehlgeschlagen');
-      console.log('  ❌ Build-Prozess fehlgeschlagen');
+      this.errors.push("Build-Prozess fehlgeschlagen");
+      console.log("  ❌ Build-Prozess fehlgeschlagen");
     }
   }
 
   // i18n-Validierung
   async validateI18n() {
-    console.log('🌍 Überprüfe i18n...');
+    console.log("🌍 Überprüfe i18n...");
 
-    const i18nDir = path.join(this.projectRoot, 'src/i18n/locales');
+    const i18nDir = path.join(this.projectRoot, "src/i18n/locales");
 
     if (!fs.existsSync(i18nDir)) {
-      this.errors.push('i18n-Verzeichnis fehlt');
-      console.log('  ❌ i18n-Verzeichnis fehlt');
+      this.errors.push("i18n-Verzeichnis fehlt");
+      console.log("  ❌ i18n-Verzeichnis fehlt");
       return;
     }
 
-    const requiredLanguages = ['de', 'en', 'es'];
+    const requiredLanguages = ["de", "en", "es"];
     const missingLanguages = [];
 
     for (const lang of requiredLanguages) {
@@ -133,14 +133,10 @@ class PreCommitValidator {
     }
 
     if (missingLanguages.length > 0) {
-      this.errors.push(
-        `Fehlende Sprachdateien: ${missingLanguages.join(', ')}`
-      );
-      console.log(
-        `  ❌ Fehlende Sprachdateien: ${missingLanguages.join(', ')}`
-      );
+      this.errors.push(`Fehlende Sprachdateien: ${missingLanguages.join(", ")}`);
+      console.log(`  ❌ Fehlende Sprachdateien: ${missingLanguages.join(", ")}`);
     } else {
-      console.log('  ✅ Alle Sprachdateien vorhanden');
+      console.log("  ✅ Alle Sprachdateien vorhanden");
     }
 
     // Übersetzungsschlüssel-Konsistenz prüfen
@@ -149,8 +145,8 @@ class PreCommitValidator {
 
   // Übersetzungsschlüssel-Konsistenz prüfen
   async validateTranslationConsistency() {
-    const i18nDir = path.join(this.projectRoot, 'src/i18n/locales');
-    const languages = ['de', 'en', 'es'];
+    const i18nDir = path.join(this.projectRoot, "src/i18n/locales");
+    const languages = ["de", "en", "es"];
     const translationKeys = {};
 
     // Alle Übersetzungsschlüssel sammeln
@@ -158,52 +154,46 @@ class PreCommitValidator {
       const langFile = path.join(i18nDir, `${lang}.json`);
       if (fs.existsSync(langFile)) {
         try {
-          const content = JSON.parse(fs.readFileSync(langFile, 'utf8'));
+          const content = JSON.parse(fs.readFileSync(langFile, "utf8"));
           translationKeys[lang] = this.extractKeys(content);
         } catch (error) {
-          this.errors.push(
-            `Fehler beim Parsen von ${lang}.json: ${error.message}`
-          );
+          this.errors.push(`Fehler beim Parsen von ${lang}.json: ${error.message}`);
         }
       }
     }
 
     // Schlüssel-Konsistenz prüfen
-    const baseKeys = translationKeys['de'] || [];
+    const baseKeys = translationKeys["de"] || [];
     const inconsistencies = [];
 
     for (const lang of languages) {
-      if (lang === 'de') continue;
+      if (lang === "de") continue;
 
       const langKeys = translationKeys[lang] || [];
 
       // Fehlende Schlüssel in anderen Sprachen
-      const missingKeys = baseKeys.filter(key => !langKeys.includes(key));
+      const missingKeys = baseKeys.filter((key) => !langKeys.includes(key));
       if (missingKeys.length > 0) {
-        inconsistencies.push(
-          `${lang}: ${missingKeys.length} fehlende Schlüssel`
-        );
+        inconsistencies.push(`${lang}: ${missingKeys.length} fehlende Schlüssel`);
       }
     }
 
     if (inconsistencies.length > 0) {
-      this.warnings.push(
-        `Übersetzungskonsistenz-Probleme: ${inconsistencies.join(', ')}`
-      );
+      this.warnings.push(`Übersetzungskonsistenz-Probleme: ${inconsistencies.join(", ")}`);
       console.log(`  ⚠️ Übersetzungskonsistenz-Probleme gefunden`);
     } else {
-      console.log('  ✅ Übersetzungskonsistenz OK');
+      console.log("  ✅ Übersetzungskonsistenz OK");
     }
   }
 
   // Schlüssel aus JSON-Objekt extrahieren
-  extractKeys(obj, prefix = '') {
+  extractKeys(obj, prefix = "") {
     const keys = [];
 
     for (const key in obj) {
       const fullKey = prefix ? `${prefix}.${key}` : key;
 
-      if (typeof obj[key] === 'object' && obj[key] !== null) {
+      if (typeof obj[key] === "object" && obj[key] !== null) {
         keys.push(...this.extractKeys(obj[key], fullKey));
       } else {
         keys.push(fullKey);
@@ -215,18 +205,18 @@ class PreCommitValidator {
 
   // Sicherheits-Validierung
   async validateSecurity() {
-    console.log('🔒 Überprüfe Sicherheit...');
+    console.log("🔒 Überprüfe Sicherheit...");
 
     try {
       // npm audit ausführen
-      execSync('npm audit --audit-level=moderate', {
+      execSync("npm audit --audit-level=moderate", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Sicherheitsprüfung bestanden');
+      console.log("  ✅ Sicherheitsprüfung bestanden");
     } catch (error) {
-      this.warnings.push('Sicherheitsprobleme gefunden');
-      console.log('  ⚠️ Sicherheitsprobleme gefunden');
+      this.warnings.push("Sicherheitsprobleme gefunden");
+      console.log("  ⚠️ Sicherheitsprobleme gefunden");
     }
 
     // Sensible Daten in Code prüfen
@@ -247,7 +237,7 @@ class PreCommitValidator {
 
     for (const file of sourceFiles) {
       try {
-        const content = fs.readFileSync(file, 'utf8');
+        const content = fs.readFileSync(file, "utf8");
 
         for (const pattern of sensitivePatterns) {
           if (pattern.test(content)) {
@@ -262,16 +252,16 @@ class PreCommitValidator {
     }
 
     if (foundSensitiveData) {
-      console.log('  ⚠️ Mögliche sensible Daten gefunden');
+      console.log("  ⚠️ Mögliche sensible Daten gefunden");
     } else {
-      console.log('  ✅ Keine sensiblen Daten gefunden');
+      console.log("  ✅ Keine sensiblen Daten gefunden");
     }
   }
 
   // Quellcode-Dateien finden
   getSourceFiles() {
-    const sourceDirs = ['src', 'components', 'app'];
-    const extensions = ['.ts', '.tsx', '.js', '.jsx'];
+    const sourceDirs = ["src", "components", "app"];
+    const extensions = [".ts", ".tsx", ".js", ".jsx"];
     const files = [];
 
     for (const dir of sourceDirs) {
@@ -305,51 +295,51 @@ class PreCommitValidator {
 
   // Ergebnisse ausgeben
   printResults() {
-    console.log('\n📊 Pre-Commit-Validierung Ergebnisse:');
+    console.log("\n📊 Pre-Commit-Validierung Ergebnisse:");
 
     if (this.errors.length > 0) {
-      console.log('\n❌ Fehler:');
-      this.errors.forEach(error => {
+      console.log("\n❌ Fehler:");
+      this.errors.forEach((error) => {
         console.log(`  - ${error}`);
       });
     }
 
     if (this.warnings.length > 0) {
-      console.log('\n⚠️ Warnungen:');
-      this.warnings.forEach(warning => {
+      console.log("\n⚠️ Warnungen:");
+      this.warnings.forEach((warning) => {
         console.log(`  - ${warning}`);
       });
     }
 
     if (this.errors.length === 0 && this.warnings.length === 0) {
-      console.log('\n✅ Keine Probleme gefunden');
+      console.log("\n✅ Keine Probleme gefunden");
     }
   }
 
   // Automatische Korrekturen versuchen
   async autoFix() {
-    console.log('🔧 Versuche automatische Korrekturen...');
+    console.log("🔧 Versuche automatische Korrekturen...");
 
     try {
       // Prettier-Formatierung anwenden
-      execSync('npm run format', {
+      execSync("npm run format", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Code-Formatierung angewendet');
+      console.log("  ✅ Code-Formatierung angewendet");
     } catch (error) {
-      console.log('  ❌ Code-Formatierung fehlgeschlagen');
+      console.log("  ❌ Code-Formatierung fehlgeschlagen");
     }
 
     try {
       // ESLint-Auto-Fix
-      execSync('npm run lint:fix', {
+      execSync("npm run lint:fix", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ ESLint-Auto-Fix angewendet');
+      console.log("  ✅ ESLint-Auto-Fix angewendet");
     } catch (error) {
-      console.log('  ❌ ESLint-Auto-Fix fehlgeschlagen');
+      console.log("  ❌ ESLint-Auto-Fix fehlgeschlagen");
     }
   }
 }
@@ -361,10 +351,10 @@ if (require.main === module) {
   const command = process.argv[2];
 
   switch (command) {
-    case 'validate':
+    case "validate":
       validator.validate();
       break;
-    case 'fix':
+    case "fix":
       validator.autoFix();
       break;
     default:

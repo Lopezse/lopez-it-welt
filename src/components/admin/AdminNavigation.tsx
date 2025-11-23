@@ -273,6 +273,11 @@ const navigation: NavItem[] = [
         href: "/admin/office/audit",
         icon: FaShieldAlt,
       },
+      {
+        name: "Lohnabrechnung",
+        href: "/admin/office/payroll",
+        icon: FaFileAlt,
+      },
     ],
   },
 ];

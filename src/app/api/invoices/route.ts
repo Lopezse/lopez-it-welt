@@ -6,6 +6,7 @@
 
 import { createConnection } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
+import { calculateInvoiceHash } from "@/lib/invoice-hash";
 
 export async function GET(request: NextRequest) {
   let connection: any = null;
@@ -22,18 +23,12 @@ export async function GET(request: NextRequest) {
       connection = await createConnection();
     } catch (dbError) {
       console.error("❌ DB-Verbindungsfehler (invoices):", dbError);
-      // Fallback: Leere Liste zurückgeben statt HTTP 500
       return NextResponse.json(
         {
           success: true,
           data: {
             invoices: [],
-            pagination: {
-              page,
-              limit,
-              total: 0,
-              pages: 0,
-            },
+            pagination: { page, limit, total: 0, pages: 0 },
           },
         },
         {
@@ -57,12 +52,10 @@ export async function GET(request: NextRequest) {
       query += " AND i.customer_id = ?";
       params.push(customerId);
     }
-
     if (projectId) {
       query += " AND i.project_id = ?";
       params.push(projectId);
     }
-
     if (status) {
       query += " AND i.status = ?";
       params.push(status);
@@ -78,20 +71,16 @@ export async function GET(request: NextRequest) {
       const [queryRows] = await connection.execute(query, params);
       rows = Array.isArray(queryRows) ? queryRows : [];
 
-      // Gesamtanzahl
       let countQuery = "SELECT COUNT(*) as total FROM lopez_invoices WHERE 1=1";
       const countParams: any[] = [];
-
       if (customerId) {
         countQuery += " AND customer_id = ?";
         countParams.push(customerId);
       }
-
       if (projectId) {
         countQuery += " AND project_id = ?";
         countParams.push(projectId);
       }
-
       if (status) {
         countQuery += " AND status = ?";
         countParams.push(status);
@@ -101,7 +90,6 @@ export async function GET(request: NextRequest) {
       total = Array.isArray(countRows) && countRows.length > 0 ? (countRows[0] as any).total : 0;
     } catch (queryError) {
       console.error("❌ SQL-Query-Fehler (invoices):", queryError);
-      // Fallback: Leere Liste zurückgeben statt HTTP 500
       rows = [];
       total = 0;
     } finally {
@@ -117,12 +105,7 @@ export async function GET(request: NextRequest) {
         success: true,
         data: {
           invoices: Array.isArray(rows) ? rows : [],
-          pagination: {
-            page,
-            limit,
-            total,
-            pages: Math.ceil(total / limit),
-          },
+          pagination: { page, limit, total, pages: Math.ceil(total / limit) },
         },
       },
       {
@@ -136,18 +119,12 @@ export async function GET(request: NextRequest) {
         await connection.end();
       } catch {}
     }
-    // Fallback: Leere Liste zurückgeben statt HTTP 500
     return NextResponse.json(
       {
         success: true,
         data: {
           invoices: [],
-          pagination: {
-            page: 1,
-            limit: 50,
-            total: 0,
-            pages: 0,
-          },
+          pagination: { page: 1, limit: 50, total: 0, pages: 0 },
         },
       },
       {
@@ -161,269 +138,163 @@ export async function POST(request: NextRequest) {
   let connection: any = null;
 
   try {
-    // Request-Body parsen mit Fehlerbehandlung
+    console.log("📥 POST /api/invoices - Start");
+    
+    // Body parsen
     let body: any = {};
     try {
       body = await request.json();
-    } catch (parseError) {
+      console.log("✅ Body geparst:", JSON.stringify(body));
+    } catch (parseError: any) {
       console.error("❌ JSON-Parse-Fehler:", parseError);
       return NextResponse.json(
         {
           success: false,
           error: "Ungültiges JSON im Request-Body",
         },
-        { status: 400 },
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+        },
       );
     }
-    const {
-      invoice_number,
-      customer_id,
-      project_id,
-      order_id,
-      issue_date,
-      service_date,
-      payment_terms,
-      currency = "EUR",
-      items,
-      tax_rate = 19.0,
-      created_by,
-      // Draft-Modus: Optionale Felder
-      debtor,
-      total_gross,
-      issued_at,
-    } = body;
 
+    const { debtor, issued_at, total_gross } = body;
+
+    console.log("🔌 Versuche DB-Verbindung...");
+    // DB-Verbindung
     try {
       connection = await createConnection();
-    } catch (dbError) {
-      console.error("❌ DB-Verbindungsfehler (invoices POST):", dbError);
+      console.log("✅ DB-Verbindung erfolgreich");
+    } catch (dbError: any) {
+      console.error("❌ DB-Verbindungsfehler:", dbError);
       return NextResponse.json(
         {
           success: false,
-          error: "Datenbankverbindung fehlgeschlagen",
+          error: `Datenbankverbindung fehlgeschlagen: ${dbError?.message || String(dbError)}`,
         },
-        { status: 500 },
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+        },
       );
     }
 
-    // Draft-Modus: Automatische Nummernkreis-Generierung (YYYY-####)
-    let finalInvoiceNumber = invoice_number;
-    if (!finalInvoiceNumber) {
-      try {
-        // Nummernkreis: Jahresbasiert (YYYY-####)
-        const dateStr = issue_date || issued_at || new Date().toISOString().slice(0, 10);
-        const year = dateStr.slice(0, 4);
-
-        // Nächste Nummer im Jahr ermitteln (mit Fehlerbehandlung für nicht existierende Tabelle)
-        try {
-          const [maxRows] = await connection.execute(
-            `SELECT MAX(CAST(SUBSTRING(invoice_number, 6) AS UNSIGNED)) as max_num 
-             FROM lopez_invoices 
-             WHERE invoice_number LIKE ?`,
-            [`${year}-%`],
-          );
-
-          const maxNum =
-            Array.isArray(maxRows) && maxRows.length > 0 ? (maxRows[0] as any).max_num || 0 : 0;
-          const nextNum = maxNum + 1;
-          finalInvoiceNumber = `${year}-${String(nextNum).padStart(4, "0")}`;
-        } catch (sqlError: any) {
-          console.error("❌ SQL-Fehler bei Nummernkreis-Generierung:", sqlError);
-          // Fallback: Timestamp-basierte Nummer
-          finalInvoiceNumber = `${year}-${String(Date.now()).slice(-4)}`;
-        }
-      } catch (error) {
-        console.error("❌ Fehler bei Nummernkreis-Generierung:", error);
-        // Fallback: Timestamp-basierte Nummer
-        const year = new Date().getFullYear();
-        finalInvoiceNumber = `${year}-${String(Date.now()).slice(-4)}`;
-      }
-    }
-
-    // Draft-Modus: Fallbacks für optionale Felder
-    const finalIssueDate = issue_date || issued_at || new Date().toISOString().slice(0, 10);
-    const finalServiceDate = service_date || finalIssueDate;
-
-    // customer_id ist NOT NULL in DB - prüfe ob Kunde existiert, sonst verwende ersten Kunden
-    let finalCustomerId = customer_id;
-    if (!finalCustomerId) {
-      try {
-        // Versuche ersten vorhandenen Kunden zu finden (ohne Status-Filter, da status NULL sein kann)
-        const [customerRows] = await connection.execute("SELECT id FROM lopez_customers LIMIT 1");
-        if (Array.isArray(customerRows) && customerRows.length > 0) {
-          const customerId = customerRows[0];
-          // id kann VARCHAR(36) oder INT sein, immer als String konvertieren
-          finalCustomerId = customerId.id ? String(customerId.id) : String(customerId);
-        } else {
-          // Kein Kunde vorhanden - Fehler mit hilfreicher Meldung
-          throw new Error(
-            "Kein Kunde vorhanden. Bitte zuerst einen Kunden anlegen oder customer_id im Request mitgeben.",
-          );
-        }
-      } catch (customerError: any) {
-        console.error("❌ Fehler beim Prüfen des Kunden:", customerError);
-        console.error("❌ Stack:", customerError?.stack);
-        // Wenn es bereits ein Error-Objekt ist, re-throw es
-        if (customerError instanceof Error && customerError.message.includes("Kein Kunde")) {
-          throw customerError;
-        }
-        // Andernfalls: Fehler mit hilfreicher Meldung
-        throw new Error(
-          `customer_id erforderlich. Fehler: ${customerError?.message || String(customerError)}`,
-        );
-      }
-    }
-
-    // created_by ist NOT NULL in DB - Fallback auf "system" wenn nicht vorhanden
-    const finalCreatedBy = created_by || "system";
-
-    // Draft-Modus: Items aus total_gross generieren, falls keine Items vorhanden
-    let finalItems = items;
-    if (!finalItems || !Array.isArray(finalItems) || finalItems.length === 0) {
-      if (total_gross && typeof total_gross === "number") {
-        // Demo-Item aus Brutto generieren
-        const netFromGross = total_gross / (1 + tax_rate / 100);
-
-        finalItems = [
-          {
-            item_text: debtor || "Demo-Position",
-            qty: 1,
-            unit: "Stk",
-            unit_price: netFromGross.toFixed(2),
-            net_line: netFromGross.toFixed(2),
-          },
-        ];
-      } else {
-        // Leeres Draft-Item
-        finalItems = [
-          {
-            item_text: debtor || "Position 1",
-            qty: 1,
-            unit: "Stk",
-            unit_price: 0,
-            net_line: 0,
-          },
-        ];
-      }
-    }
-
-    // Summen berechnen
-    let netAmount = 0;
-    for (const item of finalItems) {
-      const lineTotal = parseFloat(item.qty || 0) * parseFloat(item.unit_price || 0);
-      netAmount += lineTotal;
-    }
-    const taxAmount = netAmount * (tax_rate / 100);
-    const grossAmount = netAmount + taxAmount;
-
-    // Rechnung erstellen (Status: draft)
-    let invoiceId: number | null = null;
+    console.log("👥 Suche Kunde...");
+    // Kunde finden
+    let customerId = "system";
     try {
-      const [result] = await connection.execute(
-        `INSERT INTO lopez_invoices 
-         (invoice_number, customer_id, project_id, order_id, issue_date, service_date, payment_terms, currency, net_amount, tax_rate, tax_amount, gross_amount, status, created_by)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?)`,
-        [
-          finalInvoiceNumber,
-          finalCustomerId,
-          project_id || null,
-          order_id || null,
-          finalIssueDate,
-          finalServiceDate,
-          payment_terms || "Zahlbar innerhalb 14 Tage ohne Abzug",
-          currency,
-          netAmount,
-          tax_rate,
-          taxAmount,
-          grossAmount,
-          finalCreatedBy,
-        ],
+      const [customers] = await connection.execute("SELECT id FROM lopez_customers LIMIT 1");
+      if (Array.isArray(customers) && customers.length > 0) {
+        customerId = String(customers[0].id);
+        console.log("✅ Kunde gefunden:", customerId);
+      } else {
+        console.log("⚠️ Keine Kunden gefunden, verwende 'system'");
+      }
+    } catch (e: any) {
+      console.error("❌ Customer query failed:", e?.message);
+      // Weiter mit "system" als Fallback
+    }
+
+    console.log("🔢 Generiere Rechnungsnummer...");
+    // Rechnungsnummer: YYYYMMDD-XXX (z.B. 20251101-001)
+    const issueDate = issued_at || new Date().toISOString().slice(0, 10);
+    const dateStr = issueDate.replace(/-/g, ""); // YYYYMMDD (z.B. 20251101)
+    let invoiceNumber = `${dateStr}-001`;
+    
+    try {
+      // Nächste Nummer für dieses Datum ermitteln
+      const [maxRows] = await connection.execute(
+        `SELECT MAX(CAST(SUBSTRING(invoice_number, 10) AS UNSIGNED)) as max_num 
+         FROM lopez_invoices 
+         WHERE invoice_number LIKE ?`,
+        [`${dateStr}-%`],
       );
-
-      invoiceId = (result as any).insertId;
-
-      // Positionen einfügen
-      if (invoiceId && finalItems.length > 0) {
-        for (let i = 0; i < finalItems.length; i++) {
-          const item = finalItems[i];
-          const lineTotal = parseFloat(item.qty || 0) * parseFloat(item.unit_price || 0);
-
-          try {
-            await connection.execute(
-              `INSERT INTO lopez_invoice_items 
-               (invoice_id, pos, item_text, qty, unit, unit_price, net_line)
-               VALUES (?, ?, ?, ?, ?, ?, ?)`,
-              [
-                invoiceId,
-                i + 1,
-                item.item_text || item.name || "Position",
-                item.qty || 1,
-                item.unit || "Stk",
-                item.unit_price || item.price || 0,
-                lineTotal,
-              ],
-            );
-          } catch (itemError: any) {
-            console.error(`❌ Fehler beim Einfügen der Position ${i + 1}:`, itemError);
-            // Weiter mit nächster Position (nicht blockierend)
-          }
-        }
+      if (Array.isArray(maxRows) && maxRows.length > 0 && maxRows[0].max_num) {
+        const nextNum = (maxRows[0] as any).max_num + 1;
+        invoiceNumber = `${dateStr}-${String(nextNum).padStart(3, "0")}`;
+        console.log("✅ Rechnungsnummer:", invoiceNumber);
+      } else {
+        console.log("✅ Rechnungsnummer (erste):", invoiceNumber);
       }
+    } catch (e: any) {
+      console.error("⚠️ Invoice number query failed:", e?.message);
+      // Weiter mit Standard-Nummer
+    }
 
-      // Audit-Log (optional, nicht blockierend)
-      if (invoiceId) {
-        try {
-          await connection.execute(
-            `INSERT INTO lopez_audit_logs (user_id, action, ref_table, ref_id, notes)
-             VALUES (?, 'INVOICE_CREATE', 'lopez_invoices', ?, ?)`,
-            [
-              finalCreatedBy,
-              invoiceId,
-              `Rechnung erstellt (draft): ${finalInvoiceNumber} (Netto: ${netAmount.toFixed(2)} EUR, Brutto: ${grossAmount.toFixed(2)} EUR)`,
-            ],
-          );
-        } catch (auditError: any) {
-          console.error("❌ Fehler beim Audit-Log:", auditError);
-          // Nicht blockierend - Rechnung wurde bereits erstellt
-        }
-      }
-    } catch (insertError: any) {
-      console.error("❌ Fehler beim Erstellen der Rechnung:", insertError);
-      console.error("❌ SQL Error Details:", insertError?.message, insertError?.code);
+    console.log("💰 Berechne Werte...");
+    // Werte berechnen
+    const netAmount = total_gross ? total_gross / 1.19 : 0;
+    const taxAmount = netAmount * 0.19;
+    const grossAmount = netAmount + taxAmount;
+    console.log("✅ Werte: Netto=", netAmount, "Steuer=", taxAmount, "Brutto=", grossAmount);
 
-      // Spezifische Fehlermeldungen für häufige Probleme
-      if (insertError?.code === "ER_NO_SUCH_TABLE") {
-        throw new Error("Tabelle lopez_invoices existiert nicht. Bitte Datenbankschema ausführen.");
-      }
-      if (insertError?.code === "ER_BAD_FIELD_ERROR") {
-        throw new Error(`Ungültiges Datenbankfeld: ${insertError?.message}`);
-      }
-      if (insertError?.code === "ER_FOREIGN_KEY_CONSTRAINT_FAILS") {
-        throw new Error(
-          `Foreign Key Constraint Fehler: ${finalCustomerId} existiert nicht in lopez_customers`,
+    console.log("📝 Erstelle Rechnung in DB...");
+    
+    // Hash-Berechnung (GoBD-konform)
+    const issueDate = issued_at || new Date().toISOString().slice(0, 10);
+    const hashData = {
+      invoice_date: issueDate,
+      amount: grossAmount.toFixed(2),
+      recipient: customerId,
+      status: "draft",
+    };
+    const hashSha256 = calculateInvoiceHash(hashData);
+    console.log("✅ Hash berechnet:", hashSha256.substring(0, 16) + "...");
+    
+    // Rechnung einfügen
+    const [result] = await connection.execute(
+      `INSERT INTO lopez_invoices 
+       (invoice_number, customer_id, issue_date, service_date, net_amount, tax_rate, tax_amount, gross_amount, status, hash_sha256, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?, 'system')`,
+      [
+        invoiceNumber,
+        customerId,
+        issueDate,
+        issueDate,
+        netAmount,
+        19.0,
+        taxAmount,
+        grossAmount,
+        hashSha256,
+      ],
+    );
+
+    const invoiceId = (result as any).insertId;
+    console.log("✅ Rechnung erstellt, ID:", invoiceId);
+
+    // Item einfügen
+    if (invoiceId) {
+      console.log("📦 Füge Position ein...");
+      try {
+        await connection.execute(
+          `INSERT INTO lopez_invoice_items (invoice_id, pos, item_text, qty, unit, unit_price, net_line)
+           VALUES (?, 1, ?, 1, 'Stk', ?, ?)`,
+          [invoiceId, debtor || "Position 1", netAmount, netAmount],
         );
+        console.log("✅ Position eingefügt");
+      } catch (e: any) {
+        console.error("⚠️ Item insert failed:", e?.message);
+        // Nicht blockierend
       }
-
-      throw insertError; // Re-throw für allgemeine Fehlerbehandlung
     }
 
     if (connection) {
-      try {
-        await connection.end();
-      } catch {}
+      await connection.end();
+      console.log("🔌 DB-Verbindung geschlossen");
     }
 
+    console.log("✅ POST /api/invoices - Erfolgreich!");
     return NextResponse.json(
       {
         success: true,
         data: {
           id: invoiceId,
-          invoice_number: finalInvoiceNumber,
+          invoice_number: invoiceNumber,
           status: "draft",
           net_amount: netAmount,
           tax_amount: taxAmount,
           gross_amount: grossAmount,
-          message: "Rechnung erfolgreich erstellt (draft)",
         },
       },
       {
@@ -432,32 +303,176 @@ export async function POST(request: NextRequest) {
       },
     );
   } catch (error: any) {
-    console.error("❌ Invoices API Fehler:", error);
-    console.error("❌ Stack:", error?.stack);
+    console.error("❌ POST /api/invoices - FEHLER!");
+    console.error("❌ Error:", error);
+    console.error("❌ Error message:", error?.message);
+    console.error("❌ Error code:", error?.code);
+    console.error("❌ Error stack:", error?.stack?.split("\n").slice(0, 10).join("\n"));
+
     if (connection) {
       try {
         await connection.end();
-      } catch {}
+        console.log("🔌 DB-Verbindung geschlossen");
+      } catch (e: any) {
+        console.error("❌ Fehler beim Schließen der DB:", e?.message);
+      }
     }
 
-    // Detailliertere Fehlermeldung für Development
-    const errorMessage =
-      process.env.NODE_ENV === "development"
-        ? error?.message || String(error) || "Fehler beim Erstellen der Rechnung"
-        : "Fehler beim Erstellen der Rechnung";
-
-    return NextResponse.json(
-      {
-        success: false,
-        error: errorMessage,
-        ...(process.env.NODE_ENV === "development" && {
-          details: {
-            stack: error?.stack,
+    // WICHTIG: Stelle sicher, dass wir IMMER JSON zurückgeben
+    try {
+      return NextResponse.json(
+        {
+          success: false,
+          error: error?.message || "Internal Server Error",
+          code: error?.code,
+          details: process.env.NODE_ENV === "development" ? {
             name: error?.name,
-          },
-        }),
-      },
-      { status: 500 },
-    );
+            message: error?.message,
+            code: error?.code,
+            stack: error?.stack?.split("\n").slice(0, 5).join("\n"),
+          } : undefined,
+        },
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+        },
+      );
+    } catch (jsonError: any) {
+      console.error("❌ FEHLER beim Erstellen der JSON-Response:", jsonError);
+      // Fallback: Plain Text (sollte nicht passieren, aber zur Sicherheit)
+      return new NextResponse(
+        `Internal Server Error: ${error?.message || "Unbekannter Fehler"}`,
+        {
+          status: 500,
+          headers: { "Content-Type": "text/plain; charset=utf-8" },
+        },
+      );
+    }
   }
 }
+
+// Export dynamic für Next.js
+export const dynamic = "force-dynamic";
+
+    // Hash-Berechnung (GoBD-konform)
+    const issueDate = issued_at || new Date().toISOString().slice(0, 10);
+    const hashData = {
+      invoice_date: issueDate,
+      amount: grossAmount.toFixed(2),
+      recipient: customerId,
+      status: "draft",
+    };
+    const hashSha256 = calculateInvoiceHash(hashData);
+    console.log("✅ Hash berechnet:", hashSha256.substring(0, 16) + "...");
+    
+    // Rechnung einfügen
+    const [result] = await connection.execute(
+      `INSERT INTO lopez_invoices 
+       (invoice_number, customer_id, issue_date, service_date, net_amount, tax_rate, tax_amount, gross_amount, status, hash_sha256, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?, 'system')`,
+      [
+        invoiceNumber,
+        customerId,
+        issueDate,
+        issueDate,
+        netAmount,
+        19.0,
+        taxAmount,
+        grossAmount,
+        hashSha256,
+      ],
+    );
+
+    const invoiceId = (result as any).insertId;
+    console.log("✅ Rechnung erstellt, ID:", invoiceId);
+
+    // Item einfügen
+    if (invoiceId) {
+      console.log("📦 Füge Position ein...");
+      try {
+        await connection.execute(
+          `INSERT INTO lopez_invoice_items (invoice_id, pos, item_text, qty, unit, unit_price, net_line)
+           VALUES (?, 1, ?, 1, 'Stk', ?, ?)`,
+          [invoiceId, debtor || "Position 1", netAmount, netAmount],
+        );
+        console.log("✅ Position eingefügt");
+      } catch (e: any) {
+        console.error("⚠️ Item insert failed:", e?.message);
+        // Nicht blockierend
+      }
+    }
+
+    if (connection) {
+      await connection.end();
+      console.log("🔌 DB-Verbindung geschlossen");
+    }
+
+    console.log("✅ POST /api/invoices - Erfolgreich!");
+    return NextResponse.json(
+      {
+        success: true,
+        data: {
+          id: invoiceId,
+          invoice_number: invoiceNumber,
+          status: "draft",
+          net_amount: netAmount,
+          tax_amount: taxAmount,
+          gross_amount: grossAmount,
+        },
+      },
+      {
+        status: 201,
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+      },
+    );
+  } catch (error: any) {
+    console.error("❌ POST /api/invoices - FEHLER!");
+    console.error("❌ Error:", error);
+    console.error("❌ Error message:", error?.message);
+    console.error("❌ Error code:", error?.code);
+    console.error("❌ Error stack:", error?.stack?.split("\n").slice(0, 10).join("\n"));
+
+    if (connection) {
+      try {
+        await connection.end();
+        console.log("🔌 DB-Verbindung geschlossen");
+      } catch (e: any) {
+        console.error("❌ Fehler beim Schließen der DB:", e?.message);
+      }
+    }
+
+    // WICHTIG: Stelle sicher, dass wir IMMER JSON zurückgeben
+    try {
+      return NextResponse.json(
+        {
+          success: false,
+          error: error?.message || "Internal Server Error",
+          code: error?.code,
+          details: process.env.NODE_ENV === "development" ? {
+            name: error?.name,
+            message: error?.message,
+            code: error?.code,
+            stack: error?.stack?.split("\n").slice(0, 5).join("\n"),
+          } : undefined,
+        },
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+        },
+      );
+    } catch (jsonError: any) {
+      console.error("❌ FEHLER beim Erstellen der JSON-Response:", jsonError);
+      // Fallback: Plain Text (sollte nicht passieren, aber zur Sicherheit)
+      return new NextResponse(
+        `Internal Server Error: ${error?.message || "Unbekannter Fehler"}`,
+        {
+          status: 500,
+          headers: { "Content-Type": "text/plain; charset=utf-8" },
+        },
+      );
+    }
+  }
+}
+
+// Export dynamic für Next.js
+export const dynamic = "force-dynamic";

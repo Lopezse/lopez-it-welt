@@ -15,14 +15,14 @@ paths:
     get:
       summary: Liste aller Services
       responses:
-        '200':
+        "200":
           description: Erfolgreiche Antwort
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Service'
+                  $ref: "#/components/schemas/Service"
     post:
       summary: Neuen Service anlegen
       requestBody:
@@ -30,15 +30,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ServiceInput'
+              $ref: "#/components/schemas/ServiceInput"
       responses:
-        '201':
+        "201":
           description: Service erstellt
   /users:
     get:
       summary: Liste aller Nutzer
       responses:
-        '200':
+        "200":
           description: Erfolgreiche Antwort
     post:
       summary: Nutzer registrieren
@@ -47,21 +47,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserInput'
+              $ref: "#/components/schemas/UserInput"
       responses:
-        '201':
+        "201":
           description: Nutzer erstellt
   /orders:
     get:
       summary: Alle Bestellungen abrufen
       responses:
-        '200':
+        "200":
           description: Erfolgreiche Antwort
   /tickets:
     get:
       summary: Alle Tickets abrufen
       responses:
-        '200':
+        "200":
           description: Erfolgreiche Antwort
     post:
       summary: Ticket erstellen
@@ -70,9 +70,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TicketInput'
+              $ref: "#/components/schemas/TicketInput"
       responses:
-        '201':
+        "201":
           description: Ticket erstellt
 components:
   schemas:

@@ -836,23 +836,27 @@ Du nutzt **Next.js 14 + TailwindCSS + TypeScript** mit diesen Regeln:
 #### **Phase 1: Grundlagen (Wochen 1-8) - KRITISCH**
 
 **Hardware-Inventar:**
+
 - [ ] Computer & Server - Workstations, Server, Spezifikationen
 - [ ] Netzwerk-Geräte - Router, Switches, Access Points, Firewalls
 - [ ] Peripherie - Drucker, Scanner, Monitore, Tastaturen
 - [ ] Asset-Management - Seriennummern, Kaufdatum, Garantie, Standort
 
 **Software-Inventar:**
+
 - [ ] Betriebssysteme - Windows, Linux, macOS, Mobile OS
 - [ ] Anwendungssoftware - Office, Browser, Antivirus, Fachsoftware
 - [ ] Lizenz-Management - Lizenzschlüssel, Ablaufdaten, Kosten, Compliance
 
 **Basis-Passwort-Manager:**
+
 - [ ] Verschlüsselte Datenbank-Struktur (AES-256)
 - [ ] Admin-Interface für Credentials
 - [ ] 2FA für Passwort-Zugriff
 - [ ] Audit-Trail für alle Zugriffe
 
 **Netzwerk-Dokumentation:**
+
 - [ ] Netzwerk-Topologie - IP-Adressen, Subnetze, VLANs, Routing
 - [ ] Konfiguration - DHCP, DNS, Gateway, Proxy, VPN
 - [ ] Sicherheit - Firewall-Regeln, WLAN-Passwörter, Verschlüsselung
@@ -860,16 +864,19 @@ Du nutzt **Next.js 14 + TailwindCSS + TypeScript** mit diesen Regeln:
 #### **Phase 2: Erweiterte Features (Wochen 9-16) - HOCH**
 
 **Monitoring & Reporting:**
+
 - [ ] System-Monitoring - Performance, Verfügbarkeit, Netzwerk-Traffic
 - [ ] Reports - Asset-Reports, Lizenz-Reports, Compliance-Reports, Kosten-Reports
 - [ ] Alert-System - Bei Problemen automatisch benachrichtigen
 
 **Cloud & Externe Dienste:**
+
 - [ ] Cloud-Services - Microsoft 365, Google Workspace, AWS/Azure
 - [ ] Externe Dienste - Domain-Management, SSL-Zertifikate, Hosting
 - [ ] Integration APIs - Für automatische Synchronisation
 
 **Organisation & Prozesse:**
+
 - [ ] Organisationsstruktur - Abteilungen, Verantwortlichkeiten, Kontaktdaten
 - [ ] Prozesse - Onboarding, Offboarding, Hardware-Austausch, Updates
 - [ ] Dokumentation - Anleitungen, Troubleshooting, Best Practices
@@ -877,18 +884,21 @@ Du nutzt **Next.js 14 + TailwindCSS + TypeScript** mit diesen Regeln:
 #### **Phase 3: Enterprise-Features (Wochen 17-24) - ENTERPRISE++**
 
 **Automatisierung:**
+
 - [ ] Automatische Erkennung - Neue Geräte finden
 - [ ] Scheduled Scans - Regelmäßige Inventarisierung
 - [ ] Workflow-Automatisierung - Prozesse automatisieren
 - [ ] KI-gestützte Analyse - Intelligente Empfehlungen
 
 **Integration:**
+
 - [ ] Active Directory - Windows-Domäne
 - [ ] LDAP - Verzeichnisdienste
 - [ ] SNMP - Netzwerk-Monitoring
 - [ ] API-Integration - Mit anderen Systemen
 
 **Multi-Tenant System:**
+
 - [ ] Kunden-spezifische Bereiche
 - [ ] Isolierte Datenbank-Schemas
 - [ ] Kunden-Portale mit eigener Dokumentation
@@ -897,12 +907,14 @@ Du nutzt **Next.js 14 + TailwindCSS + TypeScript** mit diesen Regeln:
 #### **Phase 4: Compliance & Sicherheit (Wochen 25-32) - ENTERPRISE++**
 
 **Compliance-Suite:**
+
 - [ ] DSGVO-Compliance - Datenschutz-Grundverordnung
 - [ ] ISO 27001 - Informationssicherheit
 - [ ] SOX-Compliance - Sarbanes-Oxley (USA)
 - [ ] HIPAA - Gesundheitswesen (USA)
 
 **Advanced Security:**
+
 - [ ] Zero-Trust-Architektur
 - [ ] Hardware-Token Integration (YubiKey)
 - [ ] Biometrische Authentifizierung
@@ -1026,16 +1038,19 @@ interface SecurityStandards {
 #### **Service-Angebote:**
 
 **1. IT-Dokumentation als Service:**
+
 - **Einmalige Dokumentation:** €2.000 - €10.000 (je nach Größe)
 - **Regelmäßige Wartung:** €200 - €1.000/Monat
 - **Compliance-Audits:** €500 - €2.000/Audit
 
 **2. SaaS-Plattform:**
+
 - **Basic:** €50/Monat (bis 100 Assets)
 - **Professional:** €150/Monat (bis 500 Assets)
 - **Enterprise:** €500/Monat (unbegrenzt)
 
 **3. Hybrid-Modell:**
+
 - **Eigene Dokumentation** + Beratung
 - **Schulungen** für Kunden-Mitarbeiter
 - **Support** und Wartung
@@ -1043,12 +1058,14 @@ interface SecurityStandards {
 ### 🎯 **ZIELGRUPPEN**
 
 **Primäre Zielgruppen:**
+
 - **Mittelständische Unternehmen** (50-500 Mitarbeiter)
 - **IT-Dienstleister** (MSPs)
 - **Compliance-pflichtige Branchen** (Banken, Versicherungen)
 - **Öffentliche Verwaltung**
 
 **Sekundäre Zielgruppen:**
+
 - **Kleine Unternehmen** (10-50 Mitarbeiter)
 - **Startups** mit IT-Infrastruktur
 - **Bildungseinrichtungen**
@@ -1057,18 +1074,21 @@ interface SecurityStandards {
 ### 🚀 **TECHNISCHE IMPLEMENTIERUNG**
 
 #### **Agent-Entwicklung:**
+
 - **Python/Node.js Agent** für automatische Erfassung
 - **WMI/SNMP Scanner** für Windows/Netzwerk-Geräte
 - **API-Integration** mit bestehendem System
 - **Scheduled Scans** für regelmäßige Updates
 
 #### **Web-Interface:**
+
 - **Erweiterung des Admin-Bereichs** in Next.js
 - **Kunden-spezifische Dashboards**
 - **Report-Generator** mit PDF/Excel Export
 - **Mobile-optimierte** Benutzeroberfläche
 
 #### **API-System:**
+
 - **REST APIs** für alle Funktionen
 - **GraphQL** für komplexe Abfragen
 - **Webhook-System** für Integrationen
@@ -1077,12 +1097,14 @@ interface SecurityStandards {
 ### 📊 **SUCCESS METRICS**
 
 #### **Technische Metriken:**
+
 - **System-Uptime:** 99.9%
 - **Response Time:** < 200ms
 - **Data Accuracy:** 99.5%
 - **Security Incidents:** 0
 
 #### **Business Metriken:**
+
 - **Customer Acquisition:** 10 Kunden/Monat
 - **Customer Retention:** 95%
 - **Revenue Growth:** 20%/Monat
@@ -1091,11 +1113,13 @@ interface SecurityStandards {
 ### ⚠️ **RISIKEN & MITIGATION**
 
 #### **Technische Risiken:**
+
 - **Datenverlust:** Automatische Backups, Redundanz
 - **Sicherheitslücken:** Regelmäßige Audits, Penetration Tests
 - **Performance-Probleme:** Monitoring, Auto-Scaling
 
 #### **Business Risiken:**
+
 - **Marktkonkurrenz:** Unique Value Proposition, Qualitätsvorsprung
 - **Regulatorische Änderungen:** Compliance-Monitoring
 - **Technologie-Wandel:** Agile Entwicklung, Continuous Learning

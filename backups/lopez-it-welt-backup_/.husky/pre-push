@@ -1,0 +1,46 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🚀 Pre-Push: Finale Compliance-Prüfungen..."
+
+# Vollständige Enterprise++ Compliance-Prüfung
+echo "🏆 Vollständige Enterprise++ Compliance-Prüfung..."
+node scripts/full-enterprise-compliance-check.js
+if [ $? -ne 0 ]; then
+    echo "❌ Enterprise++ Compliance verletzt - Push blockiert!"
+    exit 1
+fi
+
+# Sicherheits-Scan
+echo "🔒 Sicherheits-Scan..."
+node scripts/security-scan.js
+if [ $? -ne 0 ]; then
+    echo "❌ Sicherheitsprobleme gefunden - Push blockiert!"
+    exit 1
+fi
+
+# Performance-Check
+echo "⚡ Performance-Check..."
+node scripts/performance-check.js
+if [ $? -ne 0 ]; then
+    echo "❌ Performance-Probleme gefunden - Push blockiert!"
+    exit 1
+fi
+
+# Qualitäts-Metriken
+echo "📊 Qualitäts-Metriken prüfen..."
+node scripts/quality-metrics-check.js
+if [ $? -ne 0 ]; then
+    echo "❌ Qualitätsstandards nicht erfüllt - Push blockiert!"
+    exit 1
+fi
+
+# Build-Test
+echo "🔨 Build-Test..."
+npm run build
+if [ $? -ne 0 ]; then
+    echo "❌ Build fehlgeschlagen - Push blockiert!"
+    exit 1
+fi
+
+echo "✅ Alle Pre-Push Prüfungen bestanden - Push erlaubt!" 

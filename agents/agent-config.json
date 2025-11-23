@@ -1,0 +1,313 @@
+{
+  "version": "1.0.0",
+  "environment": "production",
+  "lastUpdated": "2025-01-19T12:00:00Z",
+  "agents": {
+    "styleguard": {
+      "enabled": true,
+      "version": "1.0.0",
+      "rules": ["ci", "readability", "style", "consistency"],
+      "autoComment": true,
+      "blockOnFail": false,
+      "commentTemplate": "styleguard-comment.md",
+      "config": {
+        "maxLineLength": 120,
+        "requireComments": true,
+        "enforceNaming": true,
+        "checkSpelling": true,
+        "language": "de"
+      },
+      "permissions": {
+        "canComment": true,
+        "canBlock": false,
+        "canAutoFix": false,
+        "canSuggest": true
+      }
+    },
+    "security-audit": {
+      "enabled": true,
+      "version": "1.0.0",
+      "scanners": ["vulnerability", "secrets", "cve", "dependency"],
+      "blockOnCritical": true,
+      "autoFix": false,
+      "config": {
+        "scanFrequency": "on-commit",
+        "cveDatabase": "nvd",
+        "secretPatterns": ["api_key", "password", "token"],
+        "vulnerabilityThreshold": "high",
+        "autoBlock": true
+      },
+      "permissions": {
+        "canScan": true,
+        "canBlock": true,
+        "canAlert": true,
+        "canAutoFix": false
+      }
+    },
+    "deploy-buddy": {
+      "enabled": true,
+      "version": "1.0.0",
+      "autoApprove": false,
+      "requireChangelog": true,
+      "checkBranch": true,
+      "config": {
+        "approvalThreshold": 2,
+        "changelogRequired": true,
+        "branchProtection": true,
+        "rollbackThreshold": "medium",
+        "deploymentStages": ["staging", "production"]
+      },
+      "permissions": {
+        "canApprove": false,
+        "canSuggest": true,
+        "canBlock": true,
+        "canRollback": false
+      }
+    },
+    "monitoring-waecher": {
+      "enabled": true,
+      "version": "1.0.0",
+      "alertChannels": ["slack", "email", "webhook"],
+      "autoResponse": true,
+      "escalationTime": 300,
+      "config": {
+        "prometheusUrl": "http://localhost:9090",
+        "alertRules": "alert-rules.yml",
+        "responseTime": 30,
+        "escalationLevels": ["low", "medium", "high", "critical"]
+      },
+      "permissions": {
+        "canAlert": true,
+        "canEscalate": true,
+        "canRestart": false,
+        "canConfigure": false
+      }
+    },
+    "compliance-checker": {
+      "enabled": true,
+      "version": "1.0.0",
+      "checks": ["dsgvo", "license", "opensource", "gdpr"],
+      "blockOnViolation": true,
+      "autoReport": true,
+      "config": {
+        "dsgvoChecks": ["data-retention", "consent", "privacy"],
+        "licenseChecks": ["compatibility", "attribution", "commercial"],
+        "opensourceChecks": ["vulnerabilities", "maintenance", "community"],
+        "reporting": {
+          "daily": true,
+          "weekly": true,
+          "monthly": true
+        }
+      },
+      "permissions": {
+        "canCheck": true,
+        "canBlock": true,
+        "canReport": true,
+        "canAutoFix": false
+      }
+    },
+    "ai-test-agent": {
+      "enabled": true,
+      "version": "1.0.0",
+      "coverageThreshold": 80,
+      "autoGenerate": true,
+      "autoRun": true,
+      "config": {
+        "testTypes": ["unit", "integration", "e2e"],
+        "frameworks": ["jest", "cypress", "playwright"],
+        "coverageTarget": 80,
+        "autoFix": true,
+        "testData": {
+          "useFixtures": true,
+          "mockExternal": true,
+          "isolateTests": true
+        }
+      },
+      "permissions": {
+        "canGenerate": true,
+        "canRun": true,
+        "canAnalyze": true,
+        "canDeploy": false
+      }
+    },
+    "snapshot-archivierung": {
+      "enabled": true,
+      "version": "1.0.0",
+      "autoSnapshot": true,
+      "retentionDays": 30,
+      "metadataExtraction": true,
+      "config": {
+        "snapshotTypes": ["deployment", "database", "filesystem"],
+        "compression": "gzip",
+        "encryption": true,
+        "backupLocation": "/backups/snapshots",
+        "metadataSchema": "snapshot-metadata.json"
+      },
+      "permissions": {
+        "canCreate": true,
+        "canDelete": false,
+        "canRestore": false,
+        "canArchive": true
+      }
+    }
+  },
+  "shared": {
+    "logging": {
+      "level": "info",
+      "file": "/var/log/agents.log",
+      "maxSize": "100MB",
+      "maxFiles": 10,
+      "format": "json",
+      "timestamp": true
+    },
+    "context": {
+      "docsPath": "../docs/",
+      "statusPath": "../status/",
+      "changelogPath": "../CHANGELOG.md",
+      "configPath": "../config/",
+      "scriptsPath": "../scripts/",
+      "srcPath": "../src/"
+    },
+    "security": {
+      "encryption": true,
+      "authentication": "jwt",
+      "authorization": "rbac",
+      "auditTrail": true,
+      "secretsManagement": "vault"
+    },
+    "performance": {
+      "maxConcurrentAgents": 5,
+      "timeout": 300,
+      "retryAttempts": 3,
+      "circuitBreaker": true
+    },
+    "monitoring": {
+      "metrics": ["cpu", "memory", "response_time", "success_rate"],
+      "alerts": ["high_cpu", "high_memory", "timeout", "error_rate"],
+      "dashboard": "grafana",
+      "healthCheck": "/health"
+    },
+    "notifications": {
+      "channels": ["slack", "email", "webhook"],
+      "templates": {
+        "success": "notification-success.md",
+        "error": "notification-error.md",
+        "alert": "notification-alert.md"
+      },
+      "escalation": {
+        "levels": ["low", "medium", "high", "critical"],
+        "timeouts": [300, 900, 1800, 3600]
+      }
+    }
+  },
+  "environments": {
+    "development": {
+      "enabled": true,
+      "agents": {
+        "styleguard": {
+          "enabled": true
+        },
+        "security-audit": {
+          "enabled": true
+        },
+        "deploy-buddy": {
+          "enabled": false
+        },
+        "monitoring-waecher": {
+          "enabled": true
+        },
+        "compliance-checker": {
+          "enabled": true
+        },
+        "ai-test-agent": {
+          "enabled": true
+        },
+        "snapshot-archivierung": {
+          "enabled": false
+        }
+      }
+    },
+    "staging": {
+      "enabled": true,
+      "agents": {
+        "styleguard": {
+          "enabled": true
+        },
+        "security-audit": {
+          "enabled": true
+        },
+        "deploy-buddy": {
+          "enabled": true
+        },
+        "monitoring-waecher": {
+          "enabled": true
+        },
+        "compliance-checker": {
+          "enabled": true
+        },
+        "ai-test-agent": {
+          "enabled": true
+        },
+        "snapshot-archivierung": {
+          "enabled": true
+        }
+      }
+    },
+    "production": {
+      "enabled": true,
+      "agents": {
+        "styleguard": {
+          "enabled": true
+        },
+        "security-audit": {
+          "enabled": true
+        },
+        "deploy-buddy": {
+          "enabled": true
+        },
+        "monitoring-waecher": {
+          "enabled": true
+        },
+        "compliance-checker": {
+          "enabled": true
+        },
+        "ai-test-agent": {
+          "enabled": true
+        },
+        "snapshot-archivierung": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "ci": {
+    "github": {
+      "workflow": ".github/workflows/agent-pipeline.yml",
+      "secrets": ["AGENT_API_KEY", "SLACK_WEBHOOK_URL", "EMAIL_SMTP_CONFIG", "VAULT_TOKEN"],
+      "environments": ["development", "staging", "production"]
+    },
+    "docker": {
+      "image": "lopez-it-welt/agents:latest",
+      "registry": "ghcr.io/lopez-it-welt",
+      "multiStage": true,
+      "securityScan": true
+    }
+  },
+  "maintenance": {
+    "schedule": {
+      "routine": "weekly",
+      "major": "monthly",
+      "emergency": "on-demand"
+    },
+    "backup": {
+      "frequency": "daily",
+      "retention": "30 days",
+      "encryption": true
+    },
+    "updates": {
+      "security": "immediate",
+      "features": "monthly",
+      "patches": "weekly"
+    }
+  }
+}

@@ -658,6 +658,7 @@ Das Anti-Regelbruch Enterprise++ Modul verhindert systematisch alle Regelverstö
 ### **Setup-Anleitung**
 
 **1. Installation:**
+
 ```bash
 # Anti-Regelbruch-System verwenden
 npm run anti-rule-break
@@ -670,6 +671,7 @@ npm run post-commit
 ```
 
 **2. Konfiguration:**
+
 ```bash
 # Aktion validieren
 npm run validate-action "test action" "test.md"
@@ -684,12 +686,14 @@ powershell -ExecutionPolicy Bypass -File scripts/anti-rule-break.ps1
 ### **Beispiel-Output**
 
 **✅ Erfolgreiche Validierung:**
+
 ```
 🛡️ Anti-Regelbruch-System: Validierung läuft...
 ✅ Anti-Regelbruch-Validierung erfolgreich
 ```
 
 **❌ Blockierte Aktion:**
+
 ```
 🛡️ Anti-Regelbruch-System: Validierung läuft...
 🚨 ANTI-REGELBRUCH: AKTION BLOCKIERT
@@ -703,16 +707,19 @@ powershell -ExecutionPolicy Bypass -File scripts/anti-rule-break.ps1
 ### **Nutzung im Team**
 
 **1. Pre-Commit Hook:**
+
 - Automatische Validierung vor jedem Commit
 - Blockierung bei Regelverstößen
 - Verstoß-Dokumentation in STATUS.md
 
 **2. Post-Commit Hook:**
+
 - Automatische Commit-Dokumentation
 - Compliance-Tracking
 - Audit-Sicherheit
 
 **3. Manuelle Validierung:**
+
 ```bash
 # Einzelne Aktion prüfen
 npm run validate-action "meine Aktion" "target.md"
@@ -736,11 +743,13 @@ npm run validate-action "meine Aktion" "target.md"
 ### **Monitoring & Benachrichtigungen**
 
 **Langzeittest aktivieren:**
+
 - Modul 1 Woche im Produktivbetrieb lassen
 - Verstöße prüfen → Workflow-Prozesse ggf. anpassen
 - Automatische Benachrichtigungen bei Regelbruch
 
 **Optional: Slack/Telegram/Mail-Benachrichtigung:**
+
 - Bei Regelbruch automatische Benachrichtigung
 - Für maximale Enterprise++-Compliance
 - Team-weite Transparenz
@@ -748,6 +757,7 @@ npm run validate-action "meine Aktion" "target.md"
 ### **Pre-Deployment-Check**
 
 **Deployment blockieren bei STATUS.md-Fehlern:**
+
 - Automatische Prüfung vor Deployment
 - Blockierung bei ungelösten Verstößen
 - Compliance-Sicherheit gewährleisten

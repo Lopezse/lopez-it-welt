@@ -1,0 +1,96 @@
+{
+  "version": "2.0.0",
+  "author": "Ramiro Lopez Rodriguez",
+  "description": "Cursor-Settings für Anti-Regelbruch-System",
+  "autoStartup": {
+    "enabled": true,
+    "script": "./.cursor/startup.js",
+    "autoExecute": true,
+    "monitoring": true
+  },
+  "antiRuleBreakSystem": {
+    "enabled": true,
+    "autoActivate": true,
+    "strictMode": true,
+    "zeroTolerance": true,
+    "autoBlock": true,
+    "requireApproval": true,
+    "validateBeforeAction": true,
+    "validateAfterAction": true,
+    "blockOnViolation": true
+  },
+  "agents": {
+    "autoActivate": true,
+    "monitoring": true,
+    "validation": true,
+    "styleguardEnabled": true,
+    "securityAuditEnabled": true,
+    "deployBuddyEnabled": true,
+    "monitoringWaecherEnabled": true,
+    "complianceCheckerEnabled": true,
+    "aiTestAgentEnabled": true,
+    "snapshotArchivierungEnabled": true
+  },
+  "enterpriseRules": {
+    "autoLoad": true,
+    "validation": true,
+    "enforcement": true,
+    "ruleCount": 12
+  },
+  "monitoring": {
+    "enabled": true,
+    "interval": 30000,
+    "continuous": true,
+    "statusReporting": true,
+    "statusLogging": true
+  },
+  "security": {
+    "systemTimeValidation": true,
+    "dateCopyingBlock": true,
+    "timestampValidation": true,
+    "timeTrackingEnforcement": true,
+    "mdStructureProtection": true,
+    "appendOnlyMode": true,
+    "overwritingPrevention": true,
+    "documentationRequired": true
+  },
+  "sessionManagement": {
+    "requireSessionSwitch": true,
+    "blockOverlappingSessions": true,
+    "sessionValidation": true,
+    "sessionTracking": true
+  },
+  "compliance": {
+    "dsgvoCompliance": true,
+    "licenseCompliance": true,
+    "auditTrail": true,
+    "documentationRequired": true
+  },
+  "quality": {
+    "standards": true,
+    "codeReview": true,
+    "testingRequired": true,
+    "performanceOptimization": true
+  },
+  "enterprise": {
+    "mode": true,
+    "scalableArchitecture": true,
+    "maintainableCode": true,
+    "professionalStandards": true
+  },
+  "startupSequence": [
+    "loadSettings",
+    "activateAntiRuleBreakSystem",
+    "loadEnterpriseRules",
+    "activateAllAgents",
+    "startMonitoring",
+    "activateViolationDetection",
+    "showStatus"
+  ],
+  "statusDisplay": {
+    "showOnStartup": true,
+    "continuousDisplay": true,
+    "violationAlerts": true,
+    "systemStatus": true
+  }
+}

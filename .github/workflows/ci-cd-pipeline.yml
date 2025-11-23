@@ -1,0 +1,248 @@
+name: 🚀 Lopez IT Welt - CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: "18"
+  DOCKER_IMAGE: lopez-it-welt
+  DOCKER_TAG: latest
+
+jobs:
+  # 🔍 QUALITY CHECKS
+  quality-check:
+    name: 🔍 Quality & Security Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔍 Lint Code
+        run: npm run lint
+
+      - name: 🧪 Run Tests
+        run: npm run test
+
+      - name: 🛡️ Security Scan
+        run: npm run security:scan
+
+      - name: 🔐 Secrets Scan
+        run: npm run secrets:scan
+
+      - name: 📋 Compliance Check
+        run: npm run compliance:check
+
+  # 🐳 DOCKER BUILD
+  docker-build:
+    name: 🐳 Build Docker Image
+    runs-on: ubuntu-latest
+    needs: quality-check
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔐 Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: 🏗️ Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # 🛡️ SECURITY SCANS
+  security-scan:
+    name: 🛡️ Security Scans
+    runs-on: ubuntu-latest
+    needs: docker-build
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔍 Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@v0.4.0
+        with:
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE }}:${{ env.DOCKER_TAG }}
+          format: "sarif"
+          output: "trivy-results.sarif"
+
+      - name: 📊 Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: "trivy-results.sarif"
+
+      - name: 🔍 Snyk Security Scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+  # 🧪 INTEGRATION TESTS
+  integration-tests:
+    name: 🧪 Integration Tests
+    runs-on: ubuntu-latest
+    needs: security-scan
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🧪 Run Integration Tests
+        run: npm run test:integration
+
+      - name: 🌐 E2E Tests
+        run: npm run test:e2e
+
+  # 📊 PERFORMANCE TESTS
+  performance-tests:
+    name: 📊 Performance Tests
+    runs-on: ubuntu-latest
+    needs: integration-tests
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Application
+        run: npm run build
+
+      - name: 📊 Lighthouse Performance Test
+        run: npm run lighthouse
+
+      - name: ⚡ Performance Budget Check
+        run: npm run performance:budget
+
+  # 🚀 DEPLOYMENT
+  deploy-staging:
+    name: 🚀 Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [quality-check, security-scan, integration-tests, performance-tests]
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Staging
+        run: |
+          echo "🚀 Deploying to staging..."
+          # Hier kommt dein Staging-Deployment-Script
+          ./scripts/deploy-staging.sh
+
+      - name: ✅ Health Check
+        run: |
+          echo "🔍 Checking application health..."
+          # Health check script
+          ./scripts/health-check.sh
+
+  deploy-production:
+    name: 🚀 Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [quality-check, security-scan, integration-tests, performance-tests]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Deploy to Production
+        run: |
+          echo "🚀 Deploying to production..."
+          # Hier kommt dein Production-Deployment-Script
+          ./scripts/deploy-production.sh
+
+      - name: ✅ Health Check
+        run: |
+          echo "🔍 Checking application health..."
+          # Health check script
+          ./scripts/health-check.sh
+
+      - name: 📊 Post-Deployment Tests
+        run: |
+          echo "🧪 Running post-deployment tests..."
+          npm run test:post-deploy
+
+  # 📈 MONITORING & ALERTS
+  monitoring:
+    name: 📈 Monitoring Setup
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always()
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 📊 Setup Monitoring
+        run: |
+          echo "📊 Setting up monitoring..."
+          # Monitoring setup script
+          ./scripts/setup-monitoring.sh
+
+      - name: 🔔 Send Deployment Notification
+        run: |
+          echo "🔔 Sending deployment notification..."
+          # Notification script
+          ./scripts/send-notification.sh
+
+  # 📋 REPORTING
+  generate-report:
+    name: 📋 Generate Report
+    runs-on: ubuntu-latest
+    needs: [quality-check, security-scan, integration-tests, performance-tests]
+    if: always()
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 📊 Generate CI/CD Report
+        run: |
+          echo "📊 Generating CI/CD report..."
+          npm run ci:report
+
+      - name: 📄 Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-cd-report
+          path: reports/ci-cd-report.json

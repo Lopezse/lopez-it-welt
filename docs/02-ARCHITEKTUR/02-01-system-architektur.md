@@ -1,7 +1,7 @@
 # 🏗️ System-Architektur - Single Source of Truth
 
 **Version:** 1.0  
-**Datum:** 2025-01-19  
+**Datum:** 2025-09-14  
 **Status:** ✅ AKTIV  
 **Autor:** Lopez IT Welt Team
 
@@ -12,6 +12,7 @@ Dieses Dokument ist die **einzige Quelle der Wahrheit** für die System-Architek
 ## 🎯 **ARCHITEKTUR-PRINZIPIEN**
 
 ### **✅ Enterprise++ Standards**
+
 - **Single Source of Truth:** Jede Information nur einmal gespeichert
 - **Modularität:** Klare Trennung der Verantwortlichkeiten
 - **Compliance First:** DSGVO, Security, Quality von Anfang an
@@ -65,42 +66,49 @@ Dieses Dokument ist die **einzige Quelle der Wahrheit** für die System-Architek
 ## 🤖 **AGENTEN-ROLLEN (ENTERPRISE++ STANDARD)**
 
 ### **🛡️ Compliance Agent**
+
 - **Aufgabe:** Prüft alle Policies, Gesetze, Standards
 - **Datei:** `scripts/compliance-agent.js`
 - **Freigabe:** Vor jedem Deploy erforderlich
 - **Prüfungen:** DSGVO, Naming Conventions, Code Standards
 
 ### **📊 Quality Agent**
+
 - **Aufgabe:** Prüft Codequalität, Struktur, Performance
 - **Datei:** `scripts/quality-agent.js`
 - **Freigabe:** Automatisch bei jedem Commit
 - **Prüfungen:** Code Review, Tests, Performance Metrics
 
 ### **🚀 Deployment Agent**
+
 - **Aufgabe:** Führt Deployments nach Freigabe durch
 - **Datei:** `scripts/deployment-agent.js`
 - **Freigabe:** Manuelle Freigabe für Production
 - **Features:** Rollback-Fähigkeit, Versionierung
 
 ### **👁️ Monitoring Agent**
+
 - **Aufgabe:** Überwacht Prozesse, Systeme, Datenbanken
 - **Datei:** `scripts/monitoring-agent.js`
 - **Freigabe:** Automatisch aktiv
 - **Features:** Live-Dashboards, Alerting
 
 ### **📝 Memory Agent**
+
 - **Aufgabe:** Speichert, verwaltet und liefert Kontextdaten
 - **Datei:** `scripts/memory-agent.js`
 - **Freigabe:** Automatisch bei Bedarf
 - **Features:** Kontext-Management, Session-Handling
 
 ### **🔗 Integration Agent**
+
 - **Aufgabe:** Bindet externe APIs oder Services ein
 - **Datei:** `scripts/integration-agent.js`
 - **Freigabe:** Vor Integration erforderlich
 - **Features:** API-Validation, Security-Checks
 
 ### **🔒 Security Agent**
+
 - **Aufgabe:** Prüft auf Schwachstellen, Scan & Patches
 - **Datei:** `scripts/security-agent.js`
 - **Freigabe:** Automatisch bei Security-Issues
@@ -109,32 +117,36 @@ Dieses Dokument ist die **einzige Quelle der Wahrheit** für die System-Architek
 ## 📦 **MODULE-ÜBERSICHT**
 
 ### **🏠 Core-Module (Basis)**
-| Modul | Verantwortlichkeit | Status |
-|-------|-------------------|--------|
-| Frontend | Next.js App Router, React Components | ✅ Aktiv |
-| Backend | API Gateway, Business Logic | ✅ Aktiv |
-| Database | MySQL Schema, Data Management | ✅ Aktiv |
-| Authentication | User Login, Session Management | ✅ Aktiv |
+
+| Modul          | Verantwortlichkeit                   | Status   |
+| -------------- | ------------------------------------ | -------- |
+| Frontend       | Next.js App Router, React Components | ✅ Aktiv |
+| Backend        | API Gateway, Business Logic          | ✅ Aktiv |
+| Database       | MySQL Schema, Data Management        | ✅ Aktiv |
+| Authentication | User Login, Session Management       | ✅ Aktiv |
 
 ### **🔧 Feature-Module (Erweiterbar)**
-| Modul | Verantwortlichkeit | Status |
-|-------|-------------------|--------|
-| Admin Dashboard | User Management, Analytics | ✅ Aktiv |
-| Time Tracking | Work Sessions, Productivity | ✅ Aktiv |
-| Ticket System | Support, Issue Management | ✅ Aktiv |
-| Compliance | DSGVO, Security, Quality | ✅ Aktiv |
+
+| Modul           | Verantwortlichkeit          | Status   |
+| --------------- | --------------------------- | -------- |
+| Admin Dashboard | User Management, Analytics  | ✅ Aktiv |
+| Time Tracking   | Work Sessions, Productivity | ✅ Aktiv |
+| Ticket System   | Support, Issue Management   | ✅ Aktiv |
+| Compliance      | DSGVO, Security, Quality    | ✅ Aktiv |
 
 ### **🤖 Agent-Module (Enterprise++)**
-| Modul | Verantwortlichkeit | Status |
-|-------|-------------------|--------|
-| Compliance Agent | Policy Enforcement | ✅ Aktiv |
-| Quality Agent | Code Quality Control | ✅ Aktiv |
-| Deployment Agent | Safe Deployments | ✅ Aktiv |
-| Monitoring Agent | System Monitoring | ✅ Aktiv |
+
+| Modul            | Verantwortlichkeit   | Status   |
+| ---------------- | -------------------- | -------- |
+| Compliance Agent | Policy Enforcement   | ✅ Aktiv |
+| Quality Agent    | Code Quality Control | ✅ Aktiv |
+| Deployment Agent | Safe Deployments     | ✅ Aktiv |
+| Monitoring Agent | System Monitoring    | ✅ Aktiv |
 
 ## 🔗 **ABHÄNGIGKEITEN**
 
 ### **Externe Abhängigkeiten**
+
 ```json
 {
   "next": "^14.0.0",
@@ -149,6 +161,7 @@ Dieses Dokument ist die **einzige Quelle der Wahrheit** für die System-Architek
 ```
 
 ### **Interne Abhängigkeiten**
+
 ```
 Enterprise++ Layer
 ├── Compliance Agent
@@ -172,6 +185,7 @@ Feature Layer
 ## 🔐 **SICHERHEITSARCHITEKTUR**
 
 ### **Sicherheitsebenen**
+
 1. **🛡️ Compliance Agent** - Policy Enforcement
 2. **🔒 Security Agent** - Vulnerability Scanning
 3. **🔐 Authentication** - User Authentication
@@ -179,6 +193,7 @@ Feature Layer
 5. **🗄️ Data Security** - Encryption, Access Control
 
 ### **Compliance-Standards**
+
 - **DSGVO:** Vollständig implementiert
 - **ISO 27001:** Security Management
 - **WCAG 2.1:** Accessibility Standards
@@ -187,14 +202,16 @@ Feature Layer
 ## 📊 **MONITORING & REPORTING**
 
 ### **Überwachungssysteme**
-| System | Zweck | Status |
-|--------|-------|--------|
-| Enterprise++ Dashboard | Qualitätsmetriken | ✅ Aktiv |
-| Compliance Monitoring | Policy-Verstöße | ✅ Aktiv |
-| Security Monitoring | Sicherheitsvorfälle | ✅ Aktiv |
-| Performance Monitoring | System-Performance | ✅ Aktiv |
+
+| System                 | Zweck               | Status   |
+| ---------------------- | ------------------- | -------- |
+| Enterprise++ Dashboard | Qualitätsmetriken   | ✅ Aktiv |
+| Compliance Monitoring  | Policy-Verstöße     | ✅ Aktiv |
+| Security Monitoring    | Sicherheitsvorfälle | ✅ Aktiv |
+| Performance Monitoring | System-Performance  | ✅ Aktiv |
 
 ### **Reporting-Standards**
+
 - **Täglich:** Compliance-Report, Security-Report
 - **Wöchentlich:** Quality-Report, Performance-Report
 - **Monatlich:** Enterprise++ Status-Report
@@ -202,6 +219,7 @@ Feature Layer
 ## 🚀 **DEPLOYMENT-PROZESS**
 
 ### **Enterprise++ Deployment-Workflow**
+
 1. **Code Commit** → Quality Agent prüft
 2. **Compliance Check** → Compliance Agent validiert
 3. **Security Scan** → Security Agent scannt
@@ -211,6 +229,7 @@ Feature Layer
 7. **Rollback** → Bei Problemen automatisch
 
 ### **Rollback-Strategie**
+
 - **Automatisch:** Bei kritischen Fehlern
 - **Manuell:** Bei Performance-Problemen
 - **Versioniert:** Jeder Deploy ist versioniert
@@ -219,11 +238,13 @@ Feature Layer
 ## 📝 **DOKUMENTATION-STANDARDS**
 
 ### **Dokumentation First**
+
 - Jede Funktion wird vor Implementierung dokumentiert
 - Architektur-Änderungen werden zuerst dokumentiert
 - Compliance-Änderungen werden sofort dokumentiert
 
 ### **Dokumentations-Struktur**
+
 ```
 docs/
 ├── 00-PROJEKT-MANAGEMENT/     # Projektübersicht
@@ -239,15 +260,17 @@ docs/
 ## 🎯 **NÄCHSTE SCHRITTE**
 
 ### **Sofortige Aktionen**
+
 1. ✅ Duplikate entfernt
 2. ✅ SSOT-Struktur erstellt
 3. 🔄 Agenten-Rollen definiert
 4. 🔄 Deployment-Prozess implementiert
 
 ### **Enterprise++ Compliance**
+
 - Alle Agenten sind aktiv und überwacht
 - Compliance-Checks laufen automatisch
 - Deployment-Prozess mit Freigaben implementiert
 - Monitoring und Reporting sind Standard
 
-**Status:** ✅ **ENTERPRISE++ STANDARD ERREICHT** 
+**Status:** ✅ **ENTERPRISE++ STANDARD ERREICHT**

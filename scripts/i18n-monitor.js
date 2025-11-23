@@ -1,11 +1,11 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 class I18nMonitor {
   constructor() {
     this.projectRoot = process.cwd();
-    this.i18nDir = path.join(this.projectRoot, 'src/i18n/locales');
-    this.monitorFile = path.join(this.projectRoot, 'i18n-blocked.json');
+    this.i18nDir = path.join(this.projectRoot, "src/i18n/locales");
+    this.monitorFile = path.join(this.projectRoot, "i18n-blocked.json");
     this.isMonitoring = false;
     this.watchers = [];
     this.lastState = {};
@@ -14,11 +14,11 @@ class I18nMonitor {
   // Monitoring starten
   startMonitoring() {
     if (this.isMonitoring) {
-      console.log('⚠️ Monitoring läuft bereits');
+      console.log("⚠️ Monitoring läuft bereits");
       return;
     }
 
-    console.log('👁️ Starte i18n-Monitoring...');
+    console.log("👁️ Starte i18n-Monitoring...");
     this.isMonitoring = true;
 
     // Initialen Zustand erfassen
@@ -30,8 +30,8 @@ class I18nMonitor {
     // Periodische Überprüfung
     this.startPeriodicCheck();
 
-    console.log('✅ i18n-Monitoring gestartet');
-    console.log('Drücke Ctrl+C zum Beenden');
+    console.log("✅ i18n-Monitoring gestartet");
+    console.log("Drücke Ctrl+C zum Beenden");
   }
 
   // Monitoring stoppen
@@ -40,11 +40,11 @@ class I18nMonitor {
       return;
     }
 
-    console.log('\n🛑 Stoppe i18n-Monitoring...');
+    console.log("\n🛑 Stoppe i18n-Monitoring...");
     this.isMonitoring = false;
 
     // Watcher stoppen
-    this.watchers.forEach(watcher => {
+    this.watchers.forEach((watcher) => {
       try {
         watcher.close();
       } catch (error) {
@@ -53,7 +53,7 @@ class I18nMonitor {
     });
     this.watchers = [];
 
-    console.log('✅ i18n-Monitoring gestoppt');
+    console.log("✅ i18n-Monitoring gestoppt");
   }
 
   // Aktuellen Zustand erfassen
@@ -64,14 +64,12 @@ class I18nMonitor {
       return;
     }
 
-    const languageFiles = fs
-      .readdirSync(this.i18nDir)
-      .filter(file => file.endsWith('.json'));
+    const languageFiles = fs.readdirSync(this.i18nDir).filter((file) => file.endsWith(".json"));
 
     for (const file of languageFiles) {
       const filePath = path.join(this.i18nDir, file);
       try {
-        const content = fs.readFileSync(filePath, 'utf8');
+        const content = fs.readFileSync(filePath, "utf8");
         const parsed = JSON.parse(content);
         this.lastState[file] = {
           content: content,
@@ -87,20 +85,16 @@ class I18nMonitor {
   // Dateiüberwachung starten
   startFileWatching() {
     if (!fs.existsSync(this.i18nDir)) {
-      console.warn('i18n-Verzeichnis nicht gefunden');
+      console.warn("i18n-Verzeichnis nicht gefunden");
       return;
     }
 
     // Überwachung des i18n-Verzeichnisses
-    const watcher = fs.watch(
-      this.i18nDir,
-      { recursive: true },
-      (eventType, filename) => {
-        if (filename && filename.endsWith('.json')) {
-          this.handleFileChange(eventType, filename);
-        }
+    const watcher = fs.watch(this.i18nDir, { recursive: true }, (eventType, filename) => {
+      if (filename && filename.endsWith(".json")) {
+        this.handleFileChange(eventType, filename);
       }
-    );
+    });
 
     this.watchers.push(watcher);
   }
@@ -112,7 +106,7 @@ class I18nMonitor {
     console.log(`📝 Dateiänderung erkannt: ${eventType} - ${filename}`);
 
     try {
-      const content = fs.readFileSync(filePath, 'utf8');
+      const content = fs.readFileSync(filePath, "utf8");
       const parsed = JSON.parse(content);
       const currentKeys = this.extractKeys(parsed);
       const lastState = this.lastState[filename];
@@ -137,17 +131,14 @@ class I18nMonitor {
         lastModified: fs.statSync(filePath).mtime,
       };
     } catch (error) {
-      console.error(
-        `Fehler bei der Verarbeitung von ${filename}:`,
-        error.message
-      );
+      console.error(`Fehler bei der Verarbeitung von ${filename}:`, error.message);
     }
   }
 
   // Änderungen analysieren
   analyzeChanges(oldState, newState) {
-    const added = newState.keys.filter(key => !oldState.keys.includes(key));
-    const removed = oldState.keys.filter(key => !newState.keys.includes(key));
+    const added = newState.keys.filter((key) => !oldState.keys.includes(key));
+    const removed = oldState.keys.filter((key) => !newState.keys.includes(key));
 
     return { added, removed };
   }
@@ -158,7 +149,7 @@ class I18nMonitor {
 
     if (changes.added.length > 0) {
       console.log(`  ➕ Hinzugefügt: ${changes.added.length} Schlüssel`);
-      changes.added.slice(0, 5).forEach(key => {
+      changes.added.slice(0, 5).forEach((key) => {
         console.log(`    - ${key}`);
       });
       if (changes.added.length > 5) {
@@ -168,7 +159,7 @@ class I18nMonitor {
 
     if (changes.removed.length > 0) {
       console.log(`  ➖ Entfernt: ${changes.removed.length} Schlüssel`);
-      changes.removed.slice(0, 5).forEach(key => {
+      changes.removed.slice(0, 5).forEach((key) => {
         console.log(`    - ${key}`);
       });
       if (changes.removed.length > 5) {
@@ -184,7 +175,7 @@ class I18nMonitor {
       return;
     }
 
-    const baseLanguage = 'de.json';
+    const baseLanguage = "de.json";
     if (!this.lastState[baseLanguage]) {
       return;
     }
@@ -196,7 +187,7 @@ class I18nMonitor {
       if (lang === baseLanguage) continue;
 
       const langKeys = this.lastState[lang].keys;
-      const missingKeys = baseKeys.filter(key => !langKeys.includes(key));
+      const missingKeys = baseKeys.filter((key) => !langKeys.includes(key));
 
       if (missingKeys.length > 0) {
         inconsistencies.push({
@@ -207,8 +198,8 @@ class I18nMonitor {
     }
 
     if (inconsistencies.length > 0) {
-      console.log('\n⚠️ Konsistenzprobleme erkannt:');
-      inconsistencies.forEach(issue => {
+      console.log("\n⚠️ Konsistenzprobleme erkannt:");
+      inconsistencies.forEach((issue) => {
         console.log(`  ${issue.language}: ${issue.missing} fehlende Schlüssel`);
       });
     }
@@ -230,24 +221,19 @@ class I18nMonitor {
 
   // Periodische Überprüfung durchführen
   performPeriodicCheck() {
-    console.log('🔄 Periodische i18n-Überprüfung...');
+    console.log("🔄 Periodische i18n-Überprüfung...");
 
     const currentState = {};
-    const languageFiles = fs
-      .readdirSync(this.i18nDir)
-      .filter(file => file.endsWith('.json'));
+    const languageFiles = fs.readdirSync(this.i18nDir).filter((file) => file.endsWith(".json"));
 
     for (const file of languageFiles) {
       const filePath = path.join(this.i18nDir, file);
       try {
-        const content = fs.readFileSync(filePath, 'utf8');
+        const content = fs.readFileSync(filePath, "utf8");
         const parsed = JSON.parse(content);
         currentState[file] = this.extractKeys(parsed);
       } catch (error) {
-        console.warn(
-          `Fehler bei periodischer Überprüfung von ${file}:`,
-          error.message
-        );
+        console.warn(`Fehler bei periodischer Überprüfung von ${file}:`, error.message);
       }
     }
 
@@ -267,14 +253,14 @@ class I18nMonitor {
 
     // Konsistenz-Check
     if (languages.length > 1) {
-      const baseKeys = currentState['de.json'] || [];
+      const baseKeys = currentState["de.json"] || [];
       const inconsistencies = [];
 
       for (const lang of languages) {
-        if (lang === 'de.json') continue;
+        if (lang === "de.json") continue;
 
         const langKeys = currentState[lang] || [];
-        const missingKeys = baseKeys.filter(key => !langKeys.includes(key));
+        const missingKeys = baseKeys.filter((key) => !langKeys.includes(key));
 
         if (missingKeys.length > 0) {
           inconsistencies.push(`${lang}: ${missingKeys.length} fehlend`);
@@ -282,25 +268,21 @@ class I18nMonitor {
       }
 
       if (inconsistencies.length > 0) {
-        console.log('  ⚠️ Konsistenzprobleme:', inconsistencies.join(', '));
+        console.log("  ⚠️ Konsistenzprobleme:", inconsistencies.join(", "));
       } else {
-        console.log('  ✅ Alle Sprachen konsistent');
+        console.log("  ✅ Alle Sprachen konsistent");
       }
     }
   }
 
   // Schlüssel extrahieren
-  extractKeys(obj, prefix = '') {
+  extractKeys(obj, prefix = "") {
     const keys = [];
 
     for (const key in obj) {
       const fullKey = prefix ? `${prefix}.${key}` : key;
 
-      if (
-        typeof obj[key] === 'object' &&
-        obj[key] !== null &&
-        !Array.isArray(obj[key])
-      ) {
+      if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
         keys.push(...this.extractKeys(obj[key], fullKey));
       } else {
         keys.push(fullKey);
@@ -315,16 +297,14 @@ class I18nMonitor {
     const blockData = {
       blocked: blocked,
       timestamp: new Date().toISOString(),
-      reason: blocked ? 'i18n-Monitoring aktiv' : 'Monitoring gestoppt',
+      reason: blocked ? "i18n-Monitoring aktiv" : "Monitoring gestoppt",
     };
 
     try {
       fs.writeFileSync(this.monitorFile, JSON.stringify(blockData, null, 2));
-      console.log(
-        `🔒 i18n-Blockierung ${blocked ? 'aktiviert' : 'deaktiviert'}`
-      );
+      console.log(`🔒 i18n-Blockierung ${blocked ? "aktiviert" : "deaktiviert"}`);
     } catch (error) {
-      console.error('Fehler beim Setzen der Blockierung:', error.message);
+      console.error("Fehler beim Setzen der Blockierung:", error.message);
     }
   }
 
@@ -332,12 +312,12 @@ class I18nMonitor {
   isBlocked() {
     try {
       if (fs.existsSync(this.monitorFile)) {
-        const content = fs.readFileSync(this.monitorFile, 'utf8');
+        const content = fs.readFileSync(this.monitorFile, "utf8");
         const data = JSON.parse(content);
         return data.blocked === true;
       }
     } catch (error) {
-      console.warn('Fehler beim Prüfen der Blockierung:', error.message);
+      console.warn("Fehler beim Prüfen der Blockierung:", error.message);
     }
     return false;
   }
@@ -366,36 +346,34 @@ if (require.main === module) {
   const command = process.argv[2];
 
   switch (command) {
-    case 'start':
+    case "start":
       monitor.setBlocked(true);
       monitor.startMonitoring();
 
       // Graceful Shutdown
-      process.on('SIGINT', () => {
+      process.on("SIGINT", () => {
         monitor.stopMonitoring();
         monitor.setBlocked(false);
         process.exit(0);
       });
       break;
 
-    case 'stop':
+    case "stop":
       monitor.stopMonitoring();
       monitor.setBlocked(false);
       break;
 
-    case 'status':
+    case "status":
       const status = monitor.getStatus();
       console.log(JSON.stringify(status, null, 2));
       break;
 
-    case 'blocked':
+    case "blocked":
       console.log(monitor.isBlocked());
       break;
 
     default:
-      console.log(
-        'Verwendung: node i18n-monitor.js [start|stop|status|blocked]'
-      );
+      console.log("Verwendung: node i18n-monitor.js [start|stop|status|blocked]");
   }
 }
 

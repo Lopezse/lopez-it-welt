@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 27, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projekte/lopez-it-welt/src/app/admin/page.tsx"],"sourcesContent":["import { redirect } from \"next/navigation\";\n\nexport default function AdminPage() {\n  // Redirect to the new Enterprise Dashboard\n  redirect(\"/admin/dashboard\");\n}\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACtB,2CAA2C;IAC3C,IAAA,iMAAQ,EAAC;AACX","debugId":null}}]
+}

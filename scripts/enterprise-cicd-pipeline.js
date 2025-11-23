@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 class EnterpriseCICDPipeline {
   constructor() {
@@ -8,7 +8,7 @@ class EnterpriseCICDPipeline {
     this.stages = [];
     this.currentStage = null;
     this.buildNumber = this.generateBuildNumber();
-    this.deploymentEnvironments = ['development', 'staging', 'production'];
+    this.deploymentEnvironments = ["development", "staging", "production"];
     this.qualityGates = this.loadQualityGates();
   }
 
@@ -36,7 +36,7 @@ class EnterpriseCICDPipeline {
         codeScan: 0, // Keine Code-Security-Issues
       },
       accessibility: {
-        wcagLevel: 'AAA', // WCAG AAA Level
+        wcagLevel: "AAA", // WCAG AAA Level
         accessibilityScore: 100, // 100% Accessibility Score
         screenReaderSupport: 100, // 100% Screen Reader Support
         keyboardNavigation: 100, // 100% Keyboard Navigation
@@ -46,7 +46,7 @@ class EnterpriseCICDPipeline {
 
   // Pipeline starten
   async runPipeline() {
-    console.log('🚀 Enterprise++ CI/CD Pipeline startet...');
+    console.log("🚀 Enterprise++ CI/CD Pipeline startet...");
     console.log(`📦 Build #${this.buildNumber}`);
 
     try {
@@ -60,13 +60,10 @@ class EnterpriseCICDPipeline {
       await this.stageDeploy();
       await this.stagePostDeploy();
 
-      console.log('✅ Enterprise++ CI/CD Pipeline erfolgreich abgeschlossen!');
+      console.log("✅ Enterprise++ CI/CD Pipeline erfolgreich abgeschlossen!");
       await this.generatePipelineReport();
     } catch (error) {
-      console.error(
-        '❌ Enterprise++ CI/CD Pipeline fehlgeschlagen:',
-        error.message
-      );
+      console.error("❌ Enterprise++ CI/CD Pipeline fehlgeschlagen:", error.message);
       await this.handlePipelineFailure(error);
       throw error;
     }
@@ -74,7 +71,7 @@ class EnterpriseCICDPipeline {
 
   // Pre-Build Stage
   async stagePreBuild() {
-    this.currentStage = 'pre-build';
+    this.currentStage = "pre-build";
     console.log(`\n🔧 Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.validateEnvironment();
@@ -84,14 +81,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Build Stage
   async stageBuild() {
-    this.currentStage = 'build';
+    this.currentStage = "build";
     console.log(`\n🔨 Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.cleanBuildDirectory();
@@ -102,14 +99,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Test Stage
   async stageTest() {
-    this.currentStage = 'test';
+    this.currentStage = "test";
     console.log(`\n🧪 Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.runUnitTests();
@@ -120,14 +117,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Quality Stage
   async stageQuality() {
-    this.currentStage = 'quality';
+    this.currentStage = "quality";
     console.log(`\n📊 Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.runCodeAnalysis();
@@ -138,14 +135,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Security Stage
   async stageSecurity() {
-    this.currentStage = 'security';
+    this.currentStage = "security";
     console.log(`\n🔒 Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.runSecurityScan();
@@ -156,14 +153,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Performance Stage
   async stagePerformance() {
-    this.currentStage = 'performance';
+    this.currentStage = "performance";
     console.log(`\n⚡ Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.runLighthouseAudit();
@@ -174,14 +171,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Accessibility Stage
   async stageAccessibility() {
-    this.currentStage = 'accessibility';
+    this.currentStage = "accessibility";
     console.log(`\n♿ Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.runAccessibilityAudit();
@@ -192,14 +189,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Deploy Stage
   async stageDeploy() {
-    this.currentStage = 'deploy';
+    this.currentStage = "deploy";
     console.log(`\n🚀 Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.prepareDeployment();
@@ -210,14 +207,14 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Post-Deploy Stage
   async stagePostDeploy() {
-    this.currentStage = 'post-deploy';
+    this.currentStage = "post-deploy";
     console.log(`\n✅ Stage: ${this.currentStage.toUpperCase()}`);
 
     await this.runHealthChecks();
@@ -228,85 +225,70 @@ class EnterpriseCICDPipeline {
 
     this.stages.push({
       name: this.currentStage,
-      status: 'success',
+      status: "success",
       timestamp: new Date().toISOString(),
     });
   }
 
   // Spezifische Stage-Implementierungen
   async validateEnvironment() {
-    console.log('  - Validiere Umgebung...');
+    console.log("  - Validiere Umgebung...");
 
-    const requiredEnvVars = ['NODE_ENV', 'NEXT_PUBLIC_API_URL'];
+    const requiredEnvVars = ["NODE_ENV", "NEXT_PUBLIC_API_URL"];
     for (const envVar of requiredEnvVars) {
       if (!process.env[envVar]) {
         throw new Error(`Umgebungsvariable ${envVar} nicht gesetzt`);
       }
     }
 
-    console.log('  ✅ Umgebung validiert');
+    console.log("  ✅ Umgebung validiert");
   }
 
   async checkDependencies() {
-    console.log('  - Prüfe Dependencies...');
+    console.log("  - Prüfe Dependencies...");
 
     try {
-      execSync('npm audit', { cwd: this.projectRoot, stdio: 'pipe' });
-      console.log('  ✅ Dependencies geprüft');
+      execSync("npm audit", { cwd: this.projectRoot, stdio: "pipe" });
+      console.log("  ✅ Dependencies geprüft");
     } catch (error) {
-      throw new Error('Sicherheitslücken in Dependencies gefunden');
+      throw new Error("Sicherheitslücken in Dependencies gefunden");
     }
   }
 
   async validateConfiguration() {
-    console.log('  - Validiere Konfiguration...');
+    console.log("  - Validiere Konfiguration...");
 
-    const configFiles = [
-      'next.config.js',
-      'tailwind.config.ts',
-      'tsconfig.json',
-    ];
+    const configFiles = ["next.config.js", "tailwind.config.ts", "tsconfig.json"];
     for (const configFile of configFiles) {
       if (!fs.existsSync(path.join(this.projectRoot, configFile))) {
         throw new Error(`Konfigurationsdatei ${configFile} nicht gefunden`);
       }
     }
 
-    console.log('  ✅ Konfiguration validiert');
+    console.log("  ✅ Konfiguration validiert");
   }
 
   async backupCurrentState() {
-    console.log('  - Erstelle Backup...');
+    console.log("  - Erstelle Backup...");
 
-    const backupDir = path.join(
-      this.projectRoot,
-      'backups',
-      `build-${this.buildNumber}`
-    );
+    const backupDir = path.join(this.projectRoot, "backups", `build-${this.buildNumber}`);
     fs.mkdirSync(backupDir, { recursive: true });
 
     // Backup wichtiger Dateien
-    const filesToBackup = [
-      'package.json',
-      'package-lock.json',
-      'next.config.js',
-    ];
+    const filesToBackup = ["package.json", "package-lock.json", "next.config.js"];
     for (const file of filesToBackup) {
       if (fs.existsSync(path.join(this.projectRoot, file))) {
-        fs.copyFileSync(
-          path.join(this.projectRoot, file),
-          path.join(backupDir, file)
-        );
+        fs.copyFileSync(path.join(this.projectRoot, file), path.join(backupDir, file));
       }
     }
 
-    console.log('  ✅ Backup erstellt');
+    console.log("  ✅ Backup erstellt");
   }
 
   async cleanBuildDirectory() {
-    console.log('  - Bereinige Build-Verzeichnis...');
+    console.log("  - Bereinige Build-Verzeichnis...");
 
-    const buildDirs = ['.next', 'out', 'dist'];
+    const buildDirs = [".next", "out", "dist"];
     for (const dir of buildDirs) {
       const buildPath = path.join(this.projectRoot, dir);
       if (fs.existsSync(buildPath)) {
@@ -314,169 +296,159 @@ class EnterpriseCICDPipeline {
       }
     }
 
-    console.log('  ✅ Build-Verzeichnis bereinigt');
+    console.log("  ✅ Build-Verzeichnis bereinigt");
   }
 
   async installDependencies() {
-    console.log('  - Installiere Dependencies...');
+    console.log("  - Installiere Dependencies...");
 
     try {
-      execSync('npm ci', { cwd: this.projectRoot, stdio: 'pipe' });
-      console.log('  ✅ Dependencies installiert');
+      execSync("npm ci", { cwd: this.projectRoot, stdio: "pipe" });
+      console.log("  ✅ Dependencies installiert");
     } catch (error) {
-      throw new Error('Fehler beim Installieren der Dependencies');
+      throw new Error("Fehler beim Installieren der Dependencies");
     }
   }
 
   async compileCode() {
-    console.log('  - Kompiliere Code...');
+    console.log("  - Kompiliere Code...");
 
     try {
-      execSync('npm run build', { cwd: this.projectRoot, stdio: 'pipe' });
-      console.log('  ✅ Code kompiliert');
+      execSync("npm run build", { cwd: this.projectRoot, stdio: "pipe" });
+      console.log("  ✅ Code kompiliert");
     } catch (error) {
-      throw new Error('Fehler beim Kompilieren des Codes');
+      throw new Error("Fehler beim Kompilieren des Codes");
     }
   }
 
   async optimizeAssets() {
-    console.log('  - Optimiere Assets...');
+    console.log("  - Optimiere Assets...");
 
     // Asset-Optimierung implementieren
-    console.log('  ✅ Assets optimiert');
+    console.log("  ✅ Assets optimiert");
   }
 
   async createBuildArtifacts() {
-    console.log('  - Erstelle Build-Artefakte...');
+    console.log("  - Erstelle Build-Artefakte...");
 
-    const artifactsDir = path.join(
-      this.projectRoot,
-      'artifacts',
-      `build-${this.buildNumber}`
-    );
+    const artifactsDir = path.join(this.projectRoot, "artifacts", `build-${this.buildNumber}`);
     fs.mkdirSync(artifactsDir, { recursive: true });
 
     // Build-Artefakte kopieren
-    const nextDir = path.join(this.projectRoot, '.next');
+    const nextDir = path.join(this.projectRoot, ".next");
     if (fs.existsSync(nextDir)) {
-      fs.cpSync(nextDir, path.join(artifactsDir, '.next'), { recursive: true });
+      fs.cpSync(nextDir, path.join(artifactsDir, ".next"), { recursive: true });
     }
 
-    console.log('  ✅ Build-Artefakte erstellt');
+    console.log("  ✅ Build-Artefakte erstellt");
   }
 
   async runUnitTests() {
-    console.log('  - Führe Unit-Tests aus...');
+    console.log("  - Führe Unit-Tests aus...");
 
     try {
-      execSync('npm test', { cwd: this.projectRoot, stdio: 'pipe' });
-      console.log('  ✅ Unit-Tests erfolgreich');
+      execSync("npm test", { cwd: this.projectRoot, stdio: "pipe" });
+      console.log("  ✅ Unit-Tests erfolgreich");
     } catch (error) {
-      throw new Error('Unit-Tests fehlgeschlagen');
+      throw new Error("Unit-Tests fehlgeschlagen");
     }
   }
 
   async runIntegrationTests() {
-    console.log('  - Führe Integration-Tests aus...');
+    console.log("  - Führe Integration-Tests aus...");
 
     try {
-      execSync('npm run test:integration', {
+      execSync("npm run test:integration", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Integration-Tests erfolgreich');
+      console.log("  ✅ Integration-Tests erfolgreich");
     } catch (error) {
-      console.log('  ⚠️ Integration-Tests übersprungen (nicht konfiguriert)');
+      console.log("  ⚠️ Integration-Tests übersprungen (nicht konfiguriert)");
     }
   }
 
   async runE2ETests() {
-    console.log('  - Führe E2E-Tests aus...');
+    console.log("  - Führe E2E-Tests aus...");
 
     try {
-      execSync('npm run test:e2e', { cwd: this.projectRoot, stdio: 'pipe' });
-      console.log('  ✅ E2E-Tests erfolgreich');
+      execSync("npm run test:e2e", { cwd: this.projectRoot, stdio: "pipe" });
+      console.log("  ✅ E2E-Tests erfolgreich");
     } catch (error) {
-      console.log('  ⚠️ E2E-Tests übersprungen (nicht konfiguriert)');
+      console.log("  ⚠️ E2E-Tests übersprungen (nicht konfiguriert)");
     }
   }
 
   async runPerformanceTests() {
-    console.log('  - Führe Performance-Tests aus...');
+    console.log("  - Führe Performance-Tests aus...");
 
     try {
-      execSync('npm run test:performance', {
+      execSync("npm run test:performance", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      console.log('  ✅ Performance-Tests erfolgreich');
+      console.log("  ✅ Performance-Tests erfolgreich");
     } catch (error) {
-      console.log('  ⚠️ Performance-Tests übersprungen (nicht konfiguriert)');
+      console.log("  ⚠️ Performance-Tests übersprungen (nicht konfiguriert)");
     }
   }
 
   async validateTestCoverage() {
-    console.log('  - Validiere Test-Coverage...');
+    console.log("  - Validiere Test-Coverage...");
 
     try {
-      execSync('npm test -- --coverage', {
+      execSync("npm test -- --coverage", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      const coverageFile = path.join(
-        this.projectRoot,
-        'coverage',
-        'coverage-summary.json'
-      );
+      const coverageFile = path.join(this.projectRoot, "coverage", "coverage-summary.json");
 
       if (fs.existsSync(coverageFile)) {
-        const coverage = JSON.parse(fs.readFileSync(coverageFile, 'utf8'));
+        const coverage = JSON.parse(fs.readFileSync(coverageFile, "utf8"));
         const coveragePercentage = coverage.total.lines.pct;
 
         if (coveragePercentage < this.qualityGates.code.testCoverage) {
           throw new Error(
-            `Test-Coverage zu niedrig: ${coveragePercentage}% (Minimum: ${this.qualityGates.code.testCoverage}%)`
+            `Test-Coverage zu niedrig: ${coveragePercentage}% (Minimum: ${this.qualityGates.code.testCoverage}%)`,
           );
         }
       }
 
-      console.log('  ✅ Test-Coverage validiert');
+      console.log("  ✅ Test-Coverage validiert");
     } catch (error) {
-      throw new Error(
-        `Test-Coverage-Validierung fehlgeschlagen: ${error.message}`
-      );
+      throw new Error(`Test-Coverage-Validierung fehlgeschlagen: ${error.message}`);
     }
   }
 
   async runCodeAnalysis() {
-    console.log('  - Führe Code-Analyse aus...');
+    console.log("  - Führe Code-Analyse aus...");
 
     try {
-      execSync('npm run lint', { cwd: this.projectRoot, stdio: 'pipe' });
-      console.log('  ✅ Code-Analyse erfolgreich');
+      execSync("npm run lint", { cwd: this.projectRoot, stdio: "pipe" });
+      console.log("  ✅ Code-Analyse erfolgreich");
     } catch (error) {
-      throw new Error('Code-Analyse fehlgeschlagen - Linting-Fehler gefunden');
+      throw new Error("Code-Analyse fehlgeschlagen - Linting-Fehler gefunden");
     }
   }
 
   async checkCodeQuality() {
-    console.log('  - Prüfe Code-Qualität...');
+    console.log("  - Prüfe Code-Qualität...");
 
     // Code-Qualitätsprüfung implementieren
-    console.log('  ✅ Code-Qualität geprüft');
+    console.log("  ✅ Code-Qualität geprüft");
   }
 
   async validateCodeStandards() {
-    console.log('  - Validiere Code-Standards...');
+    console.log("  - Validiere Code-Standards...");
 
     // Code-Standard-Validierung implementieren
-    console.log('  ✅ Code-Standards validiert');
+    console.log("  ✅ Code-Standards validiert");
   }
 
   async checkDocumentation() {
-    console.log('  - Prüfe Dokumentation...');
+    console.log("  - Prüfe Dokumentation...");
 
-    const docs = ['README.md', 'CHANGELOG.md', 'PROJECT.md'];
+    const docs = ["README.md", "CHANGELOG.md", "PROJECT.md"];
     let docScore = 0;
 
     for (const doc of docs) {
@@ -488,53 +460,51 @@ class EnterpriseCICDPipeline {
     if (docScore < 100) {
       console.log(`  ⚠️ Dokumentation unvollständig: ${docScore.toFixed(1)}%`);
     } else {
-      console.log('  ✅ Dokumentation vollständig');
+      console.log("  ✅ Dokumentation vollständig");
     }
   }
 
   async validateArchitecture() {
-    console.log('  - Validiere Architektur...');
+    console.log("  - Validiere Architektur...");
 
     // Architektur-Validierung implementieren
-    console.log('  ✅ Architektur validiert');
+    console.log("  ✅ Architektur validiert");
   }
 
   async runSecurityScan() {
-    console.log('  - Führe Security-Scan aus...');
+    console.log("  - Führe Security-Scan aus...");
 
     try {
-      execSync('npm audit', { cwd: this.projectRoot, stdio: 'pipe' });
-      console.log('  ✅ Security-Scan erfolgreich');
+      execSync("npm audit", { cwd: this.projectRoot, stdio: "pipe" });
+      console.log("  ✅ Security-Scan erfolgreich");
     } catch (error) {
-      throw new Error(
-        'Security-Scan fehlgeschlagen - Vulnerabilities gefunden'
-      );
+      throw new Error("Security-Scan fehlgeschlagen - Vulnerabilities gefunden");
     }
   }
 
   async validateSecurityHeaders() {
-    console.log('  - Validiere Security-Headers...');
+    console.log("  - Validiere Security-Headers...");
 
     // Security-Header-Validierung implementieren
-    console.log('  ✅ Security-Headers validiert');
+    console.log("  ✅ Security-Headers validiert");
   }
 
   async checkAuthentication() {
-    console.log('  - Prüfe Authentifizierung...');
+    console.log("  - Prüfe Authentifizierung...");
 
     // Authentifizierungsprüfung implementieren
-    console.log('  ✅ Authentifizierung geprüft');
+    console.log("  ✅ Authentifizierung geprüft");
   }
 
   async validateEncryption() {
-    console.log('  - Validiere Verschlüsselung...');
+    console.log("  - Validiere Verschlüsselung...");
 
     // Verschlüsselungsvalidierung implementieren
-    console.log('  ✅ Verschlüsselung validiert');
+    console.log("  ✅ Verschlüsselung validiert");
   }
 
   async runLighthouseAudit() {
-    console.log('  - Führe Lighthouse-Audit aus...');
+    console.log("  - Führe Lighthouse-Audit aus...");
 
     try {
       // Lighthouse-Audit implementieren
@@ -542,156 +512,156 @@ class EnterpriseCICDPipeline {
 
       if (lighthouseScore < this.qualityGates.performance.lighthouseScore) {
         throw new Error(
-          `Lighthouse-Score zu niedrig: ${lighthouseScore}% (Minimum: ${this.qualityGates.performance.lighthouseScore}%)`
+          `Lighthouse-Score zu niedrig: ${lighthouseScore}% (Minimum: ${this.qualityGates.performance.lighthouseScore}%)`,
         );
       }
 
-      console.log('  ✅ Lighthouse-Audit erfolgreich');
+      console.log("  ✅ Lighthouse-Audit erfolgreich");
     } catch (error) {
       throw new Error(`Lighthouse-Audit fehlgeschlagen: ${error.message}`);
     }
   }
 
   async checkBundleSize() {
-    console.log('  - Prüfe Bundle-Größe...');
+    console.log("  - Prüfe Bundle-Größe...");
 
     try {
       const bundleSize = await this.calculateBundleSize();
 
       if (bundleSize > this.qualityGates.performance.bundleSize) {
         throw new Error(
-          `Bundle-Größe zu groß: ${bundleSize}KB (Maximum: ${this.qualityGates.performance.bundleSize}KB)`
+          `Bundle-Größe zu groß: ${bundleSize}KB (Maximum: ${this.qualityGates.performance.bundleSize}KB)`,
         );
       }
 
-      console.log('  ✅ Bundle-Größe geprüft');
+      console.log("  ✅ Bundle-Größe geprüft");
     } catch (error) {
       throw new Error(`Bundle-Größen-Prüfung fehlgeschlagen: ${error.message}`);
     }
   }
 
   async validatePerformanceMetrics() {
-    console.log('  - Validiere Performance-Metriken...');
+    console.log("  - Validiere Performance-Metriken...");
 
     // Performance-Metriken-Validierung implementieren
-    console.log('  ✅ Performance-Metriken validiert');
+    console.log("  ✅ Performance-Metriken validiert");
   }
 
   async optimizePerformance() {
-    console.log('  - Optimiere Performance...');
+    console.log("  - Optimiere Performance...");
 
     // Performance-Optimierung implementieren
-    console.log('  ✅ Performance optimiert');
+    console.log("  ✅ Performance optimiert");
   }
 
   async validateLoadTimes() {
-    console.log('  - Validiere Ladezeiten...');
+    console.log("  - Validiere Ladezeiten...");
 
     // Ladezeiten-Validierung implementieren
-    console.log('  ✅ Ladezeiten validiert');
+    console.log("  ✅ Ladezeiten validiert");
   }
 
   async runAccessibilityAudit() {
-    console.log('  - Führe Accessibility-Audit aus...');
+    console.log("  - Führe Accessibility-Audit aus...");
 
     try {
       // Accessibility-Audit implementieren
-      console.log('  ✅ Accessibility-Audit erfolgreich');
+      console.log("  ✅ Accessibility-Audit erfolgreich");
     } catch (error) {
       throw new Error(`Accessibility-Audit fehlgeschlagen: ${error.message}`);
     }
   }
 
   async checkWCAGCompliance() {
-    console.log('  - Prüfe WCAG-Compliance...');
+    console.log("  - Prüfe WCAG-Compliance...");
 
     // WCAG-Compliance-Prüfung implementieren
-    console.log('  ✅ WCAG-Compliance geprüft');
+    console.log("  ✅ WCAG-Compliance geprüft");
   }
 
   async validateScreenReaderSupport() {
-    console.log('  - Validiere Screen Reader Support...');
+    console.log("  - Validiere Screen Reader Support...");
 
     // Screen Reader Support-Validierung implementieren
-    console.log('  ✅ Screen Reader Support validiert');
+    console.log("  ✅ Screen Reader Support validiert");
   }
 
   async checkKeyboardNavigation() {
-    console.log('  - Prüfe Tastaturnavigation...');
+    console.log("  - Prüfe Tastaturnavigation...");
 
     // Tastaturnavigation-Prüfung implementieren
-    console.log('  ✅ Tastaturnavigation geprüft');
+    console.log("  ✅ Tastaturnavigation geprüft");
   }
 
   async validateColorContrast() {
-    console.log('  - Validiere Farbkontrast...');
+    console.log("  - Validiere Farbkontrast...");
 
     // Farbkontrast-Validierung implementieren
-    console.log('  ✅ Farbkontrast validiert');
+    console.log("  ✅ Farbkontrast validiert");
   }
 
   async prepareDeployment() {
-    console.log('  - Bereite Deployment vor...');
+    console.log("  - Bereite Deployment vor...");
 
     // Deployment-Vorbereitung implementieren
-    console.log('  ✅ Deployment vorbereitet');
+    console.log("  ✅ Deployment vorbereitet");
   }
 
   async deployToStaging() {
-    console.log('  - Deploye zu Staging...');
+    console.log("  - Deploye zu Staging...");
 
     // Staging-Deployment implementieren
-    console.log('  ✅ Staging-Deployment erfolgreich');
+    console.log("  ✅ Staging-Deployment erfolgreich");
   }
 
   async runSmokeTests() {
-    console.log('  - Führe Smoke-Tests aus...');
+    console.log("  - Führe Smoke-Tests aus...");
 
     try {
       // Smoke-Tests implementieren
-      console.log('  ✅ Smoke-Tests erfolgreich');
+      console.log("  ✅ Smoke-Tests erfolgreich");
     } catch (error) {
-      throw new Error('Smoke-Tests fehlgeschlagen');
+      throw new Error("Smoke-Tests fehlgeschlagen");
     }
   }
 
   async deployToProduction() {
-    console.log('  - Deploye zu Production...');
+    console.log("  - Deploye zu Production...");
 
     // Production-Deployment implementieren
-    console.log('  ✅ Production-Deployment erfolgreich');
+    console.log("  ✅ Production-Deployment erfolgreich");
   }
 
   async validateDeployment() {
-    console.log('  - Validiere Deployment...');
+    console.log("  - Validiere Deployment...");
 
     // Deployment-Validierung implementieren
-    console.log('  ✅ Deployment validiert');
+    console.log("  ✅ Deployment validiert");
   }
 
   async runHealthChecks() {
-    console.log('  - Führe Health-Checks aus...');
+    console.log("  - Führe Health-Checks aus...");
 
     // Health-Checks implementieren
-    console.log('  ✅ Health-Checks erfolgreich');
+    console.log("  ✅ Health-Checks erfolgreich");
   }
 
   async monitorPerformance() {
-    console.log('  - Überwache Performance...');
+    console.log("  - Überwache Performance...");
 
     // Performance-Überwachung implementieren
-    console.log('  ✅ Performance-Überwachung aktiv');
+    console.log("  ✅ Performance-Überwachung aktiv");
   }
 
   async validateUserExperience() {
-    console.log('  - Validiere Benutzererfahrung...');
+    console.log("  - Validiere Benutzererfahrung...");
 
     // UX-Validierung implementieren
-    console.log('  ✅ Benutzererfahrung validiert');
+    console.log("  ✅ Benutzererfahrung validiert");
   }
 
   async createDeploymentReport() {
-    console.log('  - Erstelle Deployment-Bericht...');
+    console.log("  - Erstelle Deployment-Bericht...");
 
     const report = {
       buildNumber: this.buildNumber,
@@ -701,17 +671,17 @@ class EnterpriseCICDPipeline {
       summary: this.generateDeploymentSummary(),
     };
 
-    const reportFile = path.join(this.projectRoot, 'deployment-report.json');
+    const reportFile = path.join(this.projectRoot, "deployment-report.json");
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
 
-    console.log('  ✅ Deployment-Bericht erstellt');
+    console.log("  ✅ Deployment-Bericht erstellt");
   }
 
   async notifyTeam() {
-    console.log('  - Benachrichtige Team...');
+    console.log("  - Benachrichtige Team...");
 
     // Team-Benachrichtigung implementieren
-    console.log('  ✅ Team benachrichtigt');
+    console.log("  ✅ Team benachrichtigt");
   }
 
   // Hilfsfunktionen
@@ -723,7 +693,7 @@ class EnterpriseCICDPipeline {
 
   async calculateBundleSize() {
     try {
-      const nextDir = path.join(this.projectRoot, '.next');
+      const nextDir = path.join(this.projectRoot, ".next");
       if (fs.existsSync(nextDir)) {
         const size = this.calculateDirectorySize(nextDir);
         return Math.round(size / 1024); // KB
@@ -753,9 +723,7 @@ class EnterpriseCICDPipeline {
   }
 
   generateDeploymentSummary() {
-    const successfulStages = this.stages.filter(
-      stage => stage.status === 'success'
-    );
+    const successfulStages = this.stages.filter((stage) => stage.status === "success");
     const totalStages = this.stages.length;
 
     return {
@@ -777,7 +745,7 @@ class EnterpriseCICDPipeline {
   }
 
   async handlePipelineFailure(error) {
-    console.error('🚨 Pipeline-Fehler behandeln...');
+    console.error("🚨 Pipeline-Fehler behandeln...");
 
     // Rollback implementieren
     await this.rollbackDeployment();
@@ -790,14 +758,14 @@ class EnterpriseCICDPipeline {
   }
 
   async rollbackDeployment() {
-    console.log('  - Führe Rollback durch...');
+    console.log("  - Führe Rollback durch...");
 
     // Rollback-Logik implementieren
-    console.log('  ✅ Rollback erfolgreich');
+    console.log("  ✅ Rollback erfolgreich");
   }
 
   async createFailureReport(error) {
-    console.log('  - Erstelle Fehlerbericht...');
+    console.log("  - Erstelle Fehlerbericht...");
 
     const failureReport = {
       buildNumber: this.buildNumber,
@@ -808,20 +776,17 @@ class EnterpriseCICDPipeline {
       stages: this.stages,
     };
 
-    const reportFile = path.join(
-      this.projectRoot,
-      'pipeline-failure-report.json'
-    );
+    const reportFile = path.join(this.projectRoot, "pipeline-failure-report.json");
     fs.writeFileSync(reportFile, JSON.stringify(failureReport, null, 2));
 
-    console.log('  ✅ Fehlerbericht erstellt');
+    console.log("  ✅ Fehlerbericht erstellt");
   }
 
   async notifyTeamOfFailure(error) {
-    console.log('  - Benachrichtige Team über Fehler...');
+    console.log("  - Benachrichtige Team über Fehler...");
 
     // Fehler-Benachrichtigung implementieren
-    console.log('  ✅ Team über Fehler benachrichtigt');
+    console.log("  ✅ Team über Fehler benachrichtigt");
   }
 
   // Pipeline-Bericht
@@ -835,21 +800,14 @@ class EnterpriseCICDPipeline {
       artifacts: this.getBuildArtifacts(),
     };
 
-    const reportFile = path.join(
-      this.projectRoot,
-      'enterprise-pipeline-report.json'
-    );
+    const reportFile = path.join(this.projectRoot, "enterprise-pipeline-report.json");
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
 
-    console.log('📊 Enterprise++ Pipeline-Bericht generiert:', reportFile);
+    console.log("📊 Enterprise++ Pipeline-Bericht generiert:", reportFile);
   }
 
   getBuildArtifacts() {
-    const artifactsDir = path.join(
-      this.projectRoot,
-      'artifacts',
-      `build-${this.buildNumber}`
-    );
+    const artifactsDir = path.join(this.projectRoot, "artifacts", `build-${this.buildNumber}`);
     if (fs.existsSync(artifactsDir)) {
       return {
         directory: artifactsDir,
@@ -868,14 +826,11 @@ if (require.main === module) {
   pipeline
     .runPipeline()
     .then(() => {
-      console.log('✅ Enterprise++ CI/CD Pipeline erfolgreich abgeschlossen');
+      console.log("✅ Enterprise++ CI/CD Pipeline erfolgreich abgeschlossen");
       process.exit(0);
     })
-    .catch(error => {
-      console.error(
-        '❌ Enterprise++ CI/CD Pipeline fehlgeschlagen:',
-        error.message
-      );
+    .catch((error) => {
+      console.error("❌ Enterprise++ CI/CD Pipeline fehlgeschlagen:", error.message);
       process.exit(1);
     });
 }

@@ -14,3 +14,6 @@ cfg.allow = Array.from(new Set([...(cfg.allow || []), ...files]));
 
 fs.writeFileSync(cfgPath, JSON.stringify(cfg, null, 2) + "\n", "utf8");
 console.log("[approve-files] Added:", files.join(", "));
+
+fs.writeFileSync(cfgPath, JSON.stringify(cfg, null, 2) + "\n", "utf8");
+console.log("[approve-files] Added:", files.join(", "));

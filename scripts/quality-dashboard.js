@@ -7,9 +7,9 @@
  * Enterprise++ Standards: Zero-Tolerance Qualitätskontrolle
  */
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 // Enterprise++ Qualitätsstandards (einheitlich mit START.md und enterprise-quality-controller.js)
 const ENTERPRISE_STANDARDS = {
@@ -37,7 +37,7 @@ const ENTERPRISE_STANDARDS = {
     authorization: 100, // 100% Autorisierung
   },
   accessibility: {
-    wcag: 'AAA', // Höchste WCAG-Stufe
+    wcag: "AAA", // Höchste WCAG-Stufe
     screenReader: 100, // 100% Screen Reader Support
     keyboard: 100, // 100% Tastaturunterstützung
     colorContrast: 100, // 100% Farbkontrast
@@ -48,21 +48,21 @@ const ENTERPRISE_STANDARDS = {
 class QualityDashboard {
   constructor() {
     this.timestamp = new Date().toISOString();
-    this.reportPath = path.join(process.cwd(), 'quality-report.json');
-    this.historyPath = path.join(process.cwd(), 'quality-history.json');
-    this.dashboardPath = path.join(process.cwd(), 'QUALITY_DASHBOARD.md');
+    this.reportPath = path.join(process.cwd(), "quality-report.json");
+    this.historyPath = path.join(process.cwd(), "quality-history.json");
+    this.dashboardPath = path.join(process.cwd(), "QUALITY_DASHBOARD.md");
   }
 
   async generateReport() {
-    console.log('📊 ENTERPRISE++ QUALITÄTS-DASHBOARD GENERIERT');
-    console.log('===============================================');
-    console.log('🚀 Zero-Tolerance Qualitätsstandards aktiviert');
-    console.log('🔒 Enterprise++ Mode: Strict, AutoFix: false');
+    console.log("📊 ENTERPRISE++ QUALITÄTS-DASHBOARD GENERIERT");
+    console.log("===============================================");
+    console.log("🚀 Zero-Tolerance Qualitätsstandards aktiviert");
+    console.log("🔒 Enterprise++ Mode: Strict, AutoFix: false");
 
     const report = {
       timestamp: this.timestamp,
-      date: new Date().toLocaleDateString('de-DE'),
-      time: new Date().toLocaleTimeString('de-DE'),
+      date: new Date().toLocaleDateString("de-DE"),
+      time: new Date().toLocaleTimeString("de-DE"),
       enterpriseStandards: ENTERPRISE_STANDARDS,
       metrics: await this.collectMetrics(),
       summary: {},
@@ -81,7 +81,7 @@ class QualityDashboard {
     report.recommendations = this.generateRecommendations(
       report.metrics,
       report.trends,
-      report.compliance
+      report.compliance,
     );
 
     // Bericht speichern
@@ -89,7 +89,7 @@ class QualityDashboard {
     await this.updateHistory(report);
     await this.generateDashboard(report);
 
-    console.log('✅ Enterprise++ Qualitätsbericht erfolgreich generiert!');
+    console.log("✅ Enterprise++ Qualitätsbericht erfolgreich generiert!");
     console.log(`📁 Bericht: ${this.reportPath}`);
     console.log(`📊 Dashboard: ${this.dashboardPath}`);
 
@@ -117,11 +117,11 @@ class QualityDashboard {
   async checkBuild() {
     try {
       const startTime = Date.now();
-      execSync('npm run build', { stdio: 'pipe' });
+      execSync("npm run build", { stdio: "pipe" });
       const buildTime = Date.now() - startTime;
 
       return {
-        status: 'success',
+        status: "success",
         buildTime: buildTime,
         score: 100,
         details: `Build erfolgreich in ${buildTime}ms`,
@@ -129,7 +129,7 @@ class QualityDashboard {
       };
     } catch (error) {
       return {
-        status: 'error',
+        status: "error",
         buildTime: 0,
         score: 0,
         details: error.message,
@@ -140,7 +140,7 @@ class QualityDashboard {
 
   async checkLinting() {
     try {
-      const output = execSync('npm run lint', { encoding: 'utf8' });
+      const output = execSync("npm run lint", { encoding: "utf8" });
       const errors = (output.match(/Error:/g) || []).length;
       const warnings = (output.match(/Warning:/g) || []).length;
 
@@ -149,11 +149,10 @@ class QualityDashboard {
       if (warnings > 0) score -= warnings * 2;
       score = Math.max(0, score);
 
-      const enterpriseCompliant =
-        errors <= ENTERPRISE_STANDARDS.code.lintErrors;
+      const enterpriseCompliant = errors <= ENTERPRISE_STANDARDS.code.lintErrors;
 
       return {
-        status: errors > 0 ? 'error' : warnings > 0 ? 'warning' : 'success',
+        status: errors > 0 ? "error" : warnings > 0 ? "warning" : "success",
         errors: errors,
         warnings: warnings,
         score: score,
@@ -163,11 +162,11 @@ class QualityDashboard {
       };
     } catch (error) {
       return {
-        status: 'error',
+        status: "error",
         errors: 999,
         warnings: 0,
         score: 0,
-        details: 'Linting fehlgeschlagen',
+        details: "Linting fehlgeschlagen",
         enterpriseCompliant: false,
         enterpriseStandard: ENTERPRISE_STANDARDS.code.lintErrors,
       };
@@ -176,20 +175,20 @@ class QualityDashboard {
 
   async checkTypeScript() {
     try {
-      execSync('npx tsc --noEmit', { stdio: 'pipe' });
+      execSync("npx tsc --noEmit", { stdio: "pipe" });
       return {
-        status: 'success',
+        status: "success",
         errors: 0,
         score: 100,
-        details: 'TypeScript-Kompilierung erfolgreich',
+        details: "TypeScript-Kompilierung erfolgreich",
         enterpriseCompliant: true,
       };
     } catch (error) {
-      const output = error.stdout?.toString() || error.stderr?.toString() || '';
+      const output = error.stdout?.toString() || error.stderr?.toString() || "";
       const errors = (output.match(/error TS/g) || []).length;
 
       return {
-        status: 'error',
+        status: "error",
         errors: errors,
         score: Math.max(0, 100 - errors * 10),
         details: `${errors} TypeScript-Fehler`,
@@ -201,10 +200,8 @@ class QualityDashboard {
   async checkPerformance() {
     try {
       // Bundle-Größe prüfen
-      const buildOutput = execSync('npm run build', { encoding: 'utf8' });
-      const bundleSizeMatch = buildOutput.match(
-        /First Load JS shared by all\s+(\d+\.?\d*)\s+kB/
-      );
+      const buildOutput = execSync("npm run build", { encoding: "utf8" });
+      const bundleSizeMatch = buildOutput.match(/First Load JS shared by all\s+(\d+\.?\d*)\s+kB/);
       const bundleSize = bundleSizeMatch ? parseFloat(bundleSizeMatch[1]) : 0;
 
       let score = 100;
@@ -212,11 +209,10 @@ class QualityDashboard {
       if (bundleSize > 300) score -= 30;
       if (bundleSize > 500) score -= 50;
 
-      const enterpriseCompliant =
-        bundleSize <= ENTERPRISE_STANDARDS.performance.bundleSize;
+      const enterpriseCompliant = bundleSize <= ENTERPRISE_STANDARDS.performance.bundleSize;
 
       return {
-        status: bundleSize > 300 ? 'warning' : 'success',
+        status: bundleSize > 300 ? "warning" : "success",
         bundleSize: bundleSize,
         score: Math.max(0, score),
         details: `Bundle-Größe: ${bundleSize} kB`,
@@ -225,10 +221,10 @@ class QualityDashboard {
       };
     } catch (error) {
       return {
-        status: 'error',
+        status: "error",
         bundleSize: 0,
         score: 0,
-        details: 'Performance-Check fehlgeschlagen',
+        details: "Performance-Check fehlgeschlagen",
         enterpriseCompliant: false,
         enterpriseStandard: ENTERPRISE_STANDARDS.performance.bundleSize,
       };
@@ -237,7 +233,7 @@ class QualityDashboard {
 
   async checkSecurity() {
     try {
-      const output = execSync('npm audit --json', { encoding: 'utf8' });
+      const output = execSync("npm audit --json", { encoding: "utf8" });
       const audit = JSON.parse(output);
 
       const vulnerabilities = audit.metadata?.vulnerabilities || {};
@@ -253,11 +249,10 @@ class QualityDashboard {
       score -= low * 2;
       score = Math.max(0, score);
 
-      const enterpriseCompliant =
-        critical <= ENTERPRISE_STANDARDS.security.vulnerabilities;
+      const enterpriseCompliant = critical <= ENTERPRISE_STANDARDS.security.vulnerabilities;
 
       return {
-        status: critical > 0 ? 'error' : high > 0 ? 'warning' : 'success',
+        status: critical > 0 ? "error" : high > 0 ? "warning" : "success",
         critical: critical,
         high: high,
         moderate: moderate,
@@ -269,13 +264,13 @@ class QualityDashboard {
       };
     } catch (error) {
       return {
-        status: 'warning',
+        status: "warning",
         critical: 0,
         high: 0,
         moderate: 0,
         low: 0,
         score: 50,
-        details: 'Security-Check nicht verfügbar',
+        details: "Security-Check nicht verfügbar",
         enterpriseCompliant: false,
         enterpriseStandard: ENTERPRISE_STANDARDS.security.vulnerabilities,
       };
@@ -285,9 +280,9 @@ class QualityDashboard {
   async checkAccessibility() {
     // Vereinfachte Accessibility-Prüfung
     const accessibilityFiles = [
-      'src/components/Core/Header.tsx',
-      'src/components/Core/Footer.tsx',
-      'src/app/page.tsx',
+      "src/components/Core/Header.tsx",
+      "src/components/Core/Footer.tsx",
+      "src/app/page.tsx",
     ];
 
     let score = 100;
@@ -295,8 +290,8 @@ class QualityDashboard {
 
     for (const file of accessibilityFiles) {
       if (fs.existsSync(file)) {
-        const content = fs.readFileSync(file, 'utf8');
-        if (!content.includes('aria-label') && !content.includes('alt=')) {
+        const content = fs.readFileSync(file, "utf8");
+        if (!content.includes("aria-label") && !content.includes("alt=")) {
           issues++;
         }
       }
@@ -305,11 +300,10 @@ class QualityDashboard {
     score -= issues * 10;
     score = Math.max(0, score);
 
-    const enterpriseCompliant =
-      score >= ENTERPRISE_STANDARDS.accessibility.screenReader;
+    const enterpriseCompliant = score >= ENTERPRISE_STANDARDS.accessibility.screenReader;
 
     return {
-      status: issues > 0 ? 'warning' : 'success',
+      status: issues > 0 ? "warning" : "success",
       issues: issues,
       score: score,
       details: `${issues} Accessibility-Probleme gefunden`,
@@ -320,18 +314,16 @@ class QualityDashboard {
 
   async checkTestCoverage() {
     try {
-      const output = execSync('npm test -- --coverage --watchAll=false', {
-        encoding: 'utf8',
+      const output = execSync("npm test -- --coverage --watchAll=false", {
+        encoding: "utf8",
       });
       const coverageMatch = output.match(/All files\s+\|\s+(\d+\.?\d*)/);
       const coverage = coverageMatch ? parseFloat(coverageMatch[1]) : 0;
 
-      const enterpriseCompliant =
-        coverage >= ENTERPRISE_STANDARDS.code.testCoverage;
+      const enterpriseCompliant = coverage >= ENTERPRISE_STANDARDS.code.testCoverage;
 
       return {
-        status:
-          coverage >= 80 ? 'success' : coverage >= 50 ? 'warning' : 'error',
+        status: coverage >= 80 ? "success" : coverage >= 50 ? "warning" : "error",
         coverage: coverage,
         score: Math.min(100, coverage),
         details: `Test-Coverage: ${coverage}%`,
@@ -340,10 +332,10 @@ class QualityDashboard {
       };
     } catch (error) {
       return {
-        status: 'error',
+        status: "error",
         coverage: 0,
         score: 0,
-        details: 'Test-Coverage nicht verfügbar',
+        details: "Test-Coverage nicht verfügbar",
         enterpriseCompliant: false,
         enterpriseStandard: ENTERPRISE_STANDARDS.code.testCoverage,
       };
@@ -352,11 +344,11 @@ class QualityDashboard {
 
   async checkDocumentation() {
     const requiredDocs = [
-      'README.md',
-      'START.md',
-      'PROJECT.md',
-      'STATUS.md',
-      'QualityController.md',
+      "README.md",
+      "START.md",
+      "PROJECT.md",
+      "STATUS.md",
+      "QualityController.md",
     ];
 
     let score = 100;
@@ -371,11 +363,10 @@ class QualityDashboard {
     score -= missing * 20;
     score = Math.max(0, score);
 
-    const enterpriseCompliant =
-      score >= ENTERPRISE_STANDARDS.code.documentation;
+    const enterpriseCompliant = score >= ENTERPRISE_STANDARDS.code.documentation;
 
     return {
-      status: missing > 0 ? 'warning' : 'success',
+      status: missing > 0 ? "warning" : "success",
       missing: missing,
       score: score,
       details: `${missing} fehlende Dokumente`,
@@ -386,18 +377,16 @@ class QualityDashboard {
 
   async checkDependencies() {
     try {
-      const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+      const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
       const dependencies = Object.keys(packageJson.dependencies || {}).length;
-      const devDependencies = Object.keys(
-        packageJson.devDependencies || {}
-      ).length;
+      const devDependencies = Object.keys(packageJson.devDependencies || {}).length;
 
       let score = 100;
       if (dependencies > 50) score -= 20;
       if (devDependencies > 30) score -= 10;
 
       return {
-        status: 'success',
+        status: "success",
         dependencies: dependencies,
         devDependencies: devDependencies,
         score: Math.max(0, score),
@@ -406,11 +395,11 @@ class QualityDashboard {
       };
     } catch (error) {
       return {
-        status: 'error',
+        status: "error",
         dependencies: 0,
         devDependencies: 0,
         score: 0,
-        details: 'Dependency-Check fehlgeschlagen',
+        details: "Dependency-Check fehlgeschlagen",
         enterpriseCompliant: false,
       };
     }
@@ -421,7 +410,7 @@ class QualityDashboard {
     const complexity = 1; // Minimal für Enterprise++
 
     return {
-      status: 'success',
+      status: "success",
       complexity: complexity,
       score: 100,
       details: `Komplexität: ${complexity}`,
@@ -435,7 +424,7 @@ class QualityDashboard {
     const duplication = 0; // Keine Duplikation für Enterprise++
 
     return {
-      status: 'success',
+      status: "success",
       duplication: duplication,
       score: 100,
       details: `Duplikation: ${duplication}%`,
@@ -476,27 +465,20 @@ class QualityDashboard {
       compliance.accessibility.screenReader,
     ];
 
-    compliance.overall = allChecks.every(check => check === true);
+    compliance.overall = allChecks.every((check) => check === true);
     compliance.score =
-      (allChecks.filter(check => check === true).length / allChecks.length) *
-      100;
+      (allChecks.filter((check) => check === true).length / allChecks.length) * 100;
 
     return compliance;
   }
 
   calculateSummary(metrics, compliance) {
-    const scores = Object.values(metrics).map(m => m.score);
+    const scores = Object.values(metrics).map((m) => m.score);
     const averageScore = scores.reduce((a, b) => a + b, 0) / scores.length;
 
-    const criticalIssues = Object.values(metrics).filter(
-      m => m.status === 'error'
-    ).length;
-    const warnings = Object.values(metrics).filter(
-      m => m.status === 'warning'
-    ).length;
-    const successes = Object.values(metrics).filter(
-      m => m.status === 'success'
-    ).length;
+    const criticalIssues = Object.values(metrics).filter((m) => m.status === "error").length;
+    const warnings = Object.values(metrics).filter((m) => m.status === "warning").length;
+    const successes = Object.values(metrics).filter((m) => m.status === "success").length;
 
     return {
       overallScore: Math.round(averageScore),
@@ -504,50 +486,44 @@ class QualityDashboard {
       criticalIssues: criticalIssues,
       warnings: warnings,
       successes: successes,
-      status:
-        criticalIssues > 0
-          ? 'critical'
-          : warnings > 0
-            ? 'warning'
-            : 'excellent',
+      status: criticalIssues > 0 ? "critical" : warnings > 0 ? "warning" : "excellent",
       enterpriseCompliant: compliance.overall,
       enterpriseScore: Math.round(compliance.score),
     };
   }
 
   calculateGrade(score) {
-    if (score >= 95) return 'A+';
-    if (score >= 90) return 'A';
-    if (score >= 85) return 'A-';
-    if (score >= 80) return 'B+';
-    if (score >= 75) return 'B';
-    if (score >= 70) return 'B-';
-    if (score >= 65) return 'C+';
-    if (score >= 60) return 'C';
-    if (score >= 55) return 'C-';
-    if (score >= 50) return 'D';
-    return 'F';
+    if (score >= 95) return "A+";
+    if (score >= 90) return "A";
+    if (score >= 85) return "A-";
+    if (score >= 80) return "B+";
+    if (score >= 75) return "B";
+    if (score >= 70) return "B-";
+    if (score >= 65) return "C+";
+    if (score >= 60) return "C";
+    if (score >= 55) return "C-";
+    if (score >= 50) return "D";
+    return "F";
   }
 
   async analyzeTrends() {
     if (!fs.existsSync(this.historyPath)) {
-      return { trend: 'new', improvement: 0 };
+      return { trend: "new", improvement: 0 };
     }
 
-    const history = JSON.parse(fs.readFileSync(this.historyPath, 'utf8'));
+    const history = JSON.parse(fs.readFileSync(this.historyPath, "utf8"));
     if (history.length < 2) {
-      return { trend: 'new', improvement: 0 };
+      return { trend: "new", improvement: 0 };
     }
 
     const lastReport = history[history.length - 1];
     const previousReport = history[history.length - 2];
 
-    const improvement =
-      lastReport.summary.overallScore - previousReport.summary.overallScore;
+    const improvement = lastReport.summary.overallScore - previousReport.summary.overallScore;
 
-    let trend = 'stable';
-    if (improvement > 5) trend = 'improving';
-    else if (improvement < -5) trend = 'declining';
+    let trend = "stable";
+    if (improvement > 5) trend = "improving";
+    else if (improvement < -5) trend = "declining";
 
     return {
       trend: trend,
@@ -563,25 +539,19 @@ class QualityDashboard {
     // Enterprise++ Compliance-Empfehlungen
     if (!compliance.overall) {
       recommendations.push(
-        '🚨 ENTERPRISE++ COMPLIANCE NICHT ERFÜLLT - Sofortige Maßnahmen erforderlich!'
+        "🚨 ENTERPRISE++ COMPLIANCE NICHT ERFÜLLT - Sofortige Maßnahmen erforderlich!",
       );
     }
 
     // Code-Qualität
     if (!compliance.code.testCoverage) {
-      recommendations.push(
-        `🧪 Test-Coverage auf 100% erhöhen (Enterprise++ Standard)`
-      );
+      recommendations.push(`🧪 Test-Coverage auf 100% erhöhen (Enterprise++ Standard)`);
     }
     if (!compliance.code.lintErrors) {
-      recommendations.push(
-        `🔧 Alle Linting-Fehler beheben (Enterprise++: 0 Fehler)`
-      );
+      recommendations.push(`🔧 Alle Linting-Fehler beheben (Enterprise++: 0 Fehler)`);
     }
     if (!compliance.code.documentation) {
-      recommendations.push(
-        `📚 Dokumentation auf 100% vervollständigen (Enterprise++ Standard)`
-      );
+      recommendations.push(`📚 Dokumentation auf 100% vervollständigen (Enterprise++ Standard)`);
     }
 
     // Performance
@@ -591,43 +561,37 @@ class QualityDashboard {
 
     // Sicherheit
     if (!compliance.security.vulnerabilities) {
-      recommendations.push(
-        `🔒 Alle Sicherheitslücken beheben (Enterprise++: 0 Vulnerabilities)`
-      );
+      recommendations.push(`🔒 Alle Sicherheitslücken beheben (Enterprise++: 0 Vulnerabilities)`);
     }
 
     // Barrierefreiheit
     if (!compliance.accessibility.screenReader) {
-      recommendations.push(
-        `♿ Accessibility auf 100% verbessern (Enterprise++: AAA Standard)`
-      );
+      recommendations.push(`♿ Accessibility auf 100% verbessern (Enterprise++: AAA Standard)`);
     }
 
     // Allgemeine Empfehlungen
     if (metrics.linting.errors > 0) {
-      recommendations.push(
-        `🔧 ${metrics.linting.errors} Linting-Fehler beheben`
-      );
+      recommendations.push(`🔧 ${metrics.linting.errors} Linting-Fehler beheben`);
     }
     if (metrics.linting.warnings > 10) {
       recommendations.push(
-        `⚠️ Linting-Warnungen reduzieren (aktuell: ${metrics.linting.warnings})`
+        `⚠️ Linting-Warnungen reduzieren (aktuell: ${metrics.linting.warnings})`,
       );
     }
     if (metrics.testCoverage.coverage < 80) {
       recommendations.push(
-        `🧪 Test-Coverage erhöhen (aktuell: ${metrics.testCoverage.coverage}%, Ziel: 100%)`
+        `🧪 Test-Coverage erhöhen (aktuell: ${metrics.testCoverage.coverage}%, Ziel: 100%)`,
       );
     }
     if (metrics.documentation.missing > 0) {
       recommendations.push(
-        `📚 Fehlende Dokumentation ergänzen (${metrics.documentation.missing} Dateien)`
+        `📚 Fehlende Dokumentation ergänzen (${metrics.documentation.missing} Dateien)`,
       );
     }
 
     // Trend-Empfehlungen
-    if (trends.trend === 'declining') {
-      recommendations.push('📉 Qualitätsrückgang analysieren und beheben');
+    if (trends.trend === "declining") {
+      recommendations.push("📉 Qualitätsrückgang analysieren und beheben");
     }
 
     return recommendations;
@@ -640,7 +604,7 @@ class QualityDashboard {
   async updateHistory(report) {
     let history = [];
     if (fs.existsSync(this.historyPath)) {
-      history = JSON.parse(fs.readFileSync(this.historyPath, 'utf8'));
+      history = JSON.parse(fs.readFileSync(this.historyPath, "utf8"));
     }
 
     // Nur die letzten 30 Berichte behalten
@@ -670,7 +634,7 @@ class QualityDashboard {
 - **Score:** ${report.summary.overallScore}/100
 - **Note:** ${report.summary.grade}
 - **Status:** ${this.getStatusEmoji(report.summary.status)} ${report.summary.status.toUpperCase()}
-- **Enterprise++ Compliance:** ${report.summary.enterpriseCompliant ? '✅ ERFÜLLT' : '❌ NICHT ERFÜLLT'}
+- **Enterprise++ Compliance:** ${report.summary.enterpriseCompliant ? "✅ ERFÜLLT" : "❌ NICHT ERFÜLLT"}
 - **Enterprise++ Score:** ${report.summary.enterpriseScore}/100
 - **Trend:** ${this.getTrendEmoji(report.trends.trend)} ${report.trends.trend}
 
@@ -678,19 +642,19 @@ class QualityDashboard {
 
 | Kategorie | Score | Status | Enterprise++ | Details |
 |-----------|-------|--------|--------------|---------|
-| 🏗️ Build | ${report.metrics.build.score}/100 | ${this.getStatusEmoji(report.metrics.build.status)} | ${report.metrics.build.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.build.details} |
-| 🔍 Linting | ${report.metrics.linting.score}/100 | ${this.getStatusEmoji(report.metrics.linting.status)} | ${report.metrics.linting.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.linting.details} |
-| 📝 TypeScript | ${report.metrics.typescript.score}/100 | ${this.getStatusEmoji(report.metrics.typescript.status)} | ${report.metrics.typescript.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.typescript.details} |
-| ⚡ Performance | ${report.metrics.performance.score}/100 | ${this.getStatusEmoji(report.metrics.performance.status)} | ${report.metrics.performance.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.performance.details} |
-| 🔒 Sicherheit | ${report.metrics.security.score}/100 | ${this.getStatusEmoji(report.metrics.security.status)} | ${report.metrics.security.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.security.details} |
-| ♿ Barrierefreiheit | ${report.metrics.accessibility.score}/100 | ${this.getStatusEmoji(report.metrics.accessibility.status)} | ${report.metrics.accessibility.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.accessibility.details} |
-| 🧪 Test-Coverage | ${report.metrics.testCoverage.score}/100 | ${this.getStatusEmoji(report.metrics.testCoverage.status)} | ${report.metrics.testCoverage.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.testCoverage.details} |
-| 📚 Dokumentation | ${report.metrics.documentation.score}/100 | ${this.getStatusEmoji(report.metrics.documentation.status)} | ${report.metrics.documentation.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.documentation.details} |
-| 📦 Dependencies | ${report.metrics.dependencies.score}/100 | ${this.getStatusEmoji(report.metrics.dependencies.status)} | ${report.metrics.dependencies.enterpriseCompliant ? '✅' : '❌'} | ${report.metrics.dependencies.details} |
+| 🏗️ Build | ${report.metrics.build.score}/100 | ${this.getStatusEmoji(report.metrics.build.status)} | ${report.metrics.build.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.build.details} |
+| 🔍 Linting | ${report.metrics.linting.score}/100 | ${this.getStatusEmoji(report.metrics.linting.status)} | ${report.metrics.linting.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.linting.details} |
+| 📝 TypeScript | ${report.metrics.typescript.score}/100 | ${this.getStatusEmoji(report.metrics.typescript.status)} | ${report.metrics.typescript.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.typescript.details} |
+| ⚡ Performance | ${report.metrics.performance.score}/100 | ${this.getStatusEmoji(report.metrics.performance.status)} | ${report.metrics.performance.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.performance.details} |
+| 🔒 Sicherheit | ${report.metrics.security.score}/100 | ${this.getStatusEmoji(report.metrics.security.status)} | ${report.metrics.security.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.security.details} |
+| ♿ Barrierefreiheit | ${report.metrics.accessibility.score}/100 | ${this.getStatusEmoji(report.metrics.accessibility.status)} | ${report.metrics.accessibility.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.accessibility.details} |
+| 🧪 Test-Coverage | ${report.metrics.testCoverage.score}/100 | ${this.getStatusEmoji(report.metrics.testCoverage.status)} | ${report.metrics.testCoverage.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.testCoverage.details} |
+| 📚 Dokumentation | ${report.metrics.documentation.score}/100 | ${this.getStatusEmoji(report.metrics.documentation.status)} | ${report.metrics.documentation.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.documentation.details} |
+| 📦 Dependencies | ${report.metrics.dependencies.score}/100 | ${this.getStatusEmoji(report.metrics.dependencies.status)} | ${report.metrics.dependencies.enterpriseCompliant ? "✅" : "❌"} | ${report.metrics.dependencies.details} |
 
 ### 📋 Enterprise++ Empfehlungen
 
-${report.recommendations.map(rec => `- ${rec}`).join('\n')}
+${report.recommendations.map((rec) => `- ${rec}`).join("\n")}
 
 ### 📈 Trends
 
@@ -713,36 +677,36 @@ ${this.generateHistorySection()}
 
   getStatusEmoji(status) {
     switch (status) {
-      case 'success':
-        return '✅';
-      case 'warning':
-        return '⚠️';
-      case 'error':
-        return '❌';
+      case "success":
+        return "✅";
+      case "warning":
+        return "⚠️";
+      case "error":
+        return "❌";
       default:
-        return '❓';
+        return "❓";
     }
   }
 
   getTrendEmoji(trend) {
     switch (trend) {
-      case 'improving':
-        return '📈';
-      case 'declining':
-        return '📉';
-      case 'stable':
-        return '➡️';
+      case "improving":
+        return "📈";
+      case "declining":
+        return "📉";
+      case "stable":
+        return "➡️";
       default:
-        return '🆕';
+        return "🆕";
     }
   }
 
   generateTrendSection(trends) {
-    if (trends.trend === 'new') {
-      return '🆕 Erster Bericht - Trend wird ab dem nächsten Bericht angezeigt';
+    if (trends.trend === "new") {
+      return "🆕 Erster Bericht - Trend wird ab dem nächsten Bericht angezeigt";
     }
 
-    const change = trends.improvement > 0 ? '+' : '';
+    const change = trends.improvement > 0 ? "+" : "";
     return `**Trend:** ${trends.trend}  
 **Änderung:** ${change}${trends.improvement} Punkte  
 **Vorher:** ${trends.lastScore} → **Jetzt:** ${trends.currentScore}`;
@@ -750,18 +714,18 @@ ${this.generateHistorySection()}
 
   generateHistorySection() {
     if (!fs.existsSync(this.historyPath)) {
-      return 'Keine Historie verfügbar';
+      return "Keine Historie verfügbar";
     }
 
-    const history = JSON.parse(fs.readFileSync(this.historyPath, 'utf8'));
+    const history = JSON.parse(fs.readFileSync(this.historyPath, "utf8"));
     const recent = history.slice(-5).reverse();
 
     return recent
       .map(
-        report =>
-          `- ${report.date} ${report.time}: ${report.summary.overallScore}/100 (${report.summary.grade}) - Enterprise++: ${report.summary.enterpriseCompliant ? '✅' : '❌'}`
+        (report) =>
+          `- ${report.date} ${report.time}: ${report.summary.overallScore}/100 (${report.summary.grade}) - Enterprise++: ${report.summary.enterpriseCompliant ? "✅" : "❌"}`,
       )
-      .join('\n');
+      .join("\n");
   }
 }
 
@@ -771,10 +735,7 @@ async function main() {
     const dashboard = new QualityDashboard();
     await dashboard.generateReport();
   } catch (error) {
-    console.error(
-      '❌ Fehler beim Generieren des Enterprise++ Qualitäts-Dashboards:',
-      error
-    );
+    console.error("❌ Fehler beim Generieren des Enterprise++ Qualitäts-Dashboards:", error);
     process.exit(1);
   }
 }

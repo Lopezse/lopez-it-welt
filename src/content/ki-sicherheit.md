@@ -1,9 +1,9 @@
 ---
-title: 'Warum unsere KI-Hilfe sicher und zuverlässig ist'
-date: '2025-01-27'
-author: 'Ramiro Lopez Rodriguez'
-description: 'Erfahren Sie, wie wir KI-Systeme sicher und kontrolliert einsetzen'
-category: 'KI-Assistenz'
+title: "Warum unsere KI-Hilfe sicher und zuverlässig ist"
+date: "2025-01-27"
+author: "Ramiro Lopez Rodriguez"
+description: "Erfahren Sie, wie wir KI-Systeme sicher und kontrolliert einsetzen"
+category: "KI-Assistenz"
 ---
 
 # Warum unsere KI-Hilfe sicher und zuverlässig ist

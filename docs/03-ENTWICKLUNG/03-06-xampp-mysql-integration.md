@@ -1,12 +1,15 @@
 # XAMPP MySQL Integration
+
 ## Content-Management-System mit XAMPP MySQL
 
 ### 🎯 **ÜBERSICHT**
+
 Das Content-Management-System nutzt XAMPP MySQL als Datenbank-Technologie für die Speicherung und Verwaltung aller Webseiten-Texte.
 
 ### 🗄️ **DATENBANK-KONFIGURATION**
 
 #### **XAMPP MySQL Einstellungen:**
+
 - **MySQL-Pfad:** C:\xampp\mysql
 - **XAMPP-Installation:** C:\xampp\
 - **Host:** localhost
@@ -16,17 +19,19 @@ Das Content-Management-System nutzt XAMPP MySQL als Datenbank-Technologie für d
 - **Datenbank:** lopez_it_welt
 
 #### **Verbindungsdaten:**
+
 ```javascript
 const dbConfig = {
-  host: 'localhost',
+  host: "localhost",
   port: 3306,
-  user: 'root',
-  password: '',
-  database: 'lopez_it_welt'
+  user: "root",
+  password: "",
+  database: "lopez_it_welt",
 };
 ```
 
 #### **XAMPP MySQL-Pfad:**
+
 ```bash
 # MySQL-Binärdateien
 C:\xampp\mysql\bin\mysql.exe
@@ -41,6 +46,7 @@ C:\xampp\mysql\bin\my.ini
 ### 📊 **DATENBANK-SCHEMA**
 
 #### **Tabelle: site_texts**
+
 ```sql
 CREATE TABLE site_texts (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -54,6 +60,7 @@ CREATE TABLE site_texts (
 ```
 
 #### **Beispieldaten:**
+
 ```sql
 INSERT INTO site_texts (`key`, value, language) VALUES
 ('hero_title', 'Professionelle IT-Dienstleistungen', 'de'),
@@ -67,16 +74,17 @@ INSERT INTO site_texts (`key`, value, language) VALUES
 ### 🔌 **API-INTEGRATION**
 
 #### **MySQL-Verbindung in Next.js:**
+
 ```typescript
 // src/lib/database.ts
-import mysql from 'mysql2/promise';
+import mysql from "mysql2/promise";
 
 const dbConfig = {
-  host: 'localhost',
+  host: "localhost",
   port: 3306,
-  user: 'root',
-  password: '',
-  database: 'lopez_it_welt'
+  user: "root",
+  password: "",
+  database: "lopez_it_welt",
 };
 
 export async function getConnection() {
@@ -95,36 +103,34 @@ export async function query(sql: string, params?: any[]) {
 ```
 
 #### **Aktualisierte API-Route:**
+
 ```typescript
 // src/app/api/texts/route.ts
-import { query } from '@/lib/database';
-import { NextResponse } from 'next/server';
+import { query } from "@/lib/database";
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const key = searchParams.get('key');
-    const language = searchParams.get('lang') || 'de';
+    const key = searchParams.get("key");
+    const language = searchParams.get("lang") || "de";
 
-    let sql = 'SELECT * FROM site_texts';
+    let sql = "SELECT * FROM site_texts";
     let params: any[] = [];
 
     if (key) {
-      sql += ' WHERE `key` = ? AND language = ?';
+      sql += " WHERE `key` = ? AND language = ?";
       params = [key, language];
     } else {
-      sql += ' WHERE language = ?';
+      sql += " WHERE language = ?";
       params = [language];
     }
 
     const results = await query(sql, params);
     return NextResponse.json(results);
   } catch (error) {
-    console.error('Datenbankfehler:', error);
-    return NextResponse.json(
-      { error: 'Fehler beim Laden der Texte' },
-      { status: 500 }
-    );
+    console.error("Datenbankfehler:", error);
+    return NextResponse.json({ error: "Fehler beim Laden der Texte" }, { status: 500 });
   }
 }
 ```
@@ -132,18 +138,21 @@ export async function GET(request: Request) {
 ### 🛠️ **SETUP-ANLEITUNG**
 
 #### **1. XAMPP installieren und starten:**
+
 ```bash
 # XAMPP herunterladen und installieren
 # Apache und MySQL starten
 ```
 
 #### **2. Datenbank erstellen:**
+
 ```sql
 CREATE DATABASE lopez_it_welt;
 USE lopez_it_welt;
 ```
 
 #### **3. Tabelle erstellen:**
+
 ```sql
 CREATE TABLE site_texts (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -157,6 +166,7 @@ CREATE TABLE site_texts (
 ```
 
 #### **4. Testdaten einfügen:**
+
 ```sql
 INSERT INTO site_texts (`key`, value, language) VALUES
 ('hero_title', 'Professionelle IT-Dienstleistungen', 'de'),
@@ -170,11 +180,13 @@ INSERT INTO site_texts (`key`, value, language) VALUES
 ### 📦 **NPM-PAKETE**
 
 #### **Benötigte Pakete:**
+
 ```bash
 npm install mysql2
 ```
 
 #### **package.json Ergänzung:**
+
 ```json
 {
   "dependencies": {
@@ -186,6 +198,7 @@ npm install mysql2
 ### 🔧 **KONFIGURATION**
 
 #### **Environment Variables (.env.local):**
+
 ```env
 DB_HOST=localhost
 DB_PORT=3306
@@ -195,30 +208,32 @@ DB_NAME=lopez_it_welt
 ```
 
 #### **Datenbank-Konfiguration:**
+
 ```typescript
 // src/lib/database.ts
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '3306'),
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'lopez_it_welt'
+  host: process.env.DB_HOST || "localhost",
+  port: parseInt(process.env.DB_PORT || "3306"),
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "lopez_it_welt",
 };
 ```
 
 ### 🧪 **TESTING**
 
 #### **Verbindung testen:**
+
 ```typescript
 // src/scripts/test-database.ts
-import { query } from '@/lib/database';
+import { query } from "@/lib/database";
 
 async function testConnection() {
   try {
-    const results = await query('SELECT 1 as test');
-    console.log('✅ Datenbank-Verbindung erfolgreich:', results);
+    const results = await query("SELECT 1 as test");
+    console.log("✅ Datenbank-Verbindung erfolgreich:", results);
   } catch (error) {
-    console.error('❌ Datenbank-Verbindung fehlgeschlagen:', error);
+    console.error("❌ Datenbank-Verbindung fehlgeschlagen:", error);
   }
 }
 
@@ -234,6 +249,7 @@ testConnection();
 5. **Frontend-Integration testen**
 
 ### 📝 **STATUS**
+
 - **Priorität:** HOCH
 - **Status:** IN ENTWICKLUNG
 - **Kategorie:** Datenbank-Integration
@@ -241,6 +257,6 @@ testConnection();
 
 ---
 
-*Erstellt: 2025-07-06*  
-*Aktualisiert: 2025-07-06*  
-*Version: 1.0* 
+_Erstellt: 2025-07-06_  
+_Aktualisiert: 2025-07-06_  
+_Version: 1.0_

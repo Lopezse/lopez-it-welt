@@ -12,6 +12,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 ## 🏗️ **VOLLSTÄNDIGE ÜBERNAHME AUS ALTEN .MD-DATEIEN:**
 
 ### **Aus enterprise-master-architektur.md:**
+
 - **Enterprise++ Master-Architektur:** Vollständige System-Architektur für Enterprise-Kunden
 - **Multi-Tenant-Architektur:** Tenant-Isolation, Customization, Resource-Sharing
 - **Service-Layer-Architektur:** Presentation, Business Logic, Data Access, Infrastructure
@@ -21,6 +22,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 - **Compliance:** GDPR, ISO27001, SOC2, HIPAA
 
 ### **Aus enterprise-starter-paket.md:**
+
 - **Enterprise-Starter-Paket:** Grundlegende Enterprise-Features
 - **Modulare Architektur:** Flexibel erweiterbare Module
 - **API-First-Architektur:** RESTful APIs für alle Services
@@ -29,6 +31,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 - **CQRS-Pattern:** Command Query Responsibility Segregation
 
 ### **Aus enterprise-roadmap.md:**
+
 - **Enterprise-Roadmap:** Strategische Entwicklung der Enterprise-Architektur
 - **Phase 1:** Grundlegende Enterprise-Features
 - **Phase 2:** Erweiterte Enterprise-Features
@@ -37,6 +40,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 - **Phase 5:** Enterprise++++ Features
 
 ### **Aus neues-modul.md:**
+
 - **Modul-Struktur:** Standardisierte Modul-Architektur
 - **Modul-Generator:** Automatisierte Modul-Erstellung
 - **Package.json Template:** Standardisierte Modul-Konfiguration
@@ -50,6 +54,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 - **Test Template:** Test-Architektur
 
 ### **Aus setup.md:**
+
 - **System-Anforderungen:** CPU, RAM, Storage, OS-Check
 - **Repository-Setup:** Git-Clone und Dependencies-Installation
 - **Environment-Konfiguration:** Node.js, Docker, Docker Compose
@@ -62,6 +67,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 - **Kubernetes-Setup:** k3s Installation, Kubernetes Deployments
 
 ### **Aus 00-01-projekt-status.md:**
+
 - **Modulare Architektur:** Flexibel erweiterbar, wartungsfreundlich, schneller Online
 - **Bestehende Module:** Header/Footer, Startseite, Login/Registrierung, Adminbereich, Sprachmodul
 - **Zukünftige Module:** Shop-Modul, Kundencenter, Newsletter-Modul, Statistikmodul, Backup-&-Recovery-Modul
@@ -72,6 +78,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 - **Monitoring:** Enterprise++ Standards
 
 ### **Aus quality-standards.md:**
+
 - **Code-Qualität:** ESLint, Prettier, TypeScript
 - **Testing:** Jest, Cypress, Playwright
 - **Performance:** Lighthouse 100%
@@ -83,6 +90,7 @@ Die **erweiterte Enterprise-Architektur** definiert die vollständige System-Arc
 ## 🎯 **ENTERPRISE-ARCHITEKTUR-PRINZIPIEN**
 
 ### **Architektur-Prinzipien**
+
 ```typescript
 // Enterprise-Architektur-Definitionen
 interface EnterpriseArchitecture {
@@ -93,7 +101,7 @@ interface EnterpriseArchitecture {
     autoScaling: boolean;
     loadBalancing: boolean;
   };
-  
+
   // Sicherheit
   security: {
     multiLayer: boolean;
@@ -101,7 +109,7 @@ interface EnterpriseArchitecture {
     accessControl: boolean;
     auditTrail: boolean;
   };
-  
+
   // Verfügbarkeit
   availability: {
     highAvailability: boolean;
@@ -109,7 +117,7 @@ interface EnterpriseArchitecture {
     backupStrategy: boolean;
     failover: boolean;
   };
-  
+
   // Compliance
   compliance: {
     gdpr: boolean;
@@ -117,10 +125,10 @@ interface EnterpriseArchitecture {
     soc2: boolean;
     hipaa: boolean;
   };
-  
+
   // Multi-Tenant
   multiTenant: {
-    isolation: 'database' | 'schema' | 'row';
+    isolation: "database" | "schema" | "row";
     customization: boolean;
     resourceSharing: boolean;
   };
@@ -128,6 +136,7 @@ interface EnterpriseArchitecture {
 ```
 
 ### **Enterprise-Service-Layer**
+
 ```typescript
 // Enterprise-Service-Architektur
 interface EnterpriseServiceLayer {
@@ -138,7 +147,7 @@ interface EnterpriseServiceLayer {
     apiGateway: APIGateway;
     adminPanel: AdminPanel;
   };
-  
+
   // Business Logic Layer
   businessLogic: {
     userManagement: UserManagementService;
@@ -147,7 +156,7 @@ interface EnterpriseServiceLayer {
     analyticsService: AnalyticsService;
     billingService: BillingService;
   };
-  
+
   // Data Access Layer
   dataAccess: {
     primaryDatabase: Database;
@@ -155,7 +164,7 @@ interface EnterpriseServiceLayer {
     fileStorage: FileStorage;
     messageQueue: MessageQueue;
   };
-  
+
   // Infrastructure Layer
   infrastructure: {
     loadBalancer: LoadBalancer;
@@ -169,18 +178,19 @@ interface EnterpriseServiceLayer {
 ## 🏗️ **MULTI-TENANT-ARCHITEKTUR**
 
 ### **Tenant-Isolation-Strategien**
+
 ```typescript
 // Multi-Tenant-Strategien
 enum TenantIsolationStrategy {
   // Datenbank-Isolation
-  DATABASE_PER_TENANT = 'database_per_tenant',
-  SCHEMA_PER_TENANT = 'schema_per_tenant',
-  ROW_PER_TENANT = 'row_per_tenant',
-  
+  DATABASE_PER_TENANT = "database_per_tenant",
+  SCHEMA_PER_TENANT = "schema_per_tenant",
+  ROW_PER_TENANT = "row_per_tenant",
+
   // Anwendungs-Isolation
-  APPLICATION_PER_TENANT = 'application_per_tenant',
-  CONTAINER_PER_TENANT = 'container_per_tenant',
-  VIRTUAL_MACHINE_PER_TENANT = 'vm_per_tenant'
+  APPLICATION_PER_TENANT = "application_per_tenant",
+  CONTAINER_PER_TENANT = "container_per_tenant",
+  VIRTUAL_MACHINE_PER_TENANT = "vm_per_tenant",
 }
 
 // Tenant-Konfiguration
@@ -191,9 +201,9 @@ interface TenantConfig {
     name: string;
     domain: string;
     plan: EnterprisePlan;
-    status: 'active' | 'suspended' | 'cancelled';
+    status: "active" | "suspended" | "cancelled";
   };
-  
+
   // Isolation-Konfiguration
   isolation: {
     strategy: TenantIsolationStrategy;
@@ -201,7 +211,7 @@ interface TenantConfig {
     schemaName?: string;
     containerId?: string;
   };
-  
+
   // Ressourcen-Limits
   resources: {
     maxUsers: number;
@@ -210,7 +220,7 @@ interface TenantConfig {
     maxApiCalls: number;
     maxConcurrentSessions: number;
   };
-  
+
   // Customization
   customization: {
     branding: BrandingConfig;
@@ -221,6 +231,7 @@ interface TenantConfig {
 ```
 
 ### **Tenant-Management-System**
+
 ```typescript
 // Tenant-Management-Service
 class TenantManagementService {
@@ -228,28 +239,28 @@ class TenantManagementService {
   static async createTenant(config: TenantConfig): Promise<Tenant> {
     // Tenant-Datenbank erstellen
     const database = await this.createTenantDatabase(config);
-    
+
     // Tenant-Schema initialisieren
     const schema = await this.initializeTenantSchema(config);
-    
+
     // Tenant-Container erstellen
     const container = await this.createTenantContainer(config);
-    
+
     // Tenant-Konfiguration speichern
     const tenant = await this.saveTenantConfig(config);
-    
+
     return {
       ...tenant,
       database,
       schema,
-      container
+      container,
     };
   }
-  
+
   // Tenant isolieren
   static async isolateTenant(tenantId: string): Promise<void> {
     const tenant = await this.getTenant(tenantId);
-    
+
     switch (tenant.isolation.strategy) {
       case TenantIsolationStrategy.DATABASE_PER_TENANT:
         await this.isolateDatabase(tenant);
@@ -265,44 +276,44 @@ class TenantManagementService {
         break;
     }
   }
-  
+
   // Tenant-Datenbank erstellen
   private static async createTenantDatabase(config: TenantConfig): Promise<Database> {
     const databaseName = `tenant_${config.metadata.id}`;
-    
+
     // Datenbank erstellen
     await this.executeSQL(`CREATE DATABASE ${databaseName}`);
-    
+
     // Tenant-spezifische Tabellen erstellen
     await this.createTenantTables(databaseName);
-    
+
     // Initiale Daten einfügen
     await this.initializeTenantData(databaseName);
-    
+
     return {
       name: databaseName,
       connectionString: this.buildConnectionString(databaseName),
-      status: 'active'
+      status: "active",
     };
   }
-  
+
   // Tenant-Schema initialisieren
   private static async initializeTenantSchema(config: TenantConfig): Promise<Schema> {
     const schemaName = `tenant_${config.metadata.id}`;
-    
+
     // Schema erstellen
     await this.executeSQL(`CREATE SCHEMA ${schemaName}`);
-    
+
     // Tenant-spezifische Views erstellen
     await this.createTenantViews(schemaName);
-    
+
     // Berechtigungen setzen
     await this.setTenantPermissions(schemaName, config);
-    
+
     return {
       name: schemaName,
       tables: await this.getTenantTables(schemaName),
-      views: await this.getTenantViews(schemaName)
+      views: await this.getTenantViews(schemaName),
     };
   }
 }
@@ -311,6 +322,7 @@ class TenantManagementService {
 ## 🔒 **ENTERPRISE-SICHERHEIT**
 
 ### **Multi-Layer-Security**
+
 ```typescript
 // Enterprise-Security-Architektur
 interface EnterpriseSecurity {
@@ -321,7 +333,7 @@ interface EnterpriseSecurity {
     ddosProtection: DDoSProtection;
     loadBalancer: LoadBalancerConfig;
   };
-  
+
   // Anwendungs-Sicherheit
   applicationSecurity: {
     authentication: AuthenticationConfig;
@@ -329,7 +341,7 @@ interface EnterpriseSecurity {
     encryption: EncryptionConfig;
     inputValidation: InputValidationConfig;
   };
-  
+
   // Daten-Sicherheit
   dataSecurity: {
     encryptionAtRest: EncryptionConfig;
@@ -337,7 +349,7 @@ interface EnterpriseSecurity {
     dataMasking: DataMaskingConfig;
     backupEncryption: BackupEncryptionConfig;
   };
-  
+
   // Compliance-Sicherheit
   complianceSecurity: {
     auditLogging: AuditLoggingConfig;
@@ -354,20 +366,20 @@ class EnterpriseSecurityService {
     const tenantKey = await this.getTenantEncryptionKey(tenantId);
     return await this.encrypt(data, tenantKey);
   }
-  
+
   // Daten entschlüsseln
   static async decryptData(encryptedData: string, tenantId: string): Promise<any> {
     const tenantKey = await this.getTenantEncryptionKey(tenantId);
     return await this.decrypt(encryptedData, tenantKey);
   }
-  
+
   // Audit-Log erstellen
   static async logAuditEvent(
     userId: string,
     action: string,
     resource: string,
     tenantId: string,
-    details?: any
+    details?: any,
   ): Promise<void> {
     const auditEvent = {
       id: generateId(),
@@ -378,22 +390,22 @@ class EnterpriseSecurityService {
       tenantId,
       details,
       ipAddress: getClientIP(),
-      userAgent: getClientUserAgent()
+      userAgent: getClientUserAgent(),
     };
-    
+
     await this.saveAuditEvent(auditEvent);
   }
-  
+
   // Zugriffskontrolle prüfen
   static async checkAccess(
     userId: string,
     resource: string,
     action: string,
-    tenantId: string
+    tenantId: string,
   ): Promise<boolean> {
     const userPermissions = await this.getUserPermissions(userId, tenantId);
     const resourcePermissions = await this.getResourcePermissions(resource, tenantId);
-    
+
     return this.hasPermission(userPermissions, resourcePermissions, action);
   }
 }
@@ -402,6 +414,7 @@ class EnterpriseSecurityService {
 ## 📊 **ENTERPRISE-SKALIERBARKEIT**
 
 ### **Horizontal-Skalierung**
+
 ```typescript
 // Auto-Scaling-Konfiguration
 interface AutoScalingConfig {
@@ -414,7 +427,7 @@ interface AutoScalingConfig {
     scaleUpThreshold: number;
     scaleDownThreshold: number;
   };
-  
+
   // Memory-basiertes Scaling
   memory: {
     enabled: boolean;
@@ -424,7 +437,7 @@ interface AutoScalingConfig {
     scaleUpThreshold: number;
     scaleDownThreshold: number;
   };
-  
+
   // Request-basiertes Scaling
   requests: {
     enabled: boolean;
@@ -442,60 +455,61 @@ class AutoScalingService {
   static async evaluateScaling(tenantId: string): Promise<ScalingDecision> {
     const metrics = await this.getTenantMetrics(tenantId);
     const config = await this.getTenantScalingConfig(tenantId);
-    
+
     const cpuDecision = this.evaluateCPU(metrics.cpu, config.cpu);
     const memoryDecision = this.evaluateMemory(metrics.memory, config.memory);
     const requestDecision = this.evaluateRequests(metrics.requests, config.requests);
-    
+
     return this.combineDecisions([cpuDecision, memoryDecision, requestDecision]);
   }
-  
+
   // Instanz skalieren
   static async scaleInstance(
     tenantId: string,
-    direction: 'up' | 'down',
-    reason: string
+    direction: "up" | "down",
+    reason: string,
   ): Promise<ScalingResult> {
     const tenant = await this.getTenant(tenantId);
-    
-    if (direction === 'up') {
+
+    if (direction === "up") {
       return await this.scaleUp(tenant, reason);
     } else {
       return await this.scaleDown(tenant, reason);
     }
   }
-  
+
   // Scale-Up durchführen
   private static async scaleUp(tenant: Tenant, reason: string): Promise<ScalingResult> {
     // Neue Instanz erstellen
     const newInstance = await this.createTenantInstance(tenant);
-    
+
     // Load Balancer aktualisieren
     await this.updateLoadBalancer(tenant, newInstance);
-    
+
     // Health Check durchführen
     await this.healthCheck(newInstance);
-    
+
     // Scaling-Event loggen
-    await this.logScalingEvent(tenant.id, 'scale_up', reason, newInstance);
-    
+    await this.logScalingEvent(tenant.id, "scale_up", reason, newInstance);
+
     return {
       success: true,
-      action: 'scale_up',
+      action: "scale_up",
       newInstance,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 }
 ```
 
 ### **Load-Balancing**
+
 ```typescript
 // Load-Balancer-Konfiguration
 interface LoadBalancerConfig {
   // Algorithmus
-  algorithm: 'round_robin' | 'least_connections' | 'ip_hash' | 'weighted';
-  
+  algorithm: "round_robin" | "least_connections" | "ip_hash" | "weighted";
+
   // Health Checks
   healthCheck: {
     enabled: boolean;
@@ -505,14 +519,14 @@ interface LoadBalancerConfig {
     unhealthyThreshold: number;
     healthyThreshold: number;
   };
-  
+
   // SSL-Terminierung
   sslTermination: {
     enabled: boolean;
     certificatePath: string;
     privateKeyPath: string;
   };
-  
+
   // Rate Limiting
   rateLimiting: {
     enabled: boolean;
@@ -524,38 +538,35 @@ interface LoadBalancerConfig {
 // Load-Balancer-Service
 class LoadBalancerService {
   // Request routen
-  static async routeRequest(
-    request: Request,
-    tenantId: string
-  ): Promise<Response> {
+  static async routeRequest(request: Request, tenantId: string): Promise<Response> {
     const tenant = await this.getTenant(tenantId);
     const instances = await this.getHealthyInstances(tenant);
-    
+
     if (instances.length === 0) {
-      throw new Error('No healthy instances available');
+      throw new Error("No healthy instances available");
     }
-    
+
     const selectedInstance = this.selectInstance(instances, request);
     const response = await this.forwardRequest(request, selectedInstance);
-    
+
     // Request-Metriken aktualisieren
     await this.updateRequestMetrics(tenantId, selectedInstance, response);
-    
+
     return response;
   }
-  
+
   // Instanz auswählen
   private static selectInstance(instances: Instance[], request: Request): Instance {
     const algorithm = this.getLoadBalancerAlgorithm();
-    
+
     switch (algorithm) {
-      case 'round_robin':
+      case "round_robin":
         return this.roundRobinSelection(instances);
-      case 'least_connections':
+      case "least_connections":
         return this.leastConnectionsSelection(instances);
-      case 'ip_hash':
+      case "ip_hash":
         return this.ipHashSelection(instances, request);
-      case 'weighted':
+      case "weighted":
         return this.weightedSelection(instances);
       default:
         return this.roundRobinSelection(instances);
@@ -567,6 +578,7 @@ class LoadBalancerService {
 ## 🔄 **ENTERPRISE-HIGH-AVAILABILITY**
 
 ### **Failover-Strategien**
+
 ```typescript
 // High-Availability-Konfiguration
 interface HighAvailabilityConfig {
@@ -577,7 +589,7 @@ interface HighAvailabilityConfig {
     secondaryNode: string;
     failoverTime: number;
   };
-  
+
   // Active-Active
   activeActive: {
     enabled: boolean;
@@ -585,7 +597,7 @@ interface HighAvailabilityConfig {
     dataReplication: boolean;
     sessionReplication: boolean;
   };
-  
+
   // Disaster Recovery
   disasterRecovery: {
     enabled: boolean;
@@ -601,61 +613,61 @@ class HighAvailabilityService {
   static async performFailover(tenantId: string, reason: string): Promise<FailoverResult> {
     const tenant = await this.getTenant(tenantId);
     const config = await this.getHAConfig(tenantId);
-    
+
     // Failover-Event loggen
-    await this.logFailoverEvent(tenantId, 'failover_started', reason);
-    
+    await this.logFailoverEvent(tenantId, "failover_started", reason);
+
     // Datenbank-Failover
     const dbFailover = await this.performDatabaseFailover(tenant, config);
-    
+
     // Application-Failover
     const appFailover = await this.performApplicationFailover(tenant, config);
-    
+
     // DNS-Update
     const dnsUpdate = await this.updateDNS(tenant, config);
-    
+
     // Health Check
     const healthCheck = await this.verifyFailover(tenant, config);
-    
+
     return {
       success: healthCheck.success,
       databaseFailover: dbFailover,
       applicationFailover: appFailover,
       dnsUpdate,
       healthCheck,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
-  
+
   // Datenbank-Failover
   private static async performDatabaseFailover(
     tenant: Tenant,
-    config: HighAvailabilityConfig
+    config: HighAvailabilityConfig,
   ): Promise<DatabaseFailoverResult> {
     const primaryDB = await this.getPrimaryDatabase(tenant);
     const secondaryDB = await this.getSecondaryDatabase(tenant);
-    
+
     // Replikation-Status prüfen
     const replicationStatus = await this.checkReplicationStatus(primaryDB, secondaryDB);
-    
+
     if (!replicationStatus.synchronized) {
-      throw new Error('Database replication not synchronized');
+      throw new Error("Database replication not synchronized");
     }
-    
+
     // Secondary zur Primary befördern
     await this.promoteToPrimary(secondaryDB);
-    
+
     // Primary zur Secondary demotieren
     await this.demoteToSecondary(primaryDB);
-    
+
     // Replikation umkehren
     await this.reverseReplication(secondaryDB, primaryDB);
-    
+
     return {
       success: true,
       newPrimary: secondaryDB,
       oldPrimary: primaryDB,
-      replicationStatus
+      replicationStatus,
     };
   }
 }
@@ -664,6 +676,7 @@ class HighAvailabilityService {
 ## 📈 **ENTERPRISE-MONITORING**
 
 ### **Enterprise-Monitoring-System**
+
 ```typescript
 // Enterprise-Monitoring-Konfiguration
 interface EnterpriseMonitoring {
@@ -674,7 +687,7 @@ interface EnterpriseMonitoring {
     disk: MonitoringConfig;
     network: MonitoringConfig;
   };
-  
+
   // Application-Monitoring
   applicationMonitoring: {
     responseTime: MonitoringConfig;
@@ -682,7 +695,7 @@ interface EnterpriseMonitoring {
     throughput: MonitoringConfig;
     availability: MonitoringConfig;
   };
-  
+
   // Business-Monitoring
   businessMonitoring: {
     userActivity: MonitoringConfig;
@@ -690,7 +703,7 @@ interface EnterpriseMonitoring {
     conversion: MonitoringConfig;
     satisfaction: MonitoringConfig;
   };
-  
+
   // Tenant-Monitoring
   tenantMonitoring: {
     resourceUsage: MonitoringConfig;
@@ -705,29 +718,29 @@ class EnterpriseMonitoringService {
   // Tenant-Metriken sammeln
   static async collectTenantMetrics(tenantId: string): Promise<TenantMetrics> {
     const tenant = await this.getTenant(tenantId);
-    
+
     const [systemMetrics, applicationMetrics, businessMetrics] = await Promise.all([
       this.collectSystemMetrics(tenant),
       this.collectApplicationMetrics(tenant),
-      this.collectBusinessMetrics(tenant)
+      this.collectBusinessMetrics(tenant),
     ]);
-    
+
     return {
       tenantId,
       timestamp: new Date(),
       system: systemMetrics,
       application: applicationMetrics,
-      business: businessMetrics
+      business: businessMetrics,
     };
   }
-  
+
   // Alert generieren
   static async generateAlert(
     tenantId: string,
     alertType: string,
-    severity: 'info' | 'warning' | 'error' | 'critical',
+    severity: "info" | "warning" | "error" | "critical",
     message: string,
-    data?: any
+    data?: any,
   ): Promise<Alert> {
     const alert: Alert = {
       id: generateId(),
@@ -737,29 +750,29 @@ class EnterpriseMonitoringService {
       message,
       data,
       timestamp: new Date(),
-      acknowledged: false
+      acknowledged: false,
     };
-    
+
     await this.saveAlert(alert);
     await this.notifyStakeholders(alert);
-    
+
     return alert;
   }
-  
+
   // Performance-Report generieren
   static async generatePerformanceReport(
     tenantId: string,
     startDate: Date,
-    endDate: Date
+    endDate: Date,
   ): Promise<PerformanceReport> {
     const metrics = await this.getTenantMetrics(tenantId, startDate, endDate);
-    
+
     return {
       tenantId,
       period: { startDate, endDate },
       summary: this.calculateSummary(metrics),
       trends: this.calculateTrends(metrics),
-      recommendations: this.generateRecommendations(metrics)
+      recommendations: this.generateRecommendations(metrics),
     };
   }
 }
@@ -768,6 +781,7 @@ class EnterpriseMonitoringService {
 ## 🔐 **ENTERPRISE-COMPLIANCE**
 
 ### **Compliance-Framework**
+
 ```typescript
 // Compliance-Konfiguration
 interface ComplianceConfig {
@@ -779,7 +793,7 @@ interface ComplianceConfig {
     dataPortability: boolean;
     consentManagement: boolean;
   };
-  
+
   // ISO 27001
   iso27001: {
     enabled: boolean;
@@ -787,7 +801,7 @@ interface ComplianceConfig {
     securityControls: boolean;
     auditTrail: boolean;
   };
-  
+
   // SOC 2
   soc2: {
     enabled: boolean;
@@ -797,7 +811,7 @@ interface ComplianceConfig {
     confidentiality: boolean;
     privacy: boolean;
   };
-  
+
   // HIPAA
   hipaa: {
     enabled: boolean;
@@ -813,55 +827,55 @@ class ComplianceService {
   static async processGDPRRequest(
     tenantId: string,
     userId: string,
-    requestType: 'access' | 'deletion' | 'portability'
+    requestType: "access" | "deletion" | "portability",
   ): Promise<GDPRRequestResult> {
     const tenant = await this.getTenant(tenantId);
-    
+
     switch (requestType) {
-      case 'access':
+      case "access":
         return await this.processDataAccessRequest(tenant, userId);
-      case 'deletion':
+      case "deletion":
         return await this.processDataDeletionRequest(tenant, userId);
-      case 'portability':
+      case "portability":
         return await this.processDataPortabilityRequest(tenant, userId);
       default:
         throw new Error(`Unknown GDPR request type: ${requestType}`);
     }
   }
-  
+
   // Daten-Zugriff verarbeiten
   private static async processDataAccessRequest(
     tenant: Tenant,
-    userId: string
+    userId: string,
   ): Promise<GDPRRequestResult> {
     const userData = await this.collectUserData(tenant, userId);
     const exportData = await this.formatForExport(userData);
-    
+
     return {
       success: true,
-      requestType: 'access',
+      requestType: "access",
       userId,
       data: exportData,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
-  
+
   // Daten-Löschung verarbeiten
   private static async processDataDeletionRequest(
     tenant: Tenant,
-    userId: string
+    userId: string,
   ): Promise<GDPRRequestResult> {
     // Daten anonymisieren
     await this.anonymizeUserData(tenant, userId);
-    
+
     // Audit-Log erstellen
     await this.logDataDeletion(tenant, userId);
-    
+
     return {
       success: true,
-      requestType: 'deletion',
+      requestType: "deletion",
       userId,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 }
@@ -870,4 +884,4 @@ class ComplianceService {
 ---
 
 **Letzte Aktualisierung:** 2025-07-05  
-**Nächste Überprüfung:** 2025-07-06 
+**Nächste Überprüfung:** 2025-07-06

@@ -1,0 +1,7 @@
+{"timestamp":"2025-07-15T09:55:51.332Z","level":"INFO","agent":"StyleGuard-AI","message":"🚀 Start: StyleGuard-AI Review","performance":{"duration":0,"memory":179219616}}
+{"timestamp":"2025-07-15T09:55:51.338Z","level":"INFO","agent":"StyleGuard-AI","message":"Lade Kontexte...","performance":{"duration":0,"memory":179354032}}
+{"timestamp":"2025-07-15T09:55:51.356Z","level":"INFO","agent":"StyleGuard-AI","message":"Kontexte geladen: 6 Kontexte verfügbar","performance":{"duration":0,"memory":179711544}}
+{"timestamp":"2025-07-15T09:55:51.359Z","level":"INFO","agent":"StyleGuard-AI","message":"0 Dateien für Review gefunden","performance":{"duration":0,"memory":179754568}}
+{"timestamp":"2025-07-15T09:55:51.378Z","level":"INFO","agent":"StyleGuard-AI","message":"✅ 📊 StyleGuard-Report generiert: D:\\Projekte\\lopez-it-welt\\agents\\reports\\styleguard-report.json","context":{"success":true,"timestamp":"2025-07-15T09:55:51.378Z"},"performance":{"duration":0,"memory":179863384}}
+{"timestamp":"2025-07-15T09:55:51.379Z","level":"INFO","agent":"StyleGuard-AI","message":"📈 Zusammenfassung: 0/0 Dateien bestanden, 0 Issues gefunden","performance":{"duration":0,"memory":179870872}}
+{"timestamp":"2025-07-15T09:55:51.380Z","level":"INFO","agent":"StyleGuard-AI","message":"✅ End: StyleGuard-AI Review (42ms)","context":{"duration":42,"memory":{"rss":260653056,"heapTotal":214843392,"heapUsed":179878320,"external":7716803,"arrayBuffers":4903321}},"performance":{"duration":0,"memory":179879440}}

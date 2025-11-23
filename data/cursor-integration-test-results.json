@@ -1,0 +1,61 @@
+{
+  "totalTests": 10,
+  "passedTests": 10,
+  "failedTests": 0,
+  "testStartTime": 1752597934250,
+  "testEndTime": 1752597934270,
+  "details": [
+    {
+      "test": "Cursor-Integration Datei existiert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Anti-Regelbruch-System Datei existiert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Cursor-Monitor Datei existiert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Layout-Integration funktioniert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Cursor-Regeln existieren",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "PowerShell-Skript existiert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Node.js-Skript existiert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Startup-Konfiguration existiert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Automatische Aktivierung simuliert",
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "test": "Regelverstoß-Erkennung",
+      "status": "PASSED",
+      "error": null
+    }
+  ],
+  "testDate": "2025-07-15T16:45:34.275Z",
+  "version": "1.0.0"
+}

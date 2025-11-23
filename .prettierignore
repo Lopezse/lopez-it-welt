@@ -19,3 +19,10 @@ status.bat
 status.ps1
 logs/**
 
+
+*.sql
+*.tsbuildinfo
+status.bat
+status.ps1
+logs/**
+

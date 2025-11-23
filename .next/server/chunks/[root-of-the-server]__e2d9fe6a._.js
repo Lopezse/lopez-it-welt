@@ -1,0 +1,3454 @@
+module.exports = [
+"[project]/.next-internal/server/app/api/auth/admin/login/route/actions.js [app-rsc] (server actions loader, ecmascript)", ((__turbopack_context__, module, exports) => {
+
+}),
+"[externals]/next/dist/compiled/next-server/app-route-turbo.runtime.dev.js [external] (next/dist/compiled/next-server/app-route-turbo.runtime.dev.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/compiled/next-server/app-route-turbo.runtime.dev.js", () => require("next/dist/compiled/next-server/app-route-turbo.runtime.dev.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/compiled/@opentelemetry/api [external] (next/dist/compiled/@opentelemetry/api, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/compiled/@opentelemetry/api", () => require("next/dist/compiled/@opentelemetry/api"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js [external] (next/dist/compiled/next-server/app-page-turbo.runtime.dev.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/compiled/next-server/app-page-turbo.runtime.dev.js", () => require("next/dist/compiled/next-server/app-page-turbo.runtime.dev.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/server/app-render/work-unit-async-storage.external.js [external] (next/dist/server/app-render/work-unit-async-storage.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/server/app-render/work-unit-async-storage.external.js", () => require("next/dist/server/app-render/work-unit-async-storage.external.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/server/app-render/work-async-storage.external.js [external] (next/dist/server/app-render/work-async-storage.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/server/app-render/work-async-storage.external.js", () => require("next/dist/server/app-render/work-async-storage.external.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/shared/lib/no-fallback-error.external.js [external] (next/dist/shared/lib/no-fallback-error.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/shared/lib/no-fallback-error.external.js", () => require("next/dist/shared/lib/no-fallback-error.external.js"));
+
+module.exports = mod;
+}),
+"[externals]/events [external] (events, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("events", () => require("events"));
+
+module.exports = mod;
+}),
+"[externals]/process [external] (process, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("process", () => require("process"));
+
+module.exports = mod;
+}),
+"[externals]/net [external] (net, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("net", () => require("net"));
+
+module.exports = mod;
+}),
+"[externals]/tls [external] (tls, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("tls", () => require("tls"));
+
+module.exports = mod;
+}),
+"[externals]/timers [external] (timers, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("timers", () => require("timers"));
+
+module.exports = mod;
+}),
+"[externals]/stream [external] (stream, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("stream", () => require("stream"));
+
+module.exports = mod;
+}),
+"[externals]/buffer [external] (buffer, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("buffer", () => require("buffer"));
+
+module.exports = mod;
+}),
+"[externals]/string_decoder [external] (string_decoder, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("string_decoder", () => require("string_decoder"));
+
+module.exports = mod;
+}),
+"[externals]/crypto [external] (crypto, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("crypto", () => require("crypto"));
+
+module.exports = mod;
+}),
+"[externals]/zlib [external] (zlib, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("zlib", () => require("zlib"));
+
+module.exports = mod;
+}),
+"[externals]/util [external] (util, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("util", () => require("util"));
+
+module.exports = mod;
+}),
+"[externals]/url [external] (url, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("url", () => require("url"));
+
+module.exports = mod;
+}),
+"[project]/src/lib/database.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// DATABASE CONNECTION - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-01-19
+// Zweck: MySQL-Datenbankverbindung für Enterprise++ Kundenverwaltung
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "closeConnection",
+    ()=>closeConnection,
+    "generateKundennummer",
+    ()=>generateKundennummer,
+    "getConnection",
+    ()=>getConnection,
+    "initializeDatabase",
+    ()=>initializeDatabase
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$mysql2$2f$promise$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/mysql2/promise.js [app-route] (ecmascript)");
+;
+// =====================================================
+// DATENBANK-KONFIGURATION
+// =====================================================
+const dbConfig = {
+    host: process.env.DB_HOST || "localhost",
+    port: parseInt(process.env.DB_PORT || "3306"),
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_NAME || "lopez_erp",
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+};
+// =====================================================
+// CONNECTION POOL
+// =====================================================
+let pool = null;
+let isInitialized = false;
+async function getConnection() {
+    if (!pool) {
+        try {
+            pool = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$mysql2$2f$promise$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].createPool(dbConfig);
+            console.log("✅ MySQL Connection Pool erstellt");
+            // Test-Verbindung
+            const connection = await pool.getConnection();
+            console.log("✅ MySQL Verbindung erfolgreich getestet");
+            connection.release();
+            // Automatische Initialisierung beim ersten Aufruf (nur einmal)
+            if (!isInitialized) {
+                try {
+                    console.log("🔧 Initialisiere Datenbank-Struktur...");
+                    await initializeDatabase();
+                    isInitialized = true;
+                    console.log("✅ Datenbank-Struktur erfolgreich initialisiert");
+                } catch (initError) {
+                    console.error("⚠️ Datenbank-Initialisierung fehlgeschlagen (wird ignoriert):", initError);
+                // Nicht werfen, da die Tabelle möglicherweise bereits existiert
+                }
+            }
+        } catch (error) {
+            console.error("❌ MySQL Verbindungsfehler:", error);
+            throw error;
+        }
+    }
+    return pool;
+}
+async function initializeDatabase() {
+    try {
+        const connection = await getConnection();
+        // =====================================================
+        // KUNDEN-HAUPTTABELLE
+        // =====================================================
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_customers (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                kundennummer VARCHAR(20) UNIQUE NOT NULL,
+                customer_type ENUM('privat', 'firma', 'behörde', 'partner') NOT NULL,
+                anrede ENUM('Herr', 'Frau', 'Divers', 'Firma', 'Keine Angabe') DEFAULT 'Keine Angabe',
+                titel VARCHAR(50),
+                vorname VARCHAR(100),
+                nachname VARCHAR(100),
+                firmenname VARCHAR(255),
+                email VARCHAR(255) UNIQUE NOT NULL,
+                telefon VARCHAR(50),
+                strasse VARCHAR(255),
+                plz VARCHAR(20),
+                ort VARCHAR(100),
+                land VARCHAR(100) DEFAULT 'Deutschland',
+                status ENUM('aktiv', 'inaktiv', 'gesperrt') DEFAULT 'aktiv',
+                support_level ENUM('Standard', 'Premium', 'SLA 24h', 'SLA 4h') DEFAULT 'Standard',
+                notes TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                INDEX idx_kundennummer (kundennummer),
+                INDEX idx_email (email),
+                INDEX idx_status (status),
+                INDEX idx_customer_type (customer_type),
+                INDEX idx_support_level (support_level)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // =====================================================
+        // KUNDEN-NOTIZEN
+        // =====================================================
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_customer_notes (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                customer_id BIGINT NOT NULL,
+                note TEXT NOT NULL,
+                created_by VARCHAR(100) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (customer_id) REFERENCES lopez_customers(id) ON DELETE CASCADE,
+                INDEX idx_customer_id (customer_id),
+                INDEX idx_created_at (created_at)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // =====================================================
+        // KUNDEN-TAGS
+        // =====================================================
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_customer_tags (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                customer_id BIGINT NOT NULL,
+                tag_name VARCHAR(50) NOT NULL,
+                tag_color VARCHAR(7) DEFAULT '#3B82F6',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (customer_id) REFERENCES lopez_customers(id) ON DELETE CASCADE,
+                UNIQUE KEY unique_customer_tag (customer_id, tag_name),
+                INDEX idx_customer_id (customer_id),
+                INDEX idx_tag_name (tag_name)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // =====================================================
+        // AUDIT-LOGS
+        // =====================================================
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_audit_logs (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                table_name VARCHAR(50) NOT NULL,
+                record_id BIGINT NOT NULL,
+                action ENUM('INSERT', 'UPDATE', 'DELETE', 'LOGIN', 'LOGOUT', '2FA_SETUP', '2FA_VERIFY', 'PASSWORD_CHANGE', 'ROLE_ASSIGN', 'PERMISSION_GRANT') NOT NULL,
+                old_values JSON,
+                new_values JSON,
+                user_id BIGINT NOT NULL,
+                username VARCHAR(100),
+                ip_address VARCHAR(45),
+                user_agent TEXT,
+                session_id VARCHAR(255),
+                risk_level ENUM('LOW', 'MEDIUM', 'HIGH', 'CRITICAL') DEFAULT 'LOW',
+                compliance_category ENUM('DATA_ACCESS', 'DATA_MODIFICATION', 'AUTHENTICATION', 'AUTHORIZATION', 'SYSTEM_CHANGE', 'SECURITY_EVENT') DEFAULT 'DATA_ACCESS',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                INDEX idx_table_record (table_name, record_id),
+                INDEX idx_user_id (user_id),
+                INDEX idx_username (username),
+                INDEX idx_action (action),
+                INDEX idx_risk_level (risk_level),
+                INDEX idx_compliance_category (compliance_category),
+                INDEX idx_created_at (created_at),
+                INDEX idx_session_id (session_id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // =====================================================
+        // RBAC/ABAC SYSTEM
+        // =====================================================
+        // Benutzer-Tabelle
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_users (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(50) UNIQUE NOT NULL,
+                email VARCHAR(255) UNIQUE NOT NULL,
+                email_external VARCHAR(255),         -- lopezitwelt.de für externe Kommunikation
+                email_internal VARCHAR(255),         -- lopez-team.de für interne Kommunikation
+                password_hash VARCHAR(255) NOT NULL,
+                first_name VARCHAR(100) NOT NULL,
+                last_name VARCHAR(100) NOT NULL,
+                display_name VARCHAR(200),           -- "Ramiro Lopez Rodriguez - Admin"
+                admin_alias VARCHAR(50),             -- "r.lopez", "r.mclean"
+                domain_type ENUM('external', 'internal') DEFAULT 'internal',
+                status ENUM('active', 'inactive', 'locked', 'pending') DEFAULT 'pending',
+                last_login TIMESTAMP NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                INDEX idx_username (username),
+                INDEX idx_email (email),
+                INDEX idx_email_external (email_external),
+                INDEX idx_email_internal (email_internal),
+                INDEX idx_admin_alias (admin_alias),
+                INDEX idx_domain_type (domain_type),
+                INDEX idx_status (status)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // Rollen-Tabelle
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_roles (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) UNIQUE NOT NULL,
+                description TEXT,
+                level TINYINT NOT NULL DEFAULT 5,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                INDEX idx_name (name),
+                INDEX idx_level (level)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // Berechtigungen-Tabelle
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_permissions (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                resource VARCHAR(100) NOT NULL,
+                action VARCHAR(50) NOT NULL,
+                conditions JSON,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE KEY unique_resource_action (resource, action),
+                INDEX idx_resource (resource),
+                INDEX idx_action (action)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // Benutzer-Rollen-Zuordnung
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_user_roles (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                user_id BIGINT NOT NULL,
+                role_id BIGINT NOT NULL,
+                assigned_by BIGINT NOT NULL,
+                assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                expires_at TIMESTAMP NULL,
+                FOREIGN KEY (user_id) REFERENCES lopez_users(id) ON DELETE CASCADE,
+                FOREIGN KEY (role_id) REFERENCES lopez_roles(id) ON DELETE CASCADE,
+                FOREIGN KEY (assigned_by) REFERENCES lopez_users(id) ON DELETE CASCADE,
+                UNIQUE KEY unique_user_role (user_id, role_id),
+                INDEX idx_user_id (user_id),
+                INDEX idx_role_id (role_id),
+                INDEX idx_expires_at (expires_at)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // Rollen-Berechtigungen-Zuordnung
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_role_permissions (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                role_id BIGINT NOT NULL,
+                permission_id BIGINT NOT NULL,
+                granted BOOLEAN DEFAULT TRUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (role_id) REFERENCES lopez_roles(id) ON DELETE CASCADE,
+                FOREIGN KEY (permission_id) REFERENCES lopez_permissions(id) ON DELETE CASCADE,
+                UNIQUE KEY unique_role_permission (role_id, permission_id),
+                INDEX idx_role_id (role_id),
+                INDEX idx_permission_id (permission_id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // Sessions-Tabelle
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_sessions (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                user_id BIGINT NOT NULL,
+                session_token VARCHAR(255) UNIQUE NOT NULL,
+                ip_address VARCHAR(45),
+                user_agent TEXT,
+                expires_at TIMESTAMP NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES lopez_users(id) ON DELETE CASCADE,
+                INDEX idx_user_id (user_id),
+                INDEX idx_session_token (session_token),
+                INDEX idx_expires_at (expires_at)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // =====================================================
+        // 2FA SYSTEM
+        // =====================================================
+        // 2FA-Secrets-Tabelle
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_user_2fa (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                user_id BIGINT NOT NULL,
+                secret VARCHAR(255) NOT NULL,
+                backup_codes JSON,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES lopez_users(id) ON DELETE CASCADE,
+                UNIQUE KEY unique_user_2fa (user_id),
+                INDEX idx_user_id (user_id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        // 2FA-Verifikationen-Tabelle
+        await connection.execute(`
+            CREATE TABLE IF NOT EXISTS lopez_user_2fa_verifications (
+                id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                user_id BIGINT NOT NULL,
+                token VARCHAR(10) NOT NULL,
+                verified BOOLEAN DEFAULT FALSE,
+                expires_at TIMESTAMP NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES lopez_users(id) ON DELETE CASCADE,
+                INDEX idx_user_id (user_id),
+                INDEX idx_token (token),
+                INDEX idx_expires_at (expires_at)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        `);
+        console.log("✅ Datenbank-Tabellen erfolgreich erstellt/aktualisiert");
+    } catch (error) {
+        console.error("❌ Datenbank-Initialisierungsfehler:", error);
+        throw error;
+    }
+}
+async function closeConnection() {
+    if (pool) {
+        await pool.end();
+        pool = null;
+        console.log("✅ MySQL Connection Pool geschlossen");
+    }
+}
+async function generateKundennummer() {
+    try {
+        const connection = await getConnection();
+        // Datums- und Zeitbasiertes Format: YYYYMMDDHHMM-1 (nur ein Trennzeichen vor der Nummer)
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        const hour = String(now.getHours()).padStart(2, "0");
+        const minute = String(now.getMinutes()).padStart(2, "0");
+        const prefix = `${year}${month}${day}${hour}${minute}`;
+        // Nächste Nummer für diese Stunde/Minute ermitteln
+        const [rows] = await connection.execute(`SELECT MAX(CAST(SUBSTRING(kundennummer, 13) AS UNSIGNED)) as max_num 
+       FROM lopez_customers 
+       WHERE kundennummer LIKE ?`, [
+            `${prefix}-%`
+        ]);
+        const maxNum = rows[0]?.max_num || 0;
+        const nextNum = maxNum + 1;
+        // Format: YYYYMMDDHHMM-1 (z.B. 202511012210-1)
+        return `${prefix}-${nextNum}`;
+    } catch (error) {
+        console.error("❌ Kundennummer-Generierung fehlgeschlagen:", error);
+        // Fallback: Timestamp-basiert
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        const hour = String(now.getHours()).padStart(2, "0");
+        const minute = String(now.getMinutes()).padStart(2, "0");
+        const prefix = `${year}${month}${day}${hour}${minute}`;
+        return `${prefix}-${String(Date.now()).slice(-1)}`;
+    }
+}
+}),
+"[project]/src/lib/audit-service.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// AUDIT SERVICE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-01-19
+// Zweck: Erweiterte Compliance-Protokollierung
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "AuditService",
+    ()=>AuditService
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/database.ts [app-route] (ecmascript)");
+;
+class AuditService {
+    // =====================================================
+    // AUDIT-LOGGING
+    // =====================================================
+    static async logAudit(auditData) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                INSERT INTO lopez_audit_logs 
+                (table_name, record_id, action, old_values, new_values, user_id, username, ip_address, user_agent, session_id, risk_level, compliance_category)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `, [
+                auditData.table_name,
+                auditData.record_id,
+                auditData.action,
+                auditData.old_values ? JSON.stringify(auditData.old_values) : null,
+                auditData.new_values ? JSON.stringify(auditData.new_values) : null,
+                auditData.user_id,
+                auditData.username || null,
+                auditData.ip_address || null,
+                auditData.user_agent || null,
+                auditData.session_id || null,
+                auditData.risk_level,
+                auditData.compliance_category
+            ]);
+            return true;
+        } catch (error) {
+            console.error("❌ Audit-Logging fehlgeschlagen:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // SPEZIFISCHE AUDIT-EVENTS
+    // =====================================================
+    static async logLogin(userId, username, ipAddress, userAgent, sessionId) {
+        await this.logAudit({
+            table_name: "lopez_users",
+            record_id: userId,
+            action: "LOGIN",
+            user_id: userId,
+            username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            session_id: sessionId,
+            risk_level: "LOW",
+            compliance_category: "AUTHENTICATION"
+        });
+    }
+    static async logLogout(userId, username, ipAddress, userAgent, sessionId) {
+        await this.logAudit({
+            table_name: "lopez_users",
+            record_id: userId,
+            action: "LOGOUT",
+            user_id: userId,
+            username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            session_id: sessionId,
+            risk_level: "LOW",
+            compliance_category: "AUTHENTICATION"
+        });
+    }
+    static async log2FASetup(userId, username, ipAddress, userAgent) {
+        await this.logAudit({
+            table_name: "lopez_user_2fa",
+            record_id: userId,
+            action: "2FA_SETUP",
+            user_id: userId,
+            username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            risk_level: "MEDIUM",
+            compliance_category: "SECURITY_EVENT"
+        });
+    }
+    static async log2FAVerify(userId, username, success, ipAddress, userAgent) {
+        await this.logAudit({
+            table_name: "lopez_user_2fa",
+            record_id: userId,
+            action: "2FA_VERIFY",
+            new_values: {
+                success
+            },
+            user_id: userId,
+            username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            risk_level: success ? "LOW" : "HIGH",
+            compliance_category: "AUTHENTICATION"
+        });
+    }
+    static async logPasswordChange(userId, username, ipAddress, userAgent) {
+        await this.logAudit({
+            table_name: "lopez_users",
+            record_id: userId,
+            action: "PASSWORD_CHANGE",
+            user_id: userId,
+            username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            risk_level: "MEDIUM",
+            compliance_category: "SECURITY_EVENT"
+        });
+    }
+    static async logRoleAssignment(userId, targetUserId, roleName, assignedBy, ipAddress, userAgent) {
+        await this.logAudit({
+            table_name: "lopez_user_roles",
+            record_id: targetUserId,
+            action: "ROLE_ASSIGN",
+            new_values: {
+                role_name: roleName,
+                assigned_by: assignedBy
+            },
+            user_id: userId,
+            username: assignedBy,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            risk_level: "HIGH",
+            compliance_category: "AUTHORIZATION"
+        });
+    }
+    static async logDataAccess(userId, username, tableName, recordId, action, ipAddress, userAgent) {
+        await this.logAudit({
+            table_name: tableName,
+            record_id: recordId,
+            action: action,
+            user_id: userId,
+            username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            risk_level: "LOW",
+            compliance_category: "DATA_ACCESS"
+        });
+    }
+    static async logDataModification(userId, username, tableName, recordId, action, oldValues, newValues, ipAddress, userAgent) {
+        await this.logAudit({
+            table_name: tableName,
+            record_id: recordId,
+            action: action,
+            old_values: oldValues,
+            new_values: newValues,
+            user_id: userId,
+            username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            risk_level: "MEDIUM",
+            compliance_category: "DATA_MODIFICATION"
+        });
+    }
+    // =====================================================
+    // AUDIT-ABFRAGEN
+    // =====================================================
+    static async getAuditLogs(filters = {}) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const { table_name, action, user_id, risk_level, compliance_category, date_from, date_to, page = 1, limit = 50 } = filters;
+            const offset = (page - 1) * limit;
+            // WHERE-Bedingungen aufbauen
+            const whereConditions = [];
+            const queryParams = [];
+            if (table_name) {
+                whereConditions.push("table_name = ?");
+                queryParams.push(table_name);
+            }
+            if (action) {
+                whereConditions.push("action = ?");
+                queryParams.push(action);
+            }
+            if (user_id) {
+                whereConditions.push("user_id = ?");
+                queryParams.push(user_id);
+            }
+            if (risk_level) {
+                whereConditions.push("risk_level = ?");
+                queryParams.push(risk_level);
+            }
+            if (compliance_category) {
+                whereConditions.push("compliance_category = ?");
+                queryParams.push(compliance_category);
+            }
+            if (date_from) {
+                whereConditions.push("created_at >= ?");
+                queryParams.push(date_from);
+            }
+            if (date_to) {
+                whereConditions.push("created_at <= ?");
+                queryParams.push(date_to);
+            }
+            const whereClause = whereConditions.length > 0 ? `WHERE ${whereConditions.join(" AND ")}` : "";
+            // Gesamtanzahl ermitteln
+            const countQuery = `SELECT COUNT(*) as total FROM lopez_audit_logs ${whereClause}`;
+            const [countRows] = await connection.execute(countQuery, queryParams);
+            const total = countRows[0].total;
+            // Logs laden
+            const logsQuery = `
+                SELECT * FROM lopez_audit_logs 
+                ${whereClause}
+                ORDER BY created_at DESC
+                LIMIT ? OFFSET ?
+            `;
+            const [logRows] = await connection.execute(logsQuery, [
+                ...queryParams,
+                limit,
+                offset
+            ]);
+            return {
+                logs: logRows,
+                total
+            };
+        } catch (error) {
+            console.error("❌ Audit-Logs-Abfrage fehlgeschlagen:", error);
+            throw error;
+        }
+    }
+    static async getAuditStats(dateFrom, dateTo) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const dateFilter = dateFrom && dateTo ? `WHERE created_at BETWEEN ? AND ?` : "";
+            const dateParams = dateFrom && dateTo ? [
+                dateFrom,
+                dateTo
+            ] : [];
+            // Gesamtanzahl
+            const [totalRows] = await connection.execute(`SELECT COUNT(*) as total FROM lopez_audit_logs ${dateFilter}`, dateParams);
+            const total_logs = totalRows[0].total;
+            // Nach Aktion
+            const [actionRows] = await connection.execute(`SELECT action, COUNT(*) as count FROM lopez_audit_logs ${dateFilter} GROUP BY action`, dateParams);
+            const logs_by_action = actionRows.reduce((acc, row)=>{
+                acc[row.action] = row.count;
+                return acc;
+            }, {});
+            // Nach Risiko-Level
+            const [riskRows] = await connection.execute(`SELECT risk_level, COUNT(*) as count FROM lopez_audit_logs ${dateFilter} GROUP BY risk_level`, dateParams);
+            const logs_by_risk_level = riskRows.reduce((acc, row)=>{
+                acc[row.risk_level] = row.count;
+                return acc;
+            }, {});
+            // Nach Kategorie
+            const [categoryRows] = await connection.execute(`SELECT compliance_category, COUNT(*) as count FROM lopez_audit_logs ${dateFilter} GROUP BY compliance_category`, dateParams);
+            const logs_by_category = categoryRows.reduce((acc, row)=>{
+                acc[row.compliance_category] = row.count;
+                return acc;
+            }, {});
+            // Nach Benutzer
+            const [userRows] = await connection.execute(`SELECT username, COUNT(*) as count FROM lopez_audit_logs ${dateFilter} GROUP BY username ORDER BY count DESC LIMIT 10`, dateParams);
+            const logs_by_user = userRows.reduce((acc, row)=>{
+                acc[row.username] = row.count;
+                return acc;
+            }, {});
+            // Letzte Aktivitäten
+            const [recentRows] = await connection.execute(`SELECT * FROM lopez_audit_logs ${dateFilter} ORDER BY created_at DESC LIMIT 10`, dateParams);
+            const recent_activity = recentRows;
+            return {
+                total_logs,
+                logs_by_action,
+                logs_by_risk_level,
+                logs_by_category,
+                logs_by_user,
+                recent_activity
+            };
+        } catch (error) {
+            console.error("❌ Audit-Statistiken fehlgeschlagen:", error);
+            throw error;
+        }
+    }
+    // =====================================================
+    // COMPLIANCE-REPORTING
+    // =====================================================
+    static async generateComplianceReport(dateFrom, dateTo) {
+        try {
+            const stats = await this.getAuditStats(dateFrom, dateTo);
+            return {
+                report_period: {
+                    from: dateFrom,
+                    to: dateTo
+                },
+                generated_at: new Date().toISOString(),
+                summary: {
+                    total_events: stats.total_logs,
+                    high_risk_events: stats.logs_by_risk_level.HIGH || 0,
+                    critical_events: stats.logs_by_risk_level.CRITICAL || 0,
+                    security_events: stats.logs_by_category.SECURITY_EVENT || 0,
+                    data_modifications: stats.logs_by_category.DATA_MODIFICATION || 0
+                },
+                details: stats
+            };
+        } catch (error) {
+            console.error("❌ Compliance-Report fehlgeschlagen:", error);
+            throw error;
+        }
+    }
+}
+}),
+"[externals]/fs [external] (fs, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("fs", () => require("fs"));
+
+module.exports = mod;
+}),
+"[externals]/assert [external] (assert, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("assert", () => require("assert"));
+
+module.exports = mod;
+}),
+"[project]/src/lib/2fa-service.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// 2FA SERVICE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-01-19
+// Zweck: Zwei-Faktor-Authentifizierung für Admin-Zugang
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "TwoFactorService",
+    ()=>TwoFactorService
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$qrcode$2f$lib$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/qrcode/lib/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$speakeasy$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/speakeasy/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/database.ts [app-route] (ecmascript)");
+;
+;
+;
+class TwoFactorService {
+    // =====================================================
+    // 2FA-SETUP
+    // =====================================================
+    static async setup2FA(userId, email, username) {
+        try {
+            // Speakeasy Secret generieren (Aegis-kompatibel: TOTP, 30 Sek. Intervalle, 6-stellig)
+            const secret = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$speakeasy$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].generateSecret({
+                name: email || username || `user_${userId}`,
+                issuer: "Lopez IT Welt",
+                length: 32
+            });
+            // otpauth URL für Aegis/Google Authenticator (TOTP, 30 Sekunden, 6-stellig)
+            const otpauthUrl = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$speakeasy$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].otpauthURL({
+                secret: secret.base32,
+                label: email || username || `user_${userId}`,
+                issuer: "Lopez IT Welt",
+                encoding: "base32",
+                algorithm: "sha1",
+                digits: 6,
+                period: 30
+            });
+            // QR-Code generieren
+            const qrCodeUrl = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$qrcode$2f$lib$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].toDataURL(otpauthUrl);
+            // Backup-Codes generieren
+            const backupCodes = this.generateBackupCodes();
+            // Secret in Datenbank speichern (noch nicht aktiviert, erst nach Verifikation)
+            // Das Secret wird erst nach erfolgreicher Verifikation aktiviert
+            return {
+                secret: secret.base32,
+                qrCodeUrl,
+                backupCodes
+            };
+        } catch (error) {
+            console.error("❌ 2FA-Setup fehlgeschlagen:", error);
+            throw error;
+        }
+    }
+    // =====================================================
+    // 2FA-VERIFIKATION
+    // =====================================================
+    static async verifyToken(userId, token) {
+        try {
+            // User Secret aus Datenbank laden
+            const userSecret = await this.getUserSecret(userId);
+            if (!userSecret) {
+                return false;
+            }
+            // Token verifizieren
+            const verified = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$speakeasy$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].totp.verify({
+                secret: userSecret.secret,
+                token: token,
+                window: 2
+            });
+            if (verified) {
+                // Verifikation in Datenbank speichern
+                await this.saveVerification(userId, token, true);
+                return true;
+            }
+            // Backup-Code prüfen
+            const backupVerified = await this.verifyBackupCode(userId, token);
+            if (backupVerified) {
+                await this.saveVerification(userId, token, true);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error("❌ 2FA-Verifikation fehlgeschlagen:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // BACKUP-CODES
+    // =====================================================
+    static async generateNewBackupCodes(userId) {
+        try {
+            const backupCodes = this.generateBackupCodes();
+            await this.updateUserBackupCodes(userId, backupCodes);
+            return backupCodes;
+        } catch (error) {
+            console.error("❌ Backup-Codes-Generierung fehlgeschlagen:", error);
+            throw error;
+        }
+    }
+    static async verifyBackupCode(userId, code) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT backup_codes FROM lopez_user_2fa WHERE user_id = ?", [
+                userId
+            ]);
+            if (rows.length === 0) {
+                return false;
+            }
+            const backupCodes = JSON.parse(rows[0].backup_codes);
+            const index = backupCodes.indexOf(code);
+            if (index !== -1) {
+                // Backup-Code entfernen (einmalig verwendbar)
+                backupCodes.splice(index, 1);
+                await this.updateUserBackupCodes(userId, backupCodes);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error("❌ Backup-Code-Verifikation fehlgeschlagen:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // 2FA-STATUS
+    // =====================================================
+    static async is2FAEnabled(userId) {
+        try {
+            const userSecret = await this.getUserSecret(userId);
+            return userSecret !== null;
+        } catch (error) {
+            console.error("❌ 2FA-Status-Prüfung fehlgeschlagen:", error);
+            return false;
+        }
+    }
+    static async disable2FA(userId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute("DELETE FROM lopez_user_2fa WHERE user_id = ?", [
+                userId
+            ]);
+            console.log(`✅ 2FA für Benutzer ${userId} deaktiviert`);
+            return true;
+        } catch (error) {
+            console.error("❌ 2FA-Deaktivierung fehlgeschlagen:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // HILFSFUNKTIONEN
+    // =====================================================
+    static generateBackupCodes() {
+        const codes = [];
+        for(let i = 0; i < 10; i++){
+            codes.push(this.generateRandomCode(8));
+        }
+        return codes;
+    }
+    static generateRandomCode(length) {
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let result = "";
+        for(let i = 0; i < length; i++){
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+    static async saveUserSecret(userId, secret, backupCodes) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                INSERT INTO lopez_user_2fa (user_id, secret, backup_codes, created_at)
+                VALUES (?, ?, ?, NOW())
+                ON DUPLICATE KEY UPDATE
+                secret = VALUES(secret),
+                backup_codes = VALUES(backup_codes),
+                updated_at = NOW()
+            `, [
+                userId,
+                secret,
+                JSON.stringify(backupCodes)
+            ]);
+        } catch (error) {
+            console.error("❌ User Secret speichern fehlgeschlagen:", error);
+            throw error;
+        }
+    }
+    static async getUserSecret(userId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT secret, backup_codes FROM lopez_user_2fa WHERE user_id = ?", [
+                userId
+            ]);
+            if (rows.length === 0) {
+                return null;
+            }
+            const row = rows[0];
+            return {
+                secret: row.secret,
+                backupCodes: JSON.parse(row.backup_codes)
+            };
+        } catch (error) {
+            console.error("❌ User Secret laden fehlgeschlagen:", error);
+            return null;
+        }
+    }
+    static async updateUserBackupCodes(userId, backupCodes) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute("UPDATE lopez_user_2fa SET backup_codes = ?, updated_at = NOW() WHERE user_id = ?", [
+                JSON.stringify(backupCodes),
+                userId
+            ]);
+        } catch (error) {
+            console.error("❌ Backup-Codes aktualisieren fehlgeschlagen:", error);
+            throw error;
+        }
+    }
+    static async saveVerification(userId, token, verified) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 Minuten
+            await connection.execute(`
+                INSERT INTO lopez_user_2fa_verifications (user_id, token, verified, expires_at, created_at)
+                VALUES (?, ?, ?, ?, NOW())
+            `, [
+                userId,
+                token,
+                verified,
+                expiresAt
+            ]);
+        } catch (error) {
+            console.error("❌ 2FA-Verifikation speichern fehlgeschlagen:", error);
+        }
+    }
+}
+}),
+"[externals]/http [external] (http, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("http", () => require("http"));
+
+module.exports = mod;
+}),
+"[externals]/https [external] (https, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("https", () => require("https"));
+
+module.exports = mod;
+}),
+"[externals]/dns [external] (dns, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("dns", () => require("dns"));
+
+module.exports = mod;
+}),
+"[externals]/os [external] (os, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("os", () => require("os"));
+
+module.exports = mod;
+}),
+"[externals]/path [external] (path, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}),
+"[externals]/child_process [external] (child_process, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("child_process", () => require("child_process"));
+
+module.exports = mod;
+}),
+"[project]/src/lib/email-service.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// EMAIL SERVICE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-01-19
+// Zweck: E-Mail-Versand für Kundenverwaltung
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "EmailService",
+    ()=>EmailService
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/nodemailer/lib/nodemailer.js [app-route] (ecmascript)");
+;
+class EmailService {
+    transporter;
+    constructor(){
+        this.transporter = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$nodemailer$2f$lib$2f$nodemailer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].createTransporter({
+            host: process.env.SMTP_HOST || "localhost",
+            port: parseInt(process.env.SMTP_PORT || "587"),
+            secure: process.env.SMTP_SECURE === "true",
+            auth: {
+                user: process.env.SMTP_USER || "",
+                pass: process.env.SMTP_PASS || ""
+            }
+        });
+    }
+    // =====================================================
+    // E-MAIL-VERSAND
+    // =====================================================
+    async sendEmail(emailData) {
+        try {
+            const mailOptions = {
+                from: process.env.SMTP_FROM || "noreply@lopez-it-welt.de",
+                to: emailData.to,
+                subject: emailData.subject,
+                text: emailData.text,
+                html: emailData.html
+            };
+            const result = await this.transporter.sendMail(mailOptions);
+            console.log("✅ E-Mail erfolgreich versendet:", result.messageId);
+            return true;
+        } catch (error) {
+            console.error("❌ E-Mail-Versand fehlgeschlagen:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // KUNDEN-E-MAILS
+    // =====================================================
+    async sendCustomerWelcome(customer) {
+        const subject = "Willkommen bei Lopez IT Welt";
+        const html = this.getWelcomeHTML(customer);
+        const text = this.getWelcomeText(customer);
+        return await this.sendEmail({
+            to: customer.email,
+            subject,
+            html,
+            text
+        });
+    }
+    async sendCustomerUpdate(customer, changes) {
+        const subject = "Ihre Kundendaten wurden aktualisiert";
+        const html = this.getUpdateHTML(customer, changes);
+        const text = this.getUpdateText(customer, changes);
+        return await this.sendEmail({
+            to: customer.email,
+            subject,
+            html,
+            text
+        });
+    }
+    // =====================================================
+    // ADMIN-E-MAILS
+    // =====================================================
+    async sendAdminNotification(subject, message, adminEmails) {
+        const html = this.getAdminNotificationHTML(subject, message);
+        const text = this.getAdminNotificationText(subject, message);
+        return await this.sendEmail({
+            to: adminEmails.join(", "),
+            subject,
+            html,
+            text
+        });
+    }
+    // =====================================================
+    // E-MAIL-TEMPLATES
+    // =====================================================
+    getWelcomeHTML(customer) {
+        return `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Willkommen bei Lopez IT Welt</title>
+                <style>
+                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                    .header { background: #1e40af; color: white; padding: 20px; text-align: center; }
+                    .content { padding: 20px; background: #f8fafc; }
+                    .footer { background: #64748b; color: white; padding: 15px; text-align: center; font-size: 12px; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>Willkommen bei Lopez IT Welt</h1>
+                    </div>
+                    <div class="content">
+                        <h2>Hallo ${customer.anrede} ${customer.vorname} ${customer.nachname},</h2>
+                        <p>herzlich willkommen in unserem Kundenverwaltungssystem!</p>
+                        <p><strong>Ihre Kundendaten:</strong></p>
+                        <ul>
+                            <li>Kundennummer: ${customer.kundennummer}</li>
+                            <li>E-Mail: ${customer.email}</li>
+                            <li>Support-Level: ${customer.support_level}</li>
+                            <li>Status: ${customer.status}</li>
+                        </ul>
+                        <p>Bei Fragen stehen wir Ihnen gerne zur Verfügung.</p>
+                        <p>Mit freundlichen Grüßen<br>Ihr Lopez IT Welt Team</p>
+                    </div>
+                    <div class="footer">
+                        <p>© 2025 Lopez IT Welt - Vertraulich</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+    }
+    getWelcomeText(customer) {
+        return `
+            Willkommen bei Lopez IT Welt
+            
+            Hallo ${customer.anrede} ${customer.vorname} ${customer.nachname},
+            
+            herzlich willkommen in unserem Kundenverwaltungssystem!
+            
+            Ihre Kundendaten:
+            - Kundennummer: ${customer.kundennummer}
+            - E-Mail: ${customer.email}
+            - Support-Level: ${customer.support_level}
+            - Status: ${customer.status}
+            
+            Bei Fragen stehen wir Ihnen gerne zur Verfügung.
+            
+            Mit freundlichen Grüßen
+            Ihr Lopez IT Welt Team
+            
+            © 2025 Lopez IT Welt - Vertraulich
+        `;
+    }
+    getUpdateHTML(customer, changes) {
+        return `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Kundendaten aktualisiert</title>
+                <style>
+                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                    .header { background: #1e40af; color: white; padding: 20px; text-align: center; }
+                    .content { padding: 20px; background: #f8fafc; }
+                    .footer { background: #64748b; color: white; padding: 15px; text-align: center; font-size: 12px; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>Kundendaten aktualisiert</h1>
+                    </div>
+                    <div class="content">
+                        <h2>Hallo ${customer.anrede} ${customer.vorname} ${customer.nachname},</h2>
+                        <p>Ihre Kundendaten wurden erfolgreich aktualisiert.</p>
+                        <p><strong>Geänderte Felder:</strong> ${changes.join(", ")}</p>
+                        <p>Bei Fragen stehen wir Ihnen gerne zur Verfügung.</p>
+                        <p>Mit freundlichen Grüßen<br>Ihr Lopez IT Welt Team</p>
+                    </div>
+                    <div class="footer">
+                        <p>© 2025 Lopez IT Welt - Vertraulich</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+    }
+    getUpdateText(customer, changes) {
+        return `
+            Kundendaten aktualisiert
+            
+            Hallo ${customer.anrede} ${customer.vorname} ${customer.nachname},
+            
+            Ihre Kundendaten wurden erfolgreich aktualisiert.
+            
+            Geänderte Felder: ${changes.join(", ")}
+            
+            Bei Fragen stehen wir Ihnen gerne zur Verfügung.
+            
+            Mit freundlichen Grüßen
+            Ihr Lopez IT Welt Team
+            
+            © 2025 Lopez IT Welt - Vertraulich
+        `;
+    }
+    getAdminNotificationHTML(subject, message) {
+        return `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <title>Admin-Benachrichtigung</title>
+                <style>
+                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                    .header { background: #dc2626; color: white; padding: 20px; text-align: center; }
+                    .content { padding: 20px; background: #f8fafc; }
+                    .footer { background: #64748b; color: white; padding: 15px; text-align: center; font-size: 12px; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>Admin-Benachrichtigung</h1>
+                    </div>
+                    <div class="content">
+                        <h2>${subject}</h2>
+                        <p>${message}</p>
+                        <p><strong>Zeitstempel:</strong> ${new Date().toLocaleString("de-DE")}</p>
+                    </div>
+                    <div class="footer">
+                        <p>© 2025 Lopez IT Welt - Vertraulich</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        `;
+    }
+    getAdminNotificationText(subject, message) {
+        return `
+            Admin-Benachrichtigung
+            
+            ${subject}
+            
+            ${message}
+            
+            Zeitstempel: ${new Date().toLocaleString("de-DE")}
+            
+            © 2025 Lopez IT Welt - Vertraulich
+        `;
+    }
+    // =====================================================
+    // E-MAIL-VALIDIERUNG
+    // =====================================================
+    async validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    // =====================================================
+    // DOMAIN-STRATEGIE METHODS
+    // =====================================================
+    /**
+   * Generiert E-Mail-Adresse basierend auf Domain-Strategie
+   * Gesetzliche Namenskonvention: Doppel-Nachname zusammen + Vorname
+   */ static generateEmailAddress(userData) {
+        const { first_name, last_name, domain_type } = userData;
+        // Gesetzliche Namenskonvention: Doppel-Nachname zusammenfügen
+        const cleanFirstName = first_name.toLowerCase().replace(/[^a-zäöüß]/g, "");
+        const cleanLastName = last_name.toLowerCase().replace(/[^a-zäöüß]/g, "").replace(/\s+/g, "");
+        const domain = domain_type === "external" ? "lopezitwelt.de" : "lopez-team.de";
+        return `${cleanFirstName}.${cleanLastName}@${domain}`;
+    }
+    /**
+   * Generiert Display-Name für Benutzer
+   */ static generateDisplayName(firstName, lastName, role) {
+        const fullName = `${firstName} ${lastName}`;
+        return role ? `${fullName} - ${role}` : fullName;
+    }
+    /**
+   * Validiert E-Mail-Adresse basierend auf Domain-Strategie
+   */ static validateEmailDomain(email, domainType) {
+        const expectedDomain = domainType === "external" ? "lopezitwelt.de" : "lopez-team.de";
+        return email.endsWith(`@${expectedDomain}`);
+    }
+    // =====================================================
+    // E-MAIL-KONFIGURATION TESTEN
+    // =====================================================
+    async testConnection() {
+        try {
+            await this.transporter.verify();
+            console.log("✅ E-Mail-Verbindung erfolgreich getestet");
+            return true;
+        } catch (error) {
+            console.error("❌ E-Mail-Verbindung fehlgeschlagen:", error);
+            return false;
+        }
+    }
+}
+}),
+"[project]/src/lib/domain-strategy.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// DOMAIN STRATEGY - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-09-20
+// Zweck: Domain-Strategie Implementation (lopezitwelt.de / lopez-team.de)
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "DomainStrategy",
+    ()=>DomainStrategy
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$email$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/email-service.ts [app-route] (ecmascript)");
+;
+class DomainStrategy {
+    // =====================================================
+    // CHEF-BENUTZER ERSTELLEN
+    // =====================================================
+    /**
+   * Erstellt Chef-Benutzer (ramiro.lopezrodriguez)
+   */ static createChefUser() {
+        return {
+            first_name: "Ramiro",
+            last_name: "Lopez Rodriguez",
+            role: "Chef",
+            domain_type: "external"
+        };
+    }
+    /**
+   * Erstellt Sohn-Benutzer (ramiro.lopezmclean)
+   */ static createSohnUser() {
+        return {
+            first_name: "Ramiro",
+            last_name: "Lopez Mc Lean",
+            role: "CTO",
+            domain_type: "external"
+        };
+    }
+    // =====================================================
+    // E-MAIL-GENERIERUNG
+    // =====================================================
+    /**
+   * Generiert alle E-Mail-Adressen für einen Benutzer
+   * Gesetzliche Namenskonvention: Doppel-Nachname zusammen + Vorname
+   */ static generateUserEmails(user) {
+        const externalEmail = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$email$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EmailService"].generateEmailAddress({
+            first_name: user.first_name,
+            last_name: user.last_name,
+            domain_type: "external"
+        });
+        const internalEmail = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$email$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EmailService"].generateEmailAddress({
+            first_name: user.first_name,
+            last_name: user.last_name,
+            domain_type: "internal"
+        });
+        const displayName = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$email$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EmailService"].generateDisplayName(user.first_name, user.last_name, user.role);
+        return {
+            external: externalEmail,
+            internal: internalEmail,
+            display_name: displayName
+        };
+    }
+    // =====================================================
+    // VALIDIERUNG
+    // =====================================================
+    /**
+   * Validiert Domain-Strategie E-Mail-Adressen
+   */ static validateDomainStrategy(user) {
+        const emails = this.generateUserEmails(user);
+        const externalValid = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$email$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EmailService"].validateEmailDomain(emails.external, "external");
+        const internalValid = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$email$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EmailService"].validateEmailDomain(emails.internal, "internal");
+        return {
+            external_valid: externalValid,
+            internal_valid: internalValid,
+            emails: {
+                external: emails.external,
+                internal: emails.internal
+            }
+        };
+    }
+    // =====================================================
+    // DEMO-DATEN
+    // =====================================================
+    /**
+   * Erstellt Demo-Benutzer für Domain-Strategie
+   */ static createDemoUsers() {
+        return [
+            this.createChefUser(),
+            this.createSohnUser(),
+            {
+                first_name: "Max",
+                last_name: "Mustermann",
+                role: "Support",
+                domain_type: "internal"
+            },
+            {
+                first_name: "Anna",
+                last_name: "Schmidt",
+                role: "Sales",
+                domain_type: "internal"
+            }
+        ];
+    }
+    // =====================================================
+    // SQL-INSERT GENERIERUNG
+    // =====================================================
+    /**
+   * Generiert SQL-Insert für Chef-Benutzer
+   * Gesetzliche Namenskonvention: ramiro.lopezrodriguez
+   */ static generateChefUserSQL() {
+        const chef = this.createChefUser();
+        const emails = this.generateUserEmails(chef);
+        return `
+INSERT INTO lopez_users (
+    username, email, email_external, email_internal, password_hash,
+    first_name, last_name, display_name, domain_type, status
+) VALUES (
+    'ramiro.lopezrodriguez',
+    '${emails.external}',
+    '${emails.external}',
+    '${emails.internal}',
+    '$2b$12$hashed_password_here', -- In Produktion: echtes Hash
+    '${chef.first_name}',
+    '${chef.last_name}',
+    '${emails.display_name}',
+    '${chef.domain_type}',
+    'active'
+);`;
+    }
+    /**
+   * Generiert SQL-Insert für Sohn-Benutzer
+   * Gesetzliche Namenskonvention: ramiro.lopezmclean
+   */ static generateSohnUserSQL() {
+        const sohn = this.createSohnUser();
+        const emails = this.generateUserEmails(sohn);
+        return `
+INSERT INTO lopez_users (
+    username, email, email_external, email_internal, password_hash,
+    first_name, last_name, display_name, domain_type, status
+) VALUES (
+    'ramiro.lopezmclean',
+    '${emails.external}',
+    '${emails.external}',
+    '${emails.internal}',
+    '$2b$12$hashed_password_here', -- In Produktion: echtes Hash
+    '${sohn.first_name}',
+    '${sohn.last_name}',
+    '${emails.display_name}',
+    '${sohn.domain_type}',
+    'active'
+);`;
+    }
+}
+}),
+"[externals]/argon2 [external] (argon2, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("argon2", () => require("argon2"));
+
+module.exports = mod;
+}),
+"[project]/src/lib/uuid-service.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// UUID SERVICE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-09-20
+// Zweck: UUID v4/v7 Generation für Enterprise++ Sicherheit
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+// Edge Runtime compatible UUID generation
+// import { randomBytes, randomUUID } from 'crypto';
+// =====================================================
+// INTERFACES
+// =====================================================
+__turbopack_context__.s([
+    "UUIDService",
+    ()=>UUIDService
+]);
+class UUIDService {
+    // =====================================================
+    // UUID GENERATION
+    // =====================================================
+    /**
+   * Generiert UUID v4 (Standard)
+   * Nicht erratbar, sicher, weltweit Standard
+   */ static generateV4() {
+        // Edge Runtime compatible UUID v4 generation
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === "x" ? r : r & 0x3 | 0x8;
+            return v.toString(16);
+        });
+    }
+    /**
+   * Generiert UUID v7 (Zeitstempel-basiert)
+   * Sortierbar, zeitlich geordnet
+   */ static generateV7() {
+        // UUID v7 Implementation - Edge Runtime compatible
+        const timestamp = Date.now();
+        const random = new Uint8Array(10);
+        crypto.getRandomValues(random);
+        // Timestamp (48 bits)
+        const timeHigh = timestamp >>> 16 & 0xffff;
+        const timeLow = timestamp & 0xffff;
+        // Random data (74 bits)
+        const random1 = random.readUInt16BE(0) & 0x0fff; // 12 bits
+        const random2 = random.readUInt16BE(2) & 0x3fff; // 14 bits
+        const random3 = random.readUInt16BE(4) & 0x3fff; // 14 bits
+        const random4 = random.readUInt16BE(6) & 0x3fff; // 14 bits
+        const random5 = random.readUInt16BE(8) & 0x3fff; // 14 bits
+        // Version 7 (0111)
+        const version = 0x7000;
+        // Variant (10)
+        const variant = 0x8000;
+        // UUID v7 Format: xxxxxxxx-xxxx-7xxx-xxxx-xxxxxxxxxxxx
+        const uuid = [
+            timeHigh.toString(16).padStart(4, "0"),
+            timeLow.toString(16).padStart(4, "0"),
+            "-",
+            (random1 | version).toString(16).padStart(4, "0"),
+            "-",
+            (random2 | variant).toString(16).padStart(4, "0"),
+            "-",
+            random3.toString(16).padStart(4, "0"),
+            "-",
+            random4.toString(16).padStart(4, "0"),
+            random5.toString(16).padStart(4, "0")
+        ].join("");
+        return uuid;
+    }
+    /**
+   * Generiert sichere UUID basierend auf Konfiguration
+   */ static generate(config = {
+        version: "v4",
+        secure: true
+    }) {
+        if (config.version === "v7") {
+            return this.generateV7();
+        }
+        return this.generateV4();
+    }
+    // =====================================================
+    // VALIDATION
+    // =====================================================
+    /**
+   * Validiert UUID Format
+   */ static isValid(uuid) {
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        return uuidRegex.test(uuid);
+    }
+    /**
+   * Validiert UUID v4
+   */ static isV4(uuid) {
+        if (!this.isValid(uuid)) return false;
+        return uuid[14] === "4";
+    }
+    /**
+   * Validiert UUID v7
+   */ static isV7(uuid) {
+        if (!this.isValid(uuid)) return false;
+        return uuid[14] === "7";
+    }
+    // =====================================================
+    // ENTERPRISE++ FEATURES
+    // =====================================================
+    /**
+   * Generiert Owner UUID (spezielle Kennzeichnung)
+   */ static generateOwnerUUID() {
+        const uuid = this.generateV4();
+        // Owner UUIDs haben spezielle Kennzeichnung
+        return `owner_${uuid}`;
+    }
+    /**
+   * Generiert Admin UUID
+   */ static generateAdminUUID() {
+        return this.generateV4();
+    }
+    /**
+   * Generiert Customer UUID
+   */ static generateCustomerUUID() {
+        return this.generateV4();
+    }
+    /**
+   * Generiert Session UUID
+   */ static generateSessionUUID() {
+        return this.generateV4();
+    }
+    // =====================================================
+    // SECURITY FEATURES
+    // =====================================================
+    /**
+   * Generiert sichere Random String
+   */ static generateSecureRandom(length = 32) {
+        return randomBytes(length).toString("hex");
+    }
+    /**
+   * Generiert Salt für Passwort-Hashing
+   */ static generateSalt() {
+        return randomBytes(16).toString("hex");
+    }
+    /**
+   * Generiert Pepper für Passwort-Hashing
+   */ static generatePepper() {
+        return randomBytes(16).toString("hex");
+    }
+}
+}),
+"[project]/src/lib/argon2-service.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// ARGON2ID SERVICE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-09-20
+// Zweck: Argon2id Passwort-Hashing für Enterprise++ Sicherheit
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "Argon2Service",
+    ()=>Argon2Service
+]);
+var __TURBOPACK__imported__module__$5b$externals$5d2f$argon2__$5b$external$5d$__$28$argon2$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/argon2 [external] (argon2, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$uuid$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/uuid-service.ts [app-route] (ecmascript)");
+;
+;
+class Argon2Service {
+    // =====================================================
+    // KONFIGURATION
+    // =====================================================
+    /**
+   * Enterprise++ Argon2id Konfiguration
+   * DSGVO/ISO27001-konform
+   */ static CONFIG = {
+        type: __TURBOPACK__imported__module__$5b$externals$5d2f$argon2__$5b$external$5d$__$28$argon2$2c$__cjs$29$__["default"].argon2id,
+        memoryCost: 65536,
+        timeCost: 3,
+        parallelism: 4,
+        hashLength: 32
+    };
+    /**
+   * Pepper für zusätzliche Sicherheit
+   * Sollte in .env gespeichert werden
+   */ static PEPPER = process.env.ARGON2_PEPPER || "default-pepper-change-in-production";
+    // =====================================================
+    // PASSWORD HASHING
+    // =====================================================
+    /**
+   * Hasht Passwort mit Argon2id + Salt + Pepper
+   */ static async hashPassword(password) {
+        try {
+            // Salt generieren
+            const salt = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$uuid$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["UUIDService"].generateSalt();
+            // Pepper hinzufügen
+            const passwordWithPepper = password + this.PEPPER;
+            // Argon2id Hash generieren
+            const hash = await __TURBOPACK__imported__module__$5b$externals$5d2f$argon2__$5b$external$5d$__$28$argon2$2c$__cjs$29$__["default"].hash(passwordWithPepper, {
+                type: this.CONFIG.type,
+                memoryCost: this.CONFIG.memoryCost,
+                timeCost: this.CONFIG.timeCost,
+                parallelism: this.CONFIG.parallelism,
+                hashLength: this.CONFIG.hashLength,
+                salt: Buffer.from(salt, "hex")
+            });
+            return {
+                hash,
+                salt,
+                pepper: this.PEPPER,
+                config: this.CONFIG
+            };
+        } catch (error) {
+            console.error("Argon2 Hash Fehler:", error);
+            throw new Error("Passwort-Hashing fehlgeschlagen");
+        }
+    }
+    /**
+   * Verifiziert Passwort gegen Hash
+   */ static async verifyPassword(password, hash, salt) {
+        try {
+            // Pepper hinzufügen
+            const passwordWithPepper = password + this.PEPPER;
+            // Hash verifizieren
+            return await __TURBOPACK__imported__module__$5b$externals$5d2f$argon2__$5b$external$5d$__$28$argon2$2c$__cjs$29$__["default"].verify(hash, passwordWithPepper);
+        } catch (error) {
+            console.error("Argon2 Verify Fehler:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // PASSWORD STRENGTH
+    // =====================================================
+    /**
+   * Prüft Passwort-Stärke (Enterprise++ Standard)
+   */ static validatePasswordStrength(password) {
+        const requirements = {
+            minLength: password.length >= 12,
+            hasUppercase: /[A-Z]/.test(password),
+            hasLowercase: /[a-z]/.test(password),
+            hasNumbers: /\d/.test(password),
+            hasSpecialChars: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
+        };
+        const score = Object.values(requirements).filter(Boolean).length;
+        let level;
+        if (score < 3) level = "weak";
+        else if (score < 4) level = "okay";
+        else if (score < 5) level = "strong";
+        else level = "very_strong";
+        return {
+            isValid: requirements.minLength && score >= 4,
+            score,
+            level,
+            requirements
+        };
+    }
+    // =====================================================
+    // SECURITY FEATURES
+    // =====================================================
+    /**
+   * Generiert sicheres temporäres Passwort
+   */ static generateSecurePassword(length = 16) {
+        const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+        let password = "";
+        for(let i = 0; i < length; i++){
+            password += charset.charAt(Math.floor(Math.random() * charset.length));
+        }
+        return password;
+    }
+    /**
+   * Prüft ob Passwort in der Historie ist
+   */ static async isPasswordInHistory(password, history) {
+        for (const oldHash of history){
+            if (await this.verifyPassword(password, oldHash, "")) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // =====================================================
+    // AUDIT & COMPLIANCE
+    // =====================================================
+    /**
+   * Erstellt Audit-Log für Passwort-Änderung
+   */ static createPasswordChangeAudit(userId, action) {
+        return {
+            user_id: userId,
+            action: `password_${action}`,
+            severity: "medium",
+            compliance_category: "security",
+            timestamp: new Date().toISOString(),
+            details: {
+                hashing_algorithm: "argon2id",
+                memory_cost: this.CONFIG.memoryCost,
+                time_cost: this.CONFIG.timeCost,
+                parallelism: this.CONFIG.parallelism
+            }
+        };
+    }
+}
+}),
+"[project]/src/lib/enterprise-user-service.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// ENTERPRISE++ USER SERVICE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-09-20
+// Zweck: Enterprise++ Benutzer-Management mit UUID & Argon2id
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "EnterpriseUserService",
+    ()=>EnterpriseUserService
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$argon2$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/argon2-service.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/database.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$uuid$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/uuid-service.ts [app-route] (ecmascript)");
+;
+;
+;
+class EnterpriseUserService {
+    // =====================================================
+    // USER CREATION
+    // =====================================================
+    /**
+   * Erstellt neuen Enterprise++ Benutzer
+   */ static async createUser(userData) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // UUID generieren
+            const userId = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$uuid$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["UUIDService"].generateV4();
+            // Passwort hashen
+            const hashResult = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$argon2$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["Argon2Service"].hashPassword(userData.password);
+            // Display Name generieren
+            const displayName = userData.display_name || `${userData.first_name} ${userData.last_name}${userData.role ? ` - ${userData.role}` : ""}`;
+            // SQL Insert
+            const [result] = await connection.execute(`
+                INSERT INTO lopez_enterprise_users (
+                    id, username, email, email_external, email_internal,
+                    first_name, last_name, display_name, password_hash, salt, pepper,
+                    is_owner, is_admin, is_employee, is_customer, role, permissions,
+                    domain_type, status, password_changed_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+            `, [
+                userId,
+                userData.username,
+                userData.email,
+                userData.email_external || null,
+                userData.email_internal || null,
+                userData.first_name,
+                userData.last_name,
+                displayName,
+                hashResult.hash,
+                hashResult.salt,
+                hashResult.pepper,
+                userData.is_owner || false,
+                userData.is_admin || false,
+                userData.is_employee || false,
+                userData.is_customer || false,
+                userData.role || "user",
+                JSON.stringify(userData.permissions || []),
+                userData.domain_type || "internal",
+                "pending"
+            ]);
+            // Passwort-Historie speichern
+            await this.addPasswordToHistory(userId, hashResult.hash, hashResult.salt);
+            // Benutzer laden und zurückgeben
+            const user = await this.getUserById(userId);
+            if (!user) {
+                throw new Error("Benutzer konnte nicht erstellt werden");
+            }
+            return user;
+        } catch (error) {
+            console.error("Enterprise User Creation Fehler:", error);
+            throw new Error("Benutzer konnte nicht erstellt werden");
+        }
+    }
+    /**
+   * Erstellt Owner-Benutzer (Chef)
+   */ static async createOwnerUser(userData) {
+        const ownerData = {
+            ...userData,
+            is_owner: true,
+            is_admin: true,
+            role: "Owner",
+            permissions: [
+                "*"
+            ],
+            domain_type: "external"
+        };
+        return await this.createUser(ownerData);
+    }
+    /**
+   * Erstellt Admin-Benutzer
+   */ static async createAdminUser(userData) {
+        const adminData = {
+            ...userData,
+            is_admin: true,
+            role: "Admin",
+            permissions: [
+                "admin.*",
+                "user.*",
+                "customer.*"
+            ],
+            domain_type: "external"
+        };
+        return await this.createUser(adminData);
+    }
+    /**
+   * Erstellt Employee-Benutzer
+   */ static async createEmployeeUser(userData) {
+        const employeeData = {
+            ...userData,
+            is_employee: true,
+            role: "Employee",
+            permissions: [
+                "customer.read",
+                "customer.update"
+            ],
+            domain_type: "internal"
+        };
+        return await this.createUser(employeeData);
+    }
+    /**
+   * Erstellt Customer-Benutzer
+   */ static async createCustomerUser(userData) {
+        const customerData = {
+            ...userData,
+            is_customer: true,
+            role: "Customer",
+            permissions: [
+                "profile.read",
+                "profile.update"
+            ],
+            domain_type: "external"
+        };
+        return await this.createUser(customerData);
+    }
+    // =====================================================
+    // USER RETRIEVAL
+    // =====================================================
+    /**
+   * Lädt Benutzer nach ID
+   */ static async getUserById(id) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT * FROM lopez_enterprise_users WHERE id = ?
+            `, [
+                id
+            ]);
+            const users = rows;
+            return users[0] || null;
+        } catch (error) {
+            console.error("Get User by ID Fehler:", error);
+            return null;
+        }
+    }
+    /**
+   * Lädt Benutzer nach Username
+   */ static async getUserByUsername(username) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT * FROM lopez_enterprise_users WHERE username = ?
+            `, [
+                username
+            ]);
+            const users = rows;
+            return users[0] || null;
+        } catch (error) {
+            console.error("Get User by Username Fehler:", error);
+            return null;
+        }
+    }
+    /**
+   * Lädt Chef-Benutzer (Development Mode)
+   */ static async getChefUser() {
+        return await this.getUserByUsername("ramiro.lopezrodriguez");
+    }
+    /**
+   * Lädt alle Admin-Benutzer
+   */ static async getAdminUsers() {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT * FROM lopez_enterprise_users 
+                WHERE is_admin = true OR is_owner = true
+                ORDER BY created_at DESC
+            `);
+            return rows;
+        } catch (error) {
+            console.error("Get Admin Users Fehler:", error);
+            return [];
+        }
+    }
+    /**
+   * Lädt Benutzer nach Email
+   */ static async getUserByEmail(email) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT * FROM lopez_enterprise_users WHERE email = ? OR email_external = ? OR email_internal = ?
+            `, [
+                email,
+                email,
+                email
+            ]);
+            const users = rows;
+            return users[0] || null;
+        } catch (error) {
+            console.error("Get User by Email Fehler:", error);
+            return null;
+        }
+    }
+    /**
+   * Lädt alle Benutzer
+   */ static async getAllUsers() {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT * FROM lopez_enterprise_users ORDER BY created_at DESC
+            `);
+            return rows;
+        } catch (error) {
+            console.error("Get All Users Fehler:", error);
+            return [];
+        }
+    }
+    // =====================================================
+    // USER UPDATES
+    // =====================================================
+    /**
+   * Aktualisiert Benutzer
+   */ static async updateUser(id, userData) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // Update-Felder dynamisch erstellen
+            const updateFields = [];
+            const values = [];
+            if (userData.first_name) {
+                updateFields.push("first_name = ?");
+                values.push(userData.first_name);
+            }
+            if (userData.last_name) {
+                updateFields.push("last_name = ?");
+                values.push(userData.last_name);
+            }
+            if (userData.display_name) {
+                updateFields.push("display_name = ?");
+                values.push(userData.display_name);
+            }
+            if (userData.email) {
+                updateFields.push("email = ?");
+                values.push(userData.email);
+            }
+            if (userData.email_external) {
+                updateFields.push("email_external = ?");
+                values.push(userData.email_external);
+            }
+            if (userData.email_internal) {
+                updateFields.push("email_internal = ?");
+                values.push(userData.email_internal);
+            }
+            if (userData.status) {
+                updateFields.push("status = ?");
+                values.push(userData.status);
+            }
+            if (userData.role) {
+                updateFields.push("role = ?");
+                values.push(userData.role);
+            }
+            if (userData.permissions) {
+                updateFields.push("permissions = ?");
+                values.push(JSON.stringify(userData.permissions));
+            }
+            if (userData.domain_type) {
+                updateFields.push("domain_type = ?");
+                values.push(userData.domain_type);
+            }
+            if (updateFields.length === 0) {
+                return false;
+            }
+            updateFields.push("updated_at = NOW()");
+            values.push(id);
+            await connection.execute(`
+                UPDATE lopez_enterprise_users 
+                SET ${updateFields.join(", ")} 
+                WHERE id = ?
+            `, values);
+            return true;
+        } catch (error) {
+            console.error("Update User Fehler:", error);
+            return false;
+        }
+    }
+    /**
+   * Ändert Passwort
+   */ static async changePassword(id, newPassword) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // Passwort hashen
+            const hashResult = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$argon2$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["Argon2Service"].hashPassword(newPassword);
+            // Passwort aktualisieren
+            await connection.execute(`
+                UPDATE lopez_enterprise_users 
+                SET password_hash = ?, salt = ?, pepper = ?, password_changed_at = NOW() 
+                WHERE id = ?
+            `, [
+                hashResult.hash,
+                hashResult.salt,
+                hashResult.pepper,
+                id
+            ]);
+            // Passwort-Historie speichern
+            await this.addPasswordToHistory(id, hashResult.hash, hashResult.salt);
+            return true;
+        } catch (error) {
+            console.error("Change Password Fehler:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // PASSWORD HISTORY
+    // =====================================================
+    /**
+   * Fügt Passwort zur Historie hinzu
+   */ static async addPasswordToHistory(userId, passwordHash, salt) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                INSERT INTO lopez_password_history (user_id, password_hash, salt) 
+                VALUES (?, ?, ?)
+            `, [
+                userId,
+                passwordHash,
+                salt
+            ]);
+            // Alte Passwörter löschen (nur die letzten 5 behalten)
+            await connection.execute(`
+                DELETE FROM lopez_password_history 
+                WHERE user_id = ? AND id NOT IN (
+                    SELECT id FROM (
+                        SELECT id FROM lopez_password_history 
+                        WHERE user_id = ? 
+                        ORDER BY created_at DESC 
+                        LIMIT 5
+                    ) AS recent_passwords
+                )
+            `, [
+                userId,
+                userId
+            ]);
+        } catch (error) {
+            console.error("Add Password to History Fehler:", error);
+        }
+    }
+    /**
+   * Prüft ob Passwort in der Historie ist
+   */ static async isPasswordInHistory(userId, password) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT password_hash, salt FROM lopez_password_history 
+                WHERE user_id = ? 
+                ORDER BY created_at DESC
+            `, [
+                userId
+            ]);
+            const history = rows;
+            for (const entry of history){
+                if (await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$argon2$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["Argon2Service"].verifyPassword(password, entry.password_hash, entry.salt)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (error) {
+            console.error("Check Password History Fehler:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // AUTHENTICATION
+    // =====================================================
+    /**
+   * Verifiziert Benutzer-Login
+   */ static async verifyLogin(username, password) {
+        try {
+            // Benutzer laden
+            let user = await this.getUserByUsername(username);
+            if (!user) {
+                user = await this.getUserByEmail(username);
+            }
+            if (!user) {
+                return null;
+            }
+            // Passwort verifizieren
+            const isValid = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$argon2$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["Argon2Service"].verifyPassword(password, user.password_hash, user.salt);
+            if (!isValid) {
+                return null;
+            }
+            // Status prüfen
+            if (user.status !== "active") {
+                return null;
+            }
+            // Account gesperrt?
+            if (user.locked_until && new Date(user.locked_until) > new Date()) {
+                return null;
+            }
+            return user;
+        } catch (error) {
+            console.error("Verify Login Fehler:", error);
+            return null;
+        }
+    }
+    // =====================================================
+    // SECURITY FEATURES
+    // =====================================================
+    /**
+   * Sperrt Benutzer-Account
+   */ static async lockUser(id, durationMinutes = 30) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const lockedUntil = new Date();
+            lockedUntil.setMinutes(lockedUntil.getMinutes() + durationMinutes);
+            await connection.execute(`
+                UPDATE lopez_enterprise_users 
+                SET locked_until = ?, status = 'locked' 
+                WHERE id = ?
+            `, [
+                lockedUntil,
+                id
+            ]);
+            return true;
+        } catch (error) {
+            console.error("Lock User Fehler:", error);
+            return false;
+        }
+    }
+    /**
+   * Entsperrt Benutzer-Account
+   */ static async unlockUser(id) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                UPDATE lopez_enterprise_users 
+                SET locked_until = NULL, failed_login_attempts = 0, status = 'active' 
+                WHERE id = ?
+            `, [
+                id
+            ]);
+            return true;
+        } catch (error) {
+            console.error("Unlock User Fehler:", error);
+            return false;
+        }
+    }
+    /**
+   * Erhöht fehlgeschlagene Login-Versuche
+   */ static async incrementFailedLogins(id) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                UPDATE lopez_enterprise_users 
+                SET failed_login_attempts = failed_login_attempts + 1 
+                WHERE id = ?
+            `, [
+                id
+            ]);
+            // Nach 5 Versuchen sperren
+            const [rows] = await connection.execute(`
+                SELECT failed_login_attempts FROM lopez_enterprise_users WHERE id = ?
+            `, [
+                id
+            ]);
+            const user = rows[0];
+            if (user && user.failed_login_attempts >= 5) {
+                await this.lockUser(id, 30);
+            }
+        } catch (error) {
+            console.error("Increment Failed Logins Fehler:", error);
+        }
+    }
+}
+}),
+"[project]/src/lib/development-mode.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// DEVELOPMENT MODE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-09-20
+// Zweck: Login optional für lokale Entwicklung
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "DevelopmentMode",
+    ()=>DevelopmentMode
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$domain$2d$strategy$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/domain-strategy.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$enterprise$2d$user$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/enterprise-user-service.ts [app-route] (ecmascript)");
+;
+;
+class DevelopmentMode {
+    // =====================================================
+    // KONFIGURATION
+    // =====================================================
+    /**
+   * Prüft ob Development Mode aktiviert ist
+   */ static isEnabled() {
+        return ("TURBOPACK compile-time value", "development") === "development" && process.env.DEVELOPMENT_MODE === "true";
+    }
+    /**
+   * Prüft ob Authentication umgangen werden soll
+   */ static shouldBypassAuth() {
+        return this.isEnabled() && process.env.BYPASS_AUTH === "true";
+    }
+    /**
+   * Gibt Development Mode Konfiguration zurück
+   */ static getConfig() {
+        return {
+            enabled: this.isEnabled(),
+            bypassAuth: this.shouldBypassAuth(),
+            defaultUser: {
+                id: 1,
+                username: "ramiro.lopezrodriguez",
+                email: "ramiro.lopezrodriguez@lopezitwelt.de",
+                first_name: "Ramiro",
+                last_name: "Lopez Rodriguez",
+                role: "Chef"
+            }
+        };
+    }
+    // =====================================================
+    // AUTHENTICATION BYPASS
+    // =====================================================
+    /**
+   * Erstellt Mock-User für Development Mode
+   */ static createMockUser() {
+        if (!this.shouldBypassAuth()) {
+            return null;
+        }
+        return {
+            id: "dev-chef-uuid-001",
+            username: "ramiro.lopezrodriguez",
+            email: "ramiro.lopezrodriguez@lopezitwelt.de",
+            email_external: "ramiro.lopezrodriguez@lopezitwelt.de",
+            email_internal: "ramiro.lopezrodriguez@lopez-team.de",
+            first_name: "Ramiro",
+            last_name: "Lopez Rodriguez",
+            display_name: "Ramiro Lopez Rodriguez - Chef",
+            domain_type: "external",
+            status: "active",
+            is_owner: true,
+            is_admin: true,
+            is_employee: true,
+            is_customer: false,
+            role: "Chef",
+            roles: [
+                "chef",
+                "admin",
+                "owner"
+            ],
+            permissions: [
+                "*"
+            ],
+            two_factor_enabled: false,
+            failed_login_attempts: 0,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+        };
+    }
+    /**
+   * Prüft ob Route im Development Mode umgangen werden soll
+   */ static shouldBypassRoute(route) {
+        if (!this.shouldBypassAuth()) {
+            return false;
+        }
+        // Routen die im Development Mode umgangen werden
+        const bypassRoutes = [
+            "/api/auth/login",
+            "/api/auth/logout",
+            "/api/admin/*"
+        ];
+        return bypassRoutes.some((pattern)=>{
+            if (pattern.includes("*")) {
+                return route.startsWith(pattern.replace("*", ""));
+            }
+            return route === pattern;
+        });
+    }
+    // =====================================================
+    // MIDDLEWARE
+    // =====================================================
+    /**
+   * Development Mode Middleware
+   */ static middleware(req, res, next) {
+        if (this.shouldBypassAuth()) {
+            // Mock-User in Request einfügen
+            req.user = this.createMockUser();
+            req.isDevelopmentMode = true;
+        // Development Mode: Authentication umgangen
+        // Mock-User: ${req.user.display_name}
+        }
+        next();
+    }
+    // =====================================================
+    // API RESPONSES
+    // =====================================================
+    /**
+   * Erstellt Development Mode Login Response
+   */ static createLoginResponse() {
+        if (!this.shouldBypassAuth()) {
+            return null;
+        }
+        return {
+            success: true,
+            message: "Development Mode: Login umgangen",
+            user: this.createMockUser(),
+            token: "dev-mode-token",
+            isDevelopmentMode: true
+        };
+    }
+    /**
+   * Erstellt Development Mode Logout Response
+   */ static createLogoutResponse() {
+        if (!this.shouldBypassAuth()) {
+            return null;
+        }
+        return {
+            success: true,
+            message: "Development Mode: Logout umgangen",
+            isDevelopmentMode: true
+        };
+    }
+    // =====================================================
+    // CHEF-BENUTZER MANAGEMENT
+    // =====================================================
+    /**
+   * Erstellt Chef-Benutzer für Development Mode
+   */ static async createChefUser() {
+        if (!this.isEnabled()) {
+            return null;
+        }
+        try {
+            const chefData = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$domain$2d$strategy$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["DomainStrategy"].createChefUser();
+            const emails = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$domain$2d$strategy$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["DomainStrategy"].generateUserEmails(chefData);
+            const userData = {
+                username: "ramiro.lopezrodriguez",
+                email: emails.external,
+                email_external: emails.external,
+                email_internal: emails.internal,
+                first_name: chefData.first_name,
+                last_name: chefData.last_name,
+                display_name: emails.display_name,
+                password: "DevMode123!",
+                is_owner: true,
+                is_admin: true,
+                is_employee: true,
+                is_customer: false,
+                role: "Chef",
+                permissions: [
+                    "*"
+                ],
+                domain_type: "external"
+            };
+            return await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$enterprise$2d$user$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EnterpriseUserService"].createUser(userData);
+        } catch (error) {
+            // Fehler beim Erstellen des Chef-Benutzers: ${error}
+            return null;
+        }
+    }
+    /**
+   * Prüft ob Chef-Benutzer existiert
+   */ static async checkChefUserExists() {
+        try {
+            const user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$enterprise$2d$user$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["EnterpriseUserService"].getUserByUsername("ramiro.lopezrodriguez");
+            return user !== null;
+        } catch  {
+            return false;
+        }
+    }
+    // =====================================================
+    // ENVIRONMENT SETUP
+    // =====================================================
+    /**
+   * Setup Development Mode Environment
+   */ static async setupEnvironment() {
+        if ("TURBOPACK compile-time truthy", 1) {
+            // Development Mode verfügbar
+            // Um zu aktivieren:
+            //   DEVELOPMENT_MODE=true
+            //   BYPASS_AUTH=true
+            //
+            // Beispiel .env.local:
+            //   NODE_ENV=development
+            //   DEVELOPMENT_MODE=true
+            //   BYPASS_AUTH=true
+            // Chef-Benutzer prüfen/erstellen
+            if (this.isEnabled()) {
+                const chefExists = await this.checkChefUserExists();
+                if (!chefExists) {
+                    // Chef-Benutzer wird erstellt...
+                    const chef = await this.createChefUser();
+                    if (chef) {
+                    // Chef-Benutzer erfolgreich erstellt: ${chef.display_name}
+                    } else {
+                    // Fehler beim Erstellen des Chef-Benutzers
+                    }
+                } else {
+                // Chef-Benutzer bereits vorhanden
+                }
+            }
+        }
+    }
+}
+}),
+"[project]/src/lib/rbac-system.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// RBAC/ABAC SYSTEM - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-01-19
+// Zweck: Rollen- und berechtigungsbasiertes Zugriffskontrollsystem
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "RBACService",
+    ()=>RBACService
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/database.ts [app-route] (ecmascript)");
+;
+class RBACService {
+    // =====================================================
+    // BENUTZER-MANAGEMENT
+    // =====================================================
+    static async createUser(userData) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [result] = await connection.execute(`
+                INSERT INTO lopez_users (username, email, password_hash, first_name, last_name, status)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `, [
+                userData.username,
+                userData.email,
+                userData.password_hash,
+                userData.first_name,
+                userData.last_name,
+                userData.status
+            ]);
+            const insertId = result.insertId;
+            const user = await this.getUserById(insertId);
+            return user;
+        } catch (error) {
+            console.error("❌ Fehler beim Erstellen des Benutzers:", error);
+            throw error;
+        }
+    }
+    static async getUserById(id) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT * FROM lopez_users WHERE id = ?", [
+                id
+            ]);
+            const users = rows;
+            return users.length > 0 ? users[0] : null;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden des Benutzers:", error);
+            throw error;
+        }
+    }
+    static async getUserByUsername(username) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT * FROM lopez_users WHERE username = ?", [
+                username
+            ]);
+            const users = rows;
+            return users.length > 0 ? users[0] : null;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden des Benutzers:", error);
+            throw error;
+        }
+    }
+    static async getUserByEmail(email) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT * FROM lopez_users WHERE email = ?", [
+                email
+            ]);
+            const users = rows;
+            return users.length > 0 ? users[0] : null;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden des Benutzers:", error);
+            throw error;
+        }
+    }
+    // =====================================================
+    // ROLLEN-MANAGEMENT
+    // =====================================================
+    static async createRole(roleData) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [result] = await connection.execute(`
+                INSERT INTO lopez_roles (name, description, level)
+                VALUES (?, ?, ?)
+            `, [
+                roleData.name,
+                roleData.description,
+                roleData.level
+            ]);
+            const insertId = result.insertId;
+            const role = await this.getRoleById(insertId);
+            return role;
+        } catch (error) {
+            console.error("❌ Fehler beim Erstellen der Rolle:", error);
+            throw error;
+        }
+    }
+    static async getRoleById(id) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT * FROM lopez_roles WHERE id = ?", [
+                id
+            ]);
+            const roles = rows;
+            return roles.length > 0 ? roles[0] : null;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden der Rolle:", error);
+            throw error;
+        }
+    }
+    static async getAllRoles() {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT * FROM lopez_roles ORDER BY level ASC");
+            return rows;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden der Rollen:", error);
+            throw error;
+        }
+    }
+    // =====================================================
+    // BERECHTIGUNGS-MANAGEMENT
+    // =====================================================
+    static async createPermission(permissionData) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [result] = await connection.execute(`
+                INSERT INTO lopez_permissions (resource, action, conditions)
+                VALUES (?, ?, ?)
+            `, [
+                permissionData.resource,
+                permissionData.action,
+                permissionData.conditions ? JSON.stringify(permissionData.conditions) : null
+            ]);
+            const insertId = result.insertId;
+            const permission = await this.getPermissionById(insertId);
+            return permission;
+        } catch (error) {
+            console.error("❌ Fehler beim Erstellen der Berechtigung:", error);
+            throw error;
+        }
+    }
+    static async getPermissionById(id) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute("SELECT * FROM lopez_permissions WHERE id = ?", [
+                id
+            ]);
+            const permissions = rows;
+            return permissions.length > 0 ? permissions[0] : null;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden der Berechtigung:", error);
+            throw error;
+        }
+    }
+    // =====================================================
+    // ZUGRIFFSKONTROLLE
+    // =====================================================
+    static async checkPermission(context) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // Benutzer-Rollen laden
+            const [userRoles] = await connection.execute(`
+                SELECT r.*, ur.expires_at
+                FROM lopez_user_roles ur
+                JOIN lopez_roles r ON ur.role_id = r.id
+                WHERE ur.user_id = ? AND (ur.expires_at IS NULL OR ur.expires_at > NOW())
+            `, [
+                context.user_id
+            ]);
+            if (userRoles.length === 0) {
+                return false;
+            }
+            // Berechtigungen für jede Rolle prüfen
+            for (const userRole of userRoles){
+                const [permissions] = await connection.execute(`
+                    SELECT p.*, rp.granted
+                    FROM lopez_role_permissions rp
+                    JOIN lopez_permissions p ON rp.permission_id = p.id
+                    WHERE rp.role_id = ? AND p.resource = ? AND p.action = ?
+                `, [
+                    userRole.id,
+                    context.resource,
+                    context.action
+                ]);
+                for (const permission of permissions){
+                    if (permission.granted) {
+                        // ABAC-Bedingungen prüfen
+                        if (permission.conditions) {
+                            const conditions = JSON.parse(permission.conditions);
+                            if (await this.evaluateABACConditions(conditions, context)) {
+                                return true;
+                            }
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        } catch (error) {
+            console.error("❌ Fehler bei der Berechtigungsprüfung:", error);
+            return false;
+        }
+    }
+    static async evaluateABACConditions(conditions, context) {
+        try {
+            // Einfache ABAC-Bedingungsauswertung
+            // In Produktion: Vollständige ABAC-Engine implementieren
+            for (const [key, value] of Object.entries(conditions)){
+                if (context.attributes && context.attributes[key] !== value) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (error) {
+            console.error("❌ Fehler bei der ABAC-Auswertung:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // ROLLEN-ZUWEISUNG
+    // =====================================================
+    static async assignRoleToUser(userId, roleId, assignedBy, expiresAt) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                INSERT INTO lopez_user_roles (user_id, role_id, assigned_by, assigned_at, expires_at)
+                VALUES (?, ?, ?, NOW(), ?)
+            `, [
+                userId,
+                roleId,
+                assignedBy,
+                expiresAt || null
+            ]);
+            return true;
+        } catch (error) {
+            console.error("❌ Fehler bei der Rollen-Zuweisung:", error);
+            return false;
+        }
+    }
+    static async removeRoleFromUser(userId, roleId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                DELETE FROM lopez_user_roles 
+                WHERE user_id = ? AND role_id = ?
+            `, [
+                userId,
+                roleId
+            ]);
+            return true;
+        } catch (error) {
+            console.error("❌ Fehler bei der Rollen-Entfernung:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // BERECHTIGUNGS-ZUWEISUNG
+    // =====================================================
+    static async assignPermissionToRole(roleId, permissionId, granted = true) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute(`
+                INSERT INTO lopez_role_permissions (role_id, permission_id, granted)
+                VALUES (?, ?, ?)
+                ON DUPLICATE KEY UPDATE granted = ?
+            `, [
+                roleId,
+                permissionId,
+                granted,
+                granted
+            ]);
+            return true;
+        } catch (error) {
+            console.error("❌ Fehler bei der Berechtigungs-Zuweisung:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // BENUTZER-ROLLEN ABRUFEN
+    // =====================================================
+    static async getUserRoles(userId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT r.*
+                FROM lopez_user_roles ur
+                JOIN lopez_roles r ON ur.role_id = r.id
+                WHERE ur.user_id = ? AND (ur.expires_at IS NULL OR ur.expires_at > NOW())
+            `, [
+                userId
+            ]);
+            return rows;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden der Benutzer-Rollen:", error);
+            throw error;
+        }
+    }
+    // =====================================================
+    // ROLLEN-BERECHTIGUNGEN ABRUFEN
+    // =====================================================
+    static async getRolePermissions(roleId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT p.*, rp.granted
+                FROM lopez_role_permissions rp
+                JOIN lopez_permissions p ON rp.permission_id = p.id
+                WHERE rp.role_id = ? AND rp.granted = true
+            `, [
+                roleId
+            ]);
+            return rows;
+        } catch (error) {
+            console.error("❌ Fehler beim Laden der Rollen-Berechtigungen:", error);
+            throw error;
+        }
+    }
+}
+}),
+"[project]/src/lib/admin-auth-service.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// ADMIN AUTH SERVICE - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-11-01
+// Zweck: Admin-Authentifizierung (Username ODER Email + 2FA Pflicht)
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "AdminAuthService",
+    ()=>AdminAuthService
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/bcryptjs/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/jsonwebtoken/index.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$2fa$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/2fa-service.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/database.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$development$2d$mode$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/development-mode.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rbac$2d$system$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/rbac-system.ts [app-route] (ecmascript)");
+;
+;
+;
+;
+;
+;
+class AdminAuthService {
+    static JWT_SECRET = process.env.JWT_SECRET || "lopez-it-welt-secret-key";
+    static JWT_EXPIRES_IN = "24h";
+    static SESSION_EXPIRES_IN = 24 * 60 * 60 * 1000;
+    static MAX_LOGIN_ATTEMPTS = 5;
+    static LOCKOUT_DURATION = 15 * 60 * 1000;
+    // =====================================================
+    // LOGIN & AUTHENTIFIZIERUNG
+    // =====================================================
+    static async login(credentials, ipAddress, userAgent) {
+        try {
+            // Development Mode: Authentication umgehen
+            if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$development$2d$mode$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["DevelopmentMode"].shouldBypassAuth()) {
+                console.log("🚀 Development Mode: Admin Login umgangen");
+                const mockUser = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$development$2d$mode$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["DevelopmentMode"].createMockUser();
+                return {
+                    success: true,
+                    message: "Development Mode: Login erfolgreich",
+                    session: {
+                        userId: mockUser.id,
+                        username: mockUser.username,
+                        email: mockUser.email,
+                        roles: [
+                            "admin"
+                        ],
+                        permissions: [
+                            "*"
+                        ],
+                        sessionToken: "dev-mode-token",
+                        expiresAt: new Date(Date.now() + this.SESSION_EXPIRES_IN),
+                        realm: "ADMIN"
+                    }
+                };
+            }
+            // Benutzer laden (Username ODER Email)
+            let user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rbac$2d$system$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["RBACService"].getUserByUsername(credentials.identifier);
+            if (!user) {
+                // Fallback: Versuche Email als Identifier
+                user = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rbac$2d$system$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["RBACService"].getUserByEmail(credentials.identifier);
+            }
+            if (!user) {
+                return {
+                    success: false,
+                    message: "Benutzername oder Passwort falsch"
+                };
+            }
+            // Lockout-Prüfung
+            const lockoutUntil = await this.checkLockout(user.id);
+            if (lockoutUntil) {
+                return {
+                    success: false,
+                    message: `Konto gesperrt. Versuchen Sie es erneut um ${lockoutUntil.toLocaleTimeString()}`,
+                    lockoutUntil
+                };
+            }
+            // Passwort prüfen
+            const passwordValid = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$bcryptjs$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].compare(credentials.password, user.password_hash);
+            if (!passwordValid) {
+                await this.recordFailedAttempt(user.id, ipAddress);
+                return {
+                    success: false,
+                    message: "Benutzername oder Passwort falsch"
+                };
+            }
+            // Benutzer-Status prüfen
+            if (user.status !== "active") {
+                return {
+                    success: false,
+                    message: "Benutzerkonto ist nicht aktiv"
+                };
+            }
+            // 2FA PRÜFEN (PFLICHT für Admin)
+            const requires2FA = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$2fa$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["TwoFactorService"].is2FAEnabled(user.id);
+            if (!requires2FA) {
+                // 2FA noch nicht aktiviert - erfordern
+                return {
+                    success: false,
+                    message: "Zwei-Faktor-Authentifizierung erforderlich. Bitte aktivieren Sie 2FA zuerst.",
+                    requires2FA: true
+                };
+            }
+            if (!credentials.twoFactorToken) {
+                return {
+                    success: false,
+                    message: "Zwei-Faktor-Authentifizierung erforderlich",
+                    requires2FA: true
+                };
+            }
+            const twoFactorValid = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$2fa$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["TwoFactorService"].verifyToken(user.id, credentials.twoFactorToken);
+            if (!twoFactorValid) {
+                await this.recordFailedAttempt(user.id, ipAddress);
+                return {
+                    success: false,
+                    message: "Zwei-Faktor-Token ungültig"
+                };
+            }
+            // Erfolgreicher Login - Failed Attempts zurücksetzen
+            await this.resetFailedAttempts(user.id);
+            // Session erstellen
+            const session = await this.createSession(user, ipAddress, userAgent);
+            if (!session) {
+                return {
+                    success: false,
+                    message: "Session konnte nicht erstellt werden"
+                };
+            }
+            // Last Login aktualisieren
+            await this.updateLastLogin(user.id);
+            return {
+                success: true,
+                message: "Login erfolgreich",
+                session
+            };
+        } catch (error) {
+            console.error("❌ Admin Login fehlgeschlagen:", error);
+            return {
+                success: false,
+                message: "Interner Serverfehler"
+            };
+        }
+    }
+    // =====================================================
+    // SESSION-MANAGEMENT
+    // =====================================================
+    static async createSession(user, ipAddress, userAgent) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // Session-Token generieren
+            const sessionToken = this.generateSessionToken();
+            const expiresAt = new Date(Date.now() + this.SESSION_EXPIRES_IN);
+            // Session in Datenbank speichern (mit adm_ Präfix in Session-Daten)
+            await connection.execute(`
+                INSERT INTO lopez_sessions (user_id, session_token, ip_address, user_agent, expires_at)
+                VALUES (?, ?, ?, ?, ?)
+            `, [
+                user.id,
+                `adm_${sessionToken}`,
+                ipAddress,
+                userAgent,
+                expiresAt
+            ]);
+            // Benutzer-Rollen laden
+            const roles = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rbac$2d$system$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["RBACService"].getUserRoles(user.id);
+            const roleNames = roles.map((role)=>role.name);
+            // Berechtigungen sammeln
+            const permissions = [];
+            for (const role of roles){
+                const rolePermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rbac$2d$system$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["RBACService"].getRolePermissions(role.id);
+                permissions.push(...rolePermissions.map((p)=>`${p.resource}.${p.action}`));
+            }
+            return {
+                userId: user.id,
+                username: user.username,
+                email: user.email,
+                roles: roleNames,
+                permissions: [
+                    ...new Set(permissions)
+                ],
+                sessionToken: `adm_${sessionToken}`,
+                expiresAt,
+                realm: "ADMIN"
+            };
+        } catch (error) {
+            console.error("❌ Session-Erstellung fehlgeschlagen:", error);
+            return null;
+        }
+    }
+    static async validateSession(sessionToken) {
+        try {
+            if (!sessionToken.startsWith("adm_")) {
+                return null;
+            }
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            const [rows] = await connection.execute(`
+                SELECT s.*, u.username, u.email, u.status
+                FROM lopez_sessions s
+                JOIN lopez_users u ON s.user_id = u.id
+                WHERE s.session_token = ? AND s.expires_at > NOW() AND u.status = 'active'
+            `, [
+                sessionToken
+            ]);
+            if (rows.length === 0) {
+                return null;
+            }
+            const session = rows[0];
+            const roles = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rbac$2d$system$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["RBACService"].getUserRoles(session.user_id);
+            const roleNames = roles.map((role)=>role.name);
+            const permissions = [];
+            for (const role of roles){
+                const rolePermissions = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$rbac$2d$system$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["RBACService"].getRolePermissions(role.id);
+                permissions.push(...rolePermissions.map((p)=>`${p.resource}.${p.action}`));
+            }
+            return {
+                userId: session.user_id,
+                username: session.username,
+                email: session.email,
+                roles: roleNames,
+                permissions: [
+                    ...new Set(permissions)
+                ],
+                sessionToken: session.session_token,
+                expiresAt: session.expires_at,
+                realm: "ADMIN"
+            };
+        } catch (error) {
+            console.error("❌ Session-Validierung fehlgeschlagen:", error);
+            return null;
+        }
+    }
+    static async logout(sessionToken) {
+        try {
+            if (!sessionToken.startsWith("adm_")) {
+                return false;
+            }
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute("DELETE FROM lopez_sessions WHERE session_token = ?", [
+                sessionToken
+            ]);
+            return true;
+        } catch (error) {
+            console.error("❌ Logout fehlgeschlagen:", error);
+            return false;
+        }
+    }
+    // =====================================================
+    // JWT-TOKEN
+    // =====================================================
+    static generateJWT(session) {
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].sign({
+            userId: session.userId,
+            username: session.username,
+            email: session.email,
+            roles: session.roles,
+            realm: "ADMIN"
+        }, this.JWT_SECRET, {
+            expiresIn: this.JWT_EXPIRES_IN
+        });
+    }
+    static verifyJWT(token) {
+        try {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$jsonwebtoken$2f$index$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].verify(token, this.JWT_SECRET);
+        } catch (error) {
+            return null;
+        }
+    }
+    // =====================================================
+    // LOCKOUT & FAILED ATTEMPTS
+    // =====================================================
+    static async checkLockout(userId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
+            try {
+                const [rows] = await connection.execute(`
+                    SELECT failed_login_attempts, locked_until
+                    FROM lopez_users
+                    WHERE id = ?
+                `, [
+                    userId
+                ]);
+                if (rows.length === 0) {
+                    return null;
+                }
+                const user = rows[0];
+                if (user.locked_until && new Date(user.locked_until) > new Date()) {
+                    return new Date(user.locked_until);
+                }
+            } catch (error) {
+                // Spalten existieren nicht - Lockout deaktiviert
+                return null;
+            }
+            return null;
+        } catch (error) {
+            return null;
+        }
+    }
+    static async recordFailedAttempt(userId, ipAddress) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
+            try {
+                const [rows] = await connection.execute("SELECT failed_login_attempts FROM lopez_users WHERE id = ?", [
+                    userId
+                ]);
+                const currentAttempts = (rows[0]?.failed_login_attempts || 0) + 1;
+                const lockoutUntil = currentAttempts >= this.MAX_LOGIN_ATTEMPTS ? new Date(Date.now() + this.LOCKOUT_DURATION) : null;
+                await connection.execute(`
+                    UPDATE lopez_users
+                    SET failed_login_attempts = ?,
+                        locked_until = ?
+                    WHERE id = ?
+                `, [
+                    currentAttempts,
+                    lockoutUntil,
+                    userId
+                ]);
+            } catch (error) {
+                // Spalten existieren nicht - Lockout deaktiviert (nicht kritisch)
+                console.warn("⚠️ Lockout-Spalten nicht vorhanden - Lockout deaktiviert");
+            }
+        } catch (error) {
+            console.error("❌ Failed Attempt Recording fehlgeschlagen:", error);
+        }
+    }
+    static async resetFailedAttempts(userId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
+            try {
+                await connection.execute(`
+                    UPDATE lopez_users
+                    SET failed_login_attempts = 0,
+                        locked_until = NULL
+                    WHERE id = ?
+                `, [
+                    userId
+                ]);
+            } catch (error) {
+            // Spalten existieren nicht - Lockout deaktiviert (nicht kritisch)
+            }
+        } catch (error) {
+            console.error("❌ Failed Attempts Reset fehlgeschlagen:", error);
+        }
+    }
+    // =====================================================
+    // HILFSFUNKTIONEN
+    // =====================================================
+    static generateSessionToken() {
+        return `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    }
+    static async updateLastLogin(userId) {
+        try {
+            const connection = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$database$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["getConnection"])();
+            await connection.execute("UPDATE lopez_users SET last_login = NOW() WHERE id = ?", [
+                userId
+            ]);
+        } catch (error) {
+            console.error("❌ Last Login Update fehlgeschlagen:", error);
+        }
+    }
+}
+}),
+"[externals]/next/dist/server/app-render/after-task-async-storage.external.js [external] (next/dist/server/app-render/after-task-async-storage.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/server/app-render/action-async-storage.external.js [external] (next/dist/server/app-render/action-async-storage.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/server/app-render/action-async-storage.external.js", () => require("next/dist/server/app-render/action-async-storage.external.js"));
+
+module.exports = mod;
+}),
+"[project]/src/app/api/auth/admin/login/route.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+// =====================================================
+// ADMIN LOGIN API - LOPEZ IT WELT
+// =====================================================
+// Erstellt: 2025-11-01
+// Zweck: Admin-Authentifizierung (Username ODER Email + 2FA Pflicht)
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// =====================================================
+__turbopack_context__.s([
+    "POST",
+    ()=>POST
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$audit$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/audit-service.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$admin$2d$auth$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/admin-auth-service.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$development$2d$mode$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/development-mode.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
+;
+;
+;
+;
+async function POST(request) {
+    try {
+        // Development Mode: Authentication umgehen
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$development$2d$mode$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["DevelopmentMode"].shouldBypassAuth()) {
+            const mockResponse = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$development$2d$mode$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["DevelopmentMode"].createLoginResponse();
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(mockResponse);
+        }
+        const body = await request.json();
+        const { identifier, password, twoFactorToken } = body;
+        if (!identifier || !password) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
+                message: "Benutzername/E-Mail und Passwort erforderlich"
+            }, {
+                status: 400
+            });
+        }
+        // IP-Adresse und User-Agent extrahieren
+        const ipAddress = request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
+        const userAgent = request.headers.get("user-agent") || "unknown";
+        const route = request.nextUrl.pathname;
+        // Login durchführen
+        const authResult = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$admin$2d$auth$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["AdminAuthService"].login({
+            identifier,
+            password,
+            twoFactorToken
+        }, ipAddress, userAgent);
+        if (!authResult.success) {
+            // Audit-Log für fehlgeschlagenen Login
+            await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$audit$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["AuditService"].logAudit({
+                table_name: "lopez_users",
+                record_id: 0,
+                action: "LOGIN",
+                user_id: 0,
+                username: identifier,
+                ip_address: ipAddress,
+                user_agent: userAgent,
+                session_id: null,
+                risk_level: "MEDIUM",
+                compliance_category: "AUTHENTICATION",
+                new_values: JSON.stringify({
+                    realm: "ADMIN",
+                    result: "failed",
+                    reason: authResult.message,
+                    route
+                })
+            });
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                success: false,
+                message: authResult.message,
+                requires2FA: authResult.requires2FA,
+                lockoutUntil: authResult.lockoutUntil
+            }, {
+                status: 401
+            });
+        }
+        // JWT-Token generieren
+        const jwtToken = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$admin$2d$auth$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["AdminAuthService"].generateJWT(authResult.session);
+        // Cookie setzen (mit adm_ Präfix)
+        const response = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: true,
+            message: "Login erfolgreich",
+            data: {
+                user: {
+                    id: authResult.session.userId,
+                    username: authResult.session.username,
+                    email: authResult.session.email,
+                    roles: authResult.session.roles
+                },
+                token: jwtToken,
+                sessionToken: authResult.session.sessionToken,
+                expiresAt: authResult.session.expiresAt
+            }
+        });
+        // Cookie mit adm_ Präfix setzen
+        response.cookies.set("adm_session", authResult.session.sessionToken, {
+            httpOnly: true,
+            secure: ("TURBOPACK compile-time value", "development") === "production",
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60,
+            path: "/"
+        });
+        response.cookies.set("adm_token", jwtToken, {
+            httpOnly: false,
+            secure: ("TURBOPACK compile-time value", "development") === "production",
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60,
+            path: "/"
+        });
+        // Audit-Log für erfolgreichen Login
+        await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$audit$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["AuditService"].logAudit({
+            table_name: "lopez_users",
+            record_id: authResult.session.userId,
+            action: "LOGIN",
+            user_id: authResult.session.userId,
+            username: authResult.session.username,
+            ip_address: ipAddress,
+            user_agent: userAgent,
+            session_id: authResult.session.sessionToken,
+            risk_level: "LOW",
+            compliance_category: "AUTHENTICATION",
+            new_values: JSON.stringify({
+                realm: "ADMIN",
+                result: "success",
+                route
+            })
+        });
+        // Automatische Zeiterfassung nach Admin-Login starten
+        try {
+            const { promises: fs } = await __turbopack_context__.A("[externals]/fs [external] (fs, cjs, async loader)");
+            const path = await __turbopack_context__.A("[externals]/path [external] (path, cjs, async loader)");
+            const SESSIONS_FILE = path.join(process.cwd(), "data", "time-sessions.json");
+            let sessions = [];
+            try {
+                const data = await fs.readFile(SESSIONS_FILE, "utf-8");
+                sessions = JSON.parse(data);
+            } catch  {
+                sessions = [];
+            }
+            const activeSession = sessions.find((s)=>s.user_id === authResult.session.userId && s.status === "active" && !s.end_time);
+            if (!activeSession) {
+                const now = new Date().toISOString();
+                const maxId = sessions.length > 0 ? Math.max(...sessions.map((s)=>s.id || 0)) : 0;
+                const newSession = {
+                    id: maxId + 1,
+                    user_id: authResult.session.userId,
+                    module: "Login-Session",
+                    taetigkeit: `System-Login: ${authResult.session.username}`,
+                    ausloeser: "Automatische Zeiterfassung nach erfolgreichem Admin-Login",
+                    problem: false,
+                    category: "administration",
+                    priority: "high",
+                    project_id: null,
+                    task_id: null,
+                    start_time: now,
+                    status: "active",
+                    created_at: now,
+                    updated_at: now
+                };
+                sessions.push(newSession);
+                const dir = path.dirname(SESSIONS_FILE);
+                await fs.mkdir(dir, {
+                    recursive: true
+                });
+                await fs.writeFile(SESSIONS_FILE, JSON.stringify(sessions, null, 2));
+                // Audit-Log für Zeiterfassung
+                await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$audit$2d$service$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["AuditService"].logAudit({
+                    table_name: "work_sessions",
+                    record_id: newSession.id,
+                    action: "INSERT",
+                    new_values: JSON.stringify({
+                        user_id: authResult.session.userId,
+                        username: authResult.session.username,
+                        module: "Login-Session",
+                        taetigkeit: newSession.taetigkeit,
+                        status: "active",
+                        realm: "ADMIN"
+                    }),
+                    user_id: authResult.session.userId,
+                    username: authResult.session.username,
+                    ip_address: ipAddress,
+                    user_agent: userAgent,
+                    session_id: authResult.session.sessionToken,
+                    risk_level: "LOW",
+                    compliance_category: "DATA_MODIFICATION"
+                });
+            }
+        } catch (timeTrackingError) {
+            console.warn("⚠️ Automatische Zeiterfassung nach Admin-Login fehlgeschlagen:", timeTrackingError);
+        }
+        return response;
+    } catch (error) {
+        console.error("❌ Admin Login API Fehler:", error);
+        // Detaillierte Fehler-Logging für Debugging
+        if (error instanceof Error) {
+            console.error("Fehler-Details:", error.message);
+            console.error("Stack:", error.stack);
+        }
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            success: false,
+            message: "Interner Serverfehler",
+            error: ("TURBOPACK compile-time truthy", 1) ? error instanceof Error ? error.message : String(error) : "TURBOPACK unreachable"
+        }, {
+            status: 500
+        });
+    }
+}
+}),
+];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__e2d9fe6a._.js.map

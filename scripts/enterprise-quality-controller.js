@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const { execSync } = require("child_process");
 
 // Enterprise++ Qualitätsstandards
 const ENTERPRISE_STANDARDS = {
@@ -28,7 +28,7 @@ const ENTERPRISE_STANDARDS = {
     authorization: 100, // 100% Autorisierung
   },
   accessibility: {
-    wcag: 'AAA', // Höchste WCAG-Stufe
+    wcag: "AAA", // Höchste WCAG-Stufe
     screenReader: 100, // 100% Screen Reader Support
     keyboard: 100, // 100% Tastaturunterstützung
     colorContrast: 100, // 100% Farbkontrast
@@ -47,7 +47,7 @@ class EnterpriseQualityController {
 
   // Hauptfunktion für Enterprise++ Qualitätskontrolle
   async enforceEnterpriseStandards() {
-    console.log('🚀 Enterprise++ Qualitätskontrolle startet...');
+    console.log("🚀 Enterprise++ Qualitätskontrolle startet...");
 
     try {
       const results = await Promise.all([
@@ -62,14 +62,14 @@ class EnterpriseQualityController {
       if (!allStandardsMet) {
         await this.blocker.blockChanges();
         await this.notifier.notifyTeam({
-          type: 'quality_violation',
-          message: 'Enterprise++ Qualitätsstandards nicht erfüllt',
+          type: "quality_violation",
+          message: "Enterprise++ Qualitätsstandards nicht erfüllt",
           details: results,
         });
-        throw new Error('Enterprise++ Qualitätsstandards nicht erfüllt');
+        throw new Error("Enterprise++ Qualitätsstandards nicht erfüllt");
       }
 
-      console.log('✅ Alle Enterprise++ Qualitätsstandards erfüllt!');
+      console.log("✅ Alle Enterprise++ Qualitätsstandards erfüllt!");
       await this.generateEnterpriseReport(results);
     } catch (error) {
       await this.handleError(error);
@@ -79,7 +79,7 @@ class EnterpriseQualityController {
 
   // Code-Qualitätsprüfung
   async checkCodeQuality() {
-    console.log('🔍 Prüfe Code-Qualität...');
+    console.log("🔍 Prüfe Code-Qualität...");
 
     const results = {
       testCoverage: await this.checkTestCoverage(),
@@ -94,7 +94,7 @@ class EnterpriseQualityController {
 
     if (!allCodeStandardsMet) {
       await this.blocker.blockCommit();
-      throw new Error('Code-Qualitätsstandards nicht erfüllt');
+      throw new Error("Code-Qualitätsstandards nicht erfüllt");
     }
 
     return results;
@@ -102,7 +102,7 @@ class EnterpriseQualityController {
 
   // Performance-Prüfung
   async checkPerformance() {
-    console.log('⚡ Prüfe Performance...');
+    console.log("⚡ Prüfe Performance...");
 
     const results = {
       lighthouse: await this.checkLighthouse(),
@@ -113,12 +113,11 @@ class EnterpriseQualityController {
       cpuUsage: await this.checkCpuUsage(),
     };
 
-    const allPerformanceStandardsMet =
-      this.areAllPerformanceStandardsMet(results);
+    const allPerformanceStandardsMet = this.areAllPerformanceStandardsMet(results);
 
     if (!allPerformanceStandardsMet) {
       await this.blocker.blockDeployment();
-      throw new Error('Performance-Standards nicht erfüllt');
+      throw new Error("Performance-Standards nicht erfüllt");
     }
 
     return results;
@@ -126,7 +125,7 @@ class EnterpriseQualityController {
 
   // Sicherheitsprüfung
   async checkSecurity() {
-    console.log('🔒 Prüfe Sicherheit...');
+    console.log("🔒 Prüfe Sicherheit...");
 
     const results = {
       vulnerabilities: await this.checkVulnerabilities(),
@@ -140,7 +139,7 @@ class EnterpriseQualityController {
 
     if (!allSecurityStandardsMet) {
       await this.blocker.blockAccess();
-      throw new Error('Sicherheitsstandards nicht erfüllt');
+      throw new Error("Sicherheitsstandards nicht erfüllt");
     }
 
     return results;
@@ -148,7 +147,7 @@ class EnterpriseQualityController {
 
   // Barrierefreiheitsprüfung
   async checkAccessibility() {
-    console.log('♿ Prüfe Barrierefreiheit...');
+    console.log("♿ Prüfe Barrierefreiheit...");
 
     const results = {
       wcag: await this.checkWCAG(),
@@ -158,12 +157,11 @@ class EnterpriseQualityController {
       focusManagement: await this.checkFocusManagement(),
     };
 
-    const allAccessibilityStandardsMet =
-      this.areAllAccessibilityStandardsMet(results);
+    const allAccessibilityStandardsMet = this.areAllAccessibilityStandardsMet(results);
 
     if (!allAccessibilityStandardsMet) {
       await this.blocker.blockRelease();
-      throw new Error('Barrierefreiheitsstandards nicht erfüllt');
+      throw new Error("Barrierefreiheitsstandards nicht erfüllt");
     }
 
     return results;
@@ -393,8 +391,7 @@ class EnterpriseQualityController {
       const vulnerabilities = await this.scanVulnerabilities();
       return {
         value: vulnerabilities,
-        passed:
-          vulnerabilities <= ENTERPRISE_STANDARDS.security.vulnerabilities,
+        passed: vulnerabilities <= ENTERPRISE_STANDARDS.security.vulnerabilities,
         standard: ENTERPRISE_STANDARDS.security.vulnerabilities,
       };
     } catch (error) {
@@ -490,7 +487,7 @@ class EnterpriseQualityController {
       };
     } catch (error) {
       return {
-        value: 'A',
+        value: "A",
         passed: false,
         standard: ENTERPRISE_STANDARDS.accessibility.wcag,
         error: error.message,
@@ -539,8 +536,7 @@ class EnterpriseQualityController {
       const colorContrast = await this.checkColorContrastScore();
       return {
         value: colorContrast,
-        passed:
-          colorContrast >= ENTERPRISE_STANDARDS.accessibility.colorContrast,
+        passed: colorContrast >= ENTERPRISE_STANDARDS.accessibility.colorContrast,
         standard: ENTERPRISE_STANDARDS.accessibility.colorContrast,
       };
     } catch (error) {
@@ -558,8 +554,7 @@ class EnterpriseQualityController {
       const focusManagement = await this.checkFocusManagementScore();
       return {
         value: focusManagement,
-        passed:
-          focusManagement >= ENTERPRISE_STANDARDS.accessibility.focusManagement,
+        passed: focusManagement >= ENTERPRISE_STANDARDS.accessibility.focusManagement,
         standard: ENTERPRISE_STANDARDS.accessibility.focusManagement,
       };
     } catch (error) {
@@ -575,17 +570,13 @@ class EnterpriseQualityController {
   // Hilfsfunktionen für Prüfungen
   async runTestCoverage() {
     try {
-      execSync('npm test -- --coverage', {
+      execSync("npm test -- --coverage", {
         cwd: this.projectRoot,
-        stdio: 'pipe',
+        stdio: "pipe",
       });
-      const coverageFile = path.join(
-        this.projectRoot,
-        'coverage',
-        'coverage-summary.json'
-      );
+      const coverageFile = path.join(this.projectRoot, "coverage", "coverage-summary.json");
       if (fs.existsSync(coverageFile)) {
-        const coverage = JSON.parse(fs.readFileSync(coverageFile, 'utf8'));
+        const coverage = JSON.parse(fs.readFileSync(coverageFile, "utf8"));
         return coverage.total.lines.pct;
       }
       return 0;
@@ -596,7 +587,7 @@ class EnterpriseQualityController {
 
   async runTypeCoverage() {
     try {
-      execSync('npx tsc --noEmit', { cwd: this.projectRoot, stdio: 'pipe' });
+      execSync("npx tsc --noEmit", { cwd: this.projectRoot, stdio: "pipe" });
       return 100; // Wenn TypeScript kompiliert, haben wir 100% Type Coverage
     } catch (error) {
       return 0;
@@ -605,7 +596,7 @@ class EnterpriseQualityController {
 
   async runLinting() {
     try {
-      execSync('npm run lint', { cwd: this.projectRoot, stdio: 'pipe' });
+      execSync("npm run lint", { cwd: this.projectRoot, stdio: "pipe" });
       return 0; // Keine Fehler
     } catch (error) {
       return 1; // Mindestens ein Fehler
@@ -618,8 +609,8 @@ class EnterpriseQualityController {
     let totalComplexity = 0;
 
     for (const file of sourceFiles) {
-      const content = fs.readFileSync(file, 'utf8');
-      const lines = content.split('\n');
+      const content = fs.readFileSync(file, "utf8");
+      const lines = content.split("\n");
       totalComplexity += lines.length;
     }
 
@@ -632,7 +623,7 @@ class EnterpriseQualityController {
   }
 
   async calculateDocumentation() {
-    const docs = ['README.md', 'CHANGELOG.md', 'PROJECT.md', 'docs/'];
+    const docs = ["README.md", "CHANGELOG.md", "PROJECT.md", "docs/"];
     let docScore = 0;
 
     for (const doc of docs) {
@@ -665,8 +656,8 @@ class EnterpriseQualityController {
 
   async calculateBundleSize() {
     try {
-      execSync('npm run build', { cwd: this.projectRoot, stdio: 'pipe' });
-      const nextDir = path.join(this.projectRoot, '.next');
+      execSync("npm run build", { cwd: this.projectRoot, stdio: "pipe" });
+      const nextDir = path.join(this.projectRoot, ".next");
       if (fs.existsSync(nextDir)) {
         const size = this.calculateDirectorySize(nextDir);
         return Math.round(size / 1024); // KB
@@ -689,7 +680,7 @@ class EnterpriseQualityController {
 
   async scanVulnerabilities() {
     try {
-      execSync('npm audit', { cwd: this.projectRoot, stdio: 'pipe' });
+      execSync("npm audit", { cwd: this.projectRoot, stdio: "pipe" });
       return 0; // Keine Vulnerabilities
     } catch (error) {
       return 1; // Mindestens eine Vulnerability
@@ -718,7 +709,7 @@ class EnterpriseQualityController {
 
   async checkWCAGLevel() {
     // Vereinfachte WCAG-Prüfung
-    return 'AAA';
+    return "AAA";
   }
 
   async checkScreenReaderSupport() {
@@ -743,8 +734,8 @@ class EnterpriseQualityController {
 
   // Hilfsfunktionen
   getSourceFiles() {
-    const sourceDirs = ['src', 'components'];
-    const extensions = ['.ts', '.tsx', '.js', '.jsx'];
+    const sourceDirs = ["src", "components"];
+    const extensions = [".ts", ".tsx", ".js", ".jsx"];
     const files = [];
 
     for (const dir of sourceDirs) {
@@ -795,25 +786,23 @@ class EnterpriseQualityController {
 
   // Standard-Prüfungen
   areAllStandardsMet(results) {
-    return results.every(result =>
-      Object.values(result).every(check => check.passed)
-    );
+    return results.every((result) => Object.values(result).every((check) => check.passed));
   }
 
   areAllCodeStandardsMet(results) {
-    return Object.values(results).every(check => check.passed);
+    return Object.values(results).every((check) => check.passed);
   }
 
   areAllPerformanceStandardsMet(results) {
-    return Object.values(results).every(check => check.passed);
+    return Object.values(results).every((check) => check.passed);
   }
 
   areAllSecurityStandardsMet(results) {
-    return Object.values(results).every(check => check.passed);
+    return Object.values(results).every((check) => check.passed);
   }
 
   areAllAccessibilityStandardsMet(results) {
-    return Object.values(results).every(check => check.passed);
+    return Object.values(results).every((check) => check.passed);
   }
 
   // Bericht-Generierung
@@ -825,13 +814,10 @@ class EnterpriseQualityController {
       summary: this.generateSummary(results),
     };
 
-    const reportFile = path.join(
-      this.projectRoot,
-      'enterprise-quality-report.json'
-    );
+    const reportFile = path.join(this.projectRoot, "enterprise-quality-report.json");
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
 
-    console.log('📊 Enterprise++ Qualitätsbericht generiert:', reportFile);
+    console.log("📊 Enterprise++ Qualitätsbericht generiert:", reportFile);
   }
 
   generateSummary(results) {
@@ -847,7 +833,7 @@ class EnterpriseQualityController {
 
   calculateSummary(categoryResults) {
     const checks = Object.values(categoryResults);
-    const passed = checks.filter(check => check.passed).length;
+    const passed = checks.filter((check) => check.passed).length;
     const total = checks.length;
 
     return {
@@ -859,9 +845,9 @@ class EnterpriseQualityController {
 
   // Fehlerbehandlung
   async handleError(error) {
-    await this.logger.error('Enterprise Quality Controller Error', error);
+    await this.logger.error("Enterprise Quality Controller Error", error);
     await this.notifier.notifyTeam({
-      type: 'error',
+      type: "error",
       message: error.message,
       stack: error.stack,
     });
@@ -883,27 +869,23 @@ class Notifier {
 
 class QualityBlocker {
   async blockChanges() {
-    console.log('🚫 Änderungen blockiert - Qualitätsstandards nicht erfüllt');
+    console.log("🚫 Änderungen blockiert - Qualitätsstandards nicht erfüllt");
   }
 
   async blockCommit() {
-    console.log('🚫 Commit blockiert - Code-Qualitätsstandards nicht erfüllt');
+    console.log("🚫 Commit blockiert - Code-Qualitätsstandards nicht erfüllt");
   }
 
   async blockDeployment() {
-    console.log(
-      '🚫 Deployment blockiert - Performance-Standards nicht erfüllt'
-    );
+    console.log("🚫 Deployment blockiert - Performance-Standards nicht erfüllt");
   }
 
   async blockAccess() {
-    console.log('🚫 Zugriff blockiert - Sicherheitsstandards nicht erfüllt');
+    console.log("🚫 Zugriff blockiert - Sicherheitsstandards nicht erfüllt");
   }
 
   async blockRelease() {
-    console.log(
-      '🚫 Release blockiert - Barrierefreiheitsstandards nicht erfüllt'
-    );
+    console.log("🚫 Release blockiert - Barrierefreiheitsstandards nicht erfüllt");
   }
 }
 
@@ -918,16 +900,11 @@ if (require.main === module) {
   controller
     .enforceEnterpriseStandards()
     .then(() => {
-      console.log(
-        '✅ Enterprise++ Qualitätskontrolle erfolgreich abgeschlossen'
-      );
+      console.log("✅ Enterprise++ Qualitätskontrolle erfolgreich abgeschlossen");
       process.exit(0);
     })
-    .catch(error => {
-      console.error(
-        '❌ Enterprise++ Qualitätskontrolle fehlgeschlagen:',
-        error.message
-      );
+    .catch((error) => {
+      console.error("❌ Enterprise++ Qualitätskontrolle fehlgeschlagen:", error.message);
       process.exit(1);
     });
 }

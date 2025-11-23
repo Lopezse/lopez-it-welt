@@ -31,7 +31,7 @@ const ENTERPRISE_STANDARDS = {
     authorization: 100, // 100% Autorisierung
   },
   accessibility: {
-    wcag: 'AAA', // Höchste WCAG-Stufe
+    wcag: "AAA", // Höchste WCAG-Stufe
     screenReader: 100, // 100% Screen Reader Support
     keyboard: 100, // 100% Tastaturunterstützung
     colorContrast: 100, // 100% Farbkontrast
@@ -46,26 +46,26 @@ const ANTI_RULE_BREAK_CONFIG = {
   zeroTolerance: true,
   autoBlock: true,
   requireApproval: true,
-  
+
   // Automatische Validierung
   validateBeforeAction: true,
   validateAfterAction: true,
   blockOnViolation: true,
-  
+
   // Datumsvalidierung
   requireSystemTime: true,
   blockDateCopying: true,
   validateTimestamps: true,
-  
+
   // Struktur-Schutz
   preventOverwriting: true,
   requireAppendOnly: true,
   protectMdStructure: true,
-  
+
   // Zeiterfassung
   enforceTimeTracking: true,
   requireSessionSwitch: true,
-  blockOverlappingSessions: true
+  blockOverlappingSessions: true,
 };
 ```
 
@@ -106,6 +106,7 @@ const ANTI_RULE_BREAK_CONFIG = {
 **Status:** Anti-Regelbruch-System aktiviert - Zero-Tolerance für alle Regelverstöße
 
 **Geschützte Regeln:**
+
 1. **Datumsvalidierung** - System-Zeit verwenden, niemals kopieren
 2. **Zeiterfassung** - Bei Themenwechsel Session wechseln
 3. **Md-Struktur** - Nur ergänzen, nie überschreiben
@@ -121,30 +122,30 @@ const ANTI_RULE_BREAK_CONFIG = {
 // 1. System-Zeit validieren
 const timeValidation = await validateSystemTime();
 if (!timeValidation.valid) {
-  blockAction('System-Zeit nicht validiert');
+  blockAction("System-Zeit nicht validiert");
 }
 
 // 2. Datumskopieren blockieren
 const dateValidation = await validateNoDateCopying(action);
 if (!dateValidation.valid) {
-  blockAction('Datumskopieren blockiert');
+  blockAction("Datumskopieren blockiert");
 }
 
 // 3. Struktur-Schutz prüfen
 const structureValidation = await validateMdStructure(targetFile);
 if (!structureValidation.valid) {
-  blockAction('Md-Struktur-Schutz');
+  blockAction("Md-Struktur-Schutz");
 }
 
 // 4. Freigabe prüfen
 if (!approvalGiven) {
-  blockAction('Keine Freigabe vorhanden');
+  blockAction("Keine Freigabe vorhanden");
 }
 
 // 5. Zeiterfassung prüfen
 const timeTrackingValidation = await validateTimeTracking(action);
 if (!timeTrackingValidation.valid) {
-  blockAction('Zeiterfassung nicht gewechselt');
+  blockAction("Zeiterfassung nicht gewechselt");
 }
 ```
 
@@ -295,7 +296,7 @@ if (!timeTrackingValidation.valid) {
 class EnterpriseRuleEnforcementSystem {
   private static isBlocked = false;
   private static violationCount = 0;
-  private static lastViolation = '';
+  private static lastViolation = "";
   private static enterpriseStandards = ENTERPRISE_STANDARDS;
 
   // ENTERPRISE++ QUALITYCONTROLLER.MD REGELN LADEN
@@ -309,30 +310,33 @@ class EnterpriseRuleEnforcementSystem {
       statusTracking: true,
       enterpriseMode: true,
       zeroTolerance: true,
-      antiRuleBreak: true
+      antiRuleBreak: true,
     };
     return rules;
   }
 
   // ENTERPRISE++ ANTI-REGELBRUCH-VALIDIERUNG
-  static async validateAntiRuleBreak(action: string, targetFile?: string): Promise<ValidationResult> {
+  static async validateAntiRuleBreak(
+    action: string,
+    targetFile?: string,
+  ): Promise<ValidationResult> {
     // System-Zeit validieren
     const timeValidation = await this.validateSystemTime();
     if (!timeValidation.valid) {
-      return { valid: false, reason: 'System-Zeit nicht validiert' };
+      return { valid: false, reason: "System-Zeit nicht validiert" };
     }
 
     // Datumskopieren blockieren
     const dateValidation = await this.validateNoDateCopying(action);
     if (!dateValidation.valid) {
-      return { valid: false, reason: 'Datumskopieren blockiert' };
+      return { valid: false, reason: "Datumskopieren blockiert" };
     }
 
     // Md-Struktur schützen
     if (targetFile && this.isMdFile(targetFile)) {
       const structureValidation = await this.validateMdStructure(targetFile);
       if (!structureValidation.valid) {
-        return { valid: false, reason: 'Md-Struktur-Schutz' };
+        return { valid: false, reason: "Md-Struktur-Schutz" };
       }
     }
 
@@ -344,7 +348,7 @@ class EnterpriseRuleEnforcementSystem {
     this.isBlocked = true;
     this.violationCount++;
     this.lastViolation = `${rule}: ${reason}`;
-    
+
     console.log(`🚨 ENTERPRISE++ REGELVERSTOß: ${rule}`);
     console.log(`   Grund: ${reason}`);
     console.log(`   Status: BLOCKIERT - Freigabe erforderlich`);

@@ -5,13 +5,14 @@
 **Dokument:** Enterprise Setup Guide  
 **Version:** 2.0.0  
 **Erstellt:** 2025-07-05  
-**Zweck:** Vollständige Setup-Anleitung für Enterprise-System  
+**Zweck:** Vollständige Setup-Anleitung für Enterprise-System
 
 ---
 
 ## 🚀 Quick Start
 
 ### **1. System-Anforderungen prüfen:**
+
 ```bash
 # CPU-Check (mindestens 16 Cores)
 nproc
@@ -27,12 +28,14 @@ lsb_release -a
 ```
 
 ### **2. Repository klonen:**
+
 ```bash
 git clone https://github.com/lopez-it-welt/enterprise.git
 cd enterprise
 ```
 
 ### **3. Dependencies installieren:**
+
 ```bash
 # Node.js (Version 18+)
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -49,6 +52,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### **4. Environment konfigurieren:**
+
 ```bash
 # Environment-Datei erstellen
 cp .env.example .env
@@ -65,6 +69,7 @@ export JWT_SECRET=your_jwt_secret_here
 ## 🛠️ Detaillierte Installation
 
 ### **1. Betriebssystem Setup:**
+
 ```bash
 # Ubuntu 22.04 LTS
 sudo apt update && sudo apt upgrade -y
@@ -80,6 +85,7 @@ sudo apt install -y net-tools nginx ufw
 ```
 
 ### **2. Database Setup:**
+
 ```bash
 # PostgreSQL Installation
 sudo apt install -y postgresql postgresql-contrib
@@ -95,6 +101,7 @@ sudo systemctl enable postgresql
 ```
 
 ### **3. Redis Setup:**
+
 ```bash
 # Redis Installation
 sudo apt install -y redis-server
@@ -109,6 +116,7 @@ sudo systemctl enable redis-server
 ```
 
 ### **4. Nginx Setup:**
+
 ```bash
 # Nginx Installation
 sudo apt install -y nginx
@@ -118,7 +126,7 @@ sudo tee /etc/nginx/sites-available/lopez-enterprise << 'EOF'
 server {
     listen 80;
     server_name lopez-enterprise.com;
-    
+
     location / {
         proxy_pass http://localhost:3000;
         proxy_set_header Host $host;
@@ -140,6 +148,7 @@ sudo systemctl reload nginx
 ## 🔧 Application Setup
 
 ### **1. Node.js Application:**
+
 ```bash
 # Dependencies installieren
 npm install
@@ -169,6 +178,7 @@ npm start
 ```
 
 ### **2. Docker Setup:**
+
 ```bash
 # Docker Images bauen
 docker build -t lopezitwelt/enterprise-api:latest .
@@ -182,6 +192,7 @@ docker-compose ps
 ```
 
 ### **3. Kubernetes Setup:**
+
 ```bash
 # k3s installieren
 curl -sfL https://get.k3s.io | sh -
@@ -206,6 +217,7 @@ kubectl apply -f k8s/ingress.yaml
 ## 🔒 Security Setup
 
 ### **1. SSL-Zertifikate:**
+
 ```bash
 # Let's Encrypt Certbot
 sudo apt install -y certbot python3-certbot-nginx
@@ -219,6 +231,7 @@ sudo crontab -e
 ```
 
 ### **2. Firewall konfigurieren:**
+
 ```bash
 # UFW aktivieren
 sudo ufw enable
@@ -238,6 +251,7 @@ sudo ufw status
 ```
 
 ### **3. VPN Setup:**
+
 ```bash
 # OpenVPN installieren
 sudo apt install -y openvpn
@@ -261,6 +275,7 @@ openssl x509 -req -days 365 -in server.csr -CA ca.crt -CAkey ca.key -out server.
 ## 📊 Monitoring Setup
 
 ### **1. Prometheus:**
+
 ```bash
 # Prometheus installieren
 wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
@@ -284,6 +299,7 @@ EOF
 ```
 
 ### **2. Grafana:**
+
 ```bash
 # Grafana installieren
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
@@ -301,6 +317,7 @@ sudo sed -i 's/;admin_password = admin/admin_password = enterprise_grafana_passw
 ```
 
 ### **3. Alert Manager:**
+
 ```bash
 # Alert Manager installieren
 wget https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz
@@ -323,7 +340,7 @@ route:
 receivers:
 - name: 'enterprise-support'
   email_configs:
-  - to: 'support@lopez-enterprise.com'
+  - to: 'dev@lopez-enterprise.com'
 EOF
 
 # Alert Manager starten
@@ -335,6 +352,7 @@ EOF
 ## 🧪 Testing Setup
 
 ### **1. Unit Tests:**
+
 ```bash
 # Jest installieren
 npm install --save-dev jest @types/jest
@@ -363,6 +381,7 @@ npm test
 ```
 
 ### **2. Integration Tests:**
+
 ```bash
 # Supertest installieren
 npm install --save-dev supertest
@@ -372,6 +391,7 @@ npm run test:integration
 ```
 
 ### **3. E2E Tests:**
+
 ```bash
 # Playwright installieren
 npm install --save-dev @playwright/test
@@ -388,46 +408,48 @@ npm run test:e2e
 ## 🔄 CI/CD Setup
 
 ### **1. GitHub Actions:**
+
 ```yaml
 # .github/workflows/ci.yml
 name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-    - run: npm ci
-    - run: npm test
-    - run: npm run test:integration
-    - run: npm run test:e2e
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:integration
+      - run: npm run test:e2e
 
   security:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: npm audit
-    - run: npm run security:scan
+      - uses: actions/checkout@v3
+      - run: npm audit
+      - run: npm run security:scan
 
   deploy:
     needs: [test, security]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-    - uses: actions/checkout@v3
-    - run: npm run deploy:production
+      - uses: actions/checkout@v3
+      - run: npm run deploy:production
 ```
 
 ### **2. Docker Registry:**
+
 ```bash
 # Docker Registry Setup
 docker run -d \
@@ -446,12 +468,14 @@ docker push localhost:5000/lopezitwelt/enterprise-api:latest
 ## 📋 Setup Checklist
 
 ### **Pre-Setup:**
+
 - [ ] System-Anforderungen prüfen
 - [ ] Repository klonen
 - [ ] Dependencies installieren
 - [ ] Environment konfigurieren
 
 ### **Core Setup:**
+
 - [ ] Betriebssystem konfigurieren
 - [ ] Database installieren
 - [ ] Redis installieren
@@ -459,24 +483,28 @@ docker push localhost:5000/lopezitwelt/enterprise-api:latest
 - [ ] Application deployen
 
 ### **Security Setup:**
+
 - [ ] SSL-Zertifikate installieren
 - [ ] Firewall konfigurieren
 - [ ] VPN einrichten
 - [ ] Security-Scans durchführen
 
 ### **Monitoring Setup:**
+
 - [ ] Prometheus installieren
 - [ ] Grafana konfigurieren
 - [ ] Alert Manager einrichten
 - [ ] Dashboards erstellen
 
 ### **Testing Setup:**
+
 - [ ] Unit Tests konfigurieren
 - [ ] Integration Tests einrichten
 - [ ] E2E Tests aufsetzen
 - [ ] Test-Automation aktivieren
 
 ### **CI/CD Setup:**
+
 - [ ] GitHub Actions konfigurieren
 - [ ] Docker Registry einrichten
 - [ ] Deployment-Pipeline erstellen
@@ -489,6 +517,7 @@ docker push localhost:5000/lopezitwelt/enterprise-api:latest
 ### **Häufige Probleme:**
 
 #### **1. Port-Konflikte:**
+
 ```bash
 # Ports prüfen
 sudo netstat -tlnp | grep :3000
@@ -498,6 +527,7 @@ sudo kill -9 $(sudo lsof -t -i:3000)
 ```
 
 #### **2. Database-Verbindung:**
+
 ```bash
 # PostgreSQL Status prüfen
 sudo systemctl status postgresql
@@ -507,6 +537,7 @@ psql -h localhost -U enterprise -d enterprise -c "SELECT 1;"
 ```
 
 #### **3. Redis-Verbindung:**
+
 ```bash
 # Redis Status prüfen
 sudo systemctl status redis-server
@@ -516,6 +547,7 @@ redis-cli -a enterprise_redis_password ping
 ```
 
 #### **4. Nginx-Konfiguration:**
+
 ```bash
 # Nginx Syntax prüfen
 sudo nginx -t
@@ -532,12 +564,14 @@ sudo tail -f /var/log/nginx/error.log
 ## 📞 Support
 
 ### **Setup-Support:**
-- **E-Mail:** setup@lopez-enterprise.com
+
+- **E-Mail:** dev@lopez-enterprise.com
 - **Telefon:** +49 231 12345678
 - **Dokumentation:** https://docs.lopez-enterprise.com/setup
 
 ### **24/7 Support:**
-- **E-Mail:** support@lopez-enterprise.com
+
+- **E-Mail:** dev@lopez-enterprise.com
 - **Telefon:** +49 231 12345679
 - **Chat:** https://support.lopez-enterprise.com
 
@@ -545,4 +579,4 @@ sudo tail -f /var/log/nginx/error.log
 
 **🎯 Ziel:** Schnelle und sichere Setup-Prozedur!  
 **📅 Letzte Aktualisierung:** 2025-07-05  
-**👥 Verantwortlich:** DevOps Team 
+**👥 Verantwortlich:** DevOps Team
