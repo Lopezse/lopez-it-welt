@@ -9,6 +9,9 @@
     "scripts/enterprise-gate.mjs",
     "scripts/gen-sbom.mjs",
     "scripts/release-tag.mjs",
+    "scripts/anti-rule-break-hook.js",
+    "scripts/pre-commit-freigabe-check.js",
+    ".gitignore",
     "src/app/admin/office/calendar/page.tsx",
     "src/app/admin/office/invoices/page.tsx",
     "src/lib/rbac-ui.ts",
@@ -34,52 +37,14 @@
       "reason": "Dokumentation, changelogs, validierungsberichte",
       "expires_at": "2025-11-08T23:59:59Z",
       "max_files_per_commit": 50,
-      "branch": [
-        "docs/*",
-        "feature/docs"
-      ]
+      "branch": ["docs/*", "feature/docs"]
     },
     {
       "pattern": "frontend/**",
       "reason": "UI & CSS Updates (Low-Risk)",
       "expires_at": "2025-11-08T23:59:59Z",
       "max_files_per_commit": 25,
-      "branch": [
-        "feature/ui",
-        "feature/frontend"
-      ]
-    }
-  ],
-  "deny_patterns": [
-    "**/*.env",
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/build/**",
-    "**/*.pem",
-    "**/*.key",
-    "**/secrets/**"
-  ],
-  "approver": {
-    "name": "Ramiro Lopez Rodriguez",
-    "role": "Inhaber / Compliance Officer",
-    "email": "ra-lopez@t-online.de"
-  }
-}
-
-      "branch": [
-        "docs/*",
-        "feature/docs"
-      ]
-    },
-    {
-      "pattern": "frontend/**",
-      "reason": "UI & CSS Updates (Low-Risk)",
-      "expires_at": "2025-11-08T23:59:59Z",
-      "max_files_per_commit": 25,
-      "branch": [
-        "feature/ui",
-        "feature/frontend"
-      ]
+      "branch": ["feature/ui", "feature/frontend"]
     }
   ],
   "deny_patterns": [

@@ -16,3 +16,12 @@ build/
 # OS
 .DS_Store
 Thumbs.db
+
+# Environment variables (SICHERHEIT!)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+*.env
+!email-config.env.example

@@ -73,37 +73,3 @@ if (relevantFiles.length > 0) {
   console.log(`✅ Alle ${relevantFiles.length} relevanten Dateien haben Freigabe.`);
 }
 process.exit(0);
-
-    file.endsWith(".lock") ||
-    file.endsWith(".tsbuildinfo") ||
-    (file.endsWith(".json") && file.includes("/.next/"))
-  ) {
-    return false;
-  }
-  return true;
-});
-
-// Normaler Modus: Datei-spezifische Prüfung
-// Unterstütze sowohl neue Struktur (allow Array) als auch alte Struktur (Dateiname als Key)
-let blockiert = false;
-relevantFiles.forEach((file) => {
-  let isApproved = false;
-  if (freigaben.mode === "strict" && Array.isArray(freigaben.allow)) {
-    // Neue Struktur: allow Array
-    isApproved = freigaben.allow.includes(file);
-  } else {
-    // Legacy-Struktur: Dateiname als Key
-    isApproved = freigaben[file] === true;
-  }
-
-  if (!isApproved) {
-    console.error(`❌ Commit blockiert: Keine Freigabe für ${file}`);
-    blockiert = true;
-  }
-});
-
-if (blockiert) process.exit(1);
-if (relevantFiles.length > 0) {
-  console.log(`✅ Alle ${relevantFiles.length} relevanten Dateien haben Freigabe.`);
-}
-process.exit(0);
