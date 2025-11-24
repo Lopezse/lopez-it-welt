@@ -32,7 +32,16 @@
     "scripts/test-invoice-creation-direct.js",
     "docs/08-BUSINESS/08-02-linkedin-marketing-content-plan.md",
     "docs/08-BUSINESS/08-03-linkedin-post-log.md",
-    "docs/08-BUSINESS/README.md"
+    "docs/08-BUSINESS/README.md",
+    "tools/notseite-plesk/README.md",
+    "tools/notseite-plesk/index.html",
+    "tools/notseite-plesk/impressum.html",
+    "tools/notseite-plesk/datenschutz.html",
+    "tools/notseite-plesk/styles.css",
+    "tools/notseite-plesk/logo-lw-mark.svg",
+    "tools/notseite-plesk/logo.svg",
+    "tools/notseite-plesk/favicon.svg",
+    "tools/notseite-plesk/xing.png"
   ],
   "temporary_allow": [
     {
