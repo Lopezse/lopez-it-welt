@@ -13,6 +13,7 @@
 - **License System Security:** Lizenzsystem und -Sicherheit
 - **Code Protection Strategy:** Code-Schutz und -Strategien
 - **Business Plan:** Geschäftsplanung und -Strategie
+- **LinkedIn Marketing & Content Plan:** Enterprise++ Marketing-Strategie für LinkedIn
 
 ## 🎯 Ziele
 

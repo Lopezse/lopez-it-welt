@@ -29,7 +29,9 @@
     "scripts/setup-office-finance.js",
     "scripts/debug-invoice-error.js",
     "scripts/test-invoice-api.js",
-    "scripts/test-invoice-creation-direct.js"
+    "scripts/test-invoice-creation-direct.js",
+    "docs/08-BUSINESS/08-02-linkedin-marketing-content-plan.md",
+    "docs/08-BUSINESS/README.md"
   ],
   "temporary_allow": [
     {
