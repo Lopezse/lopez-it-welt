@@ -39,14 +39,20 @@
       "reason": "Dokumentation, changelogs, validierungsberichte",
       "expires_at": "2025-11-08T23:59:59Z",
       "max_files_per_commit": 50,
-      "branch": ["docs/*", "feature/docs"]
+      "branch": [
+        "docs/*",
+        "feature/docs"
+      ]
     },
     {
       "pattern": "frontend/**",
       "reason": "UI & CSS Updates (Low-Risk)",
       "expires_at": "2025-11-08T23:59:59Z",
       "max_files_per_commit": 25,
-      "branch": ["feature/ui", "feature/frontend"]
+      "branch": [
+        "feature/ui",
+        "feature/frontend"
+      ]
     }
   ],
   "deny_patterns": [
