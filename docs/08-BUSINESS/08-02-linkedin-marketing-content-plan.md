@@ -25,6 +25,16 @@ Der Fokus liegt auf:
 
 ---
 
+## 📁 Logbuch-Ablage
+
+Das Logbuch aller veröffentlichten LinkedIn-Posts befindet sich in:
+
+**docs/08-BUSINESS/08-03-linkedin-post-log.md**
+
+Dort wird jeder Post mit Datum, Uhrzeit, Titel, Typ, Bild und Hashtags dokumentiert.
+
+---
+
 ## 1. Positionierung auf LinkedIn
 
 Lopez IT Welt kommuniziert:
@@ -493,7 +503,7 @@ Enterprise++ ist dabei die Leitlinie für alle Inhalte.
 
 ---
 
-## 7. Zeitstempel-Konvention
+## 13. Zeitstempel-Konvention
 
 **Für alle Dokumentationen:**
 
@@ -503,6 +513,6 @@ Enterprise++ ist dabei die Leitlinie für alle Inhalte.
 
 ---
 
-**Zuletzt aktualisiert:** 2025-11-24 09:05:01  
-**Version:** 1.1.0 (Erweitert mit aktuellem Projektstatus, Content-Kalender, Hashtags, KPIs)  
+**Zuletzt aktualisiert:** 2025-11-24 12:00:47  
+**Version:** 1.2.0 (Logbuch ausgelagert, Struktur optimiert)  
 **Enterprise++ Standards:** ✅ Erfüllt

@@ -14,6 +14,7 @@
 - **Code Protection Strategy:** Code-Schutz und -Strategien
 - **Business Plan:** Geschäftsplanung und -Strategie
 - **LinkedIn Marketing & Content Plan:** Enterprise++ Marketing-Strategie für LinkedIn
+- **LinkedIn Post Logbuch:** Dokumentation aller veröffentlichten LinkedIn-Posts
 
 ## 🎯 Ziele
 
