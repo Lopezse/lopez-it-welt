@@ -182,7 +182,8 @@ export default function CustomerExportModal({
             console.log("✅ Methode 2: Backup-Excel-Datei erfolgreich heruntergeladen");
           } catch (error) {
             console.error("❌ Fehler beim Download:", error);
-            alert("Fehler beim Herunterladen der Excel-Datei: " + error.message);
+            const errorMessage = error instanceof Error ? error.message : "Unbekannter Fehler";
+            alert("Fehler beim Herunterladen der Excel-Datei: " + errorMessage);
           }
         } else if (exportFormat === "csv") {
           // CSV-Datei herunterladen

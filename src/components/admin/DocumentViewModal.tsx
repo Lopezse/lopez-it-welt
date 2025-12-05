@@ -70,7 +70,7 @@ export default function DocumentViewModal({
   };
 
   const exportToPDF = () => {
-    const element = document.createElement("div");
+    const element = window.document.createElement("div");
     element.innerHTML = `
             <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
                 <div style="text-align: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 20px; margin-bottom: 30px;">

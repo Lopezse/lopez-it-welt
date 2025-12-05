@@ -66,6 +66,14 @@ export default function Footer() {
               <div className="text-sm text-gray-400">
                 © Lopez IT Welt – Alle Rechte vorbehalten
               </div>
+              <div className="mt-2">
+                <a
+                  href="/privacy-center"
+                  className="text-sm text-gray-400 hover:text-gray-300 underline"
+                >
+                  Datenschutz & Cookie-Einstellungen
+                </a>
+              </div>
             </div>
           </div>
         </div>

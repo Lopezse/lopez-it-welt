@@ -349,24 +349,3 @@ async function deactivateCustomer(customerId: string) {
   // Kunde deaktiviert: ${customerId}
   return true;
 }
-
-  if (!existingCustomer) return null;
-
-  return {
-    ...existingCustomer,
-    ...updateData,
-    updated_at: new Date().toISOString(),
-  };
-}
-
-async function deleteCustomer(customerId: string) {
-  // Demo: Kunde gelöscht (in Produktion: Datenbank-Delete)
-  // Kunde gelöscht: ${customerId}
-  return true;
-}
-
-async function deactivateCustomer(customerId: string) {
-  // Demo: Kunde deaktiviert (in Produktion: Status-Update)
-  // Kunde deaktiviert: ${customerId}
-  return true;
-}

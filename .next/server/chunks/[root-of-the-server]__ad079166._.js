@@ -141,7 +141,7 @@ async function GET(request) {
                 host: "localhost",
                 user: "root",
                 password: "",
-                database: "lopez_erp"
+                database: process.env.DB_NAME || "lopez_it_welt"
             });
         } catch (dbError) {
             console.error("❌ DB-Verbindungsfehler (contact-messages/stats):", dbError);

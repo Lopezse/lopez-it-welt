@@ -14,7 +14,7 @@ import { UUIDService } from "./uuid-service";
 // =====================================================
 
 export interface Argon2Config {
-  type: argon2.argon2id;
+  type: typeof argon2.argon2id;
   memoryCost: number;
   timeCost: number;
   parallelism: number;

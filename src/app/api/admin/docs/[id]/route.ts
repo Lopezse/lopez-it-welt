@@ -18,7 +18,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     const query = `
@@ -56,7 +56,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     // Prüfen ob Dokument existiert
@@ -101,7 +101,7 @@ export async function DELETE(
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     // Prüfen ob Dokument existiert

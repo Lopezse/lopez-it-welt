@@ -4,6 +4,7 @@ import "./globals.css";
 
 // 🛡️ CURSOR-INTEGRATION UND ANTI-REGELBRUCH-SYSTEM (TEMPORÄR DEAKTIVIERT)
 import I18nProvider from "@/components/Features/I18nProvider";
+import CookieBanner from "@/components/dsgvo/CookieBanner";
 // import { initializeCursorIntegration } from '@/lib/cursor-integration'
 // import { showCursorStatus, startCursorMonitoring } from '@/lib/cursor-monitor'
 
@@ -54,7 +55,7 @@ try {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de">
+    <html lang="de" suppressHydrationWarning>
       <head>
         {/* UTF-8 ENCODING */}
         <meta charSet="utf-8" />
@@ -70,6 +71,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* 🛡️ ANTI-REGELBRUCH-SYSTEM WRAPPER */}
           <div id="anti-rule-break-wrapper" data-system-active="true">
             {children}
+            {/* 🍪 DSGVO Cookie-Banner */}
+            <CookieBanner />
           </div>
         </I18nProvider>
         {/* 🛡️ ANTI-REGELBRUCH-SYSTEM SCRIPT */}

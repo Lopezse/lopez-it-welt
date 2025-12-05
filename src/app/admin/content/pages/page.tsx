@@ -5,6 +5,7 @@ import {
   FaDesktop,
   FaEdit,
   FaEye,
+  FaFileAlt,
   FaGlobe,
   FaMobile,
   FaPlus,

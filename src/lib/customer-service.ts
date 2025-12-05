@@ -6,7 +6,8 @@
 // Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
 // =====================================================
 
-import { generateKundennummer, getConnection } from "./database";
+import { generateKundennummer } from "./database";
+import { executeQueryPool, executeQueryPoolWithResult } from "@/lib/db";
 
 // =====================================================
 // INTERFACES
@@ -75,10 +76,19 @@ export class CustomerService {
     customerData: Omit<Customer, "id" | "kundennummer" | "created_at" | "updated_at">,
   ): Promise<Customer> {
     try {
-      const connection = await getConnection();
+      // Prüfe ob E-Mail bereits existiert
+      const existingByEmail = await executeQueryPool<Customer[]>(
+        "SELECT id, kundennummer FROM lopez_customers WHERE email = ?",
+        [customerData.email],
+      );
+      
+      if (existingByEmail.length > 0) {
+        throw new Error(`Ein Kunde mit der E-Mail "${customerData.email}" existiert bereits (Kundennummer: ${existingByEmail[0].kundennummer})`);
+      }
+
       const kundennummer = await generateKundennummer();
 
-      const [result] = await connection.execute(
+      const result = await executeQueryPoolWithResult(
         `
                 INSERT INTO lopez_customers (
                     kundennummer, customer_type, anrede, titel, vorname, nachname,
@@ -113,19 +123,37 @@ export class CustomerService {
       await this.logAudit("lopez_customers", insertId, "INSERT", null, customerData, "system");
 
       return customer!;
-    } catch (error) {
+    } catch (error: any) {
       console.error("❌ Fehler beim Erstellen des Kunden:", error);
-      throw error;
+      
+      // Bessere Fehlermeldung bei Duplikat-Fehler
+      if (error?.code === "ER_DUP_ENTRY") {
+        if (error?.sqlMessage?.includes("email")) {
+          throw new Error(`Ein Kunde mit dieser E-Mail existiert bereits.`);
+        } else if (error?.sqlMessage?.includes("kundennummer")) {
+          throw new Error(`Kundennummer-Konflikt. Bitte versuchen Sie es erneut.`);
+        } else if (error?.sqlMessage?.includes("PRIMARY")) {
+          // Tabellen-Struktur-Problem - AUTO_INCREMENT fehlt
+          throw new Error(`Datenbank-Struktur-Fehler. Bitte rufen Sie /api/admin/init-database auf, um die Tabelle zu reparieren.`);
+        } else {
+          throw new Error(`Duplikat-Eintrag: ${error?.sqlMessage}`);
+        }
+      }
+      
+      // Allgemeiner Fehler mit hilfreicher Meldung
+      if (error?.message) {
+        throw error;
+      }
+      
+      throw new Error("Unbekannter Fehler beim Erstellen des Kunden. Bitte versuchen Sie es erneut.");
     }
   }
 
   static async getCustomerById(id: number): Promise<Customer | null> {
     try {
-      const connection = await getConnection();
-      const [rows] = await connection.execute("SELECT * FROM lopez_customers WHERE id = ?", [id]);
+      const rows = await executeQueryPool<Customer[]>("SELECT * FROM lopez_customers WHERE id = ?", [id]);
 
-      const customers = rows as Customer[];
-      return customers.length > 0 ? customers[0] : null;
+      return rows.length > 0 ? rows[0] : null;
     } catch (error) {
       console.error("❌ Fehler beim Laden des Kunden:", error);
       throw error;
@@ -134,14 +162,12 @@ export class CustomerService {
 
   static async getCustomerByKundennummer(kundennummer: string): Promise<Customer | null> {
     try {
-      const connection = await getConnection();
-      const [rows] = await connection.execute(
+      const rows = await executeQueryPool<Customer[]>(
         "SELECT * FROM lopez_customers WHERE kundennummer = ?",
         [kundennummer],
       );
 
-      const customers = rows as Customer[];
-      return customers.length > 0 ? customers[0] : null;
+      return rows.length > 0 ? rows[0] : null;
     } catch (error) {
       console.error("❌ Fehler beim Laden des Kunden:", error);
       throw error;
@@ -153,15 +179,13 @@ export class CustomerService {
     customerData: Partial<Customer>,
   ): Promise<Customer | null> {
     try {
-      const connection = await getConnection();
-
       // Alte Daten laden für Audit-Log
       const oldCustomer = await this.getCustomerById(id);
       if (!oldCustomer) return null;
 
       // Update durchführen
-      const updateFields = [];
-      const updateValues = [];
+      const updateFields: string[] = [];
+      const updateValues: unknown[] = [];
 
       Object.entries(customerData).forEach(([key, value]) => {
         if (key !== "id" && key !== "kundennummer" && key !== "created_at" && value !== undefined) {
@@ -174,7 +198,7 @@ export class CustomerService {
 
       updateValues.push(id);
 
-      await connection.execute(
+      await executeQueryPool(
         `
                 UPDATE lopez_customers 
                 SET ${updateFields.join(", ")}, updated_at = CURRENT_TIMESTAMP 
@@ -197,13 +221,11 @@ export class CustomerService {
 
   static async deleteCustomer(id: number): Promise<boolean> {
     try {
-      const connection = await getConnection();
-
       // Alte Daten laden für Audit-Log
       const oldCustomer = await this.getCustomerById(id);
       if (!oldCustomer) return false;
 
-      await connection.execute("DELETE FROM lopez_customers WHERE id = ?", [id]);
+      await executeQueryPool("DELETE FROM lopez_customers WHERE id = ?", [id]);
 
       // Audit-Log
       await this.logAudit("lopez_customers", id, "DELETE", oldCustomer, null, "system");
@@ -223,8 +245,6 @@ export class CustomerService {
     filters: SearchFilters = {},
   ): Promise<{ customers: Customer[]; total: number }> {
     try {
-      const connection = await getConnection();
-
       const {
         customer_type,
         status,
@@ -281,8 +301,8 @@ export class CustomerService {
 
       // Gesamtanzahl ermitteln
       const countQuery = `SELECT COUNT(*) as total FROM lopez_customers ${whereClause}`;
-      const [countRows] = await connection.execute(countQuery, queryParams);
-      const total = (countRows as any)[0].total;
+      const countRows = await executeQueryPool<any[]>(countQuery, queryParams);
+      const total = countRows[0].total;
 
       // Kunden laden
       const customersQuery = `
@@ -292,14 +312,14 @@ export class CustomerService {
                 LIMIT ? OFFSET ?
             `;
 
-      const [customerRows] = await connection.execute(customersQuery, [
+      const customerRows = await executeQueryPool<Customer[]>(customersQuery, [
         ...queryParams,
         limit,
         offset,
       ]);
 
       return {
-        customers: customerRows as Customer[],
+        customers: customerRows,
         total,
       };
     } catch (error) {
@@ -314,8 +334,6 @@ export class CustomerService {
 
   static async fuzzySearch(query: string, limit: number = 10): Promise<Customer[]> {
     try {
-      const connection = await getConnection();
-
       // Fuzzy Search mit SOUNDEX und LIKE
       const searchQuery = `
                 SELECT *, 
@@ -345,7 +363,7 @@ export class CustomerService {
       const searchTerm = `%${query}%`;
       const exactTerm = query;
 
-      const [rows] = await connection.execute(searchQuery, [
+      const rows = await executeQueryPool<Customer[]>(searchQuery, [
         searchTerm,
         searchTerm,
         searchTerm,
@@ -364,7 +382,7 @@ export class CustomerService {
         limit,
       ]);
 
-      return rows as Customer[];
+      return rows;
     } catch (error) {
       console.error("❌ Fehler bei der Fuzzy-Suche:", error);
       throw error;
@@ -386,9 +404,7 @@ export class CustomerService {
     userAgent?: string,
   ): Promise<void> {
     try {
-      const connection = await getConnection();
-
-      await connection.execute(
+      await executeQueryPool(
         `
                 INSERT INTO lopez_audit_logs 
                 (table_name, record_id, action, old_values, new_values, user_id, ip_address, user_agent)

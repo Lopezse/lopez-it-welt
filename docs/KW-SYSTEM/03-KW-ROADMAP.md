@@ -1,0 +1,248 @@
+# KW-ROADMAP
+
+## Enterprise++ Roadmap – Sprint = 1 KW
+
+### Lopez IT Welt – Projekt-Planung
+
+**Version:** 1.0  
+**Stand:** 27.11.2025  
+**Status:** ✅ **AKTIV**
+
+---
+
+## 1. Einleitung
+
+Dieses Dokument definiert die **Enterprise++ Roadmap** mit **Sprint = 1 KW**.
+
+**Regel:**
+- **1 Kalenderwoche (KW) = 1 Sprint**
+- **Sprintnummer = KW-Nummer**
+- **Sprintstart = Montag**
+- **Sprintende = Sonntag**
+
+---
+
+## 2. Dezember 2025 – Übersicht
+
+### **2.1 KW 48 – 25.11.2025 bis 01.12.2025**
+
+**Sprint:** 48  
+**Zeitraum:** 25.11.2025 (Mo) bis 01.12.2025 (So)  
+**Status:** ⏳ **IN ARBEIT**
+
+**Geplanter Fokus:**
+- ✅ KW-System Planung abgeschlossen
+- ⏳ Orchestrator Level 2 Admin-UI (P8-UI) – Planung abgeschlossen, Implementierung starten
+- ⏳ KW-Integration in bestehende Dokumentation
+
+**Ziele:**
+- KW-System einführen
+- P8-UI Planung abschließen
+- P8-UI Implementierung starten
+
+---
+
+### **2.2 KW 49 – 02.12.2025 bis 08.12.2025**
+
+**Sprint:** 49  
+**Zeitraum:** 02.12.2025 (Mo) bis 08.12.2025 (So)  
+**Status:** ⏳ **GEPLANT**
+
+**Geplanter Fokus:**
+- Orchestrator Level 2 Admin-UI (P8-UI) – Implementierung
+- Automation Dashboard
+- Trigger-Komponenten
+- Workflow-Komponenten
+
+**Ziele:**
+- Automation Dashboard fertigstellen
+- Trigger-Management fertigstellen
+- Workflow-Management starten
+
+---
+
+### **2.3 KW 50 – 09.12.2025 bis 15.12.2025**
+
+**Sprint:** 50  
+**Zeitraum:** 09.12.2025 (Mo) bis 15.12.2025 (So)  
+**Status:** ⏳ **GEPLANT**
+
+**Geplanter Fokus:**
+- Orchestrator Level 2 Admin-UI (P8-UI) – Implementierung
+- Workflow-Komponenten
+- Status-Komponenten
+- Event-Komponenten
+
+**Ziele:**
+- Workflow-Management fertigstellen
+- Status Dashboard fertigstellen
+- Event-Liste erweitern
+
+---
+
+### **2.4 KW 51 – 16.12.2025 bis 22.12.2025**
+
+**Sprint:** 51  
+**Zeitraum:** 16.12.2025 (Mo) bis 22.12.2025 (So)  
+**Status:** ⏳ **GEPLANT**
+
+**Geplanter Fokus:**
+- Orchestrator Level 2 Admin-UI (P8-UI) – Finalisierung
+- Navigation erweitern
+- Testing & Dokumentation
+- Abnahme durch Agent C
+
+**Ziele:**
+- P8-UI vollständig fertigstellen
+- Testing abschließen
+- Dokumentation abschließen
+- Abnahme durch Agent C
+
+---
+
+### **2.5 KW 52 – 23.12.2025 bis 29.12.2025**
+
+**Sprint:** 52  
+**Zeitraum:** 23.12.2025 (Mo) bis 29.12.2025 (So)  
+**Status:** ⏳ **GEPLANT**
+
+**Geplanter Fokus:**
+- Weihnachtswoche (reduzierte Aktivität)
+- Alerts & Incident-Handling (P8-C) – Planung
+- Jahresrückblick
+- Planung 2026
+
+**Ziele:**
+- P8-C Planung starten
+- Jahresrückblick erstellen
+- Planung 2026 vorbereiten
+
+---
+
+## 3. Sprint-Planung (Detail)
+
+### **3.1 Sprint 48 (KW 48)**
+
+**Zeitraum:** 25.11.2025 (Mo) bis 01.12.2025 (So)
+
+**Ziele:**
+- ✅ KW-System Planung abschließen
+- ✅ P8-UI Planung abschließen
+- ⏳ P8-UI Implementierung starten
+
+**Aufgaben:**
+- ✅ KW-System-Dokumentation erstellen
+- ✅ KW-Templates erstellen
+- ✅ KW-Integration planen
+- ✅ Dezember-Übersicht erstellen
+- ⏳ P8-UI Implementierung starten (Agent B)
+
+**Meilensteine:**
+- ✅ KW-System eingeführt
+- ⏳ P8-UI Implementierung gestartet
+
+---
+
+### **3.2 Sprint 49 (KW 49)**
+
+**Zeitraum:** 02.12.2025 (Mo) bis 08.12.2025 (So)
+
+**Ziele:**
+- Automation Dashboard fertigstellen
+- Trigger-Management fertigstellen
+- Workflow-Management starten
+
+**Aufgaben:**
+- Automation Dashboard implementieren
+- Trigger-Liste implementieren
+- Trigger-Detail implementieren
+- Trigger-Formular implementieren
+- Workflow-Liste implementieren
+
+**Meilensteine:**
+- Automation Dashboard live
+- Trigger-Management live
+
+---
+
+### **3.3 Sprint 50 (KW 50)**
+
+**Zeitraum:** 09.12.2025 (Mo) bis 15.12.2025 (So)
+
+**Ziele:**
+- Workflow-Management fertigstellen
+- Status Dashboard fertigstellen
+- Event-Liste erweitern
+
+**Aufgaben:**
+- Workflow-Detail implementieren
+- Workflow-Formular implementieren
+- Workflow-Execution implementieren
+- Status Dashboard implementieren
+- Event-Liste erweitern
+
+**Meilensteine:**
+- Workflow-Management live
+- Status Dashboard live
+
+---
+
+### **3.4 Sprint 51 (KW 51)**
+
+**Zeitraum:** 16.12.2025 (Mo) bis 22.12.2025 (So)
+
+**Ziele:**
+- P8-UI vollständig fertigstellen
+- Testing abschließen
+- Dokumentation abschließen
+- Abnahme durch Agent C
+
+**Aufgaben:**
+- Navigation erweitern
+- Testing durchführen
+- Dokumentation abschließen
+- Code-Review durch Agent C
+- Abnahme durch Agent C
+
+**Meilensteine:**
+- P8-UI vollständig fertiggestellt
+- Abnahme durch Agent C
+
+---
+
+### **3.5 Sprint 52 (KW 52)**
+
+**Zeitraum:** 23.12.2025 (Mo) bis 29.12.2025 (So)
+
+**Ziele:**
+- P8-C Planung starten
+- Jahresrückblick erstellen
+- Planung 2026 vorbereiten
+
+**Aufgaben:**
+- P8-C Planung (Agent A)
+- Jahresrückblick erstellen
+- Planung 2026 vorbereiten
+
+**Meilensteine:**
+- P8-C Planung gestartet
+- Jahresrückblick erstellt
+
+---
+
+## 4. Versionskontrolle
+
+**Aktuelle Version:** v1.0 (27.11.2025)
+
+**Änderungshistorie:**
+- v1.0 (27.11.2025): Erste Version – KW-Roadmap erstellt
+
+---
+
+*Generated by Enterprise++ KW-System*  
+*Last updated: 2025-11-27*  
+*Status: ✅ AKTIV*
+
+
+
+

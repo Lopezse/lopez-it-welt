@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
             INSERT INTO lopez_footer (id, section, title, content, link_url, sort_order, language, is_active)
             VALUES (UUID(), ?, ?, ?, ?, ?, 'de', TRUE)
           `,
-            [section, item.title || null, item.content, item.link_url || null, item.sort_order],
+            [section, item.title || null, item.content, ("link_url" in item ? item.link_url : null) || null, item.sort_order],
           );
         }
       }

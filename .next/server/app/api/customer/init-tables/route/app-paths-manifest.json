@@ -1,0 +1,3 @@
+{
+  "/api/customer/init-tables/route": "app/api/customer/init-tables/route.js"
+}

@@ -1,4 +1,4 @@
-import { emailService } from "@/lib/email-service";
+import { EmailService } from "@/lib/email-service";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ContactFormData {
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: "lopez_it_welt",
     });
 
     const insertQuery = `
@@ -89,6 +89,7 @@ export async function POST(request: NextRequest) {
     };
 
     // E-Mails parallel senden (Kunde + Admin)
+    const emailService = new EmailService();
     await emailService.sendContactNotifications(messageData);
 
     // Logging für Debugging

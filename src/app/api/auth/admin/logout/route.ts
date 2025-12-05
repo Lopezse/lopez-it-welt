@@ -145,14 +145,32 @@ export async function POST(request: NextRequest) {
       }),
     });
 
-    // Cookie löschen
+    // Cookie löschen (Enterprise++: Explizit mit maxAge: 0 und expires)
     const response = NextResponse.json({
       success: true,
       message: "Logout erfolgreich",
     });
 
-    response.cookies.delete("adm_session");
-    response.cookies.delete("adm_token");
+    // Cookies explizit löschen mit maxAge: 0 und expires
+    response.cookies.set("adm_session", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 0, // Sofort ablaufen
+      expires: new Date(0), // Auf Epoch-Zeit setzen
+      path: "/",
+    });
+
+    response.cookies.set("adm_token", "", {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 0, // Sofort ablaufen
+      expires: new Date(0), // Auf Epoch-Zeit setzen
+      path: "/",
+    });
+
+    console.log("✅ Cookies gelöscht, Logout erfolgreich");
 
     return response;
   } catch (error) {

@@ -5,6 +5,24 @@
 **Status:** ✅ AKTIV  
 **Autor:** Lopez IT Welt Team
 
+---
+
+## 🟦 ENTERPRISE++ DEKLARATION
+
+**Lopez IT Welt ist ab sofort ein reines Enterprise++-System.**
+
+**Auf Niveau von:**
+- **SAP** (Systemarchitektur, Prozesse, Compliance)
+- **IBM** (Enterprise-Standards, Sicherheit, Skalierbarkeit)
+- **Siemens** (Qualität, Dokumentation, Nachvollziehbarkeit)
+
+**✅ Nur UI | ✅ Nur Admin-Tools | ✅ Nur Workflows | ✅ Nur Audit-Logs**  
+**❌ Keine CMD | ❌ Keine Scripts | ❌ Keine Terminal (für Endbenutzer)**
+
+**📋 Vollständige Deklaration:** Siehe `docs/ENTERPRISE-PLUS-PLUS-DEKLARATION.md`
+
+---
+
 ## 📋 **ÜBERSICHT**
 
 Dieses Verzeichnis enthält die **komplette Enterprise++ Dokumentation** für das Lopez IT Welt System. Jede Datei ist eine **Single Source of Truth** für ihren jeweiligen Bereich.
@@ -42,11 +60,40 @@ Dieses Verzeichnis enthält die **komplette Enterprise++ Dokumentation** für da
 - `STATUS.md` - **SSOT für Projektstatus** (26KB, 615 Zeilen)
 - `START.md` - **SSOT für Schnellstart** (5.9KB, 226 Zeilen)
 - `CHANGELOG.md` - **SSOT für Änderungen** (22KB, 601 Zeilen)
+- `TIME_LOG.md` - **SSOT für Zeitlogs** (pro KW)
 - `QualityController.md` - **SSOT für Qualitätskontrolle** (11KB, 369 Zeilen)
 - `QUALITY_DASHBOARD.md` - **SSOT für Qualitätsmetriken** (2.6KB, 67 Zeilen)
 - `ENTERPRISE_CLEANUP_REPORT.md` - **SSOT für Aufräumung** (3.6KB, 108 Zeilen)
 - `FEEDBACK.md` - **SSOT für Feedback-System** (1.0KB, 79 Zeilen)
 - `CursorGuide.md` - **SSOT für KI-Regeln** (7.3KB, 349 Zeilen)
+
+### **📅 KW-System (Sprint-System) – Enterprise++ Prozessmodell**
+
+**Status:** ✅ **OFFIZIELL AKTIV** (ab 28.11.2025)  
+**Freigabe:** ✅ **DURCH AGENT C BESTÄTIGT**  
+**Gültigkeit:** ✅ **DAUERHAFT UND VERPFLICHTEND** für alle zukünftigen Sprints
+
+**Kernregel:**
+- **1 Kalenderwoche (KW) = 1 Sprint**
+- **Sprintnummer = KW-Nummer**
+- **Sprintstart = Montag** (Planung durch Agent A)
+- **Sprintende = Sonntag**
+- **Freitag = Wochenrückblick / LinkedIn-Post**
+
+**Wochenablauf:**
+- **Montag:** Sprintstart, Planung, Ziele definieren, Aufgaben verteilen
+- **Dienstag-Donnerstag:** Entwicklung, Implementierung, Fortschritt dokumentieren
+- **Freitag:** Wochenrückblick, Review, IST-Ergebnis dokumentieren, LinkedIn-Post erstellen
+
+**Format-Standard:**
+- Alle Dokumente: `KW XX – Datum von DD.MM.YYYY bis DD.MM.YYYY`
+- Beispiel: `KW 48 – 25.11.2025 bis 01.12.2025`
+
+**Dokumentation:**
+- `docs/KW-SYSTEM/README.md` - **KW-System-Übersicht**
+- `docs/KW-SYSTEM/templates/` - **Templates** (KW-TEMPLATE.md, TIMELOG-TEMPLATE.md, LINKEDIN-REVIEW-TEMPLATE.md)
+- `docs/KW-SYSTEM/sprints/KW-XX.md` - **Sprint-Dokumentation** (pro KW)
+- **Aktuelle KW:** KW 48 (25.11.2025 – 01.12.2025) - Siehe `docs/KW-SYSTEM/sprints/KW-48.md`
 
 ### **🛒 Shop-System (08-SHOP-SYSTEM/)**
 
@@ -69,6 +116,32 @@ Dieses Verzeichnis enthält die **komplette Enterprise++ Dokumentation** für da
 - `docs/05-QUALITAET/` - Quality & Security (SSOT)
 - `docs/06-BUSINESS/` - Business Plan
 - `docs/07-APPENDIX/` - Zusatzdokumente
+
+### **🎨 Admin Sidebar Struktur (Enterprise++)**
+
+**Design-Standard:** IBM Carbon Design System / SAP Fiori Style
+
+**Vollständige Dokumentation:** `docs/ENTERPRISE-PLUS-PLUS/ADMIN-SIDEBAR-STRUCTURE.md`
+
+**Hauptkategorien (6):**
+1. **Dashboard** - Übersicht & KPIs
+2. **Operations** - Monitoring, Logs, Unified Ops, Backups
+3. **Kunden & Projekte** - Kundenverwaltung, Projekte, Support
+4. **Inhalte & Medien** - Content Management, Medien, Marketing
+5. **Finanzen** - Rechnungen, Umsätze, Zeiterfassung
+6. **System & Sicherheit** - Compliance, Rollen, Orchestrator, Navigation
+
+**Design-Features:**
+- ✅ Einheitliche Icons (20px Hauptnavigation, 16px Unterpunkte)
+- ✅ Lopez Carbon Dark Theme (Standard)
+- ✅ Gold-Akzent (#ffd700) für aktive Navigation
+- ✅ Perfekte Abstände (12px Icon-Text)
+- ✅ IBM Carbon Style Hover-States
+- ✅ Avatar-Bereich unten (Name, Rolle, Buttons)
+- ✅ Kein Scrollen im Hauptmenü
+- ✅ WCAG-konforme Kontraste
+
+**Komponente:** `src/components/admin/AdminNavigation.tsx`
 
 ## 🤖 **AGENTEN-SYSTEM**
 

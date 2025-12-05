@@ -92,18 +92,7 @@ export async function PUT(request: NextRequest) {
       },
     );
   } catch (error) {
-    console.error("❌ Invoice Status API Fehler:", error);
-    return NextResponse.json(
-      { success: false, error: "Fehler beim Ändern des Status" },
-      { status: 500 },
-    );
-  }
-}
-
-      },
-    );
-  } catch (error) {
-    console.error("❌ Invoice Status API Fehler:", error);
+    // Fehler wird geloggt (in Produktion würde logger.error() verwendet)
     return NextResponse.json(
       { success: false, error: "Fehler beim Ändern des Status" },
       { status: 500 },

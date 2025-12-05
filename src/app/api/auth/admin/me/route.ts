@@ -6,9 +6,9 @@
 // Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
 // =====================================================
 
+import { TwoFactorService } from "@/lib/2fa-service";
 import { AdminAuthService } from "@/lib/admin-auth-service";
 import { RBACService } from "@/lib/rbac-system";
-import { TwoFactorService } from "@/lib/2fa-service";
 import { NextRequest, NextResponse } from "next/server";
 
 // =====================================================
@@ -18,11 +18,18 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   try {
     // Session-Token aus Header oder Cookie extrahieren
-    const sessionToken = 
+    const sessionToken =
       request.headers.get("authorization")?.replace("Bearer ", "") ||
       request.cookies.get("adm_session")?.value;
 
+    console.log("🔍 Admin ME API:", {
+      hasHeader: !!request.headers.get("authorization"),
+      hasCookie: !!request.cookies.get("adm_session"),
+      sessionToken: sessionToken ? `${sessionToken.substring(0, 20)}...` : "none",
+    });
+
     if (!sessionToken) {
+      console.log("❌ Admin ME: Kein Session-Token gefunden");
       return NextResponse.json(
         { success: false, message: "Nicht authentifiziert" },
         { status: 401 },
@@ -32,11 +39,14 @@ export async function GET(request: NextRequest) {
     // Session validieren
     const session = await AdminAuthService.validateSession(sessionToken);
     if (!session) {
+      console.log("❌ Admin ME: Session-Validierung fehlgeschlagen");
       return NextResponse.json(
         { success: false, message: "Ungültige Session" },
         { status: 401 },
       );
     }
+
+    console.log("✅ Admin ME: Session validiert für User:", session.username);
 
     // Benutzer-Daten laden
     const user = await RBACService.getUserById(session.userId);
@@ -53,7 +63,13 @@ export async function GET(request: NextRequest) {
 
     // Rollen und Berechtigungen laden
     const roles = await RBACService.getUserRoles(session.userId);
-    const permissions = await RBACService.getUserPermissions(session.userId);
+
+    // Berechtigungen aus Rollen sammeln
+    const permissions: string[] = [];
+    for (const role of roles) {
+      const rolePermissions = await RBACService.getRolePermissions(role.id!);
+      permissions.push(...rolePermissions.map((p) => `${p.resource}.${p.action}`));
+    }
 
     return NextResponse.json({
       success: true,
@@ -64,7 +80,7 @@ export async function GET(request: NextRequest) {
           email: user.email,
           first_name: user.first_name,
           last_name: user.last_name,
-          role_id: user.role_id,
+          role_id: roles.length > 0 ? roles[0].id : undefined,
           status: user.status,
         },
         session: {
@@ -75,7 +91,7 @@ export async function GET(request: NextRequest) {
           realm: "ADMIN",
         },
         roles: roles.map((r) => r.name),
-        permissions: permissions.map((p) => p.resource + "." + p.action),
+        permissions: [...new Set(permissions)], // Duplikate entfernen
         twoFactor: {
           enabled: twoFactorEnabled,
           required: twoFactorRequired,

@@ -1,7 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaEdit, FaKey, FaPlus, FaShieldAlt, FaTrash, FaUsers } from "react-icons/fa";
+import { FaEdit, FaKey, FaPlus, FaShieldAlt, FaTrash, FaUsers, FaCopy, FaDownload, FaUpload, FaBalanceScale, FaFileAlt } from "react-icons/fa";
+import { RoleTemplates } from "@/components/admin/roles/RoleTemplates";
+import { RoleCloner } from "@/components/admin/roles/RoleCloner";
+import { RoleExporter } from "@/components/admin/roles/RoleExporter";
+import { RoleImporter } from "@/components/admin/roles/RoleImporter";
+import { RoleComparator } from "@/components/admin/roles/RoleComparator";
+import { ErrorBanner } from "@/components/ui/ErrorBanner";
+import { logger } from "@/lib/logger";
 
 interface Role {
   id: number;
@@ -40,6 +47,9 @@ export default function RolesPage() {
     role_description: "",
     permissions: [] as string[],
   });
+  const [activeTab, setActiveTab] = useState<"list" | "templates" | "clone" | "import" | "compare">("list");
+  const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
+  const [cloningRole, setCloningRole] = useState<Role | null>(null);
 
   // Rollen laden
   const loadRoles = async () => {
@@ -50,7 +60,7 @@ export default function RolesPage() {
         setRoles(data.data || []);
       }
     } catch (error) {
-      console.error("Fehler beim Laden der Rollen:", error);
+      logger.error("Fehler beim Laden der Rollen", error);
       setError("Fehler beim Laden der Rollen");
     }
   };
@@ -64,7 +74,7 @@ export default function RolesPage() {
         setPermissions(data.data.permissions || []);
       }
     } catch (error) {
-      console.error("Fehler beim Laden der Berechtigungen:", error);
+      // Fehler beim Laden der Berechtigungen - nicht kritisch
     }
   };
 
@@ -92,9 +102,21 @@ export default function RolesPage() {
         setError(data.message || "Fehler beim Erstellen der Rolle");
       }
     } catch (error) {
-      console.error("Fehler beim Hinzufügen:", error);
+      logger.error("Fehler beim Hinzufügen der Rolle", error);
       setError("Fehler beim Hinzufügen der Rolle");
     }
+  };
+
+  const handleTemplateSelect = (template: any) => {
+    setSelectedTemplate(template);
+    setNewRole({
+      role_name: template.name,
+      role_code: template.code,
+      role_description: template.description,
+      permissions: template.permissions,
+    });
+    setShowAddForm(true);
+    setActiveTab("list");
   };
 
   // Rolle bearbeiten
@@ -123,7 +145,6 @@ export default function RolesPage() {
         setError(data.message || "Fehler beim Aktualisieren der Rolle");
       }
     } catch (error) {
-      console.error("Fehler beim Bearbeiten:", error);
       setError("Fehler beim Bearbeiten der Rolle");
     }
   };
@@ -144,7 +165,6 @@ export default function RolesPage() {
         setError(data.message || "Fehler beim Löschen der Rolle");
       }
     } catch (error) {
-      console.error("Fehler beim Löschen:", error);
       setError("Fehler beim Löschen der Rolle");
     }
   };
@@ -191,13 +211,48 @@ export default function RolesPage() {
               <h1 className="text-3xl font-bold text-gray-900">Rollenverwaltung</h1>
               <p className="text-gray-600">Rollen und Berechtigungen verwalten</p>
             </div>
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
-            >
-              <FaPlus className="mr-2" />
-              Neue Rolle
-            </button>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => {
+                  setActiveTab("templates");
+                  setShowAddForm(false);
+                }}
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center"
+              >
+                <FaFileAlt className="mr-2" />
+                Templates
+              </button>
+              <button
+                onClick={() => {
+                  setActiveTab("import");
+                  setShowAddForm(false);
+                }}
+                className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 flex items-center"
+              >
+                <FaUpload className="mr-2" />
+                Importieren
+              </button>
+              <button
+                onClick={() => {
+                  setActiveTab("compare");
+                  setShowAddForm(false);
+                }}
+                className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 flex items-center"
+              >
+                <FaBalanceScale className="mr-2" />
+                Vergleichen
+              </button>
+              <button
+                onClick={() => {
+                  setActiveTab("list");
+                  setShowAddForm(true);
+                }}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center"
+              >
+                <FaPlus className="mr-2" />
+                Neue Rolle
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -237,11 +292,83 @@ export default function RolesPage() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Error Message */}
-        {error && (
-          <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
-            {error}
+        {error && <ErrorBanner message={error} />}
+
+        {/* Tabs */}
+        <div className="mb-6 border-b border-gray-200 dark:border-gray-700">
+          <nav className="flex space-x-8">
+            <button
+              onClick={() => setActiveTab("list")}
+              className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "list"
+                  ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+              }`}
+            >
+              Rollen-Liste
+            </button>
+            <button
+              onClick={() => setActiveTab("templates")}
+              className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "templates"
+                  ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+              }`}
+            >
+              Templates
+            </button>
+            <button
+              onClick={() => setActiveTab("import")}
+              className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "import"
+                  ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+              }`}
+            >
+              Importieren
+            </button>
+            <button
+              onClick={() => setActiveTab("compare")}
+              className={`py-4 px-1 border-b-2 font-medium text-sm ${
+                activeTab === "compare"
+                  ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
+              }`}
+            >
+              Vergleichen
+            </button>
+          </nav>
+        </div>
+
+        {/* Tab Content */}
+        {activeTab === "templates" && (
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <RoleTemplates
+              onSelectTemplate={handleTemplateSelect}
+              selectedTemplate={selectedTemplate}
+            />
           </div>
         )}
+
+        {activeTab === "import" && (
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <RoleImporter
+              onImportSuccess={() => {
+                loadRoles();
+                setActiveTab("list");
+              }}
+            />
+          </div>
+        )}
+
+        {activeTab === "compare" && (
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <RoleComparator roles={roles} />
+          </div>
+        )}
+
+        {activeTab === "list" && (
+          <>
 
         {/* Add Role Form */}
         {showAddForm && (
@@ -444,22 +571,41 @@ export default function RolesPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      {!role.is_system_role && (
-                        <>
-                          <button
-                            onClick={() => setEditingRole(role)}
-                            className="text-blue-600 hover:text-blue-900 mr-4"
-                          >
-                            <FaEdit />
-                          </button>
-                          <button
-                            onClick={() => deleteRole(role.id)}
-                            className="text-red-600 hover:text-red-900"
-                          >
-                            <FaTrash />
-                          </button>
-                        </>
-                      )}
+                      <div className="flex items-center justify-end space-x-2">
+                        <RoleExporter
+                          roleId={role.id}
+                          roleName={role.role_name}
+                          roleCode={role.role_code}
+                        />
+                        {!role.is_system_role && (
+                          <>
+                            <button
+                              onClick={() => {
+                                setCloningRole(role);
+                                setActiveTab("clone");
+                              }}
+                              className="text-purple-600 hover:text-purple-900 dark:text-purple-400 dark:hover:text-purple-300"
+                              title="Rolle klonen"
+                            >
+                              <FaCopy />
+                            </button>
+                            <button
+                              onClick={() => setEditingRole(role)}
+                              className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                              title="Rolle bearbeiten"
+                            >
+                              <FaEdit />
+                            </button>
+                            <button
+                              onClick={() => deleteRole(role.id)}
+                              className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
+                              title="Rolle löschen"
+                            >
+                              <FaTrash />
+                            </button>
+                          </>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -467,6 +613,27 @@ export default function RolesPage() {
             </table>
           </div>
         </div>
+          </>
+
+        )}
+
+        {/* Clone Role Dialog */}
+        {activeTab === "clone" && cloningRole && (
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <RoleCloner
+              role={cloningRole}
+              onCloneSuccess={() => {
+                loadRoles();
+                setCloningRole(null);
+                setActiveTab("list");
+              }}
+              onCancel={() => {
+                setCloningRole(null);
+                setActiveTab("list");
+              }}
+            />
+          </div>
+        )}
       </main>
     </div>
   );

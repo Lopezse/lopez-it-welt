@@ -14,7 +14,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     // Nachricht laden
@@ -116,7 +116,7 @@ export async function PATCH(request: NextRequest, { params }: { params: { id: st
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     // Update-Felder zusammenbauen
@@ -208,7 +208,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     // Soft Delete - Status auf 'archiviert' setzen

@@ -1,0 +1,11 @@
+# Dieses Verzeichnis enthält lokale SQL-Dumps
+# Erstellt: 2025-12-04
+# 
+# Verwendung:
+# node scripts/backup-db.js
+#
+# Backups werden hier gespeichert:
+# backups/db/YYYY-MM-DD_HH-MM-SS.sql
+
+
+

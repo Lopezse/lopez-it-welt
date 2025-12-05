@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="60" viewBox="0 0 400 60" shape-rendering="geometricPrecision" text-rendering="optimizeLegibility">
+  <defs>
+    <!-- Blue Gradient für IT Welt -->
+    <linearGradient id="wordmarkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#007BFF"/>
+      <stop offset="100%" stop-color="#0056B3"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Hauptmarke -->
+  <text x="0" y="35" font-family="Montserrat, Arial, sans-serif" font-size="36" font-weight="600" fill="#FFD700">Lopez</text>
+  <text x="140" y="35" font-family="Montserrat, Arial, sans-serif" font-size="36" font-weight="700" fill="url(#wordmarkGradient)">IT Welt</text>
+</svg>
+
+
+
+
+
+
+
+

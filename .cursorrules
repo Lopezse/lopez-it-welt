@@ -2,6 +2,22 @@
 # Automatische Anti-Regelbruch-System-Aktivierung
 
 # =====================================================
+# 🟦 ENTERPRISE++ DEKLARATION
+# =====================================================
+#
+# Lopez IT Welt ist ab sofort ein reines Enterprise++-System.
+#
+# Auf Niveau von:
+# - SAP (Systemarchitektur, Prozesse, Compliance)
+# - IBM (Enterprise-Standards, Sicherheit, Skalierbarkeit)
+# - Siemens (Qualität, Dokumentation, Nachvollziehbarkeit)
+#
+# ✅ Nur UI | ✅ Nur Admin-Tools | ✅ Nur Workflows | ✅ Nur Audit-Logs
+# ❌ Keine CMD | ❌ Keine Scripts | ❌ Keine Terminal (für Endbenutzer)
+#
+# Vollständige Deklaration: docs/ENTERPRISE-PLUS-PLUS-DEKLARATION.md
+#
+# =====================================================
 # ENTERPRISE++ CURSOR-INTEGRATION
 # =====================================================
 
@@ -232,4 +248,102 @@ validations:
   sessionSwitch: true
   compliance: true
   security: true
-  quality: true 
+  quality: true
+
+# =====================================================
+# DSGVO-REGELN
+# =====================================================
+
+# 🛡️ DSGVO DECISION ENGINE (KI-FIREWALL)
+# Zentrale KI-Firewall für rechtssichere KI-Verarbeitung
+# - KI darf nur arbeiten, wenn alle DSGVO-Bedingungen erfüllt sind
+# - Automatische Blockierung bei Verletzungen
+# - Vollständige Audit-Logs
+# - Rechtssichere Autonomie
+
+# DSGVO Decision Engine Regeln:
+# - Jede KI-Aktion MUSS zuerst dsgvoDecisionEngine.getAIProcessingPermission() prüfen
+# - Wenn decision.allowed === false → KI-Verarbeitung blockieren
+# - Alle Blockierungen müssen in dsgvo_audit_events geloggt werden
+# - Consent-Prüfung: checkConsentForAI(userId, purpose)
+# - DSGVO-Blocker-Prüfung: checkDSGVOBlockers(mediaId)
+# - Risiko-Bewertung: evaluateRisk(mediaMeta, context)
+# - Enforcement Layer: dsgvoEnforceMiddleware für API-Routen
+
+# DSGVO Audit-Events:
+# - AI_BLOCKED_NO_CONSENT
+# - AI_BLOCKED_DSGVO_RISK_TOO_HIGH
+# - AI_BLOCKED_PERSON_DETECTED
+# - AI_BLOCKED_CONSENT_REVOKED
+# - AI_BLOCKED_VERSION_MISMATCH
+# - AI_ALLOWED
+# - AI_PROCESSED
+
+# Integration:
+# - MediaAIService: DSGVO-Prüfung vor jeder KI-Analyse
+# - API-Routen: dsgvoEnforceMiddleware vorgeschaltet
+# - UI-Monitoring: /admin/compliance/dsgvo/ai-monitoring
+
+# =====================================================
+# KI-ORCHESTRATOR REGELN
+# =====================================================
+
+# 🛡️ KI-ORCHESTRATOR (Sprint 1)
+# Zentrale Orchestrierung aller KI-Agenten
+# - Orchestrator ist Single Source of Truth für KI-Flows
+# - Niemals DSGVO Decision Engine umgehen
+# - Nur registrierte Agenten verwenden
+# - Vollständige Audit-Logs für alle Orchestrator-Events
+
+# Orchestrator Regeln:
+# - Jede KI-Aktion MUSS über OrchestratorCore.dispatchTask() laufen
+# - AgentRegistry prüfen: Nur registrierte Agenten verwenden
+# - ContextManager: Nur DSGVO/Scope-konforme Daten weitergeben
+# - QualityGate: Input- und Output-Qualität prüfen
+# - OrchestratorAudit: Alle ORCH_* Events loggen
+
+# Agent-Registrierung:
+# - Agenten müssen in AgentRegistry registriert sein
+# - Agent-Definition: name, type, capabilities, dsgvoScope, riskProfile
+# - Initialisierung: initializeOrchestrator() beim System-Start
+
+# API-Endpoints:
+# - /api/orchestrator/task (POST) - Task-Dispatch mit DSGVO-Prüfung
+# - /api/orchestrator/agents (GET) - Agenten-Liste (read-only)
+# - RBAC: orchestrator.manage / orchestrator.view
+
+# UI:
+# - /admin/orchestrator/ - Übersicht (Agenten, Events, Statistik)
+# - /admin/orchestrator/agents - Agenten-Detail (DSGVO-Scope, Risk-Level, Toggle)
+# - /admin/orchestrator/events - Events-Liste (Filter: Zeitraum, Agent, Status)
+
+# =====================================================
+
+# 🛡️ DSGVO-COMPLIANCE
+# Automatische DSGVO-Compliance-Prüfung
+dsgvoCompliance: true
+dsgvoPersonDetection: true
+dsgvoConsentRequired: true
+dsgvoAuditLogging: true
+dsgvoDeletionFristen: true
+
+# 🔒 DSGVO-SICHERHEIT
+# DSGVO-konforme Sicherheitsmaßnahmen
+dsgvoEncryption: true
+dsgvoAccessControl: true
+dsgvoDataMinimization: true
+dsgvoPseudonymization: true
+
+# 📋 DSGVO-PROZESSE
+# DSGVO-konforme Prozesse
+dsgvoConsentManagement: true
+dsgvoDataDeletion: true
+dsgvoDataPortability: true
+dsgvoRightToAccess: true
+
+# 🤖 DSGVO-KI-INTEGRATION
+# DSGVO-konforme KI-Integration
+dsgvoMediaKI: true
+dsgvoOrchestratorKI: true
+dsgvoQualityGates: true
+dsgvoAuditTrail: true 

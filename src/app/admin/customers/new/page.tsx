@@ -108,10 +108,22 @@ export default function NewCustomerPage() {
       console.log("📦 Raw API Response:", responseText);
       console.log("📦 Response Status:", response.status, response.statusText);
       
-      let data = {};
+      interface ApiResponse {
+        success?: boolean;
+        message?: string;
+        error?: string;
+        data?: {
+          kundennummer?: string;
+          customer_id?: string;
+          [key: string]: unknown;
+        };
+        [key: string]: unknown;
+      }
+      
+      let data: ApiResponse = {};
       try {
         if (responseText) {
-          data = JSON.parse(responseText);
+          data = JSON.parse(responseText) as ApiResponse;
         }
       } catch (parseError) {
         console.error("❌ JSON Parse Fehler:", parseError);
@@ -181,19 +193,19 @@ export default function NewCustomerPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full mx-4">
+      <div className="min-h-screen bg-[#050509] flex items-center justify-center">
+        <div className="bg-[#111217] border border-[#272a33] rounded-lg shadow-lg p-8 max-w-md w-full mx-4">
           <div className="text-center">
-            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
-              <FaSave className="h-6 w-6 text-green-600" />
+            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-900/30 mb-4">
+              <FaSave className="h-6 w-6 text-green-400" />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            <h2 className="text-xl font-semibold text-[#f4f4f4] mb-2">
               ✅ Kunde erfolgreich erstellt!
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-[#b3b3b3] mb-4">
               Der neue Kunde wurde erfolgreich im System angelegt und ist jetzt in der Kundenliste verfügbar.
             </p>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-[#8a8a8a]">
               Sie werden automatisch zur Kundenliste weitergeleitet...
             </p>
           </div>
@@ -203,21 +215,21 @@ export default function NewCustomerPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#050509]">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="bg-[#111217] border-b border-[#272a33]">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <Link href="/admin/customers" className="mr-4 p-2 text-gray-400 hover:text-gray-600">
+              <Link href="/admin/customers" className="mr-4 p-2 text-[#8a8a8a] hover:text-[#f4f4f4] transition-colors">
                 <FaArrowLeft className="h-5 w-5" />
               </Link>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 flex items-center">
+                <h1 className="text-2xl font-bold text-[#f4f4f4] flex items-center">
                   {getCustomerTypeIcon(formData.customer_type)}
                   <span className="ml-3">Neuen Kunden hinzufügen</span>
                 </h1>
-                <p className="text-gray-600 mt-1">
+                <p className="text-[#8a8a8a] mt-1">
                   Neuen{" "}
                   {formData.customer_type === "privat"
                     ? "Privatkunden"
@@ -237,12 +249,12 @@ export default function NewCustomerPage() {
       <div className="px-6 py-6">
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+          <div className="bg-red-900/20 border border-red-800/50 rounded-md p-4 mb-6">
             <div className="flex">
               <FaTimes className="h-5 w-5 text-red-400" />
               <div className="ml-3">
-                <h3 className="text-sm font-medium text-red-800">Fehler</h3>
-                <div className="mt-2 text-sm text-red-700">{error}</div>
+                <h3 className="text-sm font-medium text-red-400">Fehler</h3>
+                <div className="mt-2 text-sm text-red-300">{error}</div>
               </div>
             </div>
           </div>
@@ -251,8 +263,8 @@ export default function NewCustomerPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Kundentyp */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Kundentyp</h3>
+          <div className="bg-[#111217] border border-[#272a33] rounded-lg p-6">
+            <h3 className="text-lg font-medium text-[#f4f4f4] mb-4">Kundentyp</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 { value: "privat", label: "Privat", icon: FaUser },
@@ -264,8 +276,8 @@ export default function NewCustomerPage() {
                   key={value}
                   className={`relative flex flex-col items-center p-4 border-2 rounded-lg cursor-pointer transition-colors ${
                     formData.customer_type === value
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200 hover:border-gray-300"
+                      ? "border-blue-500 bg-blue-500/10"
+                      : "border-[#272a33] bg-[#1a1d24] hover:border-[#3a3d47]"
                   }`}
                 >
                   <input
@@ -276,23 +288,23 @@ export default function NewCustomerPage() {
                     onChange={(e) => handleInputChange("customer_type", e.target.value)}
                     className="sr-only"
                   />
-                  <Icon className="h-6 w-6 mb-2 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-900">{label}</span>
+                  <Icon className={`h-6 w-6 mb-2 ${formData.customer_type === value ? "text-blue-400" : "text-[#8a8a8a]"}`} />
+                  <span className={`text-sm font-medium ${formData.customer_type === value ? "text-[#f4f4f4]" : "text-[#b3b3b3]"}`}>{label}</span>
                 </label>
               ))}
             </div>
           </div>
 
           {/* Personendaten */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Personendaten</h3>
+          <div className="bg-[#111217] border border-[#272a33] rounded-lg p-6">
+            <h3 className="text-lg font-medium text-[#f4f4f4] mb-4">Personendaten</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Anrede</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Anrede</label>
                 <select
                   value={formData.anrede}
                   onChange={(e) => handleInputChange("anrede", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 >
                   <option value="Keine Angabe">Keine Angabe</option>
                   <option value="Herr">Herr</option>
@@ -302,34 +314,34 @@ export default function NewCustomerPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Titel</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Titel</label>
                 <input
                   type="text"
                   value={formData.titel}
                   onChange={(e) => handleInputChange("titel", e.target.value)}
                   placeholder="z.B. Dr., Prof."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] placeholder-[#8a8a8a] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div></div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Vorname *</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Vorname *</label>
                 <input
                   type="text"
                   value={formData.vorname}
                   onChange={(e) => handleInputChange("vorname", e.target.value)}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Nachname *</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Nachname *</label>
                 <input
                   type="text"
                   value={formData.nachname}
                   onChange={(e) => handleInputChange("nachname", e.target.value)}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
             </div>
@@ -337,11 +349,11 @@ export default function NewCustomerPage() {
 
           {/* Firmendaten (nur für Firmen/Behörden/Partner) */}
           {isCompanyType && (
-            <div className="bg-white shadow rounded-lg p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Firmendaten</h3>
+            <div className="bg-[#111217] border border-[#272a33] rounded-lg p-6">
+              <h3 className="text-lg font-medium text-[#f4f4f4] mb-4">Firmendaten</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-[#b3b3b3] mb-2">
                     Firmenname *
                   </label>
                   <input
@@ -349,17 +361,17 @@ export default function NewCustomerPage() {
                     value={formData.company_name}
                     onChange={(e) => handleInputChange("company_name", e.target.value)}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">USt-ID</label>
+                  <label className="block text-sm font-medium text-[#b3b3b3] mb-2">USt-ID</label>
                   <input
                     type="text"
                     value={formData.ust_id}
                     onChange={(e) => handleInputChange("ust_id", e.target.value)}
                     placeholder="z.B. DE123456789"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] placeholder-[#8a8a8a] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                   />
                 </div>
               </div>
@@ -367,92 +379,92 @@ export default function NewCustomerPage() {
           )}
 
           {/* Kontaktdaten */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Kontaktdaten</h3>
+          <div className="bg-[#111217] border border-[#272a33] rounded-lg p-6">
+            <h3 className="text-lg font-medium text-[#f4f4f4] mb-4">Kontaktdaten</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">E-Mail *</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">E-Mail *</label>
                 <input
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">
                   E-Mail (sekundär)
                 </label>
                 <input
                   type="email"
                   value={formData.email_secondary}
                   onChange={(e) => handleInputChange("email_secondary", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">
                   Telefon mobil
                 </label>
                 <input
                   type="tel"
                   value={formData.phone_mobile}
                   onChange={(e) => handleInputChange("phone_mobile", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">
                   Telefon geschäftlich
                 </label>
                 <input
                   type="tel"
                   value={formData.phone_business}
                   onChange={(e) => handleInputChange("phone_business", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
             </div>
           </div>
 
           {/* Adresse */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Adresse</h3>
+          <div className="bg-[#111217] border border-[#272a33] rounded-lg p-6">
+            <h3 className="text-lg font-medium text-[#f4f4f4] mb-4">Adresse</h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Straße</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Straße</label>
                 <input
                   type="text"
                   value={formData.strasse}
                   onChange={(e) => handleInputChange("strasse", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">PLZ</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">PLZ</label>
                 <input
                   type="text"
                   value={formData.plz}
                   onChange={(e) => handleInputChange("plz", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Stadt</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Stadt</label>
                 <input
                   type="text"
                   value={formData.stadt}
                   onChange={(e) => handleInputChange("stadt", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Land</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Land</label>
                 <select
                   value={formData.land}
                   onChange={(e) => handleInputChange("land", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 >
                   <option value="Deutschland">Deutschland</option>
                   <option value="Österreich">Österreich</option>
@@ -465,17 +477,17 @@ export default function NewCustomerPage() {
           </div>
 
           {/* Service & Verwaltung */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Service & Verwaltung</h3>
+          <div className="bg-[#111217] border border-[#272a33] rounded-lg p-6">
+            <h3 className="text-lg font-medium text-[#f4f4f4] mb-4">Service & Verwaltung</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">
                   Support-Level
                 </label>
                 <select
                   value={formData.support_level}
                   onChange={(e) => handleInputChange("support_level", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 >
                   <option value="Standard">Standard</option>
                   <option value="Premium">Premium</option>
@@ -484,11 +496,11 @@ export default function NewCustomerPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Status</label>
                 <select
                   value={formData.status}
                   onChange={(e) => handleInputChange("status", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 autofill:bg-[#1a1d24] autofill:text-[#f4f4f4] [&:-webkit-autofill]:bg-[#1a1d24] [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 >
                   <option value="aktiv">Aktiv</option>
                   <option value="inaktiv">Inaktiv</option>
@@ -497,12 +509,12 @@ export default function NewCustomerPage() {
               </div>
             </div>
             <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Notizen</label>
+              <label className="block text-sm font-medium text-[#b3b3b3] mb-2">Notizen</label>
               <textarea
                 value={formData.notes}
                 onChange={(e) => handleInputChange("notes", e.target.value)}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 bg-[#1a1d24] border border-[#272a33] rounded-md text-[#f4f4f4] placeholder-[#8a8a8a] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 [&:-webkit-autofill]:[-webkit-text-fill-color:#f4f4f4] [&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#1a1d24_inset]"
                 placeholder="Interne Notizen zum Kunden..."
               />
             </div>
@@ -512,47 +524,14 @@ export default function NewCustomerPage() {
           <div className="flex justify-end space-x-4">
             <Link
               href="/admin/customers"
-              className="px-6 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              className="px-6 py-2 border border-[#272a33] rounded-md text-sm font-medium text-[#b3b3b3] bg-[#1a1d24] hover:bg-[#1f2329] transition-colors"
             >
               Abbrechen
             </Link>
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 disabled:opacity-50 flex items-center"
-            >
-              {loading ? (
-                <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                  Wird erstellt...
-                </>
-              ) : (
-                <>
-                  <FaSave className="mr-2" />
-                  Kunde erstellen
-                </>
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-}
-
-
-          {/* Submit Buttons */}
-          <div className="flex justify-end space-x-4">
-            <Link
-              href="/admin/customers"
-              className="px-6 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-            >
-              Abbrechen
-            </Link>
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 disabled:opacity-50 flex items-center"
+              className="px-6 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 disabled:opacity-50 flex items-center transition-colors"
             >
               {loading ? (
                 <>

@@ -88,11 +88,13 @@ export class TwoFactorService {
         return false;
       }
 
-      // Token verifizieren
+      // Token verifizieren (WICHTIG: encoding: "base32" für Aegis!)
+      // Window: 6 = ±3 Minuten Toleranz für Zeitdrift
       const verified = speakeasy.totp.verify({
         secret: userSecret.secret,
+        encoding: "base32",
         token: token,
-        window: 2, // 2 Zeitfenster Toleranz
+        window: 6, // 6 Zeitfenster Toleranz (±3 Minuten) - Enterprise++ kompatibel
       });
 
       if (verified) {
@@ -111,6 +113,39 @@ export class TwoFactorService {
       return false;
     } catch (error) {
       console.error("❌ 2FA-Verifikation fehlgeschlagen:", error);
+      return false;
+    }
+  }
+
+  /**
+   * Verifiziert einen 2FA-Code mit einem gegebenen Secret (für Setup-Verifikation)
+   */
+  static async verifyTokenWithSecret(secret: string, token: string): Promise<boolean> {
+    try {
+      const verified = speakeasy.totp.verify({
+        secret: secret,
+        encoding: "base32",
+        token: token,
+        window: 2, // 2 Zeitfenster Toleranz (Aegis-kompatibel)
+      });
+      return verified === true;
+    } catch (error) {
+      console.error("❌ 2FA-Token-Verifikation mit Secret fehlgeschlagen:", error);
+      return false;
+    }
+  }
+
+  /**
+   * Aktiviert 2FA für einen Benutzer (speichert Secret in DB)
+   */
+  static async enable2FA(userId: number, secret: string, backupCodes?: string[]): Promise<boolean> {
+    try {
+      const codes = backupCodes || this.generateBackupCodes();
+      await this.saveUserSecret(userId, secret, codes);
+      console.log(`✅ 2FA für Benutzer ${userId} aktiviert`);
+      return true;
+    } catch (error) {
+      console.error("❌ 2FA-Aktivierung fehlgeschlagen:", error);
       return false;
     }
   }

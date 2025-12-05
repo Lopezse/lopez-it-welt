@@ -68,7 +68,7 @@ export default function TimeTrackingPage() {
     project_id: undefined,
     order_id: undefined,
     task_id: undefined,
-    problem: false,
+    problem: undefined as string | undefined,
   });
 
   useEffect(() => {
@@ -101,10 +101,10 @@ export default function TimeTrackingPage() {
         // NEUE AUTOMATISCHE SESSION DEAKTIVIERT
         // Stattdessen: Benutzer muss manuell eine Session starten
         // Dies verhindert automatische Duplikate
-        
+
         // Automatische Session wird NICHT mehr erstellt
         // Der Benutzer muss bewusst eine Session starten über "+ Neue Session"
-        
+
       } catch (error) {
         console.error("❌ Fehler beim Prüfen aktiver Sessions:", error);
       }
@@ -146,15 +146,15 @@ export default function TimeTrackingPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ client_ts: new Date().toISOString() }),
-      }).catch(() => {});
+      }).catch(() => { });
     };
 
     heartbeatInterval = setInterval(heartbeat, 20000);
 
     const handleVisibilityChange = () => {
       if (document.hidden && currentSession) {
-        // Auto-Pause bei Tab-Hidden
-        handleSessionPause(currentSession.id);
+        // Auto-Pause bei Tab-Hidden (Feature für zukünftige Implementierung)
+        // handleSessionPause(currentSession.id);
       }
     };
 
@@ -185,7 +185,7 @@ export default function TimeTrackingPage() {
         console.log("📦 Projekte geladen:", data);
         const loadedProjects = data?.data?.projects || data?.projects || [];
         setProjects(loadedProjects);
-        
+
         // Automatisch Dialog öffnen, wenn keine Projekte vorhanden
         if (loadedProjects.length === 0 && !showProjectDialog) {
           setShowProjectDialog(true);
@@ -211,7 +211,7 @@ export default function TimeTrackingPage() {
         const data = await customersRes.json();
         const loadedCustomers = data?.data?.customers || data?.customers || [];
         setCustomers(loadedCustomers);
-        
+
         // Ersten Kunden als Default setzen, wenn vorhanden
         if (loadedCustomers.length > 0 && !newProject.customer_id) {
           setNewProject((prev) => ({
@@ -326,7 +326,7 @@ export default function TimeTrackingPage() {
         project_id: newSession.project_id,
         order_id: newSession.order_id,
         task_id: newSession.task_id,
-        problem: newSession.problem || false,
+        problem: newSession.problem || undefined,
         status: "active",
       };
 
@@ -338,7 +338,7 @@ export default function TimeTrackingPage() {
 
       if (response.ok) {
         const result = await response.json();
-        
+
         // Prüfe ob eine bestehende Session zurückgegeben wurde (Status 200)
         if (result.message && result.message === "Aktive Session existiert bereits") {
           const existingProject = projects.find((p) => p.id === result.session.project_id);
@@ -357,7 +357,7 @@ export default function TimeTrackingPage() {
         const createdSession = result;
         setCurrentSession(createdSession);
         setShowAddForm(false);
-        
+
         // Formular zurücksetzen
         setNewSession({
           module: "",
@@ -367,7 +367,7 @@ export default function TimeTrackingPage() {
           project_id: undefined,
           order_id: undefined,
           task_id: undefined,
-          problem: false,
+          problem: undefined,
         });
 
         // Daten neu laden
@@ -405,7 +405,7 @@ export default function TimeTrackingPage() {
 
       if (response.ok) {
         const updatedSession = await response.json();
-        
+
         // Aktuelle Session aktualisieren
         if (currentSession?.id === sessionId) {
           setCurrentSession(null);
@@ -413,10 +413,10 @@ export default function TimeTrackingPage() {
 
         // Sessions neu laden
         await loadData();
-        
+
         // Erfolg loggen
         kiTracker.logInteraction("Time-Tracking", `Session ${sessionId} erfolgreich beendet`, "User-Action");
-        
+
         return updatedSession;
       } else {
         const error = await response.json();
@@ -520,7 +520,7 @@ export default function TimeTrackingPage() {
               key={tab.id}
               onClick={async () => {
                 setActiveTab(tab.id as any);
-                
+
                 // Beim Wechsel zum "Abrechenbar" Tab, lade die abrechenbaren Zeiten
                 if (tab.id === "billable") {
                   setBillableLoading(true);
@@ -537,11 +537,10 @@ export default function TimeTrackingPage() {
                   }
                 }
               }}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === tab.id
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${activeTab === tab.id
                   ? "bg-blue-100 text-blue-700"
                   : "text-gray-500 hover:text-gray-700"
-              }`}
+                }`}
             >
               <span>{tab.icon}</span>
               <span>{tab.label}</span>
@@ -685,13 +684,13 @@ export default function TimeTrackingPage() {
                         if (response.ok) {
                           const result = await response.json();
                           alert(`✅ ${result.message || `${result.closedCount} Sessions erfolgreich beendet`}`);
-                          
+
                           // Aktuelle Session zurücksetzen
                           setCurrentSession(null);
-                          
+
                           // Daten neu laden
                           await loadData();
-                          
+
                           // Erfolg loggen
                           kiTracker.logInteraction("Time-Tracking", `Alle ${result.closedCount} Sessions beendet`, "User-Action");
                         } else {
@@ -804,20 +803,20 @@ export default function TimeTrackingPage() {
                     {tasks
                       .filter((task) => !newSession.project_id || task.project_id === newSession.project_id)
                       .length === 0 ? (
-                        <option value="" disabled>
-                          {!newSession.project_id
-                            ? "-- Bitte zuerst Projekt auswählen --"
-                            : "Keine Aufgaben für dieses Projekt verfügbar"}
-                        </option>
-                      ) : (
-                        tasks
-                          .filter((task) => !newSession.project_id || task.project_id === newSession.project_id)
-                          .map((task) => (
-                            <option key={task.id} value={task.id}>
-                              {task.task_title || task.title || `Aufgabe ${task.id}`}
-                            </option>
-                          ))
-                      )}
+                      <option value="" disabled>
+                        {!newSession.project_id
+                          ? "-- Bitte zuerst Projekt auswählen --"
+                          : "Keine Aufgaben für dieses Projekt verfügbar"}
+                      </option>
+                    ) : (
+                      tasks
+                        .filter((task) => !newSession.project_id || task.project_id === newSession.project_id)
+                        .map((task) => (
+                          <option key={task.id} value={task.id}>
+                            {task.task_title || task.title || `Aufgabe ${task.id}`}
+                          </option>
+                        ))
+                    )}
                   </select>
                 </div>
 
@@ -920,9 +919,9 @@ export default function TimeTrackingPage() {
                       /route/i,
                       /index\./i,
                     ];
-                    const hasTechnicalPattern = technicalPatterns.some((pattern) =>
-                      pattern.test(newSession.taetigkeit),
-                    );
+                    const hasTechnicalPattern = newSession.taetigkeit
+                      ? technicalPatterns.some((pattern) => pattern.test(newSession.taetigkeit!))
+                      : false;
                     if (hasTechnicalPattern) {
                       alert(
                         "❌ Tätigkeit enthält technische Namen. Bitte verwende verständliche Beschreibungen wie 'API-Routen testen' statt 'Component.tsx'.",
@@ -998,47 +997,47 @@ export default function TimeTrackingPage() {
                           </div>
                         </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
-                        <div>
-                          <span className="font-medium">Start:</span>{" "}
-                          {formatDateTime(session.start_time)}
-                        </div>
-                        {session.end_time && (
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
                           <div>
-                            <span className="font-medium">Ende:</span>{" "}
-                            {formatDateTime(session.end_time)}
+                            <span className="font-medium">Start:</span>{" "}
+                            {formatDateTime(session.start_time)}
+                          </div>
+                          {session.end_time && (
+                            <div>
+                              <span className="font-medium">Ende:</span>{" "}
+                              {formatDateTime(session.end_time)}
+                            </div>
+                          )}
+                          {session.duration_minutes && (
+                            <div>
+                              <span className="font-medium">Dauer:</span>{" "}
+                              {formatDuration(session.duration_minutes)}
+                            </div>
+                          )}
+                        </div>
+
+                        {session.ausloeser && (
+                          <div className="text-sm text-gray-600 mb-2">
+                            <span className="font-medium">Auslöser:</span> {session.ausloeser}
                           </div>
                         )}
-                        {session.duration_minutes && (
-                          <div>
-                            <span className="font-medium">Dauer:</span>{" "}
-                            {formatDuration(session.duration_minutes)}
+
+                        {session.problem && (
+                          <div className="text-sm text-red-600 mb-3">
+                            <span className="font-medium">Problem:</span> {session.problem}
                           </div>
                         )}
-                      </div>
 
-                      {session.ausloeser && (
-                        <div className="text-sm text-gray-600 mb-2">
-                          <span className="font-medium">Auslöser:</span> {session.ausloeser}
-                        </div>
-                      )}
-
-                      {session.problem && (
-                        <div className="text-sm text-red-600 mb-3">
-                          <span className="font-medium">Problem:</span> {session.problem}
-                        </div>
-                      )}
-
-                      {session.status === "active" && (
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={() => handleSessionComplete(session.id, {})}
-                            className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
-                          >
-                            Abschließen
-                          </button>
-                        </div>
-                      )}
+                        {session.status === "active" && (
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => handleSessionComplete(session.id, {})}
+                              className="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                            >
+                              Abschließen
+                            </button>
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -1282,7 +1281,7 @@ export default function TimeTrackingPage() {
       <Dialog open={showProjectDialog} onClose={() => setShowProjectDialog(false)}>
         <div className="p-4">
           <h2 className="text-xl font-bold mb-4">➕ Neues Projekt anlegen</h2>
-          
+
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1414,13 +1413,13 @@ export default function TimeTrackingPage() {
 
                   if (response.ok) {
                     const result = await response.json();
-                    
+
                     // Projekte neu laden
                     await loadProjectsOrdersTasks();
-                    
+
                     // Dialog schließen
                     setShowProjectDialog(false);
-                    
+
                     // Projekt automatisch auswählen
                     if (result.data?.id) {
                       setNewSession({

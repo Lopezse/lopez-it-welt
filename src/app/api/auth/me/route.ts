@@ -1,98 +1,112 @@
 // =====================================================
-// AUTH ME API - LOPEZ IT WELT
+// CURRENT USER API
 // =====================================================
-// Erstellt: 2025-11-01
-// Zweck: Aktueller Benutzer-Status abrufen
-// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
-// =====================================================
-
-import { AuthService } from "@/lib/auth-service";
-import { RBACService } from "@/lib/rbac-system";
-import { TwoFactorService } from "@/lib/2fa-service";
-import { NextRequest, NextResponse } from "next/server";
-
-// =====================================================
-// GET - Aktueller Benutzer-Status
+// GET /api/auth/me
+// Gibt aktuelle Benutzerinformationen zurück
 // =====================================================
 
-export async function GET(request: NextRequest) {
+import { NextResponse } from "next/server";
+import { CustomerAuthService } from "@/lib/customer/auth-service";
+import { getConnection } from "@/lib/database";
+import { cookies } from "next/headers";
+import { RowDataPacket } from "mysql2/promise";
+
+// =====================================================
+// GET - Aktueller Benutzer
+// =====================================================
+
+export async function GET() {
   try {
-    // Session-Token aus Header oder Cookie extrahieren
-    const sessionToken = 
-      request.headers.get("authorization")?.replace("Bearer ", "") ||
-      request.cookies.get("session_token")?.value;
+    const cookieStore = await cookies();
+    const sessionToken = cookieStore.get("customer_session")?.value;
 
     if (!sessionToken) {
       return NextResponse.json(
-        { success: false, message: "Nicht authentifiziert" },
-        { status: 401 },
+        { success: false, error: "Nicht angemeldet" },
+        { status: 401 }
       );
     }
 
-    // Session validieren
-    const session = await AuthService.validateSession(sessionToken);
-    if (!session) {
+    const session = await CustomerAuthService.validateSession(sessionToken);
+
+    if (!session.valid || !session.customer_id) {
       return NextResponse.json(
-        { success: false, message: "Ungültige Session" },
-        { status: 401 },
+        { success: false, error: "Ungültige Session" },
+        { status: 401 }
       );
     }
 
-    // Benutzer-Daten laden
-    const user = await RBACService.getUserById(session.userId);
-    if (!user) {
+    // Kundendaten laden
+    const pool = await getConnection();
+    const [customers] = await pool.execute<RowDataPacket[]>(`
+      SELECT 
+        id,
+        email,
+        salutation,
+        first_name,
+        last_name,
+        company_name,
+        language,
+        status,
+        email_verified,
+        two_factor_enabled,
+        onboarding_completed,
+        onboarding_step,
+        service_interests,
+        created_at,
+        last_login_at
+      FROM lopez_customers 
+      WHERE id = ?
+    `, [session.customer_id]);
+
+    if (customers.length === 0) {
       return NextResponse.json(
-        { success: false, message: "Benutzer nicht gefunden" },
-        { status: 404 },
+        { success: false, error: "Kunde nicht gefunden" },
+        { status: 404 }
       );
     }
 
-    // 2FA-Status prüfen
-    const twoFactorEnabled = await TwoFactorService.is2FAEnabled(session.userId);
-    const twoFactorRequired = !twoFactorEnabled && user.role_id === 1; // Admin/Owner muss 2FA haben
-
-    // Rollen und Berechtigungen laden
-    const roles = await RBACService.getUserRoles(session.userId);
-    const permissions = await RBACService.getUserPermissions(session.userId);
+    const customer = customers[0];
+    
+    // Service Interests parsen
+    let serviceInterests: string[] = [];
+    if (customer.service_interests) {
+      try {
+        serviceInterests = typeof customer.service_interests === 'string' 
+          ? JSON.parse(customer.service_interests) 
+          : customer.service_interests;
+      } catch {
+        serviceInterests = [];
+      }
+    }
 
     return NextResponse.json({
       success: true,
       data: {
-        user: {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          role_id: user.role_id,
-          status: user.status,
-        },
-        session: {
-          userId: session.userId,
-          username: session.username,
-          email: session.email,
-          expiresAt: session.expiresAt,
-        },
-        roles: roles.map((r) => r.name),
-        permissions: permissions.map((p) => p.resource + "." + p.action),
-        twoFactor: {
-          enabled: twoFactorEnabled,
-          required: twoFactorRequired,
-        },
-      },
+        id: customer.id,
+        email: customer.email,
+        salutation: customer.salutation,
+        first_name: customer.first_name,
+        last_name: customer.last_name,
+        full_name: [customer.first_name, customer.last_name].filter(Boolean).join(" ") || null,
+        company_name: customer.company_name,
+        language: customer.language || "de",
+        status: customer.status,
+        email_verified: !!customer.email_verified,
+        two_factor_enabled: !!customer.two_factor_enabled,
+        onboarding_completed: !!customer.onboarding_completed,
+        onboarding_step: customer.onboarding_step || 0,
+        service_interests: serviceInterests,
+        created_at: customer.created_at,
+        last_login_at: customer.last_login_at
+      }
     });
+
   } catch (error) {
-    console.error("❌ Auth ME Fehler:", error);
+    console.error("❌ Me API Error:", error);
     return NextResponse.json(
-      { success: false, message: "Interner Serverfehler" },
-      { status: 500 },
+      { success: false, error: "Ein Fehler ist aufgetreten" },
+      { status: 500 }
     );
   }
 }
-
-
-
-
-
-
-

@@ -17,28 +17,32 @@ export class MemoryIntegrationAgent extends KIAgent {
     this.memorySystem = new MySQLMemorySystem();
   }
 
-  async executeTask(task: KITask): Promise<KITaskResult> {
+  async executeTask(task: KITask | string): Promise<KITaskResult> {
     try {
       // Memory-System verbinden
       await this.memorySystem.connect();
       await this.memorySystem.initializeSchema();
 
-      switch (task.type) {
+      const taskObj = typeof task === "string" ? { id: task, description: task, category: "general" as const, priority: "mittel" as const } : task;
+      const taskType = taskObj.type || taskObj.category;
+
+      switch (taskType) {
         case "load_rules":
-          return await this.loadRules(task);
+          return await this.loadRules(taskObj);
         case "validate_compliance":
-          return await this.validateCompliance(task);
+          return await this.validateCompliance(taskObj);
         case "store_session":
-          return await this.storeSession(task);
+          return await this.storeSession(taskObj);
         case "get_statistics":
-          return await this.getStatistics(task);
+          return await this.getStatistics(taskObj);
         case "test_integration":
-          return await this.testIntegration(task);
+          return await this.testIntegration(taskObj);
         default:
-          return this.createFailedResult("Unbekannter Task-Typ: " + task.type);
+          return this.createFailedResult(taskObj, "Unbekannter Task-Typ: " + taskType);
       }
     } catch (error) {
-      return this.createFailedResult(`Memory Integration Fehler: ${error}`);
+      const taskObj = typeof task === "string" ? { id: task, description: task, category: "general" as const, priority: "mittel" as const } : task;
+      return this.createFailedResult(taskObj, `Memory Integration Fehler: ${error}`);
     } finally {
       await this.memorySystem.disconnect();
     }
@@ -50,61 +54,98 @@ export class MemoryIntegrationAgent extends KIAgent {
 
       return {
         success: true,
+        task_id: task.id,
+        rules_applied: [],
+        compliance_result: {
+          is_compliant: true,
+          applied_rules: [],
+          violations: [],
+          score: 100,
+        },
+        execution_time: 0,
         result: {
           message: "DSGVO + Enterprise++ Regeln erfolgreich geladen",
+          rules_applied: 0,
+          agent: this.agentName,
           rules_loaded: true,
         },
       };
     } catch (error) {
-      return this.createFailedResult(`Regeln laden fehlgeschlagen: ${error}`);
+      return this.createFailedResult(task, `Regeln laden fehlgeschlagen: ${error}`);
     }
   }
 
   private async validateCompliance(task: KITask): Promise<KITaskResult> {
     try {
-      const { action, context, agent_type } = task.data;
+      const taskData = task.data as { action?: string; context?: string; agent_type?: string } | undefined;
+      const action = taskData?.action || "";
+      const context = taskData?.context || "";
+      const agent_type = taskData?.agent_type || "general";
 
       const complianceResult = await this.memorySystem.validateAgentAction(
-        agent_type || "general",
+        agent_type,
         action,
         context,
       );
 
       return {
         success: true,
+        task_id: task.id,
+        rules_applied: [],
+        compliance_result: complianceResult,
+        execution_time: 0,
         result: {
+          message: "Compliance-Prüfung abgeschlossen",
+          rules_applied: complianceResult.applied_rules?.length || 0,
+          agent: this.agentName,
           is_compliant: complianceResult.is_compliant,
           score: complianceResult.score,
-          violations: complianceResult.violations,
-          applied_rules: complianceResult.applied_rules.length,
+          violations: complianceResult.violations || [],
         },
       };
     } catch (error) {
-      return this.createFailedResult(`Compliance-Prüfung fehlgeschlagen: ${error}`);
+      return this.createFailedResult(task, `Compliance-Prüfung fehlgeschlagen: ${error}`);
     }
   }
 
   private async storeSession(task: KITask): Promise<KITaskResult> {
     try {
-      const { session_id, context, rules_used, compliance_status, compliance_notes } = task.data;
+      const taskData = task.data as {
+        session_id?: string;
+        context?: string;
+        rules_used?: unknown;
+        compliance_status?: string;
+        compliance_notes?: string;
+      } | undefined;
 
       const sessionId = await this.memorySystem.storeMemorySession({
-        session_id,
-        context,
-        rules_used,
-        compliance_status,
-        compliance_notes,
+        session_id: (taskData?.session_id as string) || "",
+        context: (taskData?.context as string) || "",
+        rules_used: (taskData?.rules_used as string[] | undefined) || undefined,
+        compliance_status: taskData?.compliance_status ? Boolean(taskData.compliance_status) : undefined,
+        compliance_notes: (taskData?.compliance_notes as string) || undefined,
       });
 
       return {
         success: true,
+        task_id: task.id,
+        rules_applied: [],
+        compliance_result: {
+          is_compliant: true,
+          applied_rules: [],
+          violations: [],
+          score: 100,
+        },
+        execution_time: 0,
+        session_id: String(sessionId),
         result: {
-          session_id: sessionId,
           message: "Memory-Session erfolgreich gespeichert",
+          rules_applied: 0,
+          agent: this.agentName,
         },
       };
     } catch (error) {
-      return this.createFailedResult(`Session speichern fehlgeschlagen: ${error}`);
+      return this.createFailedResult(task, `Session speichern fehlgeschlagen: ${error}`);
     }
   }
 
@@ -114,13 +155,24 @@ export class MemoryIntegrationAgent extends KIAgent {
 
       return {
         success: true,
+        task_id: task.id,
+        rules_applied: [],
+        compliance_result: {
+          is_compliant: true,
+          applied_rules: [],
+          violations: [],
+          score: 100,
+        },
+        execution_time: 0,
         result: {
-          statistics: stats,
           message: "Memory-System Statistiken abgerufen",
+          rules_applied: 0,
+          agent: this.agentName,
+          statistics: stats,
         },
       };
     } catch (error) {
-      return this.createFailedResult(`Statistiken abrufen fehlgeschlagen: ${error}`);
+      return this.createFailedResult(task, `Statistiken abrufen fehlgeschlagen: ${error}`);
     }
   }
 
@@ -170,13 +222,24 @@ export class MemoryIntegrationAgent extends KIAgent {
 
       return {
         success: true,
+        task_id: task.id,
+        rules_applied: [],
+        compliance_result: {
+          is_compliant: true,
+          applied_rules: [],
+          violations: [],
+          score: 100,
+        },
+        execution_time: 0,
         result: {
-          integration_tests: results,
           message: "Memory-Integration Tests abgeschlossen",
+          rules_applied: 0,
+          agent: this.agentName,
+          integration_tests: results,
         },
       };
     } catch (error) {
-      return this.createFailedResult(`Integration-Test fehlgeschlagen: ${error}`);
+      return this.createFailedResult(task, `Integration-Test fehlgeschlagen: ${error}`);
     }
   }
 

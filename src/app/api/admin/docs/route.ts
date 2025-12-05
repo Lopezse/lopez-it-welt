@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     // Basis-Query
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     const insertQuery = `

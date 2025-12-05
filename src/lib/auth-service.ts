@@ -38,6 +38,7 @@ export interface AuthResult {
   message: string;
   session?: SessionData;
   requires2FA?: boolean;
+  isDevelopmentMode?: boolean;
 }
 
 // =====================================================
@@ -63,11 +64,25 @@ export class AuthService {
       if (DevelopmentMode.shouldBypassAuth()) {
         console.log("🚀 Development Mode: Login umgangen");
         const mockUser = DevelopmentMode.createMockUser();
+        
+        if (!mockUser) {
+          return {
+            success: false,
+            message: "Development Mode: Mock-User konnte nicht erstellt werden",
+          };
+        }
 
         return {
           success: true,
-          user: mockUser,
-          token: "dev-mode-token",
+          session: {
+            userId: (mockUser.id as unknown as number) || 1,
+            username: (mockUser.username as unknown as string) || "admin",
+            email: (mockUser.email as unknown as string) || "admin@lopez-it-welt.de",
+            roles: ["admin"],
+            permissions: ["*:*"],
+            sessionToken: "dev-mode-token",
+            expiresAt: new Date(Date.now() + 86400000),
+          },
           message: "Development Mode: Login erfolgreich",
           isDevelopmentMode: true,
         };

@@ -5,7 +5,7 @@
 **Authentifizierung:** NextAuth.js + JWT  
 **Autorisierung:** Rollenbasierte Zugriffskontrolle (RBAC)  
 **Audit-Logging:** Vollständige Nachverfolgung  
-**Letzte Aktualisierung:** 2024-12-19
+**Letzte Aktualisierung:** 2025-12-02
 
 ## 👥 Rollen-Definitionen
 

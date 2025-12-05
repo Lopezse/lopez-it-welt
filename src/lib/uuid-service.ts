@@ -7,7 +7,7 @@
 // =====================================================
 
 // Edge Runtime compatible UUID generation
-// import { randomBytes, randomUUID } from 'crypto';
+import { randomBytes } from 'crypto';
 
 // =====================================================
 // INTERFACES
@@ -54,12 +54,13 @@ export class UUIDService {
     const timeHigh = (timestamp >>> 16) & 0xffff;
     const timeLow = timestamp & 0xffff;
 
-    // Random data (74 bits)
-    const random1 = random.readUInt16BE(0) & 0x0fff; // 12 bits
-    const random2 = random.readUInt16BE(2) & 0x3fff; // 14 bits
-    const random3 = random.readUInt16BE(4) & 0x3fff; // 14 bits
-    const random4 = random.readUInt16BE(6) & 0x3fff; // 14 bits
-    const random5 = random.readUInt16BE(8) & 0x3fff; // 14 bits
+    // Random data (74 bits) - Konvertiere Uint8Array zu Buffer für readUInt16BE
+    const randomBuffer = Buffer.from(random);
+    const random1 = randomBuffer.readUInt16BE(0) & 0x0fff; // 12 bits
+    const random2 = randomBuffer.readUInt16BE(2) & 0x3fff; // 14 bits
+    const random3 = randomBuffer.readUInt16BE(4) & 0x3fff; // 14 bits
+    const random4 = randomBuffer.readUInt16BE(6) & 0x3fff; // 14 bits
+    const random5 = randomBuffer.readUInt16BE(8) & 0x3fff; // 14 bits
 
     // Version 7 (0111)
     const version = 0x7000;

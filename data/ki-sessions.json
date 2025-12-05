@@ -102,5 +102,44 @@
     "updated_at": "2025-11-04T14:58:12.118Z",
     "end_time": "2025-11-04T14:58:10.806Z",
     "duration_minutes": 6
+  },
+  {
+    "session_id": "ki_2025-11-30-TIME-TRACKING-PAGE-COMPONENT-lxvk1n",
+    "modul": "Time-Tracking-Page-Component",
+    "start_time": "2025-11-30T02:28:27.373Z",
+    "triggered_by": "Sprach-/Textbefehl: Zeiterfassung-Bereich laden und Sessions verwalten",
+    "summary": "Task ausgeführt: Zeiterfassung-Bereich laden und Sessions verwalten",
+    "tool_used": "Cursor + GPT-4 + Next.js + Tailwind",
+    "status": "completed",
+    "created_at": "2025-11-30T02:28:27.373Z",
+    "updated_at": "2025-11-30T02:34:02.607Z",
+    "end_time": "2025-11-30T02:34:00.352Z",
+    "duration_minutes": 6
+  },
+  {
+    "session_id": "ki_2025-11-30-TIME-TRACKING-PAGE-COMPONENT-80s8rv",
+    "modul": "Time-Tracking-Page-Component",
+    "start_time": "2025-11-30T10:43:04.496Z",
+    "triggered_by": "Sprach-/Textbefehl: Zeiterfassung-Bereich laden und Sessions verwalten",
+    "summary": "Task ausgeführt: Zeiterfassung-Bereich laden und Sessions verwalten",
+    "tool_used": "Cursor + GPT-4 + Next.js + Tailwind",
+    "status": "completed",
+    "created_at": "2025-11-30T10:43:04.496Z",
+    "updated_at": "2025-11-30T10:51:32.220Z",
+    "end_time": "2025-11-30T10:51:27.897Z",
+    "duration_minutes": 8
+  },
+  {
+    "session_id": "ki_2025-11-30-TIME-TRACKING-PAGE-COMPONENT-p541g8",
+    "modul": "Time-Tracking-Page-Component",
+    "start_time": "2025-11-30T10:52:12.893Z",
+    "triggered_by": "Sprach-/Textbefehl: Zeiterfassung-Bereich laden und Sessions verwalten",
+    "summary": "Task ausgeführt: Zeiterfassung-Bereich laden und Sessions verwalten",
+    "tool_used": "Cursor + GPT-4 + Next.js + Tailwind",
+    "status": "completed",
+    "created_at": "2025-11-30T10:52:12.893Z",
+    "updated_at": "2025-11-30T10:52:20.832Z",
+    "end_time": "2025-11-30T10:52:17.652Z",
+    "duration_minutes": 0
   }
 ]

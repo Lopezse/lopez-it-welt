@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
         username: email,
         ip_address: ipAddress,
         user_agent: userAgent,
-        session_id: null,
+        session_id: undefined,
         risk_level: "LOW",
         compliance_category: "AUTHENTICATION",
         new_values: JSON.stringify({

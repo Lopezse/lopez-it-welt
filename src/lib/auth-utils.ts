@@ -6,7 +6,7 @@
 // Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
 // =====================================================
 
-// Vereinfachte Version ohne externe Pakete für Demo
+import speakeasy from "speakeasy";
 
 // 2FA-Secret generieren
 export function generate2FASecret(email: string): {

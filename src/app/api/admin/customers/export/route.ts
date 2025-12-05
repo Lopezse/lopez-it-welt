@@ -142,7 +142,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Buffer zu Base64 konvertieren
-    const base64Content = Buffer.from(result.content).toString("base64");
+    const contentBuffer = result.content instanceof Buffer 
+      ? result.content 
+      : result.content instanceof Uint8Array 
+        ? Buffer.from(result.content) 
+        : Buffer.from(result.content as ArrayBuffer);
+    const base64Content = contentBuffer.toString("base64");
 
     // Base64 Konvertierung Debug:
     // Original Buffer Length: ${result.content.length}

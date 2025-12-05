@@ -66,9 +66,9 @@ export default function EnterpriseExportModal({
 
     try {
       // Format basierend auf Export-Typ bestimmen
-      let format = exportFormat;
+      let format: "xlsx" | "pdf" | "csv" | "technical-xlsx" | "technical-csv" = exportFormat;
       if (exportType === "technical") {
-        format = exportFormat === "xlsx" ? "technical-xlsx" : "technical-csv";
+        format = exportFormat === "xlsx" ? ("technical-xlsx" as const) : ("technical-csv" as const);
       }
 
       const response = await fetch("/api/admin/customers/export", {
@@ -96,7 +96,8 @@ export default function EnterpriseExportModal({
       }
     } catch (error) {
       console.error("Export error:", error);
-      alert("Fehler beim Export: " + error.message);
+      const errorMessage = error instanceof Error ? error.message : "Unbekannter Fehler";
+      alert("Fehler beim Export: " + errorMessage);
     } finally {
       setExporting(false);
     }
@@ -202,7 +203,8 @@ export default function EnterpriseExportModal({
       }
     } catch (error) {
       console.error("Vorlage-Download Fehler:", error);
-      alert("Fehler beim Herunterladen der Vorlage: " + error.message);
+      const errorMessage = error instanceof Error ? error.message : "Unbekannter Fehler";
+      alert("Fehler beim Herunterladen der Vorlage: " + errorMessage);
     } finally {
       setDownloadingTemplate(false);
     }

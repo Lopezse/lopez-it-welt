@@ -82,30 +82,37 @@ export default function UserInfo() {
   // Logout-Funktion
   const handleLogout = async () => {
     try {
-      const sessionToken = localStorage.getItem("sessionToken") || sessionStorage.getItem("sessionToken");
-      
-      if (sessionToken) {
-        await fetch("/api/auth/logout", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ sessionToken }),
-        });
+      // Admin-Logout über API (Cookie wird automatisch mitgesendet)
+      const response = await fetch("/api/auth/admin/logout", {
+        method: "POST",
+        credentials: "include", // WICHTIG: Cookies mitsenden
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.warn("⚠️ Logout-API-Fehler, aber Logout wird fortgesetzt");
       }
 
-      // Session-Daten löschen
+      // Alle lokalen Storage-Daten löschen
       localStorage.removeItem("token");
       localStorage.removeItem("sessionToken");
+      localStorage.removeItem("adm_token");
+      localStorage.removeItem("adm_session");
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("sessionToken");
+      sessionStorage.removeItem("adm_token");
+      sessionStorage.removeItem("adm_session");
 
-      // Weiterleitung zur Login-Seite
-      router.push("/login");
+      // Zur Admin-Login-Seite weiterleiten
+      router.push("/admin/login");
     } catch (error) {
       console.error("❌ Fehler beim Logout:", error);
-      // Trotzdem weiterleiten
-      router.push("/login");
+      // Auch bei Fehler: Lokale Daten löschen und weiterleiten
+      localStorage.clear();
+      sessionStorage.clear();
+      router.push("/admin/login");
     }
   };
 

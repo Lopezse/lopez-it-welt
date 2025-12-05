@@ -14,13 +14,21 @@ import {
 import { rbacApiGuard } from "./src/middleware/rbac-api-guard";
 import { adminGuard, adminApiGuard } from "./src/middleware/admin-guard";
 import { shopGuard, shopApiGuard } from "./src/middleware/shop-guard";
+import { publicMediaGuard } from "./src/middleware/public-media-guard";
 
 // =====================================================
 // MIDDLEWARE CONFIG
 // =====================================================
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // Public Media Guard (vor allen anderen Checks)
+  // Blockiert direkten Zugriff auf alte Media-Pfade
+  const mediaGuardResult = await publicMediaGuard(request);
+  if (mediaGuardResult) {
+    return mediaGuardResult; // Blockiert Anfrage (403)
+  }
 
   // API-Routen
   if (pathname.startsWith("/api/")) {
@@ -75,8 +83,13 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - public folder
+     * 
+     * WICHTIG: /linkedin-posts und /uploads werden explizit erfasst,
+     * auch wenn sie technisch unter public/ liegen könnten.
+     * Die Middleware blockiert diese Pfade mit der gebrandeten 403-Seite.
      */
-    "/((?!_next/static|_next/image|favicon.ico|public).*)",
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+    "/linkedin-posts/:path*",
+    "/uploads/:path*",
   ],
 };

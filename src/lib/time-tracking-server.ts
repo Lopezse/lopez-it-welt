@@ -106,10 +106,10 @@ export class TimeTrackingServerService {
     const session: TimeSession = {
       id: maxId + 1,
       user_id: data.user_id,
-      module: data.module,
+      module: data.module || "",
       taetigkeit: data.taetigkeit, // Pflichtfeld
       ausloeser: data.ausloeser,
-      problem: data.problem,
+      problem: data.problem ? String(data.problem) : undefined,
       category: data.category || "development",
       priority: data.priority || "medium",
       start_time: data.start_time || now,

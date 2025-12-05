@@ -10,11 +10,14 @@ interface TimeSession {
   end_time?: string;
   duration_minutes?: number;
   taetigkeit: string;
-  status: "active" | "completed" | "interrupted";
+  status: "active" | "completed" | "interrupted" | "paused";
   problem?: string;
   ausloeser?: string;
   category: string;
   priority: string;
+  project_id?: number;
+  order_id?: number;
+  task_id?: number;
   created_at: string;
   updated_at: string;
 }
@@ -187,11 +190,11 @@ export async function POST(request: NextRequest) {
       module: module || taetigkeit.substring(0, 50), // Fallback für module
       taetigkeit,
       ausloeser,
-      problem,
+      problem: problem || undefined,
       category,
       priority,
-      project_id,
-      task_id,
+      project_id: project_id || undefined,
+      task_id: task_id || undefined,
       start_time: now,
       status: "active",
       created_at: now,

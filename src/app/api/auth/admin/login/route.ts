@@ -40,39 +40,71 @@ export async function POST(request: NextRequest) {
     const route = request.nextUrl.pathname;
 
     // Login durchführen
-    const authResult = await AdminAuthService.login(
-      { identifier, password, twoFactorToken },
-      ipAddress,
-      userAgent,
-    );
+    let authResult;
+    try {
+      authResult = await AdminAuthService.login(
+        { identifier, password, twoFactorToken },
+        ipAddress,
+        userAgent,
+      );
+    } catch (loginError: any) {
+      console.error("❌ Login-Fehler in AdminAuthService:", loginError);
+      return NextResponse.json(
+        {
+          success: false,
+          message: process.env.NODE_ENV === "development" 
+            ? `Login-Fehler: ${loginError.message || String(loginError)}`
+            : "Interner Serverfehler",
+          error: process.env.NODE_ENV === "development" ? {
+            message: loginError.message || String(loginError),
+            stack: loginError.stack,
+          } : undefined,
+        },
+        { status: 500 },
+      );
+    }
 
     if (!authResult.success) {
-      // Audit-Log für fehlgeschlagenen Login
-      await AuditService.logAudit({
-        table_name: "lopez_users",
-        record_id: 0,
-        action: "LOGIN",
-        user_id: 0,
-        username: identifier,
-        ip_address: ipAddress,
-        user_agent: userAgent,
-        session_id: null,
-        risk_level: "MEDIUM",
-        compliance_category: "AUTHENTICATION",
-        new_values: JSON.stringify({
-          realm: "ADMIN",
-          result: "failed",
-          reason: authResult.message,
-          route,
-        }),
-      });
+      // In Development: Detaillierte Fehlermeldung
+      const errorMessage = process.env.NODE_ENV === "development"
+        ? `${authResult.message} (Identifier: ${identifier})`
+        : authResult.message;
+
+      // Audit-Log für fehlgeschlagenen Login (nur wenn nicht kritischer Fehler)
+      try {
+        await AuditService.logAudit({
+          table_name: "lopez_users",
+          record_id: 0,
+          action: "LOGIN",
+          user_id: 0,
+          username: identifier,
+          ip_address: ipAddress,
+          user_agent: userAgent,
+          session_id: undefined,
+          risk_level: "MEDIUM",
+          compliance_category: "AUTHENTICATION",
+          new_values: JSON.stringify({
+            realm: "ADMIN",
+            result: "failed",
+            reason: authResult.message,
+            route,
+          }),
+        });
+      } catch (auditError) {
+        console.warn("⚠️ Audit-Log fehlgeschlagen:", auditError);
+      }
 
       return NextResponse.json(
         {
           success: false,
-          message: authResult.message,
+          message: errorMessage,
           requires2FA: authResult.requires2FA,
           lockoutUntil: authResult.lockoutUntil,
+          debug: process.env.NODE_ENV === "development" ? {
+            identifier,
+            hasPassword: !!password,
+            passwordLength: password?.length || 0,
+          } : undefined,
         },
         { status: 401 },
       );
@@ -84,7 +116,10 @@ export async function POST(request: NextRequest) {
     // Cookie setzen (mit adm_ Präfix)
     const response = NextResponse.json({
       success: true,
-      message: "Login erfolgreich",
+      message: authResult.requires2FASetup 
+        ? "Login erfolgreich. Bitte 2FA einrichten." 
+        : "Login erfolgreich",
+      requires2FASetup: authResult.requires2FASetup || false, // WICHTIG: Flag an Frontend weitergeben!
       data: {
         user: {
           id: authResult.session!.userId,
@@ -98,12 +133,18 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Cookie mit adm_ Präfix setzen
-    response.cookies.set("adm_session", authResult.session!.sessionToken, {
+    // Cookie mit adm_ Präfix setzen (Enterprise++ Standard: 7 Tage)
+    const sessionToken = authResult.session!.sessionToken;
+    console.log("🍪 Setze Cookies:", {
+      adm_session: `${sessionToken.substring(0, 20)}...`,
+      adm_token: `${jwtToken.substring(0, 20)}...`,
+    });
+
+    response.cookies.set("adm_session", sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 24 * 60 * 60, // 24 Stunden
+      maxAge: 7 * 24 * 60 * 60, // 7 Tage (Enterprise++ Standard)
       path: "/",
     });
 
@@ -111,9 +152,11 @@ export async function POST(request: NextRequest) {
       httpOnly: false,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
-      maxAge: 24 * 60 * 60,
+      maxAge: 7 * 24 * 60 * 60, // 7 Tage (Enterprise++ Standard)
       path: "/",
     });
+
+    console.log("✅ Cookies gesetzt, Response wird zurückgegeben");
 
     // Audit-Log für erfolgreichen Login
     await AuditService.logAudit({
@@ -214,11 +257,20 @@ export async function POST(request: NextRequest) {
       console.error("Fehler-Details:", error.message);
       console.error("Stack:", error.stack);
     }
+    
+    // In Development: Detaillierte Fehlermeldung anzeigen
+    const errorMessage = process.env.NODE_ENV === "development" 
+      ? (error instanceof Error ? error.message : String(error))
+      : "Interner Serverfehler";
+    
     return NextResponse.json(
       { 
         success: false, 
-        message: "Interner Serverfehler",
-        error: process.env.NODE_ENV === "development" ? (error instanceof Error ? error.message : String(error)) : undefined
+        message: errorMessage,
+        error: process.env.NODE_ENV === "development" ? {
+          message: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined
+        } : undefined
       }, 
       { status: 500 }
     );

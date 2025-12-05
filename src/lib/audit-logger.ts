@@ -95,7 +95,6 @@ export class AuditLogger {
       severity: event.severity || this.getDefaultSeverity(event.action),
       compliance_category:
         event.compliance_category || this.getDefaultComplianceCategory(event.action),
-      created_at: new Date().toISOString(),
     });
 
     // Batch-Processing

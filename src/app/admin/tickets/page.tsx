@@ -262,15 +262,15 @@ export default function TicketsPage() {
                 <div className="flex gap-2 mt-4 md:mt-0">
                   <Button
                     onClick={() => setSelectedTicket(ticket)}
-                    variante="umriss"
-                    groesse="klein"
+                    variant="outline"
+                    size="sm"
                   >
                     Details
                   </Button>
                   {ticket.status === "open" && (
                     <Button
                       onClick={() => updateTicketStatus(ticket.id, "in_progress")}
-                      groesse="klein"
+                      size="sm"
                     >
                       Bearbeiten
                     </Button>
@@ -278,8 +278,8 @@ export default function TicketsPage() {
                   {ticket.status === "in_progress" && (
                     <Button
                       onClick={() => updateTicketStatus(ticket.id, "resolved")}
-                      variante="umriss"
-                      groesse="klein"
+                      variant="outline"
+                      size="sm"
                     >
                       Lösen
                     </Button>
@@ -297,7 +297,7 @@ export default function TicketsPage() {
           <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Ticket #{selectedTicket.id}</h2>
-              <Button onClick={() => setSelectedTicket(null)} variante="umriss" groesse="klein">
+              <Button onClick={() => setSelectedTicket(null)} variant="outline" size="sm">
                 Schließen
               </Button>
             </div>
@@ -355,7 +355,7 @@ export default function TicketsPage() {
                     setSelectedTicket(null);
                   }}
                   disabled={selectedTicket.status !== "in_progress"}
-                  variante="umriss"
+                  variant="outline"
                 >
                   Als gelöst markieren
                 </Button>
@@ -364,7 +364,7 @@ export default function TicketsPage() {
                     updateTicketStatus(selectedTicket.id, "closed");
                     setSelectedTicket(null);
                   }}
-                  variante="umriss"
+                  variant="outline"
                 >
                   Schließen
                 </Button>

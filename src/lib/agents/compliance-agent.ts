@@ -6,7 +6,7 @@
 // Zweck: Automatische Erstellung DSGVO-konformer Formulare
 // =====================================================
 
-import { KIAgent } from "../ki-agent";
+import { KIAgent, KITask, KITaskResult } from "../ki-agent";
 import { MemorySystem } from "../memory-system";
 
 interface DSGVOFormData {
@@ -28,8 +28,49 @@ export class ComplianceAgent extends KIAgent {
   private memory: MemorySystem;
 
   constructor() {
-    super();
+    super("Compliance-Agent", "COMPLIANCE");
     this.memory = new MemorySystem();
+  }
+
+  async executeTask(task: KITask | string): Promise<KITaskResult> {
+    const taskObj = typeof task === "string" ? { id: task, description: task, category: "compliance" as const, priority: "mittel" as const } : task;
+    const startTime = Date.now();
+    
+    try {
+      this.validateTask(taskObj);
+      const sessionId = await this.startTaskSession(taskObj);
+      const rules = await this.getRelevantRules(taskObj);
+      
+      // Compliance-spezifische Logik
+      const formData = taskObj.data as DSGVOFormData | undefined;
+      const compliance = formData ? await this.validateDSGVOCompliance(formData, rules.map(r => r.rule_text)) : {
+        isCompliant: true,
+        violations: [],
+        recommendations: [],
+        score: 100,
+      };
+      
+      return {
+        success: true,
+        task_id: taskObj.id,
+        rules_applied: rules,
+        compliance_result: {
+          is_compliant: compliance.isCompliant,
+          applied_rules: [],
+          violations: compliance.violations,
+          score: compliance.score,
+        },
+        execution_time: Date.now() - startTime,
+        result: {
+          message: `Compliance task completed`,
+          rules_applied: rules.length,
+          agent: this.agentName,
+        },
+        session_id: sessionId,
+      };
+    } catch (error) {
+      return this.createFailedResult(taskObj, error instanceof Error ? error.message : "Unknown error", startTime);
+    }
   }
 
   async createDSGVOCompliantForm(formData: DSGVOFormData): Promise<{

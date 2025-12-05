@@ -6,7 +6,7 @@
 // Zweck: Automatische Code-Qualitätsprüfung und -verbesserung
 // =====================================================
 
-import { KIAgent } from "../ki-agent";
+import { KIAgent, KITask, KITaskResult } from "../ki-agent";
 
 interface QualityMetrics {
   testCoverage: number;
@@ -27,7 +27,40 @@ interface QualityReport {
 
 export class QualityAgent extends KIAgent {
   constructor() {
-    super();
+    super("Quality-Agent", "QUALITY");
+  }
+
+  async executeTask(task: KITask | string): Promise<KITaskResult> {
+    const taskObj = typeof task === "string" ? { id: task, description: task, category: "quality" as const, priority: "mittel" as const } : task;
+    const startTime = Date.now();
+    
+    try {
+      this.validateTask(taskObj);
+      const sessionId = await this.startTaskSession(taskObj);
+      const rules = await this.getRelevantRules(taskObj);
+      const result = await this.analyzeCodeQuality(taskObj.description);
+      
+      return {
+        success: true,
+        task_id: taskObj.id,
+        rules_applied: rules,
+        compliance_result: {
+          is_compliant: result.passed,
+          applied_rules: [],
+          violations: result.issues,
+          score: result.overall,
+        },
+        execution_time: Date.now() - startTime,
+        result: {
+          message: `Quality analysis completed: ${result.overall}%`,
+          rules_applied: rules.length,
+          agent: this.agentName,
+        },
+        session_id: sessionId,
+      };
+    } catch (error) {
+      return this.createFailedResult(taskObj, error instanceof Error ? error.message : "Unknown error", startTime);
+    }
   }
 
   async analyzeCodeQuality(filePath: string): Promise<QualityReport> {

@@ -486,7 +486,7 @@ export class SimpleExcel {
 
     // Raw Data Sheet
     const rawHeaders = Object.keys(customers[0] || {});
-    const rawData = customers.map((customer) => rawHeaders.map((header) => customer[header]));
+    const rawData = customers.map((customer) => rawHeaders.map((header) => (customer as unknown as Record<string, unknown>)[header]));
     const rawSheet = XLSX.utils.aoa_to_sheet([rawHeaders, ...rawData]);
     XLSX.utils.book_append_sheet(workbook, rawSheet, "Raw_Data");
 

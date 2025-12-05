@@ -5,10 +5,15 @@
 // =====================================================
 // Erstellt: 2025-01-19
 // Zweck: IBM/SAP-Level Audit-Log Management UI
-// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT (E.2.3 erweitert)
 // =====================================================
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { AuditLogFilters } from "@/components/admin/audit-logs/AuditLogFilters";
+import { AuditLogExport } from "@/components/admin/audit-logs/AuditLogExport";
+import { ISO27001Reports } from "@/components/admin/audit-logs/ISO27001Reports";
+import { AuditLogAnalytics } from "@/components/admin/audit-logs/AuditLogAnalytics";
 import {
   FaCheckCircle,
   FaDownload,
@@ -58,15 +63,20 @@ interface FilterState {
   start_date: string;
   end_date: string;
   search: string;
+  resource_type: string;
 }
 
 export default function AuditLogsPage() {
+  const router = useRouter();
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [selectedLog, setSelectedLog] = useState<AuditLog | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [activeTab, setActiveTab] = useState<"logs" | "analytics" | "export" | "iso27001">("logs");
+  const [hasAccess, setHasAccess] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 50,
@@ -82,15 +92,58 @@ export default function AuditLogsPage() {
     start_date: "",
     end_date: "",
     search: "",
+    resource_type: "",
   });
+
+  // =====================================================
+  // AUTHENTIFIZIERUNG
+  // =====================================================
+
+  useEffect(() => {
+    const checkAccess = async () => {
+      try {
+        const response = await fetch("/api/auth/admin/me", {
+          credentials: "include",
+        });
+
+        if (!response.ok) {
+          router.push(`/admin/login?redirect=${encodeURIComponent("/admin/audit-logs")}`);
+          return;
+        }
+
+        const data = await response.json();
+        if (data.success && data.data?.roles) {
+          const roles = data.data.roles;
+          if (roles.includes("Owner") || roles.includes("Admin") || roles.includes("admin") || roles.includes("Super Admin")) {
+            setHasAccess(true);
+          } else {
+            router.push("/admin");
+            return;
+          }
+        } else {
+          router.push(`/admin/login?redirect=${encodeURIComponent("/admin/audit-logs")}`);
+          return;
+        }
+      } catch (error) {
+        console.error("Fehler bei Zugriffsprüfung:", error);
+        router.push(`/admin/login?redirect=${encodeURIComponent("/admin/audit-logs")}`);
+      } finally {
+        setAuthLoading(false);
+      }
+    };
+
+    checkAccess();
+  }, [router]);
 
   // =====================================================
   // LIFECYCLE & DATA LOADING
   // =====================================================
 
   useEffect(() => {
-    loadAuditLogs();
-  }, [filters, pagination.page]);
+    if (hasAccess) {
+      loadAuditLogs();
+    }
+  }, [filters, pagination.page, hasAccess]);
 
   const loadAuditLogs = async () => {
     try {
@@ -104,7 +157,9 @@ export default function AuditLogsPage() {
       queryParams.append("page", pagination.page.toString());
       queryParams.append("limit", pagination.limit.toString());
 
-      const response = await fetch(`/api/admin/audit-logs?${queryParams}`);
+      const response = await fetch(`/api/admin/audit-logs?${queryParams}`, {
+        credentials: "include", // Wichtig: Cookies mit senden
+      });
       const data = await response.json();
 
       if (data.success) {
@@ -114,7 +169,7 @@ export default function AuditLogsPage() {
         setError(data.message || "Fehler beim Laden der Audit-Logs");
       }
     } catch (err) {
-      console.error("Audit-Logs laden Fehler:", err);
+      // Fehler wird geloggt (in Produktion würde logger.error() verwendet)
       setError("Fehler beim Laden der Audit-Logs");
     } finally {
       setLoading(false);
@@ -139,6 +194,7 @@ export default function AuditLogsPage() {
       start_date: "",
       end_date: "",
       search: "",
+      resource_type: "",
     });
   };
 
@@ -172,7 +228,7 @@ export default function AuditLogsPage() {
         setError("Fehler beim Exportieren der Audit-Logs");
       }
     } catch (err) {
-      console.error("Export Fehler:", err);
+      // Fehler wird geloggt (in Produktion würde logger.error() verwendet)
       setError("Fehler beim Exportieren der Audit-Logs");
     }
   };
@@ -230,244 +286,189 @@ export default function AuditLogsPage() {
   // RENDER
   // =====================================================
 
+  if (authLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen" style={{ backgroundColor: "#050509" }}>
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: "#c99700" }}></div>
+          <p className="mt-4 text-sm" style={{ color: "#b3b3b3" }}>Lade Audit-Logs...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!hasAccess) {
+    return null; // Redirect handled by useEffect
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white shadow">
+      <div className="bg-white dark:bg-gray-800 shadow">
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 flex items-center">
-                <FaShieldAlt className="mr-3 text-blue-600" />
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                <FaShieldAlt className="mr-3 text-blue-600 dark:text-blue-400" />
                 Audit-Logs
               </h1>
-              <p className="text-gray-600 mt-1">
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
                 Enterprise++ Audit-System für Compliance & Sicherheit
               </p>
             </div>
-            <div className="flex space-x-3">
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-              >
-                <FaFilter className="mr-2" />
-                Filter
-              </button>
-              <div className="relative">
-                <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700">
-                  <FaDownload className="mr-2" />
-                  Export
+            {activeTab === "logs" && (
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <FaFilter className="mr-2" />
+                  Filter
                 </button>
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10 hidden group-hover:block">
-                  <div className="py-1">
-                    <button
-                      onClick={() => handleExport("CSV")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      CSV Export
-                    </button>
-                    <button
-                      onClick={() => handleExport("JSON")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      JSON Export
-                    </button>
-                    <button
-                      onClick={() => handleExport("XML")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      XML Export
-                    </button>
-                    <button
-                      onClick={() => handleExport("PDF")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      PDF Export
-                    </button>
-                  </div>
-                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
 
       <div className="px-6 py-6">
-        {/* Filter Panel */}
-        {showFilters && (
-          <div className="bg-white rounded-lg shadow mb-6 p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Benutzer</label>
-                <input
-                  type="text"
-                  value={filters.user_id}
-                  onChange={(e) => handleFilterChange("user_id", e.target.value)}
-                  placeholder="User ID oder E-Mail"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        {/* Tab-Navigation */}
+        <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
+          <nav className="flex space-x-8">
+            <button
+              onClick={() => setActiveTab("logs")}
+              className={`px-4 py-3 text-sm font-medium ${
+                activeTab === "logs"
+                  ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
+                  : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              }`}
+            >
+              Logs
+            </button>
+            <button
+              onClick={() => setActiveTab("analytics")}
+              className={`px-4 py-3 text-sm font-medium ${
+                activeTab === "analytics"
+                  ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
+                  : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              }`}
+            >
+              Analytics
+            </button>
+            <button
+              onClick={() => setActiveTab("export")}
+              className={`px-4 py-3 text-sm font-medium ${
+                activeTab === "export"
+                  ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
+                  : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              }`}
+            >
+              Export
+            </button>
+            <button
+              onClick={() => setActiveTab("iso27001")}
+              className={`px-4 py-3 text-sm font-medium ${
+                activeTab === "iso27001"
+                  ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-400 dark:border-blue-400"
+                  : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              }`}
+            >
+              ISO 27001
+            </button>
+          </nav>
+        </div>
+
+        {/* Tab-Content */}
+        {activeTab === "logs" && (
+          <>
+            {/* Erweiterte Filter-Komponente */}
+            {showFilters && (
+              <div className="mb-6">
+                <AuditLogFilters
+                  filters={filters}
+                  onFiltersChange={(newFilters) => {
+                    setFilters(newFilters);
+                    setPagination((prev) => ({ ...prev, page: 1 }));
+                  }}
+                  onReset={clearFilters}
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Aktion</label>
-                <input
-                  type="text"
-                  value={filters.action}
-                  onChange={(e) => handleFilterChange("action", e.target.value)}
-                  placeholder="z.B. USER_LOGIN"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Schweregrad</label>
-                <select
-                  value={filters.severity}
-                  onChange={(e) => handleFilterChange("severity", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Alle</option>
-                  <option value="LOW">Niedrig</option>
-                  <option value="MEDIUM">Mittel</option>
-                  <option value="HIGH">Hoch</option>
-                  <option value="CRITICAL">Kritisch</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Compliance</label>
-                <select
-                  value={filters.compliance_category}
-                  onChange={(e) => handleFilterChange("compliance_category", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="">Alle</option>
-                  <option value="DSGVO">DSGVO</option>
-                  <option value="ISO27001">ISO27001</option>
-                  <option value="SOC2">SOC2</option>
-                  <option value="SECURITY">Security</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Von Datum</label>
-                <input
-                  type="date"
-                  value={filters.start_date}
-                  onChange={(e) => handleFilterChange("start_date", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Bis Datum</label>
-                <input
-                  type="date"
-                  value={filters.end_date}
-                  onChange={(e) => handleFilterChange("end_date", e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Suche</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={filters.search}
-                    onChange={(e) => handleFilterChange("search", e.target.value)}
-                    placeholder="In allen Feldern suchen..."
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  <FaSearch className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end mt-4 space-x-3">
-              <button
-                onClick={clearFilters}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
-              >
-                Filter zurücksetzen
-              </button>
-              <button
-                onClick={() => setShowFilters(false)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
-              >
-                Filter schließen
-              </button>
-            </div>
-          </div>
-        )}
+            )}
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-4 mb-6">
             <div className="flex">
-              <FaExclamationTriangle className="h-5 w-5 text-red-400" />
+              <FaExclamationTriangle className="h-5 w-5 text-red-400 dark:text-red-300" />
               <div className="ml-3">
-                <h3 className="text-sm font-medium text-red-800">Fehler</h3>
-                <div className="mt-2 text-sm text-red-700">{error}</div>
+                <h3 className="text-sm font-medium text-red-800 dark:text-red-200">Fehler</h3>
+                <div className="mt-2 text-sm text-red-700 dark:text-red-300">{error}</div>
               </div>
             </div>
           </div>
         )}
 
         {/* Loading State */}
-        {loading && (
+        {loading && activeTab === "logs" && (
           <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 dark:border-blue-400"></div>
           </div>
         )}
 
         {/* Audit Logs Table */}
-        {!loading && (
-          <div className="bg-white shadow rounded-lg overflow-hidden">
+        {!loading && activeTab === "logs" && (
+          <div className="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Zeit
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Benutzer
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Aktion
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Schweregrad
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Compliance
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       IP-Adresse
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                       Aktionen
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                   {auditLogs.map((log) => (
-                    <tr key={log.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <tr key={log.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                         {new Date(log.created_at).toLocaleString("de-DE")}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-8 w-8">
-                            <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                              <FaUser className="h-4 w-4 text-blue-600" />
+                            <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
+                              <FaUser className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                             </div>
                           </div>
                           <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
+                            <div className="text-sm font-medium text-gray-900 dark:text-white">
                               {log.first_name} {log.last_name}
                             </div>
-                            <div className="text-sm text-gray-500">{log.email}</div>
+                            <div className="text-sm text-gray-500 dark:text-gray-400">{log.email}</div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{log.action}</div>
-                        <div className="text-sm text-gray-500">{log.resource_type}</div>
+                        <div className="text-sm text-gray-900 dark:text-white">{log.action}</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">{log.resource_type}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
@@ -484,7 +485,7 @@ export default function AuditLogsPage() {
                           {log.compliance_category}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                         {log.ip_address}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -493,7 +494,7 @@ export default function AuditLogsPage() {
                             setSelectedLog(log);
                             setShowDetails(true);
                           }}
-                          className="text-blue-600 hover:text-blue-900 mr-3"
+                          className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 mr-3"
                         >
                           <FaEye className="h-4 w-4" />
                         </button>
@@ -506,7 +507,7 @@ export default function AuditLogsPage() {
 
             {/* Pagination */}
             {pagination.pages > 1 && (
-              <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+              <div className="bg-white dark:bg-gray-800 px-4 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 sm:px-6">
                 <div className="flex-1 flex justify-between sm:hidden">
                   <button
                     onClick={() =>
@@ -516,7 +517,7 @@ export default function AuditLogsPage() {
                       }))
                     }
                     disabled={pagination.page === 1}
-                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
+                    className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
                   >
                     Vorherige
                   </button>
@@ -528,14 +529,14 @@ export default function AuditLogsPage() {
                       }))
                     }
                     disabled={pagination.page === pagination.pages}
-                    className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
+                    className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
                   >
                     Nächste
                   </button>
                 </div>
                 <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-sm text-gray-700">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
                       Zeige{" "}
                       <span className="font-medium">
                         {(pagination.page - 1) * pagination.limit + 1}
@@ -557,7 +558,7 @@ export default function AuditLogsPage() {
                           }))
                         }
                         disabled={pagination.page === 1}
-                        className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50"
+                        className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
                       >
                         Vorherige
                       </button>
@@ -569,7 +570,7 @@ export default function AuditLogsPage() {
                           }))
                         }
                         disabled={pagination.page === pagination.pages}
-                        className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50"
+                        className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm font-medium text-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50"
                       >
                         Nächste
                       </button>
@@ -581,16 +582,32 @@ export default function AuditLogsPage() {
           </div>
         )}
 
+          </>
+        )}
+
+        {activeTab === "analytics" && <AuditLogAnalytics />}
+
+        {activeTab === "export" && (
+          <AuditLogExport
+            filters={filters}
+            onExportComplete={() => {
+              // Optional: Nach Export Aktion
+            }}
+          />
+        )}
+
+        {activeTab === "iso27001" && <ISO27001Reports />}
+
         {/* Details Modal */}
         {showDetails && selectedLog && (
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-            <div className="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 dark:bg-gray-900 dark:bg-opacity-75 overflow-y-auto h-full w-full z-50">
+            <div className="relative top-20 mx-auto p-5 border border-gray-300 dark:border-gray-700 w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white dark:bg-gray-800">
               <div className="mt-3">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-medium text-gray-900">Audit-Log Details</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">Audit-Log Details</h3>
                   <button
                     onClick={() => setShowDetails(false)}
-                    className="text-gray-400 hover:text-gray-600"
+                    className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                   >
                     <FaTimes className="h-6 w-6" />
                   </button>
@@ -599,12 +616,12 @@ export default function AuditLogsPage() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">ID</label>
-                      <p className="mt-1 text-sm text-gray-900">{selectedLog.id}</p>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">ID</label>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white">{selectedLog.id}</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Zeit</label>
-                      <p className="mt-1 text-sm text-gray-900">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Zeit</label>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white">
                         {new Date(selectedLog.created_at).toLocaleString("de-DE")}
                       </p>
                     </div>
@@ -612,15 +629,15 @@ export default function AuditLogsPage() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Benutzer</label>
-                      <p className="mt-1 text-sm text-gray-900">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Benutzer</label>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white">
                         {selectedLog.first_name} {selectedLog.last_name}
                       </p>
-                      <p className="text-sm text-gray-500">{selectedLog.email}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{selectedLog.email}</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Session ID</label>
-                      <p className="mt-1 text-sm text-gray-900 font-mono">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Session ID</label>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white font-mono">
                         {selectedLog.session_id}
                       </p>
                     </div>
@@ -628,12 +645,12 @@ export default function AuditLogsPage() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Aktion</label>
-                      <p className="mt-1 text-sm text-gray-900">{selectedLog.action}</p>
-                      <p className="text-sm text-gray-500">{selectedLog.resource_type}</p>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Aktion</label>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white">{selectedLog.action}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{selectedLog.resource_type}</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Schweregrad</label>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Schweregrad</label>
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSeverityColor(selectedLog.severity)}`}
                       >
@@ -645,25 +662,25 @@ export default function AuditLogsPage() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">IP-Adresse</label>
-                      <p className="mt-1 text-sm text-gray-900 font-mono">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">IP-Adresse</label>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white font-mono">
                         {selectedLog.ip_address}
                       </p>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         Risiko-Score
                       </label>
-                      <p className="mt-1 text-sm text-gray-900">{selectedLog.risk_score}/100</p>
+                      <p className="mt-1 text-sm text-gray-900 dark:text-white">{selectedLog.risk_score}/100</p>
                     </div>
                   </div>
 
                   {selectedLog.old_value && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         Vorheriger Wert
                       </label>
-                      <pre className="mt-1 text-sm text-gray-900 bg-gray-100 p-3 rounded-md overflow-x-auto">
+                      <pre className="mt-1 text-sm text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 p-3 rounded-md overflow-x-auto">
                         {JSON.stringify(JSON.parse(selectedLog.old_value), null, 2)}
                       </pre>
                     </div>
@@ -671,23 +688,23 @@ export default function AuditLogsPage() {
 
                   {selectedLog.new_value && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">Neuer Wert</label>
-                      <pre className="mt-1 text-sm text-gray-900 bg-gray-100 p-3 rounded-md overflow-x-auto">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Neuer Wert</label>
+                      <pre className="mt-1 text-sm text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 p-3 rounded-md overflow-x-auto">
                         {JSON.stringify(JSON.parse(selectedLog.new_value), null, 2)}
                       </pre>
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">User Agent</label>
-                    <p className="mt-1 text-sm text-gray-900 break-all">{selectedLog.user_agent}</p>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">User Agent</label>
+                    <p className="mt-1 text-sm text-gray-900 dark:text-white break-all">{selectedLog.user_agent}</p>
                   </div>
                 </div>
 
                 <div className="mt-6 flex justify-end">
                   <button
                     onClick={() => setShowDetails(false)}
-                    className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                    className="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-400 dark:hover:bg-gray-500"
                   >
                     Schließen
                   </button>

@@ -1,0 +1,59 @@
+{
+  "setup": {
+    "success": true,
+    "mediaId": "test1234567890ab"
+  },
+  "tests": [
+    {
+      "name": "POST /api/admin/media/ai/analyze",
+      "success": false,
+      "status": 401,
+      "data": {
+        "success": false,
+        "message": "Nicht authentifiziert"
+      },
+      "error": "Nicht authentifiziert"
+    },
+    {
+      "name": "POST /api/admin/media/ai/analyze-batch",
+      "success": false,
+      "status": 401,
+      "data": {
+        "success": false,
+        "message": "Nicht authentifiziert"
+      },
+      "error": "Nicht authentifiziert"
+    },
+    {
+      "name": "POST /api/admin/media/ai/search",
+      "success": false,
+      "status": 401,
+      "data": {
+        "success": false,
+        "message": "Nicht authentifiziert"
+      },
+      "error": "Nicht authentifiziert"
+    },
+    {
+      "name": "GET /api/admin/media/ai/similar",
+      "success": false,
+      "status": 401,
+      "data": {
+        "success": false,
+        "message": "Nicht authentifiziert"
+      },
+      "error": "Nicht authentifiziert"
+    },
+    {
+      "name": "POST /api/admin/media/ai/approve",
+      "success": false,
+      "status": 401,
+      "data": {
+        "success": false,
+        "message": "Nicht authentifiziert"
+      },
+      "error": "Nicht authentifiziert"
+    }
+  ],
+  "summary": {}
+}

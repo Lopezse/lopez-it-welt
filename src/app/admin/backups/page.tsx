@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BackupList } from "@/components/admin/backups/BackupList";
+import { BackupCreate } from "@/components/admin/backups/BackupCreate";
+import { BackupRestore } from "@/components/admin/backups/BackupRestore";
+import { BackupLogs } from "@/components/admin/backups/BackupLogs";
+import { useSystemPermissions } from "@/lib/hooks/useSystemPermissions";
+import { ErrorBanner } from "@/components/ui/ErrorBanner";
 
 interface BackupData {
   status: {
@@ -37,13 +43,62 @@ interface BackupData {
   };
 }
 
+interface Backup {
+  id: string;
+  timestamp: string;
+  type: "full" | "incremental" | "differential";
+  size: number;
+  status: "success" | "error" | "running" | "corrupted";
+  duration?: number;
+  files: number;
+  location: string;
+  description?: string;
+}
+
 export default function BackupsPage() {
   const [backupData, setBackupData] = useState<BackupData | null>(null);
+  const [backups, setBackups] = useState<Backup[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("status");
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [restoreDialogOpen, setRestoreDialogOpen] = useState(false);
+  const [selectedBackupId, setSelectedBackupId] = useState<string | null>(null);
+  const [selectedBackupName, setSelectedBackupName] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+
+  const { canManage, canView, loading: permissionsLoading } = useSystemPermissions();
 
   useEffect(() => {
-    // Mock-Daten für Backups
+    if (!permissionsLoading && canView()) {
+      loadBackups();
+      loadBackupStatus();
+    }
+  }, [permissionsLoading]);
+
+  const loadBackups = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const response = await fetch("/api/admin/backups");
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Fehler beim Laden der Backups");
+      }
+
+      setBackups(data.data.backups || []);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Fehler beim Laden der Backups");
+      // Fallback: Mock-Daten
+      setBackups([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadBackupStatus = async () => {
+    // Mock-Daten für Status (kann später durch API ersetzt werden)
     const mockData: BackupData = {
       status: {
         lastBackup: "2025-06-27 02:00:00",
@@ -135,11 +190,63 @@ export default function BackupsPage() {
     };
 
     setBackupData(mockData);
-    setLoading(false);
-  }, []);
+  };
 
-  if (loading) {
+  const handleCreateBackup = () => {
+    setCreateDialogOpen(true);
+  };
+
+  const handleDownloadBackup = async (id: string) => {
+    try {
+      const response = await fetch(`/api/admin/backups/${id}/download`);
+      if (!response.ok) {
+        throw new Error("Fehler beim Herunterladen des Backups");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `backup-${id}.tar.gz`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Fehler beim Herunterladen des Backups");
+    }
+  };
+
+  const handleRestoreBackup = (id: string) => {
+    const backup = backups.find((b) => b.id === id);
+    setSelectedBackupId(id);
+    setSelectedBackupName(backup ? `${backup.type} - ${backup.timestamp}` : id);
+    setRestoreDialogOpen(true);
+  };
+
+  const handleBackupCreated = () => {
+    loadBackups();
+    loadBackupStatus();
+  };
+
+  const handleBackupRestored = () => {
+    loadBackups();
+    loadBackupStatus();
+  };
+
+  if (permissionsLoading || loading) {
     return <div className="text-center p-8">Lade Backup-Daten...</div>;
+  }
+
+  if (!canView()) {
+    return (
+      <div className="p-6">
+        <ErrorBanner
+          message="Sie haben keine Berechtigung, Backups anzuzeigen."
+          errorCode="PERMISSION_DENIED"
+        />
+      </div>
+    );
   }
 
   if (!backupData) {
@@ -188,12 +295,14 @@ export default function BackupsPage() {
             <p className="text-gray-600 mt-1">Sicherung und Wiederherstellung des Systems</p>
           </div>
           <div className="flex items-center space-x-4">
-            <button className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-              Manuelles Backup starten
-            </button>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-              Wiederherstellung
-            </button>
+            {canManage() && (
+              <button
+                onClick={handleCreateBackup}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Manuelles Backup starten
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -217,6 +326,11 @@ export default function BackupsPage() {
                 id: "restore",
                 name: "Wiederherstellung",
                 icon: "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15",
+              },
+              {
+                id: "logs",
+                name: "Backup-Logs",
+                icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
               },
               {
                 id: "settings",
@@ -305,87 +419,23 @@ export default function BackupsPage() {
           {/* Backup-Historie Tab */}
           {activeTab === "history" && (
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900">Backup-Historie</h3>
-                <div className="flex space-x-2">
-                  <select className="px-3 py-1 border border-gray-300 rounded-md text-sm">
-                    <option>Alle Typen</option>
-                    <option>Vollbackup</option>
-                    <option>Inkrementell</option>
-                    <option>Differenziell</option>
-                  </select>
-                  <button className="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">
-                    Export
-                  </button>
-                </div>
-              </div>
+              {error && (
+                <ErrorBanner message={error} onDismiss={() => setError(null)} />
+              )}
+              <BackupList
+                backups={backups}
+                onRefresh={loadBackups}
+                onCreateBackup={handleCreateBackup}
+                onDownloadBackup={handleDownloadBackup}
+                onRestoreBackup={handleRestoreBackup}
+              />
+            </div>
+          )}
 
-              <div className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-100">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Datum/Zeit
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Typ
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Größe
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Dauer
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Dateien
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {backupData.history.map((backup) => (
-                      <tr key={backup.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {backup.timestamp}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${getTypeColor(backup.type)}`}
-                          >
-                            {backup.type === "full"
-                              ? "Vollbackup"
-                              : backup.type === "incremental"
-                                ? "Inkrementell"
-                                : "Differenziell"}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {backup.size}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span
-                            className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(backup.status)}`}
-                          >
-                            {backup.status === "success"
-                              ? "Erfolgreich"
-                              : backup.status === "error"
-                                ? "Fehler"
-                                : "Läuft..."}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {backup.duration}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {backup.files.toLocaleString()}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+          {/* Backup-Logs Tab (neu) */}
+          {activeTab === "logs" && (
+            <div className="space-y-4">
+              <BackupLogs backupId={selectedBackupId || undefined} />
             </div>
           )}
 
@@ -643,6 +693,27 @@ export default function BackupsPage() {
           )}
         </div>
       </div>
+
+      {/* Dialogs */}
+      <BackupCreate
+        open={createDialogOpen}
+        onClose={() => setCreateDialogOpen(false)}
+        onSuccess={handleBackupCreated}
+      />
+
+      {selectedBackupId && (
+        <BackupRestore
+          backupId={selectedBackupId}
+          backupName={selectedBackupName}
+          open={restoreDialogOpen}
+          onClose={() => {
+            setRestoreDialogOpen(false);
+            setSelectedBackupId(null);
+            setSelectedBackupName("");
+          }}
+          onSuccess={handleBackupRestored}
+        />
+      )}
     </div>
   );
 }

@@ -285,8 +285,13 @@ export default function UsersPage() {
                           </div>
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{user.username}</div>
-                          <div className="text-sm text-gray-500">{user.email}</div>
+                          <a
+                            href={`/admin/users/${user.id}/profile`}
+                            className="text-sm font-medium text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
+                          >
+                            {user.username}
+                          </a>
+                          <div className="text-sm text-gray-500 dark:text-gray-400">{user.email}</div>
                         </div>
                       </div>
                     </td>

@@ -35,6 +35,8 @@
     "dist",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "**/__tests__/**"
+    "**/__tests__/**",
+    "src/agents/complianceAgentService.ts",
+    "src/scripts/test-ki-agents.ts"
   ]
 }

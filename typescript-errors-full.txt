@@ -1,0 +1,385 @@
+﻿
+> lopez-it-welt@1.0.0 type-check
+> tsc --noEmit
+
+src/app/admin/customers/new/page.tsx(570,9): error TS1128: Declaration or statement expected.
+src/app/admin/customers/new/page.tsx(571,7): error TS1109: Expression expected.
+src/app/admin/customers/new/page.tsx(572,5): error TS1109: Expression expected.
+src/app/admin/customers/new/page.tsx(573,3): error TS1109: Expression expected.
+src/app/admin/customers/new/page.tsx(574,1): error TS1128: Declaration or statement expected.
+src/app/admin/office/calendar/page.tsx(1928,1): error TS1128: Declaration or statement expected.
+src/app/admin/office/invoices/InvoiceWizard.tsx(129,2): error TS1109: Expression expected.
+src/app/admin/office/invoices/InvoiceWizard.tsx(129,14): error TS1005: ';' expected.
+src/app/admin/office/invoices/InvoiceWizard.tsx(129,18): error TS1434: Unexpected keyword or identifier.
+src/app/admin/office/invoices/InvoiceWizard.tsx(129,34): error TS1434: Unexpected keyword or identifier.
+src/app/admin/office/invoices/InvoiceWizard.tsx(130,3): error TS1161: Unterminated regular expression literal.
+src/app/api/admin/customers/[id]/route.ts(360,1): error TS1128: Declaration or statement expected.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(92,2): error TS1109: Expression expected.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(93,22): error TS1005: ';' expected.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(93,48): error TS1005: ',' expected.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(93,54): error TS1005: ',' expected.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(94,3): error TS1161: Unterminated regular expression literal.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(88,2): error TS1109: Expression expected.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(89,14): error TS1005: ';' expected.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(89,18): error TS1434: Unexpected keyword or identifier.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(89,42): error TS1005: ',' expected.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(90,3): error TS1161: Unterminated regular expression literal.
+src/app/api/appointments/[id]/route.ts(247,3): error TS1128: Declaration or statement expected.
+src/app/api/appointments/[id]/route.ts(247,5): error TS1005: 'try' expected.
+src/app/api/appointments/[id]/route.ts(254,1): error TS1128: Declaration or statement expected.
+src/app/api/appointments/ical/export/route.ts(263,7): error TS1128: Declaration or statement expected.
+src/app/api/appointments/ical/export/route.ts(281,5): error TS1128: Declaration or statement expected.
+src/app/api/appointments/ical/export/route.ts(366,3): error TS1128: Declaration or statement expected.
+src/app/api/appointments/ical/export/route.ts(366,5): error TS1005: 'try' expected.
+src/app/api/appointments/ical/export/route.ts(386,1): error TS1128: Declaration or statement expected.
+src/app/api/appointments/route.ts(236,7): error TS1128: Declaration or statement expected.
+src/app/api/appointments/route.ts(237,5): error TS1128: Declaration or statement expected.
+src/app/api/appointments/route.ts(293,3): error TS1128: Declaration or statement expected.
+src/app/api/appointments/route.ts(293,5): error TS1005: 'try' expected.
+src/app/api/appointments/route.ts(300,1): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(479,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(480,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(481,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(483,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(483,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(485,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(489,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(489,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(490,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(490,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(491,8): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(491,31): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(496,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(497,1): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(497,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(497,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(498,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(498,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(498,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(499,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(499,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(499,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(500,1): error TS1121: Octal literals are not allowed. Use the syntax '0o115'.
+src/app/api/invoices/pdf/route.ts(500,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(500,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(501,1): error TS1121: Octal literals are not allowed. Use the syntax '0o261'.
+src/app/api/invoices/pdf/route.ts(501,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(501,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(504,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(505,7): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(505,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(505,11): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(509,2): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(523,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(523,17): error TS1003: Identifier expected.
+src/app/api/invoices/pdf/route.ts(523,18): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(526,8): error TS1435: Unknown keyword or identifier. Did you mean 'from'?
+src/app/api/invoices/pdf/route.ts(526,13): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(527,8): error TS1435: Unknown keyword or identifier. Did you mean 'let'?
+src/app/api/invoices/pdf/route.ts(527,13): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(527,18): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(527,34): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(527,36): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(528,8): error TS1435: Unknown keyword or identifier. Did you mean 'let'?
+src/app/api/invoices/pdf/route.ts(528,13): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(528,18): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(528,33): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(528,35): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(529,8): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(529,21): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(543,1): error TS1005: ':' expected.
+src/app/api/invoices/pdf/route.ts(543,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(543,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(546,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(546,10): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(546,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(549,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(549,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(552,10): error TS1005: ']' expected.
+src/app/api/invoices/pdf/route.ts(552,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(552,13): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(553,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(556,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(556,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(559,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(559,11): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(559,13): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(560,14): error TS1005: ']' expected.
+src/app/api/invoices/pdf/route.ts(560,16): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(560,20): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(560,23): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(561,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(563,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(569,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(570,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(571,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(573,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(573,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(575,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(579,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(579,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(580,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(580,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(581,8): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(581,19): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(581,25): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(581,35): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(586,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(587,1): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(587,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(587,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(588,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(588,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(588,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(589,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(589,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(589,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(590,1): error TS1121: Octal literals are not allowed. Use the syntax '0o115'.
+src/app/api/invoices/pdf/route.ts(590,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(590,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(591,1): error TS1121: Octal literals are not allowed. Use the syntax '0o261'.
+src/app/api/invoices/pdf/route.ts(591,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(591,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(594,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(595,7): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(595,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(595,11): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(599,2): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(624,23): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(624,29): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(624,53): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(624,57): error TS1443: Module declaration names may only use ' or " quoted strings.
+src/app/api/invoices/pdf/route.ts(642,8): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(643,8): error TS1435: Unknown keyword or identifier. Did you mean 'set'?
+src/app/api/invoices/pdf/route.ts(643,23): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(643,24): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(643,40): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(643,41): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(644,8): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(644,19): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(650,8): error TS1005: ':' expected.
+src/app/api/invoices/pdf/route.ts(650,15): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(651,59): error TS1135: Argument expression expected.
+src/app/api/invoices/pdf/route.ts(651,60): error TS1135: Argument expression expected.
+src/app/api/invoices/pdf/route.ts(651,62): error TS1135: Argument expression expected.
+src/app/api/invoices/pdf/route.ts(651,64): error TS1443: Module declaration names may only use ' or " quoted strings.
+src/app/api/invoices/pdf/route.ts(654,10): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(654,14): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(654,24): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(654,38): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(654,72): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(654,77): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(654,87): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(654,94): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(654,95): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(654,98): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(674,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(674,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(677,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(677,10): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(677,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(680,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(680,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(683,10): error TS1005: ']' expected.
+src/app/api/invoices/pdf/route.ts(683,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(683,13): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(684,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(687,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(687,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(690,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(690,11): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(690,13): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(691,14): error TS1005: ']' expected.
+src/app/api/invoices/pdf/route.ts(691,16): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(691,20): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(691,23): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(692,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(694,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(700,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(701,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(702,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(704,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(704,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(706,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(710,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(710,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(711,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(711,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(712,11): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(712,12): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(712,20): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(712,38): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(717,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(718,1): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(718,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(718,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(719,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(719,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(719,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(720,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(720,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(720,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(721,1): error TS1121: Octal literals are not allowed. Use the syntax '0o115'.
+src/app/api/invoices/pdf/route.ts(721,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(721,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(722,1): error TS1121: Octal literals are not allowed. Use the syntax '0o261'.
+src/app/api/invoices/pdf/route.ts(722,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(722,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(725,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(726,7): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(726,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(726,11): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(730,2): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(735,20): error TS1127: Invalid character.
+src/app/api/invoices/pdf/route.ts(735,33): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(735,43): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(735,47): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(735,56): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/pdf/route.ts(743,33): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(759,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(759,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(762,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(762,10): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(762,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(765,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(765,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(768,10): error TS1005: ']' expected.
+src/app/api/invoices/pdf/route.ts(768,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(768,13): error TS1128: Declaration or statement expected.
+src/app/api/invoices/pdf/route.ts(769,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(772,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(772,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(775,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(775,11): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(775,13): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(776,14): error TS1005: ']' expected.
+src/app/api/invoices/pdf/route.ts(776,16): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(776,20): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(776,23): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(777,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(779,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(785,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(786,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(787,1): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(789,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(789,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(791,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(795,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(795,8): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(796,5): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(796,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(797,9): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(797,14): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(797,25): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(797,29): error TS1005: ',' expected.
+src/app/api/invoices/pdf/route.ts(797,34): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(802,3): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(803,1): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(803,12): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(803,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(804,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(804,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(804,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(805,1): error TS1489: Decimals with leading zeros are not allowed.
+src/app/api/invoices/pdf/route.ts(805,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(805,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(806,1): error TS1121: Octal literals are not allowed. Use the syntax '0o115'.
+src/app/api/invoices/pdf/route.ts(806,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(806,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(807,1): error TS1121: Octal literals are not allowed. Use the syntax '0o261'.
+src/app/api/invoices/pdf/route.ts(807,12): error TS1121: Octal literals are not allowed. Use the syntax '0o0'.
+src/app/api/invoices/pdf/route.ts(807,18): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(810,1): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/pdf/route.ts(811,7): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(811,9): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(811,11): error TS1005: ';' expected.
+src/app/api/invoices/pdf/route.ts(815,2): error TS1109: Expression expected.
+src/app/api/invoices/pdf/route.ts(830,1): error TS1160: Unterminated template literal.
+src/app/api/invoices/route.minimal.ts(120,2): error TS1109: Expression expected.
+src/app/api/invoices/route.minimal.ts(120,12): error TS1005: ';' expected.
+src/app/api/invoices/route.minimal.ts(121,15): error TS1005: ';' expected.
+src/app/api/invoices/route.minimal.ts(121,31): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/route.minimal.ts(121,39): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/route.minimal.ts(121,43): error TS1434: Unexpected keyword or identifier.
+src/app/api/invoices/route.minimal.ts(122,3): error TS1161: Unterminated regular expression literal.
+src/app/api/invoices/route.ts(428,3): error TS1128: Declaration or statement expected.
+src/app/api/invoices/route.ts(428,5): error TS1005: 'try' expected.
+src/app/api/invoices/route.ts(475,1): error TS1128: Declaration or statement expected.
+src/app/api/invoices/status/route.ts(103,7): error TS1128: Declaration or statement expected.
+src/app/api/invoices/status/route.ts(103,8): error TS1128: Declaration or statement expected.
+src/app/api/invoices/status/route.ts(104,5): error TS1128: Declaration or statement expected.
+src/app/api/invoices/status/route.ts(105,3): error TS1128: Declaration or statement expected.
+src/app/api/invoices/status/route.ts(105,5): error TS1005: 'try' expected.
+src/app/api/invoices/status/route.ts(112,1): error TS1128: Declaration or statement expected.
+src/app/api/payroll/entries/route.ts(232,2): error TS1109: Expression expected.
+src/app/api/payroll/entries/route.ts(234,24): error TS1005: ';' expected.
+src/app/api/payroll/entries/route.ts(234,40): error TS1005: ',' expected.
+src/app/api/payroll/entries/route.ts(234,44): error TS1005: ',' expected.
+src/app/api/payroll/entries/route.ts(234,58): error TS1005: ',' expected.
+src/app/api/payroll/entries/route.ts(235,3): error TS1161: Unterminated regular expression literal.
+src/app/api/payroll/import-sessions/route.ts(192,2): error TS1109: Expression expected.
+src/app/api/payroll/import-sessions/route.ts(192,15): error TS1005: ';' expected.
+src/app/api/payroll/import-sessions/route.ts(193,3): error TS1161: Unterminated regular expression literal.
+src/app/api/payroll/periods/route.ts(163,2): error TS1109: Expression expected.
+src/app/api/payroll/periods/route.ts(165,24): error TS1005: ';' expected.
+src/app/api/payroll/periods/route.ts(166,3): error TS1161: Unterminated regular expression literal.
+src/app/api/time/entries/route.ts(126,2): error TS1109: Expression expected.
+src/app/api/time/entries/route.ts(127,8): error TS1005: ';' expected.
+src/app/api/time/entries/route.ts(127,10): error TS1434: Unexpected keyword or identifier.
+src/app/api/time/entries/route.ts(128,3): error TS1161: Unterminated regular expression literal.
+src/lib/invoice-format.ts(41,2): error TS1109: Expression expected.
+src/lib/invoice-format.ts(41,20): error TS1005: ';' expected.
+src/lib/invoice-format.ts(42,10): error TS1005: ';' expected.
+src/lib/invoice-format.ts(42,36): error TS1127: Invalid character.
+src/lib/invoice-format.ts(42,59): error TS1127: Invalid character.
+src/lib/invoice-format.ts(43,2): error TS1109: Expression expected.
+src/lib/invoice-format.ts(43,3): error TS1161: Unterminated regular expression literal.
+src/lib/invoice-hash.ts(66,2): error TS1109: Expression expected.
+src/lib/invoice-hash.ts(66,12): error TS1005: ';' expected.
+src/lib/invoice-hash.ts(67,12): error TS1005: ';' expected.
+src/lib/invoice-hash.ts(67,28): error TS1005: ';' expected.
+src/lib/invoice-hash.ts(69,2): error TS1109: Expression expected.
+src/lib/invoice-hash.ts(69,10): error TS1005: ';' expected.
+src/lib/invoice-hash.ts(70,3): error TS1161: Unterminated regular expression literal.
+src/lib/rbac-ui.ts(30,1): error TS1128: Declaration or statement expected.
+src/lib/time-tracking-types.ts(59,14): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(60,10): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(62,14): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(63,12): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(64,11): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(66,11): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(67,11): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(68,21): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(70,12): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(71,12): error TS1109: Expression expected.
+src/lib/time-tracking-types.ts(72,1): error TS1128: Declaration or statement expected.
+src/server/time-tracking/service.ts(266,2): error TS1109: Expression expected.
+src/server/time-tracking/service.ts(266,9): error TS1005: ';' expected.
+src/server/time-tracking/service.ts(267,11): error TS1005: ';' expected.
+src/server/time-tracking/service.ts(267,32): error TS1127: Invalid character.
+src/server/time-tracking/service.ts(269,2): error TS1109: Expression expected.
+src/server/time-tracking/service.ts(269,8): error TS1005: ';' expected.
+src/server/time-tracking/service.ts(269,10): error TS1434: Unexpected keyword or identifier.
+src/server/time-tracking/service.ts(269,15): error TS1434: Unexpected keyword or identifier.
+src/server/time-tracking/service.ts(269,19): error TS1434: Unexpected keyword or identifier.
+src/server/time-tracking/service.ts(269,47): error TS1005: ';' expected.
+src/server/time-tracking/service.ts(269,55): error TS1434: Unexpected keyword or identifier.
+src/server/time-tracking/service.ts(270,10): error TS1005: ';' expected.
+src/server/time-tracking/service.ts(270,16): error TS1434: Unexpected keyword or identifier.
+src/server/time-tracking/service.ts(270,34): error TS1434: Unexpected keyword or identifier.
+src/server/time-tracking/service.ts(271,2): error TS1003: Identifier expected.
+src/server/time-tracking/service.ts(271,3): error TS1161: Unterminated regular expression literal.
+tests/smoke.admin.office.spec.ts(18,1): error TS1128: Declaration or statement expected.
+tests/smoke.admin.office.spec.ts(18,2): error TS1128: Declaration or statement expected.
+tests/smoke.api.office.spec.ts(75,2): error TS1109: Expression expected.
+tests/smoke.api.office.spec.ts(75,10): error TS1005: ';' expected.
+tests/smoke.api.office.spec.ts(75,23): error TS1434: Unexpected keyword or identifier.
+tests/smoke.api.office.spec.ts(75,38): error TS1434: Unexpected keyword or identifier.
+tests/smoke.api.office.spec.ts(75,59): error TS1005: ';' expected.
+tests/smoke.api.office.spec.ts(76,3): error TS1161: Unterminated regular expression literal.
+tests/smoke.api.time-tracking.spec.ts(31,2): error TS1109: Expression expected.
+tests/smoke.api.time-tracking.spec.ts(31,10): error TS1005: ';' expected.
+tests/smoke.api.time-tracking.spec.ts(31,16): error TS1434: Unexpected keyword or identifier.
+tests/smoke.api.time-tracking.spec.ts(31,20): error TS1434: Unexpected keyword or identifier.
+tests/smoke.api.time-tracking.spec.ts(31,25): error TS1434: Unexpected keyword or identifier.
+tests/smoke.api.time-tracking.spec.ts(32,3): error TS1161: Unterminated regular expression literal.

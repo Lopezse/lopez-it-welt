@@ -7,7 +7,18 @@
 // =====================================================
 
 import { DomainStrategy } from "./domain-strategy";
-import { EnterpriseUserService } from "./enterprise-user-service";
+import { EnterpriseUserService, CreateUserData, EnterpriseUser } from "./enterprise-user-service";
+
+// =====================================================
+// REQUEST TYPE EXTENSIONS
+// =====================================================
+
+declare global {
+  interface Request {
+    user?: Record<string, unknown> | null;
+    isDevelopmentMode?: boolean;
+  }
+}
 
 // =====================================================
 // INTERFACES
@@ -186,7 +197,7 @@ export class DevelopmentMode {
   /**
    * Erstellt Chef-Benutzer für Development Mode
    */
-  static async createChefUser(): Promise<Record<string, unknown> | null> {
+  static async createChefUser(): Promise<EnterpriseUser | null> {
     if (!this.isEnabled()) {
       return null;
     }
@@ -195,7 +206,7 @@ export class DevelopmentMode {
       const chefData = DomainStrategy.createChefUser();
       const emails = DomainStrategy.generateUserEmails(chefData);
 
-      const userData = {
+      const userData: CreateUserData = {
         username: "ramiro.lopezrodriguez",
         email: emails.external,
         email_external: emails.external,

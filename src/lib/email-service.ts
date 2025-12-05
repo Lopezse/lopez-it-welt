@@ -35,7 +35,7 @@ export class EmailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
-    this.transporter = nodemailer.createTransporter({
+    this.transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "localhost",
       port: parseInt(process.env.SMTP_PORT || "587"),
       secure: process.env.SMTP_SECURE === "true",
@@ -107,6 +107,94 @@ export class EmailService {
       html,
       text,
     });
+  }
+
+  // =====================================================
+  // KONTAKT-FORMULAR BENACHRICHTIGUNGEN
+  // =====================================================
+
+  async sendContactNotifications(messageData: {
+    id: number;
+    name: string;
+    email: string;
+    phone?: string;
+    company?: string;
+    subject: string;
+    message: string;
+    priority: "niedrig" | "normal" | "hoch" | "dringend";
+    created_at: string;
+  }): Promise<boolean> {
+    try {
+      // E-Mail an Admin senden
+      const adminEmails = [process.env.ADMIN_EMAIL || "admin@lopez-it-welt.de"];
+      const adminSubject = `Neue Kontaktanfrage: ${messageData.subject}`;
+      const adminMessage = `
+        Neue Kontaktanfrage erhalten:
+        
+        Name: ${messageData.name}
+        E-Mail: ${messageData.email}
+        ${messageData.phone ? `Telefon: ${messageData.phone}` : ""}
+        ${messageData.company ? `Firma: ${messageData.company}` : ""}
+        Priorität: ${messageData.priority}
+        Betreff: ${messageData.subject}
+        
+        Nachricht:
+        ${messageData.message}
+        
+        Erstellt: ${messageData.created_at}
+      `;
+
+      await this.sendAdminNotification(adminSubject, adminMessage, adminEmails);
+
+      // Bestätigungs-E-Mail an Kunden senden
+      const customerSubject = "Ihre Nachricht wurde erhalten";
+      const customerHtml = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Nachricht erhalten</title>
+        </head>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+          <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2>Ihre Nachricht wurde erhalten</h2>
+            <p>Hallo ${messageData.name},</p>
+            <p>vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage erhalten und werden uns schnellstmöglich bei Ihnen melden.</p>
+            <p><strong>Ihre Nachricht:</strong></p>
+            <p style="background: #f8fafc; padding: 15px; border-left: 4px solid #1e40af;">
+              ${messageData.message}
+            </p>
+            <p>Mit freundlichen Grüßen<br>Ihr Lopez IT Welt Team</p>
+          </div>
+        </body>
+        </html>
+      `;
+      const customerText = `
+        Ihre Nachricht wurde erhalten
+        
+        Hallo ${messageData.name},
+        
+        vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage erhalten und werden uns schnellstmöglich bei Ihnen melden.
+        
+        Ihre Nachricht:
+        ${messageData.message}
+        
+        Mit freundlichen Grüßen
+        Ihr Lopez IT Welt Team
+      `;
+
+      await this.sendEmail({
+        to: messageData.email,
+        subject: customerSubject,
+        html: customerHtml,
+        text: customerText,
+      });
+
+      return true;
+    } catch (error) {
+      console.error("❌ Fehler beim Senden der Kontakt-Benachrichtigungen:", error);
+      return false;
+    }
   }
 
   // =====================================================

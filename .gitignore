@@ -25,3 +25,7 @@ Thumbs.db
 .env.development
 *.env
 !email-config.env.example
+!.env.example
+
+# Enterprise++ Media Storage (nicht versionieren)
+/storage/media/

@@ -68,13 +68,20 @@ export class AdminAuthService {
         console.log("🚀 Development Mode: Admin Login umgangen");
         const mockUser = DevelopmentMode.createMockUser();
 
+        if (!mockUser) {
+          return {
+            success: false,
+            message: "Development Mode: Mock-User konnte nicht erstellt werden",
+          };
+        }
+
         return {
           success: true,
           message: "Development Mode: Login erfolgreich",
           session: {
             userId: mockUser.id as number,
-            username: mockUser.username,
-            email: mockUser.email,
+            username: (mockUser.username as string) || "dev-user",
+            email: (mockUser.email as string) || "dev@lopez-it-welt.de",
             roles: ["admin"],
             permissions: ["*"],
             sessionToken: "dev-mode-token",
@@ -128,15 +135,30 @@ export class AdminAuthService {
 
       // 2FA PRÜFEN (PFLICHT für Admin)
       const requires2FA = await TwoFactorService.is2FAEnabled(user.id!);
+      
       if (!requires2FA) {
-        // 2FA noch nicht aktiviert - erfordern
+        // 2FA noch nicht aktiviert - erlaube Login ohne 2FA, aber markiere für Setup
+        // Benutzer wird nach Login zur 2FA-Setup-Seite weitergeleitet
+        // Session erstellen (temporär, bis 2FA aktiviert ist)
+        const session = await this.createSession(user, ipAddress, userAgent);
+        if (!session) {
+          return {
+            success: false,
+            message: "Session konnte nicht erstellt werden",
+          };
+        }
+        
+        await this.updateLastLogin(user.id!);
+        
         return {
-          success: false,
-          message: "Zwei-Faktor-Authentifizierung erforderlich. Bitte aktivieren Sie 2FA zuerst.",
-          requires2FA: true,
+          success: true,
+          message: "Login erfolgreich. Bitte aktivieren Sie 2FA.",
+          session,
+          requires2FASetup: true, // Flag für Frontend: Weiterleitung zur Setup-Seite
         };
       }
 
+      // 2FA ist aktiviert - Token ist erforderlich
       if (!credentials.twoFactorToken) {
         return {
           success: false,
@@ -195,21 +217,34 @@ export class AdminAuthService {
     ipAddress?: string,
     userAgent?: string,
   ): Promise<AdminSessionData | null> {
+    const pool = await getConnection();
+    const connection = await pool.getConnection();
+    
     try {
-      const connection = await getConnection();
-
       // Session-Token generieren
       const sessionToken = this.generateSessionToken();
       const expiresAt = new Date(Date.now() + this.SESSION_EXPIRES_IN);
 
       // Session in Datenbank speichern (mit adm_ Präfix in Session-Daten)
+      const fullSessionToken = `adm_${sessionToken}`;
       await connection.execute(
         `
                 INSERT INTO lopez_sessions (user_id, session_token, ip_address, user_agent, expires_at)
                 VALUES (?, ?, ?, ?, ?)
             `,
-        [user.id, `adm_${sessionToken}`, ipAddress, userAgent, expiresAt],
+        [user.id, fullSessionToken, ipAddress, userAgent, expiresAt],
       );
+
+      // Debug: Verifiziere dass Session gespeichert wurde
+      const [verifyRows] = await connection.execute(
+        `SELECT * FROM lopez_sessions WHERE session_token = ?`,
+        [fullSessionToken],
+      );
+      if ((verifyRows as any[]).length === 0) {
+        console.error("❌ Session wurde nicht in DB gespeichert!");
+        throw new Error("Session konnte nicht gespeichert werden");
+      }
+      console.log(`✅ Session erfolgreich gespeichert: ${fullSessionToken.substring(0, 20)}...`);
 
       // Benutzer-Rollen laden
       const roles = await RBACService.getUserRoles(user.id!);
@@ -235,50 +270,86 @@ export class AdminAuthService {
     } catch (error) {
       console.error("❌ Session-Erstellung fehlgeschlagen:", error);
       return null;
+    } finally {
+      connection.release();
     }
   }
 
   static async validateSession(sessionToken: string): Promise<AdminSessionData | null> {
     try {
       if (!sessionToken.startsWith("adm_")) {
+        console.log("❌ Session-Validierung: Token hat kein adm_ Präfix");
         return null;
       }
 
-      const connection = await getConnection();
-      const [rows] = await connection.execute(
-        `
+      const pool = await getConnection();
+      const connection = await pool.getConnection();
+      
+      try {
+        // Debug: Prüfe ob Session existiert (ohne Status-Prüfung)
+        const [debugRows] = await connection.execute(
+          `SELECT s.*, u.username, u.email, u.status
+           FROM lopez_sessions s
+           JOIN lopez_users u ON s.user_id = u.id
+           WHERE s.session_token = ?`,
+          [sessionToken],
+        );
+
+        if ((debugRows as any[]).length === 0) {
+          console.log(`❌ Session-Validierung: Session nicht gefunden für Token: ${sessionToken.substring(0, 20)}...`);
+          return null;
+        }
+
+        const debugSession = (debugRows as any)[0];
+        console.log(`🔍 Session-Validierung Debug:`, {
+          sessionToken: sessionToken.substring(0, 20) + "...",
+          userId: debugSession.user_id,
+          username: debugSession.username,
+          status: debugSession.status,
+          expiresAt: debugSession.expires_at,
+          now: new Date(),
+          isExpired: new Date(debugSession.expires_at) <= new Date(),
+        });
+
+        // Jetzt mit allen Bedingungen prüfen
+        const [rows] = await connection.execute(
+          `
                 SELECT s.*, u.username, u.email, u.status
                 FROM lopez_sessions s
                 JOIN lopez_users u ON s.user_id = u.id
                 WHERE s.session_token = ? AND s.expires_at > NOW() AND u.status = 'active'
             `,
-        [sessionToken],
-      );
+          [sessionToken],
+        );
 
-      if ((rows as any[]).length === 0) {
-        return null;
+        if ((rows as any[]).length === 0) {
+          console.log(`❌ Session-Validierung: Session gefunden, aber Bedingungen nicht erfüllt (abgelaufen oder Benutzer inaktiv)`);
+          return null;
+        }
+
+        const session = (rows as any)[0];
+        const roles = await RBACService.getUserRoles(session.user_id);
+        const roleNames = roles.map((role) => role.name);
+
+        const permissions: string[] = [];
+        for (const role of roles) {
+          const rolePermissions = await RBACService.getRolePermissions(role.id!);
+          permissions.push(...rolePermissions.map((p) => `${p.resource}.${p.action}`));
+        }
+
+        return {
+          userId: session.user_id,
+          username: session.username,
+          email: session.email,
+          roles: roleNames,
+          permissions: [...new Set(permissions)],
+          sessionToken: session.session_token,
+          expiresAt: session.expires_at,
+          realm: "ADMIN",
+        };
+      } finally {
+        connection.release();
       }
-
-      const session = (rows as any)[0];
-      const roles = await RBACService.getUserRoles(session.user_id);
-      const roleNames = roles.map((role) => role.name);
-
-      const permissions: string[] = [];
-      for (const role of roles) {
-        const rolePermissions = await RBACService.getRolePermissions(role.id!);
-        permissions.push(...rolePermissions.map((p) => `${p.resource}.${p.action}`));
-      }
-
-      return {
-        userId: session.user_id,
-        username: session.username,
-        email: session.email,
-        roles: roleNames,
-        permissions: [...new Set(permissions)],
-        sessionToken: session.session_token,
-        expiresAt: session.expires_at,
-        realm: "ADMIN",
-      };
     } catch (error) {
       console.error("❌ Session-Validierung fehlgeschlagen:", error);
       return null;
@@ -291,9 +362,14 @@ export class AdminAuthService {
         return false;
       }
 
-      const connection = await getConnection();
-      await connection.execute("DELETE FROM lopez_sessions WHERE session_token = ?", [sessionToken]);
-      return true;
+      const pool = await getConnection();
+      const connection = await pool.getConnection();
+      try {
+        await connection.execute("DELETE FROM lopez_sessions WHERE session_token = ?", [sessionToken]);
+        return true;
+      } finally {
+        connection.release();
+      }
     } catch (error) {
       console.error("❌ Logout fehlgeschlagen:", error);
       return false;
@@ -332,9 +408,10 @@ export class AdminAuthService {
 
   private static async checkLockout(userId: number): Promise<Date | null> {
     try {
-      const connection = await getConnection();
-      // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
+      const pool = await getConnection();
+      const connection = await pool.getConnection();
       try {
+        // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
         const [rows] = await connection.execute(
           `
                     SELECT failed_login_attempts, locked_until
@@ -355,6 +432,8 @@ export class AdminAuthService {
       } catch (error) {
         // Spalten existieren nicht - Lockout deaktiviert
         return null;
+      } finally {
+        connection.release();
       }
 
       return null;
@@ -365,9 +444,10 @@ export class AdminAuthService {
 
   private static async recordFailedAttempt(userId: number, ipAddress?: string): Promise<void> {
     try {
-      const connection = await getConnection();
-      // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
+      const pool = await getConnection();
+      const connection = await pool.getConnection();
       try {
+        // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
         const [rows] = await connection.execute(
           "SELECT failed_login_attempts FROM lopez_users WHERE id = ?",
           [userId],
@@ -391,6 +471,8 @@ export class AdminAuthService {
       } catch (error) {
         // Spalten existieren nicht - Lockout deaktiviert (nicht kritisch)
         console.warn("⚠️ Lockout-Spalten nicht vorhanden - Lockout deaktiviert");
+      } finally {
+        connection.release();
       }
     } catch (error) {
       console.error("❌ Failed Attempt Recording fehlgeschlagen:", error);
@@ -399,9 +481,10 @@ export class AdminAuthService {
 
   private static async resetFailedAttempts(userId: number): Promise<void> {
     try {
-      const connection = await getConnection();
-      // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
+      const pool = await getConnection();
+      const connection = await pool.getConnection();
       try {
+        // Prüfe ob Spalten existieren (optional - Lockout kann später aktiviert werden)
         await connection.execute(
           `
                     UPDATE lopez_users
@@ -413,6 +496,8 @@ export class AdminAuthService {
         );
       } catch (error) {
         // Spalten existieren nicht - Lockout deaktiviert (nicht kritisch)
+      } finally {
+        connection.release();
       }
     } catch (error) {
       console.error("❌ Failed Attempts Reset fehlgeschlagen:", error);
@@ -429,11 +514,16 @@ export class AdminAuthService {
 
   private static async updateLastLogin(userId: number): Promise<void> {
     try {
-      const connection = await getConnection();
-      await connection.execute(
-        "UPDATE lopez_users SET last_login = NOW() WHERE id = ?",
-        [userId],
-      );
+      const pool = await getConnection();
+      const connection = await pool.getConnection();
+      try {
+        await connection.execute(
+          "UPDATE lopez_users SET last_login = NOW() WHERE id = ?",
+          [userId],
+        );
+      } finally {
+        connection.release();
+      }
     } catch (error) {
       console.error("❌ Last Login Update fehlgeschlagen:", error);
     }

@@ -55,25 +55,3 @@ export interface CompleteSessionData {
   status: "completed" | "interrupted" | "paused";
   problem?: string;
 }
-
-  start_time?: string;
-  status?: "active" | "completed" | "interrupted" | "paused";
-  // Office & Finance Integration (Pflichtfelder)
-  project_id?: number; // Pflichtfeld
-  order_id?: number;
-  task_id?: number; // Pflichtfeld
-  // Problem-Flag & Lernsystem
-  ursache?: string;
-  lektion?: string;
-  naechster_schritt?: string;
-  // Abrechnungs-Flags
-  approved?: number;
-  invoiced?: number;
-}
-
-export interface CompleteSessionData {
-  id: number;
-  end_time?: string;
-  status: "completed" | "interrupted" | "paused";
-  problem?: string;
-}

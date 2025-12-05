@@ -147,6 +147,36 @@ v=DMARC1; p=none; rua=mailto:postmaster@lopez-it-welt.de
 
 ---
 
+## 📅 **KW-SYSTEM (Sprint-System) – Enterprise++ Prozessmodell**
+
+**Status:** ✅ **OFFIZIELL AKTIV** (ab 28.11.2025)  
+**Freigabe:** ✅ **DURCH AGENT C BESTÄTIGT**  
+**Gültigkeit:** ✅ **DAUERHAFT UND VERPFLICHTEND** für alle zukünftigen Sprints
+
+**Kernregel:**
+- **1 Kalenderwoche (KW) = 1 Sprint**
+- **Sprintnummer = KW-Nummer**
+- **Sprintstart = Montag** (Planung durch Agent A)
+- **Sprintende = Sonntag**
+- **Freitag = Wochenrückblick / LinkedIn-Post**
+
+**Wochenablauf:**
+- **Montag:** Sprintstart, Planung, Ziele definieren, Aufgaben verteilen
+- **Dienstag-Donnerstag:** Entwicklung, Implementierung, Fortschritt dokumentieren
+- **Freitag:** Wochenrückblick, Review, IST-Ergebnis dokumentieren, LinkedIn-Post erstellen
+
+**Format-Standard:**
+- Alle Dokumente: `KW XX – Datum von DD.MM.YYYY bis DD.MM.YYYY`
+- Beispiel: `KW 48 – 25.11.2025 bis 01.12.2025`
+
+**Dokumentation:**
+- `docs/KW-SYSTEM/README.md` - KW-System-Übersicht
+- `docs/KW-SYSTEM/templates/` - Templates (KW-TEMPLATE.md, TIMELOG-TEMPLATE.md, LINKEDIN-REVIEW-TEMPLATE.md)
+- `docs/KW-SYSTEM/sprints/KW-XX.md` - Sprint-Dokumentation (pro KW)
+- **Aktuelle KW:** KW 48 (25.11.2025 – 01.12.2025) - Siehe `docs/KW-SYSTEM/sprints/KW-48.md`
+
+---
+
 ## 📊 **SYSTEM-STATUS**
 
 ### **Implementierte Module:**

@@ -20,7 +20,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     // Prüfen ob Nachricht existiert
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
       host: "localhost",
       user: "root",
       password: "",
-      database: "lopez_erp",
+      database: process.env.DB_NAME || "lopez_it_welt",
     });
 
     const query = `

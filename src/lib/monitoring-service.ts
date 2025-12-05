@@ -539,7 +539,7 @@ export class MonitoringService {
   }
 
   private static calculateOverallScore(components: any): number {
-    const scores = Object.values(components).map((status) => {
+    const scores: number[] = Object.values(components).map((status: unknown) => {
       switch (status) {
         case "healthy":
           return 100;
@@ -553,7 +553,8 @@ export class MonitoringService {
           return 0;
       }
     });
-    return Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length);
+    if (scores.length === 0) return 0;
+    return Math.round(scores.reduce((sum: number, score: number) => sum + score, 0) / scores.length);
   }
 
   private static determineSystemStatus(

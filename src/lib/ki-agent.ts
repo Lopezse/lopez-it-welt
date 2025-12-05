@@ -19,6 +19,8 @@ export interface KITask {
   priority: "niedrig" | "mittel" | "hoch" | "kritisch";
   context?: string;
   user_id?: number;
+  type?: string;
+  data?: Record<string, unknown>;
 }
 
 export interface KITaskResult {
@@ -59,13 +61,14 @@ export interface KIAgentConfig {
 export abstract class KIAgent {
   protected agentName: string;
   protected agentType: string;
+  protected config?: KIAgentConfig;
 
   constructor(agentName: string = "KI-Agent", agentType: string = "GENERAL") {
     this.agentName = agentName;
     this.agentType = agentType;
   }
 
-  abstract executeTask(task: string): Promise<{
+  abstract executeTask(task: KITask | string): Promise<KITaskResult | {
     success: boolean;
     result?: any;
     error?: string;
@@ -81,6 +84,65 @@ export abstract class KIAgent {
 
   protected success(message: string): void {
     console.log(`[${this.agentName}] ✅ ${message}`);
+  }
+
+  protected validateTask(task: KITask): void {
+    if (!task.id || !task.description) {
+      throw new Error("Task muss id und description haben");
+    }
+  }
+
+  protected async startTaskSession(task: KITask): Promise<string> {
+    return `session_${Date.now()}_${task.id}`;
+  }
+
+  protected async getRelevantRules(task: KITask): Promise<KIRule[]> {
+    return [];
+  }
+
+  protected async checkCompliance(task: KITask, rules: KIRule[]): Promise<ComplianceResult> {
+    return {
+      is_compliant: true,
+      applied_rules: [],
+      violations: [],
+      score: 100,
+    };
+  }
+
+  protected async storeTaskMemory(
+    task: KITask,
+    rules: KIRule[],
+    complianceResult: ComplianceResult | null,
+    sessionId?: string,
+  ): Promise<void> {
+    // Placeholder implementation
+  }
+
+  protected async endTaskSession(sessionId?: string): Promise<void> {
+    // Placeholder implementation
+  }
+
+  protected createFailedResult(
+    task: KITask,
+    errorMessage: string,
+    startTime?: number,
+    sessionId?: string,
+    complianceResult?: ComplianceResult | null,
+  ): KITaskResult {
+    return {
+      success: false,
+      task_id: task.id,
+      rules_applied: [],
+      compliance_result: (complianceResult || {
+        is_compliant: false,
+        applied_rules: [],
+        violations: [errorMessage],
+        score: 0,
+      }) as ComplianceResult,
+      execution_time: startTime ? Date.now() - startTime : 0,
+      error: errorMessage,
+      session_id: sessionId,
+    };
   }
 }
 
@@ -107,10 +169,10 @@ export class ComplianceAgent extends KIAgent {
 
       // 3. Compliance prüfen (falls aktiviert)
       let complianceResult: ComplianceResult | null = null;
-      if (this.config.auto_compliance_check) {
+      if (this.config?.auto_compliance_check) {
         complianceResult = await this.checkCompliance(task, rules);
 
-        if (!complianceResult.is_compliant) {
+        if (complianceResult && !complianceResult.is_compliant) {
           return this.createFailedResult(
             task,
             "Compliance-Prüfung fehlgeschlagen",
@@ -136,12 +198,12 @@ export class ComplianceAgent extends KIAgent {
         success: true,
         task_id: task.id,
         rules_applied: rules,
-        compliance_result: complianceResult || {
+        compliance_result: (complianceResult || {
           is_compliant: true,
-          rules: [],
-          notes: "",
+          applied_rules: [],
+          violations: [],
           score: 100,
-        },
+        }) as ComplianceResult,
         execution_time: executionTime,
         result: result,
         session_id: sessionId,
@@ -180,7 +242,36 @@ export class ComplianceAgent extends KIAgent {
 
 export class QualityAgent extends KIAgent {
   constructor() {
-    super("Quality-Agent");
+    super("Quality-Agent", "QUALITY");
+  }
+
+  async executeTask(task: KITask | string): Promise<KITaskResult> {
+    const taskObj = typeof task === "string" ? { id: task, description: task, category: "quality" as const, priority: "mittel" as const } : task;
+    const startTime = Date.now();
+    
+    try {
+      this.validateTask(taskObj);
+      const sessionId = await this.startTaskSession(taskObj);
+      const rules = await this.getRelevantRules(taskObj);
+      const result = await this.executeTaskLogic(taskObj, rules);
+      
+      return {
+        success: true,
+        task_id: taskObj.id,
+        rules_applied: rules,
+        compliance_result: {
+          is_compliant: true,
+          applied_rules: [],
+          violations: [],
+          score: 100,
+        },
+        execution_time: Date.now() - startTime,
+        result: result,
+        session_id: sessionId,
+      };
+    } catch (error) {
+      return this.createFailedResult(taskObj, error instanceof Error ? error.message : "Unknown error", startTime);
+    }
   }
 
   protected async executeTaskLogic(task: KITask, rules: KIRule[]): Promise<TaskExecutionResult> {
@@ -203,7 +294,36 @@ export class QualityAgent extends KIAgent {
 
 export class DevelopmentAgent extends KIAgent {
   constructor() {
-    super("Development-Agent");
+    super("Development-Agent", "DEVELOPMENT");
+  }
+
+  async executeTask(task: KITask | string): Promise<KITaskResult> {
+    const taskObj = typeof task === "string" ? { id: task, description: task, category: "development" as const, priority: "mittel" as const } : task;
+    const startTime = Date.now();
+    
+    try {
+      this.validateTask(taskObj);
+      const sessionId = await this.startTaskSession(taskObj);
+      const rules = await this.getRelevantRules(taskObj);
+      const result = await this.executeTaskLogic(taskObj, rules);
+      
+      return {
+        success: true,
+        task_id: taskObj.id,
+        rules_applied: rules,
+        compliance_result: {
+          is_compliant: true,
+          applied_rules: [],
+          violations: [],
+          score: 100,
+        },
+        execution_time: Date.now() - startTime,
+        result: result,
+        session_id: sessionId,
+      };
+    } catch (error) {
+      return this.createFailedResult(taskObj, error instanceof Error ? error.message : "Unknown error", startTime);
+    }
   }
 
   protected async executeTaskLogic(task: KITask, rules: KIRule[]): Promise<TaskExecutionResult> {

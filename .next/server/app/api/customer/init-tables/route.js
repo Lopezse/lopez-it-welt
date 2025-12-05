@@ -1,0 +1,10 @@
+var R=require("../../../../chunks/[turbopack]_runtime.js")("server/app/api/customer/init-tables/route.js")
+R.c("server/chunks/[root-of-the-server]__0854564d._.js")
+R.c("server/chunks/node_modules_next_adb6145e._.js")
+R.c("server/chunks/node_modules_mysql2_84e924d7._.js")
+R.c("server/chunks/node_modules_iconv-lite_a4444554._.js")
+R.c("server/chunks/node_modules_aws-ssl-profiles_lib_7ad223da._.js")
+R.c("server/chunks/node_modules_5c48c3fd._.js")
+R.m("[project]/.next-internal/server/app/api/customer/init-tables/route/actions.js [app-rsc] (server actions loader, ecmascript)")
+R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/src/app/api/customer/init-tables/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/src/app/api/customer/init-tables/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

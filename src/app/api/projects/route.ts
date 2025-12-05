@@ -1,155 +1,200 @@
-/**
- * GET /api/projects
- * POST /api/projects
- * Projekte verwalten
- */
+// =====================================================
+// PROJEKTE API - LOPEZ IT WELT (ENTERPRISE++)
+// =====================================================
+// Phase 3: Admin Foundation - Projektverwaltung
+// =====================================================
 
-import { createConnection } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
+import { getConnection } from "@/lib/database";
+import { SessionSecurityService } from "@/lib/session-security";
+import { AuditService } from "@/lib/audit-service";
 
+// GET - Alle Projekte laden
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const customerId = searchParams.get("customer_id");
-    const status = searchParams.get("status");
-    const page = parseInt(searchParams.get("page") || "1");
-    const limit = parseInt(searchParams.get("limit") || "50");
+    // Session validieren
+    const sessionToken = request.cookies.get("adm_session")?.value;
+    const jwtToken = request.cookies.get("adm_token")?.value;
+    const clientIp = request.headers.get("x-forwarded-for") || "unknown";
+    const userAgent = request.headers.get("user-agent") || "unknown";
 
-    const connection = await createConnection();
+    const validation = await SessionSecurityService.validateSession(
+      sessionToken, jwtToken, clientIp, userAgent
+    );
+
+    if (!validation.valid) {
+      return NextResponse.json({ success: false, message: "Nicht autorisiert" }, { status: 401 });
+    }
+
+    // Permission: admin.projects.view
+    const hasViewPermission = validation.session?.permissions.some(p => 
+      p === "admin.projects.view" || p.startsWith("admin.projects.")
+    );
+    if (!hasViewPermission && !validation.session?.roles.includes("Super Admin")) {
+      return NextResponse.json({ success: false, message: "Keine Berechtigung" }, { status: 403 });
+    }
+
+    const pool = await getConnection();
+    
+    // Query-Parameter
+    const { searchParams } = new URL(request.url);
+    const status = searchParams.get("status");
+    const customerId = searchParams.get("customer_id");
+    const search = searchParams.get("search");
 
     let query = `
-      SELECT p.*, c.company_name, c.vorname, c.nachname, c.email
+      SELECT p.*, 
+             c.firmenname as company_name, 
+             c.vorname, c.nachname, c.email as customer_email,
+             u.username as assigned_username
       FROM lopez_projects p
       LEFT JOIN lopez_customers c ON p.customer_id = c.id
+      LEFT JOIN lopez_users u ON p.assigned_user_id = u.id
       WHERE 1=1
     `;
     const params: any[] = [];
-
-    if (customerId) {
-      query += " AND p.customer_id = ?";
-      params.push(customerId);
-    }
 
     if (status) {
       query += " AND p.status = ?";
       params.push(status);
     }
 
-    query += " ORDER BY p.created_at DESC LIMIT ? OFFSET ?";
-    params.push(limit, (page - 1) * limit);
-
-    const [rows] = await connection.execute(query, params);
-
-    // Gesamtanzahl
-    let countQuery = "SELECT COUNT(*) as total FROM lopez_projects WHERE 1=1";
-    const countParams: any[] = [];
-
     if (customerId) {
-      countQuery += " AND customer_id = ?";
-      countParams.push(customerId);
+      query += " AND p.customer_id = ?";
+      params.push(customerId);
     }
 
-    if (status) {
-      countQuery += " AND status = ?";
-      countParams.push(status);
+    if (search) {
+      query += " AND (p.project_name LIKE ? OR p.project_code LIKE ? OR p.description LIKE ?)";
+      const searchTerm = `%${search}%`;
+      params.push(searchTerm, searchTerm, searchTerm);
     }
 
-    const [countRows] = await connection.execute(countQuery, countParams);
-    const total =
-      Array.isArray(countRows) && countRows.length > 0 ? (countRows[0] as any).total : 0;
+    query += " ORDER BY p.created_at DESC";
 
-    await connection.end();
+    const [projects] = await pool.execute(query, params);
 
-    return NextResponse.json(
-      {
-        success: true,
-        data: {
-          projects: Array.isArray(rows) ? rows : [],
-          pagination: {
-            page,
-            limit,
-            total,
-            pages: Math.ceil(total / limit),
-          },
-        },
+    return NextResponse.json({
+      success: true,
+      data: {
+        projects,
+        total: (projects as any[]).length,
       },
-      {
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-      },
-    );
+    });
   } catch (error) {
-    console.error("❌ Projects API Fehler:", error);
-    return NextResponse.json(
-      { success: false, error: "Fehler beim Laden der Projekte" },
-      { status: 500 },
-    );
+    console.error("Projekte API Fehler:", error);
+    return NextResponse.json({
+      success: false,
+      message: "Fehler beim Laden der Projekte",
+    }, { status: 500 });
   }
 }
 
+// POST - Neues Projekt erstellen
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const {
-      customer_id,
-      project_code,
-      project_name,
-      description,
-      start_date,
-      end_date,
-      status = "open",
-      created_by,
-    } = body;
+    const sessionToken = request.cookies.get("adm_session")?.value;
+    const jwtToken = request.cookies.get("adm_token")?.value;
+    const clientIp = request.headers.get("x-forwarded-for") || "unknown";
+    const userAgent = request.headers.get("user-agent") || "unknown";
 
-    if (!customer_id || !project_name || !created_by) {
-      return NextResponse.json(
-        { success: false, error: "customer_id, project_name und created_by sind erforderlich" },
-        { status: 400 },
-      );
+    const validation = await SessionSecurityService.validateSession(
+      sessionToken, jwtToken, clientIp, userAgent
+    );
+
+    if (!validation.valid) {
+      return NextResponse.json({ success: false, message: "Nicht autorisiert" }, { status: 401 });
     }
 
-    const connection = await createConnection();
+    // Permission: admin.projects.create
+    const hasCreatePermission = validation.session?.permissions.some(p => 
+      p === "admin.projects.create" || p === "admin.projects.edit"
+    );
+    if (!hasCreatePermission && !validation.session?.roles.includes("Super Admin")) {
+      return NextResponse.json({ success: false, message: "Keine Berechtigung" }, { status: 403 });
+    }
 
-    const [result] = await connection.execute(
+    const body = await request.json();
+    const {
+      project_name,
+      description,
+      customer_id,
+      status = "planned",
+      priority = "normal",
+      start_date,
+      end_date,
+      budget_amount,
+      assigned_user_id,
+    } = body;
+
+    if (!project_name || !customer_id) {
+      return NextResponse.json({
+        success: false,
+        message: "Projektname und Kunde sind Pflichtfelder",
+      }, { status: 400 });
+    }
+
+    const pool = await getConnection();
+
+    // Projektcode generieren (P-YYYYMMDD-XXX)
+    const today = new Date();
+    const dateStr = today.toISOString().slice(0, 10).replace(/-/g, "");
+    const [countResult] = await pool.execute(
+      "SELECT COUNT(*) as count FROM lopez_projects WHERE DATE(created_at) = CURDATE()"
+    );
+    const count = (countResult as any[])[0]?.count || 0;
+    const projectCode = `P-${dateStr}-${String(count + 1).padStart(3, "0")}`;
+
+    const [result] = await pool.execute(
       `INSERT INTO lopez_projects 
-       (customer_id, project_code, project_name, description, start_date, end_date, status, created_by)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+       (project_code, project_name, description, customer_id, status, priority, 
+        start_date, end_date, budget_amount, assigned_user_id, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        customer_id,
-        project_code || null,
+        projectCode,
         project_name,
         description || null,
+        customer_id,
+        status,
+        priority,
         start_date || null,
         end_date || null,
-        status,
-        created_by,
-      ],
+        budget_amount || null,
+        assigned_user_id || null,
+        validation.session?.userId,
+      ]
     );
 
-    const insertId = (result as any).insertId;
+    const projectId = (result as any).insertId;
 
     // Audit-Log
-    await connection.execute(
-      `INSERT INTO lopez_audit_logs (user_id, action, ref_table, ref_id, notes)
-       VALUES (?, 'PROJECT_CREATE', 'lopez_projects', ?, ?)`,
-      [created_by, insertId, `Projekt erstellt: ${project_name}`],
-    );
+    await AuditService.logAudit({
+      table_name: "lopez_projects",
+      record_id: projectId,
+      action: "PROJECT_CREATE",
+      user_id: validation.session?.userId || 0,
+      username: validation.session?.username || "system",
+      ip_address: clientIp,
+      user_agent: userAgent,
+      session_id: sessionToken || "jwt",
+      risk_level: "LOW",
+      compliance_category: "DATA_CHANGE",
+      new_values: JSON.stringify({ projectCode, project_name, customer_id, status }),
+    });
 
-    await connection.end();
-
-    return NextResponse.json(
-      {
-        success: true,
-        data: { id: insertId, message: "Projekt erfolgreich erstellt" },
+    return NextResponse.json({
+      success: true,
+      message: "Projekt erfolgreich erstellt",
+      data: {
+        id: projectId,
+        project_code: projectCode,
       },
-      {
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-      },
-    );
+    });
   } catch (error) {
-    console.error("❌ Projects API Fehler:", error);
-    return NextResponse.json(
-      { success: false, error: "Fehler beim Erstellen des Projekts" },
-      { status: 500 },
-    );
+    console.error("Projekt erstellen Fehler:", error);
+    return NextResponse.json({
+      success: false,
+      message: "Fehler beim Erstellen des Projekts",
+    }, { status: 500 });
   }
 }

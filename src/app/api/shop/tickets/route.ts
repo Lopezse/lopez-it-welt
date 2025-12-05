@@ -134,7 +134,7 @@ export async function GET(request: NextRequest) {
         description: "Meine Bestellung #12345 ist seit 5 Tagen nicht angekommen.",
         type: "shipping",
         priority: "high",
-        status: (status as string) || "in_progress",
+        status: ((status as string) || "in_progress") as "open" | "in_progress" | "waiting_customer" | "resolved" | "closed",
         order_id: "order_12345",
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),

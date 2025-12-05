@@ -1,0 +1,192 @@
+# 🐳 Lopez IT Welt - Production Docker Compose
+# Skalierbare Multi-Instance-Konfiguration mit Load Balancing
+
+version: "3.8"
+
+services:
+  # 🚀 Next.js App (mehrere Instanzen)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=proxysql
+      - DB_PORT=6033
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME:-lopez_erp}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      replicas: 3  # 3 Instanzen für Load Balancing
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  # 🌐 Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: lopez-nginx-lb
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.production.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    networks:
+      - lopez-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 🔄 Redis (für Queue & Cache)
+  redis:
+    image: redis:7-alpine
+    container_name: lopez-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 🗄️ MariaDB Master
+  mariadb-master:
+    image: mariadb:11
+    container_name: lopez-mariadb-master
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME:-lopez_erp}
+      - MYSQL_REPLICATION_MODE=master
+      - MYSQL_REPLICATION_USER=replicator
+      - MYSQL_REPLICATION_PASSWORD=${DB_REPLICATOR_PASSWORD}
+    volumes:
+      - mariadb-master-data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - lopez-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 🗄️ MariaDB Slave 1
+  mariadb-slave-1:
+    image: mariadb:11
+    container_name: lopez-mariadb-slave-1
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME:-lopez_erp}
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_REPLICATION_USER=replicator
+      - MYSQL_REPLICATION_PASSWORD=${DB_REPLICATOR_PASSWORD}
+      - MYSQL_MASTER_HOST=mariadb-master
+    volumes:
+      - mariadb-slave-1-data:/var/lib/mysql
+    networks:
+      - lopez-network
+    depends_on:
+      - mariadb-master
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 🗄️ MariaDB Slave 2
+  mariadb-slave-2:
+    image: mariadb:11
+    container_name: lopez-mariadb-slave-2
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME:-lopez_erp}
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_REPLICATION_USER=replicator
+      - MYSQL_REPLICATION_PASSWORD=${DB_REPLICATOR_PASSWORD}
+      - MYSQL_MASTER_HOST=mariadb-master
+    volumes:
+      - mariadb-slave-2-data:/var/lib/mysql
+    networks:
+      - lopez-network
+    depends_on:
+      - mariadb-master
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 🔀 ProxySQL (Load Balancer für DB)
+  proxysql:
+    image: proxysql/proxysql:latest
+    container_name: lopez-proxysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    volumes:
+      - ./proxysql.cnf:/etc/proxysql.cnf:ro
+    ports:
+      - "6032:6032"  # Admin
+      - "6033:6033"  # MySQL
+    networks:
+      - lopez-network
+    depends_on:
+      - mariadb-master
+      - mariadb-slave-1
+      - mariadb-slave-2
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-P", "6032", "-u", "admin", "-padmin"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# 📦 Volumes
+volumes:
+  redis_data:
+    driver: local
+  mariadb-master-data:
+    driver: local
+  mariadb-slave-1-data:
+    driver: local
+  mariadb-slave-2-data:
+    driver: local
+
+# 🌐 Networks
+networks:
+  lopez-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+
+
+

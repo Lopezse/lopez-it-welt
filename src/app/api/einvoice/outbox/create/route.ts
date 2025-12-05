@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
+import { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
     const connection = await createConnection();
 
     // Rechnung laden
-    const [invoiceRows] = await connection.execute(
+    const [invoiceRows] = await connection.execute<RowDataPacket[]>(
       `SELECT i.*, 
               c.company_name, c.vorname, c.nachname, c.email as customer_email,
               p.project_name, p.project_code
@@ -44,7 +45,7 @@ export async function POST(request: NextRequest) {
       [invoice_id],
     );
 
-    const invoice = Array.isArray(invoiceRows) && invoiceRows.length > 0 ? invoiceRows[0] : null;
+    const invoice = Array.isArray(invoiceRows) && invoiceRows.length > 0 ? (invoiceRows[0] as any) : null;
 
     if (!invoice) {
       return NextResponse.json(
@@ -54,12 +55,12 @@ export async function POST(request: NextRequest) {
     }
 
     // Positionen laden
-    const [itemRows] = await connection.execute(
+    const [itemRows] = await connection.execute<RowDataPacket[]>(
       "SELECT * FROM lopez_invoice_items WHERE invoice_id = ? ORDER BY pos",
       [invoice_id],
     );
 
-    const items = Array.isArray(itemRows) ? itemRows : [];
+    const items = Array.isArray(itemRows) ? (itemRows as any[]) : [];
 
     // TODO: XRechnung/ZUGFeRD generieren (Python-Hook)
     // Für jetzt: Platzhalter-XML generieren
@@ -78,7 +79,7 @@ export async function POST(request: NextRequest) {
     const hash = crypto.createHash("sha256").update(xmlContent).digest("hex");
 
     // In einvoice_outbox speichern
-    const [result] = await connection.execute(
+    const [result] = await connection.execute<ResultSetHeader>(
       `INSERT INTO einvoice_outbox 
        (customer_id, project_id, invoice_number, format, xml_path, pdf_path, hash_sha256, status)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -94,7 +95,7 @@ export async function POST(request: NextRequest) {
       ],
     );
 
-    const insertId = (result as any).insertId;
+    const insertId = result.insertId;
 
     // Audit-Log
     await connection.execute(

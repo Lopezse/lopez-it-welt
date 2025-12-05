@@ -55,7 +55,19 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const experiment = experimentRows[0] as any;
+    const experiment = experimentRows[0] as {
+      id: number;
+      name: string;
+      split_a: number | null;
+    };
+
+    if (!experiment || typeof experiment.id !== "number") {
+      await connection.end();
+      return NextResponse.json(
+        { error: "Ungültiges Experiment gefunden" },
+        { status: 500 },
+      );
+    }
 
     // 3. Lade Varianten
     const [variantRows] = await connection.execute(
@@ -86,9 +98,17 @@ export async function GET(request: NextRequest) {
 
     // 6. Variante zuweisen (konsistent basierend auf User-Hash)
     const hashValue = parseInt(userHash.substring(0, 8), 16);
-    const splitPercentage = experiment.split_a || config.default_split;
+    const splitPercentage = experiment.split_a || (config as { default_split?: number }).default_split || 50;
     const variantIndex = hashValue % 100 < splitPercentage ? 0 : 1;
-    const selectedVariant = variantRows[variantIndex] || variantRows[0];
+    const selectedVariant = (variantRows[variantIndex] || variantRows[0]) as {
+      id: number;
+      variant_key: string;
+      title: string | null;
+      subtitle: string | null;
+      description: string | null;
+      button_text: string | null;
+      button_link: string | null;
+    };
 
     // 7. Event loggen (view)
     await connection.execute(

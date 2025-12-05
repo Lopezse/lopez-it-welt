@@ -359,8 +359,12 @@ async function getCustomers(filters: any) {
 
   // Sortierung
   filteredCustomers.sort((a, b) => {
-    const aVal = a[filters.sortBy as keyof typeof a];
-    const bVal = b[filters.sortBy as keyof typeof b];
+    const sortBy = filters.sortBy as keyof typeof a;
+    const aVal = a[sortBy];
+    const bVal = b[sortBy];
+
+    if (aVal === undefined || aVal === null) return 1;
+    if (bVal === undefined || bVal === null) return -1;
 
     if (filters.sortOrder === "ASC") {
       return aVal > bVal ? 1 : -1;

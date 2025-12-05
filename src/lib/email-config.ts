@@ -49,7 +49,7 @@ export function createEmailTransporter() {
   const isProduction = process.env.NODE_ENV === "production";
   const config = isProduction ? emailConfig.production : emailConfig.smtp;
 
-  return nodemailer.createTransporter(config);
+  return nodemailer.createTransport(config);
 }
 
 // Ticket-Nummer generieren

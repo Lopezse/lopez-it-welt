@@ -70,7 +70,6 @@ export class ExcelJSGenerator {
       {
         activeTab: 0,
         firstSheet: 0,
-        tabRatio: 0.3,
         showGridLines: true,
         showRuler: true,
         showRowColHeaders: true,
@@ -78,13 +77,13 @@ export class ExcelJSGenerator {
         rightToLeft: false,
         showOutlineSymbols: true,
         showWhiteSpace: true,
-      },
+      } as unknown as ExcelJS.WorkbookView,
     ];
 
     // =====================================================
     // LOGO LADEN FÜR HEADER
     // =====================================================
-    let logoId = "";
+    let logoId: number | null = null;
     try {
       const fs = require("fs");
       const path = require("path");
@@ -96,11 +95,12 @@ export class ExcelJSGenerator {
 
       if (fs.existsSync(logoPath)) {
         const logoBuffer = fs.readFileSync(logoPath);
-        const extension = logoPath.endsWith(".svg") ? "svg" : "png";
-        logoId = workbook.addImage({
+        const extension = logoPath.endsWith(".svg") ? ("png" as const) : ("png" as const);
+        const imageId = workbook.addImage({
           buffer: logoBuffer,
           extension: extension,
         });
+        logoId = imageId as number;
         console.log("✅ Logo erfolgreich geladen für Excel-Header");
       }
     } catch (error) {
@@ -113,11 +113,11 @@ export class ExcelJSGenerator {
     const coverSheet = workbook.addWorksheet("Deckblatt");
 
     // Logo und Firmenname (A1)
-    if (logoId) {
+    if (logoId !== null) {
       // Logo in A1 einfügen
       coverSheet.addImage(logoId, {
         tl: { col: 0, row: 0 },
-        br: { col: 2, row: 2 },
+        ext: { width: 200, height: 200 },
       });
     }
 
@@ -629,14 +629,25 @@ export class ExcelJSGenerator {
     // =====================================================
     // EXCEL BUFFER ERSTELLEN
     // =====================================================
-    const excelBuffer = await workbook.xlsx.writeBuffer();
+    const excelBuffer: unknown = await workbook.xlsx.writeBuffer();
 
     console.log("✅ ExcelJS Generator: Management Report erfolgreich generiert");
-    console.log("- Buffer Länge:", excelBuffer.length);
+    // Buffer-Länge für Logging (sicherer Zugriff)
+    let bufferLength = 0;
+    if (Buffer.isBuffer(excelBuffer)) {
+      bufferLength = excelBuffer.length;
+    } else if (excelBuffer instanceof ArrayBuffer) {
+      bufferLength = excelBuffer.byteLength;
+    } else if (excelBuffer instanceof Uint8Array) {
+      bufferLength = excelBuffer.length;
+    } else if (excelBuffer && typeof excelBuffer === "object" && "length" in excelBuffer) {
+      bufferLength = Number((excelBuffer as { length: unknown }).length) || 0;
+    }
+    console.log("- Buffer Länge:", bufferLength);
     console.log("- Kunden Anzahl:", customers.length);
 
     return {
-      content: excelBuffer,
+      content: excelBuffer as Buffer | ArrayBuffer | Uint8Array,
       fileName: `Lopez_IT_Welt_Management_Report_${new Date().toISOString().split("T")[0]}.xlsx`,
       mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     };
@@ -654,7 +665,6 @@ export class ExcelJSGenerator {
       {
         activeTab: 0,
         firstSheet: 0,
-        tabRatio: 0.3,
         showGridLines: true,
         showRuler: true,
         showRowColHeaders: true,
@@ -662,13 +672,13 @@ export class ExcelJSGenerator {
         rightToLeft: false,
         showOutlineSymbols: true,
         showWhiteSpace: true,
-      },
+      } as unknown as ExcelJS.WorkbookView,
     ];
 
     // Raw Data Sheet
     const rawSheet = workbook.addWorksheet("Raw_Data");
     const rawHeaders = Object.keys(customers[0] || {});
-    const rawData = customers.map((customer) => rawHeaders.map((header) => customer[header]));
+    const rawData = customers.map((customer) => rawHeaders.map((header) => (customer as unknown as Record<string, unknown>)[header]));
 
     rawSheet.addRow(rawHeaders);
     rawData.forEach((row) => rawSheet.addRow(row));
@@ -711,14 +721,25 @@ export class ExcelJSGenerator {
 
     metadata.forEach((row) => metadataSheet.addRow(row));
 
-    const excelBuffer = await workbook.xlsx.writeBuffer();
+    const excelBuffer: unknown = await workbook.xlsx.writeBuffer();
 
     console.log("✅ ExcelJS Generator: Technical Export erfolgreich generiert");
-    console.log("- Buffer Länge:", excelBuffer.length);
+    // Buffer-Länge für Logging (sicherer Zugriff)
+    let bufferLength = 0;
+    if (Buffer.isBuffer(excelBuffer)) {
+      bufferLength = excelBuffer.length;
+    } else if (excelBuffer instanceof ArrayBuffer) {
+      bufferLength = excelBuffer.byteLength;
+    } else if (excelBuffer instanceof Uint8Array) {
+      bufferLength = excelBuffer.length;
+    } else if (excelBuffer && typeof excelBuffer === "object" && "length" in excelBuffer) {
+      bufferLength = Number((excelBuffer as { length: unknown }).length) || 0;
+    }
+    console.log("- Buffer Länge:", bufferLength);
     console.log("- Kunden Anzahl:", customers.length);
 
     return {
-      content: excelBuffer,
+      content: excelBuffer as Buffer | ArrayBuffer | Uint8Array,
       fileName: `Lopez_IT_Welt_Technical_Export_${new Date().toISOString().split("T")[0]}.xlsx`,
       mimeType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     };

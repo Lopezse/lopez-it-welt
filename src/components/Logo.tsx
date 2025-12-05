@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface LogoProps {
   size?: "small" | "medium" | "large";
   showTagline?: boolean;
@@ -49,54 +51,18 @@ export default function Logo({ size = "medium", showTagline = true, className = 
           flexShrink: 0,
         }}
       >
-        <svg
+        <Image
+          src="/logo-lw-mark.svg"
+          alt="Lopez IT Welt Logo"
           width={config.iconSize}
           height={config.iconSize}
-          viewBox="0 0 100 100"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#007BFF" />
-              <stop offset="100%" stopColor="#0056B3" />
-            </linearGradient>
-            <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#007BFF" />
-              <stop offset="100%" stopColor="#0056B3" />
-            </linearGradient>
-            <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* LW Quadrat */}
-          <rect
-            x="10"
-            y="10"
-            width="80"
-            height="80"
-            rx="20"
-            ry="20"
-            fill="url(#blueGradient)"
-            filter="url(#neonGlow)"
-          />
-          <text
-            x="50"
-            y="60"
-            fontFamily="Montserrat, Arial, sans-serif"
-            fontSize="36"
-            fontWeight="bold"
-            textAnchor="middle"
-            fill="white"
-            textRendering="optimizeLegibility"
-          >
-            LW
-          </text>
-        </svg>
+          style={{
+            display: "block",
+            width: `${config.iconSize}px`,
+            height: `${config.iconSize}px`,
+          }}
+          priority={size === "large"}
+        />
       </div>
 
       {/* Text Content */}

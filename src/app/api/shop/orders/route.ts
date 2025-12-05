@@ -125,7 +125,7 @@ export async function GET(request: NextRequest) {
         customer_id: customer_id || "customer_1",
         products: [{ product_id: "prod_1", quantity: 2, price: 29.99 }],
         total_amount: 59.98,
-        status: (status as string) || "confirmed",
+        status: ((status as string) || "confirmed") as "pending" | "confirmed" | "shipped" | "delivered" | "cancelled",
         payment_status: "paid",
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),

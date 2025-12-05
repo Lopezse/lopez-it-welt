@@ -8,6 +8,7 @@
 
 import { getConnection } from "./database";
 import { UnifiedAlert, unifiedAlertingService } from "./unified-alerting";
+import { RowDataPacket } from "mysql2/promise";
 
 // =====================================================
 // INTERFACES
@@ -128,13 +129,13 @@ export class AlertingService {
       const connection = await getConnection();
 
       // Aktuelle Metriken laden
-      const [metrics] = await connection.execute(`
+      const [metrics] = await connection.execute<RowDataPacket[]>(`
                 SELECT * FROM lopez_system_metrics 
                 ORDER BY timestamp DESC 
                 LIMIT 1
             `);
 
-      if (metrics.length === 0) return false;
+      if (!Array.isArray(metrics) || metrics.length === 0) return false;
 
       const metric = (metrics as any[])[0];
       const currentValue = metric[rule.metric_name!];
@@ -187,7 +188,7 @@ export class AlertingService {
       const connection = await getConnection();
 
       // Events der letzten Stunde zählen
-      const [events] = await connection.execute(
+      const [events] = await connection.execute<RowDataPacket[]>(
         `
                 SELECT COUNT(*) as count, user_id, ip_address 
                 FROM lopez_audit_logs 
@@ -199,7 +200,7 @@ export class AlertingService {
         [rule.metric_name, rule.threshold_value],
       );
 
-      if (events.length > 0) {
+      if (Array.isArray(events) && events.length > 0) {
         alertData = {
           event_type: rule.metric_name,
           event_count: (events as any[])[0].count,
@@ -249,13 +250,13 @@ export class AlertingService {
       const connection = await getConnection();
 
       // Compliance-Metriken prüfen
-      const [compliance] = await connection.execute(`
+      const [compliance] = await connection.execute<RowDataPacket[]>(`
                 SELECT * FROM lopez_compliance_metrics 
                 ORDER BY timestamp DESC 
                 LIMIT 1
             `);
 
-      if (compliance.length === 0) return false;
+      if (!Array.isArray(compliance) || compliance.length === 0) return false;
 
       const metrics = (compliance as any[])[0];
       const overallCompliance = metrics.overall_compliance;

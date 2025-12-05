@@ -1,0 +1,1282 @@
+﻿
+backups/lopez-it-welt-backup_/cypress.config.ts(1,30): error TS2307: Cannot find module 'cypress' or its corresponding 
+type declarations.
+backups/lopez-it-welt-backup_/cypress.config.ts(16,21): error TS7006: Parameter 'on' implicitly has an 'any' type.
+backups/lopez-it-welt-backup_/cypress.config.ts(16,25): error TS7006: Parameter 'config' implicitly has an 'any' type.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(1,1): error TS2593: Cannot find name 'describe'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(2,3): error TS2304: Cannot find name 'beforeEach'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(3,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(6,3): error TS2593: Cannot find name 'it'. Do you need to install 
+type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 
+'jest' or 'mocha' to the types field in your tsconfig.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(7,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(10,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(11,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(12,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(13,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(16,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(17,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(18,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(19,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(20,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(23,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(24,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(25,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(28,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(29,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/cypress/e2e/home.cy.ts(30,5): error TS2304: Cannot find name 'cy'.
+backups/lopez-it-welt-backup_/playwright.config.ts(1,39): error TS2307: Cannot find module '@playwright/test' or its 
+corresponding type declarations.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(9,18): error TS2307: Cannot find module 'cors' or 
+its corresponding type declarations.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(10,58): error TS2307: Cannot find module 'express' 
+or its corresponding type declarations.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(11,10): error TS2305: Module 
+'"../lib/compliance-system-mysql"' has no exported member 'createComplianceSystemMySQL'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(94,56): error TS2345: Argument of type '{ id: 
+string; description: any; category: string; priority: any; context: any; }' is not assignable to parameter of type 
+'string'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(106,35): error TS2339: Property 'compliance_result' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(107,31): error TS2339: Property 'compliance_result' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(108,32): error TS2339: Property 'compliance_result' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(109,33): error TS2339: Property 'execution_time' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(110,32): error TS2339: Property 'rules_applied' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(148,53): error TS2345: Argument of type '{ id: 
+string; description: any; category: string; priority: any; context: any; }' is not assignable to parameter of type 
+'string'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(162,33): error TS2339: Property 'execution_time' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(163,32): error TS2339: Property 'rules_applied' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(201,57): error TS2345: Argument of type '{ id: 
+string; description: any; category: string; priority: any; context: any; }' is not assignable to parameter of type 
+'string'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(215,33): error TS2339: Property 'execution_time' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(216,32): error TS2339: Property 'rules_applied' 
+does not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/agents/complianceAgentService.ts(298,50): error TS2345: Argument of type '{ id: any; 
+description: any; category: any; priority: any; context: any; }' is not assignable to parameter of type 'string'.
+backups/lopez-it-welt-backup_/src/app/admin/tickets/page.tsx(4,22): error TS2307: Cannot find module 
+'@/components/Features/Card' or its corresponding type declarations.
+backups/lopez-it-welt-backup_/src/app/admin/tickets/page.tsx(299,21): error TS2322: Type '{ children: string; onClick: 
+() => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/lopez-it-welt-backup_/src/app/admin/tickets/page.tsx(309,23): error TS2322: Type '{ children: string; onClick: 
+() => Promise<void>; groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/lopez-it-welt-backup_/src/app/admin/tickets/page.tsx(317,23): error TS2322: Type '{ children: string; onClick: 
+() => Promise<void>; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/lopez-it-welt-backup_/src/app/admin/tickets/page.tsx(338,17): error TS2322: Type '{ children: string; onClick: 
+() => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/lopez-it-welt-backup_/src/app/admin/tickets/page.tsx(406,19): error TS2322: Type '{ children: string; onClick: 
+() => void; disabled: boolean; variante: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/lopez-it-welt-backup_/src/app/admin/tickets/page.tsx(415,19): error TS2322: Type '{ children: string; onClick: 
+() => void; variante: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/lopez-it-welt-backup_/src/components/layout/MainLayout.tsx(22,15): error TS2322: Type '{ showFooter: boolean; 
+}' is not assignable to type 'IntrinsicAttributes'.
+backups/lopez-it-welt-backup_/src/components/ui/Heading.tsx(46,8): error TS2322: Type '{ children: ReactNode; 
+defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; 
+suppressContentEditableWarning?: boolean | undefined; ... 273 more ...; className: string; }' is not assignable to 
+type 'SVGProps<SVGSymbolElement>'.
+backups/lopez-it-welt-backup_/src/components/ui/Heading.tsx(47,9): error TS2590: Expression produces a union type that 
+is too complex to represent.
+backups/lopez-it-welt-backup_/src/lib/agents/compliance-agent.ts(27,14): error TS2515: Non-abstract class 
+'ComplianceAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(20,9): error TS2416: Property 'executeTask' 
+in type 'MemoryIntegrationAgent' is not assignable to the same property in base type 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(26,20): error TS2339: Property 'type' does 
+not exist on type 'KITask'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(38,23): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(38,74): error TS2339: Property 'type' does 
+not exist on type 'KITask'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(41,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(53,9): error TS2739: Type '{ message: string; 
+rules_loaded: true; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, agent
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(59,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(65,52): error TS2339: Property 'data' does 
+not exist on type 'KITask'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(75,9): error TS2739: Type '{ is_compliant: 
+boolean; score: number; violations: string[]; applied_rules: number; }' is missing the following properties from type 
+'TaskExecutionResult': message, rules_applied, agent
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(83,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(97,16): error TS2339: Property 'data' does 
+not exist on type 'KITask'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(109,9): error TS2739: Type '{ session_id: 
+number; message: string; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, agent
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(115,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(127,9): error TS2739: Type '{ statistics: 
+MemoryStatistics; message: string; }' is missing the following properties from type 'TaskExecutionResult': 
+rules_applied, agent
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(133,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(187,9): error TS2739: Type '{ 
+integration_tests: ({ test: string; success: boolean; count: number; } | { test: string; success: boolean; violations: 
+number; })[]; message: string; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, 
+agent
+backups/lopez-it-welt-backup_/src/lib/agents/memory-integration-agent.ts(193,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/quality-agent.ts(28,14): error TS2515: Non-abstract class 'QualityAgent' 
+does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/text-management-agent.ts(26,14): error TS2515: Non-abstract class 
+'TextManagementAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/agents/text-management-agent.ts(198,27): error TS7006: Parameter 'match' 
+implicitly has an 'any' type.
+backups/lopez-it-welt-backup_/src/lib/agents/text-management-agent.ts(280,27): error TS7006: Parameter 'match' 
+implicitly has an 'any' type.
+backups/lopez-it-welt-backup_/src/lib/dsgvo-enforcement.ts(4,10): error TS2305: Module '"./compliance-system-mysql"' 
+has no exported member 'createComplianceSystemMySQL'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(96,9): error TS2416: Property 'executeTask' in type 
+'ComplianceAgent' is not assignable to the same property in base type 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(100,12): error TS2339: Property 'validateTask' does not exist on 
+type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(103,36): error TS2339: Property 'startTaskSession' does not exist on 
+type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(106,32): error TS2339: Property 'getRelevantRules' does not exist on 
+type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(110,16): error TS2339: Property 'config' does not exist on type 
+'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(111,39): error TS2339: Property 'checkCompliance' does not exist on 
+type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(113,14): error TS18047: 'complianceResult' is possibly 'null'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(114,23): error TS2339: Property 'createFailedResult' does not exist 
+on type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(128,18): error TS2339: Property 'storeTaskMemory' does not exist on 
+type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(131,18): error TS2339: Property 'endTaskSession' does not exist on 
+type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(141,11): error TS2322: Type 'ComplianceResult | { is_compliant: 
+true; rules: never[]; notes: string; score: number; }' is not assignable to type 'ComplianceResult'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(152,19): error TS2339: Property 'createFailedResult' does not exist 
+on type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(184,14): error TS2515: Non-abstract class 'QualityAgent' does not 
+implement inherited abstract member executeTask from class 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(210,14): error TS2515: Non-abstract class 'DevelopmentAgent' does 
+not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/ki-agent.ts(243,9): error TS2322: Type 'ComplianceAgent' is not assignable to 
+type 'KIAgent'.
+backups/lopez-it-welt-backup_/src/lib/mdx.ts(2,20): error TS2307: Cannot find module 'gray-matter' or its 
+corresponding type declarations.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(23,15): error TS2339: Property 'initialize' does not exist 
+on type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(43,17): error TS2339: Property 'shutdown' does not exist 
+on type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(51,15): error TS2339: Property 'initialize' does not exist 
+on type 'QualityAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(62,44): error TS2345: Argument of type 'KITask' is not 
+assignable to parameter of type 'string'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(67,14): error TS2339: Property 'compliance_result' does 
+not exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(69,46): error TS2339: Property 'rules_applied' does not 
+exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(70,47): error TS2339: Property 'execution_time' does not 
+exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(74,17): error TS2339: Property 'shutdown' does not exist 
+on type 'QualityAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(82,15): error TS2339: Property 'initialize' does not exist 
+on type 'DevelopmentAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(93,44): error TS2345: Argument of type 'KITask' is not 
+assignable to parameter of type 'string'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(98,47): error TS2339: Property 'execution_time' does not 
+exist on type '{ success: boolean; result?: any; error?: string | undefined; }'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(102,17): error TS2339: Property 'shutdown' does not exist 
+on type 'DevelopmentAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(110,15): error TS2339: Property 'initialize' does not 
+exist on type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(114,31): error TS2339: Property 'getAgentStatistics' does 
+not exist on type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/src/scripts/test-ki-agents.ts(127,17): error TS2339: Property 'shutdown' does not exist 
+on type 'ComplianceAgent'.
+backups/lopez-it-welt-backup_/tests/home.spec.ts(1,30): error TS2307: Cannot find module '@playwright/test' or its 
+corresponding type declarations.
+backups/lopez-it-welt-backup_/tests/home.spec.ts(4,28): error TS7031: Binding element 'page' implicitly has an 'any' 
+type.
+backups/lopez-it-welt-backup_/tests/home.spec.ts(8,48): error TS7031: Binding element 'page' implicitly has an 'any' 
+type.
+backups/lopez-it-welt-backup_/tests/home.spec.ts(13,52): error TS7031: Binding element 'page' implicitly has an 'any' 
+type.
+backups/lopez-it-welt-backup_/tests/home.spec.ts(18,51): error TS7031: Binding element 'page' implicitly has an 'any' 
+type.
+backups/LopezITWelt_2025-07-01_14-49/cypress.config.ts(1,30): error TS2307: Cannot find module 'cypress' or its 
+corresponding type declarations.
+backups/LopezITWelt_2025-07-01_14-49/cypress.config.ts(16,21): error TS7006: Parameter 'on' implicitly has an 'any' 
+type.
+backups/LopezITWelt_2025-07-01_14-49/cypress.config.ts(16,25): error TS7006: Parameter 'config' implicitly has an 
+'any' type.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(1,1): error TS2593: Cannot find name 'describe'. Do you 
+need to install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev 
+@types/mocha` and then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(2,3): error TS2304: Cannot find name 'beforeEach'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(3,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(6,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(7,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(10,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(11,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(12,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(13,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(16,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(17,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(18,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(19,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(20,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(23,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(24,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(25,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(28,3): error TS2593: Cannot find name 'it'. Do you need to 
+install type definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and 
+then add 'jest' or 'mocha' to the types field in your tsconfig.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(29,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/cypress/e2e/home.cy.ts(30,5): error TS2304: Cannot find name 'cy'.
+backups/LopezITWelt_2025-07-01_14-49/playwright.config.ts(1,39): error TS2307: Cannot find module '@playwright/test' 
+or its corresponding type declarations.
+backups/LopezITWelt_2025-07-01_14-49/src/app/admin/tickets/page.tsx(4,22): error TS2307: Cannot find module 
+'@/components/Features/Card' or its corresponding type declarations.
+backups/LopezITWelt_2025-07-01_14-49/src/app/admin/tickets/page.tsx(299,21): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/LopezITWelt_2025-07-01_14-49/src/app/admin/tickets/page.tsx(309,23): error TS2322: Type '{ children: string; 
+onClick: () => Promise<void>; groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/LopezITWelt_2025-07-01_14-49/src/app/admin/tickets/page.tsx(317,23): error TS2322: Type '{ children: string; 
+onClick: () => Promise<void>; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/LopezITWelt_2025-07-01_14-49/src/app/admin/tickets/page.tsx(338,17): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/LopezITWelt_2025-07-01_14-49/src/app/admin/tickets/page.tsx(406,19): error TS2322: Type '{ children: string; 
+onClick: () => void; disabled: boolean; variante: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/LopezITWelt_2025-07-01_14-49/src/app/admin/tickets/page.tsx(415,19): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/LopezITWelt_2025-07-01_14-49/src/lib/mdx.ts(2,20): error TS2307: Cannot find module 'gray-matter' or its 
+corresponding type declarations.
+backups/LopezITWelt_2025-07-01_14-49/tests/home.spec.ts(1,30): error TS2307: Cannot find module '@playwright/test' or 
+its corresponding type declarations.
+backups/LopezITWelt_2025-07-01_14-49/tests/home.spec.ts(4,28): error TS7031: Binding element 'page' implicitly has an 
+'any' type.
+backups/LopezITWelt_2025-07-01_14-49/tests/home.spec.ts(8,48): error TS7031: Binding element 'page' implicitly has an 
+'any' type.
+backups/LopezITWelt_2025-07-01_14-49/tests/home.spec.ts(13,52): error TS7031: Binding element 'page' implicitly has an 
+'any' type.
+backups/LopezITWelt_2025-07-01_14-49/tests/home.spec.ts(18,51): error TS7031: Binding element 'page' implicitly has an 
+'any' type.
+backups/safe-2025-07-08T13-58-35-039Z/src/app/admin/tickets/page.tsx(4,22): error TS2307: Cannot find module 
+'@/components/Features/Card' or its corresponding type declarations.
+backups/safe-2025-07-08T13-58-35-039Z/src/app/admin/tickets/page.tsx(265,21): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-07-08T13-58-35-039Z/src/app/admin/tickets/page.tsx(273,23): error TS2322: Type '{ children: string; 
+onClick: () => Promise<void>; groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-07-08T13-58-35-039Z/src/app/admin/tickets/page.tsx(281,23): error TS2322: Type '{ children: string; 
+onClick: () => Promise<void>; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-07-08T13-58-35-039Z/src/app/admin/tickets/page.tsx(300,63): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-07-08T13-58-35-039Z/src/app/admin/tickets/page.tsx(358,19): error TS2322: Type '{ children: string; 
+onClick: () => void; disabled: boolean; variante: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-07-08T13-58-35-039Z/src/app/admin/tickets/page.tsx(367,19): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-07-08T13-58-35-039Z/src/components/layout/MainLayout.tsx(19,15): error TS2322: Type '{ showFooter: 
+boolean; }' is not assignable to type 'IntrinsicAttributes'.
+backups/safe-2025-07-08T13-58-35-039Z/src/components/ui/Heading.tsx(45,8): error TS2322: Type '{ children: ReactNode; 
+defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; 
+suppressContentEditableWarning?: boolean | undefined; ... 273 more ...; className: string; }' is not assignable to 
+type 'SVGProps<SVGSymbolElement>'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/compliance-agent.ts(27,14): error TS2515: Non-abstract class 
+'ComplianceAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(20,9): error TS2416: Property 
+'executeTask' in type 'MemoryIntegrationAgent' is not assignable to the same property in base type 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(26,20): error TS2339: Property 'type' 
+does not exist on type 'KITask'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(38,23): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(38,74): error TS2339: Property 'type' 
+does not exist on type 'KITask'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(41,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(53,9): error TS2739: Type '{ message: 
+string; rules_loaded: true; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, 
+agent
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(59,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(65,52): error TS2339: Property 'data' 
+does not exist on type 'KITask'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(75,9): error TS2739: Type '{ 
+is_compliant: boolean; score: number; violations: string[]; applied_rules: number; }' is missing the following 
+properties from type 'TaskExecutionResult': message, rules_applied, agent
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(83,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(89,93): error TS2339: Property 'data' 
+does not exist on type 'KITask'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(101,9): error TS2739: Type '{ 
+session_id: number; message: string; }' is missing the following properties from type 'TaskExecutionResult': 
+rules_applied, agent
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(107,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(117,9): error TS2739: Type '{ 
+statistics: MemoryStatistics; message: string; }' is missing the following properties from type 'TaskExecutionResult': 
+rules_applied, agent
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(123,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(173,9): error TS2739: Type '{ 
+integration_tests: ({ test: string; success: boolean; count: number; } | { test: string; success: boolean; violations: 
+number; })[]; message: string; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, 
+agent
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/memory-integration-agent.ts(179,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/quality-agent.ts(28,14): error TS2515: Non-abstract class 
+'QualityAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/text-management-agent.ts(26,14): error TS2515: Non-abstract class 
+'TextManagementAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/text-management-agent.ts(195,28): error TS7006: Parameter 'match' 
+implicitly has an 'any' type.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/agents/text-management-agent.ts(273,28): error TS7006: Parameter 'match' 
+implicitly has an 'any' type.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/dsgvo-enforcement.ts(4,10): error TS2305: Module 
+'"./compliance-system-mysql"' has no exported member 'createComplianceSystemMySQL'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(96,9): error TS2416: Property 'executeTask' in type 
+'ComplianceAgent' is not assignable to the same property in base type 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(100,12): error TS2339: Property 'validateTask' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(103,36): error TS2339: Property 'startTaskSession' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(106,32): error TS2339: Property 'getRelevantRules' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(110,16): error TS2339: Property 'config' does not exist on 
+type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(111,39): error TS2339: Property 'checkCompliance' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(113,14): error TS18047: 'complianceResult' is possibly 
+'null'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(114,23): error TS2339: Property 'createFailedResult' does 
+not exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(128,18): error TS2339: Property 'storeTaskMemory' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(131,18): error TS2339: Property 'endTaskSession' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(141,11): error TS2322: Type 'ComplianceResult | { 
+is_compliant: true; rules: never[]; notes: string; score: number; }' is not assignable to type 'ComplianceResult'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(152,19): error TS2339: Property 'createFailedResult' does 
+not exist on type 'ComplianceAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(181,14): error TS2515: Non-abstract class 'QualityAgent' 
+does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(204,14): error TS2515: Non-abstract class 'DevelopmentAgent' 
+does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/ki-agent.ts(234,9): error TS2322: Type 'ComplianceAgent' is not 
+assignable to type 'KIAgent'.
+backups/safe-2025-07-08T13-58-35-039Z/src/lib/mdx.ts(2,20): error TS2307: Cannot find module 'gray-matter' or its 
+corresponding type declarations.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/content/header-footer/page.tsx(380,26): error TS2304: Cannot find 
+name 'FaTrash'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/content/header-footer/page.tsx(409,30): error TS2304: Cannot find 
+name 'FaTrash'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/content/header-footer/page.tsx(454,24): error TS2304: Cannot find 
+name 'FaTrash'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/content/pages/page.tsx(299,18): error TS2304: Cannot find name 
+'FaFileAlt'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/tickets/page.tsx(265,21): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/tickets/page.tsx(273,23): error TS2322: Type '{ children: string; 
+onClick: () => Promise<void>; groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/tickets/page.tsx(281,23): error TS2322: Type '{ children: string; 
+onClick: () => Promise<void>; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/tickets/page.tsx(300,63): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/tickets/page.tsx(358,19): error TS2322: Type '{ children: string; 
+onClick: () => void; disabled: boolean; variante: string; }' is not assignable to type 'IntrinsicAttributes & 
+ButtonProps & RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/admin/tickets/page.tsx(367,19): error TS2322: Type '{ children: string; 
+onClick: () => void; variante: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(83,18): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(84,15): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(93,16): error TS7006: Parameter 'a' implicitly 
+has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(93,19): error TS7006: Parameter 'b' implicitly 
+has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(100,11): error TS2322: Type '{ timestamp: any; 
+date: any; size: any; hash: any; valid: boolean; }' is not assignable to type 'null'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(116,18): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(117,15): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(126,16): error TS7006: Parameter 'a' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(126,19): error TS7006: Parameter 'b' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(133,11): error TS2322: Type '{ timestamp: any; 
+date: any; size: any; hash: any; valid: boolean; }' is not assignable to type 'null'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(182,18): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(183,15): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(208,16): error TS7006: Parameter 'a' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(208,19): error TS7006: Parameter 'b' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(217,18): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(218,15): error TS7006: Parameter 'file' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(243,16): error TS7006: Parameter 'a' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(243,19): error TS7006: Parameter 'b' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/backup/route.ts(327,14): error TS18046: 'error' is of type 
+'unknown'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/customers/export/route.ts(145,39): error TS2769: No overload 
+matches this call.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/customers/route.ts(325,14): error TS18047: 'aVal' is possibly 
+'null'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/customers/route.ts(325,21): error TS18047: 'bVal' is possibly 
+'null'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/customers/route.ts(327,14): error TS18047: 'aVal' is possibly 
+'null'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/customers/route.ts(327,21): error TS18047: 'bVal' is possibly 
+'null'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/init-database/route.ts(153,44): error TS2345: Argument of type 
+'{ customer_type: "firma"; anrede: string; titel: string; vorname: string; nachname: string; firmenname: string; 
+email: string; telefon: string; strasse: string; plz: string; ort: string; land: string; status: "aktiv"; 
+support_level: "Premium"; notes: string; } | { ...; } | { ...; } | { ...; }' is not assignable to parameter of type 
+'Omit<Customer, "id" | "kundennummer" | "created_at" | "updated_at">'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/admin/utf8-fix/route.ts(136,62): error TS2339: Property 'link_url' 
+does not exist on type '{ title: string; content: string; sort_order: number; } | { title: string; content: string; 
+link_url: string; sort_order: number; } | { content: string; link_url: string; sort_order: number; title?: undefined; 
+} | ... 4 more ... | { ...; }'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/auth/register/route.ts(59,39): error TS2345: Argument of type '{ 
+email: any; password: any; first_name: any; last_name: any; company: any; phone: any; role: string; status: "active"; 
+email_verified: true; two_factor_enabled: any; }' is not assignable to parameter of type 'Omit<DemoUser, "id" | 
+"created_at">'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/auth/register/route.ts(105,30): error TS2304: Cannot find name 
+'mysql'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/auth/register/route.ts(105,53): error TS2304: Cannot find name 
+'dbConfig'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/contact/route.ts(1,10): error TS2724: '"@/lib/email-service"' has no 
+exported member named 'emailService'. Did you mean 'EmailService'?
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(26,66): error TS2345: Argument of type '{ 
+id: any; title: any; content: any; link_url: any; sort_order: any; }' is not assignable to parameter of type 'never'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(38,11): error TS2698: Spread types may only 
+be created from object types.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(39,25): error TS2339: Property 'content' 
+does not exist on type 'never'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(45,11): error TS2698: Spread types may only 
+be created from object types.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(46,25): error TS2339: Property 'content' 
+does not exist on type 'never'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(49,11): error TS2698: Spread types may only 
+be created from object types.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(50,25): error TS2339: Property 'content' 
+does not exist on type 'never'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(53,11): error TS2698: Spread types may only 
+be created from object types.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/content/footer/route.ts(54,25): error TS2339: Property 'content' 
+does not exist on type 'never'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/monitoring/status/route.ts(29,19): error TS7006: Parameter 'cpu' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/monitoring/status/route.ts(44,21): error TS7006: Parameter 'err' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/monitoring/status/route.ts(70,25): error TS7053: Element implicitly 
+has an 'any' type because expression of type '0' can't be used to index type 'QueryResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/monitoring/status/route.ts(79,27): error TS7053: Element implicitly 
+has an 'any' type because expression of type '0' can't be used to index type 'QueryResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/monitoring/status/route.ts(184,28): error TS7053: Element implicitly 
+has an 'any' type because expression of type '0' can't be used to index type 'QueryResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/shop/orders/route.ts(128,9): error TS2322: Type 'string' is not 
+assignable to type '"pending" | "confirmed" | "shipped" | "delivered" | "cancelled"'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/api/shop/tickets/route.ts(137,9): error TS2322: Type 'string' is not 
+assignable to type '"open" | "in_progress" | "waiting_customer" | "resolved" | "closed"'.
+backups/safe-2025-09-29T12-28-12-634Z/src/app/shop/quote-request/[uuid]/page.tsx(12,3): error TS2305: Module 
+'"react-icons/fa"' has no exported member 'FaEuro'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/admin/CustomerExportModal.tsx(185,67): error TS18046: 'error' is 
+of type 'unknown'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/admin/DocumentViewModal.tsx(73,30): error TS2339: Property 
+'createElement' does not exist on type 'Document'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/admin/EnterpriseExportModal.tsx(71,9): error TS2322: Type 
+'"technical-xlsx" | "technical-csv"' is not assignable to type '"csv" | "xlsx" | "pdf"'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/admin/EnterpriseExportModal.tsx(99,38): error TS18046: 'error' is 
+of type 'unknown'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/admin/EnterpriseExportModal.tsx(205,57): error TS18046: 'error' 
+is of type 'unknown'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/Core/Hauptbereiche.tsx(99,35): error TS2322: Type '{ children: 
+Element; bg: "darkblau"; divider: string; }' is not assignable to type 'IntrinsicAttributes & SectionWrapperProps'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/examples/ConsolidatedComponentsExample.tsx(77,26): error TS2322: 
+Type '{ children: Element[]; cols: 2; gap: string; variant: string; items: number; }' is not assignable to type 
+'IntrinsicAttributes & GridProps'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/examples/ConsolidatedComponentsExample.tsx(100,26): error TS2322: 
+Type '{ children: Element[]; cols: 3; gap: string; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/examples/ConsolidatedComponentsExample.tsx(109,21): error TS2322: 
+Type '{ features: string[]; variant: string; iconColor: string; textSize: "sm"; }' is not assignable to type 
+'IntrinsicAttributes & FeatureListProps'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/examples/ConsolidatedComponentsExample.tsx(132,56): error TS2322: 
+Type '{ children: string; variant: "primary"; size: "lg"; glow: true; icon: string; iconPosition: string; }' is not 
+assignable to type 'IntrinsicAttributes & ButtonProps'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/examples/ConsolidatedComponentsExample.tsx(153,26): error TS2322: 
+Type '{ children: Element[]; cols: 2; gap: string; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/layout/MainLayout.tsx(19,15): error TS2322: Type '{ showFooter: 
+boolean; }' is not assignable to type 'IntrinsicAttributes'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/navigation/Sprachumschalter.tsx(60,9): error TS2322: Type '{ 
+children: Element[]; onClick: () => void; "aria-expanded": boolean; "aria-haspopup": "listbox"; "aria-label": string; 
+variante: string; groesse: string; className: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps 
+& RefAttributes<HTMLButtonElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/ui/Button.stories.tsx(1,37): error TS2307: Cannot find module 
+'@storybook/react' or its corresponding type declarations.
+backups/safe-2025-09-29T12-28-12-634Z/src/components/ui/Heading.tsx(45,8): error TS2322: Type '{ children: ReactNode; 
+defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; 
+suppressContentEditableWarning?: boolean | undefined; ... 273 more ...; className: string; }' is not assignable to 
+type 'SVGProps<SVGSymbolElement>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/compliance-agent.ts(27,14): error TS2515: Non-abstract class 
+'ComplianceAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(20,9): error TS2416: Property 
+'executeTask' in type 'MemoryIntegrationAgent' is not assignable to the same property in base type 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(26,20): error TS2339: Property 'type' 
+does not exist on type 'KITask'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(38,23): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(38,74): error TS2339: Property 'type' 
+does not exist on type 'KITask'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(41,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(53,9): error TS2739: Type '{ message: 
+string; rules_loaded: true; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, 
+agent
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(59,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(65,52): error TS2339: Property 'data' 
+does not exist on type 'KITask'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(75,9): error TS2739: Type '{ 
+is_compliant: boolean; score: number; violations: string[]; applied_rules: number; }' is missing the following 
+properties from type 'TaskExecutionResult': message, rules_applied, agent
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(83,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(89,93): error TS2339: Property 'data' 
+does not exist on type 'KITask'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(101,9): error TS2739: Type '{ 
+session_id: number; message: string; }' is missing the following properties from type 'TaskExecutionResult': 
+rules_applied, agent
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(107,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(117,9): error TS2739: Type '{ 
+statistics: MemoryStatistics; message: string; }' is missing the following properties from type 'TaskExecutionResult': 
+rules_applied, agent
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(123,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(173,9): error TS2739: Type '{ 
+integration_tests: ({ test: string; success: boolean; count: number; } | { test: string; success: boolean; violations: 
+number; })[]; message: string; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, 
+agent
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/memory-integration-agent.ts(179,19): error TS2339: Property 
+'createFailedResult' does not exist on type 'MemoryIntegrationAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/quality-agent.ts(28,14): error TS2515: Non-abstract class 
+'QualityAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/text-management-agent.ts(26,14): error TS2515: Non-abstract class 
+'TextManagementAgent' does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/text-management-agent.ts(195,28): error TS7006: Parameter 'match' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/agents/text-management-agent.ts(273,28): error TS7006: Parameter 'match' 
+implicitly has an 'any' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/alerting-service.ts(137,19): error TS2339: Property 'length' does not 
+exist on type 'QueryResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/alerting-service.ts(202,18): error TS2339: Property 'length' does not 
+exist on type 'QueryResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/alerting-service.ts(258,22): error TS2339: Property 'length' does not 
+exist on type 'QueryResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/argon2-service.ts(17,16): error TS2724: 
+'"D:/Projekte/lopez-it-welt/node_modules/argon2/argon2"' has no exported member named 'argon2id'. Did you mean 
+'argon2d'?
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/auth-service.ts(69,11): error TS2353: Object literal may only specify 
+known properties, and 'user' does not exist in type 'AuthResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/auth-utils.ts(16,18): error TS2304: Cannot find name 'speakeasy'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/auth-utils.ts(30,10): error TS2304: Cannot find name 'speakeasy'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/basic-excel-generator.ts(492,76): error TS7053: Element implicitly has 
+an 'any' type because expression of type 'string' can't be used to index type 'Customer'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/customer-service.ts(163,13): error TS7034: Variable 'updateFields' 
+implicitly has type 'any[]' in some locations where its type cannot be determined.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/customer-service.ts(180,23): error TS7005: Variable 'updateFields' 
+implicitly has an 'any[]' type.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/development-mode.ts(136,11): error TS2339: Property 'user' does not 
+exist on type 'Request'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/development-mode.ts(137,11): error TS2339: Property 'isDevelopmentMode' 
+does not exist on type 'Request'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/development-mode.ts(216,7): error TS2322: Type 'EnterpriseUser' is not 
+assignable to type 'Record<string, unknown>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/development-mode.ts(216,53): error TS2345: Argument of type '{ username: 
+string; email: string; email_external: string; email_internal: string; first_name: string; last_name: string; 
+display_name: string; password: string; is_owner: boolean; is_admin: boolean; ... 4 more ...; domain_type: string; }' 
+is not assignable to parameter of type 'CreateUserData'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/dsgvo-enforcement.ts(4,10): error TS2305: Module 
+'"./compliance-system-mysql"' has no exported member 'createComplianceSystemMySQL'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/email-config.ts(52,21): error TS2551: Property 'createTransporter' does 
+not exist on type 'typeof import("D:/Projekte/lopez-it-welt/node_modules/@types/nodemailer/index")'. Did you mean 
+'createTransport'?
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/email-service.ts(38,35): error TS2551: Property 'createTransporter' does 
+not exist on type 'typeof import("D:/Projekte/lopez-it-welt/node_modules/@types/nodemailer/index")'. Did you mean 
+'createTransport'?
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(73,9): error TS2353: Object literal may only 
+specify known properties, and 'tabRatio' does not exist in type 'WorkbookView'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(100,9): error TS2322: Type 'number' is not 
+assignable to type 'string'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(102,11): error TS2322: Type '"svg" | "png"' is not 
+assignable to type '"png" | "jpeg" | "gif"'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(118,27): error TS2345: Argument of type 'string' is 
+not assignable to parameter of type 'number'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(635,48): error TS2339: Property 'length' does not 
+exist on type 'Buffer'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(657,9): error TS2353: Object literal may only 
+specify known properties, and 'tabRatio' does not exist in type 'WorkbookView'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(671,76): error TS7053: Element implicitly has an 
+'any' type because expression of type 'string' can't be used to index type 'Customer'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/exceljs-generator.ts(717,48): error TS2339: Property 'length' does not 
+exist on type 'Buffer'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(96,9): error TS2416: Property 'executeTask' in type 
+'ComplianceAgent' is not assignable to the same property in base type 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(100,12): error TS2339: Property 'validateTask' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(103,36): error TS2339: Property 'startTaskSession' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(106,32): error TS2339: Property 'getRelevantRules' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(110,16): error TS2339: Property 'config' does not exist on 
+type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(111,39): error TS2339: Property 'checkCompliance' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(113,14): error TS18047: 'complianceResult' is possibly 
+'null'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(114,23): error TS2339: Property 'createFailedResult' does 
+not exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(128,18): error TS2339: Property 'storeTaskMemory' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(131,18): error TS2339: Property 'endTaskSession' does not 
+exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(141,11): error TS2322: Type 'ComplianceResult | { 
+is_compliant: true; rules: never[]; notes: string; score: number; }' is not assignable to type 'ComplianceResult'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(152,19): error TS2339: Property 'createFailedResult' does 
+not exist on type 'ComplianceAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(181,14): error TS2515: Non-abstract class 'QualityAgent' 
+does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(204,14): error TS2515: Non-abstract class 'DevelopmentAgent' 
+does not implement inherited abstract member executeTask from class 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/ki-agent.ts(234,9): error TS2322: Type 'ComplianceAgent' is not 
+assignable to type 'KIAgent'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/mdx.ts(2,20): error TS2307: Cannot find module 'gray-matter' or its 
+corresponding type declarations.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/monitoring-service.ts(556,53): error TS2769: No overload matches this 
+call.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/simple-excel.ts(489,76): error TS7053: Element implicitly has an 'any' 
+type because expression of type 'string' can't be used to index type 'Customer'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(58,28): error TS2339: Property 'readUInt16BE' does not 
+exist on type 'Uint8Array<ArrayBuffer>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(59,28): error TS2339: Property 'readUInt16BE' does not 
+exist on type 'Uint8Array<ArrayBuffer>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(60,28): error TS2339: Property 'readUInt16BE' does not 
+exist on type 'Uint8Array<ArrayBuffer>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(61,28): error TS2339: Property 'readUInt16BE' does not 
+exist on type 'Uint8Array<ArrayBuffer>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(62,28): error TS2339: Property 'readUInt16BE' does not 
+exist on type 'Uint8Array<ArrayBuffer>'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(168,12): error TS2304: Cannot find name 'randomBytes'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(175,12): error TS2304: Cannot find name 'randomBytes'.
+backups/safe-2025-09-29T12-28-12-634Z/src/lib/uuid-service.ts(182,12): error TS2304: Cannot find name 'randomBytes'.
+cypress.config.ts(1,30): error TS2307: Cannot find module 'cypress' or its corresponding type declarations.
+cypress.config.ts(16,21): error TS7006: Parameter 'on' implicitly has an 'any' type.
+cypress.config.ts(16,25): error TS7006: Parameter 'config' implicitly has an 'any' type.
+cypress/e2e/home.cy.ts(1,1): error TS2593: Cannot find name 'describe'. Do you need to install type definitions for a 
+test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to 
+the types field in your tsconfig.
+cypress/e2e/home.cy.ts(2,3): error TS2304: Cannot find name 'beforeEach'.
+cypress/e2e/home.cy.ts(3,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(6,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test 
+runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the 
+types field in your tsconfig.
+cypress/e2e/home.cy.ts(7,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(10,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test 
+runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the 
+types field in your tsconfig.
+cypress/e2e/home.cy.ts(11,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(12,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(13,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(16,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test 
+runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the 
+types field in your tsconfig.
+cypress/e2e/home.cy.ts(17,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(18,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(19,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(20,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(23,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test 
+runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the 
+types field in your tsconfig.
+cypress/e2e/home.cy.ts(24,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(25,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(28,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for a test 
+runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to the 
+types field in your tsconfig.
+cypress/e2e/home.cy.ts(29,5): error TS2304: Cannot find name 'cy'.
+cypress/e2e/home.cy.ts(30,5): error TS2304: Cannot find name 'cy'.
+playwright.config.ts(1,39): error TS2307: Cannot find module '@playwright/test' or its corresponding type declarations.
+playwright.config.ts(142,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(160,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(204,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(209,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(214,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(223,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(228,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(233,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(238,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(243,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(248,3): error TS1117: An object literal cannot have multiple properties with the same name.
+playwright.config.ts(253,3): error TS1117: An object literal cannot have multiple properties with the same name.
+src/agents/complianceAgentService.ts(9,18): error TS2307: Cannot find module 'cors' or its corresponding type 
+declarations.
+src/agents/complianceAgentService.ts(10,58): error TS2307: Cannot find module 'express' or its corresponding type 
+declarations.
+src/agents/complianceAgentService.ts(11,10): error TS2305: Module '"../lib/compliance-system-mysql"' has no exported 
+member 'createComplianceSystemMySQL'.
+src/agents/complianceAgentService.ts(87,56): error TS2345: Argument of type '{ id: string; description: any; category: 
+string; priority: any; context: any; }' is not assignable to parameter of type 'string'.
+src/agents/complianceAgentService.ts(99,35): error TS2339: Property 'compliance_result' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(100,31): error TS2339: Property 'compliance_result' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(101,32): error TS2339: Property 'compliance_result' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(102,33): error TS2339: Property 'execution_time' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(103,32): error TS2339: Property 'rules_applied' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(138,51): error TS2345: Argument of type '{ id: string; description: any; 
+category: string; priority: any; context: any; }' is not assignable to parameter of type 'string'.
+src/agents/complianceAgentService.ts(152,31): error TS2339: Property 'execution_time' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(153,30): error TS2339: Property 'rules_applied' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(190,57): error TS2345: Argument of type '{ id: string; description: any; 
+category: string; priority: any; context: any; }' is not assignable to parameter of type 'string'.
+src/agents/complianceAgentService.ts(204,33): error TS2339: Property 'execution_time' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(205,32): error TS2339: Property 'rules_applied' does not exist on type '{ 
+success: boolean; result?: any; error?: string | undefined; }'.
+src/agents/complianceAgentService.ts(280,48): error TS2345: Argument of type '{ id: any; description: any; category: 
+any; priority: any; context: any; }' is not assignable to parameter of type 'string'.
+src/app/admin/content/header-footer/page.tsx(380,26): error TS2304: Cannot find name 'FaTrash'.
+src/app/admin/content/header-footer/page.tsx(409,30): error TS2304: Cannot find name 'FaTrash'.
+src/app/admin/content/header-footer/page.tsx(454,24): error TS2304: Cannot find name 'FaTrash'.
+src/app/admin/content/pages/page.tsx(299,18): error TS2304: Cannot find name 'FaFileAlt'.
+src/app/admin/customers/new/page.tsx(128,23): error TS2339: Property 'message' does not exist on type '{}'.
+src/app/admin/customers/new/page.tsx(128,39): error TS2339: Property 'error' does not exist on type '{}'.
+src/app/admin/customers/new/page.tsx(133,16): error TS2339: Property 'success' does not exist on type '{}'.
+src/app/admin/customers/new/page.tsx(139,35): error TS2339: Property 'data' does not exist on type '{}'.
+src/app/admin/customers/new/page.tsx(139,62): error TS2339: Property 'data' does not exist on type '{}'.
+src/app/admin/customers/new/page.tsx(147,23): error TS2339: Property 'message' does not exist on type '{}'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(8,10): error TS2300: Duplicate identifier 'useEffect'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(8,21): error TS2300: Duplicate identifier 'useState'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(34,17): error TS2323: Cannot redeclare exported variable 
+'InvoiceWizard'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(34,17): error TS2393: Duplicate function implementation.
+src/app/admin/office/invoices/InvoiceWizard.tsx(117,23): error TS2323: Cannot redeclare exported variable 
+'fetchBillable'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(117,23): error TS2393: Duplicate function implementation.
+src/app/admin/office/invoices/InvoiceWizard.tsx(128,10): error TS2300: Duplicate identifier 'useEffect'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(128,21): error TS2300: Duplicate identifier 'useState'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(154,17): error TS2323: Cannot redeclare exported variable 
+'InvoiceWizard'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(154,17): error TS2393: Duplicate function implementation.
+src/app/admin/office/invoices/InvoiceWizard.tsx(237,23): error TS2323: Cannot redeclare exported variable 
+'fetchBillable'.
+src/app/admin/office/invoices/InvoiceWizard.tsx(237,23): error TS2393: Duplicate function implementation.
+src/app/admin/office/payroll/page.tsx(3,10): error TS2300: Duplicate identifier 'useEffect'.
+src/app/admin/office/payroll/page.tsx(3,21): error TS2300: Duplicate identifier 'useState'.
+src/app/admin/office/payroll/page.tsx(4,8): error TS2300: Duplicate identifier 'Link'.
+src/app/admin/office/payroll/page.tsx(34,25): error TS2323: Cannot redeclare exported variable 'default'.
+src/app/admin/office/payroll/page.tsx(34,25): error TS2393: Duplicate function implementation.
+src/app/admin/office/payroll/page.tsx(271,31): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(274,31): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(346,37): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(349,37): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(352,37): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(383,10): error TS2300: Duplicate identifier 'useEffect'.
+src/app/admin/office/payroll/page.tsx(383,21): error TS2300: Duplicate identifier 'useState'.
+src/app/admin/office/payroll/page.tsx(384,8): error TS2300: Duplicate identifier 'Link'.
+src/app/admin/office/payroll/page.tsx(414,25): error TS2323: Cannot redeclare exported variable 'default'.
+src/app/admin/office/payroll/page.tsx(414,25): error TS2393: Duplicate function implementation.
+src/app/admin/office/payroll/page.tsx(651,31): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(654,31): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(726,37): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(729,37): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/payroll/page.tsx(732,37): error TS2345: Argument of type 'number' is not assignable to parameter 
+of type 'string'.
+src/app/admin/office/projects/new/page.tsx(11,8): error TS2300: Duplicate identifier 'Link'.
+src/app/admin/office/projects/new/page.tsx(12,10): error TS2300: Duplicate identifier 'useRouter'.
+src/app/admin/office/projects/new/page.tsx(13,10): error TS2300: Duplicate identifier 'useEffect'.
+src/app/admin/office/projects/new/page.tsx(13,21): error TS2300: Duplicate identifier 'useState'.
+src/app/admin/office/projects/new/page.tsx(14,10): error TS2300: Duplicate identifier 'FaArrowLeft'.
+src/app/admin/office/projects/new/page.tsx(14,23): error TS2300: Duplicate identifier 'FaSave'.
+src/app/admin/office/projects/new/page.tsx(14,31): error TS2300: Duplicate identifier 'FaProjectDiagram'.
+src/app/admin/office/projects/new/page.tsx(34,25): error TS2323: Cannot redeclare exported variable 'default'.
+src/app/admin/office/projects/new/page.tsx(34,25): error TS2393: Duplicate function implementation.
+src/app/admin/office/projects/new/page.tsx(364,8): error TS2300: Duplicate identifier 'Link'.
+src/app/admin/office/projects/new/page.tsx(365,10): error TS2300: Duplicate identifier 'useRouter'.
+src/app/admin/office/projects/new/page.tsx(366,10): error TS2300: Duplicate identifier 'useEffect'.
+src/app/admin/office/projects/new/page.tsx(366,21): error TS2300: Duplicate identifier 'useState'.
+src/app/admin/office/projects/new/page.tsx(367,10): error TS2300: Duplicate identifier 'FaArrowLeft'.
+src/app/admin/office/projects/new/page.tsx(367,23): error TS2300: Duplicate identifier 'FaSave'.
+src/app/admin/office/projects/new/page.tsx(367,31): error TS2300: Duplicate identifier 'FaProjectDiagram'.
+src/app/admin/office/projects/new/page.tsx(387,25): error TS2323: Cannot redeclare exported variable 'default'.
+src/app/admin/office/projects/new/page.tsx(387,25): error TS2393: Duplicate function implementation.
+src/app/admin/tickets/page.tsx(265,21): error TS2322: Type '{ children: string; onClick: () => void; variante: string; 
+groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'.
+src/app/admin/tickets/page.tsx(273,23): error TS2322: Type '{ children: string; onClick: () => Promise<void>; groesse: 
+string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'.
+src/app/admin/tickets/page.tsx(281,23): error TS2322: Type '{ children: string; onClick: () => Promise<void>; 
+variante: string; groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+src/app/admin/tickets/page.tsx(300,63): error TS2322: Type '{ children: string; onClick: () => void; variante: string; 
+groesse: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'.
+src/app/admin/tickets/page.tsx(358,19): error TS2322: Type '{ children: string; onClick: () => void; disabled: 
+boolean; variante: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & 
+RefAttributes<HTMLButtonElement>'.
+src/app/admin/tickets/page.tsx(367,19): error TS2322: Type '{ children: string; onClick: () => void; variante: string; 
+}' is not assignable to type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'.
+src/app/admin/time-tracking/page.tsx(71,5): error TS2322: Type 'boolean' is not assignable to type 'string'.
+src/app/admin/time-tracking/page.tsx(157,9): error TS2304: Cannot find name 'handleSessionPause'.
+src/app/admin/time-tracking/page.tsx(329,9): error TS2322: Type 'string | false' is not assignable to type 'string | 
+undefined'.
+src/app/admin/time-tracking/page.tsx(370,11): error TS2322: Type 'boolean' is not assignable to type 'string'.
+src/app/admin/time-tracking/page.tsx(924,36): error TS2345: Argument of type 'string | undefined' is not assignable to 
+parameter of type 'string'.
+src/app/api/ab/variant/route.ts(98,39): error TS2339: Property 'variant_key' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/ab/variant/route.ts(106,24): error TS2339: Property 'id' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/ab/variant/route.ts(118,32): error TS2339: Property 'variant_key' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/ab/variant/route.ts(119,34): error TS2339: Property 'title' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/ab/variant/route.ts(120,37): error TS2339: Property 'subtitle' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/ab/variant/route.ts(121,40): error TS2339: Property 'description' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/ab/variant/route.ts(122,40): error TS2339: Property 'button_text' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/ab/variant/route.ts(123,40): error TS2339: Property 'button_link' does not exist on type 'OkPacket | 
+ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/admin/audit-logs/export/route.ts(69,29): error TS2345: Argument of type 'string | Buffer<ArrayBufferLike> 
+| undefined' is not assignable to parameter of type 'BodyInit | null | undefined'.
+src/app/api/admin/audit-logs/export/route.ts(74,27): error TS2454: Variable 'exportData' is used before being assigned.
+src/app/api/admin/audit-logs/route.ts(302,14): error TS18047: 'aVal' is possibly 'null'.
+src/app/api/admin/audit-logs/route.ts(302,21): error TS18047: 'bVal' is possibly 'null'.
+src/app/api/admin/audit-logs/route.ts(304,14): error TS18047: 'aVal' is possibly 'null'.
+src/app/api/admin/audit-logs/route.ts(304,21): error TS18047: 'bVal' is possibly 'null'.
+src/app/api/admin/backup/route.ts(83,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(84,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(93,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(93,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(100,11): error TS2322: Type '{ timestamp: any; date: any; size: any; hash: any; 
+valid: boolean; }' is not assignable to type 'null'.
+src/app/api/admin/backup/route.ts(116,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(117,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(126,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(126,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(133,11): error TS2322: Type '{ timestamp: any; date: any; size: any; hash: any; 
+valid: boolean; }' is not assignable to type 'null'.
+src/app/api/admin/backup/route.ts(182,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(183,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(208,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(208,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(217,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(218,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(243,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(243,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(327,14): error TS18046: 'error' is of type 'unknown'.
+src/app/api/admin/customers/export/route.ts(145,39): error TS2769: No overload matches this call.
+src/app/api/admin/customers/reset-lopez/route.ts(7,10): error TS2300: Duplicate identifier 'CustomerService'.
+src/app/api/admin/customers/reset-lopez/route.ts(8,10): error TS2300: Duplicate identifier 'NextRequest'.
+src/app/api/admin/customers/reset-lopez/route.ts(8,23): error TS2300: Duplicate identifier 'NextResponse'.
+src/app/api/admin/customers/reset-lopez/route.ts(10,23): error TS2323: Cannot redeclare exported variable 'POST'.
+src/app/api/admin/customers/reset-lopez/route.ts(10,23): error TS2393: Duplicate function implementation.
+src/app/api/admin/customers/reset-lopez/route.ts(36,7): error TS2322: Type 'null' is not assignable to type 'string | 
+undefined'.
+src/app/api/admin/customers/reset-lopez/route.ts(48,7): error TS2322: Type 'null' is not assignable to type 'string | 
+undefined'.
+src/app/api/admin/customers/reset-lopez/route.ts(82,10): error TS2300: Duplicate identifier 'CustomerService'.
+src/app/api/admin/customers/reset-lopez/route.ts(83,10): error TS2300: Duplicate identifier 'NextRequest'.
+src/app/api/admin/customers/reset-lopez/route.ts(83,23): error TS2300: Duplicate identifier 'NextResponse'.
+src/app/api/admin/customers/reset-lopez/route.ts(85,23): error TS2323: Cannot redeclare exported variable 'POST'.
+src/app/api/admin/customers/reset-lopez/route.ts(85,23): error TS2393: Duplicate function implementation.
+src/app/api/admin/customers/reset-lopez/route.ts(111,7): error TS2322: Type 'null' is not assignable to type 'string | 
+undefined'.
+src/app/api/admin/customers/reset-lopez/route.ts(123,7): error TS2322: Type 'null' is not assignable to type 'string | 
+undefined'.
+src/app/api/admin/customers/route.ts(366,14): error TS18047: 'aVal' is possibly 'null'.
+src/app/api/admin/customers/route.ts(366,21): error TS18047: 'bVal' is possibly 'null'.
+src/app/api/admin/customers/route.ts(368,14): error TS18047: 'aVal' is possibly 'null'.
+src/app/api/admin/customers/route.ts(368,21): error TS18047: 'bVal' is possibly 'null'.
+src/app/api/admin/init-database/route.ts(153,44): error TS2345: Argument of type '{ customer_type: "firma"; anrede: 
+string; titel: string; vorname: string; nachname: string; firmenname: string; email: string; telefon: string; strasse: 
+string; plz: string; ort: string; land: string; status: "aktiv"; support_level: "Premium"; notes: string; } | { ...; } 
+| { ...; } | { ...; }' is not assignable to parameter of type 'Omit<Customer, "id" | "kundennummer" | "created_at" | 
+"updated_at">'.
+src/app/api/admin/media/ai/approve/route.ts(119,17): error TS2322: Type 'number' is not assignable to type 'string'.
+src/app/api/admin/media/detail/route.ts(66,54): error TS2339: Property 'folderPath' does not exist on type 'Promise<{ 
+folderPath: string; filePath: string; metaPath: string; category: MediaCategory; } | null>'.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(7,10): error TS2300: Duplicate identifier 
+'createConnection'.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(9,23): error TS2323: Cannot redeclare exported 
+variable 'POST'.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(9,23): error TS2393: Duplicate function implementation.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(90,10): error TS2300: Duplicate identifier 
+'createConnection'.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(92,23): error TS2323: Cannot redeclare exported 
+variable 'POST'.
+src/app/api/admin/time-tracking/sessions/[id]/activity/route.ts(92,23): error TS2393: Duplicate function 
+implementation.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(7,10): error TS2300: Duplicate identifier 
+'createConnection'.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(9,23): error TS2323: Cannot redeclare exported 
+variable 'POST'.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(9,23): error TS2393: Duplicate function 
+implementation.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(86,10): error TS2300: Duplicate identifier 
+'createConnection'.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(88,23): error TS2323: Cannot redeclare exported 
+variable 'POST'.
+src/app/api/admin/time-tracking/sessions/[id]/heartbeat/route.ts(88,23): error TS2393: Duplicate function 
+implementation.
+src/app/api/admin/time-tracking/sessions/route.ts(193,7): error TS2353: Object literal may only specify known 
+properties, and 'project_id' does not exist in type 'TimeSession'.
+src/app/api/admin/utf8-fix/route.ts(136,62): error TS2339: Property 'link_url' does not exist on type '{ title: 
+string; content: string; sort_order: number; } | { title: string; content: string; link_url: string; sort_order: 
+number; } | { content: string; link_url: string; sort_order: number; title?: undefined; } | ... 4 more ... | { ...; }'.
+src/app/api/admin/utf8-test/route.ts(99,21): error TS2339: Property 'length' does not exist on type 'QueryResult'.
+src/app/api/auth/admin/login/route.ts(59,9): error TS2322: Type 'null' is not assignable to type 'string | undefined'.
+src/app/api/auth/admin/me/route.ts(73,25): error TS2339: Property 'role_id' does not exist on type 'User'.
+src/app/api/auth/me/route.ts(52,57): error TS2339: Property 'role_id' does not exist on type 'User'.
+src/app/api/auth/me/route.ts(73,25): error TS2339: Property 'role_id' does not exist on type 'User'.
+src/app/api/auth/register/route.ts(59,39): error TS2345: Argument of type '{ email: any; password: any; first_name: 
+any; last_name: any; company: any; phone: any; role: string; status: "active"; email_verified: true; 
+two_factor_enabled: any; }' is not assignable to parameter of type 'Omit<DemoUser, "id" | "created_at">'.
+src/app/api/auth/register/route.ts(105,30): error TS2304: Cannot find name 'mysql'.
+src/app/api/auth/register/route.ts(105,53): error TS2304: Cannot find name 'dbConfig'.
+src/app/api/auth/shop/login/route.ts(60,9): error TS2322: Type 'null' is not assignable to type 'string | undefined'.
+src/app/api/contact/route.ts(1,10): error TS2724: '"@/lib/email-service"' has no exported member named 'emailService'. 
+Did you mean 'EmailService'?
+src/app/api/einvoice/outbox/create/route.ts(73,36): error TS2339: Property 'invoice_number' does not exist on type 
+'OkPacket | ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/einvoice/outbox/create/route.ts(86,17): error TS2339: Property 'customer_id' does not exist on type 
+'OkPacket | ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/einvoice/outbox/create/route.ts(87,17): error TS2339: Property 'project_id' does not exist on type 
+'OkPacket | ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/einvoice/outbox/create/route.ts(88,17): error TS2339: Property 'invoice_number' does not exist on type 
+'OkPacket | ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/einvoice/outbox/create/route.ts(103,50): error TS2339: Property 'invoice_number' does not exist on type 
+'OkPacket | ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/einvoice/outbox/create/route.ts(113,35): error TS2339: Property 'invoice_number' does not exist on type 
+'OkPacket | ResultSetHeader | RowDataPacket | RowDataPacket[]'.
+src/app/api/invoices/pdf/route.ts(384,29): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable 
+to parameter of type 'BodyInit | null | undefined'.
+src/app/api/invoices/route.ts(201,11): error TS2451: Cannot redeclare block-scoped variable 'issueDate'.
+src/app/api/invoices/route.ts(235,11): error TS2451: Cannot redeclare block-scoped variable 'issueDate'.
+src/app/api/monitoring/status/route.ts(29,19): error TS7006: Parameter 'cpu' implicitly has an 'any' type.
+src/app/api/monitoring/status/route.ts(44,21): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/app/api/monitoring/status/route.ts(70,25): error TS7053: Element implicitly has an 'any' type because expression 
+of type '0' can't be used to index type 'QueryResult'.
+src/app/api/monitoring/status/route.ts(79,27): error TS7053: Element implicitly has an 'any' type because expression 
+of type '0' can't be used to index type 'QueryResult'.
+src/app/api/monitoring/status/route.ts(184,28): error TS7053: Element implicitly has an 'any' type because expression 
+of type '0' can't be used to index type 'QueryResult'.
+src/app/api/shop/orders/route.ts(128,9): error TS2322: Type 'string' is not assignable to type '"pending" | 
+"confirmed" | "shipped" | "delivered" | "cancelled"'.
+src/app/api/shop/tickets/route.ts(137,9): error TS2322: Type 'string' is not assignable to type '"open" | 
+"in_progress" | "waiting_customer" | "resolved" | "closed"'.
+src/app/shop/quote-request/[uuid]/page.tsx(12,3): error TS2305: Module '"react-icons/fa"' has no exported member 
+'FaEuro'.
+src/components/admin/CustomerExportModal.tsx(185,67): error TS18046: 'error' is of type 'unknown'.
+src/components/admin/DocumentViewModal.tsx(73,30): error TS2339: Property 'createElement' does not exist on type 
+'Document'.
+src/components/admin/EnterpriseExportModal.tsx(71,9): error TS2322: Type '"technical-xlsx" | "technical-csv"' is not 
+assignable to type '"csv" | "xlsx" | "pdf"'.
+src/components/admin/EnterpriseExportModal.tsx(99,38): error TS18046: 'error' is of type 'unknown'.
+src/components/admin/EnterpriseExportModal.tsx(205,57): error TS18046: 'error' is of type 'unknown'.
+src/components/Core/Hauptbereiche.tsx(99,35): error TS2322: Type '{ children: Element; bg: "darkblau"; divider: 
+string; }' is not assignable to type 'IntrinsicAttributes & SectionWrapperProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(77,26): error TS2322: Type '{ children: Element[]; cols: 2; 
+gap: string; variant: string; items: number; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(100,26): error TS2322: Type '{ children: Element[]; cols: 3; 
+gap: string; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(109,21): error TS2322: Type '{ features: string[]; variant: 
+string; iconColor: string; textSize: "sm"; }' is not assignable to type 'IntrinsicAttributes & FeatureListProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(132,56): error TS2322: Type '{ children: string; variant: 
+"primary"; size: "lg"; glow: true; icon: string; iconPosition: string; }' is not assignable to type 
+'IntrinsicAttributes & ButtonProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(153,26): error TS2322: Type '{ children: Element[]; cols: 2; 
+gap: string; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+src/components/layout/MainLayout.tsx(19,15): error TS2322: Type '{ showFooter: boolean; }' is not assignable to type 
+'IntrinsicAttributes'.
+src/components/navigation/Sprachumschalter.tsx(60,9): error TS2322: Type '{ children: Element[]; onClick: () => void; 
+"aria-expanded": boolean; "aria-haspopup": "listbox"; "aria-label": string; variante: string; groesse: string; 
+className: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'.
+src/components/ui/Button.stories.tsx(1,37): error TS2307: Cannot find module '@storybook/react' or its corresponding 
+type declarations.
+src/components/ui/Heading.tsx(45,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; 
+defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; 
+... 273 more ...; className: string; }' is not assignable to type 'SVGProps<SVGSymbolElement>'.
+src/lib/admin-auth-service.ts(75,21): error TS18047: 'mockUser' is possibly 'null'.
+src/lib/admin-auth-service.ts(76,13): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/lib/admin-auth-service.ts(76,23): error TS18047: 'mockUser' is possibly 'null'.
+src/lib/admin-auth-service.ts(77,13): error TS2322: Type 'unknown' is not assignable to type 'string'.
+src/lib/admin-auth-service.ts(77,20): error TS18047: 'mockUser' is possibly 'null'.
+src/lib/agents/compliance-agent.ts(27,14): error TS2515: Non-abstract class 'ComplianceAgent' does not implement 
+inherited abstract member executeTask from class 'KIAgent'.
+src/lib/agents/memory-integration-agent.ts(20,9): error TS2416: Property 'executeTask' in type 
+'MemoryIntegrationAgent' is not assignable to the same property in base type 'KIAgent'.
+src/lib/agents/memory-integration-agent.ts(26,20): error TS2339: Property 'type' does not exist on type 'KITask'.
+src/lib/agents/memory-integration-agent.ts(38,23): error TS2339: Property 'createFailedResult' does not exist on type 
+'MemoryIntegrationAgent'.
+src/lib/agents/memory-integration-agent.ts(38,74): error TS2339: Property 'type' does not exist on type 'KITask'.
+src/lib/agents/memory-integration-agent.ts(41,19): error TS2339: Property 'createFailedResult' does not exist on type 
+'MemoryIntegrationAgent'.
+src/lib/agents/memory-integration-agent.ts(53,9): error TS2739: Type '{ message: string; rules_loaded: true; }' is 
+missing the following properties from type 'TaskExecutionResult': rules_applied, agent
+src/lib/agents/memory-integration-agent.ts(59,19): error TS2339: Property 'createFailedResult' does not exist on type 
+'MemoryIntegrationAgent'.
+src/lib/agents/memory-integration-agent.ts(65,52): error TS2339: Property 'data' does not exist on type 'KITask'.
+src/lib/agents/memory-integration-agent.ts(75,9): error TS2739: Type '{ is_compliant: boolean; score: number; 
+violations: string[]; applied_rules: number; }' is missing the following properties from type 'TaskExecutionResult': 
+message, rules_applied, agent
+src/lib/agents/memory-integration-agent.ts(83,19): error TS2339: Property 'createFailedResult' does not exist on type 
+'MemoryIntegrationAgent'.
+src/lib/agents/memory-integration-agent.ts(89,93): error TS2339: Property 'data' does not exist on type 'KITask'.
+src/lib/agents/memory-integration-agent.ts(101,9): error TS2739: Type '{ session_id: number; message: string; }' is 
+missing the following properties from type 'TaskExecutionResult': rules_applied, agent
+src/lib/agents/memory-integration-agent.ts(107,19): error TS2339: Property 'createFailedResult' does not exist on type 
+'MemoryIntegrationAgent'.
+src/lib/agents/memory-integration-agent.ts(117,9): error TS2739: Type '{ statistics: MemoryStatistics; message: 
+string; }' is missing the following properties from type 'TaskExecutionResult': rules_applied, agent
+src/lib/agents/memory-integration-agent.ts(123,19): error TS2339: Property 'createFailedResult' does not exist on type 
+'MemoryIntegrationAgent'.
+src/lib/agents/memory-integration-agent.ts(173,9): error TS2739: Type '{ integration_tests: ({ test: string; success: 
+boolean; count: number; } | { test: string; success: boolean; violations: number; })[]; message: string; }' is missing 
+the following properties from type 'TaskExecutionResult': rules_applied, agent
+src/lib/agents/memory-integration-agent.ts(179,19): error TS2339: Property 'createFailedResult' does not exist on type 
+'MemoryIntegrationAgent'.
+src/lib/agents/quality-agent.ts(28,14): error TS2515: Non-abstract class 'QualityAgent' does not implement inherited 
+abstract member executeTask from class 'KIAgent'.
+src/lib/agents/text-management-agent.ts(26,14): error TS2515: Non-abstract class 'TextManagementAgent' does not 
+implement inherited abstract member executeTask from class 'KIAgent'.
+src/lib/agents/text-management-agent.ts(195,28): error TS7006: Parameter 'match' implicitly has an 'any' type.
+src/lib/agents/text-management-agent.ts(273,28): error TS7006: Parameter 'match' implicitly has an 'any' type.
+src/lib/alerting-service.ts(137,19): error TS2339: Property 'length' does not exist on type 'QueryResult'.
+src/lib/alerting-service.ts(202,18): error TS2339: Property 'length' does not exist on type 'QueryResult'.
+src/lib/alerting-service.ts(258,22): error TS2339: Property 'length' does not exist on type 'QueryResult'.
+src/lib/argon2-service.ts(17,16): error TS2724: '"D:/Projekte/lopez-it-welt/node_modules/argon2/argon2"' has no 
+exported member named 'argon2id'. Did you mean 'argon2d'?
+src/lib/audit-logger.ts(98,7): error TS2353: Object literal may only specify known properties, and 'created_at' does 
+not exist in type 'AuditEvent'.
+src/lib/auth-service.ts(69,11): error TS2353: Object literal may only specify known properties, and 'user' does not 
+exist in type 'AuthResult'.
+src/lib/auth-utils.ts(16,18): error TS2304: Cannot find name 'speakeasy'.
+src/lib/auth-utils.ts(30,10): error TS2304: Cannot find name 'speakeasy'.
+src/lib/basic-excel-generator.ts(492,76): error TS7053: Element implicitly has an 'any' type because expression of 
+type 'string' can't be used to index type 'Customer'.
+src/lib/customer-service.ts(163,13): error TS7034: Variable 'updateFields' implicitly has type 'any[]' in some 
+locations where its type cannot be determined.
+src/lib/customer-service.ts(180,23): error TS7005: Variable 'updateFields' implicitly has an 'any[]' type.
+src/lib/development-mode.ts(136,11): error TS2339: Property 'user' does not exist on type 'Request'.
+src/lib/development-mode.ts(137,11): error TS2339: Property 'isDevelopmentMode' does not exist on type 'Request'.
+src/lib/development-mode.ts(216,7): error TS2322: Type 'EnterpriseUser' is not assignable to type 'Record<string, 
+unknown>'.
+src/lib/development-mode.ts(216,53): error TS2345: Argument of type '{ username: string; email: string; 
+email_external: string; email_internal: string; first_name: string; last_name: string; display_name: string; password: 
+string; is_owner: boolean; is_admin: boolean; ... 4 more ...; domain_type: string; }' is not assignable to parameter 
+of type 'CreateUserData'.
+src/lib/dsgvo-enforcement.ts(4,10): error TS2305: Module '"./compliance-system-mysql"' has no exported member 
+'createComplianceSystemMySQL'.
+src/lib/email-config.ts(52,21): error TS2551: Property 'createTransporter' does not exist on type 'typeof 
+import("D:/Projekte/lopez-it-welt/node_modules/@types/nodemailer/index")'. Did you mean 'createTransport'?
+src/lib/email-service.ts(38,35): error TS2551: Property 'createTransporter' does not exist on type 'typeof 
+import("D:/Projekte/lopez-it-welt/node_modules/@types/nodemailer/index")'. Did you mean 'createTransport'?
+src/lib/exceljs-generator.ts(73,9): error TS2353: Object literal may only specify known properties, and 'tabRatio' 
+does not exist in type 'WorkbookView'.
+src/lib/exceljs-generator.ts(100,9): error TS2322: Type 'number' is not assignable to type 'string'.
+src/lib/exceljs-generator.ts(102,11): error TS2322: Type '"svg" | "png"' is not assignable to type '"png" | "jpeg" | 
+"gif"'.
+src/lib/exceljs-generator.ts(118,27): error TS2345: Argument of type 'string' is not assignable to parameter of type 
+'number'.
+src/lib/exceljs-generator.ts(635,48): error TS2339: Property 'length' does not exist on type 'Buffer'.
+src/lib/exceljs-generator.ts(657,9): error TS2353: Object literal may only specify known properties, and 'tabRatio' 
+does not exist in type 'WorkbookView'.
+src/lib/exceljs-generator.ts(671,76): error TS7053: Element implicitly has an 'any' type because expression of type 
+'string' can't be used to index type 'Customer'.
+src/lib/exceljs-generator.ts(717,48): error TS2339: Property 'length' does not exist on type 'Buffer'.
+src/lib/ki-agent.ts(96,9): error TS2416: Property 'executeTask' in type 'ComplianceAgent' is not assignable to the 
+same property in base type 'KIAgent'.
+src/lib/ki-agent.ts(100,12): error TS2339: Property 'validateTask' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(103,36): error TS2339: Property 'startTaskSession' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(106,32): error TS2339: Property 'getRelevantRules' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(110,16): error TS2339: Property 'config' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(111,39): error TS2339: Property 'checkCompliance' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(113,14): error TS18047: 'complianceResult' is possibly 'null'.
+src/lib/ki-agent.ts(114,23): error TS2339: Property 'createFailedResult' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(128,18): error TS2339: Property 'storeTaskMemory' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(131,18): error TS2339: Property 'endTaskSession' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(141,11): error TS2322: Type 'ComplianceResult | { is_compliant: true; rules: never[]; notes: 
+string; score: number; }' is not assignable to type 'ComplianceResult'.
+src/lib/ki-agent.ts(152,19): error TS2339: Property 'createFailedResult' does not exist on type 'ComplianceAgent'.
+src/lib/ki-agent.ts(181,14): error TS2515: Non-abstract class 'QualityAgent' does not implement inherited abstract 
+member executeTask from class 'KIAgent'.
+src/lib/ki-agent.ts(204,14): error TS2515: Non-abstract class 'DevelopmentAgent' does not implement inherited abstract 
+member executeTask from class 'KIAgent'.
+src/lib/ki-agent.ts(234,9): error TS2322: Type 'ComplianceAgent' is not assignable to type 'KIAgent'.
+src/lib/mdx.ts(2,20): error TS2307: Cannot find module 'gray-matter' or its corresponding type declarations.
+src/lib/media/ai/MediaAIService.ts(149,16): error TS2304: Cannot find name 'similarityService'.
+src/lib/monitoring-service.ts(556,53): error TS2769: No overload matches this call.
+src/lib/monitoring/health-check.ts(84,21): error TS2322: Type '"degraded"' is not assignable to type '"healthy" | 
+"unhealthy"'.
+src/lib/simple-excel.ts(489,76): error TS7053: Element implicitly has an 'any' type because expression of type 
+'string' can't be used to index type 'Customer'.
+src/lib/time-tracking-server.ts(109,7): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+src/lib/time-tracking-server.ts(112,7): error TS2322: Type 'boolean | undefined' is not assignable to type 'string | 
+undefined'.
+src/lib/time-tracking.ts(53,9): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+src/lib/time-tracking.ts(56,9): error TS2322: Type 'boolean | undefined' is not assignable to type 'string | 
+undefined'.
+src/lib/time-tracking.ts(73,7): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+src/lib/time-tracking.ts(76,7): error TS2322: Type 'boolean | undefined' is not assignable to type 'string | 
+undefined'.
+src/lib/uuid-service.ts(58,28): error TS2339: Property 'readUInt16BE' does not exist on type 'Uint8Array<ArrayBuffer>'.
+src/lib/uuid-service.ts(59,28): error TS2339: Property 'readUInt16BE' does not exist on type 'Uint8Array<ArrayBuffer>'.
+src/lib/uuid-service.ts(60,28): error TS2339: Property 'readUInt16BE' does not exist on type 'Uint8Array<ArrayBuffer>'.
+src/lib/uuid-service.ts(61,28): error TS2339: Property 'readUInt16BE' does not exist on type 'Uint8Array<ArrayBuffer>'.
+src/lib/uuid-service.ts(62,28): error TS2339: Property 'readUInt16BE' does not exist on type 'Uint8Array<ArrayBuffer>'.
+src/lib/uuid-service.ts(168,12): error TS2304: Cannot find name 'randomBytes'.
+src/lib/uuid-service.ts(175,12): error TS2304: Cannot find name 'randomBytes'.
+src/lib/uuid-service.ts(182,12): error TS2304: Cannot find name 'randomBytes'.
+src/scripts/test-ki-agents.ts(18,15): error TS2339: Property 'initialize' does not exist on type 'ComplianceAgent'.
+src/scripts/test-ki-agents.ts(38,17): error TS2339: Property 'shutdown' does not exist on type 'ComplianceAgent'.
+src/scripts/test-ki-agents.ts(46,15): error TS2339: Property 'initialize' does not exist on type 'QualityAgent'.
+src/scripts/test-ki-agents.ts(57,44): error TS2345: Argument of type 'KITask' is not assignable to parameter of type 
+'string'.
+src/scripts/test-ki-agents.ts(60,53): error TS2339: Property 'compliance_result' does not exist on type '{ success: 
+boolean; result?: any; error?: string | undefined; }'.
+src/scripts/test-ki-agents.ts(61,46): error TS2339: Property 'rules_applied' does not exist on type '{ success: 
+boolean; result?: any; error?: string | undefined; }'.
+src/scripts/test-ki-agents.ts(62,47): error TS2339: Property 'execution_time' does not exist on type '{ success: 
+boolean; result?: any; error?: string | undefined; }'.
+src/scripts/test-ki-agents.ts(66,17): error TS2339: Property 'shutdown' does not exist on type 'QualityAgent'.
+src/scripts/test-ki-agents.ts(74,15): error TS2339: Property 'initialize' does not exist on type 'DevelopmentAgent'.
+src/scripts/test-ki-agents.ts(85,44): error TS2345: Argument of type 'KITask' is not assignable to parameter of type 
+'string'.
+src/scripts/test-ki-agents.ts(90,47): error TS2339: Property 'execution_time' does not exist on type '{ success: 
+boolean; result?: any; error?: string | undefined; }'.
+src/scripts/test-ki-agents.ts(94,17): error TS2339: Property 'shutdown' does not exist on type 'DevelopmentAgent'.
+src/scripts/test-ki-agents.ts(102,15): error TS2339: Property 'initialize' does not exist on type 'ComplianceAgent'.
+src/scripts/test-ki-agents.ts(106,31): error TS2339: Property 'getAgentStatistics' does not exist on type 
+'ComplianceAgent'.
+src/scripts/test-ki-agents.ts(116,17): error TS2339: Property 'shutdown' does not exist on type 'ComplianceAgent'.
+tests/home.spec.ts(1,30): error TS2307: Cannot find module '@playwright/test' or its corresponding type declarations.
+tests/home.spec.ts(4,28): error TS7031: Binding element 'page' implicitly has an 'any' type.
+tests/home.spec.ts(8,48): error TS7031: Binding element 'page' implicitly has an 'any' type.
+tests/home.spec.ts(13,52): error TS7031: Binding element 'page' implicitly has an 'any' type.
+tests/home.spec.ts(18,51): error TS7031: Binding element 'page' implicitly has an 'any' type.
+tests/smoke.admin.office.spec.ts(1,1): error TS2593: Cannot find name 'describe'. Do you need to install type 
+definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 
+'jest' or 'mocha' to the types field in your tsconfig.
+tests/smoke.admin.office.spec.ts(2,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions 
+for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 
+'mocha' to the types field in your tsconfig.
+tests/smoke.admin.office.spec.ts(3,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.admin.office.spec.ts(6,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions 
+for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 
+'mocha' to the types field in your tsconfig.
+tests/smoke.admin.office.spec.ts(7,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(6,1): error TS2593: Cannot find name 'describe'. Do you need to install type 
+definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 
+'jest' or 'mocha' to the types field in your tsconfig.
+tests/smoke.api.office.spec.ts(10,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for 
+a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to 
+the types field in your tsconfig.
+tests/smoke.api.office.spec.ts(12,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(15,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for 
+a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to 
+the types field in your tsconfig.
+tests/smoke.api.office.spec.ts(17,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(21,7): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(25,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for 
+a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to 
+the types field in your tsconfig.
+tests/smoke.api.office.spec.ts(34,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(39,7): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(45,7): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(49,3): error TS2593: Cannot find name 'it'. Do you need to install type definitions for 
+a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 'jest' or 'mocha' to 
+the types field in your tsconfig.
+tests/smoke.api.office.spec.ts(63,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(68,9): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.office.spec.ts(69,9): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.time-tracking.spec.ts(5,1): error TS2593: Cannot find name 'describe'. Do you need to install type 
+definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 
+'jest' or 'mocha' to the types field in your tsconfig.
+tests/smoke.api.time-tracking.spec.ts(8,3): error TS2593: Cannot find name 'it'. Do you need to install type 
+definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 
+'jest' or 'mocha' to the types field in your tsconfig.
+tests/smoke.api.time-tracking.spec.ts(12,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.time-tracking.spec.ts(15,3): error TS2593: Cannot find name 'it'. Do you need to install type 
+definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 
+'jest' or 'mocha' to the types field in your tsconfig.
+tests/smoke.api.time-tracking.spec.ts(21,5): error TS2304: Cannot find name 'expect'.
+tests/smoke.api.time-tracking.spec.ts(24,3): error TS2593: Cannot find name 'it'. Do you need to install type 
+definitions for a test runner? Try `npm i --save-dev @types/jest` or `npm i --save-dev @types/mocha` and then add 
+'jest' or 'mocha' to the types field in your tsconfig.
+tests/smoke.api.time-tracking.spec.ts(26,5): error TS2304: Cannot find name 'expect'.
+
+

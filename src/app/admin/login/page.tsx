@@ -31,8 +31,18 @@ export default function AdminLoginPage() {
         const data = await response.json();
 
         if (data.success) {
-          // Login erfolgreich, weiterleiten
-          window.location.href = "/admin";
+          // Login erfolgreich - Kurz warten, damit Cookie gesetzt wird
+          await new Promise(resolve => setTimeout(resolve, 100));
+          
+          if (data.requires2FASetup) {
+            // 2FA noch nicht aktiviert - zur Setup-Seite weiterleiten
+            window.location.href = "/admin/setup-2fa";
+          } else {
+            // Normal weiterleiten
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectTo = urlParams.get("redirect") || "/admin";
+            window.location.href = redirectTo;
+          }
         } else if (data.requires2FA) {
           // 2FA erforderlich (Pflicht für Admin)
           setStep("2fa");
@@ -54,7 +64,18 @@ export default function AdminLoginPage() {
         const data = await response.json();
 
         if (data.success) {
-          window.location.href = "/admin";
+          // Login erfolgreich - Kurz warten, damit Cookie gesetzt wird
+          await new Promise(resolve => setTimeout(resolve, 100));
+          
+          if (data.requires2FASetup) {
+            // 2FA noch nicht aktiviert - zur Setup-Seite weiterleiten
+            window.location.href = "/admin/setup-2fa";
+          } else {
+            // Normal weiterleiten
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectTo = urlParams.get("redirect") || "/admin";
+            window.location.href = redirectTo;
+          }
         } else {
           setError(data.message || "2FA-Code ungültig");
         }

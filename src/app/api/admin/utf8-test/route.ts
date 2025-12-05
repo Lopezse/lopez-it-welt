@@ -1,5 +1,6 @@
 import { createConnection } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { RowDataPacket } from "mysql2/promise";
 
 /**
  * UTF-8 Test API Route
@@ -88,7 +89,7 @@ export async function GET() {
     const connection = await createConnection();
 
     // Test-Daten abrufen
-    const [rows] = await connection.execute("SELECT * FROM test_utf8 ORDER BY id");
+    const [rows] = await connection.execute<RowDataPacket[]>("SELECT * FROM test_utf8 ORDER BY id");
 
     await connection.end();
 
@@ -96,7 +97,7 @@ export async function GET() {
       {
         success: true,
         data: rows,
-        count: rows.length,
+        count: Array.isArray(rows) ? rows.length : 0,
       },
       {
         headers: {

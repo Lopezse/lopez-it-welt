@@ -10,12 +10,13 @@ import mysql from "mysql2/promise";
  */
 
 // MySQL-Verbindungskonfiguration - MySQL2-kompatibel
+// Verwendet Environment-Variablen, falls gesetzt
 const dbConfig = {
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "lopez_it_welt",
-  port: 3306,
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "", // Leer = kein Passwort
+  database: process.env.DB_NAME || "lopez_it_welt",
+  port: parseInt(process.env.DB_PORT || "3306"),
   charset: "utf8mb4",
   supportBigNumbers: true,
   bigNumberStrings: true,
@@ -36,11 +37,11 @@ let pool: mysql.Pool | null = null;
 export function getConnectionPool(): mysql.Pool {
   if (!pool) {
     pool = mysql.createPool({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "lopez_it_welt",
-      port: 3306,
+      host: process.env.DB_HOST || "localhost",
+      user: process.env.DB_USER || "root",
+      password: process.env.DB_PASSWORD || "", // Leer = kein Passwort
+      database: process.env.DB_NAME || "lopez_it_welt",
+      port: parseInt(process.env.DB_PORT || "3306"),
       charset: "utf8mb4",
       supportBigNumbers: true,
       bigNumberStrings: true,
@@ -96,6 +97,15 @@ export async function executeQueryPool<T = any>(sql: string, params: any[] = [])
   const pool = getConnectionPool();
   const [rows] = await pool.execute(sql, params);
   return rows as T;
+}
+
+/**
+ * Führt eine INSERT/UPDATE/DELETE Query aus und gibt das vollständige ResultSet zurück (inkl. insertId)
+ */
+export async function executeQueryPoolWithResult(sql: string, params: any[] = []): Promise<any> {
+  const pool = getConnectionPool();
+  const [result] = await pool.execute(sql, params);
+  return result as any;
 }
 
 /**

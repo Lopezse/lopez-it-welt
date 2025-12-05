@@ -39,7 +39,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Kunden-Daten laden
-    const connection = await getConnection();
+    const pool = await getConnection();
+    const connection = await pool.getConnection();
     const [rows] = await connection.execute(
       `
                 SELECT id, email, vorname, nachname, status, last_login_at
@@ -57,6 +58,7 @@ export async function GET(request: NextRequest) {
     }
 
     const customer = (rows as any)[0];
+    connection.release();
 
     // 2FA-Status prüfen (optional für Shop)
     const twoFactorEnabled = await TwoFactorService.is2FAEnabled(session.userId);

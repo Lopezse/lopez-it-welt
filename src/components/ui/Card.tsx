@@ -59,12 +59,12 @@ export const Card: React.FC<CardProps> = ({
   const baseClasses = "block";
 
   const variantClasses = {
-    default: "bg-white border border-gray-200",
-    outlined: "bg-transparent border-2 border-gray-300",
-    elevated: "bg-white shadow-lg border-0",
-    filled: "bg-gray-50 border border-gray-200",
-    glass: "bg-white/80 backdrop-blur-sm border border-white/20",
-    premium: "bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-200",
+    default: "border",
+    outlined: "bg-transparent border-2",
+    elevated: "shadow-lg border-0",
+    filled: "border",
+    glass: "backdrop-blur-sm border",
+    premium: "border",
   };
 
   const sizeClasses = {
@@ -101,15 +101,15 @@ export const Card: React.FC<CardProps> = ({
   };
 
   const bgClasses = {
-    white: "bg-white",
-    gray: "bg-gray-50",
-    blue: "bg-blue-50",
-    green: "bg-green-50",
-    red: "bg-red-50",
-    yellow: "bg-yellow-50",
-    purple: "bg-purple-50",
+    white: "",
+    gray: "",
+    blue: "",
+    green: "",
+    red: "",
+    yellow: "",
+    purple: "",
     transparent: "bg-transparent",
-    weiss10: "bg-white/10",
+    weiss10: "",
   };
 
   const interactiveClasses = cn(
@@ -117,6 +117,13 @@ export const Card: React.FC<CardProps> = ({
     focusable && "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
     interactive && "cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200",
   );
+
+  // Dark Theme Styles (Lopez Carbon Dark)
+  const darkThemeStyles: React.CSSProperties = {
+    backgroundColor: variant === "outlined" ? "transparent" : variant === "filled" ? "#1a1d24" : "#111217",
+    borderColor: variant === "outlined" ? "#3a3d47" : "#272a33",
+    color: "#f4f4f4",
+  };
 
   const cardClasses = cn(
     baseClasses,
@@ -132,7 +139,12 @@ export const Card: React.FC<CardProps> = ({
   );
 
   return (
-    <div className={cardClasses} tabIndex={focusable ? 0 : undefined} {...props}>
+    <div 
+      className={cardClasses} 
+      style={darkThemeStyles}
+      tabIndex={focusable ? 0 : undefined} 
+      {...props}
+    >
       {children}
     </div>
   );

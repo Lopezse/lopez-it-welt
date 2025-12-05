@@ -1,4 +1,5 @@
 import fs from "fs";
+// @ts-ignore - gray-matter types may not be available
 import matter from "gray-matter";
 import path from "path";
 

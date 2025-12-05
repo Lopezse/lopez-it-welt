@@ -9,18 +9,47 @@ module.exports = {
     extend: {
       // Barrierefreie CI-Farben (WCAG AA/AAA konform)
       colors: {
-        // Primärfarben
+        // =====================================================
+        // LOPEZ CARBON DARK THEME (IBM Carbon g100 ähnlich)
+        // =====================================================
+        carbon: {
+          // Hintergründe
+          dark: "#050509", // Sehr dunkler Hintergrund (fast schwarz)
+          panel: "#111217", // Panel/Card Hintergrund
+          surface: "#1a1d24", // Oberflächen
+          hover: "#1f2329", // Hover-Zustand
+          
+          // Borders
+          border: "#272a33", // Feine Ränder
+          borderLight: "#3a3d47", // Helle Ränder
+          
+          // Text
+          textPrimary: "#f4f4f4", // Primär-Text (sehr hell)
+          textSecondary: "#b3b3b3", // Sekundär-Text
+          textTertiary: "#8a8a8a", // Tertiär-Text
+          
+          // Akzente
+          gold: "#ffd700", // Gold für aktive Navigation, wichtige Badges
+          goldHover: "#ffed4e", // Gold Hover
+          
+          // Status-Farben (WCAG-konform)
+          success: "#24a148", // Grün
+          warning: "#f1c21b", // Gelb
+          error: "#da1e28", // Rot
+          info: "#0043ce", // Blau
+        },
+        
+        // Legacy-Farben (für Kompatibilität)
         hauptblau: "#1e40af",
         akzentblau: "#3b82f6",
         dunkelgrau: "#1f2937",
         hellgrau: "#6b7280",
-
-        // Sekundärfarben
         weiss: "#ffffff",
         gelb: "#fbbf24",
         orange: "#f97316",
         rot: "#ef4444",
         gruen: "#10b981",
+        schwarz: "#000000",
 
         // Erweiterte Farben
         "hauptblau-light": "#3b82f6",
@@ -28,36 +57,22 @@ module.exports = {
         "akzentblau-light": "#60a5fa",
         "akzentblau-dark": "#2563eb",
 
-        // Neutrale Farben - Barrierefrei
-        dunkelgrau: "#1f2937", // Sehr dunkel für Text
-        mittelgrau: "#4b5563", // Mittel für Sekundärtext
-        hellgrau: "#9ca3af", // Hell für Tertiärtext
-        sehrhellgrau: "#f3f4f6", // Sehr hell für Hintergründe
+        // Barrierefreie Textfarben (Dark Theme)
+        "text-primary": "#f4f4f4", // Haupttext auf Dark
+        "text-secondary": "#b3b3b3", // Sekundärtext auf Dark
+        "text-tertiary": "#8a8a8a", // Tertiärtext auf Dark
+        "text-inverse": "#050509", // Text auf hellem Hintergrund
 
-        // Akzentfarben - Barrierefrei
-        weiss: "#ffffff",
-        schwarz: "#000000",
-        gelb: "#fbbf24", // Warnung
-        orange: "#ea580c", // Orange (dunkler für Kontrast)
-        rot: "#dc2626", // Fehler (dunkler)
-        gruen: "#059669", // Erfolg (dunkler)
+        // Barrierefreie Hintergrundfarben (Dark Theme)
+        "bg-primary": "#050509", // Haupthintergrund (Dark)
+        "bg-secondary": "#111217", // Sekundärhintergrund (Panels)
+        "bg-tertiary": "#1a1d24", // Tertiärhintergrund
+        "bg-dark": "#050509", // Dunkler Hintergrund
 
-        // Barrierefreie Textfarben
-        "text-primary": "#1f2937", // Haupttext (Kontrast 15:1)
-        "text-secondary": "#4b5563", // Sekundärtext (Kontrast 7:1)
-        "text-tertiary": "#6b7280", // Tertiärtext (Kontrast 4.5:1)
-        "text-inverse": "#ffffff", // Text auf dunklem Hintergrund
-
-        // Barrierefreie Hintergrundfarben
-        "bg-primary": "#ffffff", // Haupthintergrund
-        "bg-secondary": "#f9fafb", // Sekundärhintergrund
-        "bg-tertiary": "#f3f4f6", // Tertiärhintergrund
-        "bg-dark": "#1f2937", // Dunkler Hintergrund
-
-        // Barrierefreie Linkfarben
-        "link-primary": "#1d4ed8", // Hauptlinks
-        "link-hover": "#1e40af", // Hover-Zustand
-        "link-visited": "#7c3aed", // Besuchte Links
+        // Barrierefreie Linkfarben (Dark Theme)
+        "link-primary": "#ffd700", // Hauptlinks (Gold)
+        "link-hover": "#ffed4e", // Hover-Zustand
+        "link-visited": "#b3b3b3", // Besuchte Links
       },
 
       // Typografie - Barrierefrei

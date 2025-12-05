@@ -9,7 +9,7 @@ import {
   FaPhone,
   FaBuilding,
   FaFileAlt,
-  FaEuro,
+  FaEuroSign,
   FaCalendar,
 } from "react-icons/fa";
 import { ShopProductsService, ShopProduct } from "@/lib/shop-products-service";
@@ -275,7 +275,7 @@ export default function QuoteRequestPage() {
                 {/* Budget */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <FaEuro className="inline mr-2" />
+                    <FaEuroSign className="inline mr-2" />
                     Budget-Rahmen
                   </label>
                   <select

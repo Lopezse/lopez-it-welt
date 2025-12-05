@@ -1,0 +1,11 @@
+var R=require("../../../../../chunks/[turbopack]_runtime.js")("server/app/api/admin/dev-tasks/run-build/route.js")
+R.c("server/chunks/[root-of-the-server]__878ab2cd._.js")
+R.c("server/chunks/node_modules_next_2cf980b5._.js")
+R.c("server/chunks/node_modules_mysql2_84e924d7._.js")
+R.c("server/chunks/node_modules_iconv-lite_a4444554._.js")
+R.c("server/chunks/node_modules_aws-ssl-profiles_lib_7ad223da._.js")
+R.c("server/chunks/node_modules_openai_f417a314._.js")
+R.c("server/chunks/node_modules_5c48c3fd._.js")
+R.m("[project]/.next-internal/server/app/api/admin/dev-tasks/run-build/route/actions.js [app-rsc] (server actions loader, ecmascript)")
+R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/src/app/api/admin/dev-tasks/run-build/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)")
+module.exports=R.m("[project]/node_modules/next/dist/esm/build/templates/app-route.js { INNER_APP_ROUTE => \"[project]/src/app/api/admin/dev-tasks/run-build/route.ts [app-route] (ecmascript)\" } [app-route] (ecmascript)").exports

@@ -72,7 +72,7 @@ header {
 }
 
 .logo-lopez {
-  color: #ffd700;
+  color: #C99700;
 }
 
 .logo-itwelt {
@@ -107,10 +107,15 @@ main {
 }
 
 .hero h1 {
-  font-size: 42px;
+  /* Responsive Font-Sizing: Desktop groß (42px), Tablet/Mobile automatisch angepasst */
+  font-size: clamp(18px, 4.5vw + 0.5rem, 42px);
   font-weight: 700;
   margin-bottom: 20px;
   line-height: 1.2;
+  /* Kein hartes Wort-Splitten - natürlicher Zeilenumbruch */
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
 }
 
 .hero p {
@@ -294,9 +299,20 @@ footer {
 }
 
 /* Responsive */
+/* Tablet: 768px - 1024px - automatische Verkleinerung */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero h1 {
+    font-size: clamp(28px, 3.5vw + 0.5rem, 36px);
+  }
+}
+
+/* Smartphone: < 768px - WCAG-konform (mind. 18px > 16px), passt in Container */
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 32px;
+    /* Responsive Font: Minimum 18px (WCAG-konform > 16px), Maximum 28px, passt in Container */
+    font-size: clamp(18px, 5vw + 0.5rem, 28px);
+    /* Zusätzlicher Innenabstand für bessere Lesbarkeit auf kleinen Screens */
+    padding: 0 8px;
   }
 
   .hero p {
@@ -335,6 +351,18 @@ footer {
     flex-direction: column;
     gap: 15px;
   }
+
+  /* Datenschutz/Impressum: H1 auf Mobile anpassen - "Datenschutzhinweis" auf einer Zeile */
+  .page-content h1 {
+    font-size: clamp(16px, 3.5vw + 0.5rem, 20px);
+    padding: 0 8px;
+    white-space: nowrap;
+    word-break: keep-all;
+  }
+
+  .page-content {
+    padding: 30px 20px;
+  }
 }
 
 /* Impressum & Datenschutz Pages */
@@ -348,12 +376,22 @@ footer {
 }
 
 .page-content h1 {
-  font-size: 32px;
+  /* Responsive Font-Sizing: Desktop groß (32px), Tablet/Mobile automatisch angepasst */
+  font-size: clamp(16px, 3.5vw + 0.5rem, 32px);
   font-weight: 700;
   color: #007bff;
   margin-bottom: 30px;
+  /* "Datenschutzhinweis" auf einer Zeile halten */
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+  /* Blaue Linie genau so breit wie der Text */
+  display: inline-block;
   padding-bottom: 15px;
   border-bottom: 3px solid #007bff;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .page-content h2 {

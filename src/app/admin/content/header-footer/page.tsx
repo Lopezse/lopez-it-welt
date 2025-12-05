@@ -1,7 +1,7 @@
 "use client";
 import { Card } from "@/components/ui/Card";
 import { useState } from "react";
-import { FaEye, FaSave, FaUndo } from "react-icons/fa";
+import { FaEye, FaSave, FaUndo, FaTrash } from "react-icons/fa";
 
 interface HeaderData {
   logoText: string;

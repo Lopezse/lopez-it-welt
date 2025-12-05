@@ -6,8 +6,9 @@
 // Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
 // =====================================================
 
-import mysql from "mysql2/promise";
+import mysql, { RowDataPacket } from "mysql2/promise";
 import { NextRequest, NextResponse } from "next/server";
+import type { CpuInfo } from "os";
 
 // =====================================================
 // GET MONITORING STATUS
@@ -26,11 +27,10 @@ export async function GET(request: NextRequest) {
     const cpus = os.cpus();
     let totalIdle = 0;
     let totalTick = 0;
-    cpus.forEach((cpu) => {
-      for (let type in cpu.times) {
-        totalTick += cpu.times[type];
-      }
-      totalIdle += cpu.times.idle;
+    cpus.forEach((cpu: CpuInfo) => {
+      const times = cpu.times;
+      totalTick += times.user + times.nice + times.sys + times.idle + times.irq;
+      totalIdle += times.idle;
     });
     const cpuUsage = 100 - ~~((100 * totalIdle) / totalTick);
 
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
 
     // Disk Usage (echt)
     const diskUsage = await new Promise((resolve) => {
-      fs.stat(".", (err) => {
+      fs.stat(".", (err: NodeJS.ErrnoException | null) => {
         if (err) resolve(0);
         // Vereinfachte Disk-Usage Berechnung
         resolve(Math.random() * 50 + 20); // 20-70% für Demo
@@ -60,23 +60,27 @@ export async function GET(request: NextRequest) {
     });
 
     // Aktive Benutzer aus Sessions zählen (letzte 5 Minuten)
-    const [activeUsersResult] = await connection.execute(
+    const [activeUsersResult] = await connection.execute<RowDataPacket[]>(
       `SELECT COUNT(DISTINCT user_id) as active_users 
              FROM lopez_security_alerts 
              WHERE created_at >= DATE_SUB(NOW(), INTERVAL 5 MINUTE) 
              AND user_id IS NOT NULL AND user_id != ''`,
     );
 
-    const activeUsers = activeUsersResult[0]?.active_users || 0;
+    const activeUsers = Array.isArray(activeUsersResult) && activeUsersResult.length > 0
+      ? (activeUsersResult[0] as { active_users: number }).active_users || 0
+      : 0;
 
     // Echte API-Requests zählen (letzte Stunde)
-    const [requestsResult] = await connection.execute(
+    const [requestsResult] = await connection.execute<RowDataPacket[]>(
       `SELECT COUNT(*) as total_requests 
              FROM lopez_system_metrics 
              WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 HOUR)`,
     );
 
-    const totalRequests = requestsResult[0]?.total_requests || 0;
+    const totalRequests = Array.isArray(requestsResult) && requestsResult.length > 0
+      ? (requestsResult[0] as { total_requests: number }).total_requests || 0
+      : 0;
 
     // Error Rate (echt - basierend auf aktuellen Fehlern)
     const errorRate = Math.random() * 2; // 0-2% echte Error Rate
@@ -161,7 +165,7 @@ export async function GET(request: NextRequest) {
     );
 
     // Compliance-Metriken laden
-    const [complianceRows] = await connection.execute(
+    const [complianceRows] = await connection.execute<RowDataPacket[]>(
       "SELECT * FROM lopez_compliance_metrics ORDER BY created_at DESC LIMIT 1",
     );
 
@@ -181,7 +185,7 @@ export async function GET(request: NextRequest) {
       },
     ];
 
-    const realCompliance = complianceRows[0] || {
+    const realCompliance = (Array.isArray(complianceRows) && complianceRows.length > 0 ? complianceRows[0] : null) as any || {
       id: `compliance_${Date.now()}`,
       created_at: new Date().toISOString(),
       standard_name: "ISO 27001",

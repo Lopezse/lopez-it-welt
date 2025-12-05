@@ -7,6 +7,7 @@
 // =====================================================
 
 import { getConnection } from "./database";
+import { logger } from "@/lib/logger";
 
 // =====================================================
 // INTERFACES
@@ -106,7 +107,7 @@ export class RBACService {
 
       return user!;
     } catch (error) {
-      console.error("❌ Fehler beim Erstellen des Benutzers:", error);
+      logger.error("Fehler beim Erstellen des Benutzers", error);
       throw error;
     }
   }
@@ -119,7 +120,7 @@ export class RBACService {
       const users = rows as User[];
       return users.length > 0 ? users[0] : null;
     } catch (error) {
-      console.error("❌ Fehler beim Laden des Benutzers:", error);
+      logger.error("Fehler beim Laden des Benutzers", error);
       throw error;
     }
   }
@@ -134,7 +135,7 @@ export class RBACService {
       const users = rows as User[];
       return users.length > 0 ? users[0] : null;
     } catch (error) {
-      console.error("❌ Fehler beim Laden des Benutzers:", error);
+      logger.error("Fehler beim Laden des Benutzers", error);
       throw error;
     }
   }
@@ -146,8 +147,17 @@ export class RBACService {
 
       const users = rows as User[];
       return users.length > 0 ? users[0] : null;
-    } catch (error) {
-      console.error("❌ Fehler beim Laden des Benutzers:", error);
+    } catch (error: any) {
+      const errorMsg = error.message || String(error);
+      logger.error("Fehler beim Laden des Benutzers", { error: errorMsg, email });
+      
+      // Wenn Tabelle nicht existiert, geben wir einen spezifischen Fehler zurück
+      if (errorMsg.includes("doesn't exist") || errorMsg.includes("Table") || errorMsg.includes("Unknown table")) {
+        const newError = new Error(`Tabelle lopez_users existiert nicht: ${errorMsg}`);
+        (newError as any).code = "TABLE_NOT_FOUND";
+        throw newError;
+      }
+      
       throw error;
     }
   }
@@ -173,7 +183,7 @@ export class RBACService {
 
       return role!;
     } catch (error) {
-      console.error("❌ Fehler beim Erstellen der Rolle:", error);
+      logger.error("Fehler beim Erstellen der Rolle", error);
       throw error;
     }
   }
@@ -186,7 +196,7 @@ export class RBACService {
       const roles = rows as Role[];
       return roles.length > 0 ? roles[0] : null;
     } catch (error) {
-      console.error("❌ Fehler beim Laden der Rolle:", error);
+      logger.error("Fehler beim Laden der Rolle", error);
       throw error;
     }
   }
@@ -198,7 +208,7 @@ export class RBACService {
 
       return rows as Role[];
     } catch (error) {
-      console.error("❌ Fehler beim Laden der Rollen:", error);
+      logger.error("Fehler beim Laden der Rollen", error);
       throw error;
     }
   }
@@ -230,7 +240,7 @@ export class RBACService {
 
       return permission!;
     } catch (error) {
-      console.error("❌ Fehler beim Erstellen der Berechtigung:", error);
+      logger.error("Fehler beim Erstellen der Berechtigung", error);
       throw error;
     }
   }
@@ -243,7 +253,7 @@ export class RBACService {
       const permissions = rows as Permission[];
       return permissions.length > 0 ? permissions[0] : null;
     } catch (error) {
-      console.error("❌ Fehler beim Laden der Berechtigung:", error);
+      logger.error("Fehler beim Laden der Berechtigung", error);
       throw error;
     }
   }
@@ -300,7 +310,7 @@ export class RBACService {
 
       return false;
     } catch (error) {
-      console.error("❌ Fehler bei der Berechtigungsprüfung:", error);
+      logger.error("Fehler bei der Berechtigungsprüfung", error);
       return false;
     }
   }
@@ -318,7 +328,7 @@ export class RBACService {
 
       return true;
     } catch (error) {
-      console.error("❌ Fehler bei der ABAC-Auswertung:", error);
+      logger.error("Fehler bei der ABAC-Auswertung", error);
       return false;
     }
   }
@@ -346,7 +356,7 @@ export class RBACService {
 
       return true;
     } catch (error) {
-      console.error("❌ Fehler bei der Rollen-Zuweisung:", error);
+      logger.error("Fehler bei der Rollen-Zuweisung", error);
       return false;
     }
   }
@@ -365,7 +375,7 @@ export class RBACService {
 
       return true;
     } catch (error) {
-      console.error("❌ Fehler bei der Rollen-Entfernung:", error);
+      logger.error("Fehler bei der Rollen-Entfernung", error);
       return false;
     }
   }
@@ -393,7 +403,7 @@ export class RBACService {
 
       return true;
     } catch (error) {
-      console.error("❌ Fehler bei der Berechtigungs-Zuweisung:", error);
+      logger.error("Fehler bei der Berechtigungs-Zuweisung", error);
       return false;
     }
   }
@@ -418,7 +428,7 @@ export class RBACService {
 
       return rows as Role[];
     } catch (error) {
-      console.error("❌ Fehler beim Laden der Benutzer-Rollen:", error);
+      logger.error("Fehler beim Laden der Benutzer-Rollen", error);
       throw error;
     }
   }
@@ -443,8 +453,120 @@ export class RBACService {
 
       return rows as Permission[];
     } catch (error) {
-      console.error("❌ Fehler beim Laden der Rollen-Berechtigungen:", error);
+      logger.error("Fehler beim Laden der Rollen-Berechtigungen", error);
       throw error;
     }
+  }
+
+  // =====================================================
+  // ENTERPRISE++ PERMISSION HELPERS
+  // =====================================================
+
+  /**
+   * Holt alle Permission-Keys eines Users als Array
+   * Format: ["admin.dashboard.view", "admin.customers.view", ...]
+   */
+  static async getUserPermissionKeys(userId: number): Promise<string[]> {
+    try {
+      const connection = await getConnection();
+
+      const [rows] = await connection.execute(
+        `
+          SELECT DISTINCT CONCAT(p.resource, '.', p.action) as permission_key
+          FROM lopez_user_roles ur
+          JOIN lopez_role_permissions rp ON ur.role_id = rp.role_id
+          JOIN lopez_permissions p ON rp.permission_id = p.id
+          WHERE ur.user_id = ? 
+            AND (ur.expires_at IS NULL OR ur.expires_at > NOW())
+            AND rp.granted = true
+          ORDER BY p.resource, p.action
+        `,
+        [userId],
+      );
+
+      return (rows as any[]).map((row) => row.permission_key);
+    } catch (error) {
+      logger.error("Fehler beim Laden der User-Permission-Keys", error);
+      return [];
+    }
+  }
+
+  /**
+   * Prüft ob User eine bestimmte Permission hat
+   * @param userId User-ID
+   * @param permissionKey Format: "admin.dashboard.view" oder "resource.action"
+   */
+  static async hasPermission(userId: number, permissionKey: string): Promise<boolean> {
+    try {
+      const [resource, action] = this.parsePermissionKey(permissionKey);
+      return await this.checkPermission({
+        user_id: userId,
+        resource,
+        action,
+      });
+    } catch (error) {
+      logger.error("Fehler bei hasPermission", error);
+      return false;
+    }
+  }
+
+  /**
+   * Prüft ob User mindestens eine der angegebenen Permissions hat
+   */
+  static async hasAnyPermission(userId: number, permissionKeys: string[]): Promise<boolean> {
+    for (const key of permissionKeys) {
+      if (await this.hasPermission(userId, key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Parst einen Permission-Key in resource und action
+   * "admin.dashboard.view" → ["admin.dashboard", "view"]
+   * "customers.read" → ["customers", "read"]
+   */
+  private static parsePermissionKey(key: string): [string, string] {
+    const parts = key.split(".");
+    const action = parts.pop() || "view";
+    const resource = parts.join(".");
+    return [resource, action];
+  }
+
+  /**
+   * Holt die höchste Rolle eines Users (niedrigster Level = höchste Rechte)
+   */
+  static async getUserHighestRole(userId: number): Promise<Role | null> {
+    try {
+      const connection = await getConnection();
+
+      const [rows] = await connection.execute(
+        `
+          SELECT r.*
+          FROM lopez_user_roles ur
+          JOIN lopez_roles r ON ur.role_id = r.id
+          WHERE ur.user_id = ? 
+            AND (ur.expires_at IS NULL OR ur.expires_at > NOW())
+          ORDER BY r.level ASC
+          LIMIT 1
+        `,
+        [userId],
+      );
+
+      const roles = rows as Role[];
+      return roles.length > 0 ? roles[0] : null;
+    } catch (error) {
+      logger.error("Fehler beim Laden der höchsten User-Rolle", error);
+      return null;
+    }
+  }
+
+  /**
+   * Prüft ob User Super Admin ist
+   */
+  static async isSuperAdmin(userId: number): Promise<boolean> {
+    const role = await this.getUserHighestRole(userId);
+    return role?.name === "Super Admin" || role?.level === 1;
   }
 }

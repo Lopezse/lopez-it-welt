@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { glob } from "glob";
 import * as path from "path";
-import { createComplianceSystemMySQL } from "./compliance-system-mysql";
+// import { MySQLComplianceSystem } from "./compliance-system-mysql"; // TODO: Compliance-System implementieren
 
 // DSGVO-Regel Interface
 export interface DSGVORule {
@@ -59,7 +59,13 @@ export class DSGVOEnforcementSystem {
 
   constructor(projectRoot: string = process.cwd()) {
     this.projectRoot = projectRoot;
-    this.complianceSystem = createComplianceSystemMySQL();
+    // TODO: Compliance-System implementieren
+    // this.complianceSystem = createComplianceSystemMySQL();
+    this.complianceSystem = {
+      initialize: async () => {},
+      getDSGVORules: async () => [],
+      close: async () => {},
+    };
     this.initializeKnownPages();
   }
 

@@ -1,175 +1,172 @@
 // =====================================================
-// LOGIN API - LOPEZ IT WELT
+// KUNDEN LOGIN API
 // =====================================================
-// Erstellt: 2025-01-19
-// Zweck: Benutzer-Authentifizierung
-// Status: ✅ VOLLSTÄNDIG IMPLEMENTIERT
+// POST /api/auth/login
+// Enterprise++ Login mit Rate-Limiting und 2FA Support
 // =====================================================
 
-import { AuditService } from "@/lib/audit-service";
-import { AuthService } from "@/lib/auth-service";
-import { DevelopmentMode } from "@/lib/development-mode";
 import { NextRequest, NextResponse } from "next/server";
+import { CustomerAuthService } from "@/lib/customer/auth-service";
+import { getConnection } from "@/lib/database";
 
 // =====================================================
-// POST - Benutzer-Login
+// RATE LIMITING
+// =====================================================
+
+const loginAttempts = new Map<string, { count: number; blockedUntil: number }>();
+
+function checkLoginRateLimit(identifier: string): { allowed: boolean; retryAfter?: number } {
+  const now = Date.now();
+  const attempt = loginAttempts.get(identifier);
+  
+  if (attempt && attempt.blockedUntil > now) {
+    return { allowed: false, retryAfter: Math.ceil((attempt.blockedUntil - now) / 1000) };
+  }
+  
+  if (!attempt || attempt.blockedUntil < now) {
+    loginAttempts.set(identifier, { count: 1, blockedUntil: 0 });
+    return { allowed: true };
+  }
+  
+  attempt.count++;
+  
+  // Nach 5 Fehlversuchen: 5 Minuten blockieren
+  if (attempt.count >= 5) {
+    attempt.blockedUntil = now + 5 * 60 * 1000;
+    return { allowed: false, retryAfter: 300 };
+  }
+  
+  return { allowed: true };
+}
+
+function resetLoginAttempts(identifier: string) {
+  loginAttempts.delete(identifier);
+}
+
+// =====================================================
+// POST - Login
 // =====================================================
 
 export async function POST(request: NextRequest) {
   try {
-    // Development Mode: Authentication umgehen
-    if (DevelopmentMode.shouldBypassAuth()) {
-      // Development Mode: Login API umgangen
-      const mockResponse = DevelopmentMode.createLoginResponse();
-      return NextResponse.json(mockResponse);
-    }
-
+    const ip = request.headers.get("x-forwarded-for") || 
+               request.headers.get("x-real-ip") || 
+               "unknown";
+    const userAgent = request.headers.get("user-agent") || undefined;
+    
+    // Body parsen
     const body = await request.json();
-    const { username, password, twoFactorToken } = body;
+    const { email, password } = body;
 
-    if (!username || !password) {
+    // Validierung
+    if (!email || !password) {
       return NextResponse.json(
-        { success: false, message: "Benutzername und Passwort erforderlich" },
-        { status: 400 },
+        { success: false, error: "E-Mail und Passwort sind erforderlich" },
+        { status: 400 }
       );
     }
 
-    // IP-Adresse und User-Agent extrahieren
-    const ipAddress =
-      request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
-    const userAgent = request.headers.get("user-agent") || "unknown";
-
-    // Login-Versuch: ${username} von ${ipAddress}
+    // Rate Limiting prüfen (per IP + Email Kombination)
+    const rateLimitKey = `${ip}:${email.toLowerCase()}`;
+    const rateLimit = checkLoginRateLimit(rateLimitKey);
+    
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: `Zu viele Anmeldeversuche. Bitte warten Sie ${rateLimit.retryAfter} Sekunden.`,
+          retry_after: rateLimit.retryAfter
+        },
+        { status: 429 }
+      );
+    }
 
     // Login durchführen
-    const authResult = await AuthService.login(
-      { username, password, twoFactorToken },
-      ipAddress,
-      userAgent,
+    const result = await CustomerAuthService.login(
+      { email, password },
+      ip,
+      userAgent
     );
 
-    if (!authResult.success) {
-      // Login fehlgeschlagen: ${username} - ${authResult.message}
-      return NextResponse.json(
-        {
-          success: false,
-          message: authResult.message,
-          requires2FA: authResult.requires2FA,
-        },
-        { status: 401 },
-      );
-    }
-
-    // JWT-Token generieren
-    const jwtToken = AuthService.generateJWT(authResult.session!);
-
-    // Audit-Log erstellen
-    await AuditService.logLogin(
-      authResult.session!.userId,
-      authResult.session!.username,
-      ipAddress,
-      userAgent,
-      authResult.session!.sessionToken,
-    );
-
-    // Automatische Zeiterfassung nach Login starten
-    try {
-      const { promises: fs } = await import("fs");
-      const path = await import("path");
-      
-      const SESSIONS_FILE = path.join(process.cwd(), "data", "time-sessions.json");
-      
-      // Sessions laden
-      let sessions: any[] = [];
+    if (!result.success) {
+      // Audit-Log für fehlgeschlagenen Login
       try {
-        const data = await fs.readFile(SESSIONS_FILE, "utf-8");
-        sessions = JSON.parse(data);
+        const pool = await getConnection();
+        await pool.execute(`
+          INSERT INTO lopez_audit_logs 
+            (table_name, record_id, action, user_id, ip_address, new_values)
+          VALUES ('lopez_customers', 0, 'LOGIN', 0, ?, ?)
+        `, [ip, JSON.stringify({ 
+          email, 
+          event: 'LOGIN_FAILED', 
+          reason: result.error 
+        })]);
       } catch {
-        // Datei existiert nicht - erstelle sie
-        sessions = [];
+        // Audit-Fehler ignorieren
       }
       
-      // Prüfe ob bereits eine aktive Session existiert
-      const activeSession = sessions.find(
-        (s) => s.user_id === authResult.session!.userId && s.status === "active" && !s.end_time
+      return NextResponse.json(
+        { success: false, error: result.error },
+        { status: 401 }
       );
-      
-      if (!activeSession) {
-        // Neue Session erstellen
-        const now = new Date().toISOString();
-        const maxId = sessions.length > 0 ? Math.max(...sessions.map((s: any) => s.id || 0)) : 0;
-        
-        const newSession = {
-          id: maxId + 1,
-          user_id: authResult.session!.userId,
-          module: "Login-Session",
-          taetigkeit: `System-Login: ${authResult.session!.username}`,
-          ausloeser: "Automatische Zeiterfassung nach erfolgreichem Login",
-          problem: false,
-          category: "administration",
-          priority: "high",
-          project_id: null, // Keine Projekt-Zuordnung bei Login
-          task_id: null,
-          start_time: now,
-          status: "active",
-          created_at: now,
-          updated_at: now,
-        };
-        
-        sessions.push(newSession);
-        
-        // Verzeichnis erstellen falls nicht vorhanden
-        const dir = path.dirname(SESSIONS_FILE);
-        await fs.mkdir(dir, { recursive: true });
-        
-        // Sessions speichern
-        await fs.writeFile(SESSIONS_FILE, JSON.stringify(sessions, null, 2));
-        
-        // Audit-Log für Zeiterfassung
-        await AuditService.logAudit({
-          table_name: "work_sessions",
-          record_id: newSession.id,
-          action: "INSERT",
-          new_values: JSON.stringify({
-            user_id: authResult.session!.userId,
-            username: authResult.session!.username,
-            module: "Login-Session",
-            taetigkeit: newSession.taetigkeit,
-            status: "active",
-          }),
-          user_id: authResult.session!.userId,
-          username: authResult.session!.username,
-          ip_address: ipAddress,
-          user_agent: userAgent,
-          session_id: authResult.session!.sessionToken,
-          risk_level: "LOW",
-          compliance_category: "DATA_MODIFICATION", // Zeiterfassungs-Events
-        });
-      }
-    } catch (timeTrackingError) {
-      // Zeiterfassung ist optional - nicht kritisch
-      console.warn("⚠️ Automatische Zeiterfassung nach Login fehlgeschlagen:", timeTrackingError);
     }
 
-    // Login erfolgreich: ${username}
+    // Rate Limit zurücksetzen bei erfolgreichem Login
+    resetLoginAttempts(rateLimitKey);
 
-    return NextResponse.json({
+    // 2FA erforderlich?
+    if (result.requires_2fa) {
+      return NextResponse.json({
+        success: true,
+        requires_2fa: true,
+        customer_id: result.customer_id,
+        message: "Bitte geben Sie Ihren 2FA-Code ein"
+      });
+    }
+
+    // Audit-Log für erfolgreichen Login
+    try {
+      const pool = await getConnection();
+      await pool.execute(`
+        INSERT INTO lopez_audit_logs 
+          (table_name, record_id, action, user_id, ip_address, new_values)
+        VALUES ('lopez_customers', ?, 'LOGIN', ?, ?, ?)
+      `, [
+        result.customer_id, 
+        result.customer_id, 
+        ip, 
+        JSON.stringify({ event: 'LOGIN_SUCCESS' })
+      ]);
+    } catch {
+      // Audit-Fehler ignorieren
+    }
+
+    // Session-Cookie setzen
+    const response = NextResponse.json({
       success: true,
-      message: "Login erfolgreich",
+      message: "Anmeldung erfolgreich",
       data: {
-        user: {
-          id: authResult.session!.userId,
-          username: authResult.session!.username,
-          email: authResult.session!.email,
-          roles: authResult.session!.roles,
-        },
-        token: jwtToken,
-        sessionToken: authResult.session!.sessionToken,
-        expiresAt: authResult.session!.expiresAt,
-      },
+        customer_id: result.customer_id,
+        redirect: "/portal"
+      }
     });
+
+    // HttpOnly Cookie für Session
+    response.cookies.set("customer_session", result.session_token!, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60, // 7 Tage
+      path: "/"
+    });
+
+    return response;
+
   } catch (error) {
-    // Login-API-Fehler: ${error}
-    return NextResponse.json({ success: false, message: "Interner Serverfehler" }, { status: 500 });
+    console.error("❌ Login API Error:", error);
+    return NextResponse.json(
+      { success: false, error: "Ein Fehler ist aufgetreten" },
+      { status: 500 }
+    );
   }
 }

@@ -1,6 +1,12 @@
 # Lopez IT Welt – Enterprise++ Time Tracking
 
-Start: 28.09.2025
+**Start:** 28.09.2025  
+**KW-System aktiv:** ✅ **AB 28.11.2025**  
+**Status:** ✅ **KW-BASIERTE EINTRÄGE** ab KW 48
+
+**Hinweis:** Ab sofort werden alle Aufgaben **KW-basiert** eingetragen.  
+**Format:** `KW XX – Datum von DD.MM.YYYY bis DD.MM.YYYY`  
+**Template:** Siehe `docs/KW-SYSTEM/templates/TIMELOG-TEMPLATE.md`
 
 ---
 
