@@ -32,18 +32,19 @@ Nach erfolgreichem Abschluss des **AI Center 2.5.0** (Dezember 2025) startet die
 |---------|---------|--------------|
 | AI Center | ✅ Production | ✅ Stabil |
 | Admin-Backend | ✅ 90% | ✅ 100% |
-| Kunden-Portal | ✅ 70% | ✅ 100% |
+| Kunden-Portal | ✅ 80% | ✅ 100% |
 | Infrastruktur | ⚠️ 40% | ✅ 100% |
-| SaaS-Features | ⚠️ 50% | ✅ 100% |
+| SaaS-Features | ⚠️ 60% | ✅ 100% |
 | Marketing | ❌ 10% | ✅ 100% |
 
 ### Letzte Aktualisierung: 05.12.2025
 
-**Phase 1.1–1.4 abgeschlossen:**
+**Phase 1.1–1.5 abgeschlossen:**
 - ✅ Registrierung (Argon2, E-Mail-Verifizierung)
 - ✅ Login + 2FA (TOTP, Backup-Codes)
 - ✅ Onboarding (4-Schritte Wizard)
 - ✅ Kundendashboard + Portal-Seiten
+- ✅ Billing (Rechnungen, PDF-Generierung, Download)
 
 ---
 

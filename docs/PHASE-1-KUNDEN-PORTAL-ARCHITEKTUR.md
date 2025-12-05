@@ -6,8 +6,8 @@
 
 | Dokument-ID | LIW-PORTAL-ARCH-001 |
 |-------------|---------------------|
-| Version | 1.4.0 |
-| Status | 🟢 **PHASE 1.1–1.4 FERTIG** |
+| Version | 1.5.0 |
+| Status | 🟢 **PHASE 1.1–1.5 FERTIG** |
 | Erstellt | 05.12.2025 |
 | Aktualisiert | 05.12.2025 |
 
@@ -648,8 +648,8 @@ customer.ai.use
 | 1.2 | Login + 2FA | ✅ FERTIG | 05.12.2025 |
 | 1.3 | Onboarding (4-Schritte) | ✅ FERTIG | 05.12.2025 |
 | 1.4 | Kundendashboard + Portal | ✅ FERTIG | 05.12.2025 |
-| 1.5 | Billing | 🔵 GEPLANT | - |
-| 1.6 | PDF-Rechnungen | 🔵 GEPLANT | - |
+| 1.5 | Billing + PDF-Rechnungen | ✅ FERTIG | 05.12.2025 |
+| 1.6 | Admin-Portal (Kunden + Rechnungen) | 🔵 GEPLANT | - |
 
 ---
 
@@ -670,6 +670,10 @@ customer.ai.use
 | GET /api/portal/stats | `src/app/api/portal/stats/route.ts` | ✅ |
 | GET/POST /api/portal/projekte | `src/app/api/portal/projekte/route.ts` | ✅ |
 | GET /api/portal/rechnungen | `src/app/api/portal/rechnungen/route.ts` | ✅ |
+| GET /api/portal/rechnungen/[id]/download | `src/app/api/portal/rechnungen/[id]/download/route.ts` | ✅ |
+| GET/POST /api/admin/invoices | `src/app/api/admin/invoices/route.ts` | ✅ |
+| GET/PATCH /api/admin/invoices/[id] | `src/app/api/admin/invoices/[id]/route.ts` | ✅ |
+| POST/GET /api/admin/invoices/[id]/pdf | `src/app/api/admin/invoices/[id]/pdf/route.ts` | ✅ |
 | GET/POST /api/portal/support | `src/app/api/portal/support/route.ts` | ✅ |
 | PATCH /api/portal/einstellungen | `src/app/api/portal/einstellungen/route.ts` | ✅ |
 
@@ -697,10 +701,50 @@ customer.ai.use
 | OnboardingService | `src/lib/customer/onboarding-service.ts` | ✅ |
 | TwoFactorService | `src/lib/customer/two-factor-service.ts` | ✅ |
 | EmailService | `src/lib/customer/email-service.ts` | ✅ |
+| InvoiceService | `src/lib/customer/invoice-service.ts` | ✅ |
+| InvoiceNumberGenerator | `src/lib/customer/invoice-number-generator.ts` | ✅ |
+| InvoicePdf | `src/lib/customer/invoice-pdf.tsx` | ✅ |
 
 ---
 
-**Ende Phase 1.4 – Kundendashboard**
+## 10. Billing-System (Phase 1.5)
+
+### 10.1 Features
+
+| Feature | Status |
+|---------|--------|
+| Rechnungsnummer `LITW-YYYY-00001` | ✅ Thread-safe |
+| Immutabilität (sent/paid) | ✅ Keine Inhaltsänderungen |
+| Audit-Logging | ✅ Status-Wechsel protokolliert |
+| PDF-Generierung | ✅ @react-pdf/renderer |
+| Sichere Speicherung | ✅ `/storage/invoices/` |
+| Geschützter Download | ✅ Session + Berechtigung |
+| AI-Ready | ✅ Analytics-Methode |
+
+### 10.2 Status-Flow
+
+```
+draft ──► sent ──► paid
+  │         │
+  │         ├──► overdue ──► paid
+  │         │
+  │         └──► cancelled
+  │
+  └──► cancelled
+```
+
+### 10.3 Speicherstruktur
+
+```
+/storage/invoices/
+  └── {year}/
+      └── {customer_id}/
+          └── {invoice_id}-{hash}.pdf
+```
+
+---
+
+**Ende Phase 1.5 – Billing**
 
 *Lopez IT Welt – Enterprise++ Kunden-Portal*
 

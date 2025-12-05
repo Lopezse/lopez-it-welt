@@ -7,7 +7,7 @@
 import React, { useState, useEffect } from "react";
 import { 
   FaFileInvoice, FaSpinner, FaDownload, FaCheck, FaClock, 
-  FaExclamationTriangle, FaTimes, FaEye
+  FaExclamationTriangle, FaTimes, FaEye, FaFilePdf
 } from "react-icons/fa";
 
 interface LineItem {
@@ -45,8 +45,40 @@ export default function RechnungenPage() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Invoice | null>(null);
+  const [downloading, setDownloading] = useState<number | null>(null);
 
   useEffect(() => { loadInvoices(); }, []);
+
+  // PDF-Download Funktion
+  const downloadPdf = async (invoiceId: number, invoiceNumber: string) => {
+    try {
+      setDownloading(invoiceId);
+      const response = await fetch(`/api/portal/rechnungen/${invoiceId}/download`);
+      
+      if (!response.ok) {
+        const data = await response.json();
+        alert(data.error || "Download fehlgeschlagen");
+        return;
+      }
+
+      // PDF als Blob herunterladen
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${invoiceNumber}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+    } catch (error) {
+      console.error("Download Error:", error);
+      alert("Download fehlgeschlagen");
+    } finally {
+      setDownloading(null);
+    }
+  };
 
   const loadInvoices = async () => {
     try {
@@ -154,15 +186,18 @@ export default function RechnungenPage() {
                           <FaEye />
                         </button>
                         {invoice.pdf_path && (
-                          <a
-                            href={invoice.pdf_path}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 text-slate-400 hover:text-blue-400 transition-colors"
+                          <button
+                            onClick={() => downloadPdf(invoice.id, invoice.invoice_number)}
+                            disabled={downloading === invoice.id}
+                            className="p-2 text-slate-400 hover:text-red-400 disabled:opacity-50 transition-colors"
                             title="PDF herunterladen"
                           >
-                            <FaDownload />
-                          </a>
+                            {downloading === invoice.id ? (
+                              <FaSpinner className="animate-spin" />
+                            ) : (
+                              <FaFilePdf />
+                            )}
+                          </button>
                         )}
                       </div>
                     </td>
