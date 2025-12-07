@@ -44,7 +44,7 @@ export class RAGService {
         if (options?.userId) {
             const decision = await dsgvoDecisionEngine.getAIProcessingPermission({
                 userId: options.userId,
-                purpose: "rag_query",
+                purpose: "analytics", // RAG-Query verwendet analytics als Zweck
                 context: {
                     query: question,
                     category: options.category,

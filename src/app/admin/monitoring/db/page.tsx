@@ -92,18 +92,18 @@ export default function MonitoringDBPage() {
     );
   }
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string): "success" | "warning" | "error" | "default" => {
     switch (status) {
       case "healthy":
-        return "green";
+        return "success";
       case "degraded":
-        return "yellow";
+        return "warning";
       case "unhealthy":
-        return "orange";
+        return "warning";
       case "critical":
-        return "red";
+        return "error";
       default:
-        return "gray";
+        return "default";
     }
   };
 

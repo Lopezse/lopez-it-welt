@@ -4,6 +4,7 @@ export interface SectionWrapperProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
   as?: "section" | "div" | "article";
   bg?: "white" | "gray" | "darkblau" | "custom";
+  divider?: "wave" | "angle" | "none";
   className?: string;
 }
 

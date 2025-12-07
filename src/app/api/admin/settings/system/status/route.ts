@@ -20,10 +20,10 @@ export async function GET(request: NextRequest) {
     let dbStatus = "offline";
     let dbVersion = "Unknown";
     try {
-      const dbInfo = await executeQueryPool({
-        query: "SELECT VERSION() as version",
-        values: [],
-      });
+      const dbInfo = await executeQueryPool(
+        "SELECT VERSION() as version",
+        []
+      );
       if (dbInfo && dbInfo.length > 0) {
         dbStatus = "online";
         dbVersion = dbInfo[0].version || "Unknown";

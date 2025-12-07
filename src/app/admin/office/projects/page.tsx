@@ -222,7 +222,7 @@ export default function ProjectsPage() {
         ) : (
           <table className="w-full">
             <thead>
-              <tr style={{ backgroundColor: "#1f2329" }} className="border-b" style={{ borderColor: "#272a33" }}>
+              <tr style={{ backgroundColor: "#1f2329", borderColor: "#272a33" }} className="border-b">
                 <th className="px-4 py-3 text-left text-sm font-medium" style={{ color: "#b3b3b3" }}>
                   Projekt
                 </th>

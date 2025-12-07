@@ -26,7 +26,7 @@ async function getUserIdFromRequest(request: NextRequest): Promise<number | null
     if (!token) return null;
 
     const session = await AuthService.validateSession(token);
-    return session?.user?.id || null;
+    return session?.userId || null;
   } catch {
     return null;
   }

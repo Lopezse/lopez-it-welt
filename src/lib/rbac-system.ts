@@ -29,6 +29,8 @@ export interface User {
   last_login?: string;
   created_at?: string;
   updated_at?: string;
+  // Optional: Rollen werden manchmal mit dem User geladen
+  roles?: Array<{ id?: number; role_name?: string; name?: string }>;
 }
 
 export interface Role {

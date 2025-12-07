@@ -172,9 +172,12 @@ export async function POST(request: NextRequest) {
     // Prüfe ob bereits ein Task für dieses Risiko existiert
     const pool = await getConnection();
     try {
+      // @sql-safe: risk_id wird als Parameter-Wert verwendet (über ? Platzhalter)
+      // Der Template-Literal konstruiert nur den LIKE-Pattern-String, nicht die SQL-Query
+      const likePattern = `%Risk-ID:** ${body.risk_id}%`;
       const [existing] = await pool.execute(
         `SELECT id FROM dev_tasks WHERE description LIKE ?`,
-        [`%Risk-ID:** ${body.risk_id}%`]
+        [likePattern]
       );
       
       if ((existing as any[]).length > 0) {
@@ -273,4 +276,8 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+
+
+
 

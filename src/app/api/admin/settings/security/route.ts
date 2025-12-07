@@ -19,10 +19,10 @@ export async function GET(request: NextRequest) {
     const userId = session.user.id;
 
     // 2FA Status laden
-    const twoFactor = await executeQueryPool({
-      query: "SELECT enabled, secret FROM two_factor_auth WHERE user_id = ?",
-      values: [userId],
-    });
+    const twoFactor = await executeQueryPool(
+      "SELECT enabled, secret FROM two_factor_auth WHERE user_id = ?",
+      [userId]
+    );
 
     const twoFactorEnabled = twoFactor && twoFactor.length > 0 ? twoFactor[0].enabled === 1 : false;
 

@@ -193,7 +193,7 @@ class HealthEngine {
           health.score,
           JSON.stringify(health.metrics_summary),
           JSON.stringify(health.issues),
-          health.checked_at || new Date(),
+          (health as unknown as Record<string, unknown>).checked_at || new Date(),
         ]
       );
     } catch (error) {

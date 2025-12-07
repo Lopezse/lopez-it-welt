@@ -30,10 +30,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Benutzer finden
-    const users = await executeQueryPool({
-      query: "SELECT id, email FROM users WHERE email = ?",
-      values: [email],
-    });
+    const users = await executeQueryPool(
+      "SELECT id, email FROM users WHERE email = ?",
+      [email]
+    );
 
     if (!users || users.length === 0) {
       return NextResponse.json(
@@ -46,10 +46,10 @@ export async function POST(request: NextRequest) {
     const passwordHash = await bcrypt.hash(newPassword, 10);
 
     // Passwort aktualisieren
-    await executeQueryPool({
-      query: "UPDATE users SET password_hash = ?, updated_at = NOW() WHERE email = ?",
-      values: [passwordHash, email],
-    });
+    await executeQueryPool(
+      "UPDATE users SET password_hash = ?, updated_at = NOW() WHERE email = ?",
+      [passwordHash, email]
+    );
 
     return NextResponse.json({
       success: true,

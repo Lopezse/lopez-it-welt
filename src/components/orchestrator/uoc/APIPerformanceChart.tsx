@@ -95,7 +95,7 @@ export function APIPerformanceChart({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           API-Performance
         </h3>
-        {autoRefresh && <LiveStreamIndicator isConnected={isConnected} lastUpdate={lastUpdate} />}
+        {autoRefresh && <LiveStreamIndicator isConnected={isConnected} lastUpdate={lastUpdate ?? undefined} />}
       </div>
       {chartData.length > 0 ? (
         <ResponsiveContainer width="100%" height={300}>
@@ -123,7 +123,7 @@ export function APIPerformanceChart({
                 border: "1px solid #e5e7eb",
                 borderRadius: "0.5rem",
               }}
-              className="dark:bg-gray-800 dark:border-gray-700"
+              wrapperClassName="dark:bg-gray-800 dark:border-gray-700"
             />
             <Legend />
             <Line

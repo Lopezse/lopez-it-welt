@@ -47,7 +47,7 @@ export async function GET(
 
         // RBAC-Prüfung: compliance.view
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "compliance",
             action: "view"
         });
@@ -113,7 +113,7 @@ export async function PUT(
 
         // RBAC-Prüfung: compliance.manage
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "compliance",
             action: "manage"
         });
@@ -158,38 +158,28 @@ export async function PUT(
             }
         }
 
-        // Update-Felder
+        // Update-Felder - Enterprise++ ALLOWED_FIELDS Whitelist
+        // @sql-safe: Nur Felder aus ALLOWED_FIELDS werden akzeptiert
+        const ALLOWED_FIELDS = [
+            "use_case_name",
+            "risk_category", 
+            "risk_score",
+            "approval_reason",
+            "approval_conditions",
+            "measures_package",
+            "review_date"
+        ] as const;
+
         const connection = await getConnection();
         const updateFields: string[] = [];
         const updateValues: any[] = [];
 
-        if (body.use_case_name !== undefined) {
-            updateFields.push("use_case_name = ?");
-            updateValues.push(body.use_case_name);
-        }
-        if (body.risk_category !== undefined) {
-            updateFields.push("risk_category = ?");
-            updateValues.push(body.risk_category);
-        }
-        if (body.risk_score !== undefined) {
-            updateFields.push("risk_score = ?");
-            updateValues.push(body.risk_score);
-        }
-        if (body.approval_reason !== undefined) {
-            updateFields.push("approval_reason = ?");
-            updateValues.push(body.approval_reason);
-        }
-        if (body.approval_conditions !== undefined) {
-            updateFields.push("approval_conditions = ?");
-            updateValues.push(body.approval_conditions);
-        }
-        if (body.measures_package !== undefined) {
-            updateFields.push("measures_package = ?");
-            updateValues.push(body.measures_package);
-        }
-        if (body.review_date !== undefined) {
-            updateFields.push("review_date = ?");
-            updateValues.push(body.review_date);
+        // Nur erlaubte Felder verarbeiten
+        for (const field of ALLOWED_FIELDS) {
+            if (body[field] !== undefined) {
+                updateFields.push(`${field} = ?`);
+                updateValues.push(body[field]);
+            }
         }
 
         if (updateFields.length === 0) {
@@ -203,7 +193,7 @@ export async function PUT(
         updateValues.push(new Date());
         updateValues.push(approvalId);
 
-        // Update durchführen
+        // @sql-safe: SET-Klausel aus ALLOWED_FIELDS Whitelist
         await connection.execute(
             `UPDATE dsgvo_approvals SET ${updateFields.join(", ")} WHERE id = ?`,
             updateValues

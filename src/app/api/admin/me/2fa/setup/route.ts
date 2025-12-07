@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
       await AuditService.logAudit({
         table_name: "lopez_user_2fa",
         record_id: session.userId,
-        action: "2FA_SETUP_STARTED",
+        action: "2FA_SETUP",
         user_id: session.userId,
         username: session.username,
         ip_address: ipAddress,
@@ -117,6 +117,11 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+
+
+
+
 
 
 

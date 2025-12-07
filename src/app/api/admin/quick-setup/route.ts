@@ -30,10 +30,7 @@ export async function POST(request: NextRequest) {
     for (const table of tables) {
       try {
         // Prüfe ob Tabelle existiert
-        const tableCheck = await executeQueryPool({
-          query: `SHOW TABLES LIKE '${table}'`,
-          values: [],
-        });
+        const tableCheck = await executeQueryPool(`SHOW TABLES LIKE '${table}'`, []);
 
         if (!tableCheck || (Array.isArray(tableCheck) && tableCheck.length === 0)) {
           results.errors.push(`Tabelle ${table} existiert nicht`);
@@ -41,25 +38,16 @@ export async function POST(request: NextRequest) {
         }
 
         // Prüfe ob Benutzer existiert
-        const existing = await executeQueryPool({
-          query: `SELECT id FROM ${table} WHERE email = ? OR username = ? LIMIT 1`,
-          values: [email, username],
-        });
+        const existing = await executeQueryPool(`SELECT id FROM ${table} WHERE email = ? OR username = ? LIMIT 1`, [email, username]);
 
         if (existing && Array.isArray(existing) && existing.length > 0) {
           // Aktualisiere Passwort
-          await executeQueryPool({
-            query: `UPDATE ${table} SET password_hash = ?, status = 'active', updated_at = NOW() WHERE email = ? OR username = ?`,
-            values: [passwordHash, email, username],
-          });
+          await executeQueryPool(`UPDATE ${table} SET password_hash = ?, status = 'active', updated_at = NOW() WHERE email = ? OR username = ?`, [passwordHash, email, username]);
           results.actions.push(`Passwort in ${table} aktualisiert`);
         } else {
           // Erstelle Benutzer
-          const result = await executeQueryPool({
-            query: `INSERT INTO ${table} (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
-                     VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`,
-            values: [username, email, passwordHash, "System", "Administrator"],
-          });
+          const result = await executeQueryPool(`INSERT INTO ${table} (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
+                     VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`, [username, email, passwordHash, "System", "Administrator"]);
           
           if (result && (result as any).insertId) {
             results.actions.push(`Benutzer in ${table} erstellt (ID: ${(result as any).insertId})`);
@@ -76,10 +64,7 @@ export async function POST(request: NextRequest) {
       const existing = await RBACService.getUserByEmail(email);
       if (existing) {
         // Passwort aktualisieren
-        await executeQueryPool({
-          query: "UPDATE lopez_users SET password_hash = ?, status = 'active' WHERE email = ?",
-          values: [passwordHash, email],
-        });
+        await executeQueryPool("UPDATE lopez_users SET password_hash = ?, status = 'active' WHERE email = ?", [passwordHash, email]);
         results.actions.push("Passwort über RBACService aktualisiert");
       } else {
         const user = await RBACService.createUser({

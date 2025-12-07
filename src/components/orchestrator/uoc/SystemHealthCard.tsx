@@ -44,7 +44,7 @@ export function SystemHealthCard({
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">System-Health</h3>
         <div className="flex items-center gap-2">
-          {autoRefresh && <LiveStreamIndicator isConnected={isConnected} lastUpdate={lastUpdate} />}
+          {autoRefresh && <LiveStreamIndicator isConnected={isConnected} lastUpdate={lastUpdate ?? undefined} />}
           <StatusBadge status={health.status} size="md" />
         </div>
       </div>

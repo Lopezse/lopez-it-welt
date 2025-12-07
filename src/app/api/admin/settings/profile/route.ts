@@ -19,10 +19,10 @@ export async function GET(request: NextRequest) {
     const userId = session.user.id;
 
     // Profil aus Datenbank laden
-    const profile = await executeQueryPool({
-      query: "SELECT first_name, last_name, email, phone, avatar_url, email_verified FROM users WHERE id = ?",
-      values: [userId],
-    });
+    const profile = await executeQueryPool(
+      "SELECT first_name, last_name, email, phone, avatar_url, email_verified FROM users WHERE id = ?",
+      [userId]
+    );
 
     if (!profile || profile.length === 0) {
       return NextResponse.json({ success: false, error: "Benutzer nicht gefunden" }, { status: 404 });
@@ -31,10 +31,10 @@ export async function GET(request: NextRequest) {
     const user = profile[0];
 
     // 2FA Status prüfen
-    const twoFactor = await executeQueryPool({
-      query: "SELECT enabled FROM two_factor_auth WHERE user_id = ?",
-      values: [userId],
-    });
+    const twoFactor = await executeQueryPool(
+      "SELECT enabled FROM two_factor_auth WHERE user_id = ?",
+      [userId]
+    );
 
     return NextResponse.json({
       success: true,
@@ -78,10 +78,10 @@ export async function PUT(request: NextRequest) {
     }
 
     // Profil aktualisieren
-    await executeQueryPool({
-      query: "UPDATE users SET first_name = ?, last_name = ?, phone = ?, updated_at = NOW() WHERE id = ?",
-      values: [first_name, last_name, phone || null, userId],
-    });
+    await executeQueryPool(
+      "UPDATE users SET first_name = ?, last_name = ?, phone = ?, updated_at = NOW() WHERE id = ?",
+      [first_name, last_name, phone || null, userId]
+    );
 
     return NextResponse.json({ success: true, message: "Profil erfolgreich aktualisiert" });
   } catch (error: any) {

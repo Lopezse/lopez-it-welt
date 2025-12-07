@@ -6,16 +6,32 @@ import { RowDataPacket } from "mysql2/promise";
  * UTF-8 Test API Route
  * Testet Umlaute mit Node.js/MySQL2 direkt
  *
+ * ⚠️ DEV-ONLY: Diese Route verwendet DROP TABLE und ist NUR für Entwicklung/Tests gedacht.
+ * In Production wird die Route blockiert.
+ *
  * @author Ramiro Lopez Rodriguez
  * @version 1.0.0
  * @date 2025-09-29
  */
 
 export async function POST() {
+  // Enterprise++ Security: DROP TABLE in Production blockieren
+  if (process.env.NODE_ENV === "production") {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Diese Test-Route ist in Production nicht verfügbar",
+        reason: "DROP TABLE ist in Production-Code verboten (Enterprise++ Policy SEC-01)"
+      },
+      { status: 403 }
+    );
+  }
+
   try {
     const connection = await createConnection();
 
-    // Test-Tabelle löschen und neu erstellen
+    // ⚠️ DEV-ONLY: Test-Tabelle löschen und neu erstellen
+    // @dev-only: DROP TABLE nur in Development erlaubt
     await connection.execute("DROP TABLE IF EXISTS test_utf8");
     await connection.execute(`
       CREATE TABLE test_utf8 (

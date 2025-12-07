@@ -11,6 +11,7 @@ import { auditManager } from "../index";
 import { matchRules, determineSeverity } from "./AlertRuleMatcher";
 import type { OrchestratorEvent, Alert, AlertData, AlertSeverity, AlertCategory } from "../types";
 import { createHash } from "crypto";
+import type { RowDataPacket } from "mysql2";
 
 class AlertEngine {
   /**
@@ -164,13 +165,13 @@ class AlertEngine {
   async getAlert(alertId: string): Promise<Alert | null> {
     try {
       const connection = await getConnection();
-      const [rows] = await connection.execute<Alert[]>(
+      const [rows] = await connection.execute<RowDataPacket[]>(
         `SELECT * FROM orchestrator_alerts WHERE id = ?`,
         [alertId]
       );
 
       if (Array.isArray(rows) && rows.length > 0) {
-        const alert = rows[0];
+        const alert = rows[0] as Alert;
         // Parse JSON fields
         if (typeof alert.payload === "string") {
           alert.payload = JSON.parse(alert.payload);
@@ -329,8 +330,8 @@ class AlertEngine {
 
       // Get total count
       const countQuery = query.replace("SELECT *", "SELECT COUNT(*) as total");
-      const [countRows] = await connection.execute<{ total: number }[]>(countQuery, params);
-      const total = Array.isArray(countRows) && countRows.length > 0 ? countRows[0].total : 0;
+      const [countRows] = await connection.execute<RowDataPacket[]>(countQuery, params);
+      const total = Array.isArray(countRows) && countRows.length > 0 ? (countRows[0] as { total: number }).total : 0;
 
       // Apply pagination
       query += ` ORDER BY triggered_at DESC`;
@@ -343,9 +344,10 @@ class AlertEngine {
         }
       }
 
-      const [rows] = await connection.execute<Alert[]>(query, params);
+      const [rows] = await connection.execute<RowDataPacket[]>(query, params);
 
-      const alerts = Array.isArray(rows) ? rows.map((alert) => {
+      const alerts = Array.isArray(rows) ? rows.map((row) => {
+        const alert = row as Alert;
         if (typeof alert.payload === "string") {
           alert.payload = JSON.parse(alert.payload);
         }

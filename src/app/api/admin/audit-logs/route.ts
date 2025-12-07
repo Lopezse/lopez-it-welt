@@ -188,7 +188,7 @@ export async function POST(request: NextRequest) {
 async function getAuditLogs(connection: any, filters: any): Promise<any[]> {
   try {
     // Prüfe welche Spalten existieren
-    const [columns] = await connection.execute<RowDataPacket[]>(
+    const [columns] = await connection.execute(
       "SHOW COLUMNS FROM lopez_audit_logs"
     );
     const columnNames = columns.map((col: any) => col.Field);
@@ -287,7 +287,7 @@ async function getAuditLogs(connection: any, filters: any): Promise<any[]> {
     query += " LIMIT ? OFFSET ?";
     params.push(filters.limit, filters.offset);
 
-    const [rows] = await connection.execute<RowDataPacket[]>(query, params);
+    const [rows] = await connection.execute(query, params);
     
     // Daten formatieren
     return rows.map((row: any) => ({
@@ -326,7 +326,7 @@ async function getAuditLogs(connection: any, filters: any): Promise<any[]> {
 async function getAuditLogsCount(connection: any, filters: any): Promise<number> {
   try {
     // Prüfe welche Spalten existieren
-    const [columns] = await connection.execute<RowDataPacket[]>(
+    const [columns] = await connection.execute(
       "SHOW COLUMNS FROM lopez_audit_logs"
     );
     const columnNames = columns.map((col: any) => col.Field);
@@ -395,7 +395,7 @@ async function getAuditLogsCount(connection: any, filters: any): Promise<number>
       searchConditions.forEach(() => params.push(searchTerm));
     }
 
-    const [rows] = await connection.execute<RowDataPacket[]>(query, params);
+    const [rows] = await connection.execute(query, params);
     return rows[0]?.total || 0;
   } catch (error) {
     console.error("❌ Fehler beim Zählen der Audit-Logs:", error);
@@ -449,7 +449,7 @@ async function logAuditEvent(connection: any, eventData: any): Promise<number> {
     let username = eventData.username;
     if (!username && eventData.user_id) {
       try {
-        const [userRows] = await connection.execute<RowDataPacket[]>(
+        const [userRows] = await connection.execute(
           "SELECT username FROM lopez_users WHERE id = ?",
           [eventData.user_id]
         );

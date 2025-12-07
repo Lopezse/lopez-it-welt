@@ -757,6 +757,9 @@ export class AgentSystemService {
   static async initializeTables(): Promise<{
     tablesCreated: string[];
     modulesInserted: number;
+    modulesUpdated?: number;
+    migrated?: number;
+    totalModules?: number;
   }> {
     const pool = await getConnection();
     const tablesCreated: string[] = [];

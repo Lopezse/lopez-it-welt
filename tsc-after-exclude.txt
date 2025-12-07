@@ -1,0 +1,375 @@
+﻿src/app/admin/audit-logs/page.tsx(592,13): error TS2322: Type 'FilterState' is not assignable to type 'Record<string, string>'.
+  Index signature for type 'string' is missing in type 'FilterState'.
+src/app/admin/marketing/linkedin-content-plan/page.tsx(24,23): error TS2307: Cannot find module 'remark-gfm' or its corresponding type declarations.
+src/app/admin/monitoring/db/page.tsx(140,53): error TS2322: Type '"green" | "yellow" | "red" | "gray" | "orange"' is not assignable to type '"error" | "default" | "info" | "success" | "warning" | undefined'.
+  Type '"green"' is not assignable to type '"error" | "default" | "info" | "success" | "warning" | undefined'.
+src/app/admin/monitoring/page.tsx(126,53): error TS2322: Type '"green" | "yellow" | "red" | "gray" | "orange"' is not assignable to type '"error" | "default" | "info" | "success" | "warning" | undefined'.
+  Type '"green"' is not assignable to type '"error" | "default" | "info" | "success" | "warning" | undefined'.
+src/app/admin/monitoring/queue/page.tsx(104,80): error TS2322: Type '"green" | "red"' is not assignable to type '"error" | "default" | "info" | "success" | "warning" | undefined'.
+  Type '"green"' is not assignable to type '"error" | "default" | "info" | "success" | "warning" | undefined'.
+src/app/admin/office/invoices/[id]/page.tsx(347,15): error TS2322: Type '(updatedInvoice: Invoice) => Promise<void>' is not assignable to type '(invoice: Invoice) => Promise<void>'.
+  Types of parameters 'updatedInvoice' and 'invoice' are incompatible.
+    Type 'Invoice' is missing the following properties from type 'Invoice': net_amount, tax_amount, gross_amount, status, and 2 more.
+src/app/admin/office/invoices/[id]/page.tsx(352,15): error TS2719: Type 'Invoice' is not assignable to type 'Invoice'. Two different types with this name exist, but they are unrelated.
+  Types of property 'items' are incompatible.
+    Type 'InvoiceItem[] | undefined' is not assignable to type 'InvoiceItem[] | undefined'. Two different types with this name exist, but they are unrelated.
+      Type 'InvoiceItem[]' is not assignable to type 'InvoiceItem[]'. Two different types with this name exist, but they are unrelated.
+        Type 'InvoiceItem' is not assignable to type 'InvoiceItem'. Two different types with this name exist, but they are unrelated.
+          Types of property 'id' are incompatible.
+            Type 'number | undefined' is not assignable to type 'number'.
+              Type 'undefined' is not assignable to type 'number'.
+src/app/admin/office/projects/page.tsx(225,79): error TS17001: JSX elements cannot have multiple attributes with the same name.
+src/app/admin/policies/page.tsx(204,19): error TS2719: Type 'Policy | undefined' is not assignable to type 'Policy | undefined'. Two different types with this name exist, but they are unrelated.
+  Property 'content' is missing in type 'Policy' but required in type 'Policy'.
+src/app/admin/uoc/correlation/page.tsx(27,5): error TS2353: Object literal may only specify known properties, and 'minScore' does not exist in type 'CorrelationFilters | (() => CorrelationFilters)'.
+src/app/admin/uoc/correlation/page.tsx(64,19): error TS2339: Property 'minScore' does not exist on type 'CorrelationFilters'.
+src/app/admin/uoc/correlation/page.tsx(65,43): error TS2339: Property 'minScore' does not exist on type 'CorrelationFilters'.
+src/app/api/admin/audit-logs/route.ts(191,29): error TS2347: Untyped function calls may not accept type arguments.
+src/app/api/admin/audit-logs/route.ts(290,26): error TS2347: Untyped function calls may not accept type arguments.
+src/app/api/admin/audit-logs/route.ts(329,29): error TS2347: Untyped function calls may not accept type arguments.
+src/app/api/admin/audit-logs/route.ts(398,26): error TS2347: Untyped function calls may not accept type arguments.
+src/app/api/admin/audit-logs/route.ts(452,34): error TS2347: Untyped function calls may not accept type arguments.
+src/app/api/admin/backup/route.ts(83,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(84,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(93,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(93,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(100,11): error TS2322: Type '{ timestamp: any; date: any; size: any; hash: any; valid: boolean; }' is not assignable to type 'null'.
+src/app/api/admin/backup/route.ts(116,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(117,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(126,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(126,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(133,11): error TS2322: Type '{ timestamp: any; date: any; size: any; hash: any; valid: boolean; }' is not assignable to type 'null'.
+src/app/api/admin/backup/route.ts(182,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(183,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(208,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(208,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(217,18): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(218,15): error TS7006: Parameter 'file' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(243,16): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(243,19): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/app/api/admin/backup/route.ts(327,14): error TS18046: 'error' is of type 'unknown'.
+src/app/api/admin/backups/[id]/download/route.ts(46,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/admin/backups/[id]/download/route.ts(106,31): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'BodyInit | null | undefined'.
+  Type 'Buffer<ArrayBufferLike>' is missing the following properties from type 'URLSearchParams': size, append, delete, get, and 2 more.
+src/app/api/admin/backups/[id]/restore/route.ts(46,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/admin/backups/[id]/route.ts(46,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/admin/backups/route.ts(61,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/admin/backups/route.ts(174,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/admin/create-admin/route.ts(33,51): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/create-admin/route.ts(44,49): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/create-admin/route.ts(51,34): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/create-admin/route.ts(61,51): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/create-admin/route.ts(71,51): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/debug-login/route.ts(23,43): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/debug-login/route.ts(35,45): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/debug-login/route.ts(52,47): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/debug-login/route.ts(67,49): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/debug-login/route.ts(83,49): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/debug-login/route.ts(145,48): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/fix-admin-user/route.ts(33,44): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/fix-admin-user/route.ts(48,46): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/fix-admin-user/route.ts(64,46): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/fix-admin-user/route.ts(84,32): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/fix-admin-user/route.ts(100,47): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/fix-admin-user/route.ts(117,49): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/invoices/[id]/pdf/route.ts(13,32): error TS2307: Cannot find module '@react-pdf/renderer' or its corresponding type declarations.
+src/app/api/admin/invoices/[id]/pdf/route.ts(63,50): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Type 'RowDataPacket' has no properties in common with type '{ company_name?: string | undefined; first_name?: string | undefined; last_name?: string | undefined; street?: string | undefined; postal_code?: string | undefined; city?: string | undefined; country?: string | undefined; email?: string | undefined; }'.
+src/app/api/admin/invoices/[id]/pdf/route.ts(134,29): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'BodyInit | null | undefined'.
+  Type 'Buffer<ArrayBufferLike>' is missing the following properties from type 'URLSearchParams': size, append, delete, get, and 2 more.
+src/app/api/admin/me/2fa/reset/route.ts(74,9): error TS2322: Type '"2FA_RESET"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/me/2fa/setup/route.ts(88,9): error TS2322: Type '"2FA_SETUP_STARTED"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/me/2fa/verify/route.ts(76,9): error TS2322: Type '"2FA_ACTIVATED"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/media/ai/analyze/route.ts(54,32): error TS2551: Property 'user_id' does not exist on type 'AdminSessionData'. Did you mean 'userId'?
+src/app/api/admin/media/ai/analyze/route.ts(79,40): error TS2551: Property 'user_id' does not exist on type 'AdminSessionData'. Did you mean 'userId'?
+src/app/api/admin/media/ai/analyze/route.ts(150,44): error TS2551: Property 'user_id' does not exist on type 'AdminSessionData'. Did you mean 'userId'?
+src/app/api/admin/quick-setup/route.ts(33,51): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/quick-setup/route.ts(44,49): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/quick-setup/route.ts(51,34): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/quick-setup/route.ts(58,49): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/quick-setup/route.ts(79,32): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/reset-password/route.ts(33,42): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/reset-password/route.ts(49,28): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/security/2fa-reset/route.ts(64,9): error TS2322: Type '"2FA_RESET"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/security/recheck/route.ts(99,11): error TS2322: Type '"RECHECK_FAILED"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/security/recheck/route.ts(166,9): error TS2322: Type '"RECHECK_SUCCESS"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/settings/ai/route.ts(20,39): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/ai/route.ts(72,45): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/ai/route.ts(79,30): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/ai/route.ts(108,30): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/company/route.ts(20,44): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/company/route.ts(78,45): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/company/route.ts(85,30): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/company/route.ts(108,30): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/notifications/route.ts(20,50): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/notifications/route.ts(66,45): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/notifications/route.ts(73,30): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/notifications/route.ts(95,30): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/notifications/templates/[id]/route.ts(23,28): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/notifications/templates/route.ts(20,46): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/profile/avatar/route.ts(53,28): error TS2345: Argument of type '{ query: string; values: (string | number)[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/profile/login-history/route.ts(22,44): error TS2345: Argument of type '{ query: string; values: number[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/profile/route.ts(22,44): error TS2345: Argument of type '{ query: string; values: number[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/profile/route.ts(34,46): error TS2345: Argument of type '{ query: string; values: number[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/profile/route.ts(81,28): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/security/password-policy/route.ts(29,21): error TS2339: Property 'user' does not exist on type 'SessionData'.
+src/app/api/admin/settings/security/route.ts(22,46): error TS2345: Argument of type '{ query: string; values: number[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/security/tokens/[id]/route.ts(23,28): error TS2345: Argument of type '{ query: string; values: (string | number)[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/security/tokens/route.ts(23,43): error TS2345: Argument of type '{ query: string; values: number[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/security/tokens/route.ts(82,28): error TS2345: Argument of type '{ query: string; values: any[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/settings/system/status/route.ts(23,45): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/test-db/route.ts(19,43): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/test-db/route.ts(29,24): error TS2304: Cannot find name 'AggregateError'.
+src/app/api/admin/test-db/route.ts(42,45): error TS2345: Argument of type '{ query: string; values: never[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/test-db/route.ts(64,46): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/test-db/route.ts(79,46): error TS2345: Argument of type '{ query: string; values: string[]; }' is not assignable to parameter of type 'string'.
+src/app/api/admin/users/[id]/2fa/reset/route.ts(58,41): error TS2339: Property 'roles' does not exist on type 'User'.
+src/app/api/admin/users/[id]/2fa/reset/route.ts(109,9): error TS2322: Type '"2FA_RESET_BY_ADMIN"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/users/[id]/2fa/route.ts(64,41): error TS2339: Property 'roles' does not exist on type 'User'.
+src/app/api/admin/users/[id]/2fa/route.ts(170,34): error TS2339: Property 'roles' does not exist on type 'User'.
+src/app/api/admin/users/[id]/2fa/route.ts(205,9): error TS2322: Type '"2FA_DISABLED_BY_ADMIN"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/users/[id]/2fa/setup/route.ts(57,41): error TS2339: Property 'roles' does not exist on type 'User'.
+src/app/api/admin/users/[id]/2fa/setup/route.ts(114,9): error TS2322: Type '"2FA_SETUP_BY_ADMIN"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/admin/users/[id]/2fa/verify/route.ts(57,41): error TS2339: Property 'roles' does not exist on type 'User'.
+src/app/api/admin/users/[id]/2fa/verify/route.ts(112,9): error TS2322: Type '"2FA_ACTIVATED_BY_ADMIN"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/auth/admin/login/route.ts(119,27): error TS2551: Property 'requires2FASetup' does not exist on type 'AdminAuthResult'. Did you mean 'requires2FA'?
+src/app/api/auth/admin/login/route.ts(122,36): error TS2551: Property 'requires2FASetup' does not exist on type 'AdminAuthResult'. Did you mean 'requires2FA'?
+src/app/api/auth/check-session/route.ts(59,11): error TS2322: Type '"SESSION_ACCESS"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/auth/check-session/route.ts(66,11): error TS2322: Type '"ACCESS"' is not assignable to type '"DATA_ACCESS" | "SECURITY_EVENT" | "SYSTEM_CHANGE" | "DATA_MODIFICATION" | "AUTHORIZATION" | "AUTHENTICATION"'.
+src/app/api/auth/permissions/route.ts(35,30): error TS2339: Property 'user' does not exist on type 'SessionData'.
+src/app/api/auth/permissions/route.ts(47,28): error TS2339: Property 'user' does not exist on type 'SessionData'.
+src/app/api/dsgvo/approvals/[id]/approve/route.ts(48,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/dsgvo/approvals/[id]/pdf/route.ts(49,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/dsgvo/approvals/[id]/reject/route.ts(48,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/dsgvo/approvals/[id]/route.ts(50,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/dsgvo/approvals/[id]/route.ts(116,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/dsgvo/approvals/route.ts(46,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/dsgvo/approvals/route.ts(117,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/invoices/route.ts(279,7): error TS2322: Type '"INVOICE_CREATE"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/invoices/route.ts(286,7): error TS2322: Type '"FINANCE"' is not assignable to type '"DATA_ACCESS" | "SECURITY_EVENT" | "SYSTEM_CHANGE" | "DATA_MODIFICATION" | "AUTHORIZATION" | "AUTHENTICATION"'.
+src/app/api/orchestrator/alerts/[id]/ack/route.ts(42,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/alerts/[id]/escalate/route.ts(42,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/alerts/[id]/route.ts(61,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/alerts/route.ts(63,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/approvals/check/route.ts(39,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/approvals/request/route.ts(39,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/approvals/status/route.ts(40,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/automation/disable/route.ts(39,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/automation/enable/route.ts(39,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/automation/stats/route.ts(39,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/automation/status/route.ts(39,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/events/[id]/route.ts(42,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/events/route.ts(44,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/events/route.ts(117,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/incidents/[id]/resolve/route.ts(43,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/incidents/[id]/route.ts(43,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/incidents/[id]/route.ts(66,54): error TS2344: Type '{ id: string; title: string; }[]' does not satisfy the constraint 'QueryResult'.
+  Type '{ id: string; title: string; }[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type '{ id: string; title: string; }[]' is not assignable to type 'RowDataPacket[]'.
+      Type '{ id: string; title: string; }' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/app/api/orchestrator/incidents/route.ts(44,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/incidents/route.ts(117,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/logs/[id]/route.ts(46,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/logs/analytics/anomalies/route.ts(44,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/logs/analytics/patterns/route.ts(44,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/logs/analytics/trends/route.ts(44,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/logs/route.ts(17,10): error TS2724: '"@/lib/ki-orchestrator/level2/ApprovalManager"' has no exported member named 'ApprovalManager'. Did you mean 'approvalManager'?
+src/app/api/orchestrator/logs/route.ts(48,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/logs/route.ts(87,7): error TS2353: Object literal may only specify known properties, and 'sort_order' does not exist in type 'SearchQuery'.
+src/app/api/orchestrator/logs/search/route.ts(43,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/metrics/ai-costs/route.ts(29,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/metrics/api-performance/route.ts(35,34): error TS2576: Property 'validateSession' does not exist on type 'AdminAuthService'. Did you mean to access the static member 'AdminAuthService.validateSession' instead?
+src/app/api/orchestrator/metrics/api-performance/route.ts(46,42): error TS2576: Property 'hasPermission' does not exist on type 'RBACService'. Did you mean to access the static member 'RBACService.hasPermission' instead?
+src/app/api/orchestrator/metrics/db/route.ts(35,34): error TS2576: Property 'validateSession' does not exist on type 'AdminAuthService'. Did you mean to access the static member 'AdminAuthService.validateSession' instead?
+src/app/api/orchestrator/metrics/db/route.ts(46,42): error TS2576: Property 'hasPermission' does not exist on type 'RBACService'. Did you mean to access the static member 'RBACService.hasPermission' instead?
+src/app/api/orchestrator/metrics/health/route.ts(35,34): error TS2576: Property 'validateSession' does not exist on type 'AdminAuthService'. Did you mean to access the static member 'AdminAuthService.validateSession' instead?
+src/app/api/orchestrator/metrics/health/route.ts(46,42): error TS2576: Property 'hasPermission' does not exist on type 'RBACService'. Did you mean to access the static member 'RBACService.hasPermission' instead?
+src/app/api/orchestrator/metrics/live/route.ts(33,34): error TS2576: Property 'validateSession' does not exist on type 'AdminAuthService'. Did you mean to access the static member 'AdminAuthService.validateSession' instead?
+src/app/api/orchestrator/metrics/live/route.ts(44,42): error TS2576: Property 'hasPermission' does not exist on type 'RBACService'. Did you mean to access the static member 'RBACService.hasPermission' instead?
+src/app/api/orchestrator/metrics/queue/route.ts(35,34): error TS2576: Property 'validateSession' does not exist on type 'AdminAuthService'. Did you mean to access the static member 'AdminAuthService.validateSession' instead?
+src/app/api/orchestrator/metrics/queue/route.ts(46,42): error TS2576: Property 'hasPermission' does not exist on type 'RBACService'. Did you mean to access the static member 'RBACService.hasPermission' instead?
+src/app/api/orchestrator/metrics/system/route.ts(33,34): error TS2576: Property 'validateSession' does not exist on type 'AdminAuthService'. Did you mean to access the static member 'AdminAuthService.validateSession' instead?
+src/app/api/orchestrator/metrics/system/route.ts(44,42): error TS2576: Property 'hasPermission' does not exist on type 'RBACService'. Did you mean to access the static member 'RBACService.hasPermission' instead?
+src/app/api/orchestrator/status/queue/route.ts(39,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/status/route.ts(42,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/status/triggers/route.ts(40,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/status/workflows/route.ts(40,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/triggers/[id]/fire/route.ts(56,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/triggers/[id]/route.ts(49,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/triggers/[id]/route.ts(138,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/triggers/[id]/route.ts(275,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/triggers/route.ts(44,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/triggers/route.ts(115,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/correlations/route.ts(69,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/correlations/route.ts(74,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/correlations/route.ts(79,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/correlations/route.ts(116,7): error TS2353: Object literal may only specify known properties, and 'minScore' does not exist in type 'CorrelationFilters'.
+src/app/api/orchestrator/uoc/dashboard/route.ts(70,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/dashboard/route.ts(75,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/dashboard/route.ts(80,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/root-cause/[incidentId]/route.ts(45,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/root-cause/[incidentId]/route.ts(50,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/root-cause/[incidentId]/route.ts(55,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/stream/alerts/route.ts(38,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/stream/events/route.ts(38,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/stream/events/route.ts(43,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/stream/events/route.ts(48,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/stream/health/route.ts(38,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/stream/logs/route.ts(38,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/stream/metrics/route.ts(38,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/timeline/route.ts(43,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/timeline/route.ts(48,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/uoc/timeline/route.ts(53,7): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/[id]/executions/route.ts(42,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/[id]/pause/route.ts(43,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/[id]/resume/route.ts(43,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/[id]/route.ts(48,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/[id]/route.ts(145,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/[id]/route.ts(260,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/[id]/start/route.ts(49,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/route.ts(44,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/orchestrator/workflows/route.ts(113,13): error TS2322: Type 'string' is not assignable to type 'number'.
+src/app/api/portal/rechnungen/[id]/download/route.ts(82,31): error TS2345: Argument of type 'Buffer<ArrayBufferLike>' is not assignable to parameter of type 'BodyInit | null | undefined'.
+  Type 'Buffer<ArrayBufferLike>' is missing the following properties from type 'URLSearchParams': size, append, delete, get, and 2 more.
+src/app/api/projects/route.ts(174,7): error TS2322: Type '"PROJECT_CREATE"' is not assignable to type '"INSERT" | "UPDATE" | "DELETE" | "LOGIN" | "LOGOUT" | "2FA_SETUP" | "2FA_VERIFY" | "PASSWORD_CHANGE" | "ROLE_ASSIGN" | "PERMISSION_GRANT"'.
+src/app/api/projects/route.ts(181,7): error TS2322: Type '"DATA_CHANGE"' is not assignable to type '"DATA_ACCESS" | "SECURITY_EVENT" | "SYSTEM_CHANGE" | "DATA_MODIFICATION" | "AUTHORIZATION" | "AUTHENTICATION"'.
+src/app/api/rag/query/route.ts(51,48): error TS2339: Property 'processingTime' does not exist on type '{ query: string; retrievalCount: number; generationTime?: number | undefined; retrievalTime?: number | undefined; }'.
+src/components/admin/dashboard/DashboardConfig.tsx(289,30): error TS2339: Property 'role_name' does not exist on type 'DashboardConfig'.
+src/components/admin/dashboard/DashboardConfig.tsx(372,30): error TS2322: Type '(widgetId: number | string) => Promise<void>' is not assignable to type '(widget: Widget) => void'.
+  Types of parameters 'widgetId' and 'widget' are incompatible.
+    Type 'Widget' is not assignable to type 'string | number'.
+src/components/admin/help/HelpViewer.tsx(119,48): error TS2304: Cannot find name 'renderMarkdown'.
+src/components/admin/media/ai/MediaAIMonitoringPanel.tsx(118,45): error TS2322: Type '{ status: "error" | "pending" | "completed" | "analyzing"; color: "green" | "yellow" | "red" | "gray" | "orange"; }' is not assignable to type 'IntrinsicAttributes & StatusBadgeProps'.
+  Property 'color' does not exist on type 'IntrinsicAttributes & StatusBadgeProps'.
+src/components/admin/media/ai/MediaAIMonitoringPanel.tsx(126,11): error TS2322: Type '"green" | "yellow" | "red" | "gray" | "orange"' is not assignable to type '"blue" | "green" | "yellow" | "red" | undefined'.
+  Type '"gray"' is not assignable to type '"blue" | "green" | "yellow" | "red" | undefined'.
+src/components/admin/privileges/PrivilegeMatrix.tsx(210,24): error TS2304: Cannot find name 'FaCheck'.
+src/components/Core/Hauptbereiche.tsx(99,35): error TS2322: Type '{ children: Element; bg: "darkblau"; divider: string; }' is not assignable to type 'IntrinsicAttributes & SectionWrapperProps'.
+  Property 'divider' does not exist on type 'IntrinsicAttributes & SectionWrapperProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(77,26): error TS2322: Type '{ children: Element[]; cols: 2; gap: string; variant: string; items: number; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+  Property 'gap' does not exist on type 'IntrinsicAttributes & GridProps'. Did you mean 'gapX'?
+src/components/examples/ConsolidatedComponentsExample.tsx(100,26): error TS2322: Type '{ children: Element[]; cols: 3; gap: string; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+  Property 'gap' does not exist on type 'IntrinsicAttributes & GridProps'. Did you mean 'gapX'?
+src/components/examples/ConsolidatedComponentsExample.tsx(109,21): error TS2322: Type '{ features: string[]; variant: string; iconColor: string; textSize: "sm"; }' is not assignable to type 'IntrinsicAttributes & FeatureListProps'.
+  Property 'variant' does not exist on type 'IntrinsicAttributes & FeatureListProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(132,56): error TS2322: Type '{ children: string; variant: "primary"; size: "lg"; glow: true; icon: string; iconPosition: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps'.
+  Property 'icon' does not exist on type 'IntrinsicAttributes & ButtonProps'.
+src/components/examples/ConsolidatedComponentsExample.tsx(153,26): error TS2322: Type '{ children: Element[]; cols: 2; gap: string; }' is not assignable to type 'IntrinsicAttributes & GridProps'.
+  Property 'gap' does not exist on type 'IntrinsicAttributes & GridProps'. Did you mean 'gapX'?
+src/components/layout/MainLayout.tsx(19,15): error TS2322: Type '{ showFooter: boolean; }' is not assignable to type 'IntrinsicAttributes'.
+  Property 'showFooter' does not exist on type 'IntrinsicAttributes'.
+src/components/navigation/Sprachumschalter.tsx(60,9): error TS2322: Type '{ children: Element[]; onClick: () => void; "aria-expanded": boolean; "aria-haspopup": "listbox"; "aria-label": string; variante: string; groesse: string; className: string; }' is not assignable to type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'.
+  Property 'variante' does not exist on type 'IntrinsicAttributes & ButtonProps & RefAttributes<HTMLButtonElement>'. Did you mean 'variant'?
+src/components/orchestrator/uoc/APIPerformanceChart.tsx(98,72): error TS2322: Type 'Date | null' is not assignable to type 'Date | undefined'.
+  Type 'null' is not assignable to type 'Date | undefined'.
+src/components/orchestrator/uoc/APIPerformanceChart.tsx(126,15): error TS2322: Type '{ contentStyle: { backgroundColor: "white"; border: string; borderRadius: string; }; className: string; }' is not assignable to type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+src/components/orchestrator/uoc/CorrelationView.tsx(40,21): error TS2339: Property 'minScore' does not exist on type 'CorrelationFilters'.
+src/components/orchestrator/uoc/CorrelationView.tsx(41,45): error TS2339: Property 'minScore' does not exist on type 'CorrelationFilters'.
+src/components/orchestrator/uoc/LiveUpdateToastContainer.tsx(91,13): error TS2322: Type '{ type: "alert" | "incident" | "metric" | "health" | "log"; data: Alert | Incident | Log | BaseMetric | SystemHealth; timestamp: Date; onDismiss: () => void; }' is not assignable to type 'IntrinsicAttributes & LiveUpdateCardProps'.
+  Property 'type' does not exist on type 'IntrinsicAttributes & LiveUpdateCardProps'.
+src/components/orchestrator/uoc/SystemHealthCard.tsx(47,74): error TS2322: Type 'Date | null' is not assignable to type 'Date | undefined'.
+  Type 'null' is not assignable to type 'Date | undefined'.
+src/components/orchestrator/uoc/UnifiedChart.tsx(63,15): error TS2322: Type '{ contentStyle: { backgroundColor: "white"; border: string; borderRadius: string; }; className: string; }' is not assignable to type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+src/components/orchestrator/uoc/UnifiedChart.tsx(86,15): error TS2322: Type '{ contentStyle: { backgroundColor: "white"; border: string; borderRadius: string; }; className: string; }' is not assignable to type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+src/components/orchestrator/uoc/UnifiedChart.tsx(109,15): error TS2322: Type '{ contentStyle: { backgroundColor: "white"; border: string; borderRadius: string; }; className: string; }' is not assignable to type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+  Property 'className' does not exist on type 'IntrinsicAttributes & Omit<Props<ValueType, NameType>, PropertiesReadFromContext> & { ...; }'.
+src/components/orchestrator/uoc/UnifiedLogList.tsx(13,20): error TS2305: Module '"@/lib/ki-orchestrator/level2/logs/types"' has no exported member 'LogFilters'.
+src/components/orchestrator/uoc/UOCDashboard.tsx(161,53): error TS2322: Type 'Date | null' is not assignable to type 'Date | undefined'.
+  Type 'null' is not assignable to type 'Date | undefined'.
+src/components/orchestrator/uoc/UOCDashboard.tsx(198,11): error TS2322: Type '"orange"' is not assignable to type '"blue" | "green" | "yellow" | "red" | undefined'.
+src/components/ui/Button.stories.tsx(1,37): error TS2307: Cannot find module '@storybook/react' or its corresponding type declarations.
+src/components/ui/Heading.tsx(45,8): error TS2322: Type '{ children: ReactNode; defaultChecked?: boolean | undefined; defaultValue?: string | number | readonly string[] | undefined; suppressContentEditableWarning?: boolean | undefined; ... 273 more ...; className: string; }' is not assignable to type 'SVGProps<SVGSymbolElement>'.
+  Types of property 'onCopy' are incompatible.
+    Type 'ClipboardEventHandler<HTMLHeadingElement> | undefined' is not assignable to type 'ClipboardEventHandler<SVGSymbolElement> | undefined'.
+      Type 'ClipboardEventHandler<HTMLHeadingElement>' is not assignable to type 'ClipboardEventHandler<SVGSymbolElement>'.
+        Type 'HTMLHeadingElement' is missing the following properties from type 'SVGSymbolElement': ownerSVGElement, viewportElement, preserveAspectRatio, viewBox
+src/components/ui/Heading.tsx(46,9): error TS2590: Expression produces a union type that is too complex to represent.
+src/lib/admin-auth-service.ts(157,11): error TS2561: Object literal may only specify known properties, but 'requires2FASetup' does not exist in type 'AdminAuthResult'. Did you mean to write 'requires2FA'?
+src/lib/agent-system.ts(948,46): error TS2353: Object literal may only specify known properties, and 'modulesUpdated' does not exist in type '{ tablesCreated: string[]; modulesInserted: number; }'.
+src/lib/ai-center/settings-service.ts(154,11): error TS2322: Type 'any' is not assignable to type 'never'.
+src/lib/ai/providers/openai-provider.ts(27,14): error TS2564: Property 'name' has no initializer and is not definitely assigned in the constructor.
+src/lib/customer/invoice-pdf.tsx(15,8): error TS2307: Cannot find module '@react-pdf/renderer' or its corresponding type declarations.
+src/lib/dev-orchestrator/agent-a-planner.ts(100,43): error TS2339: Property 'complete' does not exist on type 'AiProvider'.
+src/lib/dev-orchestrator/agent-b-builder.ts(107,41): error TS2339: Property 'chat' does not exist on type 'AiProvider'.
+src/lib/dev-orchestrator/agent-c-reviewer.ts(123,41): error TS2339: Property 'chat' does not exist on type 'AiProvider'.
+src/lib/dsgvo/approval-service.ts(332,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'LogContext | undefined'.
+src/lib/dsgvo/approval-service.ts(441,76): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'LogContext | undefined'.
+src/lib/hooks/useUOCAlertsStream.ts(58,13): error TS2561: Object literal may only specify known properties, but 'acknowledged' does not exist in type 'Alert'. Did you mean to write 'acknowledged_at'?
+src/lib/hooks/useUOCEventsStream.ts(70,15): error TS2561: Object literal may only specify known properties, but 'acknowledged' does not exist in type 'Alert'. Did you mean to write 'acknowledged_at'?
+src/lib/ki-orchestrator/level2/alerts/AlertEngine.ts(167,47): error TS2344: Type 'Alert[]' does not satisfy the constraint 'QueryResult'.
+  Type 'Alert[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type 'Alert[]' is not assignable to type 'RowDataPacket[]'.
+      Type 'Alert' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/lib/ki-orchestrator/level2/alerts/AlertEngine.ts(332,52): error TS2344: Type '{ total: number; }[]' does not satisfy the constraint 'QueryResult'.
+  Type '{ total: number; }[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type '{ total: number; }[]' is not assignable to type 'RowDataPacket[]'.
+      Type '{ total: number; }' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/lib/ki-orchestrator/level2/alerts/AlertEngine.ts(346,47): error TS2344: Type 'Alert[]' does not satisfy the constraint 'QueryResult'.
+  Type 'Alert[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type 'Alert[]' is not assignable to type 'RowDataPacket[]'.
+      Type 'Alert' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/lib/ki-orchestrator/level2/incidents/IncidentManager.ts(118,47): error TS2344: Type 'Incident[]' does not satisfy the constraint 'QueryResult'.
+  Type 'Incident[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type 'Incident[]' is not assignable to type 'RowDataPacket[]'.
+      Type 'Incident' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/lib/ki-orchestrator/level2/incidents/IncidentManager.ts(313,47): error TS2344: Type 'IncidentEvent[]' does not satisfy the constraint 'QueryResult'.
+  Type 'IncidentEvent[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type 'IncidentEvent[]' is not assignable to type 'RowDataPacket[]'.
+      Type 'IncidentEvent' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/lib/ki-orchestrator/level2/incidents/IncidentManager.ts(368,52): error TS2344: Type '{ total: number; }[]' does not satisfy the constraint 'QueryResult'.
+  Type '{ total: number; }[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type '{ total: number; }[]' is not assignable to type 'RowDataPacket[]'.
+      Type '{ total: number; }' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/lib/ki-orchestrator/level2/incidents/IncidentManager.ts(382,47): error TS2344: Type 'Incident[]' does not satisfy the constraint 'QueryResult'.
+  Type 'Incident[]' is not assignable to type 'ResultSetHeader | OkPacket | RowDataPacket[] | ResultSetHeader[] | RowDataPacket[][] | OkPacket[]'.
+    Type 'Incident[]' is not assignable to type 'RowDataPacket[]'.
+      Type 'Incident' is not assignable to type 'RowDataPacket'.
+        The types of 'constructor.name' are incompatible between these types.
+          Type 'string' is not assignable to type '"RowDataPacket"'.
+src/lib/ki-orchestrator/level2/incidents/IncidentManager.ts(438,9): error TS2322: Type 'string | null | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+src/lib/ki-orchestrator/level2/incidents/IncidentManager.ts(439,9): error TS2322: Type 'string | null | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+src/lib/ki-orchestrator/level2/logs/LogEnricher.ts(46,16): error TS2339: Property 'security_relevant' does not exist on type '{ enriched_at: string; enrichment_version: string; }'.
+src/lib/ki-orchestrator/level2/logs/LogEnricher.ts(49,16): error TS2339: Property 'dsgvo_relevant' does not exist on type '{ enriched_at: string; enrichment_version: string; }'.
+src/lib/ki-orchestrator/level2/logs/LogEnricher.ts(52,16): error TS2339: Property 'critical' does not exist on type '{ enriched_at: string; enrichment_version: string; }'.
+src/lib/ki-orchestrator/level2/logs/LogRuleRegistry.ts(7,75): error TS2305: Module '"./types"' has no exported member 'MetricPriority'.
+src/lib/ki-orchestrator/level2/logs/pipeline/LogPipeline.ts(119,9): error TS2322: Type '"Compliance" | "Performance" | "Systemintegrit├ñt" | "Sicherheit" | "Datenqualit├ñt"' is not assignable to type 'AlertCategory'.
+  Type '"Sicherheit"' is not assignable to type 'AlertCategory'.
+src/lib/ki-orchestrator/level2/uoc/clients/LogClient.ts(7,20): error TS2305: Module '"../../logs/types"' has no exported member 'LogFilters'.
+src/lib/ki-orchestrator/level2/uoc/DataAggregator.ts(9,20): error TS2305: Module '"../logs/types"' has no exported member 'LogFilters'.
+src/lib/ki-orchestrator/level2/uoc/types.ts(9,20): error TS2305: Module '"../logs/types"' has no exported member 'LogFilters'.
+src/lib/ki-orchestrator/QueueManager.ts(34,36): error TS2307: Cannot find module 'ioredis' or its corresponding type declarations.
+src/lib/ki-orchestrator/QueueManager.ts(40,36): error TS2307: Cannot find module 'bullmq' or its corresponding type declarations.
+src/lib/ki-orchestrator/QueueManager.ts(45,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'LogContext | undefined'.
+src/lib/ki-orchestrator/QueueManager.ts(69,23): error TS2347: Untyped function calls may not accept type arguments.
+src/lib/ki-orchestrator/QueueManager.ts(158,24): error TS2347: Untyped function calls may not accept type arguments.
+src/lib/ki-orchestrator/QueueManager.ts(160,20): error TS7006: Parameter 'job' implicitly has an 'any' type.
+src/lib/ki-orchestrator/QueueManager.ts(170,33): error TS7006: Parameter 'job' implicitly has an 'any' type.
+src/lib/ki-orchestrator/QueueManager.ts(174,30): error TS7006: Parameter 'job' implicitly has an 'any' type.
+src/lib/ki-orchestrator/QueueManager.ts(174,35): error TS7006: Parameter 'err' implicitly has an 'any' type.
+src/lib/rag/config/chroma.ts(69,9): error TS2322: Type 'unknown' is not assignable to type 'Error | null'.
+src/lib/rag/config/chroma.ts(104,63): error TS2307: Cannot find module '@chroma-core/default-embed' or its corresponding type declarations.
+src/lib/rag/services/EmbeddingService.ts(94,13): error TS2322: Type 'unknown[]' is not assignable to type 'number[]'.
+  Type 'unknown' is not assignable to type 'number'.
+src/lib/rag/services/RAGService.ts(47,17): error TS2322: Type '"rag_query"' is not assignable to type '"person_detection" | "analytics" | "media_ki" | "orchestrator_ki" | "profile_building"'.
+src/lib/telemetry/engines/HealthEngine.ts(196,18): error TS2339: Property 'checked_at' does not exist on type 'SystemHealth | ComponentHealth'.
+  Property 'checked_at' does not exist on type 'SystemHealth'.

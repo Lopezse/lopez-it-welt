@@ -11,19 +11,10 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ErrorBanner } from "@/components/ui/ErrorBanner";
 import { logger } from "@/lib/logger";
+import type { AdminPolicyInput } from "@/lib/finance/types";
 
-interface Policy {
-  id?: string;
-  name: string;
-  description: string;
-  category: string;
-  type: "security" | "compliance" | "data" | "access" | "audit";
-  status: "draft" | "active" | "archived";
-  content: string;
-  version: number;
-  effective_date?: string;
-  expiry_date?: string;
-}
+// Re-export für Abwärtskompatibilität (Input-Typ für Formulare)
+type Policy = AdminPolicyInput;
 
 interface PolicyEditorProps {
   policy?: Policy;

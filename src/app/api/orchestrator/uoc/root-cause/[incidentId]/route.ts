@@ -42,17 +42,17 @@ export async function GET(
 
     // RBAC-Prüfung (mindestens eine Berechtigung erforderlich)
     const hasSecurity = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "security",
       action: "view",
     });
     const hasMonitoring = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "monitoring",
       action: "view",
     });
     const hasLogs = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "logs",
       action: "view",
     });

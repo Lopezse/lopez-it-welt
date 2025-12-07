@@ -589,7 +589,7 @@ export default function AuditLogsPage() {
 
         {activeTab === "export" && (
           <AuditLogExport
-            filters={filters}
+            filters={filters as unknown as Record<string, string>}
             onExportComplete={() => {
               // Optional: Nach Export Aktion
             }}

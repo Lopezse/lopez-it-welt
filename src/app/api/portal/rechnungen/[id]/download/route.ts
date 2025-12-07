@@ -79,7 +79,7 @@ export async function GET(
       const pdfBuffer = await readFile(storagePath);
 
       // PDF als Download zurückgeben
-      return new NextResponse(pdfBuffer, {
+      return new NextResponse(new Uint8Array(pdfBuffer), {
         headers: {
           'Content-Type': 'application/pdf',
           'Content-Disposition': `attachment; filename="${invoice.invoice_number}.pdf"`,
@@ -104,4 +104,10 @@ export async function GET(
     );
   }
 }
+
+
+
+
+
+
 

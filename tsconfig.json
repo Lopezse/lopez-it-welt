@@ -37,6 +37,14 @@
     "**/*.test.tsx",
     "**/__tests__/**",
     "src/agents/complianceAgentService.ts",
-    "src/scripts/test-ki-agents.ts"
+    "src/scripts/test-ki-agents.ts",
+    "backups/**",
+    "cypress/**",
+    "tests/**",
+    "playwright.config.ts",
+    "cypress.config.ts",
+    "src/components/examples/**",
+    "**/*.stories.tsx",
+    "**/*.stories.ts"
   ]
 }

@@ -158,7 +158,7 @@ export function UOCDashboard({
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <LiveStreamIndicator isConnected={isLive} lastUpdate={lastUpdate} />
+          <LiveStreamIndicator isConnected={isLive} lastUpdate={lastUpdate ?? undefined} />
           <button
             onClick={fetchDashboardData}
             disabled={loading}
@@ -195,7 +195,7 @@ export function UOCDashboard({
         <KPICard
           title="Incidents"
           value={data?.kpis?.incidents_count || 0}
-          color="orange"
+          color="yellow"
           icon={Activity}
         />
         <KPICard

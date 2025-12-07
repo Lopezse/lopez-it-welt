@@ -14,7 +14,7 @@ import { logPipeline } from "@/lib/ki-orchestrator/level2/logs/pipeline/LogPipel
 import { RBACService } from "@/lib/rbac-system";
 import { AdminAuthService } from "@/lib/admin-auth-service";
 import { logger } from "@/lib/logger";
-import { ApprovalManager } from "@/lib/ki-orchestrator/level2/ApprovalManager";
+import { approvalManager } from "@/lib/ki-orchestrator/level2/ApprovalManager";
 import { getLogRule } from "@/lib/ki-orchestrator/level2/logs/LogRuleRegistry";
 import type { RawLog, SearchQuery } from "@/lib/ki-orchestrator/level2/logs/types";
 
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
     // RBAC-Prüfung
     const hasPermission = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "logs",
       action: "view",
     });
@@ -158,9 +158,8 @@ export async function POST(request: NextRequest) {
 
     // DSFA-Check: Bei High/Critical-Risk-Logs prüfe P7-Approval
     if (logRule.dsfa_relevance === "High" || body.severity === "critical") {
-      const approvalManager = new ApprovalManager();
       const approval = await approvalManager.checkApprovalStatus(logRule.id);
-      if (approval.approval_status !== "granted") {
+      if (approval.approval_status !== "approved") {
         return NextResponse.json(
           {
             success: false,

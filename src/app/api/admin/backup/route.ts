@@ -5,6 +5,33 @@ import { promisify } from "util";
 
 const execAsync = promisify(exec);
 
+// TypeScript Interfaces für Backup-System
+interface BackupMetadata {
+  timestamp: string;
+  date: string;
+  size: number;
+  hash: string;
+  valid?: boolean;
+}
+
+interface BackupFile {
+  file: string;
+  mtime: Date;
+  size: number;
+  timestamp?: string | null;
+  date?: string | null;
+  hash?: string | null;
+  error?: string;
+}
+
+interface LastBackup {
+  timestamp: string;
+  date: string;
+  size: number;
+  hash: string;
+  valid: boolean;
+}
+
 /**
  * 🛡️ Lopez IT Welt – Enterprise++ Backup API
  *
@@ -72,25 +99,27 @@ async function getBackupStatus() {
     };
 
     // Letzte Backups finden
-    let lastBackups = {
+    const lastBackups: {
+      mysql: LastBackup | null;
+      project: LastBackup | null;
+    } = {
       mysql: null,
       project: null,
     };
 
     if (dirsExist.mysql) {
-      const mysqlFiles = fs
-        .readdirSync(mysqlDir)
-        .filter((file) => file.endsWith(".json"))
-        .map((file) => {
+      const mysqlFiles = (fs.readdirSync(mysqlDir) as string[])
+        .filter((file: string) => file.endsWith(".json"))
+        .map((file: string) => {
           const filePath = path.join(mysqlDir, file);
           const stats = fs.statSync(filePath);
           return {
             file,
-            mtime: stats.mtime,
-            size: stats.size,
+            mtime: stats.mtime as Date,
+            size: stats.size as number,
           };
         })
-        .sort((a, b) => b.mtime - a.mtime);
+        .sort((a: { mtime: Date }, b: { mtime: Date }) => b.mtime.getTime() - a.mtime.getTime());
 
       if (mysqlFiles.length > 0) {
         const lastFile = mysqlFiles[0];
@@ -111,19 +140,18 @@ async function getBackupStatus() {
     }
 
     if (dirsExist.project) {
-      const projectFiles = fs
-        .readdirSync(projectDir)
-        .filter((file) => file.endsWith(".json"))
-        .map((file) => {
+      const projectFiles = (fs.readdirSync(projectDir) as string[])
+        .filter((file: string) => file.endsWith(".json"))
+        .map((file: string) => {
           const filePath = path.join(projectDir, file);
           const stats = fs.statSync(filePath);
           return {
             file,
-            mtime: stats.mtime,
-            size: stats.size,
+            mtime: stats.mtime as Date,
+            size: stats.size as number,
           };
         })
-        .sort((a, b) => b.mtime - a.mtime);
+        .sort((a: { mtime: Date }, b: { mtime: Date }) => b.mtime.getTime() - a.mtime.getTime());
 
       if (projectFiles.length > 0) {
         const lastFile = projectFiles[0];
@@ -170,21 +198,23 @@ async function listBackups() {
 
     const fs = require("fs");
 
-    const backups = {
+    const backups: {
+      mysql: BackupFile[];
+      project: BackupFile[];
+    } = {
       mysql: [],
       project: [],
     };
 
     // MySQL-Backups
     if (fs.existsSync(mysqlDir)) {
-      const mysqlFiles = fs
-        .readdirSync(mysqlDir)
-        .filter((file) => file.endsWith(".json"))
-        .map((file) => {
+      const mysqlFiles = (fs.readdirSync(mysqlDir) as string[])
+        .filter((file: string) => file.endsWith(".json"))
+        .map((file: string): BackupFile => {
           const filePath = path.join(mysqlDir, file);
           const stats = fs.statSync(filePath);
           try {
-            const metadata = JSON.parse(fs.readFileSync(filePath, "utf8"));
+            const metadata = JSON.parse(fs.readFileSync(filePath, "utf8")) as BackupMetadata;
             return {
               file: file.replace(".json", ""),
               timestamp: metadata.timestamp,
@@ -193,7 +223,7 @@ async function listBackups() {
               hash: metadata.hash,
               mtime: stats.mtime,
             };
-          } catch (e) {
+          } catch {
             return {
               file: file.replace(".json", ""),
               timestamp: null,
@@ -205,21 +235,20 @@ async function listBackups() {
             };
           }
         })
-        .sort((a, b) => b.mtime - a.mtime);
+        .sort((a: BackupFile, b: BackupFile) => b.mtime.getTime() - a.mtime.getTime());
 
       backups.mysql = mysqlFiles;
     }
 
     // Projekt-Backups
     if (fs.existsSync(projectDir)) {
-      const projectFiles = fs
-        .readdirSync(projectDir)
-        .filter((file) => file.endsWith(".json"))
-        .map((file) => {
+      const projectFiles = (fs.readdirSync(projectDir) as string[])
+        .filter((file: string) => file.endsWith(".json"))
+        .map((file: string): BackupFile => {
           const filePath = path.join(projectDir, file);
           const stats = fs.statSync(filePath);
           try {
-            const metadata = JSON.parse(fs.readFileSync(filePath, "utf8"));
+            const metadata = JSON.parse(fs.readFileSync(filePath, "utf8")) as BackupMetadata;
             return {
               file: file.replace(".json", ""),
               timestamp: metadata.timestamp,
@@ -228,7 +257,7 @@ async function listBackups() {
               hash: metadata.hash,
               mtime: stats.mtime,
             };
-          } catch (e) {
+          } catch {
             return {
               file: file.replace(".json", ""),
               timestamp: null,
@@ -240,7 +269,7 @@ async function listBackups() {
             };
           }
         })
-        .sort((a, b) => b.mtime - a.mtime);
+        .sort((a: BackupFile, b: BackupFile) => b.mtime.getTime() - a.mtime.getTime());
 
       backups.project = projectFiles;
     }
@@ -324,7 +353,7 @@ async function startBackup(type: string, user: string) {
       type,
       user,
       timestamp: new Date().toISOString(),
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
       message: "Backup konnte nicht gestartet werden",
     };
   }

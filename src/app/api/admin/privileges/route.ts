@@ -60,8 +60,11 @@ export async function GET(request: NextRequest) {
 
       if ((userRoles as any[]).length > 0) {
         const roleIds = (userRoles as any[]).map((ur) => ur.role_id);
+        // @sql-safe: Platzhalter werden dynamisch generiert, aber nur "?" Zeichen
+        // roleIds kommen aus vorheriger DB-Abfrage, nicht aus User-Input
+        const placeholders = roleIds.map(() => "?").join(",");
         const [userPerms] = await connection.execute(
-          `SELECT DISTINCT permission_id FROM lopez_core_role_permissions WHERE role_id IN (${roleIds.map(() => "?").join(",")})`,
+          `SELECT DISTINCT permission_id FROM lopez_core_role_permissions WHERE role_id IN (${placeholders})`,
           roleIds,
         );
         assignedPermissions = (userPerms as any[]).map((up) => up.permission_id);

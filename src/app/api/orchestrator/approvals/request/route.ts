@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "orchestrator",
             action: "manage"
         });
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
             request_type: body.request_type || 're_approval',
             reason: body.reason,
             change_type: body.change_type || undefined,
-            requested_by: session.userId.toString()
+            requested_by: String(session.userId)
         });
 
         return NextResponse.json({

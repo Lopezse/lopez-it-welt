@@ -31,8 +31,9 @@ async function initializeQueue(): Promise<boolean> {
 
     try {
         // Prüfe, ob Redis verfügbar ist
-        const redis = await import("ioredis");
-        const testClient = new redis.Redis(redisConfig);
+        const redisModule = await import("ioredis");
+        const Redis = redisModule.default || redisModule.Redis;
+        const testClient = new Redis(redisConfig);
         await testClient.ping();
         await testClient.quit();
 
@@ -41,8 +42,8 @@ async function initializeQueue(): Promise<boolean> {
         queueEnabled = true;
         logger.info("Queue Manager: Redis verfügbar, Queue aktiviert");
         return true;
-    } catch (error) {
-        logger.warn("Queue Manager: Redis nicht verfügbar, Queue deaktiviert", error);
+    } catch (error: unknown) {
+        logger.warn("Queue Manager: Redis nicht verfügbar, Queue deaktiviert", { error: String(error) });
         queueEnabled = false;
         return false;
     }
@@ -66,7 +67,7 @@ export async function enqueueTask(
 
     try {
         const { Queue } = queueModule;
-        const queue = new Queue<OrchestratorTask>("orchestrator-tasks", {
+        const queue = new Queue("orchestrator-tasks", {
             connection: redisConfig,
             defaultJobOptions: {
                 attempts: 3,
@@ -155,9 +156,9 @@ export async function initializeWorker(
 
     try {
         const { Worker } = queueModule;
-        const worker = new Worker<OrchestratorTask>(
+        const worker = new Worker(
             "orchestrator-tasks",
-            async (job) => {
+            async (job: any) => {
                 logger.info(`Processing orchestrator task: ${job.id}`);
                 return await processTask(job.data);
             },
@@ -167,12 +168,12 @@ export async function initializeWorker(
             }
         );
 
-        worker.on("completed", (job) => {
+        worker.on("completed", (job: any) => {
             logger.info(`Task completed: ${job.id}`);
         });
 
-        worker.on("failed", (job, err) => {
-            logger.error(`Task failed: ${job?.id}`, err);
+        worker.on("failed", (job: any, err: any) => {
+            logger.error(`Task failed: ${job?.id}`, { error: String(err) });
         });
 
         logger.info("Queue Worker initialisiert");

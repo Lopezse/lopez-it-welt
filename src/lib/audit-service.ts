@@ -24,9 +24,27 @@ export interface AuditLog {
     | "LOGOUT"
     | "2FA_SETUP"
     | "2FA_VERIFY"
+    | "2FA_RESET"
+    | "2FA_RESET_BY_ADMIN"
+    | "2FA_DISABLED_BY_ADMIN"
+    | "2FA_ENABLED"
+    | "2FA_SETUP_BY_ADMIN"
+    | "2FA_ACTIVATED_BY_ADMIN"
     | "PASSWORD_CHANGE"
     | "ROLE_ASSIGN"
-    | "PERMISSION_GRANT";
+    | "PERMISSION_GRANT"
+    | "RECHECK_FAILED"
+    | "RECHECK_SUCCESS"
+    | "TWO_FACTOR_SETUP"
+    | "TWO_FACTOR_VERIFY"
+    | "TWO_FACTOR_RESET"
+    | "BACKUP_DOWNLOAD"
+    | "BACKUP_CREATE"
+    | "BACKUP_DELETE"
+    | "BACKUP_RESTORE"
+    | "SESSION_ACCESS"
+    | "SESSION_CHECK"
+    | string;
   old_values?: any;
   new_values?: any;
   user_id: number;
@@ -41,7 +59,9 @@ export interface AuditLog {
     | "AUTHENTICATION"
     | "AUTHORIZATION"
     | "SYSTEM_CHANGE"
-    | "SECURITY_EVENT";
+    | "SECURITY_EVENT"
+    | "ACCESS"
+    | string;
   created_at?: string;
 }
 

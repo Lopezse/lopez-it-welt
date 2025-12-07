@@ -304,3 +304,9 @@ Alle API-Endpunkte sind im Handbuch dokumentiert mit:
 ╚═══════════════════════════════════════════════════════════════╝
 ```
 
+
+
+
+
+
+

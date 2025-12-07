@@ -444,149 +444,43 @@ export async function initializeDatabase(): Promise<void> {
         }
         
         if (needsRecreate) {
-          // Enterprise++: NUKLEARE OPTION - Alle Tabellen ZWINGEND löschen
-          console.log("🗑️ Enterprise++ Schema-Reparatur: Lösche ALLE Tabellen...");
+          // Enterprise++ SEC-01: DROP TABLE ist in Production-Code VERBOTEN
+          // Schema-Reparatur muss über Migrationen erfolgen, nicht durch Löschen
+          console.error("❌ Enterprise++ SEC-01: Schema-Inkompatibilität erkannt!");
+          console.error("   Das aktuelle Schema ist nicht kompatibel.");
+          console.error("   DROP TABLE ist in Production-Code verboten.");
+          console.error("   ");
+          console.error("   Bitte führen Sie eine der folgenden Aktionen aus:");
+          console.error("   1. Migration ausführen: pnpm db:migrate");
+          console.error("   2. Manuell in MySQL: ALTER TABLE Befehle");
+          console.error("   3. Dev-Reset (nur Development): pnpm dev:reset-db");
           
-          // Abhängige Tabellen zuerst löschen (Foreign Key Constraints)
-          try {
-            await connection.execute("DROP TABLE IF EXISTS lopez_customer_notes");
-          } catch (e) {
-            console.warn("⚠️ Fehler beim Löschen von lopez_customer_notes:", e);
+          // In Development: Warnung, aber fortfahren mit CREATE IF NOT EXISTS
+          if (process.env.NODE_ENV !== "production") {
+            console.warn("⚠️ Development-Modus: Versuche Schema mit CREATE TABLE IF NOT EXISTS anzupassen...");
+            needsRecreate = false; // Kein DROP, nur CREATE IF NOT EXISTS
+          } else {
+            // In Production: NIEMALS Daten löschen - Fehler werfen
+            throw new Error(
+              "SEC-01: Schema-Inkompatibilität in Production. " +
+              "DROP TABLE ist verboten. Bitte führen Sie eine Migration aus."
+            );
           }
-          
-          try {
-            await connection.execute("DROP TABLE IF EXISTS lopez_customer_tags");
-          } catch (e) {
-            console.warn("⚠️ Fehler beim Löschen von lopez_customer_tags:", e);
-          }
-          
-          // Haupttabelle ZWINGEND löschen - MEHRMALS versuchen
-          let dropAttempts = 0;
-          let tableDropped = false;
-          
-          while (dropAttempts < 3 && !tableDropped) {
-            try {
-              await connection.execute("DROP TABLE IF EXISTS lopez_customers");
-              
-              // Verifikation
-              const [verifyTables] = await connection.execute<RowDataPacket[]>(
-                "SHOW TABLES LIKE 'lopez_customers'"
-              );
-              
-              if (verifyTables.length === 0) {
-                tableDropped = true;
-                console.log(`✅ Tabelle lopez_customers erfolgreich gelöscht (Versuch ${dropAttempts + 1})`);
-              } else {
-                dropAttempts++;
-                console.log(`⚠️ Tabelle existiert noch - Versuch ${dropAttempts + 1}/3...`);
-                if (dropAttempts < 3) {
-                  // Kurz warten
-                  await new Promise(resolve => setTimeout(resolve, 100));
-                  // FORCE DROP ohne IF EXISTS
-                  try {
-                    await connection.execute("DROP TABLE lopez_customers");
-                  } catch (forceError) {
-                    console.warn("⚠️ FORCE DROP fehlgeschlagen:", forceError);
-                  }
-                }
-              }
-            } catch (dropError: any) {
-              dropAttempts++;
-              console.warn(`⚠️ DROP TABLE Versuch ${dropAttempts} fehlgeschlagen:`, dropError.message);
-              if (dropAttempts < 3) {
-                await new Promise(resolve => setTimeout(resolve, 100));
-              }
-            }
-          }
-          
-          if (!tableDropped) {
-            throw new Error("Tabelle lopez_customers konnte nach 3 Versuchen nicht gelöscht werden");
-          }
-          
-          console.log("✅ Alle Tabellen gelöscht - Neuerstellung startet...");
         }
       }
     } catch (error) {
-      // Enterprise++: Fehler nicht ignorieren, sondern loggen
+      // Enterprise++ SEC-01: Fehler loggen, aber KEIN DROP TABLE
       console.error("❌ Schema-Prüfung fehlgeschlagen:", error);
-      // Bei Fehler: Sicherheitshalber neu erstellen
-      needsRecreate = true;
-      try {
-        console.log("🗑️ Fehlerbehandlung: Lösche alle Tabellen...");
-        await connection.execute("DROP TABLE IF EXISTS lopez_customer_notes");
-        await connection.execute("DROP TABLE IF EXISTS lopez_customer_tags");
-        await connection.execute("DROP TABLE IF EXISTS lopez_customers");
-        
-        // Verifikation
-        const [verifyTables] = await connection.execute<RowDataPacket[]>(
-          "SHOW TABLES LIKE 'lopez_customers'"
-        );
-        if (verifyTables.length > 0) {
-          await connection.execute("DROP TABLE lopez_customers");
-        }
-      } catch (dropError) {
-        console.warn("⚠️ Fehler beim Löschen der Tabellen:", dropError);
-      }
+      console.error("   Enterprise++ SEC-01: DROP TABLE ist verboten.");
+      console.error("   Verwende CREATE TABLE IF NOT EXISTS als Fallback.");
+      
+      // Bei Fehler: NICHT löschen, sondern mit CREATE IF NOT EXISTS fortfahren
+      needsRecreate = false; // Kein DROP - nur CREATE IF NOT EXISTS
     }
     
-    // Enterprise++: Tabelle erstellen
-    // Wenn needsRecreate=true: OHNE IF NOT EXISTS (Tabelle wurde gelöscht)
-    // Wenn needsRecreate=false: MIT IF NOT EXISTS (Tabelle existiert korrekt oder wurde migriert)
-    if (needsRecreate) {
-      // Finale Verifikation: Tabelle wirklich gelöscht?
-      const [finalCheck] = await connection.execute<RowDataPacket[]>(
-        "SHOW TABLES LIKE 'lopez_customers'"
-      );
-      
-      if (finalCheck.length > 0) {
-        // Tabelle existiert noch - FORCE DROP
-        console.log("⚠️ Finale Prüfung: Tabelle existiert noch - FORCE DROP...");
-        try {
-          await connection.execute("DROP TABLE lopez_customers");
-          // Nochmal prüfen
-          const [finalCheck2] = await connection.execute<RowDataPacket[]>(
-            "SHOW TABLES LIKE 'lopez_customers'"
-          );
-          if (finalCheck2.length > 0) {
-            throw new Error("Tabelle lopez_customers konnte nicht gelöscht werden");
-          }
-          console.log("✅ Tabelle erfolgreich gelöscht");
-        } catch (forceError: any) {
-          console.error("❌ FORCE DROP fehlgeschlagen:", forceError.message);
-          throw new Error(`Tabelle lopez_customers konnte nicht gelöscht werden: ${forceError.message}`);
-        }
-      }
-      
-      await connection.execute(`
-            CREATE TABLE lopez_customers (
-                id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                kundennummer VARCHAR(20) UNIQUE NOT NULL,
-                customer_type ENUM('privat', 'firma', 'behörde', 'partner') NOT NULL,
-                anrede ENUM('Herr', 'Frau', 'Divers', 'Firma', 'Keine Angabe') DEFAULT 'Keine Angabe',
-                titel VARCHAR(50),
-                vorname VARCHAR(100),
-                nachname VARCHAR(100),
-                firmenname VARCHAR(255),
-                email VARCHAR(255) UNIQUE NOT NULL,
-                telefon VARCHAR(50),
-                strasse VARCHAR(255),
-                plz VARCHAR(20),
-                ort VARCHAR(100),
-                land VARCHAR(100) DEFAULT 'Deutschland',
-                status ENUM('aktiv', 'inaktiv', 'gesperrt') DEFAULT 'aktiv',
-                support_level ENUM('Standard', 'Premium', 'SLA 24h', 'SLA 4h') DEFAULT 'Standard',
-                notes TEXT,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                INDEX idx_kundennummer (kundennummer),
-                INDEX idx_email (email),
-                INDEX idx_status (status),
-                INDEX idx_customer_type (customer_type),
-                INDEX idx_support_level (support_level)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-        `);
-      console.log("✅ Tabelle lopez_customers neu erstellt mit kundennummer");
-    } else {
+    // Enterprise++ SEC-01: Tabelle erstellen (NUR mit IF NOT EXISTS - KEIN DROP TABLE)
+    // needsRecreate wird nie mehr true sein, da DROP TABLE verboten ist
+    {
       await connection.execute(`
             CREATE TABLE IF NOT EXISTS lopez_customers (
                 id BIGINT AUTO_INCREMENT PRIMARY KEY,

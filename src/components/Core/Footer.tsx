@@ -1,7 +1,11 @@
 "use client";
 import { useI18n } from "../Features/I18nProvider";
 
-export default function Footer() {
+interface FooterProps {
+  showFooter?: boolean;
+}
+
+export default function Footer({ showFooter = true }: FooterProps) {
   const { t } = useI18n();
   const currentYear = new Date().getFullYear();
 

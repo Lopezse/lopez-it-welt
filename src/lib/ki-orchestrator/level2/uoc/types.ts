@@ -32,6 +32,7 @@ export interface CorrelationFilters extends UOCFilters {
   correlationId?: string;
   resourceId?: string;
   resourceType?: string;
+  minScore?: number;
 }
 
 export interface TimelineFilters extends UOCFilters {

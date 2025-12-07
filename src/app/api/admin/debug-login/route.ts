@@ -20,10 +20,7 @@ export async function GET(request: NextRequest) {
 
     // 1. Datenbankverbindung prüfen
     try {
-      const test = await executeQueryPool({
-        query: "SELECT 1 as test",
-        values: [],
-      });
+      await executeQueryPool("SELECT 1 as test", []);
       results.checks.database = "OK";
     } catch (error: any) {
       results.checks.database = "FEHLER";
@@ -32,10 +29,7 @@ export async function GET(request: NextRequest) {
 
     // 2. Users-Tabelle prüfen
     try {
-      const tables = await executeQueryPool({
-        query: "SHOW TABLES LIKE 'users' OR SHOW TABLES LIKE 'lopez_users' OR SHOW TABLES LIKE 'lopez_core_users'",
-        values: [],
-      });
+      const tables = await executeQueryPool("SHOW TABLES LIKE '%users%'", []);
       results.checks.usersTable = tables && tables.length > 0 ? "GEFUNDEN" : "NICHT GEFUNDEN";
     } catch (error: any) {
       results.checks.usersTable = "FEHLER";
@@ -49,30 +43,30 @@ export async function GET(request: NextRequest) {
       
       // Versuch 1: users
       try {
-        const users1 = await executeQueryPool({
-          query: "SELECT id, username, email, password_hash, status FROM users WHERE email = ? LIMIT 1",
-          values: [email],
-        });
+        const users1 = await executeQueryPool(
+          "SELECT id, username, email, password_hash, status FROM users WHERE email = ? LIMIT 1",
+          [email]
+        );
         if (users1 && users1.length > 0) {
           user = users1[0];
           results.checks.userFound = "JA (users-Tabelle)";
         }
-      } catch (e) {
+      } catch {
         // Ignorieren
       }
 
       // Versuch 2: lopez_users
       if (!user) {
         try {
-          const users2 = await executeQueryPool({
-            query: "SELECT id, username, email, password_hash, status FROM lopez_users WHERE email = ? LIMIT 1",
-            values: [email],
-          });
+          const users2 = await executeQueryPool(
+            "SELECT id, username, email, password_hash, status FROM lopez_users WHERE email = ? LIMIT 1",
+            [email]
+          );
           if (users2 && users2.length > 0) {
             user = users2[0];
             results.checks.userFound = "JA (lopez_users-Tabelle)";
           }
-        } catch (e) {
+        } catch {
           // Ignorieren
         }
       }
@@ -80,15 +74,15 @@ export async function GET(request: NextRequest) {
       // Versuch 3: lopez_core_users
       if (!user) {
         try {
-          const users3 = await executeQueryPool({
-            query: "SELECT id, username, email, password_hash, status FROM lopez_core_users WHERE email = ? LIMIT 1",
-            values: [email],
-          });
+          const users3 = await executeQueryPool(
+            "SELECT id, username, email, password_hash, status FROM lopez_core_users WHERE email = ? LIMIT 1",
+            [email]
+          );
           if (users3 && users3.length > 0) {
             user = users3[0];
             results.checks.userFound = "JA (lopez_core_users-Tabelle)";
           }
-        } catch (e) {
+        } catch {
           // Ignorieren
         }
       }
@@ -142,10 +136,7 @@ export async function GET(request: NextRequest) {
 
     // 4. Alle Tabellen auflisten
     try {
-      const allTables = await executeQueryPool({
-        query: "SHOW TABLES",
-        values: [],
-      });
+      const allTables = await executeQueryPool("SHOW TABLES", []);
       results.allTables = allTables.map((t: any) => Object.values(t)[0]);
     } catch (error: any) {
       results.errors.push(`Tabellen-Liste: ${error.message}`);

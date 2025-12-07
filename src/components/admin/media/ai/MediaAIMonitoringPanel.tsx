@@ -79,7 +79,23 @@ export function MediaAIMonitoringPanel({ mediaId }: MediaAIMonitoringPanelProps)
     }
   };
 
-  const getStatusColor = (status: string): "green" | "yellow" | "orange" | "red" | "gray" => {
+  const getStatusColor = (status: string): "success" | "warning" | "error" | "default" => {
+    switch (status) {
+      case "completed":
+        return "success";
+      case "analyzing":
+        return "warning";
+      case "error":
+        return "error";
+      case "pending":
+        return "default";
+      default:
+        return "default";
+    }
+  };
+
+  // Farben für KPICard (andere Werte als StatusBadge)
+  const getKPIColor = (status: string): "green" | "yellow" | "red" | "blue" => {
     switch (status) {
       case "completed":
         return "green";
@@ -88,9 +104,8 @@ export function MediaAIMonitoringPanel({ mediaId }: MediaAIMonitoringPanelProps)
       case "error":
         return "red";
       case "pending":
-        return "gray";
       default:
-        return "gray";
+        return "blue";
     }
   };
 
@@ -115,7 +130,7 @@ export function MediaAIMonitoringPanel({ mediaId }: MediaAIMonitoringPanelProps)
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">KI-Monitoring</h2>
-        <StatusBadge status={status.status} color={getStatusColor(status.status)} />
+        <StatusBadge status={status.status} variant={getStatusColor(status.status)} />
       </div>
 
       {/* KPI-Cards */}
@@ -123,7 +138,7 @@ export function MediaAIMonitoringPanel({ mediaId }: MediaAIMonitoringPanelProps)
         <KPICard
           title="KI-Status"
           value={status.status === "completed" ? "Abgeschlossen" : status.status === "analyzing" ? "Analysiert" : status.status === "error" ? "Fehler" : "Ausstehend"}
-          color={getStatusColor(status.status)}
+          color={getKPIColor(status.status)}
         />
         {status.cost !== undefined && (
           <KPICard

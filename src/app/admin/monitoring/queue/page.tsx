@@ -101,7 +101,7 @@ export default function MonitoringQueuePage() {
           <div className="rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Queue Status</h2>
-              <StatusBadge status={performance.blocked ? "blocked" : "active"} variant={performance.blocked ? "red" : "green"} />
+              <StatusBadge status={performance.blocked ? "blocked" : "active"} variant={performance.blocked ? "error" : "success"} />
             </div>
           </div>
 

@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
 
     // RBAC-Prüfung
     const hasPermission = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "system",
       action: "manage",
     });
@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
 
     // RBAC-Prüfung
     const hasPermission = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "system",
       action: "manage",
     });
@@ -207,7 +207,7 @@ export async function POST(request: NextRequest) {
     await connection.execute(
       `INSERT INTO system_backups (id, timestamp, type, status, location, description, created_by)
        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [backupId, timestamp, type, "running", backupPath, description || null, session.userId.toString()]
+      [backupId, timestamp, type, "running", backupPath, description || null, session.userId]
     );
 
     // Audit-Log

@@ -26,6 +26,8 @@ const headingSizes = {
   "3xl": "text-5xl sm:text-6xl lg:text-7xl",
 };
 
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
 export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   (
     {
@@ -39,10 +41,10 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
     },
     ref,
   ) => {
-    const Component = `h${level}` as keyof JSX.IntrinsicElements;
+    const Tag = `h${level}` as HeadingTag;
 
     return (
-      <Component
+      <Tag
         ref={ref}
         className={cn(
           "font-bold leading-tight",
@@ -54,7 +56,7 @@ export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
         {...props}
       >
         {children}
-      </Component>
+      </Tag>
     );
   },
 );

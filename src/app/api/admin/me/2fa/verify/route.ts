@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
       await AuditService.logAudit({
         table_name: "lopez_user_2fa",
         record_id: session.userId,
-        action: "2FA_ACTIVATED",
+        action: "2FA_VERIFY",
         user_id: session.userId,
         username: session.username,
         ip_address: ipAddress,
@@ -99,6 +99,11 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+
+
+
+
 
 
 

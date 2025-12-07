@@ -43,7 +43,7 @@ export async function GET(
 
     // RBAC-Prüfung
     const hasPermission = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "system",
       action: "manage",
     });
@@ -103,7 +103,7 @@ export async function GET(
       );
       await connection2.end();
 
-      return new NextResponse(fileBuffer, {
+      return new NextResponse(new Uint8Array(fileBuffer), {
         headers: {
           "Content-Type": "application/octet-stream",
           "Content-Disposition": `attachment; filename="${fileName}"`,

@@ -18,7 +18,11 @@ interface FooterData {
   rechtliches: FooterItem[];
 }
 
-export default function Footer() {
+interface FooterProps {
+  showFooter?: boolean;
+}
+
+export default function Footer({ showFooter = true }: FooterProps) {
   const [footerData, setFooterData] = useState<FooterData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

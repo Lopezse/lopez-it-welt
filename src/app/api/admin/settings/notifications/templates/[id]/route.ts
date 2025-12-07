@@ -20,14 +20,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const body = await request.json();
 
     // Vorlage aktualisieren
-    await executeQueryPool({
-      query: `
-        UPDATE email_templates SET 
-          subject = ?, body_html = ?, body_text = ?, updated_at = NOW()
-        WHERE id = ?
-      `,
-      values: [body.subject, body.body_html, body.body_text, templateId],
-    });
+    await executeQueryPool(
+      `UPDATE email_templates SET 
+        subject = ?, body_html = ?, body_text = ?, updated_at = NOW()
+      WHERE id = ?`,
+      [body.subject, body.body_html, body.body_text, templateId]
+    );
 
     return NextResponse.json({ success: true, message: "Vorlage erfolgreich aktualisiert" });
   } catch (error: any) {

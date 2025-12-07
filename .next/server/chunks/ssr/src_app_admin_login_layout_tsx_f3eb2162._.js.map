@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projekte/lopez-it-welt/src/app/admin/login/layout.tsx"],"sourcesContent":["// =====================================================\r\n// LOGIN LAYOUT - LOPEZ IT WELT\r\n// =====================================================\r\n// Zweck: Separates Layout für Login-Seite OHNE Sidebar\r\n// Status: ✅ ENTERPRISE++ STANDARD\r\n// =====================================================\r\n\r\nimport type { Metadata } from \"next\";\r\n\r\nexport const metadata: Metadata = {\r\n  title: \"Admin-Login - Lopez IT Welt\",\r\n  description: \"Sicherer Login für den Administrationsbereich\",\r\n};\r\n\r\nexport default function LoginLayout({ children }: { children: React.ReactNode }) {\r\n  // Login-Seite hat KEIN AdminLayout (keine Sidebar)\r\n  return (\r\n    <div className=\"min-h-screen\" style={{ backgroundColor: \"#050509\" }}>\r\n      {children}\r\n    </div>\r\n  );\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"],"names":[],"mappings":"AAAA,wDAAwD;AACxD,+BAA+B;AAC/B,wDAAwD;AACxD,uDAAuD;AACvD,kCAAkC;AAClC,wDAAwD;;;;;;;;;AAIjD,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;AACf;AAEe,SAAS,YAAY,EAAE,QAAQ,EAAiC;IAC7E,mDAAmD;IACnD,qBACE,8OAAC;QAAI,WAAU;QAAe,OAAO;YAAE,iBAAiB;QAAU;kBAC/D;;;;;;AAGP","debugId":null}}]
-}

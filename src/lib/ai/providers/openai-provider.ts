@@ -24,7 +24,7 @@ import OpenAI from "openai";
 export class OpenAIProvider implements AiProvider {
     private client: any | null = null;
     private model: string;
-    readonly name: string;
+    readonly name: string = "openai";
     readonly version: string = "1.0.0";
     readonly supportsJson: boolean = true; // GPT-4 unterstützt JSON-Mode
 

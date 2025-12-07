@@ -74,61 +74,34 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     const connection = await createConnection();
 
-    // Dynamisches UPDATE basierend auf übergebenen Feldern
+    // Enterprise++ ALLOWED_FIELDS Whitelist
+    // @sql-safe: Nur Felder aus ALLOWED_FIELDS werden akzeptiert
+    const ALLOWED_FIELDS = [
+      "title", "date_start", "date_end", "location", "notes",
+      "is_all_day", "project_id", "order_id", "task_id", 
+      "employee_id", "is_billable", "status", "time_session_id"
+    ] as const;
+    
+    // Felder die als Boolean/Null behandelt werden
+    const BOOLEAN_FIELDS = ["is_all_day", "is_billable"] as const;
+    const NULLABLE_FIELDS = ["project_id", "order_id", "task_id", "employee_id", "time_session_id"] as const;
+
     const updates: string[] = [];
     const values: any[] = [];
 
-    if (title !== undefined) {
-      updates.push("title = ?");
-      values.push(title);
-    }
-    if (date_start !== undefined) {
-      updates.push("date_start = ?");
-      values.push(date_start);
-    }
-    if (date_end !== undefined) {
-      updates.push("date_end = ?");
-      values.push(date_end);
-    }
-    if (location !== undefined) {
-      updates.push("location = ?");
-      values.push(location);
-    }
-    if (notes !== undefined) {
-      updates.push("notes = ?");
-      values.push(notes);
-    }
-    if (is_all_day !== undefined) {
-      updates.push("is_all_day = ?");
-      values.push(is_all_day ? 1 : 0);
-    }
-    if (project_id !== undefined) {
-      updates.push("project_id = ?");
-      values.push(project_id || null);
-    }
-    if (order_id !== undefined) {
-      updates.push("order_id = ?");
-      values.push(order_id || null);
-    }
-    if (task_id !== undefined) {
-      updates.push("task_id = ?");
-      values.push(task_id || null);
-    }
-    if (employee_id !== undefined) {
-      updates.push("employee_id = ?");
-      values.push(employee_id || null);
-    }
-    if (is_billable !== undefined) {
-      updates.push("is_billable = ?");
-      values.push(is_billable ? 1 : 0);
-    }
-    if (status !== undefined) {
-      updates.push("status = ?");
-      values.push(status);
-    }
-    if (time_session_id !== undefined) {
-      updates.push("time_session_id = ?");
-      values.push(time_session_id || null);
+    // Nur erlaubte Felder verarbeiten
+    for (const field of ALLOWED_FIELDS) {
+      if (body[field] !== undefined) {
+        updates.push(`${field} = ?`);
+        
+        if ((BOOLEAN_FIELDS as readonly string[]).includes(field)) {
+          values.push(body[field] ? 1 : 0);
+        } else if ((NULLABLE_FIELDS as readonly string[]).includes(field)) {
+          values.push(body[field] || null);
+        } else {
+          values.push(body[field]);
+        }
+      }
     }
 
     if (updates.length === 0) {
@@ -141,6 +114,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     values.push(appointmentId);
 
+    // @sql-safe: SET-Klausel aus ALLOWED_FIELDS Whitelist
     const [result] = await connection.execute(
       `UPDATE lopez_appointments 
        SET ${updates.join(", ")}

@@ -119,13 +119,15 @@ export class AgentCReviewer {
       }
       
       // Echte AI-Evaluation
-      const prompt = this.buildReviewPrompt(change, taskContext);
-      const response = await aiProvider.chat([
-        { role: "system", content: "Du bist Agent-C, ein Enterprise++ Code-Reviewer. Prüfe Code auf Qualität, Sicherheit und Best Practices." },
-        { role: "user", content: prompt }
-      ]);
+      const systemPrompt = "Du bist Agent-C, ein Enterprise++ Code-Reviewer. Prüfe Code auf Qualität, Sicherheit und Best Practices.";
+      const userPrompt = this.buildReviewPrompt(change, taskContext);
+      const fullPrompt = `${systemPrompt}\n\n${userPrompt}`;
+      const responseContent = await aiProvider.requestText(fullPrompt, {
+        maxTokens: 2000,
+        temperature: 0.2
+      });
       
-      return this.parseAIReviewResponse(response);
+      return this.parseAIReviewResponse(responseContent);
       
     } catch (error) {
       console.warn(`[Agent-C] AI-Fehler, verwende Mock:`, error);
@@ -508,6 +510,9 @@ Antworte im JSON-Format:
     // 7. Task-Status final setzen
     if (qualityGatePassed) {
       await DevTasksService.updateTaskStatus(taskId, "done");
+    } else {
+      // Bei nicht bestandenem Review: zurück auf "coding" für Überarbeitung
+      await DevTasksService.updateTaskStatus(taskId, "coding");
     }
     
     return {
@@ -548,6 +553,10 @@ Antworte im JSON-Format:
 }
 
 export default AgentCReviewer;
+
+
+
+
 
 
 

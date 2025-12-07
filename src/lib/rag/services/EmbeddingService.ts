@@ -90,7 +90,7 @@ export class EmbeddingService {
             });
 
             // Konvertiere Tensor zu Array
-            const embedding = Array.from(output.data);
+            const embedding = Array.from(output.data) as number[];
             return embedding;
         } catch (error) {
             console.error("Fehler bei Embedding-Generierung:", error);

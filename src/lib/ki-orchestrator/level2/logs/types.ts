@@ -12,6 +12,8 @@ export type LogCategory = "System" | "Security" | "API" | "Orchestrator" | "Queu
 
 export type DSFARelevance = "High" | "Medium" | "Low" | "None";
 
+export type MetricPriority = "critical" | "high" | "medium" | "low";
+
 export type AnalysisType = "trend" | "pattern" | "anomaly" | "correlation";
 
 export type AnalysisPeriod = "hour" | "day" | "week" | "month";
@@ -144,7 +146,8 @@ export interface SearchQuery {
   limit?: number;
   offset?: number;
   sort?: "asc" | "desc";
-  sort_by?: "timestamp" | "log_level" | "severity";
+  sort_by?: "timestamp" | "log_level" | "severity" | string;
+  sort_order?: "ASC" | "DESC";
 }
 
 /**
@@ -240,7 +243,21 @@ export interface ArchiveStats {
   newest_log: Date;
 }
 
-
-
-
+/**
+ * Log Filters - Filter für Log-Abfragen
+ */
+export interface LogFilters {
+  log_level?: LogLevel;
+  category?: LogCategory;
+  severity?: LogSeverity;
+  log_rule_id?: LogRuleID;
+  start_time?: Date;
+  end_time?: Date;
+  correlation_id?: string;
+  resource_type?: string;
+  resource_id?: string;
+  limit?: number;
+  offset?: number;
+  sort?: "asc" | "desc";
+}
 

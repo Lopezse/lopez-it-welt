@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
     // Token validieren und User laden
     const session = await AuthService.validateSession(token);
     
-    if (!session || !session.user) {
+    if (!session || !session.userId) {
       return NextResponse.json({
         success: false,
         message: "Ungültige Session",
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
       }, { status: 401 });
     }
 
-    const userId = session.user.id;
+    const userId = session.userId;
 
     // Permissions und Rollen laden
     const [permissionKeys, roles, highestRole, isSuperAdmin] = await Promise.all([
@@ -142,6 +142,12 @@ export async function GET(request: NextRequest) {
     });
   }
 }
+
+
+
+
+
+
 
 
 

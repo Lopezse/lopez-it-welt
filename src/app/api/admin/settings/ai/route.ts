@@ -17,10 +17,7 @@ export async function GET(request: NextRequest) {
     }
 
     // KI-Einstellungen laden
-    const ai = await executeQueryPool({
-      query: "SELECT * FROM settings_ai ORDER BY id DESC LIMIT 1",
-      values: [],
-    });
+    const ai = await executeQueryPool("SELECT * FROM settings_ai ORDER BY id DESC LIMIT 1", []);
 
     if (ai && ai.length > 0) {
       return NextResponse.json({ success: true, data: ai[0] });
@@ -69,23 +66,18 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
 
     // Prüfen ob Eintrag existiert
-    const existing = await executeQueryPool({
-      query: "SELECT id FROM settings_ai ORDER BY id DESC LIMIT 1",
-      values: [],
-    });
+    const existing = await executeQueryPool("SELECT id FROM settings_ai ORDER BY id DESC LIMIT 1", []);
 
     if (existing && existing.length > 0) {
       // Aktualisieren
-      await executeQueryPool({
-        query: `
-          UPDATE settings_ai SET 
-            provider = ?, model = ?, temperature = ?, max_tokens = ?, top_p = ?,
-            token_limit_per_request = ?, token_limit_per_day = ?, token_limit_per_month = ?,
-            rag_enabled = ?, embedding_model = ?, chunk_size = ?,
-            logging_enabled = ?, log_level = ?, log_retention_days = ?, updated_at = NOW()
-          WHERE id = ?
-        `,
-        values: [
+      await executeQueryPool(
+        `UPDATE settings_ai SET 
+          provider = ?, model = ?, temperature = ?, max_tokens = ?, top_p = ?,
+          token_limit_per_request = ?, token_limit_per_day = ?, token_limit_per_month = ?,
+          rag_enabled = ?, embedding_model = ?, chunk_size = ?,
+          logging_enabled = ?, log_level = ?, log_retention_days = ?, updated_at = NOW()
+        WHERE id = ?`,
+        [
           body.provider || "openai",
           body.model || "gpt-4",
           body.temperature || 0.7,
@@ -101,17 +93,15 @@ export async function PUT(request: NextRequest) {
           body.log_level || "info",
           body.log_retention_days || 30,
           existing[0].id,
-        ],
-      });
+        ]
+      );
     } else {
       // Erstellen
-      await executeQueryPool({
-        query: `
+      await executeQueryPool(`
           INSERT INTO settings_ai 
           (provider, model, temperature, max_tokens, top_p, token_limit_per_request, token_limit_per_day, token_limit_per_month, rag_enabled, embedding_model, chunk_size, logging_enabled, log_level, log_retention_days, created_at, updated_at)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-        `,
-        values: [
+        `, [
           body.provider || "openai",
           body.model || "gpt-4",
           body.temperature || 0.7,
@@ -126,8 +116,7 @@ export async function PUT(request: NextRequest) {
           body.logging_enabled ? 1 : 0,
           body.log_level || "info",
           body.log_retention_days || 30,
-        ],
-      });
+        ]);
     }
 
     return NextResponse.json({ success: true, message: "KI-Einstellungen erfolgreich aktualisiert" });

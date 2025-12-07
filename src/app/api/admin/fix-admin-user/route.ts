@@ -30,10 +30,7 @@ export async function POST(request: NextRequest) {
 
     // Versuch 1: users
     try {
-      const users = await executeQueryPool({
-        query: "SELECT id, username, email, password_hash, status FROM users WHERE email = ? OR username = ? LIMIT 1",
-        values: [email, username],
-      });
+      const users = await executeQueryPool("SELECT id, username, email, password_hash, status FROM users WHERE email = ? OR username = ? LIMIT 1", [email, username]);
       if (users && Array.isArray(users) && users.length > 0) {
         user = users[0];
         userTable = "users";
@@ -45,10 +42,7 @@ export async function POST(request: NextRequest) {
     // Versuch 2: lopez_users
     if (!user) {
       try {
-        const users = await executeQueryPool({
-          query: "SELECT id, username, email, password_hash, status FROM lopez_users WHERE email = ? OR username = ? LIMIT 1",
-          values: [email, username],
-        });
+        const users = await executeQueryPool("SELECT id, username, email, password_hash, status FROM lopez_users WHERE email = ? OR username = ? LIMIT 1", [email, username]);
         if (users && Array.isArray(users) && users.length > 0) {
           user = users[0];
           userTable = "lopez_users";
@@ -61,10 +55,7 @@ export async function POST(request: NextRequest) {
     // Versuch 3: lopez_core_users
     if (!user) {
       try {
-        const users = await executeQueryPool({
-          query: "SELECT id, username, email, password_hash, status FROM lopez_core_users WHERE email = ? OR username = ? LIMIT 1",
-          values: [email, username],
-        });
+        const users = await executeQueryPool("SELECT id, username, email, password_hash, status FROM lopez_core_users WHERE email = ? OR username = ? LIMIT 1", [email, username]);
         if (users && Array.isArray(users) && users.length > 0) {
           user = users[0];
           userTable = "lopez_core_users";
@@ -81,10 +72,7 @@ export async function POST(request: NextRequest) {
     if (user && userTable) {
       // Benutzer existiert - Passwort aktualisieren
       try {
-        await executeQueryPool({
-          query: `UPDATE ${userTable} SET password_hash = ?, status = 'active', updated_at = NOW() WHERE id = ?`,
-          values: [passwordHash, user.id],
-        });
+        await executeQueryPool(`UPDATE ${userTable} SET password_hash = ?, status = 'active', updated_at = NOW() WHERE id = ?`, [passwordHash, user.id]);
         results.actions.push(`Passwort für Benutzer ${user.id} in Tabelle ${userTable} aktualisiert`);
         results.userId = user.id;
       } catch (e: any) {
@@ -97,11 +85,8 @@ export async function POST(request: NextRequest) {
 
       // Versuch 1: users
       try {
-        const result = await executeQueryPool({
-          query: `INSERT INTO users (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
-                   VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`,
-          values: [username, email, passwordHash, "System", "Administrator"],
-        });
+        const result = await executeQueryPool(`INSERT INTO users (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
+                   VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`, [username, email, passwordHash, "System", "Administrator"]);
         if (result && (result as any).insertId) {
           results.actions.push(`Benutzer in users-Tabelle erstellt (ID: ${(result as any).insertId})`);
           results.userId = (result as any).insertId;
@@ -114,11 +99,8 @@ export async function POST(request: NextRequest) {
       // Versuch 2: lopez_users
       if (!created) {
         try {
-          const result = await executeQueryPool({
-            query: `INSERT INTO lopez_users (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
-                     VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`,
-            values: [username, email, passwordHash, "System", "Administrator"],
-          });
+          const result = await executeQueryPool(`INSERT INTO lopez_users (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
+                     VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`, [username, email, passwordHash, "System", "Administrator"]);
           if (result && (result as any).insertId) {
             results.actions.push(`Benutzer in lopez_users-Tabelle erstellt (ID: ${(result as any).insertId})`);
             results.userId = (result as any).insertId;

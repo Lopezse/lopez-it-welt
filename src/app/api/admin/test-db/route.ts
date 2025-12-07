@@ -16,18 +16,15 @@ export async function GET(request: NextRequest) {
 
     // 1. Verbindung testen
     try {
-      const test = await executeQueryPool({
-        query: "SELECT 1 as test",
-        values: [],
-      });
+      const test = await executeQueryPool("SELECT 1 as test", []);
       results.connection = "OK";
     } catch (e: any) {
       results.connection = "FEHLER";
       results.errors.push(`Verbindung: ${e.message || String(e)}`);
       
       // Wenn AggregateError, alle Fehler auflisten
-      if (e instanceof AggregateError) {
-        results.errors.push(...(e.errors?.map((err: any) => err.message || String(err)) || []));
+      if (e && typeof e === "object" && "errors" in e && Array.isArray((e as any).errors)) {
+        results.errors.push(...((e as any).errors.map((err: any) => err.message || String(err)) || []));
       }
       
       return NextResponse.json({
@@ -39,10 +36,7 @@ export async function GET(request: NextRequest) {
 
     // 2. Tabellen auflisten
     try {
-      const tables = await executeQueryPool({
-        query: "SHOW TABLES",
-        values: [],
-      });
+      const tables = await executeQueryPool("SHOW TABLES", []);
       results.tables = Array.isArray(tables) 
         ? tables.map((t: any) => Object.values(t)[0])
         : [];
@@ -61,10 +55,7 @@ export async function GET(request: NextRequest) {
     
     if (hasLopezUsers) {
       try {
-        const admin = await executeQueryPool({
-          query: "SELECT id, username, email, status FROM lopez_users WHERE email = ? OR username = ? LIMIT 1",
-          values: ["admin@lopez-it-welt.de", "admin"],
-        });
+        const admin = await executeQueryPool("SELECT id, username, email, status FROM lopez_users WHERE email = ? OR username = ? LIMIT 1", ["admin@lopez-it-welt.de", "admin"]);
         if (admin && Array.isArray(admin) && admin.length > 0) {
           adminExists = true;
           adminInTable = "lopez_users";
@@ -76,10 +67,7 @@ export async function GET(request: NextRequest) {
 
     if (!adminExists && hasUsers) {
       try {
-        const admin = await executeQueryPool({
-          query: "SELECT id, username, email, status FROM users WHERE email = ? OR username = ? LIMIT 1",
-          values: ["admin@lopez-it-welt.de", "admin"],
-        });
+        const admin = await executeQueryPool("SELECT id, username, email, status FROM users WHERE email = ? OR username = ? LIMIT 1", ["admin@lopez-it-welt.de", "admin"]);
         if (admin && Array.isArray(admin) && admin.length > 0) {
           adminExists = true;
           adminInTable = "users";

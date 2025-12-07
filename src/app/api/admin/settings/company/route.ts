@@ -17,10 +17,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Unternehmensdaten laden
-    const company = await executeQueryPool({
-      query: "SELECT * FROM settings_company ORDER BY id DESC LIMIT 1",
-      values: [],
-    });
+    const company = await executeQueryPool("SELECT * FROM settings_company ORDER BY id DESC LIMIT 1", []);
 
     if (company && company.length > 0) {
       return NextResponse.json({ success: true, data: company[0] });
@@ -75,22 +72,17 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
 
     // Prüfen ob Eintrag existiert
-    const existing = await executeQueryPool({
-      query: "SELECT id FROM settings_company ORDER BY id DESC LIMIT 1",
-      values: [],
-    });
+    const existing = await executeQueryPool("SELECT id FROM settings_company ORDER BY id DESC LIMIT 1", []);
 
     if (existing && existing.length > 0) {
       // Aktualisieren
-      await executeQueryPool({
-        query: `
-          UPDATE settings_company SET 
-            company_name = ?, address = ?, contact_email = ?, contact_phone = ?,
-            color_lopez = ?, color_itwelt = ?, color_itwelt_dark = ?,
-            impressum_text = ?, datenschutz_text = ?, updated_at = NOW()
-          WHERE id = ?
-        `,
-        values: [
+      await executeQueryPool(
+        `UPDATE settings_company SET 
+          company_name = ?, address = ?, contact_email = ?, contact_phone = ?,
+          color_lopez = ?, color_itwelt = ?, color_itwelt_dark = ?,
+          impressum_text = ?, datenschutz_text = ?, updated_at = NOW()
+        WHERE id = ?`,
+        [
           body.company_name,
           body.address || null,
           body.contact_email || null,
@@ -101,17 +93,15 @@ export async function PUT(request: NextRequest) {
           body.impressum_text || null,
           body.datenschutz_text || null,
           existing[0].id,
-        ],
-      });
+        ]
+      );
     } else {
       // Erstellen
-      await executeQueryPool({
-        query: `
+      await executeQueryPool(`
           INSERT INTO settings_company 
           (company_name, address, contact_email, contact_phone, color_lopez, color_itwelt, color_itwelt_dark, impressum_text, datenschutz_text, created_at, updated_at)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-        `,
-        values: [
+        `, [
           body.company_name,
           body.address || null,
           body.contact_email || null,
@@ -121,8 +111,7 @@ export async function PUT(request: NextRequest) {
           body.color_itwelt_dark || "#0056b3",
           body.impressum_text || null,
           body.datenschutz_text || null,
-        ],
-      });
+        ]);
     }
 
     return NextResponse.json({ success: true, message: "Unternehmensdaten erfolgreich aktualisiert" });

@@ -6,8 +6,12 @@ import React from "react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger" | "success";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "danger" | "success" | "text";
   size?: "sm" | "md" | "lg" | "xl";
+  /** @deprecated use variant instead */
+  variante?: string;
+  /** @deprecated use size instead */
+  groesse?: string;
   loading?: boolean;
   disabled?: boolean;
   fullWidth?: boolean;
@@ -55,6 +59,13 @@ const buttonVariants = {
     hover:bg-green-700 hover:border-green-700
     focus:ring-2 focus:ring-green-500/50 focus:outline-none
     active:bg-green-800 active:scale-95
+    transition-all duration-200
+  `,
+  text: `
+    bg-transparent text-hauptblau border border-transparent
+    hover:text-hauptblau/80 hover:underline
+    focus:outline-none focus:ring-0
+    active:text-hauptblau/60
     transition-all duration-200
   `,
 };

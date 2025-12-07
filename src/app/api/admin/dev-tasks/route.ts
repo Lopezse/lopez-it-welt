@@ -176,5 +176,58 @@ export async function POST(request: NextRequest): Promise<NextResponse<ApiRespon
   }
 }
 
+// =====================================================
+// PATCH – Task-Status aktualisieren
+// =====================================================
 
+export async function PATCH(request: NextRequest): Promise<NextResponse<ApiResponse>> {
+  try {
+    const body = await request.json();
+    const { taskId, status } = body;
 
+    if (!taskId) {
+      return NextResponse.json({
+        success: false,
+        error: "taskId ist erforderlich"
+      }, { status: 400 });
+    }
+
+    // Prüfe ob Task existiert
+    const task = await DevTasksService.getTaskById(taskId);
+    if (!task) {
+      return NextResponse.json({
+        success: false,
+        error: `Task #${taskId} nicht gefunden`
+      }, { status: 404 });
+    }
+
+    // Status aktualisieren
+    if (status) {
+      const validStatuses: DevTaskStatus[] = ["open", "planning", "planned", "coding", "review", "done", "cancelled"];
+      if (!validStatuses.includes(status)) {
+        return NextResponse.json({
+          success: false,
+          error: `Ungültiger Status: ${status}`
+        }, { status: 400 });
+      }
+
+      await DevTasksService.updateTaskStatus(taskId, status);
+    }
+
+    // Aktualisierter Task laden
+    const updatedTask = await DevTasksService.getTaskById(taskId);
+
+    return NextResponse.json({
+      success: true,
+      message: `Task #${taskId} aktualisiert`,
+      data: { task: updatedTask }
+    });
+
+  } catch (error) {
+    console.error("[DEV-TASKS API] PATCH Fehler:", error);
+    return NextResponse.json({
+      success: false,
+      error: error instanceof Error ? error.message : "Interner Serverfehler"
+    }, { status: 500 });
+  }
+}

@@ -50,10 +50,10 @@ export async function POST(request: NextRequest) {
     const avatarUrl = `/uploads/avatars/${fileName}`;
 
     // URL in Datenbank speichern
-    await executeQueryPool({
-      query: "UPDATE users SET avatar_url = ?, updated_at = NOW() WHERE id = ?",
-      values: [avatarUrl, userId],
-    });
+    await executeQueryPool(
+      "UPDATE users SET avatar_url = ?, updated_at = NOW() WHERE id = ?",
+      [avatarUrl, userId]
+    );
 
     return NextResponse.json({ success: true, data: { avatar_url: avatarUrl } });
   } catch (error: any) {

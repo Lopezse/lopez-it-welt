@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "security",
             action: "view"
         });
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "security",
             action: "manage"
         });
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
             sla_minutes: body.sla_minutes,
         };
 
-        const incidentId = await incidentManager.createIncident(incidentData, session.userId.toString());
+        const incidentId = await incidentManager.createIncident(incidentData, String(session.userId));
 
         const incident = await incidentManager.getIncident(incidentId);
 

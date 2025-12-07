@@ -39,6 +39,7 @@ export interface AdminAuthResult {
   message: string;
   session?: AdminSessionData;
   requires2FA?: boolean;
+  requires2FASetup?: boolean;
   lockoutUntil?: Date;
 }
 

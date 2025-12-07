@@ -30,10 +30,7 @@ export async function POST(request: NextRequest) {
     for (const table of tables) {
       try {
         // Prüfe ob Tabelle existiert
-        const tableCheck = await executeQueryPool({
-          query: `SHOW TABLES LIKE '${table.name}'`,
-          values: [],
-        });
+        const tableCheck = await executeQueryPool(`SHOW TABLES LIKE '${table.name}'`, []);
 
         if (!tableCheck || (Array.isArray(tableCheck) && tableCheck.length === 0)) {
           results.errors.push(`Tabelle ${table.name} existiert nicht`);
@@ -41,38 +38,26 @@ export async function POST(request: NextRequest) {
         }
 
         // Prüfe ob Benutzer existiert
-        const existing = await executeQueryPool({
-          query: `SELECT id FROM ${table.name} WHERE email = ? OR username = ? LIMIT 1`,
-          values: [email, username],
-        });
+        const existing = await executeQueryPool(`SELECT id FROM ${table.name} WHERE email = ? OR username = ? LIMIT 1`, [email, username]);
 
         if (existing && Array.isArray(existing) && existing.length > 0) {
           // Aktualisiere Passwort
-          await executeQueryPool({
-            query: `UPDATE ${table.name} SET password_hash = ?, status = 'active', updated_at = NOW() WHERE email = ? OR username = ?`,
-            values: [passwordHash, email, username],
-          });
+          await executeQueryPool(`UPDATE ${table.name} SET password_hash = ?, status = 'active', updated_at = NOW() WHERE email = ? OR username = ?`, [passwordHash, email, username]);
           results.actions.push(`✅ Passwort in ${table.name} aktualisiert`);
           results.userId = existing[0].id;
         } else {
           // Erstelle Benutzer
           if (table.name === "lopez_core_users") {
             // Spezielle Behandlung für lopez_core_users (braucht role_id)
-            const result = await executeQueryPool({
-              query: `INSERT INTO ${table.name} (username, email, password_hash, first_name, last_name, role_id, two_fa_enabled, created_at, updated_at) 
-                       VALUES (?, ?, ?, ?, ?, 1, FALSE, NOW(), NOW())`,
-              values: [username, email, passwordHash, "System", "Administrator"],
-            });
+            const result = await executeQueryPool(`INSERT INTO ${table.name} (username, email, password_hash, first_name, last_name, role_id, two_fa_enabled, created_at, updated_at) 
+                       VALUES (?, ?, ?, ?, ?, 1, FALSE, NOW(), NOW())`, [username, email, passwordHash, "System", "Administrator"]);
             if (result && (result as any).insertId) {
               results.actions.push(`✅ Benutzer in ${table.name} erstellt (ID: ${(result as any).insertId})`);
               results.userId = (result as any).insertId;
             }
           } else {
-            const result = await executeQueryPool({
-              query: `INSERT INTO ${table.name} (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
-                       VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`,
-              values: [username, email, passwordHash, "System", "Administrator"],
-            });
+            const result = await executeQueryPool(`INSERT INTO ${table.name} (username, email, password_hash, first_name, last_name, status, created_at, updated_at) 
+                       VALUES (?, ?, ?, ?, ?, 'active', NOW(), NOW())`, [username, email, passwordHash, "System", "Administrator"]);
             if (result && (result as any).insertId) {
               results.actions.push(`✅ Benutzer in ${table.name} erstellt (ID: ${(result as any).insertId})`);
               results.userId = (result as any).insertId;

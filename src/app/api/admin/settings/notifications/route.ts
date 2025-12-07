@@ -17,10 +17,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Benachrichtigungseinstellungen laden
-    const notifications = await executeQueryPool({
-      query: "SELECT * FROM settings_notifications ORDER BY id DESC LIMIT 1",
-      values: [],
-    });
+    const notifications = await executeQueryPool("SELECT * FROM settings_notifications ORDER BY id DESC LIMIT 1", []);
 
     if (notifications && notifications.length > 0) {
       return NextResponse.json({ success: true, data: notifications[0] });
@@ -63,22 +60,17 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
 
     // Prüfen ob Eintrag existiert
-    const existing = await executeQueryPool({
-      query: "SELECT id FROM settings_notifications ORDER BY id DESC LIMIT 1",
-      values: [],
-    });
+    const existing = await executeQueryPool("SELECT id FROM settings_notifications ORDER BY id DESC LIMIT 1", []);
 
     if (existing && existing.length > 0) {
       // Aktualisieren
-      await executeQueryPool({
-        query: `
-          UPDATE settings_notifications SET 
-            sender_name = ?, sender_email = ?, reply_to = ?,
-            email_notifications_enabled = ?, notify_new_users = ?, notify_errors = ?,
-            notify_backups = ?, notify_updates = ?, updated_at = NOW()
-          WHERE id = ?
-        `,
-        values: [
+      await executeQueryPool(
+        `UPDATE settings_notifications SET 
+          sender_name = ?, sender_email = ?, reply_to = ?,
+          email_notifications_enabled = ?, notify_new_users = ?, notify_errors = ?,
+          notify_backups = ?, notify_updates = ?, updated_at = NOW()
+        WHERE id = ?`,
+        [
           body.sender_name,
           body.sender_email,
           body.reply_to,
@@ -88,17 +80,15 @@ export async function PUT(request: NextRequest) {
           body.notify_backups ? 1 : 0,
           body.notify_updates ? 1 : 0,
           existing[0].id,
-        ],
-      });
+        ]
+      );
     } else {
       // Erstellen
-      await executeQueryPool({
-        query: `
+      await executeQueryPool(`
           INSERT INTO settings_notifications 
           (sender_name, sender_email, reply_to, email_notifications_enabled, notify_new_users, notify_errors, notify_backups, notify_updates, created_at, updated_at)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-        `,
-        values: [
+        `, [
           body.sender_name || "Lopez IT Welt",
           body.sender_email || "noreply@lopez-it-welt.de",
           body.reply_to || "support@lopez-it-welt.de",
@@ -107,8 +97,7 @@ export async function PUT(request: NextRequest) {
           body.notify_errors ? 1 : 0,
           body.notify_backups ? 1 : 0,
           body.notify_updates ? 1 : 0,
-        ],
-      });
+        ]);
     }
 
     return NextResponse.json({ success: true, message: "Benachrichtigungseinstellungen erfolgreich aktualisiert" });

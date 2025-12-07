@@ -327,9 +327,9 @@ class ApprovalService {
                             }
                         );
                         logger.info(`Orchestrator-Event geloggt für Use-Case: ${approval.use_case_id}`);
-                    } catch (orchestratorError) {
+                    } catch (orchestratorError: unknown) {
                         // Orchestrator-Fehler nicht kritisch, nur loggen
-                        logger.warn("Fehler bei OrchestratorCore-Integration", orchestratorError);
+                        logger.warn("Fehler bei OrchestratorCore-Integration", { error: String(orchestratorError) });
                     }
                 }
             } else {
@@ -436,9 +436,9 @@ class ApprovalService {
                         }
                     );
                     logger.info(`Orchestrator-Event geloggt für Use-Case: ${approval.use_case_id}`);
-                } catch (orchestratorError) {
+                } catch (orchestratorError: unknown) {
                     // Orchestrator-Fehler nicht kritisch, nur loggen
-                    logger.warn("Fehler bei OrchestratorCore-Integration", orchestratorError);
+                    logger.warn("Fehler bei OrchestratorCore-Integration", { error: String(orchestratorError) });
                 }
             }
 

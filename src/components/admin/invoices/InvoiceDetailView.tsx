@@ -9,46 +9,10 @@
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
+import type { AdminInvoice, InvoiceItem } from "@/lib/finance/types";
 
-interface Invoice {
-  id: string | number;
-  invoice_number: string;
-  customer_id?: string;
-  company_name?: string;
-  vorname?: string;
-  nachname?: string;
-  customer_email?: string;
-  project_id?: number;
-  project_name?: string;
-  project_code?: string;
-  order_id?: number;
-  issue_date: string;
-  service_date?: string;
-  payment_terms?: string;
-  currency?: string;
-  net_amount: number;
-  tax_rate: number;
-  tax_amount: number;
-  gross_amount: number;
-  status: "draft" | "sent" | "paid" | "overdue" | "cancelled";
-  hash_sha256?: string;
-  pdf_path?: string;
-  created_at: string;
-  updated_at: string;
-  created_by?: string;
-  items?: InvoiceItem[];
-}
-
-interface InvoiceItem {
-  id: number;
-  invoice_id: number;
-  pos: number;
-  item_text: string;
-  qty: number;
-  unit: string;
-  unit_price: number;
-  net_line: number;
-}
+// Re-export für Abwärtskompatibilität
+type Invoice = AdminInvoice;
 
 interface InvoiceDetailViewProps {
   invoice: Invoice;

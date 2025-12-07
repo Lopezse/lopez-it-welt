@@ -39,7 +39,7 @@ export async function PATCH(
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "security",
             action: "manage"
         });
@@ -51,7 +51,7 @@ export async function PATCH(
             );
         }
 
-        await alertEngine.acknowledge(params.id, session.userId.toString());
+        await alertEngine.acknowledge(params.id, String(session.userId));
 
         const alert = await alertEngine.getAlert(params.id);
 

@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
         logger.info("RAG-Query erfolgreich", {
             question: question.substring(0, 50),
             sourcesCount: response.sources.length,
-            processingTime: response.metadata?.processingTime,
+            processingTime: (response.metadata as Record<string, unknown>)?.processingTime,
         });
 
         return NextResponse.json({

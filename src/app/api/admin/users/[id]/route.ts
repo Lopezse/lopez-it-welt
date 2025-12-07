@@ -127,26 +127,22 @@ export async function PUT(
       );
     }
     
-    // Benutzer aktualisieren
+    // Enterprise++ ALLOWED_FIELDS Whitelist
+    // @sql-safe: Nur Felder aus ALLOWED_FIELDS werden akzeptiert
+    const ALLOWED_FIELDS = ["first_name", "last_name", "email", "status"] as const;
+    
     const updates: string[] = [];
     const values: any[] = [];
     
-    if (first_name !== undefined) {
-      updates.push("first_name = ?");
-      values.push(first_name);
+    // Nur erlaubte Felder verarbeiten
+    for (const field of ALLOWED_FIELDS) {
+      if (body[field] !== undefined) {
+        updates.push(`${field} = ?`);
+        values.push(body[field]);
+      }
     }
-    if (last_name !== undefined) {
-      updates.push("last_name = ?");
-      values.push(last_name);
-    }
-    if (email !== undefined) {
-      updates.push("email = ?");
-      values.push(email);
-    }
-    if (status !== undefined) {
-      updates.push("status = ?");
-      values.push(status);
-    }
+    
+    // Passwort-Hash separat behandeln (nicht aus Body direkt)
     if (password) {
       const hashResult = await Argon2Service.hashPassword(password);
       updates.push("password_hash = ?");
@@ -157,6 +153,7 @@ export async function PUT(
     values.push(id);
     
     if (updates.length > 1) {
+      // @sql-safe: SET-Klausel aus ALLOWED_FIELDS Whitelist
       await connection.execute(
         `UPDATE lopez_users SET ${updates.join(", ")} WHERE id = ?`,
         values

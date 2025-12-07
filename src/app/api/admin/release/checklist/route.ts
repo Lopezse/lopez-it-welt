@@ -127,34 +127,32 @@ export async function PUT(request: NextRequest) {
 
     const connection = await mysql.createConnection(dbConfig);
 
+    // Enterprise++ ALLOWED_FIELDS Whitelist
+    // @sql-safe: Nur Felder aus ALLOWED_FIELDS werden akzeptiert
+    const ALLOWED_FIELDS = ["checklist_name", "version", "items", "status"] as const;
+    
     const updateFields: string[] = [];
     const params: any[] = [];
 
-    if (checklist_name) {
-      updateFields.push("checklist_name = ?");
-      params.push(checklist_name);
-    }
-
-    if (version) {
-      updateFields.push("version = ?");
-      params.push(version);
-    }
-
-    if (items) {
-      updateFields.push("items = ?");
-      params.push(JSON.stringify(items));
-    }
-
-    if (status) {
-      updateFields.push("status = ?");
-      params.push(status);
-
-      if (status === "completed") {
-        updateFields.push("completed_at = NOW()");
-      } else if (status === "approved") {
-        updateFields.push("approved_at = NOW()");
-        updateFields.push("approved_by = 'system'");
+    // Nur erlaubte Felder verarbeiten
+    for (const field of ALLOWED_FIELDS) {
+      if (body[field] !== undefined) {
+        if (field === "items") {
+          updateFields.push(`${field} = ?`);
+          params.push(JSON.stringify(body[field]));
+        } else {
+          updateFields.push(`${field} = ?`);
+          params.push(body[field]);
+        }
       }
+    }
+
+    // Status-abhängige Zeitstempel (statische Werte, kein User-Input)
+    if (status === "completed") {
+      updateFields.push("completed_at = NOW()");
+    } else if (status === "approved") {
+      updateFields.push("approved_at = NOW()");
+      updateFields.push("approved_by = 'system'");
     }
 
     if (updateFields.length === 0) {
@@ -168,6 +166,7 @@ export async function PUT(request: NextRequest) {
     updateFields.push("updated_at = NOW()");
     params.push(id);
 
+    // @sql-safe: SET-Klausel aus ALLOWED_FIELDS Whitelist
     await connection.execute(
       `UPDATE release_checklists SET ${updateFields.join(", ")} WHERE id = ?`,
       params,

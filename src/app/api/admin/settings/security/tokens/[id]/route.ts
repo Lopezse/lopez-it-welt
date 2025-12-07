@@ -20,10 +20,10 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     const tokenId = params.id;
 
     // Token löschen (nur eigene Token)
-    await executeQueryPool({
-      query: "DELETE FROM api_tokens WHERE id = ? AND user_id = ?",
-      values: [tokenId, userId],
-    });
+    await executeQueryPool(
+      "DELETE FROM api_tokens WHERE id = ? AND user_id = ?",
+      [tokenId, userId]
+    );
 
     return NextResponse.json({ success: true, message: "Token erfolgreich gelöscht" });
   } catch (error: any) {

@@ -45,6 +45,8 @@ type DevTaskType = "bug" | "feature" | "refactor" | "documentation" | "security"
 type DevTaskStatus = "open" | "planning" | "planned" | "coding" | "review" | "done" | "cancelled";
 type DevTaskPriority = "low" | "medium" | "high" | "critical";
 
+type AuditStatus = "pending" | "passed" | "failed";
+
 interface DevTask {
   id: number;
   title: string;
@@ -57,6 +59,9 @@ interface DevTask {
   created_at: string;
   updated_at: string;
   steps_count?: number;
+  // Enterprise++ Audit-Felder
+  quality_score?: number | null;
+  audit_status?: AuditStatus;
 }
 
 interface DevTaskStep {
@@ -157,6 +162,17 @@ export default function DevTasksPage() {
   // Agent Aktionen
   const [runningAgentB, setRunningAgentB] = useState<number | null>(null);
   const [runningAgentC, setRunningAgentC] = useState<number | null>(null);
+  
+  // Recheck & Reopen (Security-Tasks)
+  const [runningRecheck, setRunningRecheck] = useState<number | null>(null);
+  const [recheckResult, setRecheckResult] = useState<{taskId: number; verified: boolean; message: string} | null>(null);
+  
+  // Code-Check (Feature-Tasks)
+  const [runningCodeCheck, setRunningCodeCheck] = useState<number | null>(null);
+  const [codeCheckResult, setCodeCheckResult] = useState<{taskId: number; verified: boolean; score: number; message: string} | null>(null);
+  
+  // Enterprise++ Audit-Modus
+  const [auditMode, setAuditMode] = useState<boolean>(true);
 
   // =====================================================
   // DATEN LADEN
@@ -181,6 +197,17 @@ export default function DevTasksPage() {
       
       if (statsData.success) {
         setStats(statsData.data);
+      }
+      
+      // Enterprise++ Audit-Modus laden
+      try {
+        const auditRes = await fetch("/api/admin/settings/audit-mode");
+        const auditData = await auditRes.json();
+        if (auditData.success) {
+          setAuditMode(auditData.data.auditMode);
+        }
+      } catch (e) {
+        // Audit-API nicht verfügbar - Default verwenden
       }
 
     } catch (err) {
@@ -382,6 +409,151 @@ export default function DevTasksPage() {
   };
 
   // =====================================================
+  // RECHECK - Prüft ob Security-Issue wirklich behoben ist
+  // =====================================================
+
+  const handleRecheck = async (taskId: number, task: DevTask) => {
+    try {
+      setRunningRecheck(taskId);
+      setError(null);
+      setRecheckResult(null);
+
+      // Bestimme Issue-Typ aus Task-Titel
+      let issueType = "drop_table"; // Default
+      if (task.title.toLowerCase().includes("sql-injection") || task.title.includes("SEC-02")) {
+        issueType = "sql_injection";
+      } else if (task.title.toLowerCase().includes("password") || task.title.includes("SEC-03")) {
+        issueType = "hardcoded_password";
+      }
+
+      const response = await fetch("/api/admin/ai-center/security/recheck", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          issueId: task.title.match(/\[([^\]]+)\]/)?.[1] || `TASK-${taskId}`,
+          issueType,
+          taskId  // 🔧 FIX: taskId mitschicken für Status-Update
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setRecheckResult({
+          taskId,
+          verified: data.data.verified,
+          message: data.data.verified 
+            ? "✅ Verifiziert: Problem wurde behoben!" 
+            : `⚠️ Nicht behoben: ${data.data.remainingCount} Probleme verbleiben`
+        });
+        
+        if (!data.data.verified) {
+          setSuccessMessage(`⚠️ Recheck: ${data.data.remainingCount} Probleme noch offen! Status auf 'open' gesetzt.`);
+        } else {
+          setSuccessMessage("✅ Recheck bestätigt: Issue wurde korrekt behoben!");
+        }
+        
+        // 🔄 Task-Liste neu laden um neuen Status zu zeigen
+        await loadData();
+      } else {
+        setError(data.error || "Recheck fehlgeschlagen");
+      }
+
+    } catch (err) {
+      setError("Recheck konnte nicht durchgeführt werden");
+      console.error(err);
+    } finally {
+      setRunningRecheck(null);
+    }
+  };
+
+  // =====================================================
+  // REOPEN - Task wieder öffnen
+  // =====================================================
+
+  const handleReopenTask = async (taskId: number) => {
+    try {
+      setError(null);
+
+      const response = await fetch("/api/admin/dev-tasks", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          taskId,
+          status: "planned" // Zurück zu "Geplant"
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSuccessMessage(`↩️ Task #${taskId} wieder geöffnet`);
+        setRecheckResult(null);
+        await loadData();
+      } else {
+        setError(data.error || "Konnte Task nicht wieder öffnen");
+      }
+
+    } catch (err) {
+      setError("Fehler beim Wieder-Öffnen");
+      console.error(err);
+    }
+  };
+
+  // =====================================================
+  // CODE-CHECK - Quality Gate für Feature-Tasks
+  // =====================================================
+
+  const handleCodeCheck = async (taskId: number) => {
+    try {
+      setRunningCodeCheck(taskId);
+      setError(null);
+      setCodeCheckResult(null);
+
+      const response = await fetch("/api/admin/ai-center/code-check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ taskId })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        const auditInfo = data.data.audit;
+        setCodeCheckResult({
+          taskId,
+          verified: data.data.verified,
+          score: data.data.score,
+          message: data.data.verified 
+            ? `✅ Quality Gate bestanden (${data.data.score}/100)` 
+            : `⚠️ Quality Gate: ${data.data.score}/100 Punkte`
+        });
+        
+        if (data.data.verified) {
+          setSuccessMessage(`🟢 AUDIT PASSED: ${data.data.score}/100 Punkte`);
+        } else {
+          if (auditInfo?.statusChanged) {
+            setSuccessMessage(`🔴 AUDIT FAILED: ${data.data.score}/100 Punkte - Task wurde auf "${auditInfo.newStatus}" gesetzt`);
+          } else {
+            setSuccessMessage(`⚠️ AUDIT: ${data.data.score}/100 Punkte (mind. 70 benötigt)`);
+          }
+        }
+        
+        // Task-Liste neu laden um Audit-Status zu aktualisieren
+        await loadData();
+      } else {
+        setError(data.error || "Code-Check fehlgeschlagen");
+      }
+
+    } catch (err) {
+      setError("Code-Check konnte nicht durchgeführt werden");
+      console.error(err);
+    } finally {
+      setRunningCodeCheck(null);
+    }
+  };
+
+  // =====================================================
   // RENDER
   // =====================================================
 
@@ -407,6 +579,15 @@ export default function DevTasksPage() {
                   Enterprise++ Orchestrator • Agent-A → Agent-B → Agent-C
                 </p>
               </div>
+              {/* Enterprise++ Audit-Mode Badge */}
+              {auditMode && (
+                <div className="ml-4 px-3 py-1 bg-amber-500/20 border border-amber-500/40 rounded-full flex items-center gap-2">
+                  <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+                  <span className="text-xs font-medium text-amber-400">
+                    AUDIT-MODUS AKTIV
+                  </span>
+                </div>
+              )}
             </div>
             <div className="flex items-center gap-3">
               <button
@@ -690,6 +871,23 @@ export default function DevTasksPage() {
                               {task.steps_count} Schritte
                             </span>
                           )}
+                          {/* Enterprise++ Audit-Badges */}
+                          {auditMode && task.quality_score !== null && task.quality_score !== undefined && (
+                            <span 
+                              className={`px-2 py-0.5 text-xs rounded-full font-medium ${
+                                task.audit_status === 'passed' 
+                                  ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                                  : task.audit_status === 'failed'
+                                  ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                                  : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+                              }`}
+                            >
+                              {task.audit_status === 'passed' && '🟢 '}
+                              {task.audit_status === 'failed' && '🔴 '}
+                              {task.audit_status === 'pending' && '⏳ '}
+                              {task.quality_score}/100
+                            </span>
+                          )}
                         </div>
                         <p className="text-sm text-[#71717a] truncate">
                           {task.description}
@@ -727,9 +925,9 @@ export default function DevTasksPage() {
                           {/* Agent-B Button */}
                           <button
                             onClick={(e) => { e.stopPropagation(); handleRunAgentB(task.id); }}
-                            disabled={task.status !== "planned" || runningAgentB === task.id}
+                            disabled={!["planned", "open"].includes(task.status) || runningAgentB === task.id}
                             className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors ${
-                              task.status === "planned"
+                              ["planned", "open"].includes(task.status)
                                 ? "bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 border border-purple-500/30"
                                 : "bg-[#27272a] text-[#52525b] cursor-not-allowed"
                             }`}
@@ -760,12 +958,72 @@ export default function DevTasksPage() {
                             Agent-C: Code prüfen
                           </button>
 
+                          {/* Recheck Button für Security-Tasks (done oder open) */}
+                          {(task.status === "done" || task.status === "open") && task.type === "security" && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleRecheck(task.id, task); }}
+                              disabled={runningRecheck === task.id}
+                              className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-colors bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 border border-blue-500/30"
+                            >
+                              {runningRecheck === task.id ? (
+                                <FaSpinner className="animate-spin" />
+                              ) : (
+                                <FaSearch />
+                              )}
+                              Recheck
+                            </button>
+                          )}
+
+                          {/* Code-Check Button für Feature-Tasks (done) */}
+                          {task.status === "done" && task.type !== "security" && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleCodeCheck(task.id); }}
+                              disabled={runningCodeCheck === task.id}
+                              className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-colors bg-cyan-500/20 text-cyan-400 hover:bg-cyan-500/30 border border-cyan-500/30"
+                            >
+                              {runningCodeCheck === task.id ? (
+                                <FaSpinner className="animate-spin" />
+                              ) : (
+                                <FaCheckCircle />
+                              )}
+                              Code prüfen
+                            </button>
+                          )}
+
+                          {/* Wieder öffnen Button für done Tasks */}
+                          {task.status === "done" && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleReopenTask(task.id); }}
+                              className="flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-colors bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30 border border-yellow-500/30"
+                            >
+                              <FaSync />
+                              Wieder öffnen
+                            </button>
+                          )}
+
                           {/* Status Info */}
                           <span className="ml-auto text-xs text-[#71717a]">
                             {task.status === "planned" && "→ Bereit für Agent-B"}
+                            {task.status === "open" && "⚠️ Offen - Agent-B kann Fix generieren"}
                             {task.status === "coding" && "→ Bereit für Agent-C Review"}
                             {task.status === "review" && "→ Review läuft..."}
-                            {task.status === "done" && "✓ Auftrag abgeschlossen"}
+                            {/* Security Recheck Ergebnis */}
+                            {(task.status === "done" || task.status === "open") && recheckResult?.taskId === task.id && (
+                              <span className={recheckResult.verified ? "text-green-400" : "text-yellow-400"}>
+                                {recheckResult.message}
+                              </span>
+                            )}
+                            {/* Code-Check Ergebnis */}
+                            {task.status === "done" && codeCheckResult?.taskId === task.id && (
+                              <span className={codeCheckResult.verified ? "text-green-400" : "text-cyan-400"}>
+                                {codeCheckResult.message}
+                              </span>
+                            )}
+                            {/* Default Status */}
+                            {task.status === "done" && 
+                             recheckResult?.taskId !== task.id && 
+                             codeCheckResult?.taskId !== task.id && 
+                             "✓ Auftrag abgeschlossen"}
                           </span>
                         </div>
                       </div>

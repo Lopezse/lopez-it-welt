@@ -19,16 +19,14 @@ export async function GET(request: NextRequest) {
     const userId = session.user.id;
 
     // Login-Historie laden (letzte 50 Einträge)
-    const history = await executeQueryPool({
-      query: `
-        SELECT id, created_at as date, ip_address as ip, user_agent as device, status 
-        FROM login_history 
-        WHERE user_id = ? 
-        ORDER BY created_at DESC 
-        LIMIT 50
-      `,
-      values: [userId],
-    });
+    const history = await executeQueryPool(
+      `SELECT id, created_at as date, ip_address as ip, user_agent as device, status 
+       FROM login_history 
+       WHERE user_id = ? 
+       ORDER BY created_at DESC 
+       LIMIT 50`,
+      [userId]
+    );
 
     return NextResponse.json({
       success: true,

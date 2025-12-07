@@ -66,8 +66,10 @@ export class AgentBBuilder {
       throw new Error(`Task ${taskId} nicht gefunden`);
     }
     
-    if (task.status !== "planned") {
-      throw new Error(`Task ${taskId} hat Status '${task.status}', erwartet 'planned'`);
+    // Erlaubte Status: "planned" (neu geplant) oder "open" (nach Recheck wieder geöffnet)
+    const allowedStatuses = ["planned", "open"];
+    if (!allowedStatuses.includes(task.status)) {
+      throw new Error(`Task ${taskId} hat Status '${task.status}', erwartet 'planned' oder 'open'`);
     }
     
     const steps = await DevTasksService.getStepsForTask(taskId);
@@ -101,14 +103,16 @@ export class AgentBBuilder {
       }
       
       // Echte AI-Generierung
-      const prompt = this.buildCodePrompt(step, taskContext);
-      const response = await aiProvider.chat([
-        { role: "system", content: "Du bist Agent-B, ein Enterprise++ Code-Generator. Generiere sauberen, typisierten TypeScript-Code." },
-        { role: "user", content: prompt }
-      ]);
+      const systemPrompt = "Du bist Agent-B, ein Enterprise++ Code-Generator. Generiere sauberen, typisierten TypeScript-Code.";
+      const userPrompt = this.buildCodePrompt(step, taskContext);
+      const fullPrompt = `${systemPrompt}\n\n${userPrompt}`;
+      const responseContent = await aiProvider.requestText(fullPrompt, {
+        maxTokens: 4000,
+        temperature: 0.2
+      });
       
       // Parse AI-Antwort
-      return this.parseAICodeResponse(response, step);
+      return this.parseAICodeResponse(responseContent, step);
       
     } catch (error) {
       console.warn(`[Agent-B] AI-Fehler, verwende Mock:`, error);
@@ -517,6 +521,10 @@ Antworte im JSON-Format:
 }
 
 export default AgentBBuilder;
+
+
+
+
 
 
 

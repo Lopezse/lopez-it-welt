@@ -88,7 +88,7 @@ export function LiveUpdateToastContainer({
       {toasts.map((toast) => (
         <div key={toast.id} className="pointer-events-auto">
           <LiveUpdateCard
-            type={toast.type}
+            eventType={toast.type}
             data={toast.data}
             timestamp={toast.timestamp}
             onDismiss={() => removeToast(toast.id)}

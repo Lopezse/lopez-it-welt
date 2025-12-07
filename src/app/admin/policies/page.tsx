@@ -26,20 +26,10 @@ import {
   FaClock,
   FaShieldAlt,
 } from "react-icons/fa";
+import type { AdminPolicy } from "@/lib/finance/types";
 
-interface Policy {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  type: string;
-  status: string;
-  version: number;
-  effective_date?: string;
-  expiry_date?: string;
-  created_at: string;
-  updated_at: string;
-}
+// Re-export für Abwärtskompatibilität
+type Policy = AdminPolicy;
 
 export default function PolicyManagementPage() {
   const [policies, setPolicies] = useState<Policy[]>([]);

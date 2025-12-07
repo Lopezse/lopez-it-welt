@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///D:/Projekte/lopez-it-welt/src/app/%28auth%29/layout.tsx"],"sourcesContent":["// =====================================================\r\n// AUTH LAYOUT\r\n// =====================================================\r\n// Layout für /register, /login, /verify-email etc.\r\n// Minimales Layout ohne Admin-Navigation\r\n// =====================================================\r\n\r\nimport React from \"react\";\r\nimport type { Metadata } from \"next\";\r\n\r\nexport const metadata: Metadata = {\r\n  title: \"Lopez IT Welt - Kunden-Portal\",\r\n  description: \"Enterprise++ Kunden-Portal\"\r\n};\r\n\r\nexport default function AuthLayout({\r\n  children,\r\n}: {\r\n  children: React.ReactNode;\r\n}) {\r\n  return (\r\n    <div className=\"min-h-screen bg-slate-900\">\r\n      {children}\r\n    </div>\r\n  );\r\n}\r\n\r\n"],"names":[],"mappings":"AAAA,wDAAwD;AACxD,cAAc;AACd,wDAAwD;AACxD,mDAAmD;AACnD,yCAAyC;AACzC,wDAAwD;;;;;;;;;AAKjD,MAAM,WAAqB;IAChC,OAAO;IACP,aAAa;AACf;AAEe,SAAS,WAAW,EACjC,QAAQ,EAGT;IACC,qBACE,8OAAC;QAAI,WAAU;kBACZ;;;;;;AAGP","debugId":null}}]
-}

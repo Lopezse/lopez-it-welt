@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "orchestrator",
             action: "view"
         });
@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "orchestrator",
             action: "manage"
         });
@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
 
         const workflowId = await workflowManager.createWorkflow({
             ...body,
-            created_by: session.userId.toString()
+            created_by: String(session.userId)
         });
 
         return NextResponse.json({

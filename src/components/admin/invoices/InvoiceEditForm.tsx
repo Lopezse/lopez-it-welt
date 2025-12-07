@@ -8,27 +8,10 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
+import type { AdminInvoice, InvoiceItem } from "@/lib/finance/types";
 
-interface Invoice {
-  id: string | number;
-  invoice_number: string;
-  issue_date: string;
-  service_date?: string;
-  payment_terms?: string;
-  currency?: string;
-  tax_rate: number;
-  items?: InvoiceItem[];
-}
-
-interface InvoiceItem {
-  id?: number;
-  pos: number;
-  item_text: string;
-  qty: number;
-  unit: string;
-  unit_price: number;
-  net_line: number;
-}
+// Re-export für Abwärtskompatibilität
+type Invoice = AdminInvoice;
 
 interface InvoiceEditFormProps {
   invoice: Invoice;

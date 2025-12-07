@@ -60,7 +60,7 @@ export function UnifiedChart({
                 border: "1px solid #e5e7eb",
                 borderRadius: "0.5rem",
               }}
-              className="dark:bg-gray-800 dark:border-gray-700"
+              wrapperClassName="dark:bg-gray-800 dark:border-gray-700"
             />
             <Legend />
             <Line type="monotone" dataKey={yKey} stroke={color} strokeWidth={2} />
@@ -83,7 +83,7 @@ export function UnifiedChart({
                 border: "1px solid #e5e7eb",
                 borderRadius: "0.5rem",
               }}
-              className="dark:bg-gray-800 dark:border-gray-700"
+              wrapperClassName="dark:bg-gray-800 dark:border-gray-700"
             />
             <Legend />
             <Bar dataKey={yKey} fill={color} />
@@ -106,7 +106,7 @@ export function UnifiedChart({
                 border: "1px solid #e5e7eb",
                 borderRadius: "0.5rem",
               }}
-              className="dark:bg-gray-800 dark:border-gray-700"
+              wrapperClassName="dark:bg-gray-800 dark:border-gray-700"
             />
             <Legend />
             <Area type="monotone" dataKey={yKey} stroke={color} fill={color} fillOpacity={0.6} />

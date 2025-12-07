@@ -46,7 +46,7 @@ export async function GET(
 
         // RBAC-Prüfung: compliance.view
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "compliance",
             action: "view"
         });

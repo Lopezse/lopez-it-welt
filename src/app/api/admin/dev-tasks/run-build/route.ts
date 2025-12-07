@@ -61,8 +61,8 @@ export async function GET(request: NextRequest) {
       console.warn("[Agent-B API] Code-Changes konnten nicht geladen werden:", e);
     }
 
-    // Status prüfen
-    const canRunBuild = task.status === "planned";
+    // Status prüfen - "planned" oder "open" sind erlaubt
+    const canRunBuild = ["planned", "open"].includes(task.status);
     const buildComplete = codeChanges.length > 0 && task.status === "coding";
 
     return NextResponse.json({
@@ -136,12 +136,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (task.status !== "planned") {
+    // Erlaubte Status für Agent-B: "planned" oder "open" (nach Recheck)
+    const allowedStatuses = ["planned", "open"];
+    if (!allowedStatuses.includes(task.status)) {
       return NextResponse.json(
         { 
           success: false, 
-          error: `Task hat Status '${task.status}', Build erfordert 'planned'`,
-          hint: "Führe zuerst Agent-A Planung aus"
+          error: `Task hat Status '${task.status}', Build erfordert 'planned' oder 'open'`,
+          hint: "Führe zuerst Agent-A Planung aus oder öffne den Task wieder"
         },
         { status: 400 }
       );
@@ -181,6 +183,10 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+
+
+
 
 
 

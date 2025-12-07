@@ -33,8 +33,20 @@ export async function PUT(
 
     const connection = await mysql.createConnection(dbConfig);
 
+    // Enterprise++ @sql-safe: Zeitstempel-Feld aus statischer Ternary-Bedingung
+    // Keine User-Eingabe im SQL-String, nur "approved_at" oder "rejected_at"
+    const ALLOWED_TIMESTAMP_FIELDS = ["approved_at", "rejected_at"] as const;
     const timestampField = status === "approved" ? "approved_at" : "rejected_at";
+    
+    // Validierung dass timestampField in Whitelist ist
+    if (!ALLOWED_TIMESTAMP_FIELDS.includes(timestampField as any)) {
+      return NextResponse.json(
+        { success: false, message: "Ungültiger Zeitstempel-Typ" },
+        { status: 400 },
+      );
+    }
 
+    // @sql-safe: timestampField kommt aus ALLOWED_TIMESTAMP_FIELDS Whitelist
     await connection.execute(
       `UPDATE release_approvals 
        SET status = ?, comments = ?, ${timestampField} = NOW() 

@@ -43,7 +43,7 @@ export async function POST(
 
     // RBAC-Prüfung - KRITISCH: Nur Admins
     const hasPermission = await RBACService.checkPermission({
-      user_id: session.userId.toString(),
+      user_id: session.userId,
       resource: "system",
       action: "manage",
     });
@@ -108,7 +108,7 @@ export async function POST(
         timestamp,
         "running",
         target_location || null,
-        session.userId.toString(),
+        session.userId,
       ]
     );
 

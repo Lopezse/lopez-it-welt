@@ -97,15 +97,14 @@ export class AgentAPlanner {
       
       // AI aufrufen
       console.log(`[Agent-A] Rufe AI Provider auf...`);
-      const aiResponse = await aiProvider.complete({
-        systemPrompt: AGENT_A_SYSTEM_PROMPT,
-        userPrompt: userPrompt,
+      const fullPrompt = `${AGENT_A_SYSTEM_PROMPT}\n\n${userPrompt}`;
+      const aiResponseContent = await aiProvider.requestText(fullPrompt, {
         maxTokens: 2000,
         temperature: 0.3 // Niedrig für konsistente Planung
       });
       
       // Response parsen
-      const planData = this.parseAIResponse(aiResponse.content);
+      const planData = this.parseAIResponse(aiResponseContent);
       
       if (!planData.steps || planData.steps.length === 0) {
         throw new Error("AI hat keine Plan-Schritte generiert");

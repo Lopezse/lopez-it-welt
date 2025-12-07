@@ -269,7 +269,7 @@ export interface AuditFilters {
 
 export type AlertSeverity = 'info' | 'warning' | 'critical';
 export type AlertStatus = 'open' | 'acknowledged' | 'escalated' | 'closed' | 'ignored';
-export type AlertCategory = 'Security' | 'Compliance' | 'Performance' | 'Systemintegrität' | 'Orchestrator' | 'KI-Risiken';
+export type AlertCategory = 'Security' | 'Compliance' | 'Performance' | 'Systemintegrität' | 'Orchestrator' | 'KI-Risiken' | 'Sicherheit' | 'Datenqualität';
 
 export interface Alert {
   id: string;

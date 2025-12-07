@@ -66,7 +66,7 @@ export async function createChromaClient(config?: ChromaConfig): Promise<any | n
         return chromaClientInstance;
     } catch (error) {
         const errorMessage = error instanceof Error ? error.message : "Unknown error";
-        initializationError = error;
+        initializationError = error instanceof Error ? error : new Error(String(error));
         logger.error("Fehler beim Erstellen des ChromaDB-Clients", {
             url,
             error: errorMessage,

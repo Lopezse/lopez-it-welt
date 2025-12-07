@@ -18,6 +18,7 @@ import type {
   IncidentSeverity,
 } from "../types";
 import { createHash } from "crypto";
+import type { RowDataPacket } from "mysql2";
 
 class IncidentManager {
   /**
@@ -115,13 +116,13 @@ class IncidentManager {
   async getIncident(incidentId: string): Promise<Incident | null> {
     try {
       const connection = await getConnection();
-      const [rows] = await connection.execute<Incident[]>(
+      const [rows] = await connection.execute<RowDataPacket[]>(
         `SELECT * FROM orchestrator_incidents WHERE id = ?`,
         [incidentId]
       );
 
       if (Array.isArray(rows) && rows.length > 0) {
-        return rows[0];
+        return rows[0] as Incident;
       }
 
       return null;
@@ -310,7 +311,7 @@ class IncidentManager {
   async getIncidentEvents(incidentId: string): Promise<IncidentEvent[]> {
     try {
       const connection = await getConnection();
-      const [rows] = await connection.execute<IncidentEvent[]>(
+      const [rows] = await connection.execute<RowDataPacket[]>(
         `SELECT * FROM orchestrator_incident_events 
          WHERE incident_id = ? 
          ORDER BY performed_at ASC`,
@@ -318,7 +319,8 @@ class IncidentManager {
       );
 
       const events = Array.isArray(rows)
-        ? rows.map((event) => {
+        ? rows.map((row) => {
+            const event = row as IncidentEvent;
             if (typeof event.event_data === "string") {
               event.event_data = JSON.parse(event.event_data);
             }
@@ -365,8 +367,8 @@ class IncidentManager {
 
       // Get total count
       const countQuery = query.replace("SELECT *", "SELECT COUNT(*) as total");
-      const [countRows] = await connection.execute<{ total: number }[]>(countQuery, params);
-      const total = Array.isArray(countRows) && countRows.length > 0 ? countRows[0].total : 0;
+      const [countRows] = await connection.execute<RowDataPacket[]>(countQuery, params);
+      const total = Array.isArray(countRows) && countRows.length > 0 ? (countRows[0] as { total: number }).total : 0;
 
       // Apply pagination
       query += ` ORDER BY opened_at DESC`;
@@ -379,10 +381,10 @@ class IncidentManager {
         }
       }
 
-      const [rows] = await connection.execute<Incident[]>(query, params);
+      const [rows] = await connection.execute<RowDataPacket[]>(query, params);
 
       return {
-        incidents: Array.isArray(rows) ? rows : [],
+        incidents: Array.isArray(rows) ? (rows as Incident[]) : [],
         total,
       };
     } catch (error) {
@@ -435,8 +437,8 @@ class IncidentManager {
       return {
         sla_minutes: incident.sla_minutes,
         sla_started_at: incident.sla_started_at,
-        sla_warning_at: incident.sla_warning_at,
-        sla_breached_at: slaBreachedAt || incident.sla_breached_at,
+        sla_warning_at: incident.sla_warning_at ?? null,
+        sla_breached_at: slaBreachedAt || (incident.sla_breached_at ?? null),
         time_remaining_minutes: Math.max(0, remainingMinutes),
         status,
       };

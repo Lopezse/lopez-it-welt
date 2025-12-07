@@ -45,7 +45,7 @@ export async function GET(
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "orchestrator",
             action: "view"
         });
@@ -142,7 +142,7 @@ export async function PUT(
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "orchestrator",
             action: "manage"
         });
@@ -172,25 +172,25 @@ export async function PUT(
             );
         }
 
-        // Update-Felder zusammenstellen
+        // Update-Felder - Enterprise++ ALLOWED_FIELDS Whitelist
+        // @sql-safe: Nur Felder aus ALLOWED_FIELDS werden akzeptiert
+        const ALLOWED_FIELDS = ["name", "description", "steps", "status"] as const;
+        const JSON_FIELDS = ["steps"] as const;
+
         const updateFields: string[] = [];
         const updateValues: unknown[] = [];
 
-        if (body.name !== undefined) {
-            updateFields.push("name = ?");
-            updateValues.push(body.name);
-        }
-        if (body.description !== undefined) {
-            updateFields.push("description = ?");
-            updateValues.push(body.description);
-        }
-        if (body.steps !== undefined) {
-            updateFields.push("steps = ?");
-            updateValues.push(JSON.stringify(body.steps));
-        }
-        if (body.status !== undefined) {
-            updateFields.push("status = ?");
-            updateValues.push(body.status);
+        // Nur erlaubte Felder verarbeiten
+        for (const field of ALLOWED_FIELDS) {
+            if (body[field] !== undefined) {
+                updateFields.push(`${field} = ?`);
+                // JSON-Felder serialisieren
+                if ((JSON_FIELDS as readonly string[]).includes(field)) {
+                    updateValues.push(JSON.stringify(body[field]));
+                } else {
+                    updateValues.push(body[field]);
+                }
+            }
         }
 
         if (updateFields.length === 0) {
@@ -203,6 +203,7 @@ export async function PUT(
         updateFields.push("updated_at = NOW()");
         updateValues.push(workflowId);
 
+        // @sql-safe: SET-Klausel aus ALLOWED_FIELDS Whitelist
         await connection.execute(
             `UPDATE orchestrator_workflows 
              SET ${updateFields.join(", ")}
@@ -256,7 +257,7 @@ export async function DELETE(
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "orchestrator",
             action: "manage"
         });

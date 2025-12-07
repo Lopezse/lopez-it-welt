@@ -48,22 +48,26 @@ export function useUOCAlertsStream(
         const data = JSON.parse(event.data);
 
         if (onAlert) {
+          const now = new Date().toISOString();
           const alert: Alert = {
-            id: data.id,
+            id: data.id || `alert-${Date.now()}`,
+            alert_rule_id: data.alert_rule_id || "stream",
             severity: data.severity,
             category: data.category,
+            status: "open",
             title: data.title,
             description: data.description,
-            triggered_at: data.timestamp || new Date().toISOString(),
-            acknowledged: false,
+            triggered_at: data.timestamp || now,
             acknowledged_at: null,
             acknowledged_by: null,
-            resolved: false,
-            resolved_at: null,
-            resolved_by: null,
-            metadata: data.metadata || {},
-            created_at: data.timestamp || new Date().toISOString(),
-            updated_at: data.timestamp || new Date().toISOString(),
+            escalated_at: null,
+            escalated_by: null,
+            closed_at: null,
+            created_at: now,
+            updated_at: now,
+            closed_by: null,
+            payload: data.metadata || {},
+            audit_hash: "",
           };
           onAlert(alert);
         }

@@ -35,7 +35,7 @@ class LogEnricher {
    * Fügt Metadata zu einem Log hinzu
    */
   async addMetadata(log: Log): Promise<Log> {
-    const metadata = {
+    const metadata: Record<string, unknown> = {
       ...log.metadata,
       enriched_at: new Date().toISOString(),
       enrichment_version: "1.0",

@@ -40,7 +40,7 @@ export async function POST(
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "security",
             action: "manage"
         });
@@ -68,7 +68,7 @@ export async function POST(
             verification: body.verification || false,
         };
 
-        await incidentManager.resolve(params.id, resolutionData, session.userId.toString());
+        await incidentManager.resolve(params.id, resolutionData, String(session.userId));
 
         const incident = await incidentManager.getIncident(params.id);
 

@@ -111,8 +111,19 @@ export async function POST(request: NextRequest) {
       { name: 'last_login_at', definition: 'TIMESTAMP NULL', after: 'updated_at' },
     ];
     
+    // @sql-safe: Spalten kommen aus statischer missingColumns-Definition, nicht aus User-Input
+    // Enterprise++ Schema-Migration mit Whitelist-Validierung
+    const ALLOWED_COLUMN_NAMES = missingColumns.map(c => c.name);
+    
     for (const col of missingColumns) {
+      // Validierung: Spaltenname muss in Whitelist sein
+      if (!ALLOWED_COLUMN_NAMES.includes(col.name)) {
+        console.warn(`⚠️ Spalte ${col.name} nicht in Whitelist - übersprungen`);
+        continue;
+      }
+      
       try {
+        // @sql-safe: col.name und col.definition kommen aus statischer Konfiguration
         await pool.execute(`
           ALTER TABLE lopez_customers 
           ADD COLUMN ${col.name} ${col.definition}

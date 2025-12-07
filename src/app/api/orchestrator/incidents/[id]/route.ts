@@ -12,6 +12,7 @@ import { RBACService } from "@/lib/rbac-system";
 import { AdminAuthService } from "@/lib/admin-auth-service";
 import { logger } from "@/lib/logger";
 import { getConnection } from "@/lib/database";
+import type { RowDataPacket } from "mysql2";
 
 export async function GET(
     request: NextRequest,
@@ -40,7 +41,7 @@ export async function GET(
 
         // RBAC-Prüfung
         const hasPermission = await RBACService.checkPermission({
-            user_id: session.userId.toString(),
+            user_id: session.userId,
             resource: "security",
             action: "view"
         });
@@ -63,11 +64,11 @@ export async function GET(
 
         // Get related alerts
         const connection = await getConnection();
-        const [alertRows] = await connection.execute<{ id: string; title: string }[]>(
+        const [alertRows] = await connection.execute<RowDataPacket[]>(
             `SELECT id, title FROM orchestrator_alerts WHERE incident_id = ?`,
             [params.id]
         );
-        const alerts = Array.isArray(alertRows) ? alertRows : [];
+        const alerts = Array.isArray(alertRows) ? (alertRows as { id: string; title: string }[]) : [];
 
         // Get incident events (timeline)
         const events = await incidentManager.getIncidentEvents(params.id);

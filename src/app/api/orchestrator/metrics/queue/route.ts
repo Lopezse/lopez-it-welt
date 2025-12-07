@@ -31,8 +31,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const adminAuth = new AdminAuthService();
-    const user = await adminAuth.validateSession(sessionToken);
+    const user = await AdminAuthService.validateSession(sessionToken);
 
     if (!user) {
       return NextResponse.json(
@@ -42,8 +41,7 @@ export async function GET(request: NextRequest) {
     }
 
     // RBAC-Prüfung
-    const rbac = new RBACService();
-    const hasViewPermission = await rbac.hasPermission(user.id, "monitoring.view");
+    const hasViewPermission = await RBACService.hasPermission(user.userId, "monitoring.view");
 
     if (!hasViewPermission) {
       return NextResponse.json(

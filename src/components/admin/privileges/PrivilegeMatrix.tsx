@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FaTable, FaDownload } from "react-icons/fa";
+import { FaTable, FaDownload, FaCheck } from "react-icons/fa";
 import { ErrorBanner } from "@/components/ui/ErrorBanner";
 import { logger } from "@/lib/logger";
 

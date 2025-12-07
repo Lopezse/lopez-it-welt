@@ -17,10 +17,10 @@ export async function GET(request: NextRequest) {
     }
 
     // E-Mail-Vorlagen laden
-    const templates = await executeQueryPool({
-      query: "SELECT * FROM email_templates ORDER BY name ASC",
-      values: [],
-    });
+    const templates = await executeQueryPool(
+      "SELECT * FROM email_templates ORDER BY name ASC",
+      []
+    );
 
     return NextResponse.json({ success: true, data: templates || [] });
   } catch (error: any) {

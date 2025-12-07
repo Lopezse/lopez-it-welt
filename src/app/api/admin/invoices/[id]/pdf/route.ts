@@ -10,6 +10,7 @@ import { InvoiceService } from "@/lib/customer/invoice-service";
 import { InvoicePdf } from "@/lib/customer/invoice-pdf";
 import { getConnection } from "@/lib/database";
 import { RowDataPacket } from "mysql2/promise";
+// @ts-expect-error - renderToBuffer ist in @react-pdf/renderer verfügbar, aber Typen sind unvollständig
 import { renderToBuffer } from "@react-pdf/renderer";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
@@ -60,7 +61,19 @@ export async function POST(
 
     // PDF generieren
     const pdfBuffer = await renderToBuffer(
-      React.createElement(InvoicePdf, { invoice, customer })
+      React.createElement(InvoicePdf, { 
+        invoice, 
+        customer: customer as {
+          company_name?: string;
+          first_name?: string;
+          last_name?: string;
+          street?: string;
+          postal_code?: string;
+          city?: string;
+          country?: string;
+          email?: string;
+        }
+      })
     );
 
     // Pfad generieren
@@ -131,7 +144,7 @@ export async function GET(
     const fullPath = path.join(process.cwd(), 'storage', 'invoices', invoice.pdf_path);
     const pdfBuffer = await readFile(fullPath);
 
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(new Uint8Array(pdfBuffer), {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `inline; filename="${invoice.invoice_number}.pdf"`,
@@ -147,4 +160,10 @@ export async function GET(
     );
   }
 }
+
+
+
+
+
+
 

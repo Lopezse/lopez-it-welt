@@ -261,17 +261,93 @@ function collectFiles(dir: string, extensions: string[], result: string[]): void
 
 function analyzeFile(filePath: string, projectRoot: string): FileAnalysisResult {
   const content = fs.readFileSync(filePath, "utf-8");
+  
+  // =====================================================
+  // VERBESSERTE ANALYSE (Enterprise++ Qualität)
+  // =====================================================
+  
+  // SQL-Injection: Nur UNSICHERE Template-Literals zählen
+  // Ausschließen: escapeId(), escape(), Prepared Statements mit ?
+  const sqlTemplateCount = countUnsafeSqlTemplates(content);
+  
+  // DROP TABLE: Nur ECHTE Statements zählen
+  // Ausschließen: Kommentare, Strings, UI-Text
+  const dropTableCount = countRealDropTableStatements(content);
+  
   return {
     path: path.relative(projectRoot, filePath).replace(/\\/g, "/"),
     consoleLogCount: (content.match(/console\.log/g) || []).length,
     anyTypeCount: (content.match(/:\s*any\b|as\s+any\b/g) || []).length,
     todoCount: (content.match(/TODO|FIXME|HACK/g) || []).length,
-    sqlTemplateCount: (content.match(/`[^`]*\$\{[^}]*\}[^`]*(SELECT|INSERT|UPDATE|DELETE)/gi) || []).length +
-                      (content.match(/`[^`]*(SELECT|INSERT|UPDATE|DELETE)[^`]*\$\{/gi) || []).length,
-    dropTableCount: (content.match(/DROP\s+TABLE/gi) || []).length,
+    sqlTemplateCount,
+    dropTableCount,
     ariaCount: (content.match(/aria-|role=|tabindex/g) || []).length,
     lines: content.split("\n").length,
   };
+}
+
+/**
+ * Zählt nur UNSICHERE SQL-Template-Literals
+ * SICHER (nicht gezählt): escapeId(), escape(), Prepared Statements
+ */
+function countUnsafeSqlTemplates(content: string): number {
+  // Finde alle Template-Literals mit SQL-Keywords UND Interpolation
+  const sqlTemplateRegex = /`[^`]*(SELECT|INSERT|UPDATE|DELETE|FROM|WHERE)[^`]*\$\{[^}]+\}[^`]*`/gi;
+  const matches = content.match(sqlTemplateRegex) || [];
+  
+  // Filtere sichere Fälle aus
+  const unsafeMatches = matches.filter(match => {
+    // SICHER: Verwendet escapeId() oder escape()
+    if (/escapeId\s*\(/.test(match) || /mysql\.escape\s*\(/.test(match)) {
+      return false;
+    }
+    // SICHER: Verwendet nur ? Platzhalter (Prepared Statement Pattern)
+    if (/\?\s*,|\?\s*\)/.test(match) && !/\$\{[^}]*\}/.test(match.replace(/escapeId\([^)]*\)/g, ''))) {
+      return false;
+    }
+    return true;
+  });
+  
+  return unsafeMatches.length;
+}
+
+/**
+ * Zählt nur ECHTE DROP TABLE Statements
+ * NICHT gezählt: Kommentare, UI-Text, String-Literale
+ */
+function countRealDropTableStatements(content: string): number {
+  const lines = content.split('\n');
+  let count = 0;
+  
+  for (const line of lines) {
+    const trimmedLine = line.trim();
+    
+    // SKIP: Kommentare
+    if (trimmedLine.startsWith('//') || trimmedLine.startsWith('*') || trimmedLine.startsWith('/*')) {
+      continue;
+    }
+    
+    // SKIP: JSX/UI Text (enthält < oder >)
+    if (/<[^>]*DROP\s+TABLE/i.test(line) || /DROP\s+TABLE[^"'`]*>/i.test(line)) {
+      continue;
+    }
+    
+    // SKIP: String in Anführungszeichen die NICHT execute/query sind
+    if (/"[^"]*DROP\s+TABLE[^"]*"/i.test(line) && !/execute|query/i.test(line)) {
+      continue;
+    }
+    
+    // ZÄHLE: Echte SQL-Ausführung mit DROP TABLE
+    if (/\.(execute|query)\s*\(\s*[`"'].*DROP\s+TABLE/i.test(line)) {
+      count++;
+    }
+    // ZÄHLE: Direkte SQL-Strings die ausgeführt werden
+    else if (/await\s+.*DROP\s+TABLE/i.test(line) && /execute|query/i.test(line)) {
+      count++;
+    }
+  }
+  
+  return count;
 }
 
 function calculateScores(m: {

@@ -51,10 +51,10 @@ export async function POST(request: NextRequest) {
         // DSGVO: Middleware-Prüfung
         const dsgvoCheck = await dsgvoEnforceMiddleware(
             request,
-            authResult.session.user_id,
+            String(authResult.session.userId),
             "media_ki",
             "media.ai.manage",
-            mediaId
+            String(mediaId)
         );
 
         if (dsgvoCheck) {
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
             intendedUse,
             context,
             language: language || "de",
-            userId: authResult.session.user_id, // DSGVO: User-ID für Consent-Prüfung
+            userId: String(authResult.session.userId), // DSGVO: User-ID für Consent-Prüfung
         });
 
         // Ergebnisse in MediaMeta speichern
@@ -147,7 +147,7 @@ export async function POST(request: NextRequest) {
                      (user_id, event_type, action, resource_type, resource_id, data_category, ip_address, user_agent, result)
                      VALUES (?, 'PERSON_DETECTED', 'Person Detection', 'media', ?, 'media_ki', ?, ?, 'success')`,
                     [
-                        authResult.session.user_id,
+                        authResult.session.userId,
                         mediaId,
                         request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || null,
                         request.headers.get("user-agent") || null

@@ -41,7 +41,9 @@
     "compliance:verify": "node scripts/compliance-verify.mjs",
     "users:create": "node scripts/create-users.mjs",
     "release:sbom": "node scripts/gen-sbom.mjs",
-    "release:tag": "node scripts/release-tag.mjs"
+    "release:tag": "node scripts/release-tag.mjs",
+    "ai-center:worker": "npx ts-node src/scripts/ai-center-worker.ts",
+    "ai-center:worker:once": "npx ts-node src/scripts/ai-center-worker.ts --once"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

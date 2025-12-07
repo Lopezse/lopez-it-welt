@@ -21,6 +21,7 @@ interface Widget {
 interface DashboardConfig {
   id: number;
   role_id: number;
+  role_name?: string;
   config_name: string;
   layout: Record<string, any>;
   is_default: boolean;
@@ -369,7 +370,7 @@ export function DashboardConfig() {
 
           {showWidgetManager && (
             <div className="mb-6">
-              <WidgetManager onWidgetSelect={assignWidget} />
+              <WidgetManager onWidgetSelect={(widget: Widget) => assignWidget(widget.id)} />
             </div>
           )}
 

@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
       await AuditService.logAudit({
         table_name: "lopez_user_2fa",
         record_id: session.userId,
-        action: "2FA_RESET",
+        action: "2FA_SETUP", // Reset uses same audit category
         user_id: session.userId,
         username: session.username,
         ip_address: ipAddress,
@@ -91,6 +91,11 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+
+
+
+
 
 
 

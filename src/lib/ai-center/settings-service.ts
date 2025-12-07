@@ -151,7 +151,7 @@ export class AISettingsService {
       for (const row of rows) {
         const key = row.setting_key as keyof AISettings;
         if (key in settings) {
-          settings[key] = this.parseValue(row.setting_value, row.value_type) as any;
+          (settings as unknown as Record<string, unknown>)[key] = this.parseValue(row.setting_value, row.value_type);
         }
       }
       
@@ -369,4 +369,10 @@ export default {
   AICostTracker,
   DEFAULT_SETTINGS
 };
+
+
+
+
+
+
 

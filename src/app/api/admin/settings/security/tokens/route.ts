@@ -20,15 +20,13 @@ export async function GET(request: NextRequest) {
     const userId = session.user.id;
 
     // API-Token laden
-    const tokens = await executeQueryPool({
-      query: `
-        SELECT id, name, token_hash, expires_at, created_at, last_used_at 
-        FROM api_tokens 
-        WHERE user_id = ? AND (expires_at IS NULL OR expires_at > NOW())
-        ORDER BY created_at DESC
-      `,
-      values: [userId],
-    });
+    const tokens = await executeQueryPool(
+      `SELECT id, name, token_hash, expires_at, created_at, last_used_at 
+       FROM api_tokens 
+       WHERE user_id = ? AND (expires_at IS NULL OR expires_at > NOW())
+       ORDER BY created_at DESC`,
+      [userId]
+    );
 
     return NextResponse.json({
       success: true,
@@ -79,10 +77,10 @@ export async function POST(request: NextRequest) {
       : null;
 
     // Token in Datenbank speichern
-    await executeQueryPool({
-      query: "INSERT INTO api_tokens (user_id, name, token_hash, expires_at, created_at) VALUES (?, ?, ?, ?, NOW())",
-      values: [userId, name, tokenHash, expiresAt],
-    });
+    await executeQueryPool(
+      "INSERT INTO api_tokens (user_id, name, token_hash, expires_at, created_at) VALUES (?, ?, ?, ?, NOW())",
+      [userId, name, tokenHash, expiresAt]
+    );
 
     return NextResponse.json({ success: true, data: { token } });
   } catch (error: any) {
